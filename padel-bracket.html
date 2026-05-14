@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padel Toernooi</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  /* App dark chrome */
+  --bg:#111827;
+  --surface:#1f2937;
+  --surface2:#374151;
+  --accent:#10b981;
+  --accent-d:#059669;
+  --gold:#fbbf24;
+  --red:#ef4444;
+  --txt:#f9fafb;
+  --txt2:rgba(249,250,251,.5);
+  --bdr:rgba(255,255,255,.1);
+
+  /* Poule card — dark */
+  --card-bg:#111827;
+  --card-bdr:#374151;
+  --card-txt:#f9fafb;
+  --card-muted:#9ca3af;
+
+  /* Button A — left team */
+  --btn-a-bg:#1d4ed8;
+  --btn-a-txt:#ffffff;
+  --btn-a-hover:#1e40af;
+
+  /* Button B — right team */
+  --btn-b-bg:#7c3aed;
+  --btn-b-txt:#ffffff;
+  --btn-b-hover:#6d28d9;
+
+  /* Undo */
+  --undo-bg:#374151;
+  --undo-txt:#d1d5db;
+
+  /* Winner / loser row */
+  --win-bg:#065f46;
+  --win-txt:#a7f3d0;
+  --lose-bg:#1f2937;
+  --lose-txt:#6b7280;
+
+  /* Bracket — dark theme */
+  --b-bg:#1f2937;
+  --b-card:#111827;
+  --b-hdr:#374151;
+  --b-line:#6b7280;
+  --b-txt:#f9fafb;
+  --b-muted:#9ca3af;
+  --b-win-bg:#064e3b;
+  --b-win-txt:#6ee7b7;
+  --b-lose-bg:#1c2533;
+  --b-lose-txt:#4b5563;
+  --b-empty-bg:#374151;
+  --b-empty-txt:#6b7280;
+}
+
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+.app{max-width:980px;margin:0 auto;padding:16px;background:var(--bg);min-height:100vh}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg)}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--txt)}
+.logo em{color:var(--accent);font-style:normal}
+.hbtns{display:flex;gap:8px}
+
+/* BUTTONS */
+.btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;padding:9px 18px;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.btn-green{background:var(--accent);color:#fff}.btn-green:hover{background:var(--accent-d)}
+.btn-ghost{background:var(--surface);color:var(--txt);border:1px solid var(--bdr)}.btn-ghost:hover{background:var(--surface2)}
+.btn-sm{padding:6px 13px;font-size:.82rem}
+
+/* SETUP */
+#screen-setup{display:block}
+#screen-tournament{display:none}
+.setup-box{background:var(--surface);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:600px;margin:0 auto}
+.setup-box h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;margin-bottom:4px}
+.setup-box p{color:var(--txt2);font-size:.86rem;margin-bottom:16px}
+textarea{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Barlow',sans-serif;font-size:.95rem;line-height:1.8;padding:12px 14px;resize:vertical;min-height:210px;outline:none}
+textarea:focus{border-color:var(--accent)}
+textarea::placeholder{color:rgba(255,255,255,.18)}
+.setup-btns{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.nc{font-size:.78rem;color:var(--txt2);margin-top:4px}
+.nc b{color:var(--accent)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;margin-top:14px}
+.pchip{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:7px 10px;font-size:.8rem;color:var(--txt);display:flex;align-items:center;gap:6px}
+.pchip .nn{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--accent);font-size:.9rem;min-width:18px}
+.trio-pill{margin-left:auto;background:var(--gold);color:#000;font-size:.58rem;font-weight:800;padding:1px 5px;border-radius:4px;letter-spacing:.5px}
+
+/* TABS */
+.tabs{display:flex;gap:3px;background:var(--bg)}
+.tab{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border:none;border-radius:10px 10px 0 0;cursor:pointer;background:rgba(255,255,255,.06);color:var(--txt2);transition:.15s}
+.tab.active{background:var(--surface);color:var(--txt);border-bottom:2px solid var(--accent)}
+.tab-body{background:var(--surface);border-radius:0 12px 12px 12px;overflow:hidden}
+
+/* POULE */
+.prog-wrap{padding:12px 18px 8px;background:var(--surface)}
+.prog-bar{height:5px;background:#374151;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.prog-txt{font-size:.72rem;color:var(--b-muted);margin-top:4px}
+
+.poule-body{padding:0 14px 16px;background:var(--surface)}
+.rblock{margin-bottom:20px}
+.rlbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);padding:10px 4px 6px;border-bottom:1px solid #374151;margin-bottom:6px}
+
+/* Match card */
+.mcard{background:var(--card-bg);border:1.5px solid var(--card-bdr);border-radius:12px;margin-bottom:8px;overflow:hidden}
+
+/* Teams row inside card */
+.mteams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 12px;gap:8px}
+.mteam{font-weight:600;font-size:.85rem;color:var(--card-txt);line-height:1.3}
+.mteam.r{text-align:right}
+.mteam.won{color:var(--accent-d);font-weight:700}
+.mteam.lost{color:#9ca3af;text-decoration:line-through}
+
+.mscore-wrap{text-align:center}
+.mscore{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;color:var(--card-txt);letter-spacing:2px}
+
+/* Winner result row */
+.mresult{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 12px 10px}
+.mwinner-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1px;color:var(--accent-d)}
+.mundo-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.5px;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;background:var(--undo-bg);color:var(--undo-txt);transition:.15s}
+.mundo-btn:hover{background:#4b5563;color:#fff}
+
+/* Game buttons */
+.mgame-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);text-align:center;padding:6px 0 4px}
+.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 10px 10px}
+.mbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.5px;border:none;border-radius:8px;padding:9px 8px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mbtn-a{background:var(--btn-a-bg);color:var(--btn-a-txt)}.mbtn-a:hover{background:var(--btn-a-hover)}
+.mbtn-b{background:var(--btn-b-bg);color:var(--btn-b-txt)}.mbtn-b:hover{background:var(--btn-b-hover)}
+
+/* Standings */
+.st-wrap{border-top:2px solid #374151;padding:14px 18px;background:var(--surface)}
+.st-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
+.st-tbl{width:100%;border-collapse:collapse;font-size:.84rem}
+.st-tbl th{text-align:left;color:var(--b-muted);font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid #374151}
+.st-tbl td{padding:7px 8px;border-bottom:1px solid #374151;color:var(--b-txt)}
+.st-tbl tr:last-child td{border-bottom:none}
+.st-tbl tr.qq td{color:var(--b-win-txt);font-weight:600}
+.st-tbl tr.divr td{background:#374151;font-size:.65rem;color:var(--b-muted);padding:3px 8px;letter-spacing:1px;text-transform:uppercase}
+.wc{font-weight:700;color:var(--accent-d)}
+.lc{color:var(--red)}
+
+/* BRACKET */
+.bracket-body{padding:20px;overflow-x:auto;background:var(--surface)}
+.bsec{margin-bottom:28px}
+.bsec:last-child{margin-bottom:0}
+.bsec-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.bsec-lbl::after{content:'';flex:1;height:1px;background:#374151}
+
+.bracket{display:flex;align-items:center;min-width:500px}
+.br1{display:flex;flex-direction:column;gap:12px;flex-shrink:0}
+.bspacer{width:32px;flex-shrink:0;align-self:stretch;position:relative}
+.bspacer svg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible}
+.br2{display:flex;flex-direction:column;justify-content:center;flex-shrink:0}
+.barrow{width:18px;height:2px;background:var(--b-line);flex-shrink:0;align-self:center}
+.bwcol{flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-left:4px}
+.bwtitle{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;text-align:center}
+.bwname{border:2.5px solid var(--b-line);background:var(--b-card);min-width:110px;min-height:32px;padding:5px 9px;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;color:var(--b-win-txt);text-align:center;display:flex;align-items:center;justify-content:center;border-radius:3px}
+
+/* Bracket match card */
+.bmatch{border:2px solid var(--b-line);background:var(--b-card);min-width:155px;max-width:190px;border-radius:3px;flex-shrink:0}
+.bmlbl{background:var(--b-hdr);border-bottom:1px solid #4b5563;padding:2px 7px;font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted)}
+.bteam{display:flex;align-items:center;padding:5px 8px;min-height:28px;font-size:.76rem;font-weight:600;color:var(--b-txt);border-bottom:1px solid #374151;background:var(--b-card);line-height:1.2}
+.bteam:last-of-type{border-bottom:none}
+.bteam.won{background:var(--b-win-bg);color:var(--b-win-txt)}
+.bteam.lost{background:var(--b-lose-bg);color:var(--b-lose-txt);font-style:italic}
+.bteam.empty{background:var(--b-empty-bg);color:var(--b-empty-txt);font-style:italic}
+.bteam .bsc{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.88rem}
+.bteam.won .bsc{color:var(--b-win-txt)}
+.bmbtns{background:#374151;border-top:1px solid #4b5563;padding:4px 5px;display:flex;gap:3px}
+.bgbtn{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3px;border:none;border-radius:5px;padding:5px 3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.12s}
+.bgbtn-a{background:var(--btn-a-bg);color:#fff}.bgbtn-a:hover{background:var(--btn-a-hover)}
+.bgbtn-b{background:var(--btn-b-bg);color:#fff}.bgbtn-b:hover{background:var(--btn-b-hover)}
+.bgbtn-undo{background:var(--undo-bg);color:var(--undo-txt);border:1px solid #4b5563;flex:0;min-width:28px}.bgbtn-undo:hover{background:#4b5563;color:#fff}
+
+/* Champion */
+.champ-wrap{text-align:center;padding:24px 20px;border-top:2px solid #374151;background:var(--surface)}
+.champ-wrap .trophy{font-size:2rem}
+.champ-wrap h2{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:var(--b-win-txt);text-transform:uppercase;margin-top:6px}
+.champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
+
+/* PRINT */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body,html{background:#fff!important;color:#000!important}
+  .app{padding:0!important;background:#fff!important}
+  header,.tabs,.prog-wrap,.poule-body,.st-wrap,.mbtns,.btn,.hbtns{display:none!important}
+  #screen-setup{display:none!important}
+  #screen-tournament{display:block!important;background:#fff!important}
+  #tb-poule{display:none!important}
+  #tb-bracket{display:block!important}
+  .tab-body{background:#fff!important;border-radius:0!important;box-shadow:none!important}
+  .bracket-body{background:#fff!important;padding:8px!important}
+  .bsec{margin-bottom:20px!important}
+  .bsec-lbl{color:#333!important;font-size:.7rem!important}
+  .bsec-lbl::after{background:#bbb!important}
+  /* Match cards */
+  .bmatch{border:2px solid #333!important;background:#fff!important;border-radius:2px!important}
+  .bmlbl{background:#e5e5e5!important;color:#444!important;border-bottom:1px solid #ccc!important}
+  .bteam{background:#fff!important;color:#111!important;border-bottom:1px solid #ddd!important;font-size:.75rem!important}
+  .bteam.won{background:#d1fae5!important;color:#065f46!important}
+  .bteam.lost{background:#f5f5f5!important;color:#999!important}
+  .bteam.empty{background:#f0f0f0!important;color:#bbb!important}
+  .bteam .bsc{color:#065f46!important}
+  /* Connector lines */
+  .bspacer svg line{stroke:#333!important}
+  /* Game buttons — hide in print */
+  .bmbtns{display:none!important}
+  /* Winner box */
+  .bwname{background:#fff!important;color:#065f46!important;border:2px solid #333!important}
+  .bwtitle{color:#b45309!important}
+  /* Arrow */
+  .barrow{background:#333!important}
+  /* Champion */
+  .champ-wrap{background:#fff!important;border-top:2px solid #ddd!important}
+  .champ-wrap h2{color:#065f46!important}
+  .champ-wrap p{color:#666!important}
+  /* Print header */
+  .phdr{display:block!important;color:#111!important;border-bottom-color:#ccc!important}
+  @page{size:landscape;margin:1.2cm}
+}
+.phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="logo">Padel <em>•</em> Toernooi</div>
+  <div class="hbtns">
+    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()">✏️ Aanpassen</button>
+    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ Afdrukken</button>
+  </div>
+</header>
+
+<!-- SETUP -->
+<div id="screen-setup">
+  <div class="setup-box">
+    <h2>Voer spelersnamen in</h2>
+    <p>Één naam per regel, minimaal 4. De app maakt automatisch duo's en trio's.</p>
+    <textarea id="ta" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
+    <div class="nc" id="nc">Voer namen in...</div>
+    <div class="setup-btns">
+      <button class="btn btn-green" onclick="doStart()">🎾 Starten</button>
+      <button class="btn btn-ghost" onclick="doShuffle()">🔀 Schudden</button>
+    </div>
+    <div class="pgrid" id="prev"></div>
+  </div>
+</div>
+
+<!-- TOURNAMENT -->
+<div id="screen-tournament">
+  <div class="phdr">Padel Toernooi — Bracket</div>
+  <div class="tabs">
+    <button class="tab active" id="tab-poule" onclick="showTab('poule')">📋 Pouleronde</button>
+    <button class="tab" id="tab-bracket" onclick="showTab('bracket')">🏆 Bracket</button>
+  </div>
+  <div class="tab-body">
+    <div id="tb-poule">
+      <div class="prog-wrap">
+        <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+        <div class="prog-txt" id="progtxt"></div>
+      </div>
+      <div class="poule-body" id="pm"></div>
+      <div class="st-wrap">
+        <h3>Tussenstand</h3>
+        <table class="st-tbl" id="sttbl"></table>
+      </div>
+    </div>
+    <div id="tb-bracket" style="display:none">
+      <div class="bracket-body">
+        <div class="bsec">
+          <div class="bsec-lbl">📋 Pouleronde</div>
+          <div id="bracket-poule-rounds"></div>
+        </div>
+        <div class="bsec">
+          <div class="bsec-lbl">🏆 Winnaarsbracket — Top 4</div>
+          <div class="bracket" id="bw"></div>
+        </div>
+        <div class="bsec">
+          <div class="bsec-lbl">🎖️ Verliezersfinale — Plaatsen 5–9</div>
+          <div class="bracket" id="bl"></div>
+        </div>
+        <div id="champ"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+<script>
+const $ = id => document.getElementById(id);
+const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
+const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
+
+let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
+
+// ── Setup ─────────────────────────────────────
+$('ta').addEventListener('input', updateNC);
+
+function updateNC(){
+  const n = names().length;
+  const el = $('nc');
+  if(n < 4){ el.innerHTML = `${n} namen — minimaal 4 nodig`; return; }
+  const {nTeams, nTrios} = calcTeams(n);
+  el.innerHTML = `<b>✓ ${n} spelers → ${nTeams} teams (${nTeams-nTrios} duo's${nTrios?`, ${nTrios} trio's`:''})</b>`;
+}
+
+function names(){ return $('ta').value.split('\n').map(s=>s.trim()).filter(Boolean); }
+
+// Calculate how many teams and trios for N players
+// N = 2*teams + extra_trios  →  teams = floor(N/2), trios = N%2 (1 trio absorbs odd player)
+// But padel needs pairs on court: each "team" is 2 or 3 players.
+// Strategy: make as many duo's as possible; if N is odd add 1 trio (last team gets 3rd player)
+function calcTeams(n){
+  if(n < 4) return {nTeams:0, nTrios:0};
+  const nTrios = n % 2; // 0 or 1 trio needed for odd number
+  const nTeams = Math.floor(n / 2) + (nTrios ? -1 : 0); // trios use 3 players = 1 duo + 1 extra
+  // Simpler: nTeams = ceil(n/2) when odd, floor(n/2) when even... 
+  // Actually: pair up: floor(n/2) pairs, but if odd the last "pair" becomes a trio
+  // So: nTeams = ceil(n/2)... no.
+  // N=4: 2 teams of 2. N=5: 1 duo + 1 trio = 2 teams. N=6: 3 duos. N=17: 8 duos + 1 trio = 9 teams.
+  const teams = Math.ceil(n/2);
+  const trios = n % 2; // 1 if odd, 0 if even
+  return {nTeams: teams, nTrios: trios};
+}
+
+function makeTeams(list){
+  T=[];
+  const {nTeams, nTrios} = calcTeams(list.length);
+  let idx=0;
+  for(let i=0;i<nTeams;i++){
+    const isTrio = nTrios && i === nTeams-1;
+    if(isTrio){
+      T.push({id:i, name:`${list[idx]} / ${list[idx+1]} / ${list[idx+2]}`, trio:true});
+      idx+=3;
+    } else {
+      T.push({id:i, name:`${list[idx]} & ${list[idx+1]}`, trio:false});
+      idx+=2;
+    }
+  }
+}
+
+function doShuffle(){
+  const n=names();
+  if(n.length<4){alert('Voer minimaal 4 namen in.');return;}
+  lastShuffle=[...n].sort(()=>Math.random()-.5);
+  makeTeams(lastShuffle);
+  $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${t.name}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
+}
+
+function doStart(){
+  const n=names();
+  if(n.length<4){alert('Voer minimaal 4 namen in.');return;}
+  if(lastShuffle.length!==n.length){ lastShuffle=[...n].sort(()=>Math.random()-.5); }
+  makeTeams(lastShuffle);
+  buildPoule();
+  buildPlayoffShell();
+  $('screen-setup').style.display='none';
+  $('screen-tournament').style.display='block';
+  $('btn-back').style.display='';
+  $('btn-print').style.display='';
+  renderPoule(); renderSt(); renderBracket();
+  showTab('poule');
+}
+
+function goSetup(){
+  $('screen-setup').style.display='block';
+  $('screen-tournament').style.display='none';
+  $('btn-back').style.display='none';
+  $('btn-print').style.display='none';
+  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];
+}
+
+// ── Poule — dynamic round-robin ────────────────
+// Each team plays at least 3 matches. Works for any team count.
+function buildPoule(){
+  PM=[]; pmid=0; pDone=false; PW=[]; PL=[];
+  const n=T.length;
+  if(n<2) return;
+
+  // Generate round-robin schedule using circle method
+  // For n teams: n-1 rounds if n even, n rounds if n odd
+  // Each round: floor(n/2) matches
+  const teamIds=[...Array(n).keys()];
+  // If odd number of teams, add a "bye" phantom team
+  const ids = n%2===0 ? [...teamIds] : [...teamIds, -1];
+  const N=ids.length; // even
+  const rounds=[];
+  const fixed=ids[0];
+  const rotating=[...ids.slice(1)];
+
+  for(let r=0;r<N-1;r++){
+    const round=[];
+    const circle=[fixed,...rotating];
+    for(let i=0;i<N/2;i++){
+      const a=circle[i], b=circle[N-1-i];
+      if(a!==-1&&b!==-1) round.push([a,b]);
+    }
+    rounds.push(round);
+    rotating.unshift(rotating.pop()); // rotate
+  }
+
+  // Only take enough rounds so each team has ≥3 matches
+  // With small n (2-3 teams) we may need to repeat rounds
+  const playCount=Array(n).fill(0);
+  const selected=[];
+  let ri=0;
+  while(playCount.some(c=>c<3)){
+    const r=rounds[ri%rounds.length];
+    selected.push({round:selected.length+1, matches:r});
+    r.forEach(([a,b])=>{playCount[a]++;playCount[b]++;});
+    ri++;
+    if(ri>rounds.length*5) break; // safety
+  }
+
+  selected.forEach(({round,matches})=>{
+    matches.forEach(([a,b])=>{
+      PM.push({id:pmid++,round,a,b,ga:0,gb:0,winner:null});
+    });
+  });
+}
+
+function renderPoule(){
+  const maxR=Math.max(...PM.map(m=>m.round),0);
+  let html='';
+  for(let r=1;r<=maxR;r++){
+    const rm=PM.filter(m=>m.round===r);
+    if(!rm.length) continue;
+    const done=rm.every(m=>m.winner);
+    html+=`<div class="rblock"><div class="rlbl">Ronde ${r} ${done?'✅':''}</div>`;
+    for(const m of rm) html+=mrow(m);
+    html+='</div>';
+  }
+  $('pm').innerHTML=html;
+  const done=PM.filter(m=>m.winner).length, tot=PM.length;
+  $('prog').style.width=tot?`${Math.round(done/tot*100)}%`:'0%';
+  $('progtxt').textContent=`${done} van ${tot} wedstrijden gespeeld`;
+  renderPouleInBracket();
+}
+
+function renderPouleInBracket(){
+  const el=$('bracket-poule-rounds');
+  if(!el) return;
+  const maxR=Math.max(...PM.map(m=>m.round),0);
+  let html='';
+  for(let r=1;r<=maxR;r++){
+    const rm=PM.filter(m=>m.round===r);
+    if(!rm.length) continue;
+    const done=rm.every(m=>m.winner);
+    html+=`<div style="margin-bottom:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:6px">
+        Ronde ${r} ${done?'✅':''}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">`;
+    for(const m of rm){
+      const na=T[m.a].name, nb=T[m.b].name;
+      const wA=m.winner==='A', wB=m.winner==='B';
+      const scoreColor=m.winner?'var(--accent)':'var(--b-muted)';
+      html+=`<div style="background:var(--b-card);border:1.5px solid var(--b-line);border-radius:6px;display:flex;align-items:center;padding:7px 10px;gap:8px;font-size:.8rem">
+        <span style="flex:1;font-weight:${wA?700:400};color:${wA?'var(--b-win-txt)':wB?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${na}</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:${scoreColor};flex-shrink:0;letter-spacing:1px">${m.ga}–${m.gb}</span>
+        <span style="flex:1;text-align:right;font-weight:${wB?700:400};color:${wB?'var(--b-win-txt)':wA?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl">${nb}</span>
+        ${m.winner?`<button onclick="undoPM(${m.id})" style="flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;border:1px solid #4b5563;background:#374151;color:#d1d5db;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700">↩</button>`:''}
+      </div>`;
+    }
+    html+='</div></div>';
+  }
+  el.innerHTML=html;
+}
+
+function mrow(m){
+  const na=T[m.a].name, nb=T[m.b].name;
+  const sa=sn(na), sb=sn(nb);
+
+  if(m.winner){
+    const wA=m.winner==='A';
+    return `<div class="mcard">
+      <div class="mteams">
+        <div class="mteam ${wA?'won':'lost'}">${na}</div>
+        <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
+        <div class="mteam r ${!wA?'won':'lost'}">${nb}</div>
+      </div>
+      <div class="mresult">
+        <span class="mwinner-label">✅ ${wA?sa:sb} wint</span>
+        <button class="mundo-btn" onclick="undoPM(${m.id})">↩ Herstel</button>
+      </div>
+    </div>`;
+  }
+
+  const gn=m.ga+m.gb+1;
+  return `<div class="mcard">
+    <div class="mteams">
+      <div class="mteam">${na}</div>
+      <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
+      <div class="mteam r">${nb}</div>
+    </div>
+    <div class="mgame-label">Game ${gn} — wie wint?</div>
+    <div class="mbtns">
+      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">✓ ${sa}</button>
+      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">✓ ${sb}</button>
+    </div>
+  </div>`;
+}
+
+function pg(id,side){
+  const m=PM.find(x=>x.id===id);
+  if(!m||m.winner) return;
+  if(side==='A') m.ga++; else m.gb++;
+  if(m.ga===2) m.winner='A';
+  else if(m.gb===2) m.winner='B';
+  renderPoule(); renderSt();
+  if(PM.every(x=>x.winner)) checkDone();
+}
+
+function undoPM(id){
+  const m=PM.find(x=>x.id===id);
+  if(!m) return;
+  // Remove last game
+  if(m.winner) m.winner=null;
+  if(m.ga>0||m.gb>0){
+    // We stored running totals not individual games; remove one game from winner side
+    // Actually we increment ga/gb one at a time, so just decrement winner side by 1
+    // But we lost which side won last game. Just reset to 0-0 if ambiguous.
+    // Better: store games array for accurate undo
+  }
+  // Full reset of this match
+  m.ga=0; m.gb=0; m.winner=null;
+  renderPoule(); renderSt();
+}
+
+// ── Standings ─────────────────────────────────
+function getStandings(){
+  return T.map(t=>{
+    const my=PM.filter(m=>m.winner&&(m.a===t.id||m.b===t.id));
+    const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
+    return{...t,played:my.length,wins,losses:my.length-wins};
+  }).sort((a,b)=>b.wins-a.wins||a.losses-b.losses||a.id-b.id);
+}
+
+function renderSt(){
+  const st=getStandings();
+  const topN=Math.min(4,Math.ceil(st.length/2));
+  let h=`<tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>V</th></tr>`;
+  st.forEach((t,i)=>{
+    if(i===topN) h+=`<tr class="divr"><td colspan="5">— verliezersfinale —</td></tr>`;
+    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td>${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}</td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td></tr>`;
+  });
+  $('sttbl').innerHTML=h;
+}
+
+// ── Playoff ───────────────────────────────────
+function checkDone(){
+  if(pDone) return;
+  pDone=true;
+  fillPlayoff();
+  $('tab-bracket').style.color='var(--accent)';
+  renderBracket();
+  setTimeout(()=>showTab('bracket'),500);
+}
+
+function buildPlayoffShell(){
+  // Determine split: top half = winners bracket, bottom half = losers
+  const half=Math.max(2,Math.floor(T.length/2));
+  const topN=Math.min(4,half); // up to 4 in winners bracket
+  // Build empty shells
+  PW=[
+    {id:'wsf1',label:'Halve Finale 1',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wsf2',label:'Halve Finale 2',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wf',label:'🏆 Finale',a:null,b:null,ga:0,gb:0,winner:null},
+  ];
+  PL=[
+    {id:'lsf1',label:'Troostfinale SF 1',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lsf2',label:'Troostfinale SF 2',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lf',label:'🎖️ Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
+  ];
+}
+
+function fillPlayoff(){
+  const st=getStandings();
+  const n=st.length;
+  // Always put top 4 (or fewer) in winners bracket, rest in losers
+  const topN=Math.min(4,Math.floor(n/2)+n%2);
+  const top=st.slice(0,topN);
+  const bot=st.slice(topN);
+
+  // Winners bracket: need at least 2 teams
+  if(top.length>=2){
+    PW=[
+      {id:'wsf1',label:'Halve Finale 1',a:top[0].id,b:(top[3]||top[1]).id,ga:0,gb:0,winner:null},
+      {id:'wsf2',label:'Halve Finale 2',a:top[1].id,b:(top[2]||top[0]).id,ga:0,gb:0,winner:null},
+      {id:'wf',label:'🏆 Finale',a:null,b:null,ga:0,gb:0,winner:null},
+    ];
+    // If only 2 teams: wsf2 same as wsf1, skip it — direct final
+    if(top.length===2){
+      PW=[
+        {id:'wsf1',label:'🏆 Finale',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
+        {id:'wf',label:'',a:null,b:null,ga:0,gb:0,winner:null,skip:true},
+      ];
+    } else if(top.length===3){
+      PW=[
+        {id:'wsf1',label:'Halve Finale',a:top[1].id,b:top[2].id,ga:0,gb:0,winner:null},
+        {id:'wsf2',label:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null},
+        {id:'wf',label:'🏆 Finale',a:top[0].id,b:null,ga:0,gb:0,winner:null},
+      ];
+    }
+  }
+
+  // Losers bracket
+  PL=[];
+  if(bot.length>=2){
+    PL=[
+      {id:'lsf1',label:'Troostfinale SF 1',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},
+    ];
+    if(bot.length>=4){
+      PL.push({id:'lsf2',label:'Troostfinale SF 2',a:bot[2].id,b:bot[3].id,ga:0,gb:0,winner:null});
+    }
+    if(bot.length>=5){
+      PL.push({id:'lbye',bye:true,label:'Vrije doorgang',a:bot[4].id,b:null,ga:0,gb:0,winner:'A'});
+    }
+    PL.push({id:'lf',label:'🎖️ Troostfinale',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
+    if(bot.length===2) PL=[{id:'lsf1',label:'🎖️ Troostfinale',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
+  }
+}
+
+// ── Bracket render ────────────────────────────
+function renderBracket(){
+  renderPouleInBracket();
+  renderHalf('bw',PW,'w');
+  renderHalf('bl',PL,'l');
+  renderChamp();
+}
+
+function renderHalf(elId,matches,pfx){
+  const el=$(elId);
+  const sf1=matches.find(m=>m.id===pfx+'sf1');
+  const sf2=matches.find(m=>m.id===pfx+'sf2');
+  const fin=matches.find(m=>m.id===pfx+'f');
+  const bye=pfx==='l'?matches.find(m=>m.id==='lbye'):null;
+  if(!sf1||!sf2||!fin){el.innerHTML='';return;}
+
+  const winTeam=fin.winner?tn(fin.winner==='A'?fin.a:fin.b):null;
+  const isW=pfx==='w';
+  const hasBye=!!bye;
+
+  el.innerHTML=`
+    <div class="br1" id="br1-${pfx}">
+      ${mcard(sf1,pfx)}${mcard(sf2,pfx)}${hasBye?mcard(bye,pfx):''}
+    </div>
+    <div class="bspacer" id="bsp-${pfx}"><svg id="svg-${pfx}"></svg></div>
+    <div class="br2">${mcard(fin,pfx)}</div>
+    <div class="barrow"></div>
+    <div class="bwcol">
+      <div class="bwtitle">${isW?'🏆 WINNAAR':'🎖️ TROOSTFINALE'}</div>
+      <div class="bwname">${winTeam||'?'}</div>
+    </div>`;
+
+  requestAnimationFrame(()=>drawSVG(pfx,hasBye));
+}
+
+function drawSVG(pfx,hasBye){
+  const svg=$('svg-'+pfx), sp=$('bsp-'+pfx);
+  if(!svg||!sp) return;
+  const spR=sp.getBoundingClientRect();
+  const h=sp.offsetHeight||200;
+  svg.setAttribute('height',h);
+  svg.setAttribute('viewBox',`0 0 32 ${h}`);
+  function midY(id){
+    const el=$(id); if(!el) return h/2;
+    const r=el.getBoundingClientRect();
+    return r.top+r.height/2-spR.top;
+  }
+  const y1=midY('bm-'+pfx+'sf1'), y2=midY('bm-'+pfx+'sf2');
+  const y3=hasBye?midY('bm-lbye'):null;
+  const yf=midY('bm-'+pfx+'f');
+  const x=16;
+  let d=`<line x1="0" y1="${y1}" x2="${x}" y2="${y1}" stroke="#374151" stroke-width="2"/>`;
+  d+=`<line x1="0" y1="${y2}" x2="${x}" y2="${y2}" stroke="#374151" stroke-width="2"/>`;
+  if(hasBye&&y3!==null){
+    d+=`<line x1="0" y1="${y3}" x2="${x}" y2="${y3}" stroke="#374151" stroke-width="2" stroke-dasharray="4"/>`;
+    d+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y3}" stroke="#374151" stroke-width="2"/>`;
+  } else {
+    d+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="#374151" stroke-width="2"/>`;
+  }
+  d+=`<line x1="${x}" y1="${yf}" x2="32" y2="${yf}" stroke="#374151" stroke-width="2"/>`;
+  svg.innerHTML=d;
+}
+
+function mcard(m,pfx){
+  if(!m) return '';
+  const isBye=m.bye;
+  const na=tn(m.a), nb=isBye?'— bye —':tn(m.b);
+  const emA=m.a===null, emB=m.b===null||isBye;
+  const wa=m.winner==='A', wb=m.winner==='B';
+  const tA=`<div class="bteam ${m.winner?(wa?'won':'lost'):(emA?'empty':'')}">
+    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emA?'— ?—':na}</span>
+    ${m.winner?`<span class="bsc">${m.ga}</span>`:''}
+  </div>`;
+  const tB=`<div class="bteam ${m.winner?(wb?'won':'lost'):(emB?'empty':'')}">
+    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emB?'— ?—':nb}</span>
+    ${m.winner&&!isBye?`<span class="bsc">${m.gb}</span>`:''}
+  </div>`;
+  const canPlay=!m.winner&&!emA&&!emB&&!isBye;
+  const gn=m.ga+m.gb+1;
+  const sa=na?sn(na):'?', sb=nb?sn(nb):'?';
+  const btns=canPlay?`<div class="bmbtns">
+    <button class="bgbtn bgbtn-a" onclick="ppg('${m.id}','A','${pfx}')">G${gn}: ${sa}</button>
+    <button class="bgbtn bgbtn-b" onclick="ppg('${m.id}','B','${pfx}')">${sb}</button>
+    </div>`
+    : m.winner?`<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">↩</button></div>`:''
+  ;
+  return `<div class="bmatch" id="bm-${m.id}">
+    <div class="bmlbl">${m.label}</div>${tA}${tB}${btns}
+  </div>`;
+}
+
+function ppg(matchId,side,pfx){
+  const list=pfx==='w'?PW:PL;
+  const m=list.find(x=>x.id===matchId);
+  if(!m||m.winner) return;
+  if(side==='A') m.ga++; else m.gb++;
+  if(m.ga===2) m.winner='A';
+  else if(m.gb===2) m.winner='B';
+  advancePlayoff(pfx);
+  renderBracket();
+}
+
+function undoPPG(matchId,pfx){
+  const list=pfx==='w'?PW:PL;
+  const m=list.find(x=>x.id===matchId);
+  if(!m) return;
+  m.ga=0; m.gb=0; m.winner=null;
+  // If this was a semi, clear the final teams too
+  if(pfx==='w'){
+    const wf=PW.find(x=>x.id==='wf');
+    wf.a=null; wf.b=null; wf.ga=0; wf.gb=0; wf.winner=null;
+  }
+  if(pfx==='l'){
+    const lf=PL.find(x=>x.id==='lf');
+    lf.a=null; lf.b=null; lf.ga=0; lf.gb=0; lf.winner=null;
+  }
+  renderBracket();
+}
+
+function advancePlayoff(pfx){
+  if(pfx==='w'){
+    const sf1=PW.find(x=>x.id==='wsf1'),sf2=PW.find(x=>x.id==='wsf2'),wf=PW.find(x=>x.id==='wf');
+    if(sf1.winner&&sf2.winner&&wf.a===null){
+      wf.a=sf1.winner==='A'?sf1.a:sf1.b;
+      wf.b=sf2.winner==='A'?sf2.a:sf2.b;
+    }
+  }
+  if(pfx==='l'){
+    const lsf1=PL.find(x=>x.id==='lsf1'),lsf2=PL.find(x=>x.id==='lsf2');
+    const lbye=PL.find(x=>x.id==='lbye'),lf=PL.find(x=>x.id==='lf');
+    if(lf.a!==null) return;
+    const w1=lsf1?.winner?(lsf1.winner==='A'?lsf1.a:lsf1.b):null;
+    const w2=lsf2?.winner?(lsf2.winner==='A'?lsf2.a:lsf2.b):null;
+    if(w1!==null&&w2!==null){lf.a=w1;lf.b=w2;}
+    else if(w1!==null&&lbye?.a!=null&&!lsf2){lf.a=w1;lf.b=lbye.a;}
+  }
+}
+
+function renderChamp(){
+  const wf=PW.find(x=>x.id==='wf');
+  const area=$('champ');
+  if(!wf||!wf.winner){area.innerHTML='';return;}
+  const c=T[wf.winner==='A'?wf.a:wf.b];
+  area.innerHTML=`<div class="champ-wrap"><div class="trophy">🏆</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
+}
+
+// ── Tabs & Print ──────────────────────────────
+function showTab(t){
+  $('tb-poule').style.display=t==='poule'?'':'none';
+  $('tb-bracket').style.display=t==='bracket'?'':'none';
+  $('tab-poule').classList.toggle('active',t==='poule');
+  $('tab-bracket').classList.toggle('active',t==='bracket');
+  if(t==='bracket') requestAnimationFrame(()=>{
+    drawSVG('w',false);
+    drawSVG('l',PL.some(m=>m.id==='lbye'));
+  });
+}
+function doPrint(){ showTab('bracket'); setTimeout(()=>window.print(),300); }
+</script>
+</body>
+</html>
