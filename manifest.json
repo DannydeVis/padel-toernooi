@@ -1,0 +1,24 @@
+{
+  "name": "Padel Toernooi",
+  "short_name": "Padel",
+  "description": "Organiseer eenvoudig een padel toernooi met poules en bracket",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

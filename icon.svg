@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#111827"/>
+  <!-- Racket head -->
+  <ellipse cx="248" cy="208" rx="128" ry="140" fill="#10b981"/>
+  <!-- Racket head inner (holes pattern) -->
+  <ellipse cx="248" cy="208" rx="100" ry="112" fill="#0d9268"/>
+  <!-- String grid -->
+  <line x1="248" y1="68" x2="248" y2="348" stroke="#10b981" stroke-width="10" opacity="0.7"/>
+  <line x1="180" y1="100" x2="316" y2="316" stroke="#10b981" stroke-width="8" opacity="0.5"/>
+  <line x1="316" y1="100" x2="180" y2="316" stroke="#10b981" stroke-width="8" opacity="0.5"/>
+  <line x1="148" y1="208" x2="348" y2="208" stroke="#10b981" stroke-width="10" opacity="0.7"/>
+  <!-- Racket frame outer ring -->
+  <ellipse cx="248" cy="208" rx="128" ry="140" fill="none" stroke="white" stroke-width="18"/>
+  <!-- Handle -->
+  <rect x="224" y="338" width="48" height="118" rx="24" fill="white"/>
+  <!-- Handle grip lines -->
+  <line x1="224" y1="368" x2="272" y2="368" stroke="#9ca3af" stroke-width="4"/>
+  <line x1="224" y1="384" x2="272" y2="384" stroke="#9ca3af" stroke-width="4"/>
+  <line x1="224" y1="400" x2="272" y2="400" stroke="#9ca3af" stroke-width="4"/>
+  <!-- Ball -->
+  <circle cx="372" cy="118" r="56" fill="#fbbf24"/>
+  <path d="M 348 88 Q 380 108 375 155" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 396 88 Q 364 108 369 155" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="5" stroke-linecap="round"/>
+</svg>
