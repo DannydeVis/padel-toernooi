@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full bleed background for maskable -->
+  <rect width="512" height="512" fill="#111827"/>
+  <!-- Racket head (scaled down to fit safe zone ~80%) -->
+  <ellipse cx="240" cy="218" rx="108" ry="118" fill="#10b981"/>
+  <ellipse cx="240" cy="218" rx="84" ry="94" fill="#0d9268"/>
+  <line x1="240" y1="100" x2="240" y2="336" stroke="#10b981" stroke-width="9" opacity="0.7"/>
+  <line x1="132" y1="218" x2="348" y2="218" stroke="#10b981" stroke-width="9" opacity="0.7"/>
+  <ellipse cx="240" cy="218" rx="108" ry="118" fill="none" stroke="white" stroke-width="16"/>
+  <!-- Handle -->
+  <rect x="218" y="328" width="44" height="102" rx="22" fill="white"/>
+  <line x1="218" y1="354" x2="262" y2="354" stroke="#9ca3af" stroke-width="4"/>
+  <line x1="218" y1="370" x2="262" y2="370" stroke="#9ca3af" stroke-width="4"/>
+  <!-- Ball -->
+  <circle cx="354" cy="122" r="46" fill="#fbbf24"/>
+  <path d="M 333 97 Q 362 114 358 150" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="5" stroke-linecap="round"/>
+</svg>

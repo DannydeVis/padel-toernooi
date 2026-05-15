@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Padel Toernooi</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#10b981">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Padel">
+<link rel="apple-touch-icon" href="icon.svg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -228,6 +235,42 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
   @page{size:landscape;margin:1.2cm}
 }
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
+
+/* INSTALL BANNER */
+#install-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  padding:0 12px 12px;
+  pointer-events:none;
+  display:flex;justify-content:center;
+}
+#install-banner.hidden{display:none}
+.install-card{
+  pointer-events:all;
+  background:#1f2937;
+  border:1px solid rgba(16,185,129,.35);
+  border-radius:20px 20px 16px 16px;
+  box-shadow:0 -4px 32px rgba(0,0,0,.5),0 0 0 1px rgba(16,185,129,.1);
+  padding:16px 18px 14px;
+  max-width:480px;width:100%;
+  animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes slideUp{from{transform:translateY(120%);opacity:0}to{transform:translateY(0);opacity:1}}
+.install-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.install-icon{width:48px;height:48px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#111827;border:1px solid rgba(255,255,255,.1)}
+.install-icon img{width:100%;height:100%}
+.install-text{flex:1;min-width:0}
+.install-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px;color:#f9fafb}
+.install-text span{font-size:.78rem;color:rgba(249,250,251,.5);margin-top:1px;display:block}
+.install-close{background:none;border:none;color:rgba(249,250,251,.4);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;flex-shrink:0;border-radius:6px;transition:.15s}
+.install-close:hover{color:#f9fafb;background:rgba(255,255,255,.08)}
+.install-steps{font-size:.8rem;color:rgba(249,250,251,.6);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:10px}
+.install-steps b{color:#10b981}
+.install-actions{display:flex;gap:8px}
+.install-btn-primary{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;background:#10b981;color:#fff;border:none;border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s}
+.install-btn-primary:hover{background:#059669}
+.install-btn-skip{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.5px;background:rgba(255,255,255,.06);color:rgba(249,250,251,.5);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s;white-space:nowrap}
+.install-btn-skip:hover{background:rgba(255,255,255,.1);color:#f9fafb}
+@media print{#install-banner{display:none!important}}
 </style>
 </head>
 <body>
@@ -317,6 +360,26 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 </div>
 
 </div><!-- /app -->
+
+<!-- INSTALL BANNER -->
+<div id="install-banner" class="hidden">
+  <div class="install-card">
+    <div class="install-top">
+      <div class="install-icon"><img src="icon.svg" alt=""></div>
+      <div class="install-text">
+        <strong>Padel Toernooi</strong>
+        <span id="install-subtitle">Zet op je beginscherm</span>
+      </div>
+      <button class="install-close" onclick="dismissInstall()" aria-label="Sluiten">✕</button>
+    </div>
+    <div class="install-steps" id="install-steps"></div>
+    <div class="install-actions">
+      <button class="install-btn-primary" id="install-btn-main" onclick="triggerInstall()">📲 Installeren</button>
+      <button class="install-btn-skip" onclick="dismissInstall()">Niet nu</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
@@ -855,6 +918,82 @@ function showTab(t){
   });
 }
 function doPrint(){ showTab('bracket'); setTimeout(()=>window.print(),300); }
+
+// ── PWA Install Banner ────────────────────────
+let deferredPrompt = null;
+
+function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+function isInStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+function isDismissed(){ return sessionStorage.getItem('install-dismissed') === '1'; }
+
+function showInstallBanner(){
+  if(isInStandalone() || isDismissed()) return;
+  const banner = document.getElementById('install-banner');
+  const steps  = document.getElementById('install-steps');
+  const btn    = document.getElementById('install-btn-main');
+  const sub    = document.getElementById('install-subtitle');
+
+  if(isIOS()){
+    sub.textContent = 'Zet op je beginscherm via Safari';
+    steps.innerHTML =
+      '1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>' +
+      '2. Scrol en tik op <b>Zet op beginscherm</b><br>' +
+      '3. Tik op <b>Voeg toe</b> — klaar! 🎾';
+    btn.textContent = '👍 Begrepen';
+    btn.onclick = dismissInstall;
+  } else if(deferredPrompt){
+    sub.textContent = 'Installeer de app op je beginscherm';
+    steps.innerHTML =
+      'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.';
+    btn.textContent = '📲 Installeren';
+    btn.onclick = triggerInstall;
+  } else {
+    // Generic: browser doesn't support prompt or already installed
+    return;
+  }
+
+  banner.classList.remove('hidden');
+}
+
+function triggerInstall(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(c => {
+      deferredPrompt = null;
+      dismissInstall();
+    });
+  } else {
+    dismissInstall();
+  }
+}
+
+function dismissInstall(){
+  sessionStorage.setItem('install-dismissed', '1');
+  document.getElementById('install-banner').classList.add('hidden');
+}
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  setTimeout(showInstallBanner, 2500);
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  dismissInstall();
+});
+
+// Show iOS banner after a short delay
+if(isIOS() && !isInStandalone()){
+  setTimeout(showInstallBanner, 2500);
+}
+
+// ── Service Worker ────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
