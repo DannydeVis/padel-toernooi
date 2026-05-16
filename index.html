@@ -1150,7 +1150,12 @@ function undoPPG(matchId,pfx){
 function advancePlayoff(pfx){
   if(pfx==='w'){
     const sf1=PW.find(x=>x.id==='wsf1'),sf2=PW.find(x=>x.id==='wsf2'),wf=PW.find(x=>x.id==='wf');
-    if(sf1.winner&&sf2.winner&&wf.a===null){
+    if(!wf||wf.winner) return;
+    if(sf2?.skip){
+      // 3-team bracket: wf.a is already the bye team, sf1 winner fills wf.b
+      if(sf1?.winner&&wf.b===null)
+        wf.b=sf1.winner==='A'?sf1.a:sf1.b;
+    } else if(sf1?.winner&&sf2?.winner&&wf.a===null){
       wf.a=sf1.winner==='A'?sf1.a:sf1.b;
       wf.b=sf2.winner==='A'?sf2.a:sf2.b;
     }
