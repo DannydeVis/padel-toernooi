@@ -245,6 +245,30 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
 
 /* PRINT */
+/* AMERICANO */
+#screen-americano{padding-top:4px}
+.am-round{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
+.am-round-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2)}
+.am-round-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
+.am-round-done .am-round-hdr{opacity:.65}
+.am-match{padding:12px 14px;border-top:1px solid var(--bdr)}
+.am-match-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:10px}
+.am-team{font-weight:600;font-size:.83rem;color:var(--card-txt);line-height:1.3}
+.am-team.r{text-align:right}.am-team.won{color:var(--accent);font-weight:700}
+.am-vs{color:var(--b-muted);font-size:.72rem;text-align:center}
+.am-score-done{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;color:var(--card-txt);letter-spacing:2px;text-align:center}
+.am-score-ctrl{display:flex;align-items:center;justify-content:center;gap:12px}
+.am-sc-side{display:flex;align-items:center;gap:10px}
+.am-sc-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1.3rem;font-weight:700;cursor:pointer;transition:.15s;touch-action:manipulation;display:flex;align-items:center;justify-content:center;line-height:1}
+.am-sc-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.am-sc-val{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.6rem;color:var(--card-txt);min-width:32px;text-align:center}
+.am-sc-sep{color:var(--b-muted);font-size:1rem;padding:0 4px}
+.am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
+.am-sc-prog{font-size:.74rem;color:var(--b-muted)}
+.am-sc-prog.ready{color:var(--accent);font-weight:600}
+.am-st-wrap{background:var(--surface);border-radius:14px;padding:16px 18px;margin-top:4px;border:1px solid var(--bdr)}
+.am-st-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
+
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   body,html{background:#fff!important;color:#000!important}
@@ -394,10 +418,19 @@ body.banner-open .app{padding-bottom:140px}
 <!-- SETUP -->
 <div id="screen-setup">
   <div class="setup-box">
-    <h2>Teams instellen</h2>
+    <h2 id="setup-box-title">Teams instellen</h2>
 
-    <!-- Spelregels -->
+    <!-- Toernooi type -->
     <div class="rules-row">
+      <span class="rules-lbl">Type</span>
+      <div class="rules-opts" id="rules-type">
+        <button class="rbtn active" onclick="setTType('team')">Team<span class="rbtn-sub">vast koppel</span></button>
+        <button class="rbtn" onclick="setTType('americano')">Americano<span class="rbtn-sub">wissel koppel</span></button>
+      </div>
+    </div>
+
+    <!-- Match formaat (team only) -->
+    <div class="rules-row" id="rules-gpm-row">
       <span class="rules-lbl">Match formaat</span>
       <div class="rules-opts" id="rules-gpm">
         <button class="rbtn" onclick="setGpm(1)">1 game</button>
@@ -406,20 +439,30 @@ body.banner-open .app{padding-bottom:140px}
       </div>
     </div>
 
-    <!-- Mode toggle -->
-    <div style="display:flex;gap:8px;margin-bottom:18px;">
+    <!-- Punten per match (americano only) -->
+    <div class="rules-row" id="rules-pts-row" style="display:none">
+      <span class="rules-lbl">Punten/match</span>
+      <div class="rules-opts" id="rules-pts">
+        <button class="rbtn" onclick="setMatchPts(24)">24</button>
+        <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub">standaard</span></button>
+        <button class="rbtn" onclick="setMatchPts(40)">40</button>
+      </div>
+    </div>
+
+    <!-- Mode toggle (team only) -->
+    <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
       <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1">👥 Spelersnamen invoeren</button>
       <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1">✏️ Teams zelf invoeren</button>
     </div>
 
     <!-- AUTO MODE: player names -->
     <div id="mode-auto">
-      <p style="color:var(--txt2);font-size:.86rem;margin-bottom:12px">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
+      <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
       <textarea id="ta" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
       <div class="nc" id="nc">Voer namen in...</div>
       <div class="setup-btns">
-        <button class="btn btn-green" onclick="doStart()">🎾 Starten</button>
-        <button class="btn btn-ghost" onclick="doShuffle()">🔀 Schudden</button>
+        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()">🎾 Starten</button>
+        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()">🔀 Schudden</button>
       </div>
       <div class="pgrid" id="prev"></div>
     </div>
@@ -477,6 +520,11 @@ body.banner-open .app{padding-bottom:140px}
   </div>
 </div>
 
+<!-- AMERICANO TOURNAMENT -->
+<div id="screen-americano" style="display:none">
+  <div id="am-rounds-wrap"></div>
+</div>
+
 </div><!-- /app -->
 
 <!-- INSTALL BANNER -->
@@ -499,21 +547,51 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.6';
+const APP_VERSION = 'v1.7';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
-let R={gpm:3};
+let R={gpm:3, matchPts:32};
+let mode='team'; // 'team' | 'americano'
+let AP=[], AM=[]; // americano players & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
 
 // ── Spelregels ────────────────────────────────
+function setTType(t){
+  mode=t;
+  document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
+    b.classList.toggle('active',['team','americano'][i]===t);
+  });
+  $('rules-gpm-row').style.display = t==='team' ? '' : 'none';
+  $('rules-pts-row').style.display = t==='americano' ? '' : 'none';
+  $('mode-toggle-row').style.display = t==='team' ? '' : 'none';
+  $('setup-box-title').textContent = t==='americano' ? 'Americano instellen' : 'Teams instellen';
+  $('mode-auto-desc').textContent = t==='americano'
+    ? 'Één naam per regel. Deelbaar door 4 (bijv. 8, 12 of 16 spelers). Partners wisselen elke ronde.'
+    : "Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.";
+  $('btn-shuffle').style.display = t==='americano' ? 'none' : '';
+  if(t==='americano') setMode('auto');
+}
+
+function setMatchPts(n){
+  R.matchPts=n;
+  document.querySelectorAll('#rules-pts .rbtn').forEach((b,i)=>{
+    b.classList.toggle('active',[24,32,40][i]===n);
+  });
+}
+
 function setGpm(n){
   R.gpm=n;
   document.querySelectorAll('#rules-gpm .rbtn').forEach((b,i)=>{
     b.classList.toggle('active',[1,3,5][i]===n);
   });
+}
+
+function doStartAny(){
+  if(mode==='americano') return startAmericano();
+  return doStart();
 }
 
 // ── Mode toggle ───────────────────────────────
@@ -621,11 +699,14 @@ function startTournament(){
 }
 
 function goSetup(){
+  mode='team';
   $('screen-setup').style.display='block';
   $('screen-tournament').style.display='none';
+  $('screen-americano').style.display='none';
   $('btn-back').style.display='none';
   $('btn-print').style.display='none';
-  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];
+  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];AP=[];AM=[];
+  setTType('team');
   setGpm(R.gpm);
   clearSavedState();
 }
@@ -1091,10 +1172,176 @@ function editTeam(id){
   });
 }
 
+// ── Americano ─────────────────────────────────
+function buildAmericanoSchedule(n){
+  // Uses circle algorithm: fix player 0, rotate rest.
+  // Pairs are formed by mirroring positions: arr[i]+arr[n-1-i].
+  // Guarantees each player partners every other exactly once over n-1 rounds.
+  let circle=[];
+  for(let i=1;i<n;i++) circle.push(i);
+  const rounds=[];
+  for(let r=0;r<n-1;r++){
+    const arr=[0,...circle];
+    const pairs=[];
+    for(let i=0;i<n/2;i++) pairs.push([arr[i],arr[n-1-i]]);
+    const matches=[];
+    for(let i=0;i<pairs.length/2;i++){
+      matches.push({
+        id:`am-${r}-${i}`, round:r+1,
+        a1:pairs[i][0], a2:pairs[i][1],
+        b1:pairs[pairs.length-1-i][0], b2:pairs[pairs.length-1-i][1],
+        sa:0, sb:0, done:false
+      });
+    }
+    rounds.push(matches);
+    circle=[circle[circle.length-1],...circle.slice(0,-1)];
+  }
+  return rounds;
+}
+
+function startAmericano(){
+  const ns=names().filter(Boolean);
+  if(ns.length<4){alert('Voer minimaal 4 namen in.');return;}
+  if(ns.length%4!==0){
+    const add=4-ns.length%4;
+    alert(`Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt ${ns.length} spelers — voeg nog ${add} toe of verwijder ${ns.length%4}.`);
+    return;
+  }
+  const shuffled=[...ns].sort(()=>Math.random()-.5);
+  AP=shuffled.map((name,id)=>({id,name,pts:0}));
+  AM=buildAmericanoSchedule(AP.length);
+  showAmericano();
+  saveState();
+}
+
+function showAmericano(){
+  $('screen-setup').style.display='none';
+  $('screen-tournament').style.display='none';
+  $('screen-americano').style.display='block';
+  $('btn-back').style.display='';
+  $('btn-print').style.display='none';
+  renderAmericano();
+}
+
+function renderAmericano(){
+  let h='';
+  AM.forEach((matches,ri)=>{
+    const done=matches.every(m=>m.done);
+    h+=`<div class="am-round${done?' am-round-done':''}">
+      <div class="am-round-hdr">
+        <span class="am-round-lbl">Ronde ${ri+1} <span style="opacity:.5;font-weight:400">— ${matches.length} ${matches.length===1?'baan':'banen'}</span></span>
+        ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':''}
+      </div>
+      ${matches.map(m=>renderAmMatch(m)).join('')}
+    </div>`;
+  });
+  h+=renderAmSt();
+  $('am-rounds-wrap').innerHTML=h;
+}
+
+function renderAmMatch(m){
+  const pa=AP[m.a1],pb=AP[m.a2],pc=AP[m.b1],pd=AP[m.b2];
+  const tA=`${pa.name} & ${pb.name}`;
+  const tB=`${pc.name} & ${pd.name}`;
+  if(m.done){
+    const wA=m.sa>m.sb, wB=m.sb>m.sa;
+    return `<div class="am-match">
+      <div class="am-match-teams">
+        <span class="am-team${wA?' won':''}">${tA}</span>
+        <span class="am-score-done">${m.sa}–${m.sb}</span>
+        <span class="am-team r${wB?' won':''}">${tB}</span>
+      </div>
+      <div style="text-align:center">
+        <button class="mundo-btn" onclick="amUndo('${m.id}')">↩ Herstel</button>
+      </div>
+    </div>`;
+  }
+  const total=m.sa+m.sb, ready=total===R.matchPts;
+  return `<div class="am-match" id="amm-${m.id}">
+    <div class="am-match-teams">
+      <span class="am-team">${tA}</span>
+      <span class="am-vs">vs</span>
+      <span class="am-team r">${tB}</span>
+    </div>
+    <div class="am-score-ctrl">
+      <div class="am-sc-side">
+        <button class="am-sc-btn" onclick="amAdj('${m.id}','a',-1)">−</button>
+        <span class="am-sc-val" id="amsa-${m.id}">${m.sa}</span>
+        <button class="am-sc-btn" onclick="amAdj('${m.id}','a',1)">+</button>
+      </div>
+      <span class="am-sc-sep">—</span>
+      <div class="am-sc-side">
+        <button class="am-sc-btn" onclick="amAdj('${m.id}','b',-1)">−</button>
+        <span class="am-sc-val" id="amsb-${m.id}">${m.sb}</span>
+        <button class="am-sc-btn" onclick="amAdj('${m.id}','b',1)">+</button>
+      </div>
+    </div>
+    <div class="am-sc-footer">
+      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${total}/${R.matchPts} punten</span>
+      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">✓ Opslaan</button>`:''}
+    </div>
+  </div>`;
+}
+
+function amAdj(matchId,side,delta){
+  const m=AM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  if(side==='a'){
+    m.sa=Math.max(0,Math.min(R.matchPts,m.sa+delta));
+    if(m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
+  } else {
+    m.sb=Math.max(0,Math.min(R.matchPts,m.sb+delta));
+    if(m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
+  }
+  // Targeted DOM update — no full re-render, keeps button focus
+  const saEl=$(`amsa-${matchId}`), sbEl=$(`amsb-${matchId}`), totEl=$(`amtot-${matchId}`);
+  if(saEl) saEl.textContent=m.sa;
+  if(sbEl) sbEl.textContent=m.sb;
+  const total=m.sa+m.sb, ready=total===R.matchPts;
+  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=`${total}/${R.matchPts} punten`; }
+  const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
+  if(foot){
+    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${total}/${R.matchPts} punten</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">✓ Opslaan</button>`:''}`;
+  }
+}
+
+function amSave(matchId){
+  const m=AM.flat().find(x=>x.id===matchId);
+  if(!m||m.done||m.sa+m.sb!==R.matchPts) return;
+  m.done=true;
+  AP[m.a1].pts+=m.sa; AP[m.a2].pts+=m.sa;
+  AP[m.b1].pts+=m.sb; AP[m.b2].pts+=m.sb;
+  renderAmericano(); saveState();
+}
+
+function amUndo(matchId){
+  const m=AM.flat().find(x=>x.id===matchId);
+  if(!m||!m.done) return;
+  AP[m.a1].pts-=m.sa; AP[m.a2].pts-=m.sa;
+  AP[m.b1].pts-=m.sb; AP[m.b2].pts-=m.sb;
+  m.done=false; m.sa=0; m.sb=0;
+  renderAmericano(); saveState();
+}
+
+function renderAmSt(){
+  const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
+  let h=`<div class="am-st-wrap"><h3>Ranglijst</h3><table class="st-tbl">
+    <tr><th>#</th><th>Speler</th><th>Punten</th></tr>`;
+  sorted.forEach((p,i)=>{
+    h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
+  });
+  return h+`</table></div>`;
+}
+
 // ── State opslaan ─────────────────────────────
 function saveState(){
+  if(mode==='americano'){
+    if(!AP.length) return;
+    localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R}));
+    return;
+  }
   if(!T.length) return;
-  localStorage.setItem('padel-state', JSON.stringify({T,PM,PW,PL,pmid,pDone,R}));
+  localStorage.setItem('padel-state', JSON.stringify({mode:'team',T,PM,PW,PL,pmid,pDone,R}));
 }
 
 function loadState(){
@@ -1112,9 +1359,17 @@ function loadState(){
 
 function resumeFromBanner(){
   if(!savedState) return;
-  ({T,PM,PW,PL,pmid,pDone}=savedState);
   if(savedState.R) R=savedState.R;
   $('resume-banner').classList.add('hidden');
+  if(savedState.mode==='americano'){
+    mode='americano';
+    ({AP,AM}=savedState);
+    savedState=null;
+    showAmericano();
+    return;
+  }
+  mode='team';
+  ({T,PM,PW,PL,pmid,pDone}=savedState);
   savedState=null;
   startTournamentUI();
 }
