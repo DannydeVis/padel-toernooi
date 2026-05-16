@@ -244,6 +244,24 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .champ-wrap h2{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:var(--b-win-txt);text-transform:uppercase;margin-top:6px}
 .champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
 
+/* ANIMATIES */
+@keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tabIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes resultIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes champIn{from{opacity:0;transform:scale(.88) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.screen-enter{animation:screenIn .28s ease both}
+.tab-fade{animation:tabIn .2s ease both}
+.mresult{animation:resultIn .25s ease both}
+.champ-wrap{animation:champIn .5s cubic-bezier(.34,1.56,.64,1) both}
+/* Knop-druk */
+.btn:active{transform:scale(.94)}
+.mbtn:active{transform:scale(.96)}
+.rbtn:active{transform:scale(.95)}
+.bgbtn:active{transform:scale(.93)}
+.am-sc-btn:active{transform:scale(.88)}
+.tab:active:not(.active){transform:scale(.97)}
+.mundo-btn:active{transform:scale(.94)}
+
 /* PRINT */
 /* ONBOARDING */
 #onboarding{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;padding:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
@@ -577,7 +595,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.8';
+const APP_VERSION = 'v1.9';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
@@ -714,7 +732,10 @@ function doStart(){
 
 function startTournamentUI(){
   $('screen-setup').style.display='none';
-  $('screen-tournament').style.display='block';
+  const el=$('screen-tournament');
+  el.style.display='block';
+  el.classList.remove('screen-enter');
+  requestAnimationFrame(()=>el.classList.add('screen-enter'));
   $('btn-back').style.display='';
   $('btn-print').style.display='';
   renderPoule(); renderSt(); renderBracket();
@@ -890,6 +911,7 @@ function pg(id,side){
     if(m.ga > m.gb) m.winner='A';
     else if(m.gb > m.ga) m.winner='B';
     else m.winner='A';
+    launchConfetti(45,10);
   }
   renderPoule(); renderSt(); saveState();
   if(PM.every(x=>x.winner)) checkDone();
@@ -1102,6 +1124,7 @@ function ppg(matchId,side,pfx){
   if(m.ga + m.gb >= R.gpm){
     if(m.ga > m.gb) m.winner='A';
     else m.winner='B';
+    launchConfetti(80,14);
   }
   advancePlayoff(pfx);
   renderBracket(); saveState();
@@ -1148,16 +1171,22 @@ function renderChamp(){
   const area=$('champ');
   if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
+  const alreadyShown = area.innerHTML.includes('champ-wrap');
   area.innerHTML=`<div class="champ-wrap"><div class="trophy">🏆</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
+  if(!alreadyShown) champConfetti();
   renderStats();
 }
 
 // ── Tabs & Print ──────────────────────────────
 function showTab(t){
-  $('tb-poule').style.display=t==='poule'?'':'none';
-  $('tb-bracket').style.display=t==='bracket'?'':'none';
+  const poule=$('tb-poule'), bracket=$('tb-bracket');
+  poule.style.display=t==='poule'?'':'none';
+  bracket.style.display=t==='bracket'?'':'none';
   $('tab-poule').classList.toggle('active',t==='poule');
   $('tab-bracket').classList.toggle('active',t==='bracket');
+  const active=t==='poule'?poule:bracket;
+  active.classList.remove('tab-fade');
+  requestAnimationFrame(()=>active.classList.add('tab-fade'));
   if(t==='bracket') requestAnimationFrame(()=>{
     drawSVG('w',false);
     drawSVG('l',PL.some(m=>m.id==='lbye'));
@@ -1175,6 +1204,47 @@ function toggleTheme(){
   const t=document.body.classList.contains('light')?'dark':'light';
   localStorage.setItem('padel-theme',t);
   applyTheme(t);
+}
+
+// ── Confetti ──────────────────────────────────
+function launchConfetti(count,spread,fromY){
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998';
+  document.body.appendChild(cvs);
+  cvs.width=innerWidth; cvs.height=innerHeight;
+  const ctx=cvs.getContext('2d');
+  const COLORS=['#10b981','#fbbf24','#3b82f6','#8b5cf6','#ef4444','#f97316','#ec4899'];
+  const ps=Array.from({length:count},()=>({
+    x:innerWidth/2+(Math.random()-.5)*140,
+    y:fromY??innerHeight*.32,
+    vx:(Math.random()-.5)*spread,
+    vy:-(Math.random()*11+5),
+    color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    w:Math.random()*9+4, h:Math.random()*5+3,
+    rot:Math.random()*360, rv:(Math.random()-.5)*13,
+    alpha:1
+  }));
+  (function draw(){
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    let alive=false;
+    for(const p of ps){
+      p.x+=p.vx; p.y+=p.vy; p.vy+=.36; p.vx*=.985;
+      p.rot+=p.rv; p.alpha-=.012;
+      if(p.alpha<=0) continue;
+      alive=true;
+      ctx.save(); ctx.globalAlpha=Math.max(0,p.alpha);
+      ctx.fillStyle=p.color;
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    }
+    if(alive) requestAnimationFrame(draw); else cvs.remove();
+  })();
+}
+function champConfetti(){
+  launchConfetti(160,18,innerHeight*.22);
+  setTimeout(()=>launchConfetti(120,22,innerHeight*.18),420);
+  setTimeout(()=>launchConfetti(80,16,innerHeight*.28),920);
 }
 
 // ── Onboarding ────────────────────────────────
@@ -1305,7 +1375,10 @@ function startAmericano(){
 function showAmericano(){
   $('screen-setup').style.display='none';
   $('screen-tournament').style.display='none';
-  $('screen-americano').style.display='block';
+  const el=$('screen-americano');
+  el.style.display='block';
+  el.classList.remove('screen-enter');
+  requestAnimationFrame(()=>el.classList.add('screen-enter'));
   $('btn-back').style.display='';
   $('btn-print').style.display='none';
   renderAmericano();
