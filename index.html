@@ -595,7 +595,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.9';
+const APP_VERSION = 'v1.10';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
@@ -1030,29 +1030,44 @@ function renderBracket(){
 
 function renderHalf(elId,matches,pfx){
   const el=$(elId);
+  if(!matches||!matches.length){el.innerHTML='';return;}
   const sf1=matches.find(m=>m.id===pfx+'sf1');
   const sf2=matches.find(m=>m.id===pfx+'sf2');
   const fin=matches.find(m=>m.id===pfx+'f');
   const bye=pfx==='l'?matches.find(m=>m.id==='lbye'):null;
-  if(!sf1||!sf2||!fin){el.innerHTML='';return;}
+  if(!sf1){el.innerHTML='';return;}
 
-  const winTeam=fin.winner?tn(fin.winner==='A'?fin.a:fin.b):null;
   const isW=pfx==='w';
+  const title=isW?'🏆 WINNAAR':'🎖️ TROOSTFINALE';
+  const hasSf2=sf2&&!sf2.skip;
   const hasBye=!!bye;
 
+  // Direct final: sf1 IS the final (no real sf2, fin is skip or absent)
+  if(!hasSf2&&(!fin||fin.skip)){
+    const winTeam=sf1.winner?tn(sf1.winner==='A'?sf1.a:sf1.b):null;
+    el.innerHTML=`<div class="br1" id="br1-${pfx}">${mcard(sf1,pfx)}</div>
+      <div class="bwcol" style="margin-top:8px">
+        <div class="bwtitle">${title}</div>
+        <div class="bwname">${winTeam||'?'}</div>
+      </div>`;
+    return;
+  }
+  if(!fin){el.innerHTML='';return;}
+
+  const winTeam=fin.winner?tn(fin.winner==='A'?fin.a:fin.b):null;
   el.innerHTML=`
     <div class="br1" id="br1-${pfx}">
-      ${mcard(sf1,pfx)}${mcard(sf2,pfx)}${hasBye?mcard(bye,pfx):''}
+      ${mcard(sf1,pfx)}${hasSf2?mcard(sf2,pfx):''}${hasBye?mcard(bye,pfx):''}
     </div>
-    <div class="bspacer" id="bsp-${pfx}"><svg id="svg-${pfx}"></svg></div>
+    ${hasSf2?`<div class="bspacer" id="bsp-${pfx}"><svg id="svg-${pfx}"></svg></div>`:''}
     <div class="br2">${mcard(fin,pfx)}</div>
     <div class="barrow"></div>
     <div class="bwcol">
-      <div class="bwtitle">${isW?'🏆 WINNAAR':'🎖️ TROOSTFINALE'}</div>
+      <div class="bwtitle">${title}</div>
       <div class="bwname">${winTeam||'?'}</div>
     </div>`;
 
-  requestAnimationFrame(()=>drawSVG(pfx,hasBye));
+  if(hasSf2) requestAnimationFrame(()=>drawSVG(pfx,hasBye));
 }
 
 function drawSVG(pfx,hasBye){
@@ -1138,11 +1153,11 @@ function undoPPG(matchId,pfx){
   // If this was a semi, clear the final teams too
   if(pfx==='w'){
     const wf=PW.find(x=>x.id==='wf');
-    wf.a=null; wf.b=null; wf.ga=0; wf.gb=0; wf.winner=null;
+    if(wf&&!wf.skip){wf.a=null;wf.b=null;wf.ga=0;wf.gb=0;wf.winner=null;}
   }
   if(pfx==='l'){
     const lf=PL.find(x=>x.id==='lf');
-    lf.a=null; lf.b=null; lf.ga=0; lf.gb=0; lf.winner=null;
+    if(lf&&!lf.skip){lf.a=null;lf.b=null;lf.ga=0;lf.gb=0;lf.winner=null;}
   }
   renderBracket(); saveState();
 }
@@ -1171,8 +1186,13 @@ function advancePlayoff(pfx){
   }
 }
 
-function renderChamp(){
+function getFinalMatch(){
   const wf=PW.find(x=>x.id==='wf');
+  return (wf&&!wf.skip)?wf:PW.find(x=>x.id==='wsf1');
+}
+
+function renderChamp(){
+  const wf=getFinalMatch();
   const area=$('champ');
   if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
@@ -1553,7 +1573,7 @@ function clearSavedState(){
 
 // ── Statistieken & eindstand ───────────────────
 function renderStats(){
-  const wf=PW.find(x=>x.id==='wf');
+  const wf=getFinalMatch();
   const lf=PL.find(x=>x.id==='lf');
   if(!wf||!wf.winner){ $('stats').innerHTML=''; return; }
 
