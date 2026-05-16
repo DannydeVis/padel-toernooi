@@ -74,8 +74,9 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--txt);min-h
 
 /* HEADER */
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg)}
-.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--txt)}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--txt);display:flex;align-items:baseline;gap:8px}
 .logo em{color:var(--accent);font-style:normal}
+.logo-version{font-size:.65rem;font-weight:600;letter-spacing:1px;color:var(--txt2);opacity:.6;font-family:'Barlow',sans-serif;text-transform:none}
 .hbtns{display:flex;gap:8px}
 
 /* BUTTONS */
@@ -317,7 +318,7 @@ body.banner-open .app{padding-bottom:140px}
 <div class="app">
 
 <header>
-  <div class="logo">Padel <em>•</em> Toernooi</div>
+  <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span></div>
   <div class="hbtns">
     <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()">✏️ Aanpassen</button>
     <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ Afdrukken</button>
@@ -435,6 +436,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
+const APP_VERSION = 'v1.3';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
@@ -1166,7 +1168,10 @@ if(isIOS() && !isInStandalone()){
   setTimeout(showInstallBanner, 2500);
 }
 
-document.addEventListener('DOMContentLoaded', loadState);
+document.addEventListener('DOMContentLoaded', () => {
+  $('app-version').textContent = APP_VERSION;
+  loadState();
+});
 
 // ── Service Worker ────────────────────────────
 if('serviceWorker' in navigator){
