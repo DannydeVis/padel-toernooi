@@ -245,6 +245,23 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
 
 /* PRINT */
+/* ONBOARDING */
+#onboarding{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;padding:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+#onboarding.hidden{display:none}
+.ob-card{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:520px;padding:28px 24px 32px;display:flex;flex-direction:column;gap:0;box-shadow:0 -8px 40px rgba(0,0,0,.4)}
+body.light .ob-card{box-shadow:0 -8px 40px rgba(0,0,0,.15)}
+.ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
+.ob-dot{width:7px;height:7px;border-radius:50%;background:var(--surface2);transition:.25s}
+.ob-dot.active{width:22px;border-radius:4px;background:var(--accent)}
+.ob-icon{font-size:2.8rem;text-align:center;margin-bottom:12px;line-height:1}
+.ob-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;text-align:center;margin-bottom:8px;color:var(--txt)}
+.ob-body{font-size:.9rem;color:var(--txt2);text-align:center;line-height:1.6;margin-bottom:24px}
+.ob-body b{color:var(--txt)}
+.ob-btns{display:flex;gap:10px}
+.ob-btns .btn{flex:1}
+.ob-skip{font-size:.78rem;color:var(--txt2);background:none;border:none;cursor:pointer;padding:0;margin-top:10px;text-align:center;width:100%;touch-action:manipulation}
+.ob-skip:hover{color:var(--txt)}
+
 /* AMERICANO */
 #screen-americano{padding-top:4px}
 .am-round{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
@@ -391,6 +408,19 @@ body.banner-open .app{padding-bottom:140px}
 </style>
 </head>
 <body>
+
+<!-- ONBOARDING -->
+<div id="onboarding" class="hidden">
+  <div class="ob-card">
+    <div class="ob-dots" id="ob-dots"></div>
+    <div class="ob-icon" id="ob-icon"></div>
+    <div class="ob-title" id="ob-title"></div>
+    <div class="ob-body" id="ob-body"></div>
+    <div class="ob-btns" id="ob-btns"></div>
+    <button class="ob-skip" id="ob-skip" onclick="dismissOnboarding()">Overslaan</button>
+  </div>
+</div>
+
 <div class="app">
 
 <header>
@@ -547,7 +577,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.7';
+const APP_VERSION = 'v1.8';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
@@ -1147,6 +1177,64 @@ function toggleTheme(){
   applyTheme(t);
 }
 
+// ── Onboarding ────────────────────────────────
+const OB_STEPS = [
+  {
+    icon: '🎾',
+    title: 'Padel Toernooi',
+    body: 'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.'
+  },
+  {
+    icon: '🏆',
+    title: 'Team toernooi',
+    body: '<b>Vaste duo\'s of trio\'s</b> spelen een poule. Daarna beslist een bracket wie er wint — met winnaar- én verliezersfinale.'
+  },
+  {
+    icon: '🔄',
+    title: 'Americano',
+    body: '<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.'
+  },
+  {
+    icon: '✅',
+    title: 'Klaar om te spelen',
+    body: 'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.'
+  }
+];
+let obStep = 0;
+
+function showOnboarding(){
+  if(localStorage.getItem('padel-onboarding')) return;
+  obStep = 0;
+  $('onboarding').classList.remove('hidden');
+  renderObStep();
+}
+
+function renderObStep(){
+  const s = OB_STEPS[obStep], last = obStep === OB_STEPS.length - 1;
+  // Dots
+  $('ob-dots').innerHTML = OB_STEPS.map((_,i)=>`<div class="ob-dot${i===obStep?' active':''}"></div>`).join('');
+  $('ob-icon').textContent = s.icon;
+  $('ob-title').textContent = s.title;
+  $('ob-body').innerHTML = s.body;
+  // Buttons
+  const prev = obStep > 0 ? `<button class="btn btn-ghost" onclick="obNav(-1)">← Terug</button>` : '';
+  const next = last
+    ? `<button class="btn btn-green" onclick="dismissOnboarding()">🎾 Starten</button>`
+    : `<button class="btn btn-green" onclick="obNav(1)">Volgende →</button>`;
+  $('ob-btns').innerHTML = prev + next;
+  $('ob-skip').style.display = last ? 'none' : '';
+}
+
+function obNav(dir){
+  obStep = Math.max(0, Math.min(OB_STEPS.length - 1, obStep + dir));
+  renderObStep();
+}
+
+function dismissOnboarding(){
+  localStorage.setItem('padel-onboarding', '1');
+  $('onboarding').classList.add('hidden');
+}
+
 // ── Teamnaam bewerken ─────────────────────────
 function editTeam(id){
   const cell=document.querySelector(`[data-team-id="${id}"]`);
@@ -1536,6 +1624,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('app-version').textContent = APP_VERSION;
   applyTheme(localStorage.getItem('padel-theme') || 'dark');
   loadState();
+  showOnboarding();
 });
 
 // ── Service Worker ────────────────────────────
