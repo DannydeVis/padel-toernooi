@@ -88,7 +88,15 @@ body.light .install-text span{color:rgba(17,24,39,.5)}
 body.light .install-close{color:rgba(17,24,39,.4)}
 body.light textarea{background:#f9fafb;color:#111827}
 body.light textarea::placeholder{color:rgba(17,24,39,.3)}
-body.light .resume-banner,body.light #resume-banner{background:rgba(16,185,129,.08)}
+body.light #resume-banner{background:rgba(16,185,129,.08)}
+body.light .mcard{box-shadow:0 2px 8px rgba(0,0,0,.08);border-color:#e5e7eb}
+body.light .rlbl{color:#6b7280;border-bottom-color:#e5e7eb}
+body.light .prog-bar{background:#e5e7eb}
+body.light .st-tbl th{border-bottom-color:#e5e7eb}
+body.light .st-tbl td{border-bottom-color:#e5e7eb}
+body.light .st-tbl tr.divr td{background:#f3f4f6}
+body.light .st-wrap{border-top-color:#e5e7eb}
+body.light .champ-wrap{background:#fff;border-top-color:#e5e7eb}
 
 /* TEAM EDIT */
 .team-edit-btn{background:none;border:none;cursor:pointer;opacity:.35;font-size:.72rem;padding:0 3px;transition:.15s;vertical-align:middle}
@@ -99,17 +107,20 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--txt);min-h
 .app{max-width:980px;margin:0 auto;padding:16px;background:var(--bg);min-height:100vh}
 
 /* HEADER */
-header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg)}
-.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--txt);display:flex;align-items:baseline;gap:8px}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg);gap:8px}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:2px;text-transform:uppercase;color:var(--txt);display:flex;align-items:center;gap:6px;min-width:0;flex-shrink:1}
 .logo em{color:var(--accent);font-style:normal}
-.logo-version{font-size:.62rem;font-weight:700;letter-spacing:.5px;color:var(--accent);opacity:.75;font-family:'Barlow',sans-serif;text-transform:none;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:5px;padding:1px 6px;align-self:center}
-.hbtns{display:flex;gap:8px}
+.logo-version{font-size:.58rem;font-weight:700;letter-spacing:.5px;color:var(--accent);opacity:.85;font-family:'Barlow',sans-serif;text-transform:none;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:5px;padding:1px 5px;flex-shrink:0}
+.hbtns{display:flex;gap:6px;flex-shrink:0}
+/* Op mobiel: verberg knoptekst, toon alleen icoon */
+.btn-label{display:inline}
+@media(max-width:600px){.btn-label{display:none}}
 
 /* BUTTONS */
 .btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;padding:9px 18px;display:inline-flex;align-items:center;gap:6px;transition:.15s}
 .btn-green{background:var(--accent);color:#fff}.btn-green:hover{background:var(--accent-d)}
 .btn-ghost{background:var(--surface);color:var(--txt);border:1px solid var(--bdr)}.btn-ghost:hover{background:var(--surface2)}
-.btn-sm{padding:6px 13px;font-size:.82rem}
+.btn-sm{padding:7px 12px;font-size:.82rem}
 
 /* SETUP */
 #screen-setup{display:block}
@@ -145,41 +156,41 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .rlbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);padding:10px 4px 6px;border-bottom:1px solid #374151;margin-bottom:6px}
 
 /* Match card */
-.mcard{background:var(--card-bg);border:1px solid var(--bdr);border-radius:14px;margin-bottom:8px;overflow:hidden}
+.mcard{background:var(--card-bg);border:1px solid var(--bdr);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.18)}
 
 /* Teams row inside card */
-.mteams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 12px;gap:8px}
-.mteam{font-weight:600;font-size:.85rem;color:var(--card-txt);line-height:1.3}
+.mteams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 14px 10px;gap:8px}
+.mteam{font-weight:600;font-size:.88rem;color:var(--card-txt);line-height:1.3}
 .mteam.r{text-align:right}
-.mteam.won{color:var(--accent-d);font-weight:700}
-.mteam.lost{color:#9ca3af;text-decoration:line-through}
+.mteam.won{color:var(--accent);font-weight:700}
+.mteam.lost{color:var(--card-muted);text-decoration:line-through}
 
 .mscore-wrap{text-align:center}
-.mscore{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;color:var(--card-txt);letter-spacing:2px}
+.mscore{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;color:var(--card-txt);letter-spacing:3px}
 
 /* Winner result row */
-.mresult{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 12px 10px}
-.mwinner-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1px;color:var(--accent-d)}
-.mundo-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.5px;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;background:var(--undo-bg);color:var(--undo-txt);transition:.15s}
-.mundo-btn:hover{background:#4b5563;color:#fff}
+.mresult{display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 14px 12px}
+.mwinner-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.5px;color:var(--accent)}
+.mundo-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.5px;border:none;border-radius:8px;padding:5px 12px;cursor:pointer;background:var(--undo-bg);color:var(--undo-txt);transition:.15s}
+.mundo-btn:hover{background:var(--surface2);color:var(--txt)}
 
 /* Game buttons */
-.mgame-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);text-align:center;padding:6px 0 4px}
-.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 10px 10px}
-.mbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.5px;border:none;border-radius:8px;padding:9px 8px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mgame-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;color:var(--b-muted);text-align:center;padding:4px 0 6px}
+.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
+.mbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.5px;border:none;border-radius:10px;padding:12px 8px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mbtn-a{background:var(--btn-a-bg);color:var(--btn-a-txt)}.mbtn-a:hover{background:var(--btn-a-hover)}
 .mbtn-b{background:var(--btn-b-bg);color:var(--btn-b-txt)}.mbtn-b:hover{background:var(--btn-b-hover)}
 
 /* Standings */
-.st-wrap{border-top:2px solid #374151;padding:14px 18px;background:var(--surface)}
+.st-wrap{border-top:1px solid var(--bdr);padding:16px 18px;background:var(--surface)}
 .st-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
 .st-tbl{width:100%;border-collapse:collapse;font-size:.84rem}
-.st-tbl th{text-align:left;color:var(--b-muted);font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid #374151}
-.st-tbl td{padding:7px 8px;border-bottom:1px solid #374151;color:var(--b-txt)}
+.st-tbl th{text-align:left;color:var(--b-muted);font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid var(--bdr)}
+.st-tbl td{padding:8px 8px;border-bottom:1px solid var(--bdr);color:var(--b-txt)}
 .st-tbl tr:last-child td{border-bottom:none}
 .st-tbl tr.qq td{color:var(--b-win-txt);font-weight:600}
-.st-tbl tr.divr td{background:#374151;font-size:.65rem;color:var(--b-muted);padding:3px 8px;letter-spacing:1px;text-transform:uppercase}
-.wc{font-weight:700;color:var(--accent-d)}
+.st-tbl tr.divr td{background:var(--surface2);font-size:.65rem;color:var(--b-muted);padding:3px 8px;letter-spacing:1px;text-transform:uppercase}
+.wc{font-weight:700;color:var(--accent)}
 .lc{color:var(--red)}
 
 /* BRACKET */
@@ -328,13 +339,16 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
   .stats-wrap{display:none!important}
 }
 
-/* MOBIEL — grotere tap-targets */
+/* MOBIEL — grotere tap-targets & layout */
 @media (max-width:600px){
-  .mbtn{padding:13px 10px;font-size:.88rem}
-  .bgbtn{padding:8px 5px;font-size:.68rem}
+  .mbtn{padding:14px 10px;font-size:.9rem}
+  .bgbtn{padding:9px 5px;font-size:.7rem}
   .mundo-btn{padding:6px 14px;font-size:.78rem}
   .tab{padding:11px 14px;font-size:.84rem}
   .setup-box{padding:16px}
+  .mteams{padding:12px 12px 8px}
+  .mbtns{padding:0 10px 12px;gap:6px}
+  .app{padding:12px}
 }
 body.banner-open .app{padding-bottom:140px}
 #install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
@@ -347,8 +361,8 @@ body.banner-open .app{padding-bottom:140px}
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span></div>
   <div class="hbtns">
     <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" aria-label="Thema wisselen">🌙</button>
-    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()">✏️ Aanpassen</button>
-    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ Afdrukken</button>
+    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()">✏️ <span class="btn-label">Aanpassen</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ <span class="btn-label">Afdrukken</span></button>
   </div>
 </header>
 
@@ -463,7 +477,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.4';
+const APP_VERSION = 'v1.5';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
