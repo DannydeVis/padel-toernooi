@@ -271,6 +271,46 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .install-btn-skip{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.5px;background:rgba(255,255,255,.06);color:rgba(249,250,251,.5);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s;white-space:nowrap}
 .install-btn-skip:hover{background:rgba(255,255,255,.1);color:#f9fafb}
 @media print{#install-banner{display:none!important}}
+
+/* RESUME BANNER */
+#resume-banner{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#resume-banner.hidden{display:none}
+.resume-icon{font-size:1.4rem;flex-shrink:0}
+.resume-text{flex:1;min-width:120px}
+.resume-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:var(--txt)}
+.resume-text span{font-size:.76rem;color:var(--txt2)}
+.resume-btns{display:flex;gap:6px;flex-shrink:0}
+
+/* STATS / PODIUM */
+.stats-wrap{padding:20px;background:var(--surface);border-top:2px solid #374151}
+.stats-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:16px}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px}
+.podium-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:160px}
+.podium-medal{font-size:1.5rem}
+.podium-place{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
+.podium-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;color:var(--txt);text-align:center;background:var(--surface2);border-radius:8px;padding:7px 10px;width:100%;line-height:1.3}
+.podium-item.first .podium-name{color:var(--gold);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2)}
+.podium-item.first .podium-medal{font-size:2rem}
+.stats-tbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.stats-tbl th{text-align:left;color:var(--b-muted);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid #374151}
+.stats-tbl td{padding:6px 8px;border-bottom:1px solid #374151;color:var(--b-txt)}
+.stats-tbl tr:last-child td{border-bottom:none}
+.stats-tbl .medal-cell{font-size:.9rem;padding-right:4px;width:24px}
+.stats-export{display:flex;justify-content:flex-end;margin-top:14px}
+@media print{
+  .stats-wrap{display:none!important}
+}
+
+/* MOBIEL — grotere tap-targets */
+@media (max-width:600px){
+  .mbtn{padding:13px 10px;font-size:.88rem}
+  .bgbtn{padding:8px 5px;font-size:.68rem}
+  .mundo-btn{padding:6px 14px;font-size:.78rem}
+  .tab{padding:11px 14px;font-size:.84rem}
+  .setup-box{padding:16px}
+}
+body.banner-open .app{padding-bottom:140px}
+#install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
 </style>
 </head>
 <body>
@@ -283,6 +323,19 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
     <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ Afdrukken</button>
   </div>
 </header>
+
+<!-- RESUME BANNER -->
+<div id="resume-banner" class="hidden">
+  <div class="resume-icon">🎾</div>
+  <div class="resume-text">
+    <strong>Toernooi hervat</strong>
+    <span id="resume-info"></span>
+  </div>
+  <div class="resume-btns">
+    <button class="btn btn-green btn-sm" onclick="resumeFromBanner()">▶ Doorgaan</button>
+    <button class="btn btn-ghost btn-sm" onclick="discardSaved()">✕</button>
+  </div>
+</div>
 
 <!-- SETUP -->
 <div id="screen-setup">
@@ -354,6 +407,7 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
           <div class="bracket" id="bl"></div>
         </div>
         <div id="champ"></div>
+        <div id="stats"></div>
       </div>
     </div>
   </div>
@@ -386,6 +440,7 @@ const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
+let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
 
 // ── Mode toggle ───────────────────────────────
 function setMode(m){
@@ -475,15 +530,20 @@ function doStart(){
   startTournament();
 }
 
-function startTournament(){
-  buildPoule();
-  buildPlayoffShell();
+function startTournamentUI(){
   $('screen-setup').style.display='none';
   $('screen-tournament').style.display='block';
   $('btn-back').style.display='';
   $('btn-print').style.display='';
   renderPoule(); renderSt(); renderBracket();
-  showTab('poule');
+  showTab(pDone?'bracket':'poule');
+}
+
+function startTournament(){
+  buildPoule();
+  buildPlayoffShell();
+  startTournamentUI();
+  saveState();
 }
 
 function goSetup(){
@@ -492,6 +552,7 @@ function goSetup(){
   $('btn-back').style.display='none';
   $('btn-print').style.display='none';
   T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];
+  clearSavedState();
 }
 
 // ── Poule — dynamic round-robin ────────────────
@@ -645,7 +706,7 @@ function pg(id,side){
     else if(m.gb > m.ga) m.winner='B';
     else m.winner='A'; // tie (1-1-1 impossible in best of 3; 3 games = 2-1 always)
   }
-  renderPoule(); renderSt();
+  renderPoule(); renderSt(); saveState();
   if(PM.every(x=>x.winner)) checkDone();
 }
 
@@ -655,7 +716,7 @@ function undoPM(id){
   // Full reset
   m.ga=0; m.gb=0; m.winner=null;
   m.g1=null; m.g2=null; m.g3=null;
-  renderPoule(); renderSt();
+  renderPoule(); renderSt(); saveState();
 }
 
 // ── Standings ─────────────────────────────────
@@ -859,7 +920,7 @@ function ppg(matchId,side,pfx){
     else m.winner='B';
   }
   advancePlayoff(pfx);
-  renderBracket();
+  renderBracket(); saveState();
 }
 
 function undoPPG(matchId,pfx){
@@ -876,7 +937,7 @@ function undoPPG(matchId,pfx){
     const lf=PL.find(x=>x.id==='lf');
     lf.a=null; lf.b=null; lf.ga=0; lf.gb=0; lf.winner=null;
   }
-  renderBracket();
+  renderBracket(); saveState();
 }
 
 function advancePlayoff(pfx){
@@ -901,9 +962,10 @@ function advancePlayoff(pfx){
 function renderChamp(){
   const wf=PW.find(x=>x.id==='wf');
   const area=$('champ');
-  if(!wf||!wf.winner){area.innerHTML='';return;}
+  if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
   area.innerHTML=`<div class="champ-wrap"><div class="trophy">🏆</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
+  renderStats();
 }
 
 // ── Tabs & Print ──────────────────────────────
@@ -918,6 +980,120 @@ function showTab(t){
   });
 }
 function doPrint(){ showTab('bracket'); setTimeout(()=>window.print(),300); }
+
+// ── State opslaan ─────────────────────────────
+function saveState(){
+  if(!T.length) return;
+  localStorage.setItem('padel-state', JSON.stringify({T,PM,PW,PL,pmid,pDone}));
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem('padel-state');
+    if(!raw) return;
+    const s=JSON.parse(raw);
+    if(!s.T?.length) return;
+    savedState=s;
+    const done=s.PM.filter(m=>m.winner).length, tot=s.PM.length;
+    $('resume-info').textContent=`${s.T.length} teams · ${done}/${tot} wedstrijden gespeeld${s.pDone?' · Bracket klaar':''}`;
+    $('resume-banner').classList.remove('hidden');
+  }catch(e){ localStorage.removeItem('padel-state'); }
+}
+
+function resumeFromBanner(){
+  if(!savedState) return;
+  ({T,PM,PW,PL,pmid,pDone}=savedState);
+  $('resume-banner').classList.add('hidden');
+  savedState=null;
+  startTournamentUI();
+}
+
+function discardSaved(){
+  localStorage.removeItem('padel-state');
+  savedState=null;
+  $('resume-banner').classList.add('hidden');
+}
+
+function clearSavedState(){
+  localStorage.removeItem('padel-state');
+  savedState=null;
+}
+
+// ── Statistieken & eindstand ───────────────────
+function renderStats(){
+  const wf=PW.find(x=>x.id==='wf');
+  const lf=PL.find(x=>x.id==='lf');
+  if(!wf||!wf.winner){ $('stats').innerHTML=''; return; }
+
+  statsGold=T[wf.winner==='A'?wf.a:wf.b];
+  statsSilver=T[wf.winner==='A'?wf.b:wf.a];
+  statsBronze=lf?.winner?T[lf.winner==='A'?lf.a:lf.b]:null;
+
+  const all=[...PM,...PW,...PL].filter(m=>m.winner&&m.a!==null&&m.b!==null&&!m.skip&&!m.bye);
+  statsData=T.map(t=>{
+    const my=all.filter(m=>m.a===t.id||m.b===t.id);
+    const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
+    const gW=my.reduce((s,m)=>s+(m.a===t.id?m.ga:m.gb),0);
+    const gL=my.reduce((s,m)=>s+(m.a===t.id?m.gb:m.ga),0);
+    return{...t,played:my.length,wins,losses:my.length-wins,gW,gL};
+  }).sort((a,b)=>b.wins-a.wins||b.gW-a.gW||a.id-b.id);
+
+  const rows=statsData.map(t=>{
+    const medal=T[t.id]===statsGold?'🥇':T[t.id]===statsSilver?'🥈':(statsBronze&&T[t.id]===statsBronze)?'🥉':'';
+    const pct=t.played?Math.round(t.wins/t.played*100):0;
+    return`<tr><td class="medal-cell">${medal}</td><td>${t.name}${t.trio?'<span style="opacity:.4;font-size:.6rem"> trio</span>':''}</td><td>${t.played}</td><td style="color:var(--accent)">${t.wins}</td><td style="color:var(--red)">${t.losses}</td><td>${t.gW}</td><td>${t.gL}</td><td style="color:var(--txt2)">${pct}%</td></tr>`;
+  }).join('');
+
+  $('stats').innerHTML=`<div class="stats-wrap">
+    <div class="stats-title">Eindstand</div>
+    <div class="podium">
+      <div class="podium-item">
+        <div class="podium-medal">🥈</div>
+        <div class="podium-place">2e plaats</div>
+        <div class="podium-name">${statsSilver.name}</div>
+      </div>
+      <div class="podium-item first">
+        <div class="podium-medal">🥇</div>
+        <div class="podium-place">Winnaar</div>
+        <div class="podium-name">${statsGold.name}</div>
+      </div>
+      ${statsBronze?`<div class="podium-item"><div class="podium-medal">🥉</div><div class="podium-place">3e plaats</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
+    </div>
+    <table class="stats-tbl">
+      <tr><th></th><th>Team</th><th>G</th><th>W</th><th>V</th><th>GW</th><th>GV</th><th>%</th></tr>
+      ${rows}
+    </table>
+    <div class="stats-export">
+      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">📋 Kopieer uitslag</button>
+    </div>
+  </div>`;
+}
+
+function copyStats(){
+  const d=new Date().toLocaleDateString('nl-NL');
+  let txt=`Padel Toernooi — Eindstand (${d})\n\n`;
+  if(statsGold) txt+=`🥇 Winnaar: ${statsGold.name}\n`;
+  if(statsSilver) txt+=`🥈 Runner-up: ${statsSilver.name}\n`;
+  if(statsBronze) txt+=`🥉 3e plaats: ${statsBronze.name}\n`;
+  txt+=`\nVolledige stand:\n`;
+  statsData.forEach((t,i)=>{ txt+=`${i+1}. ${t.name} — ${t.wins}W ${t.losses}V (${t.gW}–${t.gL} games)\n`; });
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=$('stats-copy-btn');
+    if(btn){ btn.textContent='✓ Gekopieerd!'; setTimeout(()=>btn.textContent='📋 Kopieer uitslag',2000); }
+  }).catch(()=>alert('Kopiëren niet beschikbaar in deze browser.'));
+}
+
+// ── Swipe-navigatie ────────────────────────────
+(function(){
+  const tb=document.querySelector('.tab-body');
+  if(!tb) return;
+  let tx=0;
+  tb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  tb.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>60) showTab(dx<0?'bracket':'poule');
+  },{passive:true});
+})();
 
 // ── PWA Install Banner ────────────────────────
 let deferredPrompt = null;
@@ -953,6 +1129,7 @@ function showInstallBanner(){
   }
 
   banner.classList.remove('hidden');
+  document.body.classList.add('banner-open');
 }
 
 function triggerInstall(){
@@ -970,6 +1147,7 @@ function triggerInstall(){
 function dismissInstall(){
   sessionStorage.setItem('install-dismissed', '1');
   document.getElementById('install-banner').classList.add('hidden');
+  document.body.classList.remove('banner-open');
 }
 
 window.addEventListener('beforeinstallprompt', e => {
@@ -987,6 +1165,8 @@ window.addEventListener('appinstalled', () => {
 if(isIOS() && !isInStandalone()){
   setTimeout(showInstallBanner, 2500);
 }
+
+document.addEventListener('DOMContentLoaded', loadState);
 
 // ── Service Worker ────────────────────────────
 if('serviceWorker' in navigator){
