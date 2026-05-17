@@ -1419,10 +1419,10 @@ function renderSt(){
     });
   });
   let h=`<tr><th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th style="color:var(--b-muted)">${t('st_col_games')}</th></tr>`;
-  st.forEach((t,i)=>{
-    const g=gameMap[t.id]||{gW:0,gL:0};
+  st.forEach((tm,i)=>{
+    const g=gameMap[tm.id]||{gW:0,gL:0};
     if(i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
-    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">${icon('ic-pencil')}</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
+    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button></td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
 }
