@@ -456,8 +456,8 @@ body.banner-open .app{padding-bottom:140px}
   <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M6 5h12v5a6 6 0 0 1-12 0z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></symbol>
   <!-- Medal (ribbon medal) -->
   <symbol id="ic-medal" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><polyline points="8.56 2.75 4.5 4.5 7.5 9"/><polyline points="15.44 2.75 19.5 4.5 16.5 9"/><path d="M9 9h6l-3-7z" fill="none"/></symbol>
-  <!-- Check circle -->
-  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <!-- Check (plain tick) -->
+  <symbol id="ic-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
   <!-- Gold medal (solid star) -->
   <symbol id="ic-gold" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="none" fill="currentColor"/></symbol>
   <!-- Silver medal (solid diamond) -->
@@ -939,8 +939,8 @@ function mrow(m){
     ${progress}
     <div class="mgame-label">Game ${gn} van ${R.gpm} — wie wint?</div>
     <div class="mbtns">
-      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">✓ ${sa}</button>
-      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">✓ ${sb}</button>
+      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">${icon('ic-check')} ${sa}</button>
+      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">${icon('ic-check')} ${sb}</button>
     </div>
   </div>`;
 }
@@ -1508,7 +1508,7 @@ function renderAmMatch(m){
     </div>
     <div class="am-sc-footer">
       <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${total}/${R.matchPts} punten</span>
-      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">✓ Opslaan</button>`:''}
+      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">Opslaan</button>`:''}
     </div>
   </div>`;
 }
@@ -1531,7 +1531,7 @@ function amAdj(matchId,side,delta){
   if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=`${total}/${R.matchPts} punten`; }
   const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
   if(foot){
-    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${total}/${R.matchPts} punten</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">✓ Opslaan</button>`:''}`;
+    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${total}/${R.matchPts} punten</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">Opslaan</button>`:''}`;
   }
 }
 
@@ -1677,7 +1677,7 @@ function copyStats(){
   statsData.forEach((t,i)=>{ txt+=`${i+1}. ${t.name} — ${t.wins}W ${t.losses}V (${t.gW}–${t.gL} games)\n`; });
   navigator.clipboard.writeText(txt).then(()=>{
     const btn=$('stats-copy-btn');
-    if(btn){ btn.innerHTML='✓ Gekopieerd!'; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} Kopieer uitslag`,2000); }
+    if(btn){ btn.innerHTML=`${icon('ic-check')} Gekopieerd!`; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} Kopieer uitslag`,2000); }
   }).catch(()=>alert('Kopiëren niet beschikbaar in deze browser.'));
 }
 
