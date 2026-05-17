@@ -3,12 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Padel Bracket — Organiseer je toernooi</title>
-  <meta name="description" content="Gratis app om eenvoudig een padel toernooi te organiseren. Team toernooi of Americano, met poules, bracket en live tussenstand.">
-  <meta property="og:title" content="Padel Bracket">
-  <meta property="og:description" content="Organiseer in 30 seconden een padel toernooi. Gratis, geen account nodig.">
+  <title>PadelBracket — Gratis Padel Toernooi Generator &amp; Bracket Maker</title>
+  <meta name="description" content="Maak gratis padel toernooien: knockout brackets, Americano en Round Robin. Geen account nodig. Werkt offline op de baan. In 6 talen.">
+  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel round robin, tournament bracket maker, padel toernooi maken">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://padel-bracket.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PadelBracket">
+  <meta property="og:url" content="https://padel-bracket.com/">
+  <meta property="og:title" content="PadelBracket — Gratis Padel Toernooi Generator">
+  <meta property="og:description" content="Maak gratis padel toernooien: knockout brackets, Americano &amp; Round Robin. Geen account, werkt offline.">
   <meta property="og:image" content="https://app.padel-bracket.com/icon.svg">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="sv_SE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PadelBracket — Gratis Padel Toernooi Generator">
+  <meta name="twitter:description" content="Brackets, Americano &amp; Round Robin — gratis, geen account, offline.">
+  <meta name="twitter:image" content="https://app.padel-bracket.com/icon.svg">
+  <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
+  <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/">
   <meta name="theme-color" content="#10b981">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PadelBracket",
+    "alternateName": "Padel Bracket Generator",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Web, iOS, Android (PWA)",
+    "description": "Gratis padel toernooi bracket generator voor recreatieve spelers en clubs.",
+    "url": "https://app.padel-bracket.com",
+    "inLanguage": ["nl","en","fr","de","es","sv"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "featureList": ["Knockout brackets","Americano format","Round robin","Live scoring","No signup required","Offline support"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is PadelBracket gratis?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, PadelBracket is volledig gratis. Er is geen abonnement, geen account en geen betaalmuur. Alle functies zijn direct beschikbaar." }
+      },
+      {
+        "@type": "Question",
+        "name": "Welke toernooiformats worden ondersteund?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt drie formats: knockout bracket (poule → halve finale → finale), Americano (wisselende koppels, punten per speler) en Round Robin (iedereen speelt tegen iedereen)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoeveel spelers kan ik gebruiken?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Voor een teamtoernooi minimaal 4 spelers (2 teams). Voor Americano werkt de app met aantallen deelbaar door 4: 8, 12, 16 of meer spelers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Werkt de app ook zonder internet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Na de eerste keer laden werkt PadelBracket volledig offline. Het toernooi wordt lokaal opgeslagen op je apparaat, ook als je de browser sluit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Moet ik een account aanmaken?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nee. Er is geen registratie of login vereist. Open de app en start direct je toernooi." }
+      },
+      {
+        "@type": "Question",
+        "name": "In welke talen is de app beschikbaar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat." }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -245,6 +316,33 @@
     }
     .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
 
+    /* ── HERO KICKER ── */
+    .hero-kicker {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--bdr);
+      border-radius: 12px; overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer; padding: 18px 20px;
+      font-weight: 600; font-size: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 1.4rem; color: var(--accent);
+      transition: transform .2s; flex-shrink: 0; margin-left: 12px;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { padding: 0 20px 18px; color: var(--txt2); line-height: 1.65; }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--bdr); padding: 32px 24px;
@@ -279,7 +377,8 @@
     Gratis · Geen account nodig · Offline werkt ook
   </div>
 
-  <h1>Padel <em>Bracket</em></h1>
+  <h1>Gratis Padel <em>Toernooi Generator</em></h1>
+  <p class="hero-kicker">Brackets · Americano · Round Robin</p>
   <p class="hero-sub">Organiseer in 30 seconden een padel toernooi. Poules, bracket en live tussenstand — alles op je telefoon.</p>
 
   <div class="hero-btns">
@@ -463,6 +562,37 @@
         <li>8, 12 of 16 spelers</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title">Veelgestelde vragen</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Is PadelBracket gratis?</summary>
+      <p>Ja, PadelBracket is volledig gratis. Er is geen abonnement, geen account en geen betaalmuur. Alle functies zijn direct beschikbaar.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Welke toernooiformats worden ondersteund?</summary>
+      <p>PadelBracket ondersteunt drie formats: <strong>knockout bracket</strong> (poule → halve finale → finale), <strong>Americano</strong> (wisselende koppels, punten per speler) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+    </details>
+    <details class="faq-item">
+      <summary>Hoeveel spelers kan ik gebruiken?</summary>
+      <p>Voor een teamtoernooi minimaal 4 spelers (2 teams). Voor Americano werkt de app met aantallen deelbaar door 4: 8, 12, 16 of meer spelers.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Werkt de app ook zonder internet?</summary>
+      <p>Ja. Na de eerste keer laden werkt PadelBracket volledig offline. Het toernooi wordt lokaal opgeslagen op je apparaat, ook als je de browser sluit.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Moet ik een account aanmaken?</summary>
+      <p>Nee. Er is geen registratie of login vereist. Open de app en start direct je toernooi.</p>
+    </details>
+    <details class="faq-item">
+      <summary>In welke talen is de app beschikbaar?</summary>
+      <p>PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat.</p>
+    </details>
   </div>
 </section>
 

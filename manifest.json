@@ -1,8 +1,9 @@
 {
-  "name": "Padel Toernooi",
-  "short_name": "Padel",
-  "description": "Organiseer eenvoudig een padel toernooi met poules en bracket",
-  "start_url": "./",
+  "name": "PadelBracket — Padel Toernooi Generator",
+  "short_name": "PadelBracket",
+  "description": "Gratis padel toernooien: brackets, Americano en Round Robin. Offline, geen account.",
+  "lang": "nl",
+  "start_url": "./?utm_source=pwa",
   "display": "standalone",
   "background_color": "#111827",
   "theme_color": "#10b981",
