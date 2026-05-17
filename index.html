@@ -1026,10 +1026,19 @@ function getStandings(){
 function renderSt(){
   const st=getStandings();
   const topN=Math.min(4,Math.ceil(st.length/2));
+  const gameMap={};
+  PM.filter(m=>m.winner).forEach(m=>{
+    [m.a,m.b].forEach(id=>{
+      if(!gameMap[id]) gameMap[id]={gW:0,gL:0};
+      gameMap[id].gW+=m.a===id?m.ga:m.gb;
+      gameMap[id].gL+=m.a===id?m.gb:m.ga;
+    });
+  });
   let h=`<tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>V</th><th style="color:var(--b-muted)">GW–GV</th></tr>`;
   st.forEach((t,i)=>{
+    const g=gameMap[t.id]||{gW:0,gL:0};
     if(i===topN) h+=`<tr class="divr"><td colspan="6">— verliezersfinale —</td></tr>`;
-    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">${icon('ic-pencil')}</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td><td style="color:var(--txt2);font-size:.75rem">${t.gW}–${t.gL}</td></tr>`;
+    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">${icon('ic-pencil')}</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
 }
