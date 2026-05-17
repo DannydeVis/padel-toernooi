@@ -466,6 +466,8 @@ body.banner-open .app{padding-bottom:140px}
   <symbol id="ic-bronze" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="currentColor"/></symbol>
   <!-- Rotate/refresh (Americano) -->
   <symbol id="ic-rotate" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+  <!-- Undo -->
+  <symbol id="ic-undo" viewBox="0 0 24 24"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></symbol>
   <!-- Install/download -->
   <symbol id="ic-install" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 </svg>
@@ -894,7 +896,7 @@ function renderPouleInBracket(){
         <span style="flex:1;font-weight:${wA?700:400};color:${wA?'var(--b-win-txt)':wB?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${na}</span>
         <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:${scoreColor};flex-shrink:0;letter-spacing:1px">${m.ga}–${m.gb}</span>
         <span style="flex:1;text-align:right;font-weight:${wB?700:400};color:${wB?'var(--b-win-txt)':wA?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl">${nb}</span>
-        ${m.winner?`<button onclick="undoPM(${m.id})" style="flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;border:1px solid #4b5563;background:#374151;color:#d1d5db;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700">↩</button>`:''}
+        ${m.winner?`<button onclick="undoPM(${m.id})" style="flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;border:1px solid #4b5563;background:#374151;color:#d1d5db;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700">${icon('ic-undo')}</button>`:''}
       </div>`;
     }
     html+='</div></div>';
@@ -918,7 +920,7 @@ function mrow(m){
       </div>
       <div class="mresult">
         <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
-        <button class="mundo-btn" onclick="undoPM(${m.id})">↩ Herstel</button>
+        <button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} Herstel</button>
       </div>
     </div>`;
   }
@@ -1166,7 +1168,7 @@ function mcard(m,pfx){
         <button class="bgbtn bgbtn-b" onclick="ppg('${m.id}','B','${pfx}')">${sb}</button>
        </div>`
     : m.winner
-      ? `<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">↩</button></div>`
+      ? `<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">${icon('ic-undo')}</button></div>`
       : '';
   return `<div class="bmatch" id="bm-${m.id}">
     <div class="bmlbl">${m.label}</div>${tA}${tB}${btns}
@@ -1482,7 +1484,7 @@ function renderAmMatch(m){
         <span class="am-team r${wB?' won':''}">${tB}</span>
       </div>
       <div style="text-align:center">
-        <button class="mundo-btn" onclick="amUndo('${m.id}')">↩ Herstel</button>
+        <button class="mundo-btn" onclick="amUndo('${m.id}')">${icon('ic-undo')} Herstel</button>
       </div>
     </div>`;
   }
