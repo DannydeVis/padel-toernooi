@@ -1200,7 +1200,7 @@ function startTournamentUI(){
   const tname=$('logo-tname'), phdr=$('phdr-el');
   if(tname) tname.textContent=tournamentName||'';
   if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
-  if(!pDone && PM.length && PM.every(m=>m.winner)){
+  if(PM.length && PM.every(m=>m.winner) && (!pDone || !PW.length || PW.every(m=>!m.a&&!m.b&&!m.skip))){
     pDone=true;
     fillPlayoff();
   }
