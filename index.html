@@ -490,7 +490,7 @@ body.banner-open .app{padding-bottom:140px}
     <div class="ob-title" id="ob-title"></div>
     <div class="ob-body" id="ob-body"></div>
     <div class="ob-btns" id="ob-btns"></div>
-    <button class="ob-skip" id="ob-skip" onclick="dismissOnboarding()">Overslaan</button>
+    <button class="ob-skip" id="ob-skip" onclick="dismissOnboarding()" data-i18n="ob_skip">Overslaan</button>
   </div>
 </div>
 
@@ -499,9 +499,9 @@ body.banner-open .app{padding-bottom:140px}
 <header>
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
-    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
-    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label">Aanpassen</span></button>
-    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label">Afdrukken</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" data-i18n-aria="hdr_theme" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
+    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label" data-i18n="hdr_edit">Aanpassen</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label" data-i18n="hdr_print">Afdrukken</span></button>
   </div>
 </header>
 
@@ -509,32 +509,32 @@ body.banner-open .app{padding-bottom:140px}
 <div id="resume-banner" class="hidden">
   <div class="resume-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg></div>
   <div class="resume-text">
-    <strong>Toernooi hervat</strong>
+    <strong data-i18n="res_title">Toernooi hervat</strong>
     <span id="resume-info"></span>
   </div>
   <div class="resume-btns">
-    <button class="btn btn-green btn-sm" onclick="resumeFromBanner()">▶ Doorgaan</button>
-    <button class="btn btn-ghost btn-sm" onclick="discardSaved()">✕</button>
+    <button class="btn btn-green btn-sm" onclick="resumeFromBanner()" data-i18n="res_continue">▶ Doorgaan</button>
+    <button class="btn btn-ghost btn-sm" onclick="discardSaved()" data-i18n="res_discard">✕</button>
   </div>
 </div>
 
 <!-- SETUP -->
 <div id="screen-setup">
   <div class="setup-box">
-    <h2 id="setup-box-title">Teams instellen</h2>
+    <h2 id="setup-box-title" data-i18n="set_title_team">Teams instellen</h2>
 
     <!-- Toernooinaam -->
     <div class="rules-row">
-      <span class="rules-lbl">Naam</span>
-      <input id="inp-tname" class="tname-input" type="text" placeholder="Toernooinaam (optioneel)" maxlength="48" oninput="tournamentName=this.value.trim()">
+      <span class="rules-lbl" data-i18n="set_lbl_name">Naam</span>
+      <input id="inp-tname" class="tname-input" type="text" data-i18n-ph="set_ph_name" placeholder="Toernooinaam (optioneel)" maxlength="48" oninput="tournamentName=this.value.trim()">
     </div>
 
     <!-- Banen -->
     <div class="rules-row" id="rules-courts-row">
-      <span class="rules-lbl">Banen</span>
+      <span class="rules-lbl" data-i18n="set_lbl_courts">Banen</span>
       <div class="rules-opts" id="rules-courts">
         <button class="rbtn" onclick="setCourts(1)">1</button>
-        <button class="rbtn active" onclick="setCourts(2)">2<span class="rbtn-sub">standaard</span></button>
+        <button class="rbtn active" onclick="setCourts(2)">2<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
         <button class="rbtn" onclick="setCourts(3)">3</button>
         <button class="rbtn" onclick="setCourts(4)">4</button>
       </div>
@@ -542,58 +542,58 @@ body.banner-open .app{padding-bottom:140px}
 
     <!-- Toernooi type -->
     <div class="rules-row">
-      <span class="rules-lbl">Type</span>
+      <span class="rules-lbl" data-i18n="set_lbl_type">Type</span>
       <div class="rules-opts" id="rules-type">
-        <button class="rbtn active" onclick="setTType('team')">Team<span class="rbtn-sub">vast koppel</span></button>
-        <button class="rbtn" onclick="setTType('americano')">Americano<span class="rbtn-sub">wissel koppel</span></button>
+        <button class="rbtn active" onclick="setTType('team')" id="rbtn-type-team">Team<span class="rbtn-sub" data-i18n="set_type_sub_team">vast koppel</span></button>
+        <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
       </div>
     </div>
 
     <!-- Match formaat (team only) -->
     <div class="rules-row" id="rules-gpm-row">
-      <span class="rules-lbl">Match formaat</span>
+      <span class="rules-lbl" data-i18n="set_lbl_format">Match formaat</span>
       <div class="rules-opts" id="rules-gpm">
         <button class="rbtn" onclick="setGpm(1)">1 game</button>
-        <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub">standaard</span></button>
+        <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
         <button class="rbtn" onclick="setGpm(5)">Best of 5</button>
       </div>
     </div>
 
     <!-- Punten per match (americano only) -->
     <div class="rules-row" id="rules-pts-row" style="display:none">
-      <span class="rules-lbl">Punten/match</span>
+      <span class="rules-lbl" data-i18n="set_lbl_pts">Punten/match</span>
       <div class="rules-opts" id="rules-pts">
         <button class="rbtn" onclick="setMatchPts(24)">24</button>
-        <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub">standaard</span></button>
+        <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
         <button class="rbtn" onclick="setMatchPts(40)">40</button>
       </div>
     </div>
 
     <!-- Mode toggle (team only) -->
     <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
-      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> Spelersnamen invoeren</button>
-      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> Teams zelf invoeren</button>
+      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> <span data-i18n="set_btn_auto">Spelersnamen invoeren</span></button>
+      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="set_btn_manual">Teams zelf invoeren</span></button>
     </div>
 
     <!-- AUTO MODE: player names -->
     <div id="mode-auto">
-      <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
-      <textarea id="ta" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
-      <div class="nc" id="nc">Voer namen in...</div>
+      <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
+      <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
+      <div class="nc" id="nc"></div>
       <div class="setup-btns">
-        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> Starten</button>
-        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg> Schudden</button>
+        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
+        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg> <span data-i18n="set_btn_shuffle">Schudden</span></button>
       </div>
       <div class="pgrid" id="prev"></div>
     </div>
 
     <!-- MANUAL MODE: team names directly -->
     <div id="mode-manual" style="display:none">
-      <p style="color:var(--txt2);font-size:.86rem;margin-bottom:12px">Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.</p>
-      <textarea id="ta-manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
-      <div class="nc" id="nc-manual">Voer teamnamen in...</div>
+      <p style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n-html="set_desc_manual">Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.</p>
+      <textarea id="ta-manual" data-i18n-ph="set_ph_manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
+      <div class="nc" id="nc-manual"></div>
       <div class="setup-btns">
-        <button class="btn btn-green" onclick="doStartManual()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> Starten</button>
+        <button class="btn btn-green" onclick="doStartManual()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
       </div>
     </div>
 
@@ -604,8 +604,8 @@ body.banner-open .app{padding-bottom:140px}
 <div id="screen-tournament">
   <div class="phdr" id="phdr-el">Padel Toernooi — Bracket</div>
   <div class="tabs">
-    <button class="tab active" id="tab-poule" onclick="showTab('poule')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> Pouleronde</button>
-    <button class="tab" id="tab-bracket" onclick="showTab('bracket')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> Bracket</button>
+    <button class="tab active" id="tab-poule" onclick="showTab('poule')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="tab_poule">Pouleronde</span></button>
+    <button class="tab" id="tab-bracket" onclick="showTab('bracket')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="tab_bracket">Bracket</span></button>
   </div>
   <div class="tab-body">
     <div id="tb-poule">
@@ -615,22 +615,22 @@ body.banner-open .app{padding-bottom:140px}
       </div>
       <div class="poule-body" id="pm"></div>
       <div class="st-wrap">
-        <h3>Tussenstand</h3>
+        <h3 data-i18n="tab_standings">Tussenstand</h3>
         <table class="st-tbl" id="sttbl"></table>
       </div>
     </div>
     <div id="tb-bracket" style="display:none">
       <div class="bracket-body">
         <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> Pouleronde</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="sec_poule">Pouleronde</span></div>
           <div id="bracket-poule-rounds"></div>
         </div>
         <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> Winnaarsbracket — Top 4</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="sec_winners">Winnaarsbracket — Top 4</span></div>
           <div class="bracket" id="bw"></div>
         </div>
         <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> Verliezersfinale — Plaatsen 5–9</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> <span data-i18n="sec_losers">Verliezersfinale — Plaatsen 5–9</span></div>
           <div class="bracket" id="bl"></div>
         </div>
         <div id="champ"></div>
@@ -654,21 +654,402 @@ body.banner-open .app{padding-bottom:140px}
       <div class="install-icon"><img src="icon.svg" alt=""></div>
       <div class="install-text">
         <strong>Padel Toernooi</strong>
-        <span id="install-subtitle">Zet op je beginscherm</span>
+        <span id="install-subtitle" data-i18n="inst_subtitle_default">Zet op je beginscherm</span>
       </div>
-      <button class="install-close" onclick="dismissInstall()" aria-label="Sluiten">✕</button>
+      <button class="install-close" onclick="dismissInstall()" data-i18n-aria="inst_close" aria-label="Sluiten">✕</button>
     </div>
     <div class="install-steps" id="install-steps"></div>
     <div class="install-actions">
       <button class="install-btn-primary" id="install-btn-main" onclick="triggerInstall()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-install"></use></svg> Installeren</button>
-      <button class="install-btn-skip" onclick="dismissInstall()">Niet nu</button>
+      <button class="install-btn-skip" onclick="dismissInstall()" data-i18n="inst_skip">Niet nu</button>
     </div>
   </div>
 </div>
 
 <script>
-const APP_VERSION = 'v1.12';
+const APP_VERSION = 'v1.13';
 const $ = id => document.getElementById(id);
+
+// ── i18n ──────────────────────────────────────
+const SUPPORTED_LANGS=['nl','en','fr','de','es','sv'];
+function detectLang(){
+  const s=localStorage.getItem('padel-lang');
+  if(s&&SUPPORTED_LANGS.includes(s)) return s;
+  const nav=(navigator.language||'nl').slice(0,2).toLowerCase();
+  return SUPPORTED_LANGS.includes(nav)?nav:'nl';
+}
+let LANG=detectLang();
+localStorage.setItem('padel-lang',LANG);
+document.documentElement.lang=LANG;
+
+const I18N={
+nl:{
+  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',
+  ob_skip:'Overslaan',ob_back:'← Terug',ob_next:'Volgende →',ob_start:'Starten',
+  ob1_title:'Padel Toernooi',
+  ob1_body:'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.',
+  ob2_title:'Team toernooi',
+  ob2_body:'<b>Vaste duo\'s of trio\'s</b> spelen een poule. Daarna beslist een bracket wie er wint — met winnaar- én verliezersfinale.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.',
+  ob4_title:'Klaar om te spelen',
+  ob4_body:'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.',
+  set_title_team:'Teams instellen',set_title_am:'Americano instellen',
+  set_lbl_name:'Naam',set_ph_name:'Toernooinaam (optioneel)',
+  set_lbl_courts:'Banen',set_lbl_type:'Type',
+  set_type_team:'Team',set_type_sub_team:'vast koppel',
+  set_type_am:'Americano',set_type_sub_am:'wissel koppel',
+  set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',
+  set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
+  set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
+  set_desc_auto_am:'Één naam per regel. Deelbaar door 4 (bijv. 8, 12 of 16 spelers). Partners wisselen elke ronde.',
+  set_ph_auto:'Voer namen in...',set_ph_manual:'Voer teamnamen in...',
+  set_desc_manual:'Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.',
+  set_btn_start:'Starten',set_btn_shuffle:'Schudden',set_default:'standaard',
+  val_min_teams:'{n} team — minimaal 2 nodig',val_ok_teams:'✓ {n} teams klaar',
+  val_need2:'Voer minimaal 2 teams in.',
+  val_min_names:'{n} namen — minimaal 4 nodig',
+  val_ok_names_simple:"✓ {n} spelers → {nTeams} teams ({nDuo} duo's)",
+  val_ok_names_trio:"✓ {n} spelers → {nTeams} teams ({nDuo} duo's, {nTrio} trio's)",
+  val_min4:'Voer minimaal 4 namen in.',
+  val_am_div4:'Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt {n} spelers — voeg nog {add} toe of verwijder {rem}.',
+  tab_poule:'Pouleronde',tab_bracket:'Bracket',tab_standings:'Tussenstand',
+  sec_poule:'Pouleronde',sec_winners:'Winnaarsbracket — Top 4',sec_losers:'Verliezersfinale — Plaatsen 5–9',
+  rnd_label:'Ronde {r}',rnd_progress:'{done} van {tot} wedstrijden gespeeld',
+  rnd_game:'Game {gn} van {total} — wie wint?',rnd_undo:'Herstel',rnd_court:'Baan {n}',
+  st_col_team:'Team',st_col_played:'G',st_col_wins:'W',st_col_losses:'V',st_col_games:'GW–GV',
+  st_losers_div:'— verliezersfinale —',
+  brk_semifinal:'Halve Finale',brk_final:'Finale',brk_consolation:'Troostfinale',
+  brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
+  am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
+  am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
+  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',
+  res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
+  res_am:'{label}Americano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
+  res_bracket_done:' · Bracket klaar',
+  fin_winner:'Toernooi winnaar!',fin_winner_trio:'Toernooi winnaar (Trio)!',
+  fin_title:'Eindstand',fin_1st:'Winnaar',fin_2nd:'2e plaats',fin_3rd:'3e plaats',
+  fin_copy:'Kopieer uitslag',fin_copied:'Gekopieerd!',
+  fin_copy_err:'Kopiëren niet beschikbaar in deze browser.',
+  fin_export_hdr:'{name} — Eindstand ({date})',fin_export_full:'Volledige stand:',
+  fin_export_gold:'🥇 Winnaar: {name}',fin_export_silver:'🥈 Runner-up: {name}',
+  fin_export_bronze:'🥉 3e plaats: {name}',
+  fin_export_row:'{pos}. {name} — {w}W {l}V ({gw}–{gl} games)',
+  inst_subtitle_default:'Zet op je beginscherm',inst_close:'Sluiten',
+  inst_install:'Installeren',inst_skip:'Niet nu',
+  inst_ios_title:'Zet op je beginscherm via Safari',
+  inst_ios_steps:'1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>2. Scrol en tik op <b>Zet op beginscherm</b><br>3. Tik op <b>Voeg toe</b> — klaar!',
+  inst_ios_ok:'Begrepen',inst_and_title:'Installeer de app op je beginscherm',
+  inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
+},
+en:{
+  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',
+  ob_skip:'Skip',ob_back:'← Back',ob_next:'Next →',ob_start:'Start',
+  ob1_title:'Padel Tournament',
+  ob1_body:'Organise your own tournament in a few taps — from entering names to the final standings. All in one app, even offline.',
+  ob2_title:'Team tournament',
+  ob2_body:'<b>Fixed pairs or trios</b> play a round-robin. Then a bracket decides the winner — with a winners and losers final.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Rotating pairs</b> every round. Everyone plays with everyone. The most points across all rounds wins.',
+  ob4_title:'Ready to play',
+  ob4_body:'Choose your type, enter names and tap <b>Start</b>. During the tournament you\'ll see live scores and standings.',
+  set_title_team:'Set up teams',set_title_am:'Set up Americano',
+  set_lbl_name:'Name',set_ph_name:'Tournament name (optional)',
+  set_lbl_courts:'Courts',set_lbl_type:'Type',
+  set_type_team:'Team',set_type_sub_team:'fixed pair',
+  set_type_am:'Americano',set_type_sub_am:'rotating pair',
+  set_lbl_format:'Match format',set_lbl_pts:'Points/match',
+  set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
+  set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
+  set_desc_auto_am:'One name per line. Must be divisible by 4 (e.g. 8, 12 or 16 players). Partners rotate each round.',
+  set_ph_auto:'Enter names...',set_ph_manual:'Enter team names...',
+  set_desc_manual:'One team name per line. Use <b style="color:var(--accent)">/</b> for a trio, <b style="color:var(--accent)">&</b> for a pair — or just type a name.',
+  set_btn_start:'Start',set_btn_shuffle:'Shuffle',set_default:'default',
+  val_min_teams:'{n} team — minimum 2 needed',val_ok_teams:'✓ {n} teams ready',
+  val_need2:'Enter at least 2 teams.',
+  val_min_names:'{n} names — minimum 4 needed',
+  val_ok_names_simple:'✓ {n} players → {nTeams} teams ({nDuo} pairs)',
+  val_ok_names_trio:'✓ {n} players → {nTeams} teams ({nDuo} pairs, {nTrio} trios)',
+  val_min4:'Enter at least 4 names.',
+  val_am_div4:'Americano requires a number of players divisible by 4.\n\nYou have {n} players — add {add} more or remove {rem}.',
+  tab_poule:'Pool round',tab_bracket:'Bracket',tab_standings:'Standings',
+  sec_poule:'Pool round',sec_winners:'Winners bracket — Top 4',sec_losers:'Consolation bracket — Places 5–9',
+  rnd_label:'Round {r}',rnd_progress:'{done} of {tot} matches played',
+  rnd_game:'Game {gn} of {total} — who wins?',rnd_undo:'Undo',rnd_court:'Court {n}',
+  st_col_team:'Team',st_col_played:'P',st_col_wins:'W',st_col_losses:'L',st_col_games:'GW–GL',
+  st_losers_div:'— consolation —',
+  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Consolation final',
+  brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
+  am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
+  am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
+  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',
+  res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
+  res_am:'{label}Americano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
+  res_bracket_done:' · Bracket done',
+  fin_winner:'Tournament winner!',fin_winner_trio:'Tournament winner (Trio)!',
+  fin_title:'Final standings',fin_1st:'Winner',fin_2nd:'2nd place',fin_3rd:'3rd place',
+  fin_copy:'Copy results',fin_copied:'Copied!',
+  fin_copy_err:'Copying not available in this browser.',
+  fin_export_hdr:'{name} — Final standings ({date})',fin_export_full:'Full standings:',
+  fin_export_gold:'🥇 Winner: {name}',fin_export_silver:'🥈 Runner-up: {name}',
+  fin_export_bronze:'🥉 3rd place: {name}',
+  fin_export_row:'{pos}. {name} — {w}W {l}L ({gw}–{gl} games)',
+  inst_subtitle_default:'Add to home screen',inst_close:'Close',
+  inst_install:'Install',inst_skip:'Not now',
+  inst_ios_title:'Add to home screen via Safari',
+  inst_ios_steps:'1. Tap the <b>Share</b> icon <b>⎦↑⎡</b> at the bottom of Safari<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
+  inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
+  inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',
+},
+fr:{
+  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',
+  ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
+  ob1_title:'Tournoi de Padel',
+  ob1_body:"Organisez votre propre tournoi en quelques clics — de la saisie des noms au classement final. Tout dans une appli, même hors ligne.",
+  ob2_title:'Tournoi par équipes',
+  ob2_body:'<b>Paires ou trios fixes</b> jouent une poule. Ensuite un bracket désigne le vainqueur — avec une finale gagnants et perdants.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Paires tournantes</b> à chaque manche. Tout le monde joue avec tout le monde. Le plus de points sur toutes les manches gagne.',
+  ob4_title:'Prêt à jouer',
+  ob4_body:'Choisissez votre type, entrez les noms et appuyez sur <b>Démarrer</b>. Pendant le tournoi vous verrez les scores en direct.',
+  set_title_team:'Configurer les équipes',set_title_am:'Configurer Americano',
+  set_lbl_name:'Nom',set_ph_name:'Nom du tournoi (optionnel)',
+  set_lbl_courts:'Courts',set_lbl_type:'Type',
+  set_type_team:'Équipe',set_type_sub_team:'paire fixe',
+  set_type_am:'Americano',set_type_sub_am:'paire tournante',
+  set_lbl_format:'Format de match',set_lbl_pts:'Points/match',
+  set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
+  set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
+  set_desc_auto_am:'Un nom par ligne. Doit être divisible par 4 (p.ex. 8, 12 ou 16 joueurs). Les partenaires changent chaque manche.',
+  set_ph_auto:'Entrez les noms...',set_ph_manual:"Entrez les noms d'équipes...",
+  set_desc_manual:'Un nom d\'équipe par ligne. Utilisez <b style="color:var(--accent)">/</b> pour un trio, <b style="color:var(--accent)">&</b> pour une paire — ou tapez simplement un nom.',
+  set_btn_start:'Démarrer',set_btn_shuffle:'Mélanger',set_default:'défaut',
+  val_min_teams:'{n} équipe — minimum 2 nécessaire',val_ok_teams:'✓ {n} équipes prêtes',
+  val_need2:'Saisissez au moins 2 équipes.',
+  val_min_names:'{n} noms — minimum 4 nécessaire',
+  val_ok_names_simple:'✓ {n} joueurs → {nTeams} équipes ({nDuo} paires)',
+  val_ok_names_trio:'✓ {n} joueurs → {nTeams} équipes ({nDuo} paires, {nTrio} trios)',
+  val_min4:'Saisissez au moins 4 noms.',
+  val_am_div4:'Americano nécessite un nombre de joueurs divisible par 4.\n\nVous avez {n} joueurs — ajoutez {add} de plus ou supprimez {rem}.',
+  tab_poule:'Poule',tab_bracket:'Bracket',tab_standings:'Classement',
+  sec_poule:'Poule',sec_winners:'Tableau des gagnants — Top 4',sec_losers:'Finale de consolation — Places 5–9',
+  rnd_label:'Manche {r}',rnd_progress:'{done} sur {tot} matchs joués',
+  rnd_game:'Jeu {gn} sur {total} — qui gagne ?',rnd_undo:'Annuler',rnd_court:'Court {n}',
+  st_col_team:'Équipe',st_col_played:'J',st_col_wins:'V',st_col_losses:'D',st_col_games:'JG–JP',
+  st_losers_div:'— consolation —',
+  brk_semifinal:'Demi-finale',brk_final:'Finale',brk_consolation:'Finale de consolation',
+  brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
+  am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
+  am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
+  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',
+  res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
+  res_am:'{label}Americano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
+  res_bracket_done:' · Bracket terminé',
+  fin_winner:'Vainqueur du tournoi !',fin_winner_trio:'Vainqueur du tournoi (Trio) !',
+  fin_title:'Classement final',fin_1st:'Vainqueur',fin_2nd:'2e place',fin_3rd:'3e place',
+  fin_copy:'Copier les résultats',fin_copied:'Copié !',
+  fin_copy_err:'Copie non disponible dans ce navigateur.',
+  fin_export_hdr:'{name} — Classement final ({date})',fin_export_full:'Classement complet :',
+  fin_export_gold:'🥇 Vainqueur : {name}',fin_export_silver:'🥈 Finaliste : {name}',
+  fin_export_bronze:'🥉 3e place : {name}',
+  fin_export_row:'{pos}. {name} — {w}V {l}D ({gw}–{gl} jeux)',
+  inst_subtitle_default:"Ajouter à l'écran d'accueil",inst_close:'Fermer',
+  inst_install:'Installer',inst_skip:'Pas maintenant',
+  inst_ios_title:"Ajouter à l'écran d'accueil via Safari",
+  inst_ios_steps:"1. Appuyez sur l'icône <b>Partager</b> <b>⎦↑⎡</b> en bas de Safari<br>2. Faites défiler et appuyez sur <b>Sur l'écran d'accueil</b><br>3. Appuyez sur <b>Ajouter</b> — terminé !",
+  inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
+  inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
+},
+de:{
+  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',
+  ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
+  ob1_title:'Padel Turnier',
+  ob1_body:'Organisiere dein eigenes Turnier in wenigen Taps — von der Namenseingabe bis zur Endabrechnung. Alles in einer App, auch offline.',
+  ob2_title:'Teamturnier',
+  ob2_body:'<b>Feste Paare oder Trios</b> spielen eine Gruppenphase. Dann entscheidet ein Bracket über den Sieger — mit Gewinner- und Verliererfinal.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Wechselnde Paare</b> jede Runde. Jeder spielt mit jedem. Die meisten Punkte über alle Runden gewinnt.',
+  ob4_title:'Bereit zum Spielen',
+  ob4_body:'Wähle deinen Typ, gib Namen ein und tippe auf <b>Starten</b>. Während des Turniers siehst du Live-Scores und die Tabelle.',
+  set_title_team:'Teams einrichten',set_title_am:'Americano einrichten',
+  set_lbl_name:'Name',set_ph_name:'Turniername (optional)',
+  set_lbl_courts:'Plätze',set_lbl_type:'Typ',
+  set_type_team:'Team',set_type_sub_team:'festes Paar',
+  set_type_am:'Americano',set_type_sub_am:'wechselndes Paar',
+  set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',
+  set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
+  set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
+  set_desc_auto_am:'Ein Name pro Zeile. Muss durch 4 teilbar sein (z.B. 8, 12 oder 16 Spieler). Partner wechseln jede Runde.',
+  set_ph_auto:'Namen eingeben...',set_ph_manual:'Teamnamen eingeben...',
+  set_desc_manual:'Ein Teamname pro Zeile. Verwende <b style="color:var(--accent)">/</b> für ein Trio, <b style="color:var(--accent)">&</b> für ein Paar — oder gib einfach einen Namen ein.',
+  set_btn_start:'Starten',set_btn_shuffle:'Mischen',set_default:'Standard',
+  val_min_teams:'{n} Team — mindestens 2 erforderlich',val_ok_teams:'✓ {n} Teams bereit',
+  val_need2:'Mindestens 2 Teams eingeben.',
+  val_min_names:'{n} Namen — mindestens 4 erforderlich',
+  val_ok_names_simple:'✓ {n} Spieler → {nTeams} Teams ({nDuo} Paare)',
+  val_ok_names_trio:'✓ {n} Spieler → {nTeams} Teams ({nDuo} Paare, {nTrio} Trios)',
+  val_min4:'Mindestens 4 Namen eingeben.',
+  val_am_div4:'Americano benötigt eine durch 4 teilbare Spielerzahl.\n\nDu hast {n} Spieler — füge {add} hinzu oder entferne {rem}.',
+  tab_poule:'Gruppenphase',tab_bracket:'Bracket',tab_standings:'Tabelle',
+  sec_poule:'Gruppenphase',sec_winners:'Gewinnerbracket — Top 4',sec_losers:'Verliererfinale — Plätze 5–9',
+  rnd_label:'Runde {r}',rnd_progress:'{done} von {tot} Spielen gespielt',
+  rnd_game:'Spiel {gn} von {total} — wer gewinnt?',rnd_undo:'Rückgängig',rnd_court:'Platz {n}',
+  st_col_team:'Team',st_col_played:'S',st_col_wins:'G',st_col_losses:'N',st_col_games:'GG–GN',
+  st_losers_div:'— Verliererfinale —',
+  brk_semifinal:'Halbfinale',brk_final:'Finale',brk_consolation:'Trostfinale',
+  brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
+  am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
+  am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
+  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',
+  res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
+  res_am:'{label}Americano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
+  res_bracket_done:' · Bracket fertig',
+  fin_winner:'Turniersieger!',fin_winner_trio:'Turniersieger (Trio)!',
+  fin_title:'Endabrechnung',fin_1st:'Sieger',fin_2nd:'2. Platz',fin_3rd:'3. Platz',
+  fin_copy:'Ergebnis kopieren',fin_copied:'Kopiert!',
+  fin_copy_err:'Kopieren in diesem Browser nicht verfügbar.',
+  fin_export_hdr:'{name} — Endabrechnung ({date})',fin_export_full:'Vollständige Tabelle:',
+  fin_export_gold:'🥇 Sieger: {name}',fin_export_silver:'🥈 Zweiter: {name}',
+  fin_export_bronze:'🥉 3. Platz: {name}',
+  fin_export_row:'{pos}. {name} — {w}G {l}N ({gw}–{gl} Spiele)',
+  inst_subtitle_default:'Zum Startbildschirm hinzufügen',inst_close:'Schließen',
+  inst_install:'Installieren',inst_skip:'Nicht jetzt',
+  inst_ios_title:'Zum Startbildschirm über Safari hinzufügen',
+  inst_ios_steps:'1. Tippe auf das <b>Teilen</b>-Symbol <b>⎦↑⎡</b> unten in Safari<br>2. Scrolle und tippe auf <b>Zum Home-Bildschirm</b><br>3. Tippe auf <b>Hinzufügen</b> — fertig!',
+  inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
+  inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
+},
+es:{
+  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',
+  ob_skip:'Saltar',ob_back:'← Atrás',ob_next:'Siguiente →',ob_start:'Iniciar',
+  ob1_title:'Torneo de Pádel',
+  ob1_body:'Organiza tu propio torneo en pocos toques — desde introducir nombres hasta la clasificación final. Todo en una app, incluso sin conexión.',
+  ob2_title:'Torneo por equipos',
+  ob2_body:'<b>Parejas o tríos fijos</b> juegan una fase de grupos. Luego un bracket decide el ganador — con final de ganadores y perdedores.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Parejas rotativas</b> cada ronda. Todos juegan con todos. El que más puntos acumule en todas las rondas gana.',
+  ob4_title:'Listo para jugar',
+  ob4_body:'Elige tu tipo, introduce los nombres y pulsa <b>Iniciar</b>. Durante el torneo verás puntuaciones en directo y la clasificación.',
+  set_title_team:'Configurar equipos',set_title_am:'Configurar Americano',
+  set_lbl_name:'Nombre',set_ph_name:'Nombre del torneo (opcional)',
+  set_lbl_courts:'Pistas',set_lbl_type:'Tipo',
+  set_type_team:'Equipo',set_type_sub_team:'pareja fija',
+  set_type_am:'Americano',set_type_sub_am:'pareja rotativa',
+  set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',
+  set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
+  set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
+  set_desc_auto_am:'Un nombre por línea. Debe ser divisible entre 4 (p.ej. 8, 12 o 16 jugadores). Las parejas rotan cada ronda.',
+  set_ph_auto:'Introduce nombres...',set_ph_manual:'Introduce nombres de equipos...',
+  set_desc_manual:'Un nombre de equipo por línea. Usa <b style="color:var(--accent)">/</b> para un trío, <b style="color:var(--accent)">&</b> para una pareja — o simplemente escribe un nombre.',
+  set_btn_start:'Iniciar',set_btn_shuffle:'Mezclar',set_default:'por defecto',
+  val_min_teams:'{n} equipo — mínimo 2 necesario',val_ok_teams:'✓ {n} equipos listos',
+  val_need2:'Introduce al menos 2 equipos.',
+  val_min_names:'{n} nombres — mínimo 4 necesario',
+  val_ok_names_simple:'✓ {n} jugadores → {nTeams} equipos ({nDuo} parejas)',
+  val_ok_names_trio:'✓ {n} jugadores → {nTeams} equipos ({nDuo} parejas, {nTrio} tríos)',
+  val_min4:'Introduce al menos 4 nombres.',
+  val_am_div4:'Americano requiere un número de jugadores divisible entre 4.\n\nTienes {n} jugadores — añade {add} más o elimina {rem}.',
+  tab_poule:'Fase de grupos',tab_bracket:'Bracket',tab_standings:'Clasificación',
+  sec_poule:'Fase de grupos',sec_winners:'Bracket de ganadores — Top 4',sec_losers:'Final de consolación — Puestos 5–9',
+  rnd_label:'Ronda {r}',rnd_progress:'{done} de {tot} partidos jugados',
+  rnd_game:'Juego {gn} de {total} — ¿quién gana?',rnd_undo:'Deshacer',rnd_court:'Pista {n}',
+  st_col_team:'Equipo',st_col_played:'J',st_col_wins:'G',st_col_losses:'P',st_col_games:'JG–JP',
+  st_losers_div:'— consolación —',
+  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Final de consolación',
+  brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
+  am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
+  am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
+  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',
+  res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
+  res_am:'{label}Americano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
+  res_bracket_done:' · Bracket completado',
+  fin_winner:'¡Ganador del torneo!',fin_winner_trio:'¡Ganador del torneo (Trío)!',
+  fin_title:'Clasificación final',fin_1st:'Ganador',fin_2nd:'2.º puesto',fin_3rd:'3.er puesto',
+  fin_copy:'Copiar resultados',fin_copied:'¡Copiado!',
+  fin_copy_err:'Copia no disponible en este navegador.',
+  fin_export_hdr:'{name} — Clasificación final ({date})',fin_export_full:'Clasificación completa:',
+  fin_export_gold:'🥇 Ganador: {name}',fin_export_silver:'🥈 Subcampeón: {name}',
+  fin_export_bronze:'🥉 3.er puesto: {name}',
+  fin_export_row:'{pos}. {name} — {w}G {l}P ({gw}–{gl} juegos)',
+  inst_subtitle_default:'Añadir a la pantalla de inicio',inst_close:'Cerrar',
+  inst_install:'Instalar',inst_skip:'Ahora no',
+  inst_ios_title:'Añadir a la pantalla de inicio via Safari',
+  inst_ios_steps:'1. Toca el icono de <b>Compartir</b> <b>⎦↑⎡</b> en la parte inferior de Safari<br>2. Desplázate y toca <b>En la pantalla de inicio</b><br>3. Toca <b>Añadir</b> — ¡listo!',
+  inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
+  inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
+},
+sv:{
+  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',
+  ob_skip:'Hoppa över',ob_back:'← Tillbaka',ob_next:'Nästa →',ob_start:'Starta',
+  ob1_title:'Padelturnering',
+  ob1_body:'Organisera din egen turnering med några tryck — från att ange namn till slutresultatet. Allt i en app, även offline.',
+  ob2_title:'Lagturnering',
+  ob2_body:'<b>Fasta par eller trior</b> spelar en poolrunda. Sedan avgör ett bracket vem som vinner — med vinnarbracket och förlorarfinal.',
+  ob3_title:'Americano',
+  ob3_body:'<b>Roterande par</b> varje runda. Alla spelar med alla. Den med flest poäng totalt vinner.',
+  ob4_title:'Redo att spela',
+  ob4_body:'Välj din typ, ange namn och tryck på <b>Starta</b>. Under turneringen ser du live-poäng och tabellen.',
+  set_title_team:'Ställ in lag',set_title_am:'Ställ in Americano',
+  set_lbl_name:'Namn',set_ph_name:'Turneringsnamn (valfritt)',
+  set_lbl_courts:'Banor',set_lbl_type:'Typ',
+  set_type_team:'Lag',set_type_sub_team:'fast par',
+  set_type_am:'Americano',set_type_sub_am:'roterande par',
+  set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',
+  set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
+  set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
+  set_desc_auto_am:'Ett namn per rad. Måste vara delbart med 4 (t.ex. 8, 12 eller 16 spelare). Partners roterar varje runda.',
+  set_ph_auto:'Ange namn...',set_ph_manual:'Ange lagnamn...',
+  set_desc_manual:'Ett lagnamn per rad. Använd <b style="color:var(--accent)">/</b> för en trio, <b style="color:var(--accent)">&</b> för ett par — eller skriv bara ett namn.',
+  set_btn_start:'Starta',set_btn_shuffle:'Blanda',set_default:'standard',
+  val_min_teams:'{n} lag — minst 2 krävs',val_ok_teams:'✓ {n} lag redo',
+  val_need2:'Ange minst 2 lag.',
+  val_min_names:'{n} namn — minst 4 krävs',
+  val_ok_names_simple:'✓ {n} spelare → {nTeams} lag ({nDuo} par)',
+  val_ok_names_trio:'✓ {n} spelare → {nTeams} lag ({nDuo} par, {nTrio} trior)',
+  val_min4:'Ange minst 4 namn.',
+  val_am_div4:'Americano kräver ett antal spelare delbart med 4.\n\nDu har {n} spelare — lägg till {add} till eller ta bort {rem}.',
+  tab_poule:'Poolrunda',tab_bracket:'Bracket',tab_standings:'Tabell',
+  sec_poule:'Poolrunda',sec_winners:'Vinnarbracket — Topp 4',sec_losers:'Tröstfinal — Plats 5–9',
+  rnd_label:'Runda {r}',rnd_progress:'{done} av {tot} matcher spelade',
+  rnd_game:'Game {gn} av {total} — vem vinner?',rnd_undo:'Ångra',rnd_court:'Bana {n}',
+  st_col_team:'Lag',st_col_played:'S',st_col_wins:'V',st_col_losses:'F',st_col_games:'VG–FG',
+  st_losers_div:'— tröstfinal —',
+  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Tröstfinal',
+  brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
+  am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
+  am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
+  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',
+  res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
+  res_am:'{label}Americano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
+  res_bracket_done:' · Bracket klart',
+  fin_winner:'Turneringsvinnare!',fin_winner_trio:'Turneringsvinnare (Trio)!',
+  fin_title:'Slutresultat',fin_1st:'Vinnare',fin_2nd:'2:a plats',fin_3rd:'3:e plats',
+  fin_copy:'Kopiera resultat',fin_copied:'Kopierat!',
+  fin_copy_err:'Kopiering inte tillgänglig i den här webbläsaren.',
+  fin_export_hdr:'{name} — Slutresultat ({date})',fin_export_full:'Fullständig tabell:',
+  fin_export_gold:'🥇 Vinnare: {name}',fin_export_silver:'🥈 Tvåa: {name}',
+  fin_export_bronze:'🥉 3:e plats: {name}',
+  fin_export_row:'{pos}. {name} — {w}V {l}F ({gw}–{gl} games)',
+  inst_subtitle_default:'Lägg till på hemskärmen',inst_close:'Stäng',
+  inst_install:'Installera',inst_skip:'Inte nu',
+  inst_ios_title:'Lägg till på hemskärmen via Safari',
+  inst_ios_steps:'1. Tryck på <b>Dela</b>-ikonen <b>⎦↑⎡</b> längst ner i Safari<br>2. Scrolla och tryck på <b>Lägg till på hemskärmen</b><br>3. Tryck på <b>Lägg till</b> — klart!',
+  inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
+  inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
+},
+};
+
+function t(key,vars={}){
+  const s=(I18N[LANG]||I18N.nl)[key]||I18N.nl[key]||key;
+  return s.replace(/\{(\w+)\}/g,(_,k)=>vars[k]??'');
+}
+
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder=t(el.dataset.i18nPh));
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+}
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
 const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="true" viewBox="0 0 24 24"><use href="#${id}"></use></svg>`;
@@ -681,20 +1062,18 @@ let AP=[], AM=[]; // americano players & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
 
 // ── Spelregels ────────────────────────────────
-function setTType(t){
-  mode=t;
+function setTType(typ){
+  mode=typ;
   document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',['team','americano'][i]===t);
+    b.classList.toggle('active',['team','americano'][i]===typ);
   });
-  $('rules-gpm-row').style.display = t==='team' ? '' : 'none';
-  $('rules-pts-row').style.display = t==='americano' ? '' : 'none';
-  $('mode-toggle-row').style.display = t==='team' ? '' : 'none';
-  $('setup-box-title').textContent = t==='americano' ? 'Americano instellen' : 'Teams instellen';
-  $('mode-auto-desc').textContent = t==='americano'
-    ? 'Één naam per regel. Deelbaar door 4 (bijv. 8, 12 of 16 spelers). Partners wisselen elke ronde.'
-    : "Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.";
-  $('btn-shuffle').style.display = t==='americano' ? 'none' : '';
-  if(t==='americano') setMode('auto');
+  $('rules-gpm-row').style.display = typ==='team' ? '' : 'none';
+  $('rules-pts-row').style.display = typ==='americano' ? '' : 'none';
+  $('mode-toggle-row').style.display = typ==='team' ? '' : 'none';
+  $('setup-box-title').textContent = typ==='americano' ? t('set_title_am') : t('set_title_team');
+  $('mode-auto-desc').textContent = typ==='americano' ? t('set_desc_auto_am') : t('set_desc_auto_team');
+  $('btn-shuffle').style.display = typ==='americano' ? 'none' : '';
+  if(typ==='americano') setMode('auto');
 }
 
 function setMatchPts(n){
@@ -734,8 +1113,8 @@ function setMode(m){
 $('ta-manual') && $('ta-manual').addEventListener('input', () => {
   const lines = manualTeamLines();
   $('nc-manual').innerHTML = lines.length < 2
-    ? `${lines.length} team — minimaal 2 nodig`
-    : `<b>✓ ${lines.length} teams klaar</b>`;
+    ? t('val_min_teams',{n:lines.length})
+    : `<b>${t('val_ok_teams',{n:lines.length})}</b>`;
 });
 
 function manualTeamLines(){
@@ -744,7 +1123,7 @@ function manualTeamLines(){
 
 function doStartManual(){
   const lines = manualTeamLines();
-  if(lines.length < 2){ alert('Voer minimaal 2 teams in.'); return; }
+  if(lines.length < 2){ alert(t('val_need2')); return; }
   T = lines.map((name, i) => ({
     id: i,
     name,
@@ -759,9 +1138,10 @@ $('ta').addEventListener('input', updateNC);
 function updateNC(){
   const n = names().length;
   const el = $('nc');
-  if(n < 4){ el.innerHTML = `${n} namen — minimaal 4 nodig`; return; }
+  if(n < 4){ el.innerHTML = t('val_min_names',{n}); return; }
   const {nTeams, nTrios} = calcTeams(n);
-  el.innerHTML = `<b>✓ ${n} spelers → ${nTeams} teams (${nTeams-nTrios} duo's${nTrios?`, ${nTrios} trio's`:''})</b>`;
+  const nDuo = nTeams - nTrios;
+  el.innerHTML = `<b>${nTrios ? t('val_ok_names_trio',{n,nTeams,nDuo,nTrio:nTrios}) : t('val_ok_names_simple',{n,nTeams,nDuo})}</b>`;
 }
 
 function names(){ return $('ta').value.split('\n').map(s=>s.trim()).filter(Boolean); }
@@ -795,7 +1175,7 @@ function makeTeams(list){
 
 function doShuffle(){
   const n=names();
-  if(n.length<4){alert('Voer minimaal 4 namen in.');return;}
+  if(n.length<4){alert(t('val_min4'));return;}
   lastShuffle=[...n].sort(()=>Math.random()-.5);
   makeTeams(lastShuffle);
   $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${t.name}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
@@ -803,7 +1183,7 @@ function doShuffle(){
 
 function doStart(){
   const n=names();
-  if(n.length<4){alert('Voer minimaal 4 namen in.');return;}
+  if(n.length<4){alert(t('val_min4'));return;}
   if(lastShuffle.length!==n.length){ lastShuffle=[...n].sort(()=>Math.random()-.5); }
   makeTeams(lastShuffle);
   startTournament();
@@ -819,7 +1199,7 @@ function startTournamentUI(){
   $('btn-print').style.display='';
   const tname=$('logo-tname'), phdr=$('phdr-el');
   if(tname) tname.textContent=tournamentName||'';
-  if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':'Padel Toernooi — Bracket';
+  if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
   renderPoule(); renderSt(); renderBracket();
   showTab(pDone?'bracket':'poule');
 }
@@ -902,14 +1282,14 @@ function renderPoule(){
     const rm=PM.filter(m=>m.round===r);
     if(!rm.length) continue;
     const done=rm.every(m=>m.winner);
-    html+=`<div class="rblock"><div class="rlbl">Ronde ${r} ${done?icon('ic-check','icon-gold'):''}</div>`;
+    html+=`<div class="rblock"><div class="rlbl">${t('rnd_label',{r})} ${done?icon('ic-check','icon-gold'):''}</div>`;
     for(const m of rm) html+=mrow(m);
     html+='</div>';
   }
   $('pm').innerHTML=html;
   const done=PM.filter(m=>m.winner).length, tot=PM.length;
   $('prog').style.width=tot?`${Math.round(done/tot*100)}%`:'0%';
-  $('progtxt').textContent=`${done} van ${tot} wedstrijden gespeeld`;
+  $('progtxt').textContent=t('rnd_progress',{done,tot});
   renderPouleInBracket();
 }
 
@@ -924,7 +1304,7 @@ function renderPouleInBracket(){
     const done=rm.every(m=>m.winner);
     html+=`<div style="margin-bottom:14px">
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:6px">
-        Ronde ${r} ${done?icon('ic-check','icon-gold'):''}
+        ${t('rnd_label',{r})} ${done?icon('ic-check','icon-gold'):''}
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">`;
     for(const m of rm){
@@ -949,7 +1329,7 @@ function mrow(m){
   const totalGames = m.ga + m.gb;
   const allPlayed = totalGames >= R.gpm;
 
-  const courtBadge=R.courts>1&&m.court?`<div class="court-badge">Baan ${m.court}</div>`:'';
+  const courtBadge=R.courts>1&&m.court?`<div class="court-badge">${t('rnd_court',{n:m.court})}</div>`:'';
   if(m.winner){
     const wA=m.winner==='A';
     return `<div class="mcard">
@@ -961,7 +1341,7 @@ function mrow(m){
       </div>
       <div class="mresult">
         <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
-        <button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} Herstel</button>
+        <button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} ${t('rnd_undo')}</button>
       </div>
     </div>`;
   }
@@ -981,7 +1361,7 @@ function mrow(m){
       <div class="mteam r">${nb}</div>
     </div>
     ${progress}
-    <div class="mgame-label">Game ${gn} van ${R.gpm} — wie wint?</div>
+    <div class="mgame-label">${t('rnd_game',{gn,total:R.gpm})}</div>
     <div class="mbtns">
       <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">${icon('ic-check')} ${sa}</button>
       <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">${icon('ic-check')} ${sb}</button>
@@ -1034,10 +1414,10 @@ function renderSt(){
       gameMap[id].gL+=m.a===id?m.gb:m.ga;
     });
   });
-  let h=`<tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>V</th><th style="color:var(--b-muted)">GW–GV</th></tr>`;
+  let h=`<tr><th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th style="color:var(--b-muted)">${t('st_col_games')}</th></tr>`;
   st.forEach((t,i)=>{
     const g=gameMap[t.id]||{gW:0,gL:0};
-    if(i===topN) h+=`<tr class="divr"><td colspan="6">— verliezersfinale —</td></tr>`;
+    if(i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
     h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">${icon('ic-pencil')}</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
@@ -1059,14 +1439,14 @@ function buildPlayoffShell(){
   const topN=Math.min(4,half); // up to 4 in winners bracket
   // Build empty shells
   PW=[
-    {id:'wsf1',label:'Halve Finale 1',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'wsf2',label:'Halve Finale 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'wf',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wsf1',labelKey:'brk_semifinal',label:'Halve Finale 1',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wsf2',labelKey:'brk_semifinal',label:'Halve Finale 2',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wf',labelKey:'brk_final',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
   ];
   PL=[
-    {id:'lsf1',label:'Troostfinale SF 1',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'lsf2',label:'Troostfinale SF 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'lf',label:'Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lsf1',labelKey:'brk_consolation',label:'Troostfinale SF 1',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lsf2',labelKey:'brk_consolation',label:'Troostfinale SF 2',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lf',labelKey:'brk_consolation',label:'Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
   ];
 }
 
@@ -1081,21 +1461,20 @@ function fillPlayoff(){
   // Winners bracket: need at least 2 teams
   if(top.length>=2){
     PW=[
-      {id:'wsf1',label:'Halve Finale 1',a:top[0].id,b:(top[3]||top[1]).id,ga:0,gb:0,winner:null},
-      {id:'wsf2',label:'Halve Finale 2',a:top[1].id,b:(top[2]||top[0]).id,ga:0,gb:0,winner:null},
-      {id:'wf',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
+      {id:'wsf1',labelKey:'brk_semifinal',label:'SF 1',a:top[0].id,b:(top[3]||top[1]).id,ga:0,gb:0,winner:null},
+      {id:'wsf2',labelKey:'brk_semifinal',label:'SF 2',a:top[1].id,b:(top[2]||top[0]).id,ga:0,gb:0,winner:null},
+      {id:'wf',labelKey:'brk_final',label:'Final',a:null,b:null,ga:0,gb:0,winner:null},
     ];
-    // If only 2 teams: wsf2 same as wsf1, skip it — direct final
     if(top.length===2){
       PW=[
-        {id:'wsf1',label:'Finale',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
-        {id:'wf',label:'',a:null,b:null,ga:0,gb:0,winner:null,skip:true},
+        {id:'wsf1',labelKey:'brk_final',label:'Final',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
+        {id:'wf',labelKey:'',label:'',a:null,b:null,ga:0,gb:0,winner:null,skip:true},
       ];
     } else if(top.length===3){
       PW=[
-        {id:'wsf1',label:'Halve Finale',a:top[1].id,b:top[2].id,ga:0,gb:0,winner:null},
-        {id:'wsf2',label:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null},
-        {id:'wf',label:'Finale',a:top[0].id,b:null,ga:0,gb:0,winner:null},
+        {id:'wsf1',labelKey:'brk_semifinal',label:'SF',a:top[1].id,b:top[2].id,ga:0,gb:0,winner:null},
+        {id:'wsf2',labelKey:'',label:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null},
+        {id:'wf',labelKey:'brk_final',label:'Final',a:top[0].id,b:null,ga:0,gb:0,winner:null},
       ];
     }
   }
@@ -1104,16 +1483,16 @@ function fillPlayoff(){
   PL=[];
   if(bot.length>=2){
     PL=[
-      {id:'lsf1',label:'Troostfinale SF 1',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},
+      {id:'lsf1',labelKey:'brk_consolation',label:'C-SF 1',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},
     ];
     if(bot.length>=4){
-      PL.push({id:'lsf2',label:'Troostfinale SF 2',a:bot[2].id,b:bot[3].id,ga:0,gb:0,winner:null});
+      PL.push({id:'lsf2',labelKey:'brk_consolation',label:'C-SF 2',a:bot[2].id,b:bot[3].id,ga:0,gb:0,winner:null});
     }
     if(bot.length>=5){
-      PL.push({id:'lbye',bye:true,label:'Vrije doorgang',a:bot[4].id,b:null,ga:0,gb:0,winner:'A'});
+      PL.push({id:'lbye',bye:true,labelKey:'',label:'Bye',a:bot[4].id,b:null,ga:0,gb:0,winner:'A'});
     }
-    PL.push({id:'lf',label:'Troostfinale',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
-    if(bot.length===2) PL=[{id:'lsf1',label:'Troostfinale',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
+    PL.push({id:'lf',labelKey:'brk_consolation',label:'Consolation',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
+    if(bot.length===2) PL=[{id:'lsf1',labelKey:'brk_consolation',label:'Consolation',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',labelKey:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
   }
   // Assign courts to bracket matches
   [...PW,...PL].filter(m=>!m.skip&&!m.bye).forEach((m,i)=>{ m.court=(i%R.courts)+1; });
@@ -1137,7 +1516,7 @@ function renderHalf(elId,matches,pfx){
   if(!sf1){el.innerHTML='';return;}
 
   const isW=pfx==='w';
-  const title=isW?`${icon('ic-trophy')} WINNAAR`:`${icon('ic-medal')} TROOSTFINALE`;
+  const title=isW?`${icon('ic-trophy')} ${t('brk_winner')}`:`${icon('ic-medal')} ${t('brk_consolation_lbl')}`;
   const hasSf2=sf2&&!sf2.skip;
   const hasBye=!!bye;
 
@@ -1225,9 +1604,10 @@ function mcard(m,pfx){
     : m.winner
       ? `<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">${icon('ic-undo')}</button></div>`
       : '';
-  const courtLbl=R.courts>1&&m.court&&!isBye?`<span class="court-badge" style="padding:0;display:inline;font-size:.55rem;letter-spacing:1px"> · Baan ${m.court}</span>`:'';
+  const courtLbl=R.courts>1&&m.court&&!isBye?`<span class="court-badge" style="padding:0;display:inline;font-size:.55rem;letter-spacing:1px"> · ${t('rnd_court',{n:m.court})}</span>`:'';
+  const displayLabel = m.labelKey ? t(m.labelKey) : (m.label||'');
   return `<div class="bmatch" id="bm-${m.id}">
-    <div class="bmlbl">${m.label}${courtLbl}</div>${tA}${tB}${btns}
+    <div class="bmlbl">${displayLabel}${courtLbl}</div>${tA}${tB}${btns}
   </div>`;
 }
 
@@ -1299,7 +1679,7 @@ function renderChamp(){
   if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
   const alreadyShown = area.innerHTML.includes('champ-wrap');
-  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
+  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${c.name}</h2><p>${t(c.trio?'fin_winner_trio':'fin_winner')}</p></div>`;
   if(!alreadyShown) champConfetti();
   renderStats();
 }
@@ -1375,27 +1755,11 @@ function champConfetti(){
 }
 
 // ── Onboarding ────────────────────────────────
-const OB_STEPS = [
-  {
-    icon: icon('ic-padel','icon-xl'),
-    title: 'Padel Toernooi',
-    body: 'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.'
-  },
-  {
-    icon: icon('ic-trophy','icon-xl'),
-    title: 'Team toernooi',
-    body: '<b>Vaste duo\'s of trio\'s</b> spelen een poule. Daarna beslist een bracket wie er wint — met winnaar- én verliezersfinale.'
-  },
-  {
-    icon: icon('ic-rotate','icon-xl'),
-    title: 'Americano',
-    body: '<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.'
-  },
-  {
-    icon: icon('ic-check','icon-xl'),
-    title: 'Klaar om te spelen',
-    body: 'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.'
-  }
+const OB_ICONS = [
+  icon('ic-padel','icon-xl'),
+  icon('ic-trophy','icon-xl'),
+  icon('ic-rotate','icon-xl'),
+  icon('ic-check','icon-xl'),
 ];
 let obStep = 0;
 
@@ -1407,18 +1771,18 @@ function showOnboarding(){
 }
 
 function renderObStep(){
-  const s = OB_STEPS[obStep], last = obStep === OB_STEPS.length - 1;
-  // Dots
-  $('ob-dots').innerHTML = OB_STEPS.map((_,i)=>`<div class="ob-dot${i===obStep?' active':''}"></div>`).join('');
-  $('ob-icon').innerHTML = s.icon;
-  $('ob-title').textContent = s.title;
-  $('ob-body').innerHTML = s.body;
-  // Buttons
-  const prev = obStep > 0 ? `<button class="btn btn-ghost" onclick="obNav(-1)">← Terug</button>` : '';
+  const n = obStep + 1;
+  const last = obStep === OB_ICONS.length - 1;
+  $('ob-dots').innerHTML = OB_ICONS.map((_,i)=>`<div class="ob-dot${i===obStep?' active':''}"></div>`).join('');
+  $('ob-icon').innerHTML = OB_ICONS[obStep];
+  $('ob-title').textContent = t(`ob${n}_title`);
+  $('ob-body').innerHTML = t(`ob${n}_body`);
+  const prev = obStep > 0 ? `<button class="btn btn-ghost" onclick="obNav(-1)">${t('ob_back')}</button>` : '';
   const next = last
-    ? `<button class="btn btn-green" onclick="dismissOnboarding()">${icon('ic-padel')} Starten</button>`
-    : `<button class="btn btn-green" onclick="obNav(1)">Volgende →</button>`;
+    ? `<button class="btn btn-green" onclick="dismissOnboarding()">${icon('ic-padel')} ${t('ob_start')}</button>`
+    : `<button class="btn btn-green" onclick="obNav(1)">${t('ob_next')}</button>`;
   $('ob-btns').innerHTML = prev + next;
+  $('ob-skip').textContent = t('ob_skip');
   $('ob-skip').style.display = last ? 'none' : '';
 }
 
@@ -1486,10 +1850,10 @@ function buildAmericanoSchedule(n){
 
 function startAmericano(){
   const ns=names().filter(Boolean);
-  if(ns.length<4){alert('Voer minimaal 4 namen in.');return;}
+  if(ns.length<4){alert(t('val_min4'));return;}
   if(ns.length%4!==0){
     const add=4-ns.length%4;
-    alert(`Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt ${ns.length} spelers — voeg nog ${add} toe of verwijder ${ns.length%4}.`);
+    alert(t('val_am_div4',{n:ns.length,add,rem:ns.length%4}));
     return;
   }
   const shuffled=[...ns].sort(()=>Math.random()-.5);
@@ -1519,7 +1883,7 @@ function renderAmericano(){
     const done=matches.every(m=>m.done);
     h+=`<div class="am-round${done?' am-round-done':''}">
       <div class="am-round-hdr">
-        <span class="am-round-lbl">Ronde ${ri+1} <span style="opacity:.5;font-weight:400">— ${matches.length} ${matches.length===1?'baan':'banen'}</span></span>
+        <span class="am-round-lbl">${t('am_round',{n:ri+1})} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':''}
       </div>
       ${matches.map(m=>renderAmMatch(m)).join('')}
@@ -1542,7 +1906,7 @@ function renderAmMatch(m){
         <span class="am-team r${wB?' won':''}">${tB}</span>
       </div>
       <div style="text-align:center">
-        <button class="mundo-btn" onclick="amUndo('${m.id}')">${icon('ic-undo')} Herstel</button>
+        <button class="mundo-btn" onclick="amUndo('${m.id}')">${icon('ic-undo')} ${t('am_undo')}</button>
       </div>
     </div>`;
   }
@@ -1567,8 +1931,8 @@ function renderAmMatch(m){
       </div>
     </div>
     <div class="am-sc-footer">
-      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${total}/${R.matchPts} punten</span>
-      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">Opslaan</button>`:''}
+      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
+      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
     </div>
   </div>`;
 }
@@ -1588,10 +1952,10 @@ function amAdj(matchId,side,delta){
   if(saEl) saEl.textContent=m.sa;
   if(sbEl) sbEl.textContent=m.sb;
   const total=m.sa+m.sb, ready=total===R.matchPts;
-  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=`${total}/${R.matchPts} punten`; }
+  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=t('am_pts',{total,max:R.matchPts}); }
   const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
   if(foot){
-    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${total}/${R.matchPts} punten</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">Opslaan</button>`:''}`;
+    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">${t('am_save')}</button>`:''}`;
   }
 }
 
@@ -1615,8 +1979,8 @@ function amUndo(matchId){
 
 function renderAmSt(){
   const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
-  let h=`<div class="am-st-wrap"><h3>Ranglijst</h3><table class="st-tbl">
-    <tr><th>#</th><th>Speler</th><th>Punten</th></tr>`;
+  let h=`<div class="am-st-wrap"><h3>${t('am_standings')}</h3><table class="st-tbl">
+    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th></tr>`;
   sorted.forEach((p,i)=>{
     h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
   });
@@ -1643,10 +2007,10 @@ function loadState(){
     savedState=s;
     const label=s.tournamentName?`${s.tournamentName} · `:'';
     if(s.mode==='americano'){
-      $('resume-info').textContent=`${label}Americano · ${s.AP?.length||0} spelers`;
+      $('resume-info').textContent=t('res_am',{label,n:s.AP?.length||0});
     } else {
       const done=s.PM.filter(m=>m.winner).length, tot=s.PM.length;
-      $('resume-info').textContent=`${label}${s.T.length} teams · ${done}/${tot} wedstrijden${s.pDone?' · Bracket klaar':''}`;
+      $('resume-info').textContent=t('res_team',{label,teams:s.T.length,done,tot})+(s.pDone?t('res_bracket_done'):'');
     }
     $('resume-banner').classList.remove('hidden');
   }catch(e){ localStorage.removeItem('padel-state'); }
@@ -1710,42 +2074,43 @@ function renderStats(){
   }).join('');
 
   $('stats').innerHTML=`<div class="stats-wrap">
-    <div class="stats-title">Eindstand</div>
+    <div class="stats-title">${t('fin_title')}</div>
     <div class="podium">
       <div class="podium-item">
         <div class="podium-medal">${icon('ic-silver','icon-lg icon-silver')}</div>
-        <div class="podium-place">2e plaats</div>
+        <div class="podium-place">${t('fin_2nd')}</div>
         <div class="podium-name">${statsSilver.name}</div>
       </div>
       <div class="podium-item first">
         <div class="podium-medal">${icon('ic-gold','icon-lg icon-gold')}</div>
-        <div class="podium-place">Winnaar</div>
+        <div class="podium-place">${t('fin_1st')}</div>
         <div class="podium-name">${statsGold.name}</div>
       </div>
-      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">3e plaats</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
+      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">${t('fin_3rd')}</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
     </div>
     <table class="stats-tbl">
-      <tr><th></th><th>Team</th><th>G</th><th>W</th><th>V</th><th>GW</th><th>GV</th><th>%</th></tr>
+      <tr><th></th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th>GW</th><th>GV</th><th>%</th></tr>
       ${rows}
     </table>
     <div class="stats-export">
-      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} Kopieer uitslag</button>
+      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} ${t('fin_copy')}</button>
     </div>
   </div>`;
 }
 
 function copyStats(){
-  const d=new Date().toLocaleDateString('nl-NL');
-  let txt=`${tournamentName||'Padel Toernooi'} — Eindstand (${d})\n\n`;
-  if(statsGold) txt+=`🥇 Winnaar: ${statsGold.name}\n`;
-  if(statsSilver) txt+=`🥈 Runner-up: ${statsSilver.name}\n`;
-  if(statsBronze) txt+=`🥉 3e plaats: ${statsBronze.name}\n`;
-  txt+=`\nVolledige stand:\n`;
-  statsData.forEach((t,i)=>{ txt+=`${i+1}. ${t.name} — ${t.wins}W ${t.losses}V (${t.gW}–${t.gL} games)\n`; });
+  const locale=LANG==='nl'?'nl-NL':LANG;
+  const d=new Date().toLocaleDateString(locale);
+  let txt=t('fin_export_hdr',{name:tournamentName||t('ob1_title'),date:d})+'\n\n';
+  if(statsGold) txt+=t('fin_export_gold',{name:statsGold.name})+'\n';
+  if(statsSilver) txt+=t('fin_export_silver',{name:statsSilver.name})+'\n';
+  if(statsBronze) txt+=t('fin_export_bronze',{name:statsBronze.name})+'\n';
+  txt+='\n'+t('fin_export_full')+'\n';
+  statsData.forEach((s,i)=>{ txt+=t('fin_export_row',{pos:i+1,name:s.name,w:s.wins,l:s.losses,gw:s.gW,gl:s.gL})+'\n'; });
   navigator.clipboard.writeText(txt).then(()=>{
     const btn=$('stats-copy-btn');
-    if(btn){ btn.innerHTML=`${icon('ic-check')} Gekopieerd!`; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} Kopieer uitslag`,2000); }
-  }).catch(()=>alert('Kopiëren niet beschikbaar in deze browser.'));
+    if(btn){ btn.innerHTML=`${icon('ic-check')} ${t('fin_copied')}`; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} ${t('fin_copy')}`,2000); }
+  }).catch(()=>alert(t('fin_copy_err')));
 }
 
 // ── Swipe-navigatie ────────────────────────────
@@ -1775,18 +2140,14 @@ function showInstallBanner(){
   const sub    = document.getElementById('install-subtitle');
 
   if(isIOS()){
-    sub.textContent = 'Zet op je beginscherm via Safari';
-    steps.innerHTML =
-      '1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>' +
-      '2. Scrol en tik op <b>Zet op beginscherm</b><br>' +
-      '3. Tik op <b>Voeg toe</b> — klaar!';
-    btn.innerHTML = `${icon('ic-check')} Begrepen`;
+    sub.textContent = t('inst_ios_title');
+    steps.innerHTML = t('inst_ios_steps');
+    btn.innerHTML = `${icon('ic-check')} ${t('inst_ios_ok')}`;
     btn.onclick = dismissInstall;
   } else if(deferredPrompt){
-    sub.textContent = 'Installeer de app op je beginscherm';
-    steps.innerHTML =
-      'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.';
-    btn.innerHTML = `${icon('ic-install')} Installeren`;
+    sub.textContent = t('inst_and_title');
+    steps.innerHTML = t('inst_and_body');
+    btn.innerHTML = `${icon('ic-install')} ${t('inst_install')}`;
     btn.onclick = triggerInstall;
   } else {
     // Generic: browser doesn't support prompt or already installed
@@ -1832,6 +2193,10 @@ if(isIOS() && !isInStandalone()){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  applyI18n();
+  // Initialize placeholder text in nc elements
+  const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
+  const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
   $('app-version').textContent = APP_VERSION;
   applyTheme(localStorage.getItem('padel-theme') || 'dark');
   loadState();
