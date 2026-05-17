@@ -240,7 +240,7 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 
 /* Champion */
 .champ-wrap{text-align:center;padding:24px 20px;border-top:2px solid #374151;background:var(--surface)}
-.champ-wrap .trophy{font-size:2rem}
+.champ-wrap .trophy{font-size:2rem;display:flex;justify-content:center;color:var(--gold)}
 .champ-wrap h2{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:var(--b-win-txt);text-transform:uppercase;margin-top:6px}
 .champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
 
@@ -345,6 +345,13 @@ body.light .ob-card{box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 }
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
+/* SVG ICONS */
+.icon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;overflow:visible;flex-shrink:0}
+.icon use{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-lg{width:1.35em;height:1.35em}
+.icon-xl{width:2.4em;height:2.4em;stroke-width:1.5}
+.icon-gold{color:#f59e0b}.icon-silver{color:#94a3b8}.icon-bronze{color:#b45309}
+.icon-fill use{fill:currentColor;stroke:none}
 /* INSTALL BANNER */
 #install-banner{
   position:fixed;bottom:0;left:0;right:0;z-index:1000;
@@ -395,7 +402,7 @@ body.light .ob-card{box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 .stats-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:16px}
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px}
 .podium-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:160px}
-.podium-medal{font-size:1.5rem}
+.podium-medal{font-size:1.5rem;display:flex;justify-content:center;align-items:center}
 .podium-place{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
 .podium-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;color:var(--txt);text-align:center;background:var(--surface2);border-radius:8px;padding:7px 10px;width:100%;line-height:1.3}
 .podium-item.first .podium-name{color:var(--gold);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2)}
@@ -427,6 +434,38 @@ body.banner-open .app{padding-bottom:140px}
 </head>
 <body>
 
+<!-- SVG SPRITE -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <!-- Moon -->
+  <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <!-- Sun -->
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <!-- Pencil -->
+  <symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+  <!-- Print -->
+  <symbol id="ic-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <!-- Padel racket -->
+  <symbol id="ic-padel" viewBox="0 0 24 24"><ellipse cx="11" cy="9" rx="7" ry="7" transform="rotate(-45 11 9)"/><line x1="16.24" y1="14.24" x2="21" y2="19"/><circle cx="9" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/></symbol>
+  <!-- Shuffle -->
+  <symbol id="ic-shuffle" viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+  <!-- Users -->
+  <symbol id="ic-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <!-- Clipboard/list -->
+  <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></symbol>
+  <!-- Trophy -->
+  <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M6 5h12v5a6 6 0 0 1-12 0z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></symbol>
+  <!-- Medal (ribbon medal) -->
+  <symbol id="ic-medal" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><polyline points="8.56 2.75 4.5 4.5 7.5 9"/><polyline points="15.44 2.75 19.5 4.5 16.5 9"/><path d="M9 9h6l-3-7z" fill="none"/></symbol>
+  <!-- Check circle -->
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <!-- Gold medal (solid star) -->
+  <symbol id="ic-gold" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="none" fill="currentColor"/></symbol>
+  <!-- Silver medal (solid diamond) -->
+  <symbol id="ic-silver" viewBox="0 0 24 24"><polygon points="12 2 22 12 12 22 2 12" stroke="none" fill="currentColor"/></symbol>
+  <!-- Bronze medal (solid circle) -->
+  <symbol id="ic-bronze" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="currentColor"/></symbol>
+</svg>
+
 <!-- ONBOARDING -->
 <div id="onboarding" class="hidden">
   <div class="ob-card">
@@ -444,15 +483,15 @@ body.banner-open .app{padding-bottom:140px}
 <header>
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span></div>
   <div class="hbtns">
-    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" aria-label="Thema wisselen">🌙</button>
-    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()">✏️ <span class="btn-label">Aanpassen</span></button>
-    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()">🖨️ <span class="btn-label">Afdrukken</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
+    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label">Aanpassen</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label">Afdrukken</span></button>
   </div>
 </header>
 
 <!-- RESUME BANNER -->
 <div id="resume-banner" class="hidden">
-  <div class="resume-icon">🎾</div>
+  <div class="resume-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg></div>
   <div class="resume-text">
     <strong>Toernooi hervat</strong>
     <span id="resume-info"></span>
@@ -499,8 +538,8 @@ body.banner-open .app{padding-bottom:140px}
 
     <!-- Mode toggle (team only) -->
     <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
-      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1">👥 Spelersnamen invoeren</button>
-      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1">✏️ Teams zelf invoeren</button>
+      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> Spelersnamen invoeren</button>
+      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> Teams zelf invoeren</button>
     </div>
 
     <!-- AUTO MODE: player names -->
@@ -509,8 +548,8 @@ body.banner-open .app{padding-bottom:140px}
       <textarea id="ta" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
       <div class="nc" id="nc">Voer namen in...</div>
       <div class="setup-btns">
-        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()">🎾 Starten</button>
-        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()">🔀 Schudden</button>
+        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> Starten</button>
+        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg> Schudden</button>
       </div>
       <div class="pgrid" id="prev"></div>
     </div>
@@ -521,7 +560,7 @@ body.banner-open .app{padding-bottom:140px}
       <textarea id="ta-manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
       <div class="nc" id="nc-manual">Voer teamnamen in...</div>
       <div class="setup-btns">
-        <button class="btn btn-green" onclick="doStartManual()">🎾 Starten</button>
+        <button class="btn btn-green" onclick="doStartManual()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> Starten</button>
       </div>
     </div>
 
@@ -532,8 +571,8 @@ body.banner-open .app{padding-bottom:140px}
 <div id="screen-tournament">
   <div class="phdr">Padel Toernooi — Bracket</div>
   <div class="tabs">
-    <button class="tab active" id="tab-poule" onclick="showTab('poule')">📋 Pouleronde</button>
-    <button class="tab" id="tab-bracket" onclick="showTab('bracket')">🏆 Bracket</button>
+    <button class="tab active" id="tab-poule" onclick="showTab('poule')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> Pouleronde</button>
+    <button class="tab" id="tab-bracket" onclick="showTab('bracket')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> Bracket</button>
   </div>
   <div class="tab-body">
     <div id="tb-poule">
@@ -550,15 +589,15 @@ body.banner-open .app{padding-bottom:140px}
     <div id="tb-bracket" style="display:none">
       <div class="bracket-body">
         <div class="bsec">
-          <div class="bsec-lbl">📋 Pouleronde</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> Pouleronde</div>
           <div id="bracket-poule-rounds"></div>
         </div>
         <div class="bsec">
-          <div class="bsec-lbl">🏆 Winnaarsbracket — Top 4</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> Winnaarsbracket — Top 4</div>
           <div class="bracket" id="bw"></div>
         </div>
         <div class="bsec">
-          <div class="bsec-lbl">🎖️ Verliezersfinale — Plaatsen 5–9</div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> Verliezersfinale — Plaatsen 5–9</div>
           <div class="bracket" id="bl"></div>
         </div>
         <div id="champ"></div>
@@ -595,10 +634,11 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.10';
+const APP_VERSION = 'v1.11';
 const $ = id => document.getElementById(id);
 const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
 const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
+const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="true" viewBox="0 0 24 24"><use href="#${id}"></use></svg>`;
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
 let R={gpm:3, matchPts:32};
@@ -817,7 +857,7 @@ function renderPoule(){
     const rm=PM.filter(m=>m.round===r);
     if(!rm.length) continue;
     const done=rm.every(m=>m.winner);
-    html+=`<div class="rblock"><div class="rlbl">Ronde ${r} ${done?'✅':''}</div>`;
+    html+=`<div class="rblock"><div class="rlbl">Ronde ${r} ${done?icon('ic-check','icon-gold'):''}</div>`;
     for(const m of rm) html+=mrow(m);
     html+='</div>';
   }
@@ -839,7 +879,7 @@ function renderPouleInBracket(){
     const done=rm.every(m=>m.winner);
     html+=`<div style="margin-bottom:14px">
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:6px">
-        Ronde ${r} ${done?'✅':''}
+        Ronde ${r} ${done?icon('ic-check','icon-gold'):''}
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">`;
     for(const m of rm){
@@ -873,7 +913,7 @@ function mrow(m){
         <div class="mteam r ${!wA?'won':'lost'}">${nb}</div>
       </div>
       <div class="mresult">
-        <span class="mwinner-label">✅ ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
+        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
         <button class="mundo-btn" onclick="undoPM(${m.id})">↩ Herstel</button>
       </div>
     </div>`;
@@ -941,7 +981,7 @@ function renderSt(){
   let h=`<tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>V</th></tr>`;
   st.forEach((t,i)=>{
     if(i===topN) h+=`<tr class="divr"><td colspan="5">— verliezersfinale —</td></tr>`;
-    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">✏️</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td></tr>`;
+    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${t.id}">${t.name}${t.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${t.id})">${icon('ic-pencil')}</button></td><td>${t.played}</td><td class="wc">${t.wins}</td><td class="lc">${t.losses}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
 }
@@ -964,12 +1004,12 @@ function buildPlayoffShell(){
   PW=[
     {id:'wsf1',label:'Halve Finale 1',a:null,b:null,ga:0,gb:0,winner:null},
     {id:'wsf2',label:'Halve Finale 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'wf',label:'🏆 Finale',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'wf',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
   ];
   PL=[
     {id:'lsf1',label:'Troostfinale SF 1',a:null,b:null,ga:0,gb:0,winner:null},
     {id:'lsf2',label:'Troostfinale SF 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'lf',label:'🎖️ Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
+    {id:'lf',label:'Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
   ];
 }
 
@@ -986,19 +1026,19 @@ function fillPlayoff(){
     PW=[
       {id:'wsf1',label:'Halve Finale 1',a:top[0].id,b:(top[3]||top[1]).id,ga:0,gb:0,winner:null},
       {id:'wsf2',label:'Halve Finale 2',a:top[1].id,b:(top[2]||top[0]).id,ga:0,gb:0,winner:null},
-      {id:'wf',label:'🏆 Finale',a:null,b:null,ga:0,gb:0,winner:null},
+      {id:'wf',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
     ];
     // If only 2 teams: wsf2 same as wsf1, skip it — direct final
     if(top.length===2){
       PW=[
-        {id:'wsf1',label:'🏆 Finale',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
+        {id:'wsf1',label:'Finale',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
         {id:'wf',label:'',a:null,b:null,ga:0,gb:0,winner:null,skip:true},
       ];
     } else if(top.length===3){
       PW=[
         {id:'wsf1',label:'Halve Finale',a:top[1].id,b:top[2].id,ga:0,gb:0,winner:null},
         {id:'wsf2',label:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null},
-        {id:'wf',label:'🏆 Finale',a:top[0].id,b:null,ga:0,gb:0,winner:null},
+        {id:'wf',label:'Finale',a:top[0].id,b:null,ga:0,gb:0,winner:null},
       ];
     }
   }
@@ -1015,8 +1055,8 @@ function fillPlayoff(){
     if(bot.length>=5){
       PL.push({id:'lbye',bye:true,label:'Vrije doorgang',a:bot[4].id,b:null,ga:0,gb:0,winner:'A'});
     }
-    PL.push({id:'lf',label:'🎖️ Troostfinale',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
-    if(bot.length===2) PL=[{id:'lsf1',label:'🎖️ Troostfinale',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
+    PL.push({id:'lf',label:'Troostfinale',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
+    if(bot.length===2) PL=[{id:'lsf1',label:'Troostfinale',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
   }
 }
 
@@ -1038,7 +1078,7 @@ function renderHalf(elId,matches,pfx){
   if(!sf1){el.innerHTML='';return;}
 
   const isW=pfx==='w';
-  const title=isW?'🏆 WINNAAR':'🎖️ TROOSTFINALE';
+  const title=isW?`${icon('ic-trophy')} WINNAAR`:`${icon('ic-medal')} TROOSTFINALE`;
   const hasSf2=sf2&&!sf2.skip;
   const hasBye=!!bye;
 
@@ -1197,7 +1237,7 @@ function renderChamp(){
   if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
   const alreadyShown = area.innerHTML.includes('champ-wrap');
-  area.innerHTML=`<div class="champ-wrap"><div class="trophy">🏆</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
+  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${c.name}</h2><p>Toernooi winnaar${c.trio?' (Trio)':''}!</p></div>`;
   if(!alreadyShown) champConfetti();
   renderStats();
 }
@@ -1222,8 +1262,8 @@ function doPrint(){ showTab('bracket'); setTimeout(()=>window.print(),300); }
 // ── Thema ─────────────────────────────────────
 function applyTheme(t){
   document.body.classList.toggle('light', t==='light');
-  const btn=$('btn-theme');
-  if(btn) btn.textContent = t==='light' ? '☀️' : '🌙';
+  const use=document.querySelector('#icon-theme use');
+  if(use) use.setAttribute('href', t==='light'?'#ic-sun':'#ic-moon');
 }
 function toggleTheme(){
   const t=document.body.classList.contains('light')?'dark':'light';
@@ -1591,7 +1631,9 @@ function renderStats(){
   }).sort((a,b)=>b.wins-a.wins||b.gW-a.gW||a.id-b.id);
 
   const rows=statsData.map(t=>{
-    const medal=T[t.id]===statsGold?'🥇':T[t.id]===statsSilver?'🥈':(statsBronze&&T[t.id]===statsBronze)?'🥉':'';
+    const medal=T[t.id]===statsGold   ? icon('ic-gold','icon-lg icon-gold')
+              : T[t.id]===statsSilver ? icon('ic-silver','icon-lg icon-silver')
+              : (statsBronze&&T[t.id]===statsBronze) ? icon('ic-bronze','icon-lg icon-bronze') : '';
     const pct=t.played?Math.round(t.wins/t.played*100):0;
     return`<tr><td class="medal-cell">${medal}</td><td>${t.name}${t.trio?'<span style="opacity:.4;font-size:.6rem"> trio</span>':''}</td><td>${t.played}</td><td style="color:var(--accent)">${t.wins}</td><td style="color:var(--red)">${t.losses}</td><td>${t.gW}</td><td>${t.gL}</td><td style="color:var(--txt2)">${pct}%</td></tr>`;
   }).join('');
@@ -1600,23 +1642,23 @@ function renderStats(){
     <div class="stats-title">Eindstand</div>
     <div class="podium">
       <div class="podium-item">
-        <div class="podium-medal">🥈</div>
+        <div class="podium-medal">${icon('ic-silver','icon-lg icon-silver')}</div>
         <div class="podium-place">2e plaats</div>
         <div class="podium-name">${statsSilver.name}</div>
       </div>
       <div class="podium-item first">
-        <div class="podium-medal">🥇</div>
+        <div class="podium-medal">${icon('ic-gold','icon-lg icon-gold')}</div>
         <div class="podium-place">Winnaar</div>
         <div class="podium-name">${statsGold.name}</div>
       </div>
-      ${statsBronze?`<div class="podium-item"><div class="podium-medal">🥉</div><div class="podium-place">3e plaats</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
+      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">3e plaats</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
     </div>
     <table class="stats-tbl">
       <tr><th></th><th>Team</th><th>G</th><th>W</th><th>V</th><th>GW</th><th>GV</th><th>%</th></tr>
       ${rows}
     </table>
     <div class="stats-export">
-      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">📋 Kopieer uitslag</button>
+      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} Kopieer uitslag</button>
     </div>
   </div>`;
 }
@@ -1631,7 +1673,7 @@ function copyStats(){
   statsData.forEach((t,i)=>{ txt+=`${i+1}. ${t.name} — ${t.wins}W ${t.losses}V (${t.gW}–${t.gL} games)\n`; });
   navigator.clipboard.writeText(txt).then(()=>{
     const btn=$('stats-copy-btn');
-    if(btn){ btn.textContent='✓ Gekopieerd!'; setTimeout(()=>btn.textContent='📋 Kopieer uitslag',2000); }
+    if(btn){ btn.innerHTML='✓ Gekopieerd!'; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} Kopieer uitslag`,2000); }
   }).catch(()=>alert('Kopiëren niet beschikbaar in deze browser.'));
 }
 
