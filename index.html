@@ -271,7 +271,7 @@ body.light .ob-card{box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 .ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
 .ob-dot{width:7px;height:7px;border-radius:50%;background:var(--surface2);transition:.25s}
 .ob-dot.active{width:22px;border-radius:4px;background:var(--accent)}
-.ob-icon{font-size:2.8rem;text-align:center;margin-bottom:12px;line-height:1}
+.ob-icon{font-size:1rem;display:flex;justify-content:center;align-items:center;margin-bottom:12px;height:3.5rem;color:var(--accent)}
 .ob-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;text-align:center;margin-bottom:8px;color:var(--txt)}
 .ob-body{font-size:.9rem;color:var(--txt2);text-align:center;line-height:1.6;margin-bottom:24px}
 .ob-body b{color:var(--txt)}
@@ -464,6 +464,10 @@ body.banner-open .app{padding-bottom:140px}
   <symbol id="ic-silver" viewBox="0 0 24 24"><polygon points="12 2 22 12 12 22 2 12" stroke="none" fill="currentColor"/></symbol>
   <!-- Bronze medal (solid circle) -->
   <symbol id="ic-bronze" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="currentColor"/></symbol>
+  <!-- Rotate/refresh (Americano) -->
+  <symbol id="ic-rotate" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+  <!-- Install/download -->
+  <symbol id="ic-install" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -627,7 +631,7 @@ body.banner-open .app{padding-bottom:140px}
     </div>
     <div class="install-steps" id="install-steps"></div>
     <div class="install-actions">
-      <button class="install-btn-primary" id="install-btn-main" onclick="triggerInstall()">📲 Installeren</button>
+      <button class="install-btn-primary" id="install-btn-main" onclick="triggerInstall()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-install"></use></svg> Installeren</button>
       <button class="install-btn-skip" onclick="dismissInstall()">Niet nu</button>
     </div>
   </div>
@@ -1315,22 +1319,22 @@ function champConfetti(){
 // ── Onboarding ────────────────────────────────
 const OB_STEPS = [
   {
-    icon: '🎾',
+    icon: icon('ic-padel','icon-xl'),
     title: 'Padel Toernooi',
     body: 'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.'
   },
   {
-    icon: '🏆',
+    icon: icon('ic-trophy','icon-xl'),
     title: 'Team toernooi',
     body: '<b>Vaste duo\'s of trio\'s</b> spelen een poule. Daarna beslist een bracket wie er wint — met winnaar- én verliezersfinale.'
   },
   {
-    icon: '🔄',
+    icon: icon('ic-rotate','icon-xl'),
     title: 'Americano',
     body: '<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.'
   },
   {
-    icon: '✅',
+    icon: icon('ic-check','icon-xl'),
     title: 'Klaar om te spelen',
     body: 'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.'
   }
@@ -1348,13 +1352,13 @@ function renderObStep(){
   const s = OB_STEPS[obStep], last = obStep === OB_STEPS.length - 1;
   // Dots
   $('ob-dots').innerHTML = OB_STEPS.map((_,i)=>`<div class="ob-dot${i===obStep?' active':''}"></div>`).join('');
-  $('ob-icon').textContent = s.icon;
+  $('ob-icon').innerHTML = s.icon;
   $('ob-title').textContent = s.title;
   $('ob-body').innerHTML = s.body;
   // Buttons
   const prev = obStep > 0 ? `<button class="btn btn-ghost" onclick="obNav(-1)">← Terug</button>` : '';
   const next = last
-    ? `<button class="btn btn-green" onclick="dismissOnboarding()">🎾 Starten</button>`
+    ? `<button class="btn btn-green" onclick="dismissOnboarding()">${icon('ic-padel')} Starten</button>`
     : `<button class="btn btn-green" onclick="obNav(1)">Volgende →</button>`;
   $('ob-btns').innerHTML = prev + next;
   $('ob-skip').style.display = last ? 'none' : '';
@@ -1708,14 +1712,14 @@ function showInstallBanner(){
     steps.innerHTML =
       '1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>' +
       '2. Scrol en tik op <b>Zet op beginscherm</b><br>' +
-      '3. Tik op <b>Voeg toe</b> — klaar! 🎾';
-    btn.textContent = '👍 Begrepen';
+      '3. Tik op <b>Voeg toe</b> — klaar!';
+    btn.innerHTML = `${icon('ic-check')} Begrepen`;
     btn.onclick = dismissInstall;
   } else if(deferredPrompt){
     sub.textContent = 'Installeer de app op je beginscherm';
     steps.innerHTML =
       'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.';
-    btn.textContent = '📲 Installeren';
+    btn.innerHTML = `${icon('ic-install')} Installeren`;
     btn.onclick = triggerInstall;
   } else {
     // Generic: browser doesn't support prompt or already installed
