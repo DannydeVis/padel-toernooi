@@ -1200,6 +1200,10 @@ function startTournamentUI(){
   const tname=$('logo-tname'), phdr=$('phdr-el');
   if(tname) tname.textContent=tournamentName||'';
   if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
+  if(!pDone && PM.length && PM.every(m=>m.winner)){
+    pDone=true;
+    fillPlayoff();
+  }
   renderPoule(); renderSt(); renderBracket();
   showTab(pDone?'bracket':'poule');
 }
@@ -1428,6 +1432,7 @@ function checkDone(){
   if(pDone) return;
   pDone=true;
   fillPlayoff();
+  saveState();
   $('tab-bracket').style.color='var(--accent)';
   renderBracket();
   setTimeout(()=>showTab('bracket'),500);
