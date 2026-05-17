@@ -438,6 +438,21 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   .mbtns{padding:0 10px 12px;gap:6px}
   .app{padding:12px}
 }
+@media (min-width:768px){
+  .rblock{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+  .rlbl{grid-column:1/-1}
+  .am-round{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+  .am-round-hdr{grid-column:1/-1}
+  .bmatch{min-width:175px;max-width:220px}
+}
+@media (min-width:1024px){
+  .app{max-width:1200px}
+  #tb-poule{display:grid;grid-template-columns:1fr 300px;column-gap:24px;align-items:start}
+  .prog-wrap{grid-column:1/-1}
+  .st-wrap{position:sticky;top:76px}
+  .bmatch{min-width:200px;max-width:260px}
+  .bracket-body{padding:28px 32px}
+}
 body.banner-open .app{padding-bottom:140px}
 #install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
 </style>
@@ -667,7 +682,7 @@ body.banner-open .app{padding-bottom:140px}
 </div>
 
 <script>
-const APP_VERSION = 'v1.13';
+const APP_VERSION = 'v1.14';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
