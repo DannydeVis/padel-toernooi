@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padel Bracket — Organiseer je toernooi</title>
+  <meta name="description" content="Gratis app om eenvoudig een padel toernooi te organiseren. Team toernooi of Americano, met poules, bracket en live tussenstand.">
+  <meta property="og:title" content="Padel Bracket">
+  <meta property="og:description" content="Organiseer in 30 seconden een padel toernooi. Gratis, geen account nodig.">
+  <meta property="og:image" content="https://dannydevis.github.io/padel-toernooi/icon.svg">
+  <meta name="theme-color" content="#10b981">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0f1a;
+      --surface: #111827;
+      --surface2:#1f2937;
+      --accent:  #10b981;
+      --accent2: #059669;
+      --gold:    #fbbf24;
+      --txt:     #f9fafb;
+      --txt2:    rgba(249,250,251,.55);
+      --bdr:     rgba(255,255,255,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Barlow', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      background: rgba(10,15,26,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
+      color: var(--txt); text-decoration: none;
+    }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-cta {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      padding: 9px 20px; font-family: 'Barlow', sans-serif; font-weight: 600;
+      font-size: .9rem; cursor: pointer; text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .nav-cta:hover { background: var(--accent2); }
+    .nav-cta:active { transform: scale(.96); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(139,92,246,.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: .04;
+      background-image: linear-gradient(var(--bdr) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3);
+      color: var(--accent); border-radius: 99px; padding: 6px 16px;
+      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
+      margin-bottom: 28px;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
+      line-height: .95; letter-spacing: -1px; margin-bottom: 10px;
+    }
+    h1 em { color: var(--accent); font-style: normal; display: block; }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--txt2);
+      max-width: 520px; margin: 20px auto 44px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      border-radius: 12px; padding: 16px 32px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.15rem; letter-spacing: .5px;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      box-shadow: 0 4px 24px rgba(16,185,129,.3);
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(16,185,129,.45); }
+    .btn-primary:active { transform: scale(.97); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--txt2); text-decoration: none;
+      border: 1px solid var(--bdr); border-radius: 12px; padding: 15px 28px;
+      font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 1rem;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.25); color: var(--txt); }
+    .hero-note { margin-top: 20px; font-size: .82rem; color: var(--txt2); }
+
+    /* ── MOCKUP ── */
+    .mockup-wrap {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 24px 100px;
+      display: flex; justify-content: center;
+    }
+    .mockup {
+      background: var(--surface); border: 1px solid var(--bdr);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
+      width: 100%; max-width: 680px;
+    }
+    .mockup-bar {
+      background: #1f2937; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--bdr);
+    }
+    .mockup-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .mockup-screen {
+      padding: 20px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .mock-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 4px 12px; border-bottom: 1px solid var(--bdr);
+    }
+    .mock-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.1rem; }
+    .mock-logo em { color: var(--accent); font-style:normal; }
+    .mock-tabs { display:flex; gap:4px; }
+    .mock-tab { padding:6px 14px; border-radius:8px; font-size:.78rem; font-weight:600; }
+    .mock-tab.active { background:var(--accent); color:#fff; }
+    .mock-tab:not(.active) { color:var(--txt2); }
+    .mock-rounds { display:flex; flex-direction:column; gap:8px; }
+    .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:4px; }
+    .mock-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .mock-card {
+      background: #1f2937; border-radius:10px; padding:12px;
+      border: 1px solid var(--bdr);
+    }
+    .mock-card-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:4px; }
+    .mock-team { font-size:.72rem; font-weight:600; }
+    .mock-team.r { text-align:right; }
+    .mock-score { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; color:var(--txt); text-align:center; }
+    .mock-btns { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:8px; }
+    .mock-btn { border-radius:6px; padding:6px; font-size:.65rem; font-weight:700; text-align:center; }
+    .mock-btn.a { background:#1d4ed8; color:#fff; }
+    .mock-btn.b { background:#7c3aed; color:#fff; }
+    .mock-card.done .mock-winner { font-size:.68rem; color:var(--accent); margin-top:6px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 48px;
+      padding: 40px 24px; flex-wrap: wrap;
+      border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr);
+      margin: 0 0 80px;
+    }
+    .stat { text-align: center; }
+    .stat-n {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2.6rem; color: var(--accent); line-height: 1;
+    }
+    .stat-lbl { font-size: .82rem; color: var(--txt2); margin-top: 4px; }
+
+    /* ── FEATURES ── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 12px;
+    }
+    .section-sub { text-align: center; color: var(--txt2); max-width: 480px; margin: 0 auto 56px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 28px; transition: border-color .2s, transform .2s;
+    }
+    .feature:hover { border-color: rgba(16,185,129,.3); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-size: 1.4rem;
+    }
+    .feature h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; letter-spacing: .3px; margin-bottom: 8px;
+    }
+    .feature p { font-size: .92rem; color: var(--txt2); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+    .step { padding: 32px 24px; text-align: center; position: relative; }
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+      color: var(--txt2); font-size: 1.2rem;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--accent);
+      color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
+    .step p { font-size:.85rem; color:var(--txt2); }
+
+    /* ── FORMATS ── */
+    .formats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .format {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 32px; overflow: hidden; position: relative;
+    }
+    .format::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .format.team::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+    .format.am::before   { background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .format h3 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; margin-bottom:10px; }
+    .format p  { color:var(--txt2); font-size:.92rem; line-height:1.6; margin-bottom:20px; }
+    .format ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .format ul li { font-size:.88rem; display:flex; align-items:flex-start; gap:8px; }
+    .format ul li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      text-align: center; padding: 80px 24px 100px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,.08) 0%, transparent 70%);
+    }
+    .cta-wrap h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 16px;
+    }
+    .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--bdr); padding: 32px 24px;
+      text-align: center; color: var(--txt2); font-size: .82rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .formats { grid-template-columns: 1fr; }
+      .mock-cards { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step:not(:last-child)::after { display:none; }
+      .stats-bar { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Padel <em>•</em> Bracket</a>
+  <a class="nav-cta" href="https://dannydevis.github.io/padel-toernooi/" target="_blank">Open app →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Gratis · Geen account nodig · Offline werkt ook
+  </div>
+
+  <h1>Padel <em>Bracket</em></h1>
+  <p class="hero-sub">Organiseer in 30 seconden een padel toernooi. Poules, bracket en live tussenstand — alles op je telefoon.</p>
+
+  <div class="hero-btns">
+    <a class="btn-primary" href="https://dannydevis.github.io/padel-toernooi/" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Start toernooi
+    </a>
+    <a class="btn-secondary" href="#hoe-werkt-het">
+      Hoe werkt het?
+    </a>
+  </div>
+  <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app</p>
+</section>
+
+<!-- MOCKUP -->
+<div class="mockup-wrap">
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="mockup-dot" style="background:#ef4444"></div>
+      <div class="mockup-dot" style="background:#fbbf24"></div>
+      <div class="mockup-dot" style="background:#10b981"></div>
+    </div>
+    <div class="mockup-screen">
+      <div class="mock-header">
+        <div class="mock-logo">Padel <em>•</em> Bracket</div>
+        <div class="mock-tabs">
+          <div class="mock-tab active">Pouleronde</div>
+          <div class="mock-tab">Bracket</div>
+        </div>
+      </div>
+      <div class="mock-rounds">
+        <div>
+          <div class="mock-round-lbl">Ronde 1 ✓</div>
+          <div class="mock-cards">
+            <div class="mock-card done">
+              <div class="mock-card-teams">
+                <div class="mock-team">Tom & Lisa</div>
+                <div class="mock-score">2–1</div>
+                <div class="mock-team r">Sara & Mark</div>
+              </div>
+              <div class="mock-winner">✓ Tom & Lisa wint</div>
+            </div>
+            <div class="mock-card done">
+              <div class="mock-card-teams">
+                <div class="mock-team">Jan & Kim</div>
+                <div class="mock-score">3–0</div>
+                <div class="mock-team r">Roos & Bas</div>
+              </div>
+              <div class="mock-winner">✓ Jan & Kim wint</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="mock-round-lbl">Ronde 2</div>
+          <div class="mock-cards">
+            <div class="mock-card">
+              <div class="mock-card-teams">
+                <div class="mock-team">Tom & Lisa</div>
+                <div class="mock-score">1–1</div>
+                <div class="mock-team r">Jan & Kim</div>
+              </div>
+              <div class="mock-btns">
+                <div class="mock-btn a">Tom & Lisa</div>
+                <div class="mock-btn b">Jan & Kim</div>
+              </div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-teams">
+                <div class="mock-team">Sara & Mark</div>
+                <div class="mock-score">0–0</div>
+                <div class="mock-team r">Roos & Bas</div>
+              </div>
+              <div class="mock-btns">
+                <div class="mock-btn a">Sara & Mark</div>
+                <div class="mock-btn b">Roos & Bas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Toernooi opzetten</div></div>
+  <div class="stat"><div class="stat-n">16</div><div class="stat-lbl">Max. spelers</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Talen ondersteund</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <h2 class="section-title">Alles wat je nodig hebt</h2>
+  <p class="section-sub">Van namen invoeren tot kampioen — de app regelt de rest automatisch.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">🏆</div>
+      <h3>Automatische poules & bracket</h3>
+      <p>Voer namen in, kies het aantal banen — de app maakt automatisch een eerlijk schema met halve finales en finale.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">🔄</div>
+      <h3>Americano-modus</h3>
+      <p>Partners wisselen elke ronde. Ideaal voor losse sessies waarbij iedereen met iedereen speelt. Live puntentelling.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📊</div>
+      <h3>Live tussenstand</h3>
+      <p>De stand wordt automatisch bijgehouden tijdens het toernooi. Na afloop een overzicht met winnaar, podium en stats.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">📱</div>
+      <h3>Installeerbaar als app</h3>
+      <p>Voeg de app toe aan je beginscherm — werkt daarna ook zonder internet. Geen App Store, geen account.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(239,68,68,.1)">🌍</div>
+      <h3>6 talen</h3>
+      <p>Automatisch in jouw taal: Nederlands, Engels, Frans, Duits, Spaans en Zweeds. Op basis van je toestelinstelling.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">⚡</div>
+      <h3>Direct klaar</h3>
+      <p>Geen registratie, geen betaling, geen reclame. Open de app en start — ook als iemand anders het toernooi organiseert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="hoe-werkt-het">
+  <h2 class="section-title">Klaar in 4 stappen</h2>
+  <p class="section-sub">In minder dan een minuut heb je een volledig toernooi klaarstaan.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Namen invoeren</h4>
+      <p>Typ één naam per regel. De app maakt automatisch duo's of trio's.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Type kiezen</h4>
+      <p>Team toernooi (vaste koppels) of Americano (wisselende partners).</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Scores invoeren</h4>
+      <p>Tik de winnaar aan na elke game. Stand wordt live bijgewerkt.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Kampioen 🏆</div>
+      <p>Na de finale wordt de winnaar getoond met confetti en eindstand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section class="section">
+  <h2 class="section-title">Twee toernooiformats</h2>
+  <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
+  <div class="formats">
+    <div class="format team">
+      <h3>Team toernooi</h3>
+      <p>Vaste duo's of trio's spelen poules, waarna de top 4 doorgaat naar de finale-bracket en de rest naar de troostfinale.</p>
+      <ul>
+        <li>Vaste koppels de hele dag</li>
+        <li>Pouleronde + winnaarsbracket</li>
+        <li>Troostfinale voor plaatsen 5–9</li>
+        <li>4 tot 9 teams (8–18 spelers)</li>
+      </ul>
+    </div>
+    <div class="format am">
+      <h3>Americano</h3>
+      <p>Elke ronde nieuwe partners. Iedereen speelt met en tegen iedereen — ideaal voor een gezellige sessie.</p>
+      <ul>
+        <li>Partners wisselen elke ronde</li>
+        <li>Puntentelling per speler</li>
+        <li>Live ranglijst</li>
+        <li>8, 12 of 16 spelers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-wrap">
+  <h2>Klaar om te spelen?</h2>
+  <p>Open de app, voer de namen in en start je toernooi. Gratis en altijd beschikbaar.</p>
+  <a class="btn-primary" href="https://dannydevis.github.io/padel-toernooi/" target="_blank" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Start nu gratis
+  </a>
+</section>
+
+<footer>
+  <p>Padel Bracket — Gratis toernooi-app &nbsp;·&nbsp; <a href="https://dannydevis.github.io/padel-toernooi/" target="_blank">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/dannydevis/padel-toernooi" target="_blank">GitHub</a></p>
+</footer>
+
+</body>
+</html>
