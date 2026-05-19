@@ -474,6 +474,11 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 }
 body.banner-open .app{padding-bottom:140px}
 #install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.feedback-wrap{position:relative;display:inline-flex}
+.feedback-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--bdr);border-radius:10px;padding:4px;min-width:180px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.feedback-menu.open{display:flex;flex-direction:column}
+.feedback-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:7px;color:var(--txt);font-size:.85rem;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.5px}
+.feedback-item:hover{background:var(--surface2)}
 </style>
 </head>
 <body>
@@ -514,6 +519,12 @@ body.banner-open .app{padding-bottom:140px}
   <symbol id="ic-undo" viewBox="0 0 24 24"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></symbol>
   <!-- Install/download -->
   <symbol id="ic-install" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <!-- Feedback / speech bubble -->
+  <symbol id="ic-feedback" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <!-- Bug -->
+  <symbol id="ic-bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l1.5 1.5M15.5 3.5 17 2"/><path d="M12 8a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0v-3a4 4 0 0 0-4-4z"/><path d="M8 12H4m12 0h4M8 17H4m12 0h4M10 8V5m4 3V5"/></symbol>
+  <!-- Lightbulb / idea -->
+  <symbol id="ic-idea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6m-6-4h6"/><path d="M12 3a6 6 0 0 1 4.243 10.243C15.05 15.45 15 15.72 15 16H9c0-.28-.05-.55-.243-.757A6 6 0 0 1 12 3z"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -533,6 +544,13 @@ body.banner-open .app{padding-bottom:140px}
 <header>
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
+    <div class="feedback-wrap" id="feedback-wrap">
+      <button class="btn btn-ghost btn-sm" onclick="toggleFeedback()" data-i18n-aria="feedback_btn" aria-label="Feedback"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-feedback"></use></svg></button>
+      <div class="feedback-menu" id="feedback-menu">
+        <a class="feedback-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bug"></use></svg> <span data-i18n="feedback_bug">Bug report</span></a>
+        <a class="feedback-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-idea"></use></svg> <span data-i18n="feedback_feature">Feature request</span></a>
+      </div>
+    </div>
     <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" data-i18n-aria="hdr_theme" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
     <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label" data-i18n="hdr_edit">Aanpassen</span></button>
     <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label" data-i18n="hdr_print">Afdrukken</span></button>
@@ -718,7 +736,7 @@ document.documentElement.lang=LANG;
 
 const I18N={
 nl:{
-  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',
+  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',feedback_btn:'Feedback',feedback_bug:'Bug melden',feedback_feature:'Idee indienen',
   ob_skip:'Overslaan',ob_back:'← Terug',ob_next:'Volgende →',ob_start:'Starten',
   ob1_title:'Padel Toernooi',
   ob1_body:'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.',
@@ -777,7 +795,7 @@ nl:{
   inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
 },
 en:{
-  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',
+  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',
   ob_skip:'Skip',ob_back:'← Back',ob_next:'Next →',ob_start:'Start',
   ob1_title:'Padel Tournament',
   ob1_body:'Organise your own tournament in a few taps — from entering names to the final standings. All in one app, even offline.',
@@ -836,7 +854,7 @@ en:{
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',
 },
 fr:{
-  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',
+  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',
   ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
   ob1_title:'Tournoi de Padel',
   ob1_body:"Organisez votre propre tournoi en quelques clics — de la saisie des noms au classement final. Tout dans une appli, même hors ligne.",
@@ -895,7 +913,7 @@ fr:{
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
 },
 de:{
-  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',
+  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',
   ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
   ob1_title:'Padel Turnier',
   ob1_body:'Organisiere dein eigenes Turnier in wenigen Taps — von der Namenseingabe bis zur Endabrechnung. Alles in einer App, auch offline.',
@@ -954,7 +972,7 @@ de:{
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
 },
 es:{
-  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',
+  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',
   ob_skip:'Saltar',ob_back:'← Atrás',ob_next:'Siguiente →',ob_start:'Iniciar',
   ob1_title:'Torneo de Pádel',
   ob1_body:'Organiza tu propio torneo en pocos toques — desde introducir nombres hasta la clasificación final. Todo en una app, incluso sin conexión.',
@@ -1013,7 +1031,7 @@ es:{
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
 },
 sv:{
-  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',
+  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',
   ob_skip:'Hoppa över',ob_back:'← Tillbaka',ob_next:'Nästa →',ob_start:'Starta',
   ob1_title:'Padelturnering',
   ob1_body:'Organisera din egen turnering med några tryck — från att ange namn till slutresultatet. Allt i en app, även offline.',
@@ -1754,6 +1772,15 @@ function toggleTheme(){
 const _sysMq=window.matchMedia('(prefers-color-scheme: light)');
 _sysMq.addEventListener('change', e=>{
   if(!localStorage.getItem('padel-theme')) applyTheme(e.matches?'light':'dark');
+});
+
+// ── Feedback ──────────────────────────────────
+function toggleFeedback(){
+  document.getElementById('feedback-menu').classList.toggle('open');
+}
+document.addEventListener('click', e=>{
+  const wrap=document.getElementById('feedback-wrap');
+  if(wrap&&!wrap.contains(e.target)) document.getElementById('feedback-menu').classList.remove('open');
 });
 
 // ── Confetti ──────────────────────────────────
