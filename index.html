@@ -1,2245 +1,641 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>PadelBracket — Padel Toernooi Generator &amp; Bracket Maker</title>
-<meta name="description" content="Organiseer padel toernooien met poules, brackets en live stand. Gratis, offline, geen account.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://padel-bracket.com/">
-<meta property="og:title" content="PadelBracket — Padel Toernooi Generator">
-<meta property="og:description" content="Gratis padel brackets en Americano. Geen account, werkt offline.">
-<meta property="og:url" content="https://padel-bracket.com/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://padel-bracket.com/icon.svg">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PadelBracket","alternateName":"Padel Bracket Generator","applicationCategory":"SportsApplication","operatingSystem":"Web, iOS, Android (PWA)","description":"Gratis padel toernooi bracket generator voor recreatieve spelers en clubs.","url":"https://padel-bracket.com","inLanguage":["nl","en","fr","de","es","sv"],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"featureList":["Knockout brackets","Americano format","Round robin","Live scoring","No signup required","Offline support"]}
-</script>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#10b981">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Padel">
-<link rel="apple-touch-icon" href="icon.svg">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadelBracket — Gratis Padel Toernooi Generator &amp; Bracket Maker</title>
+  <meta name="description" content="Maak gratis padel toernooien: knockout brackets, Americano en Round Robin. Geen account nodig. Werkt offline op de baan. In 6 talen.">
+  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel round robin, tournament bracket maker, padel toernooi maken">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://padel-bracket.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PadelBracket">
+  <meta property="og:url" content="https://padel-bracket.com/">
+  <meta property="og:title" content="PadelBracket — Gratis Padel Toernooi Generator">
+  <meta property="og:description" content="Maak gratis padel toernooien: knockout brackets, Americano &amp; Round Robin. Geen account, werkt offline.">
+  <meta property="og:image" content="https://padel-bracket.com/icon.svg">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="sv_SE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PadelBracket — Gratis Padel Toernooi Generator">
+  <meta name="twitter:description" content="Brackets, Americano &amp; Round Robin — gratis, geen account, offline.">
+  <meta name="twitter:image" content="https://padel-bracket.com/icon.svg">
+  <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
+  <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/">
+  <meta name="theme-color" content="#10b981">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PadelBracket",
+    "alternateName": "Padel Bracket Generator",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Web, iOS, Android (PWA)",
+    "description": "Gratis padel toernooi bracket generator voor recreatieve spelers en clubs.",
+    "url": "https://padel-bracket.com",
+    "inLanguage": ["nl","en","fr","de","es","sv"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "featureList": ["Knockout brackets","Americano format","Round robin","Live scoring","No signup required","Offline support"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is PadelBracket gratis?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, PadelBracket is volledig gratis. Er is geen abonnement, geen account en geen betaalmuur. Alle functies zijn direct beschikbaar." }
+      },
+      {
+        "@type": "Question",
+        "name": "Welke toernooiformats worden ondersteund?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt drie formats: knockout bracket (poule → halve finale → finale), Americano (wisselende koppels, punten per speler) en Round Robin (iedereen speelt tegen iedereen)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoeveel spelers kan ik gebruiken?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Voor een teamtoernooi minimaal 4 spelers (2 teams). Voor Americano werkt de app met aantallen deelbaar door 4: 8, 12, 16 of meer spelers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Werkt de app ook zonder internet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Na de eerste keer laden werkt PadelBracket volledig offline. Het toernooi wordt lokaal opgeslagen op je apparaat, ook als je de browser sluit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Moet ik een account aanmaken?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nee. Er is geen registratie of login vereist. Open de app en start direct je toernooi." }
+      },
+      {
+        "@type": "Question",
+        "name": "In welke talen is de app beschikbaar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat." }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  /* App dark chrome */
-  --bg:#111827;
-  --surface:#1f2937;
-  --surface2:#374151;
-  --accent:#10b981;
-  --accent-d:#059669;
-  --gold:#fbbf24;
-  --red:#ef4444;
-  --txt:#f9fafb;
-  --txt2:rgba(249,250,251,.5);
-  --bdr:rgba(255,255,255,.1);
+    :root {
+      --bg:      #0a0f1a;
+      --surface: #111827;
+      --surface2:#1f2937;
+      --accent:  #10b981;
+      --accent2: #059669;
+      --gold:    #fbbf24;
+      --txt:     #f9fafb;
+      --txt2:    rgba(249,250,251,.55);
+      --bdr:     rgba(255,255,255,.08);
+    }
 
-  /* Poule card — dark */
-  --card-bg:#111827;
-  --card-bdr:#374151;
-  --card-txt:#f9fafb;
-  --card-muted:#9ca3af;
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Barlow', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-  /* Button A — left team */
-  --btn-a-bg:#1d4ed8;
-  --btn-a-txt:#ffffff;
-  --btn-a-hover:#1e40af;
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      background: rgba(10,15,26,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
+      color: var(--txt); text-decoration: none;
+    }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-cta {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      padding: 9px 20px; font-family: 'Barlow', sans-serif; font-weight: 600;
+      font-size: .9rem; cursor: pointer; text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .nav-cta:hover { background: var(--accent2); }
+    .nav-cta:active { transform: scale(.96); }
 
-  /* Button B — right team */
-  --btn-b-bg:#7c3aed;
-  --btn-b-txt:#ffffff;
-  --btn-b-hover:#6d28d9;
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(139,92,246,.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: .04;
+      background-image: linear-gradient(var(--bdr) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3);
+      color: var(--accent); border-radius: 99px; padding: 6px 16px;
+      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
+      margin-bottom: 28px;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
+      line-height: .95; letter-spacing: -1px; margin-bottom: 10px;
+    }
+    h1 em { color: var(--accent); font-style: normal; display: block; }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--txt2);
+      max-width: 520px; margin: 20px auto 44px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      border-radius: 12px; padding: 16px 32px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.15rem; letter-spacing: .5px;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      box-shadow: 0 4px 24px rgba(16,185,129,.3);
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(16,185,129,.45); }
+    .btn-primary:active { transform: scale(.97); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--txt2); text-decoration: none;
+      border: 1px solid var(--bdr); border-radius: 12px; padding: 15px 28px;
+      font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 1rem;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.25); color: var(--txt); }
+    .hero-note { margin-top: 20px; font-size: .82rem; color: var(--txt2); }
 
-  /* Undo */
-  --undo-bg:#374151;
-  --undo-txt:#d1d5db;
+    /* ── MOCKUP ── */
+    .mockup-wrap {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 24px 100px;
+      display: flex; justify-content: center;
+    }
+    .mockup {
+      background: var(--surface); border: 1px solid var(--bdr);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
+      width: 100%; max-width: 680px;
+    }
+    .mockup-bar {
+      background: #1f2937; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--bdr);
+    }
+    .mockup-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .mockup-screen {
+      padding: 20px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .mock-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 4px 12px; border-bottom: 1px solid var(--bdr);
+    }
+    .mock-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.1rem; }
+    .mock-logo em { color: var(--accent); font-style:normal; }
+    .mock-tabs { display:flex; gap:4px; }
+    .mock-tab { padding:6px 14px; border-radius:8px; font-size:.78rem; font-weight:600; }
+    .mock-tab.active { background:var(--accent); color:#fff; }
+    .mock-tab:not(.active) { color:var(--txt2); }
+    .mock-rounds { display:flex; flex-direction:column; gap:8px; }
+    .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:4px; }
+    .mock-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .mock-card {
+      background: #1f2937; border-radius:10px; padding:12px;
+      border: 1px solid var(--bdr);
+    }
+    .mock-card-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:4px; }
+    .mock-team { font-size:.72rem; font-weight:600; }
+    .mock-team.r { text-align:right; }
+    .mock-score { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; color:var(--txt); text-align:center; }
+    .mock-btns { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:8px; }
+    .mock-btn { border-radius:6px; padding:6px; font-size:.65rem; font-weight:700; text-align:center; }
+    .mock-btn.a { background:#1d4ed8; color:#fff; }
+    .mock-btn.b { background:#7c3aed; color:#fff; }
+    .mock-card.done .mock-winner { font-size:.68rem; color:var(--accent); margin-top:6px; }
 
-  /* Winner / loser row */
-  --win-bg:#065f46;
-  --win-txt:#a7f3d0;
-  --lose-bg:#1f2937;
-  --lose-txt:#6b7280;
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 48px;
+      padding: 40px 24px; flex-wrap: wrap;
+      border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr);
+      margin: 0 0 80px;
+    }
+    .stat { text-align: center; }
+    .stat-n {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2.6rem; color: var(--accent); line-height: 1;
+    }
+    .stat-lbl { font-size: .82rem; color: var(--txt2); margin-top: 4px; }
 
-  /* Bracket — dark theme */
-  --b-bg:#1f2937;
-  --b-card:#111827;
-  --b-hdr:#374151;
-  --b-line:#6b7280;
-  --b-txt:#f9fafb;
-  --b-muted:#9ca3af;
-  --b-win-bg:#064e3b;
-  --b-win-txt:#6ee7b7;
-  --b-lose-bg:#1c2533;
-  --b-lose-txt:#4b5563;
-  --b-empty-bg:#374151;
-  --b-empty-txt:#6b7280;
-}
+    /* ── FEATURES ── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 12px;
+    }
+    .section-sub { text-align: center; color: var(--txt2); max-width: 480px; margin: 0 auto 56px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 28px; transition: border-color .2s, transform .2s;
+    }
+    .feature:hover { border-color: rgba(16,185,129,.3); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-size: 1.4rem;
+    }
+    .feature h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; letter-spacing: .3px; margin-bottom: 8px;
+    }
+    .feature p { font-size: .92rem; color: var(--txt2); line-height: 1.6; }
 
-/* LICHT THEMA */
-body.light{--bg:#f9fafb;--surface:#ffffff;--surface2:#f3f4f6;--txt:#111827;--txt2:rgba(17,24,39,.5);--bdr:rgba(0,0,0,.1);--card-bg:#ffffff;--card-bdr:#e5e7eb;--card-txt:#111827;--card-muted:#6b7280;--undo-bg:#f3f4f6;--undo-txt:#374151;--win-bg:#d1fae5;--win-txt:#065f46;--lose-bg:#f9fafb;--lose-txt:#9ca3af;--b-bg:#f9fafb;--b-card:#ffffff;--b-hdr:#f3f4f6;--b-line:#d1d5db;--b-txt:#111827;--b-muted:#6b7280;--b-win-bg:#d1fae5;--b-win-txt:#065f46;--b-lose-bg:#f3f4f6;--b-lose-txt:#9ca3af;--b-empty-bg:#f3f4f6;--b-empty-txt:#9ca3af}
-body.light .btn-ghost{background:#f3f4f6;border-color:rgba(0,0,0,.15);color:#111827}
-body.light .btn-ghost:hover{background:#e5e7eb}
-body.light .tab{background:rgba(0,0,0,.05);color:rgba(17,24,39,.5)}
-body.light .tab.active{background:#ffffff;color:#111827}
-body.light .rlbl{border-bottom-color:#e5e7eb}
-body.light .prog-bar{background:#e5e7eb}
-body.light .st-tbl th,.body.light .st-tbl td{border-bottom-color:#e5e7eb}
-body.light .st-tbl tr.divr td{background:#f3f4f6;color:#6b7280}
-body.light .st-wrap{border-top-color:#e5e7eb}
-body.light .bmbtns{background:#f3f4f6;border-top-color:#e5e7eb}
-body.light .bsec-lbl::after{background:#e5e7eb}
-body.light .install-card{background:#ffffff;color:#111827}
-body.light .install-steps{background:rgba(0,0,0,.04)}
-body.light .install-text span{color:rgba(17,24,39,.5)}
-body.light .install-close{color:rgba(17,24,39,.4)}
-body.light textarea{background:#f9fafb;color:#111827}
-body.light textarea::placeholder{color:rgba(17,24,39,.3)}
-body.light #resume-banner{background:rgba(16,185,129,.08)}
-body.light .mcard{box-shadow:0 2px 8px rgba(0,0,0,.08);border-color:#e5e7eb}
-body.light .rlbl{color:#6b7280;border-bottom-color:#e5e7eb}
-body.light .prog-bar{background:#e5e7eb}
-body.light .st-tbl th{border-bottom-color:#e5e7eb}
-body.light .st-tbl td{border-bottom-color:#e5e7eb}
-body.light .st-tbl tr.divr td{background:#f3f4f6}
-body.light .st-wrap{border-top-color:#e5e7eb}
-body.light .champ-wrap{background:#fff;border-top-color:#e5e7eb}
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+    .step { padding: 32px 24px; text-align: center; position: relative; }
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+      color: var(--txt2); font-size: 1.2rem;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--accent);
+      color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
+    .step p { font-size:.85rem; color:var(--txt2); }
 
-/* TEAM EDIT */
-.team-edit-btn{background:none;border:none;cursor:pointer;opacity:.35;font-size:.72rem;padding:0 3px;transition:.15s;vertical-align:middle}
-.team-edit-btn:hover{opacity:1}
-.team-name-input{background:var(--surface2);border:1px solid var(--accent);border-radius:6px;color:var(--txt);font-family:'Barlow',sans-serif;font-size:.84rem;padding:3px 8px;width:calc(100% - 8px);outline:none}
+    /* ── FORMATS ── */
+    .formats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .format {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 32px; overflow: hidden; position: relative;
+    }
+    .format::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .format.team::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+    .format.am::before   { background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .format h3 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; margin-bottom:10px; }
+    .format p  { color:var(--txt2); font-size:.92rem; line-height:1.6; margin-bottom:20px; }
+    .format ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .format ul li { font-size:.88rem; display:flex; align-items:flex-start; gap:8px; }
+    .format ul li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; }
 
-body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;touch-action:pan-x pan-y}
-button,a{touch-action:manipulation}
-.app{max-width:980px;margin:0 auto;padding:16px;background:var(--bg);min-height:100vh}
+    /* ── CTA ── */
+    .cta-wrap {
+      text-align: center; padding: 80px 24px 100px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,.08) 0%, transparent 70%);
+    }
+    .cta-wrap h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 16px;
+    }
+    .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
 
-/* HEADER */
-header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg);gap:8px}
-.logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:2px;text-transform:uppercase;color:var(--txt);display:flex;align-items:center;gap:6px;min-width:0;flex-shrink:1}
-.logo em{color:var(--accent);font-style:normal}
-.logo-version{font-size:.58rem;font-weight:700;letter-spacing:.5px;color:var(--accent);opacity:.85;font-family:'Barlow',sans-serif;text-transform:none;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:5px;padding:1px 5px;flex-shrink:0}
-.logo-tname{display:block;font-size:.62rem;font-weight:500;letter-spacing:.5px;color:var(--txt2);text-transform:none;font-family:'Barlow',sans-serif;margin-top:2px;line-height:1}
-.tname-input{flex:1;background:var(--surface2);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;color:var(--txt);font-family:'Barlow',sans-serif;font-size:.9rem;outline:none;transition:.15s}
-.tname-input:focus{border-color:var(--accent)}
-body.light .tname-input{background:#f3f4f6;color:#111827}
-.court-badge{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);padding:6px 14px 0;opacity:.8}
-.hbtns{display:flex;gap:6px;flex-shrink:0}
-/* Op mobiel: verberg knoptekst, toon alleen icoon */
-.btn-label{display:inline}
-@media(max-width:600px){.btn-label{display:none}}
+    /* ── HERO KICKER ── */
+    .hero-kicker {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
 
-/* BUTTONS */
-.btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;padding:9px 18px;display:inline-flex;align-items:center;gap:6px;transition:.15s}
-.btn-green{background:var(--accent);color:#fff}.btn-green:hover{background:var(--accent-d)}
-.btn-ghost{background:var(--surface);color:var(--txt);border:1px solid var(--bdr)}.btn-ghost:hover{background:var(--surface2)}
-.btn-sm{padding:7px 12px;font-size:.82rem}
+    /* ── FAQ ── */
+    .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--bdr);
+      border-radius: 12px; overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer; padding: 18px 20px;
+      font-weight: 600; font-size: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 1.4rem; color: var(--accent);
+      transition: transform .2s; flex-shrink: 0; margin-left: 12px;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { padding: 0 20px 18px; color: var(--txt2); line-height: 1.65; }
 
-/* SPELREGELS */
-.rules-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.rules-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
-.rules-opts{display:flex;gap:5px}
-.rbtn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.5px;border:1px solid var(--bdr);border-radius:8px;padding:7px 13px;cursor:pointer;background:var(--surface2);color:var(--txt);transition:.15s;line-height:1.2;touch-action:manipulation}
-.rbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.rbtn:hover:not(.active){background:var(--surface);border-color:var(--accent)}
-.rbtn-sub{display:block;font-size:.58rem;font-weight:600;opacity:.7;letter-spacing:0;text-transform:none}
-body.light .rbtn{background:#f3f4f6;color:#111827}
-body.light .rbtn.active{background:var(--accent);color:#fff}
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--bdr); padding: 32px 24px;
+      text-align: center; color: var(--txt2); font-size: .82rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
 
-/* SETUP */
-#screen-setup{display:block}
-#screen-tournament{display:none}
-.setup-box{background:var(--surface);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:600px;margin:0 auto}
-.setup-box h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;margin-bottom:4px}
-.setup-box p{color:var(--txt2);font-size:.86rem;margin-bottom:16px}
-textarea{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Barlow',sans-serif;font-size:.95rem;line-height:1.8;padding:12px 14px;resize:vertical;min-height:180px;outline:none}
-textarea:focus{border-color:var(--accent)}
-textarea::placeholder{color:rgba(255,255,255,.18)}
-.setup-btns{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
-.nc{font-size:.78rem;color:var(--txt2);margin-top:4px}
-.nc b{color:var(--accent)}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;margin-top:14px}
-.pchip{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:7px 10px;font-size:.8rem;color:var(--txt);display:flex;align-items:center;gap:6px}
-.pchip .nn{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--accent);font-size:.9rem;min-width:18px}
-.trio-pill{margin-left:auto;background:var(--gold);color:#000;font-size:.58rem;font-weight:800;padding:1px 5px;border-radius:4px;letter-spacing:.5px}
-
-/* TABS */
-.tabs{display:flex;gap:3px;background:var(--bg)}
-.tab{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border:none;border-radius:10px 10px 0 0;cursor:pointer;background:rgba(255,255,255,.06);color:var(--txt2);transition:.15s}
-.tab.active{background:var(--surface);color:var(--txt);border-bottom:3px solid var(--accent)}
-.tab-body{background:var(--surface);border-radius:0 12px 12px 12px;overflow:hidden}
-
-/* POULE */
-.prog-wrap{padding:12px 18px 8px;background:var(--surface)}
-.prog-bar{height:6px;background:#374151;border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
-.prog-txt{font-size:.72rem;color:var(--b-muted);margin-top:4px}
-
-.poule-body{padding:0 14px 16px;background:var(--surface)}
-.rblock{margin-bottom:20px}
-.rlbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);padding:10px 4px 6px;border-bottom:1px solid #374151;margin-bottom:6px}
-
-/* Match card */
-.mcard{background:var(--card-bg);border:1px solid var(--bdr);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.18)}
-
-/* Teams row inside card */
-.mteams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 14px 10px;gap:8px}
-.mteam{font-weight:600;font-size:.82rem;color:var(--card-txt);line-height:1.3}
-.mteam.r{text-align:right}
-.mteam.won{color:var(--accent);font-weight:700}
-.mteam.lost{color:var(--card-muted);text-decoration:line-through}
-
-.mscore-wrap{text-align:center}
-.mscore{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2rem;color:var(--card-txt);letter-spacing:3px}
-
-/* Winner result row */
-.mresult{display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 14px 12px}
-.mwinner-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.5px;color:var(--accent)}
-.mundo-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.5px;border:none;border-radius:8px;padding:5px 12px;cursor:pointer;background:var(--undo-bg);color:var(--undo-txt);transition:.15s}
-.mundo-btn:hover{background:var(--surface2);color:var(--txt)}
-
-/* Game buttons */
-.mgame-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;color:var(--b-muted);text-align:center;padding:4px 0 6px}
-.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
-.mbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.5px;border:none;border-radius:10px;padding:12px 8px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mbtn-a{background:var(--btn-a-bg);color:var(--btn-a-txt)}.mbtn-a:hover{background:var(--btn-a-hover)}
-.mbtn-b{background:var(--btn-b-bg);color:var(--btn-b-txt)}.mbtn-b:hover{background:var(--btn-b-hover)}
-
-/* Standings */
-.st-wrap{border-top:1px solid var(--bdr);padding:16px 18px;background:var(--surface)}
-.st-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
-.st-tbl{width:100%;border-collapse:collapse;font-size:.84rem}
-.st-tbl th{text-align:left;color:var(--b-muted);font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid var(--bdr)}
-.st-tbl td{padding:8px 8px;border-bottom:1px solid var(--bdr);color:var(--b-txt)}
-.st-tbl tr:last-child td{border-bottom:none}
-.st-tbl tr.qq td{color:var(--b-win-txt);font-weight:600}
-.st-tbl tr.divr td{background:var(--surface2);font-size:.65rem;color:var(--b-muted);padding:3px 8px;letter-spacing:1px;text-transform:uppercase}
-.wc{font-weight:700;color:var(--accent)}
-.lc{color:var(--red)}
-
-/* BRACKET */
-.bracket-body{padding:20px;overflow-x:auto;background:var(--surface)}
-.bsec{margin-bottom:28px}
-.bsec:last-child{margin-bottom:0}
-.bsec-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.bsec-lbl::after{content:'';flex:1;height:1px;background:#374151}
-
-.bracket{display:flex;align-items:center;min-width:500px}
-.br1{display:flex;flex-direction:column;gap:12px;flex-shrink:0}
-.bspacer{width:32px;flex-shrink:0;align-self:stretch;position:relative}
-.bspacer svg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible}
-.br2{display:flex;flex-direction:column;justify-content:center;flex-shrink:0}
-.barrow{width:18px;height:2px;background:var(--b-line);flex-shrink:0;align-self:center}
-.bwcol{flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-left:4px}
-.bwtitle{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;text-align:center}
-.bwname{border:2.5px solid var(--b-line);background:var(--b-card);min-width:110px;min-height:32px;padding:5px 9px;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;color:var(--b-win-txt);text-align:center;display:flex;align-items:center;justify-content:center;border-radius:3px}
-
-/* Bracket match card */
-.bmatch{border:2px solid var(--b-line);background:var(--b-card);min-width:155px;max-width:190px;border-radius:3px;flex-shrink:0}
-.bmlbl{background:var(--b-hdr);border-bottom:1px solid #4b5563;padding:2px 7px;font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted)}
-.bteam{display:flex;align-items:center;padding:5px 8px;min-height:28px;font-size:.76rem;font-weight:600;color:var(--b-txt);border-bottom:1px solid #374151;background:var(--b-card);line-height:1.2}
-.bteam:last-of-type{border-bottom:none}
-.bteam.won{background:var(--b-win-bg);color:var(--b-win-txt)}
-.bteam.lost{background:var(--b-lose-bg);color:var(--b-lose-txt);font-style:italic}
-.bteam.empty{background:var(--b-empty-bg);color:var(--b-empty-txt);font-style:italic}
-.bteam .bsc{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.88rem}
-.bteam.won .bsc{color:var(--b-win-txt)}
-.bmbtns{background:#374151;border-top:1px solid #4b5563;padding:4px 5px;display:flex;gap:3px}
-.bgbtn{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3px;border:none;border-radius:5px;padding:5px 3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.12s}
-.bgbtn-a{background:var(--btn-a-bg);color:#fff}.bgbtn-a:hover{background:var(--btn-a-hover)}
-.bgbtn-b{background:var(--btn-b-bg);color:#fff}.bgbtn-b:hover{background:var(--btn-b-hover)}
-.bgbtn-undo{background:var(--undo-bg);color:var(--undo-txt);border:1px solid #4b5563;flex:0;min-width:28px}.bgbtn-undo:hover{background:#4b5563;color:#fff}
-
-/* Champion */
-.champ-wrap{text-align:center;padding:24px 20px;border-top:2px solid #374151;background:var(--surface)}
-.champ-wrap .trophy{font-size:2rem;display:flex;justify-content:center;color:var(--gold)}
-.champ-wrap h2{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:var(--b-win-txt);text-transform:uppercase;margin-top:6px}
-.champ-wrap p{color:var(--b-muted);font-size:.84rem;margin-top:4px}
-
-/* ANIMATIES */
-@keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tabIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes resultIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes champIn{from{opacity:0;transform:scale(.88) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.screen-enter{animation:screenIn .28s ease both}
-.tab-fade{animation:tabIn .2s ease both}
-.mresult{animation:resultIn .25s ease both}
-.champ-wrap{animation:champIn .5s cubic-bezier(.34,1.56,.64,1) both}
-/* Knop-druk */
-.btn:active{transform:scale(.94)}
-.mbtn:active{transform:scale(.96)}
-.rbtn:active{transform:scale(.95)}
-.bgbtn:active{transform:scale(.93)}
-.am-sc-btn:active{transform:scale(.88)}
-.tab:active:not(.active){transform:scale(.97)}
-.mundo-btn:active{transform:scale(.94)}
-
-/* PRINT */
-/* ONBOARDING */
-#onboarding{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;padding:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
-#onboarding.hidden{display:none}
-.ob-card{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:520px;padding:28px 24px 32px;display:flex;flex-direction:column;gap:0;box-shadow:0 -8px 40px rgba(0,0,0,.4)}
-body.light .ob-card{box-shadow:0 -8px 40px rgba(0,0,0,.15)}
-body.light header{box-shadow:0 1px 0 rgba(0,0,0,.08)}
-body.light .setup-box{box-shadow:0 4px 24px rgba(0,0,0,.07)}
-body.light .mcard{box-shadow:0 2px 12px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04)!important}
-body.light .bsec-lbl::after{background:#d1d5db}
-body.light .rlbl{border-bottom-color:#d1d5db}
-.ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
-.ob-dot{width:7px;height:7px;border-radius:50%;background:var(--surface2);transition:.25s}
-.ob-dot.active{width:22px;border-radius:4px;background:var(--accent)}
-.ob-icon{font-size:1rem;display:flex;justify-content:center;align-items:center;margin-bottom:12px;height:3.5rem;color:var(--accent)}
-.ob-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;text-align:center;margin-bottom:8px;color:var(--txt)}
-.ob-body{font-size:.9rem;color:var(--txt2);text-align:center;line-height:1.6;margin-bottom:24px}
-.ob-body b{color:var(--txt)}
-.ob-btns{display:flex;gap:10px}
-.ob-btns .btn{flex:1}
-.ob-skip{font-size:.78rem;color:var(--txt2);background:none;border:none;cursor:pointer;padding:0;margin-top:10px;text-align:center;width:100%;touch-action:manipulation}
-.ob-skip:hover{color:var(--txt)}
-
-/* AMERICANO */
-#screen-americano{padding-top:4px}
-.am-round{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
-.am-round-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2)}
-.am-round-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
-.am-round-done .am-round-hdr{opacity:.65}
-.am-match{padding:12px 14px;border-top:1px solid var(--bdr)}
-.am-match-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:10px}
-.am-team{font-weight:600;font-size:.83rem;color:var(--card-txt);line-height:1.3}
-.am-team.r{text-align:right}.am-team.won{color:var(--accent);font-weight:700}
-.am-vs{color:var(--b-muted);font-size:.72rem;text-align:center}
-.am-score-done{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;color:var(--card-txt);letter-spacing:2px;text-align:center}
-.am-score-ctrl{display:flex;align-items:center;justify-content:center;gap:12px}
-.am-sc-side{display:flex;align-items:center;gap:10px}
-.am-sc-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1.3rem;font-weight:700;cursor:pointer;transition:.15s;touch-action:manipulation;display:flex;align-items:center;justify-content:center;line-height:1}
-.am-sc-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.am-sc-val{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.6rem;color:var(--card-txt);min-width:32px;text-align:center}
-.am-sc-sep{color:var(--b-muted);font-size:1rem;padding:0 4px}
-.am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
-.am-sc-prog{font-size:.74rem;color:var(--b-muted)}
-.am-sc-prog.ready{color:var(--accent);font-weight:600}
-.am-st-wrap{background:var(--surface);border-radius:14px;padding:16px 18px;margin-top:4px;border:1px solid var(--bdr)}
-.am-st-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
-
-@media print{
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  body,html{background:#fff!important;color:#000!important}
-  .app{padding:0!important;background:#fff!important}
-  header,.tabs,.prog-wrap,.poule-body,.st-wrap,.mbtns,.btn,.hbtns{display:none!important}
-  #screen-setup{display:none!important}
-  #screen-tournament{display:block!important;background:#fff!important}
-  #tb-poule{display:none!important}
-  #tb-bracket{display:block!important}
-  .tab-body{background:#fff!important;border-radius:0!important;box-shadow:none!important}
-  .bracket-body{background:#fff!important;padding:8px!important}
-  .bsec{margin-bottom:20px!important}
-  .bsec-lbl{color:#333!important;font-size:.7rem!important}
-  .bsec-lbl::after{background:#bbb!important}
-  /* Match cards */
-  .bmatch{border:2px solid #333!important;background:#fff!important;border-radius:2px!important}
-  .bmlbl{background:#e5e5e5!important;color:#444!important;border-bottom:1px solid #ccc!important}
-  .bteam{background:#fff!important;color:#111!important;border-bottom:1px solid #ddd!important;font-size:.75rem!important}
-  .bteam.won{background:#d1fae5!important;color:#065f46!important}
-  .bteam.lost{background:#f5f5f5!important;color:#999!important}
-  .bteam.empty{background:#f0f0f0!important;color:#bbb!important}
-  .bteam .bsc{color:#065f46!important}
-  /* Connector lines */
-  .bspacer svg line{stroke:#333!important}
-  /* Game buttons — hide in print */
-  .bmbtns{display:none!important}
-  /* Winner box */
-  .bwname{background:#fff!important;color:#065f46!important;border:2px solid #333!important}
-  .bwtitle{color:#b45309!important}
-  /* Arrow */
-  .barrow{background:#333!important}
-  /* Champion */
-  .champ-wrap{background:#fff!important;border-top:2px solid #ddd!important}
-  .champ-wrap h2{color:#065f46!important}
-  .champ-wrap p{color:#666!important}
-  /* Print header */
-  .phdr{display:block!important;color:#111!important;border-bottom-color:#ccc!important}
-  @page{size:landscape;margin:1.2cm}
-}
-.phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
-
-/* SVG ICONS */
-.icon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;overflow:visible;flex-shrink:0}
-.icon use{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.icon-lg{width:1.35em;height:1.35em}
-.icon-xl{width:2.4em;height:2.4em;stroke-width:1.5}
-.icon-gold{color:#f59e0b}.icon-silver{color:#94a3b8}.icon-bronze{color:#b45309}
-.icon-fill use{fill:currentColor;stroke:none}
-/* INSTALL BANNER */
-#install-banner{
-  position:fixed;bottom:0;left:0;right:0;z-index:1000;
-  padding:0 12px 12px;
-  pointer-events:none;
-  display:flex;justify-content:center;
-}
-#install-banner.hidden{display:none}
-.install-card{
-  pointer-events:all;
-  background:#1f2937;
-  border:1px solid rgba(16,185,129,.35);
-  border-radius:20px 20px 16px 16px;
-  box-shadow:0 -4px 32px rgba(0,0,0,.5),0 0 0 1px rgba(16,185,129,.1);
-  padding:16px 18px 14px;
-  max-width:480px;width:100%;
-  animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes slideUp{from{transform:translateY(120%);opacity:0}to{transform:translateY(0);opacity:1}}
-.install-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.install-icon{width:48px;height:48px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#111827;border:1px solid rgba(255,255,255,.1)}
-.install-icon img{width:100%;height:100%}
-.install-text{flex:1;min-width:0}
-.install-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px;color:#f9fafb}
-.install-text span{font-size:.78rem;color:rgba(249,250,251,.5);margin-top:1px;display:block}
-.install-close{background:none;border:none;color:rgba(249,250,251,.4);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;flex-shrink:0;border-radius:6px;transition:.15s}
-.install-close:hover{color:#f9fafb;background:rgba(255,255,255,.08)}
-.install-steps{font-size:.8rem;color:rgba(249,250,251,.6);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:10px}
-.install-steps b{color:#10b981}
-.install-actions{display:flex;gap:8px}
-.install-btn-primary{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;background:#10b981;color:#fff;border:none;border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s}
-.install-btn-primary:hover{background:#059669}
-.install-btn-skip{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.5px;background:rgba(255,255,255,.06);color:rgba(249,250,251,.5);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s;white-space:nowrap}
-.install-btn-skip:hover{background:rgba(255,255,255,.1);color:#f9fafb}
-@media print{#install-banner{display:none!important}}
-
-/* RESUME BANNER */
-#resume-banner{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-#resume-banner.hidden{display:none}
-.resume-icon{font-size:1.4rem;flex-shrink:0}
-.resume-text{flex:1;min-width:120px}
-.resume-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:var(--txt)}
-.resume-text span{font-size:.76rem;color:var(--txt2)}
-.resume-btns{display:flex;gap:6px;flex-shrink:0}
-
-/* STATS / PODIUM */
-.stats-wrap{padding:20px;background:var(--surface);border-top:2px solid #374151}
-.stats-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted);margin-bottom:16px}
-.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px}
-.podium-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:160px}
-.podium-medal{font-size:1.5rem;display:flex;justify-content:center;align-items:center}
-.podium-place{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
-.podium-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;color:var(--txt);text-align:center;background:var(--surface2);border-radius:8px;padding:7px 10px;width:100%;line-height:1.3}
-.podium-item.first .podium-name{color:var(--gold);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2)}
-.podium-item.first .podium-medal{font-size:2rem}
-.stats-tbl{width:100%;border-collapse:collapse;font-size:.82rem}
-.stats-tbl th{text-align:left;color:var(--b-muted);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid #374151}
-.stats-tbl td{padding:6px 8px;border-bottom:1px solid #374151;color:var(--b-txt)}
-.stats-tbl tr:last-child td{border-bottom:none}
-.stats-tbl .medal-cell{font-size:.9rem;padding-right:4px;width:24px}
-.stats-export{display:flex;justify-content:flex-end;margin-top:14px}
-@media print{
-  .stats-wrap{display:none!important}
-}
-
-/* MOBIEL — grotere tap-targets & layout */
-@media (max-width:600px){
-  .mbtn{padding:14px 10px;font-size:.9rem}
-  .bgbtn{padding:9px 5px;font-size:.7rem}
-  .mundo-btn{padding:6px 14px;font-size:.78rem}
-  .tab{padding:11px 14px;font-size:.84rem}
-  .setup-box{padding:16px}
-  .mteams{padding:12px 12px 8px}
-  .mbtns{padding:0 10px 12px;gap:6px}
-  .app{padding:12px}
-}
-@media (min-width:768px){
-  .rblock{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
-  .rlbl{grid-column:1/-1}
-  .am-round{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
-  .am-round-hdr{grid-column:1/-1}
-  .bmatch{min-width:175px;max-width:220px}
-}
-@media (min-width:1024px){
-  .app{max-width:1200px}
-  #tb-poule{display:grid;grid-template-columns:1fr 300px;column-gap:24px;align-items:start}
-  .prog-wrap{grid-column:1/-1}
-  .st-wrap{position:sticky;top:76px}
-  .bmatch{min-width:200px;max-width:260px}
-  .bracket-body{padding:28px 32px}
-}
-body.banner-open .app{padding-bottom:140px}
-#install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
-</style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .formats { grid-template-columns: 1fr; }
+      .mock-cards { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step:not(:last-child)::after { display:none; }
+      .stats-bar { gap: 28px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- SVG SPRITE -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <!-- Moon -->
-  <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
-  <!-- Sun -->
-  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
-  <!-- Pencil -->
-  <symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
-  <!-- Print -->
-  <symbol id="ic-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
-  <!-- Padel racket -->
-  <symbol id="ic-padel" viewBox="0 0 24 24"><ellipse cx="11" cy="9" rx="7" ry="7" transform="rotate(-45 11 9)"/><line x1="16.24" y1="14.24" x2="21" y2="19"/><circle cx="9" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/></symbol>
-  <!-- Shuffle -->
-  <symbol id="ic-shuffle" viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
-  <!-- Users -->
-  <symbol id="ic-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-  <!-- Clipboard/list -->
-  <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></symbol>
-  <!-- Trophy -->
-  <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M6 5h12v5a6 6 0 0 1-12 0z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></symbol>
-  <!-- Medal (ribbon medal) -->
-  <symbol id="ic-medal" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><polyline points="8.56 2.75 4.5 4.5 7.5 9"/><polyline points="15.44 2.75 19.5 4.5 16.5 9"/><path d="M9 9h6l-3-7z" fill="none"/></symbol>
-  <!-- Check (plain tick) -->
-  <symbol id="ic-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
-  <!-- Gold medal (solid star) -->
-  <symbol id="ic-gold" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="none" fill="currentColor"/></symbol>
-  <!-- Silver medal (solid diamond) -->
-  <symbol id="ic-silver" viewBox="0 0 24 24"><polygon points="12 2 22 12 12 22 2 12" stroke="none" fill="currentColor"/></symbol>
-  <!-- Bronze medal (solid circle) -->
-  <symbol id="ic-bronze" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="currentColor"/></symbol>
-  <!-- Rotate/refresh (Americano) -->
-  <symbol id="ic-rotate" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
-  <!-- Undo -->
-  <symbol id="ic-undo" viewBox="0 0 24 24"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></symbol>
-  <!-- Install/download -->
-  <symbol id="ic-install" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
-</svg>
+<nav>
+  <a class="nav-logo" href="#">Padel <em>•</em> Bracket</a>
+  <a class="nav-cta" href="/app/">Open app →</a>
+</nav>
 
-<!-- ONBOARDING -->
-<div id="onboarding" class="hidden">
-  <div class="ob-card">
-    <div class="ob-dots" id="ob-dots"></div>
-    <div class="ob-icon" id="ob-icon"></div>
-    <div class="ob-title" id="ob-title"></div>
-    <div class="ob-body" id="ob-body"></div>
-    <div class="ob-btns" id="ob-btns"></div>
-    <button class="ob-skip" id="ob-skip" onclick="dismissOnboarding()" data-i18n="ob_skip">Overslaan</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Gratis · Geen account nodig · Offline werkt ook
   </div>
-</div>
 
-<div class="app">
+  <h1>Gratis Padel <em>Toernooi Generator</em></h1>
+  <p class="hero-kicker">Brackets · Americano · Round Robin</p>
+  <p class="hero-sub">Organiseer in 30 seconden een padel toernooi. Poules, bracket en live tussenstand — alles op je telefoon.</p>
 
-<header>
-  <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
-  <div class="hbtns">
-    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" data-i18n-aria="hdr_theme" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
-    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label" data-i18n="hdr_edit">Aanpassen</span></button>
-    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label" data-i18n="hdr_print">Afdrukken</span></button>
+  <div class="hero-btns">
+    <a class="btn-primary" href="/app/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Start toernooi
+    </a>
+    <button class="btn-secondary btn-install" id="installBtn" style="display:none" onclick="installApp()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13M7 11l5 5 5-5"/><path d="M3 19h18"/></svg>
+      Installeer app
+    </button>
+    <a class="btn-secondary" href="#hoe-werkt-het" id="howBtn">
+      Hoe werkt het?
+    </a>
   </div>
-</header>
+  <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app</p>
+</section>
 
-<!-- RESUME BANNER -->
-<div id="resume-banner" class="hidden">
-  <div class="resume-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg></div>
-  <div class="resume-text">
-    <strong data-i18n="res_title">Toernooi hervat</strong>
-    <span id="resume-info"></span>
-  </div>
-  <div class="resume-btns">
-    <button class="btn btn-green btn-sm" onclick="resumeFromBanner()" data-i18n="res_continue">▶ Doorgaan</button>
-    <button class="btn btn-ghost btn-sm" onclick="discardSaved()" data-i18n="res_discard">✕</button>
-  </div>
-</div>
-
-<!-- SETUP -->
-<div id="screen-setup">
-  <div class="setup-box">
-    <h2 id="setup-box-title" data-i18n="set_title_team">Teams instellen</h2>
-
-    <!-- Toernooinaam -->
-    <div class="rules-row">
-      <span class="rules-lbl" data-i18n="set_lbl_name">Naam</span>
-      <input id="inp-tname" class="tname-input" type="text" data-i18n-ph="set_ph_name" placeholder="Toernooinaam (optioneel)" maxlength="48" oninput="tournamentName=this.value.trim()">
+<!-- MOCKUP -->
+<div class="mockup-wrap">
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="mockup-dot" style="background:#ef4444"></div>
+      <div class="mockup-dot" style="background:#fbbf24"></div>
+      <div class="mockup-dot" style="background:#10b981"></div>
     </div>
-
-    <!-- Banen -->
-    <div class="rules-row" id="rules-courts-row">
-      <span class="rules-lbl" data-i18n="set_lbl_courts">Banen</span>
-      <div class="rules-opts" id="rules-courts">
-        <button class="rbtn" onclick="setCourts(1)">1</button>
-        <button class="rbtn active" onclick="setCourts(2)">2<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setCourts(3)">3</button>
-        <button class="rbtn" onclick="setCourts(4)">4</button>
-      </div>
-    </div>
-
-    <!-- Toernooi type -->
-    <div class="rules-row">
-      <span class="rules-lbl" data-i18n="set_lbl_type">Type</span>
-      <div class="rules-opts" id="rules-type">
-        <button class="rbtn active" onclick="setTType('team')" id="rbtn-type-team">Team<span class="rbtn-sub" data-i18n="set_type_sub_team">vast koppel</span></button>
-        <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
-      </div>
-    </div>
-
-    <!-- Match formaat (team only) -->
-    <div class="rules-row" id="rules-gpm-row">
-      <span class="rules-lbl" data-i18n="set_lbl_format">Match formaat</span>
-      <div class="rules-opts" id="rules-gpm">
-        <button class="rbtn" onclick="setGpm(1)">1 game</button>
-        <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setGpm(5)">Best of 5</button>
-      </div>
-    </div>
-
-    <!-- Punten per match (americano only) -->
-    <div class="rules-row" id="rules-pts-row" style="display:none">
-      <span class="rules-lbl" data-i18n="set_lbl_pts">Punten/match</span>
-      <div class="rules-opts" id="rules-pts">
-        <button class="rbtn" onclick="setMatchPts(24)">24</button>
-        <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setMatchPts(40)">40</button>
-      </div>
-    </div>
-
-    <!-- Mode toggle (team only) -->
-    <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
-      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> <span data-i18n="set_btn_auto">Spelersnamen invoeren</span></button>
-      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="set_btn_manual">Teams zelf invoeren</span></button>
-    </div>
-
-    <!-- AUTO MODE: player names -->
-    <div id="mode-auto">
-      <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
-      <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
-      <div class="nc" id="nc"></div>
-      <div class="setup-btns">
-        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
-        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg> <span data-i18n="set_btn_shuffle">Schudden</span></button>
-      </div>
-      <div class="pgrid" id="prev"></div>
-    </div>
-
-    <!-- MANUAL MODE: team names directly -->
-    <div id="mode-manual" style="display:none">
-      <p style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n-html="set_desc_manual">Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.</p>
-      <textarea id="ta-manual" data-i18n-ph="set_ph_manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
-      <div class="nc" id="nc-manual"></div>
-      <div class="setup-btns">
-        <button class="btn btn-green" onclick="doStartManual()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- TOURNAMENT -->
-<div id="screen-tournament">
-  <div class="phdr" id="phdr-el">Padel Toernooi — Bracket</div>
-  <div class="tabs">
-    <button class="tab active" id="tab-poule" onclick="showTab('poule')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="tab_poule">Pouleronde</span></button>
-    <button class="tab" id="tab-bracket" onclick="showTab('bracket')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="tab_bracket">Bracket</span></button>
-  </div>
-  <div class="tab-body">
-    <div id="tb-poule">
-      <div class="prog-wrap">
-        <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-        <div class="prog-txt" id="progtxt"></div>
-      </div>
-      <div class="poule-body" id="pm"></div>
-      <div class="st-wrap">
-        <h3 data-i18n="tab_standings">Tussenstand</h3>
-        <table class="st-tbl" id="sttbl"></table>
-      </div>
-    </div>
-    <div id="tb-bracket" style="display:none">
-      <div class="bracket-body">
-        <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="sec_poule">Pouleronde</span></div>
-          <div id="bracket-poule-rounds"></div>
+    <div class="mockup-screen">
+      <div class="mock-header">
+        <div class="mock-logo">Padel <em>•</em> Bracket</div>
+        <div class="mock-tabs">
+          <div class="mock-tab active">Pouleronde</div>
+          <div class="mock-tab">Bracket</div>
         </div>
-        <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="sec_winners">Winnaarsbracket — Top 4</span></div>
-          <div class="bracket" id="bw"></div>
+      </div>
+      <div class="mock-rounds">
+        <div>
+          <div class="mock-round-lbl">Ronde 1 ✓</div>
+          <div class="mock-cards">
+            <div class="mock-card done">
+              <div class="mock-card-teams">
+                <div class="mock-team">Tom & Lisa</div>
+                <div class="mock-score">2–1</div>
+                <div class="mock-team r">Sara & Mark</div>
+              </div>
+              <div class="mock-winner">✓ Tom & Lisa wint</div>
+            </div>
+            <div class="mock-card done">
+              <div class="mock-card-teams">
+                <div class="mock-team">Jan & Kim</div>
+                <div class="mock-score">3–0</div>
+                <div class="mock-team r">Roos & Bas</div>
+              </div>
+              <div class="mock-winner">✓ Jan & Kim wint</div>
+            </div>
+          </div>
         </div>
-        <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> <span data-i18n="sec_losers">Verliezersfinale — Plaatsen 5–9</span></div>
-          <div class="bracket" id="bl"></div>
+        <div>
+          <div class="mock-round-lbl">Ronde 2</div>
+          <div class="mock-cards">
+            <div class="mock-card">
+              <div class="mock-card-teams">
+                <div class="mock-team">Tom & Lisa</div>
+                <div class="mock-score">1–1</div>
+                <div class="mock-team r">Jan & Kim</div>
+              </div>
+              <div class="mock-btns">
+                <div class="mock-btn a">Tom & Lisa</div>
+                <div class="mock-btn b">Jan & Kim</div>
+              </div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-teams">
+                <div class="mock-team">Sara & Mark</div>
+                <div class="mock-score">0–0</div>
+                <div class="mock-team r">Roos & Bas</div>
+              </div>
+              <div class="mock-btns">
+                <div class="mock-btn a">Sara & Mark</div>
+                <div class="mock-btn b">Roos & Bas</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="champ"></div>
-        <div id="stats"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- AMERICANO TOURNAMENT -->
-<div id="screen-americano" style="display:none">
-  <div id="am-rounds-wrap"></div>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Toernooi opzetten</div></div>
+  <div class="stat"><div class="stat-n">16</div><div class="stat-lbl">Max. spelers</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Talen ondersteund</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
 </div>
 
-</div><!-- /app -->
-
-<!-- INSTALL BANNER -->
-<div id="install-banner" class="hidden">
-  <div class="install-card">
-    <div class="install-top">
-      <div class="install-icon"><img src="icon.svg" alt=""></div>
-      <div class="install-text">
-        <strong>Padel Toernooi</strong>
-        <span id="install-subtitle" data-i18n="inst_subtitle_default">Zet op je beginscherm</span>
-      </div>
-      <button class="install-close" onclick="dismissInstall()" data-i18n-aria="inst_close" aria-label="Sluiten">✕</button>
+<!-- FEATURES -->
+<section class="section">
+  <h2 class="section-title">Alles wat je nodig hebt</h2>
+  <p class="section-sub">Van namen invoeren tot kampioen — de app regelt de rest automatisch.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">🏆</div>
+      <h3>Automatische poules & bracket</h3>
+      <p>Voer namen in, kies het aantal banen — de app maakt automatisch een eerlijk schema met halve finales en finale.</p>
     </div>
-    <div class="install-steps" id="install-steps"></div>
-    <div class="install-actions">
-      <button class="install-btn-primary" id="install-btn-main" onclick="triggerInstall()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-install"></use></svg> Installeren</button>
-      <button class="install-btn-skip" onclick="dismissInstall()" data-i18n="inst_skip">Niet nu</button>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">🔄</div>
+      <h3>Americano-modus</h3>
+      <p>Partners wisselen elke ronde. Ideaal voor losse sessies waarbij iedereen met iedereen speelt. Live puntentelling.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📊</div>
+      <h3>Live tussenstand</h3>
+      <p>De stand wordt automatisch bijgehouden tijdens het toernooi. Na afloop een overzicht met winnaar, podium en stats.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">📱</div>
+      <h3>Installeerbaar als app</h3>
+      <p>Voeg de app toe aan je beginscherm — werkt daarna ook zonder internet. Geen App Store, geen account.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(239,68,68,.1)">🌍</div>
+      <h3>6 talen</h3>
+      <p>Automatisch in jouw taal: Nederlands, Engels, Frans, Duits, Spaans en Zweeds. Op basis van je toestelinstelling.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">⚡</div>
+      <h3>Direct klaar</h3>
+      <p>Geen registratie, geen betaling, geen reclame. Open de app en start — ook als iemand anders het toernooi organiseert.</p>
     </div>
   </div>
-</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="hoe-werkt-het">
+  <h2 class="section-title">Klaar in 4 stappen</h2>
+  <p class="section-sub">In minder dan een minuut heb je een volledig toernooi klaarstaan.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Namen invoeren</h4>
+      <p>Typ één naam per regel. De app maakt automatisch duo's of trio's.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Type kiezen</h4>
+      <p>Team toernooi (vaste koppels) of Americano (wisselende partners).</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Scores invoeren</h4>
+      <p>Tik de winnaar aan na elke game. Stand wordt live bijgewerkt.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Kampioen 🏆</div>
+      <p>Na de finale wordt de winnaar getoond met confetti en eindstand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section class="section">
+  <h2 class="section-title">Twee toernooiformats</h2>
+  <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
+  <div class="formats">
+    <div class="format team">
+      <h3>Team toernooi</h3>
+      <p>Vaste duo's of trio's spelen poules, waarna de top 4 doorgaat naar de finale-bracket en de rest naar de troostfinale.</p>
+      <ul>
+        <li>Vaste koppels de hele dag</li>
+        <li>Pouleronde + winnaarsbracket</li>
+        <li>Troostfinale voor plaatsen 5–9</li>
+        <li>4 tot 9 teams (8–18 spelers)</li>
+      </ul>
+    </div>
+    <div class="format am">
+      <h3>Americano</h3>
+      <p>Elke ronde nieuwe partners. Iedereen speelt met en tegen iedereen — ideaal voor een gezellige sessie.</p>
+      <ul>
+        <li>Partners wisselen elke ronde</li>
+        <li>Puntentelling per speler</li>
+        <li>Live ranglijst</li>
+        <li>8, 12 of 16 spelers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title">Veelgestelde vragen</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Is PadelBracket gratis?</summary>
+      <p>Ja, PadelBracket is volledig gratis. Er is geen abonnement, geen account en geen betaalmuur. Alle functies zijn direct beschikbaar.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Welke toernooiformats worden ondersteund?</summary>
+      <p>PadelBracket ondersteunt drie formats: <strong>knockout bracket</strong> (poule → halve finale → finale), <strong>Americano</strong> (wisselende koppels, punten per speler) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+    </details>
+    <details class="faq-item">
+      <summary>Hoeveel spelers kan ik gebruiken?</summary>
+      <p>Voor een teamtoernooi minimaal 4 spelers (2 teams). Voor Americano werkt de app met aantallen deelbaar door 4: 8, 12, 16 of meer spelers.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Werkt de app ook zonder internet?</summary>
+      <p>Ja. Na de eerste keer laden werkt PadelBracket volledig offline. Het toernooi wordt lokaal opgeslagen op je apparaat, ook als je de browser sluit.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Moet ik een account aanmaken?</summary>
+      <p>Nee. Er is geen registratie of login vereist. Open de app en start direct je toernooi.</p>
+    </details>
+    <details class="faq-item">
+      <summary>In welke talen is de app beschikbaar?</summary>
+      <p>PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-wrap">
+  <h2>Klaar om te spelen?</h2>
+  <p>Open de app, voer de namen in en start je toernooi. Gratis en altijd beschikbaar.</p>
+  <a class="btn-primary" href="/app/" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Start nu gratis
+  </a>
+</section>
+
+<footer>
+  <p>Padel Bracket — Gratis toernooi-app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/dannydevis/padel-toernooi" target="_blank">GitHub</a></p>
+</footer>
 
 <script>
-const APP_VERSION = 'v1.14';
-const $ = id => document.getElementById(id);
-
-// ── i18n ──────────────────────────────────────
-const SUPPORTED_LANGS=['nl','en','fr','de','es','sv'];
-function detectLang(){
-  const s=localStorage.getItem('padel-lang');
-  if(s&&SUPPORTED_LANGS.includes(s)) return s;
-  const nav=(navigator.language||'nl').slice(0,2).toLowerCase();
-  return SUPPORTED_LANGS.includes(nav)?nav:'nl';
-}
-let LANG=detectLang();
-localStorage.setItem('padel-lang',LANG);
-document.documentElement.lang=LANG;
-
-const I18N={
-nl:{
-  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',
-  ob_skip:'Overslaan',ob_back:'← Terug',ob_next:'Volgende →',ob_start:'Starten',
-  ob1_title:'Padel Toernooi',
-  ob1_body:'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.',
-  ob2_title:'Team toernooi',
-  ob2_body:'<b>Vaste duo\'s of trio\'s</b> spelen een poule. Daarna beslist een bracket wie er wint — met winnaar- én verliezersfinale.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.',
-  ob4_title:'Klaar om te spelen',
-  ob4_body:'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.',
-  set_title_team:'Teams instellen',set_title_am:'Americano instellen',
-  set_lbl_name:'Naam',set_ph_name:'Toernooinaam (optioneel)',
-  set_lbl_courts:'Banen',set_lbl_type:'Type',
-  set_type_team:'Team',set_type_sub_team:'vast koppel',
-  set_type_am:'Americano',set_type_sub_am:'wissel koppel',
-  set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',
-  set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
-  set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
-  set_desc_auto_am:'Één naam per regel. Deelbaar door 4 (bijv. 8, 12 of 16 spelers). Partners wisselen elke ronde.',
-  set_ph_auto:'Voer namen in...',set_ph_manual:'Voer teamnamen in...',
-  set_desc_manual:'Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.',
-  set_btn_start:'Starten',set_btn_shuffle:'Schudden',set_default:'standaard',
-  val_min_teams:'{n} team — minimaal 2 nodig',val_ok_teams:'✓ {n} teams klaar',
-  val_need2:'Voer minimaal 2 teams in.',
-  val_min_names:'{n} namen — minimaal 4 nodig',
-  val_ok_names_simple:"✓ {n} spelers → {nTeams} teams ({nDuo} duo's)",
-  val_ok_names_trio:"✓ {n} spelers → {nTeams} teams ({nDuo} duo's, {nTrio} trio's)",
-  val_min4:'Voer minimaal 4 namen in.',
-  val_am_div4:'Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt {n} spelers — voeg nog {add} toe of verwijder {rem}.',
-  tab_poule:'Pouleronde',tab_bracket:'Bracket',tab_standings:'Tussenstand',
-  sec_poule:'Pouleronde',sec_winners:'Winnaarsbracket — Top 4',sec_losers:'Verliezersfinale — Plaatsen 5–9',
-  rnd_label:'Ronde {r}',rnd_progress:'{done} van {tot} wedstrijden gespeeld',
-  rnd_game:'Game {gn} van {total} — wie wint?',rnd_undo:'Herstel',rnd_court:'Baan {n}',
-  st_col_team:'Team',st_col_played:'G',st_col_wins:'W',st_col_losses:'V',st_col_games:'GW–GV',
-  st_losers_div:'— verliezersfinale —',
-  brk_semifinal:'Halve Finale',brk_final:'Finale',brk_consolation:'Troostfinale',
-  brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
-  am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
-  am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
-  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',
-  res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
-  res_am:'{label}Americano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
-  res_bracket_done:' · Bracket klaar',
-  fin_winner:'Toernooi winnaar!',fin_winner_trio:'Toernooi winnaar (Trio)!',
-  fin_title:'Eindstand',fin_1st:'Winnaar',fin_2nd:'2e plaats',fin_3rd:'3e plaats',
-  fin_copy:'Kopieer uitslag',fin_copied:'Gekopieerd!',
-  fin_copy_err:'Kopiëren niet beschikbaar in deze browser.',
-  fin_export_hdr:'{name} — Eindstand ({date})',fin_export_full:'Volledige stand:',
-  fin_export_gold:'🥇 Winnaar: {name}',fin_export_silver:'🥈 Runner-up: {name}',
-  fin_export_bronze:'🥉 3e plaats: {name}',
-  fin_export_row:'{pos}. {name} — {w}W {l}V ({gw}–{gl} games)',
-  inst_subtitle_default:'Zet op je beginscherm',inst_close:'Sluiten',
-  inst_install:'Installeren',inst_skip:'Niet nu',
-  inst_ios_title:'Zet op je beginscherm via Safari',
-  inst_ios_steps:'1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>2. Scrol en tik op <b>Zet op beginscherm</b><br>3. Tik op <b>Voeg toe</b> — klaar!',
-  inst_ios_ok:'Begrepen',inst_and_title:'Installeer de app op je beginscherm',
-  inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
-},
-en:{
-  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',
-  ob_skip:'Skip',ob_back:'← Back',ob_next:'Next →',ob_start:'Start',
-  ob1_title:'Padel Tournament',
-  ob1_body:'Organise your own tournament in a few taps — from entering names to the final standings. All in one app, even offline.',
-  ob2_title:'Team tournament',
-  ob2_body:'<b>Fixed pairs or trios</b> play a round-robin. Then a bracket decides the winner — with a winners and losers final.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Rotating pairs</b> every round. Everyone plays with everyone. The most points across all rounds wins.',
-  ob4_title:'Ready to play',
-  ob4_body:'Choose your type, enter names and tap <b>Start</b>. During the tournament you\'ll see live scores and standings.',
-  set_title_team:'Set up teams',set_title_am:'Set up Americano',
-  set_lbl_name:'Name',set_ph_name:'Tournament name (optional)',
-  set_lbl_courts:'Courts',set_lbl_type:'Type',
-  set_type_team:'Team',set_type_sub_team:'fixed pair',
-  set_type_am:'Americano',set_type_sub_am:'rotating pair',
-  set_lbl_format:'Match format',set_lbl_pts:'Points/match',
-  set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
-  set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
-  set_desc_auto_am:'One name per line. Must be divisible by 4 (e.g. 8, 12 or 16 players). Partners rotate each round.',
-  set_ph_auto:'Enter names...',set_ph_manual:'Enter team names...',
-  set_desc_manual:'One team name per line. Use <b style="color:var(--accent)">/</b> for a trio, <b style="color:var(--accent)">&</b> for a pair — or just type a name.',
-  set_btn_start:'Start',set_btn_shuffle:'Shuffle',set_default:'default',
-  val_min_teams:'{n} team — minimum 2 needed',val_ok_teams:'✓ {n} teams ready',
-  val_need2:'Enter at least 2 teams.',
-  val_min_names:'{n} names — minimum 4 needed',
-  val_ok_names_simple:'✓ {n} players → {nTeams} teams ({nDuo} pairs)',
-  val_ok_names_trio:'✓ {n} players → {nTeams} teams ({nDuo} pairs, {nTrio} trios)',
-  val_min4:'Enter at least 4 names.',
-  val_am_div4:'Americano requires a number of players divisible by 4.\n\nYou have {n} players — add {add} more or remove {rem}.',
-  tab_poule:'Pool round',tab_bracket:'Bracket',tab_standings:'Standings',
-  sec_poule:'Pool round',sec_winners:'Winners bracket — Top 4',sec_losers:'Consolation bracket — Places 5–9',
-  rnd_label:'Round {r}',rnd_progress:'{done} of {tot} matches played',
-  rnd_game:'Game {gn} of {total} — who wins?',rnd_undo:'Undo',rnd_court:'Court {n}',
-  st_col_team:'Team',st_col_played:'P',st_col_wins:'W',st_col_losses:'L',st_col_games:'GW–GL',
-  st_losers_div:'— consolation —',
-  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Consolation final',
-  brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
-  am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
-  am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
-  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',
-  res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
-  res_am:'{label}Americano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
-  res_bracket_done:' · Bracket done',
-  fin_winner:'Tournament winner!',fin_winner_trio:'Tournament winner (Trio)!',
-  fin_title:'Final standings',fin_1st:'Winner',fin_2nd:'2nd place',fin_3rd:'3rd place',
-  fin_copy:'Copy results',fin_copied:'Copied!',
-  fin_copy_err:'Copying not available in this browser.',
-  fin_export_hdr:'{name} — Final standings ({date})',fin_export_full:'Full standings:',
-  fin_export_gold:'🥇 Winner: {name}',fin_export_silver:'🥈 Runner-up: {name}',
-  fin_export_bronze:'🥉 3rd place: {name}',
-  fin_export_row:'{pos}. {name} — {w}W {l}L ({gw}–{gl} games)',
-  inst_subtitle_default:'Add to home screen',inst_close:'Close',
-  inst_install:'Install',inst_skip:'Not now',
-  inst_ios_title:'Add to home screen via Safari',
-  inst_ios_steps:'1. Tap the <b>Share</b> icon <b>⎦↑⎡</b> at the bottom of Safari<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
-  inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
-  inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',
-},
-fr:{
-  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',
-  ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
-  ob1_title:'Tournoi de Padel',
-  ob1_body:"Organisez votre propre tournoi en quelques clics — de la saisie des noms au classement final. Tout dans une appli, même hors ligne.",
-  ob2_title:'Tournoi par équipes',
-  ob2_body:'<b>Paires ou trios fixes</b> jouent une poule. Ensuite un bracket désigne le vainqueur — avec une finale gagnants et perdants.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Paires tournantes</b> à chaque manche. Tout le monde joue avec tout le monde. Le plus de points sur toutes les manches gagne.',
-  ob4_title:'Prêt à jouer',
-  ob4_body:'Choisissez votre type, entrez les noms et appuyez sur <b>Démarrer</b>. Pendant le tournoi vous verrez les scores en direct.',
-  set_title_team:'Configurer les équipes',set_title_am:'Configurer Americano',
-  set_lbl_name:'Nom',set_ph_name:'Nom du tournoi (optionnel)',
-  set_lbl_courts:'Courts',set_lbl_type:'Type',
-  set_type_team:'Équipe',set_type_sub_team:'paire fixe',
-  set_type_am:'Americano',set_type_sub_am:'paire tournante',
-  set_lbl_format:'Format de match',set_lbl_pts:'Points/match',
-  set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
-  set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
-  set_desc_auto_am:'Un nom par ligne. Doit être divisible par 4 (p.ex. 8, 12 ou 16 joueurs). Les partenaires changent chaque manche.',
-  set_ph_auto:'Entrez les noms...',set_ph_manual:"Entrez les noms d'équipes...",
-  set_desc_manual:'Un nom d\'équipe par ligne. Utilisez <b style="color:var(--accent)">/</b> pour un trio, <b style="color:var(--accent)">&</b> pour une paire — ou tapez simplement un nom.',
-  set_btn_start:'Démarrer',set_btn_shuffle:'Mélanger',set_default:'défaut',
-  val_min_teams:'{n} équipe — minimum 2 nécessaire',val_ok_teams:'✓ {n} équipes prêtes',
-  val_need2:'Saisissez au moins 2 équipes.',
-  val_min_names:'{n} noms — minimum 4 nécessaire',
-  val_ok_names_simple:'✓ {n} joueurs → {nTeams} équipes ({nDuo} paires)',
-  val_ok_names_trio:'✓ {n} joueurs → {nTeams} équipes ({nDuo} paires, {nTrio} trios)',
-  val_min4:'Saisissez au moins 4 noms.',
-  val_am_div4:'Americano nécessite un nombre de joueurs divisible par 4.\n\nVous avez {n} joueurs — ajoutez {add} de plus ou supprimez {rem}.',
-  tab_poule:'Poule',tab_bracket:'Bracket',tab_standings:'Classement',
-  sec_poule:'Poule',sec_winners:'Tableau des gagnants — Top 4',sec_losers:'Finale de consolation — Places 5–9',
-  rnd_label:'Manche {r}',rnd_progress:'{done} sur {tot} matchs joués',
-  rnd_game:'Jeu {gn} sur {total} — qui gagne ?',rnd_undo:'Annuler',rnd_court:'Court {n}',
-  st_col_team:'Équipe',st_col_played:'J',st_col_wins:'V',st_col_losses:'D',st_col_games:'JG–JP',
-  st_losers_div:'— consolation —',
-  brk_semifinal:'Demi-finale',brk_final:'Finale',brk_consolation:'Finale de consolation',
-  brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
-  am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
-  am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
-  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',
-  res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
-  res_am:'{label}Americano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
-  res_bracket_done:' · Bracket terminé',
-  fin_winner:'Vainqueur du tournoi !',fin_winner_trio:'Vainqueur du tournoi (Trio) !',
-  fin_title:'Classement final',fin_1st:'Vainqueur',fin_2nd:'2e place',fin_3rd:'3e place',
-  fin_copy:'Copier les résultats',fin_copied:'Copié !',
-  fin_copy_err:'Copie non disponible dans ce navigateur.',
-  fin_export_hdr:'{name} — Classement final ({date})',fin_export_full:'Classement complet :',
-  fin_export_gold:'🥇 Vainqueur : {name}',fin_export_silver:'🥈 Finaliste : {name}',
-  fin_export_bronze:'🥉 3e place : {name}',
-  fin_export_row:'{pos}. {name} — {w}V {l}D ({gw}–{gl} jeux)',
-  inst_subtitle_default:"Ajouter à l'écran d'accueil",inst_close:'Fermer',
-  inst_install:'Installer',inst_skip:'Pas maintenant',
-  inst_ios_title:"Ajouter à l'écran d'accueil via Safari",
-  inst_ios_steps:"1. Appuyez sur l'icône <b>Partager</b> <b>⎦↑⎡</b> en bas de Safari<br>2. Faites défiler et appuyez sur <b>Sur l'écran d'accueil</b><br>3. Appuyez sur <b>Ajouter</b> — terminé !",
-  inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
-  inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
-},
-de:{
-  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',
-  ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
-  ob1_title:'Padel Turnier',
-  ob1_body:'Organisiere dein eigenes Turnier in wenigen Taps — von der Namenseingabe bis zur Endabrechnung. Alles in einer App, auch offline.',
-  ob2_title:'Teamturnier',
-  ob2_body:'<b>Feste Paare oder Trios</b> spielen eine Gruppenphase. Dann entscheidet ein Bracket über den Sieger — mit Gewinner- und Verliererfinal.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Wechselnde Paare</b> jede Runde. Jeder spielt mit jedem. Die meisten Punkte über alle Runden gewinnt.',
-  ob4_title:'Bereit zum Spielen',
-  ob4_body:'Wähle deinen Typ, gib Namen ein und tippe auf <b>Starten</b>. Während des Turniers siehst du Live-Scores und die Tabelle.',
-  set_title_team:'Teams einrichten',set_title_am:'Americano einrichten',
-  set_lbl_name:'Name',set_ph_name:'Turniername (optional)',
-  set_lbl_courts:'Plätze',set_lbl_type:'Typ',
-  set_type_team:'Team',set_type_sub_team:'festes Paar',
-  set_type_am:'Americano',set_type_sub_am:'wechselndes Paar',
-  set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',
-  set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
-  set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
-  set_desc_auto_am:'Ein Name pro Zeile. Muss durch 4 teilbar sein (z.B. 8, 12 oder 16 Spieler). Partner wechseln jede Runde.',
-  set_ph_auto:'Namen eingeben...',set_ph_manual:'Teamnamen eingeben...',
-  set_desc_manual:'Ein Teamname pro Zeile. Verwende <b style="color:var(--accent)">/</b> für ein Trio, <b style="color:var(--accent)">&</b> für ein Paar — oder gib einfach einen Namen ein.',
-  set_btn_start:'Starten',set_btn_shuffle:'Mischen',set_default:'Standard',
-  val_min_teams:'{n} Team — mindestens 2 erforderlich',val_ok_teams:'✓ {n} Teams bereit',
-  val_need2:'Mindestens 2 Teams eingeben.',
-  val_min_names:'{n} Namen — mindestens 4 erforderlich',
-  val_ok_names_simple:'✓ {n} Spieler → {nTeams} Teams ({nDuo} Paare)',
-  val_ok_names_trio:'✓ {n} Spieler → {nTeams} Teams ({nDuo} Paare, {nTrio} Trios)',
-  val_min4:'Mindestens 4 Namen eingeben.',
-  val_am_div4:'Americano benötigt eine durch 4 teilbare Spielerzahl.\n\nDu hast {n} Spieler — füge {add} hinzu oder entferne {rem}.',
-  tab_poule:'Gruppenphase',tab_bracket:'Bracket',tab_standings:'Tabelle',
-  sec_poule:'Gruppenphase',sec_winners:'Gewinnerbracket — Top 4',sec_losers:'Verliererfinale — Plätze 5–9',
-  rnd_label:'Runde {r}',rnd_progress:'{done} von {tot} Spielen gespielt',
-  rnd_game:'Spiel {gn} von {total} — wer gewinnt?',rnd_undo:'Rückgängig',rnd_court:'Platz {n}',
-  st_col_team:'Team',st_col_played:'S',st_col_wins:'G',st_col_losses:'N',st_col_games:'GG–GN',
-  st_losers_div:'— Verliererfinale —',
-  brk_semifinal:'Halbfinale',brk_final:'Finale',brk_consolation:'Trostfinale',
-  brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
-  am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
-  am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
-  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',
-  res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
-  res_am:'{label}Americano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
-  res_bracket_done:' · Bracket fertig',
-  fin_winner:'Turniersieger!',fin_winner_trio:'Turniersieger (Trio)!',
-  fin_title:'Endabrechnung',fin_1st:'Sieger',fin_2nd:'2. Platz',fin_3rd:'3. Platz',
-  fin_copy:'Ergebnis kopieren',fin_copied:'Kopiert!',
-  fin_copy_err:'Kopieren in diesem Browser nicht verfügbar.',
-  fin_export_hdr:'{name} — Endabrechnung ({date})',fin_export_full:'Vollständige Tabelle:',
-  fin_export_gold:'🥇 Sieger: {name}',fin_export_silver:'🥈 Zweiter: {name}',
-  fin_export_bronze:'🥉 3. Platz: {name}',
-  fin_export_row:'{pos}. {name} — {w}G {l}N ({gw}–{gl} Spiele)',
-  inst_subtitle_default:'Zum Startbildschirm hinzufügen',inst_close:'Schließen',
-  inst_install:'Installieren',inst_skip:'Nicht jetzt',
-  inst_ios_title:'Zum Startbildschirm über Safari hinzufügen',
-  inst_ios_steps:'1. Tippe auf das <b>Teilen</b>-Symbol <b>⎦↑⎡</b> unten in Safari<br>2. Scrolle und tippe auf <b>Zum Home-Bildschirm</b><br>3. Tippe auf <b>Hinzufügen</b> — fertig!',
-  inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
-  inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
-},
-es:{
-  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',
-  ob_skip:'Saltar',ob_back:'← Atrás',ob_next:'Siguiente →',ob_start:'Iniciar',
-  ob1_title:'Torneo de Pádel',
-  ob1_body:'Organiza tu propio torneo en pocos toques — desde introducir nombres hasta la clasificación final. Todo en una app, incluso sin conexión.',
-  ob2_title:'Torneo por equipos',
-  ob2_body:'<b>Parejas o tríos fijos</b> juegan una fase de grupos. Luego un bracket decide el ganador — con final de ganadores y perdedores.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Parejas rotativas</b> cada ronda. Todos juegan con todos. El que más puntos acumule en todas las rondas gana.',
-  ob4_title:'Listo para jugar',
-  ob4_body:'Elige tu tipo, introduce los nombres y pulsa <b>Iniciar</b>. Durante el torneo verás puntuaciones en directo y la clasificación.',
-  set_title_team:'Configurar equipos',set_title_am:'Configurar Americano',
-  set_lbl_name:'Nombre',set_ph_name:'Nombre del torneo (opcional)',
-  set_lbl_courts:'Pistas',set_lbl_type:'Tipo',
-  set_type_team:'Equipo',set_type_sub_team:'pareja fija',
-  set_type_am:'Americano',set_type_sub_am:'pareja rotativa',
-  set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',
-  set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
-  set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
-  set_desc_auto_am:'Un nombre por línea. Debe ser divisible entre 4 (p.ej. 8, 12 o 16 jugadores). Las parejas rotan cada ronda.',
-  set_ph_auto:'Introduce nombres...',set_ph_manual:'Introduce nombres de equipos...',
-  set_desc_manual:'Un nombre de equipo por línea. Usa <b style="color:var(--accent)">/</b> para un trío, <b style="color:var(--accent)">&</b> para una pareja — o simplemente escribe un nombre.',
-  set_btn_start:'Iniciar',set_btn_shuffle:'Mezclar',set_default:'por defecto',
-  val_min_teams:'{n} equipo — mínimo 2 necesario',val_ok_teams:'✓ {n} equipos listos',
-  val_need2:'Introduce al menos 2 equipos.',
-  val_min_names:'{n} nombres — mínimo 4 necesario',
-  val_ok_names_simple:'✓ {n} jugadores → {nTeams} equipos ({nDuo} parejas)',
-  val_ok_names_trio:'✓ {n} jugadores → {nTeams} equipos ({nDuo} parejas, {nTrio} tríos)',
-  val_min4:'Introduce al menos 4 nombres.',
-  val_am_div4:'Americano requiere un número de jugadores divisible entre 4.\n\nTienes {n} jugadores — añade {add} más o elimina {rem}.',
-  tab_poule:'Fase de grupos',tab_bracket:'Bracket',tab_standings:'Clasificación',
-  sec_poule:'Fase de grupos',sec_winners:'Bracket de ganadores — Top 4',sec_losers:'Final de consolación — Puestos 5–9',
-  rnd_label:'Ronda {r}',rnd_progress:'{done} de {tot} partidos jugados',
-  rnd_game:'Juego {gn} de {total} — ¿quién gana?',rnd_undo:'Deshacer',rnd_court:'Pista {n}',
-  st_col_team:'Equipo',st_col_played:'J',st_col_wins:'G',st_col_losses:'P',st_col_games:'JG–JP',
-  st_losers_div:'— consolación —',
-  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Final de consolación',
-  brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
-  am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
-  am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
-  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',
-  res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
-  res_am:'{label}Americano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
-  res_bracket_done:' · Bracket completado',
-  fin_winner:'¡Ganador del torneo!',fin_winner_trio:'¡Ganador del torneo (Trío)!',
-  fin_title:'Clasificación final',fin_1st:'Ganador',fin_2nd:'2.º puesto',fin_3rd:'3.er puesto',
-  fin_copy:'Copiar resultados',fin_copied:'¡Copiado!',
-  fin_copy_err:'Copia no disponible en este navegador.',
-  fin_export_hdr:'{name} — Clasificación final ({date})',fin_export_full:'Clasificación completa:',
-  fin_export_gold:'🥇 Ganador: {name}',fin_export_silver:'🥈 Subcampeón: {name}',
-  fin_export_bronze:'🥉 3.er puesto: {name}',
-  fin_export_row:'{pos}. {name} — {w}G {l}P ({gw}–{gl} juegos)',
-  inst_subtitle_default:'Añadir a la pantalla de inicio',inst_close:'Cerrar',
-  inst_install:'Instalar',inst_skip:'Ahora no',
-  inst_ios_title:'Añadir a la pantalla de inicio via Safari',
-  inst_ios_steps:'1. Toca el icono de <b>Compartir</b> <b>⎦↑⎡</b> en la parte inferior de Safari<br>2. Desplázate y toca <b>En la pantalla de inicio</b><br>3. Toca <b>Añadir</b> — ¡listo!',
-  inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
-  inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
-},
-sv:{
-  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',
-  ob_skip:'Hoppa över',ob_back:'← Tillbaka',ob_next:'Nästa →',ob_start:'Starta',
-  ob1_title:'Padelturnering',
-  ob1_body:'Organisera din egen turnering med några tryck — från att ange namn till slutresultatet. Allt i en app, även offline.',
-  ob2_title:'Lagturnering',
-  ob2_body:'<b>Fasta par eller trior</b> spelar en poolrunda. Sedan avgör ett bracket vem som vinner — med vinnarbracket och förlorarfinal.',
-  ob3_title:'Americano',
-  ob3_body:'<b>Roterande par</b> varje runda. Alla spelar med alla. Den med flest poäng totalt vinner.',
-  ob4_title:'Redo att spela',
-  ob4_body:'Välj din typ, ange namn och tryck på <b>Starta</b>. Under turneringen ser du live-poäng och tabellen.',
-  set_title_team:'Ställ in lag',set_title_am:'Ställ in Americano',
-  set_lbl_name:'Namn',set_ph_name:'Turneringsnamn (valfritt)',
-  set_lbl_courts:'Banor',set_lbl_type:'Typ',
-  set_type_team:'Lag',set_type_sub_team:'fast par',
-  set_type_am:'Americano',set_type_sub_am:'roterande par',
-  set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',
-  set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
-  set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
-  set_desc_auto_am:'Ett namn per rad. Måste vara delbart med 4 (t.ex. 8, 12 eller 16 spelare). Partners roterar varje runda.',
-  set_ph_auto:'Ange namn...',set_ph_manual:'Ange lagnamn...',
-  set_desc_manual:'Ett lagnamn per rad. Använd <b style="color:var(--accent)">/</b> för en trio, <b style="color:var(--accent)">&</b> för ett par — eller skriv bara ett namn.',
-  set_btn_start:'Starta',set_btn_shuffle:'Blanda',set_default:'standard',
-  val_min_teams:'{n} lag — minst 2 krävs',val_ok_teams:'✓ {n} lag redo',
-  val_need2:'Ange minst 2 lag.',
-  val_min_names:'{n} namn — minst 4 krävs',
-  val_ok_names_simple:'✓ {n} spelare → {nTeams} lag ({nDuo} par)',
-  val_ok_names_trio:'✓ {n} spelare → {nTeams} lag ({nDuo} par, {nTrio} trior)',
-  val_min4:'Ange minst 4 namn.',
-  val_am_div4:'Americano kräver ett antal spelare delbart med 4.\n\nDu har {n} spelare — lägg till {add} till eller ta bort {rem}.',
-  tab_poule:'Poolrunda',tab_bracket:'Bracket',tab_standings:'Tabell',
-  sec_poule:'Poolrunda',sec_winners:'Vinnarbracket — Topp 4',sec_losers:'Tröstfinal — Plats 5–9',
-  rnd_label:'Runda {r}',rnd_progress:'{done} av {tot} matcher spelade',
-  rnd_game:'Game {gn} av {total} — vem vinner?',rnd_undo:'Ångra',rnd_court:'Bana {n}',
-  st_col_team:'Lag',st_col_played:'S',st_col_wins:'V',st_col_losses:'F',st_col_games:'VG–FG',
-  st_losers_div:'— tröstfinal —',
-  brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Tröstfinal',
-  brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
-  am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
-  am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
-  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',
-  res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
-  res_am:'{label}Americano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
-  res_bracket_done:' · Bracket klart',
-  fin_winner:'Turneringsvinnare!',fin_winner_trio:'Turneringsvinnare (Trio)!',
-  fin_title:'Slutresultat',fin_1st:'Vinnare',fin_2nd:'2:a plats',fin_3rd:'3:e plats',
-  fin_copy:'Kopiera resultat',fin_copied:'Kopierat!',
-  fin_copy_err:'Kopiering inte tillgänglig i den här webbläsaren.',
-  fin_export_hdr:'{name} — Slutresultat ({date})',fin_export_full:'Fullständig tabell:',
-  fin_export_gold:'🥇 Vinnare: {name}',fin_export_silver:'🥈 Tvåa: {name}',
-  fin_export_bronze:'🥉 3:e plats: {name}',
-  fin_export_row:'{pos}. {name} — {w}V {l}F ({gw}–{gl} games)',
-  inst_subtitle_default:'Lägg till på hemskärmen',inst_close:'Stäng',
-  inst_install:'Installera',inst_skip:'Inte nu',
-  inst_ios_title:'Lägg till på hemskärmen via Safari',
-  inst_ios_steps:'1. Tryck på <b>Dela</b>-ikonen <b>⎦↑⎡</b> längst ner i Safari<br>2. Scrolla och tryck på <b>Lägg till på hemskärmen</b><br>3. Tryck på <b>Lägg till</b> — klart!',
-  inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
-  inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
-},
-};
-
-function t(key,vars={}){
-  const s=(I18N[LANG]||I18N.nl)[key]||I18N.nl[key]||key;
-  return s.replace(/\{(\w+)\}/g,(_,k)=>vars[k]??'');
-}
-
-function applyI18n(){
-  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
-  document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder=t(el.dataset.i18nPh));
-  document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
-  document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
-}
-const sn = n => n.split('&')[0].split('/')[0].trim().split(' ')[0];
-const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
-const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="true" viewBox="0 0 24 24"><use href="#${id}"></use></svg>`;
-
-let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
-let R={gpm:3, matchPts:32, courts:2};
-let tournamentName='';
-let mode='team'; // 'team' | 'americano'
-let AP=[], AM=[]; // americano players & rounds
-let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
-
-// ── Spelregels ────────────────────────────────
-function setTType(typ){
-  mode=typ;
-  document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',['team','americano'][i]===typ);
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').style.display = 'inline-flex';
+    document.getElementById('howBtn').style.display = 'none';
   });
-  $('rules-gpm-row').style.display = typ==='team' ? '' : 'none';
-  $('rules-pts-row').style.display = typ==='americano' ? '' : 'none';
-  $('mode-toggle-row').style.display = typ==='team' ? '' : 'none';
-  $('setup-box-title').textContent = typ==='americano' ? t('set_title_am') : t('set_title_team');
-  $('mode-auto-desc').textContent = typ==='americano' ? t('set_desc_auto_am') : t('set_desc_auto_team');
-  $('btn-shuffle').style.display = typ==='americano' ? 'none' : '';
-  if(typ==='americano') setMode('auto');
-}
-
-function setMatchPts(n){
-  R.matchPts=n;
-  document.querySelectorAll('#rules-pts .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',[24,32,40][i]===n);
-  });
-}
-
-function setGpm(n){
-  R.gpm=n;
-  document.querySelectorAll('#rules-gpm .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',[1,3,5][i]===n);
-  });
-}
-
-function setCourts(n){
-  R.courts=n;
-  document.querySelectorAll('#rules-courts .rbtn').forEach((b,i)=>b.classList.toggle('active',i===n-1));
-}
-
-function doStartAny(){
-  if(mode==='americano') return startAmericano();
-  return doStart();
-}
-
-// ── Mode toggle ───────────────────────────────
-function setMode(m){
-  $('mode-auto').style.display = m==='auto' ? '' : 'none';
-  $('mode-manual').style.display = m==='manual' ? '' : 'none';
-  $('mode-auto-btn').className = m==='auto' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
-  $('mode-manual-btn').className = m==='manual' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
-  if(m==='manual') $('mode-auto-btn').style.flex=$('mode-manual-btn').style.flex='1';
-}
-
-// ── Manual mode ───────────────────────────────
-$('ta-manual') && $('ta-manual').addEventListener('input', () => {
-  const lines = manualTeamLines();
-  $('nc-manual').innerHTML = lines.length < 2
-    ? t('val_min_teams',{n:lines.length})
-    : `<b>${t('val_ok_teams',{n:lines.length})}</b>`;
-});
-
-function manualTeamLines(){
-  return $('ta-manual').value.split('\n').map(s=>s.trim()).filter(Boolean);
-}
-
-function doStartManual(){
-  const lines = manualTeamLines();
-  if(lines.length < 2){ alert(t('val_need2')); return; }
-  T = lines.map((name, i) => ({
-    id: i,
-    name,
-    trio: name.includes('/')
-  }));
-  lastShuffle = lines; // not used but keep state clean
-  startTournament();
-}
-
-$('ta').addEventListener('input', updateNC);
-
-function updateNC(){
-  const n = names().length;
-  const el = $('nc');
-  if(n < 4){ el.innerHTML = t('val_min_names',{n}); return; }
-  const {nTeams, nTrios} = calcTeams(n);
-  const nDuo = nTeams - nTrios;
-  el.innerHTML = `<b>${nTrios ? t('val_ok_names_trio',{n,nTeams,nDuo,nTrio:nTrios}) : t('val_ok_names_simple',{n,nTeams,nDuo})}</b>`;
-}
-
-function names(){ return $('ta').value.split('\n').map(s=>s.trim()).filter(Boolean); }
-
-// N players → as many duo's as possible, max 1 trio for odd N
-// N=4: 2 duo's. N=5: 1 duo + 1 trio. N=6: 3 duo's. N=17: 8 duo's + 1 trio.
-function calcTeams(n){
-  if(n < 2) return {nTeams:0, nTrios:0};
-  if(n % 2 === 0){
-    return {nTeams: n/2, nTrios: 0};
-  } else {
-    // Odd: (n-3)/2 duo's + 1 trio = (n-3)/2 + 1 teams
-    const duos = (n - 3) / 2;
-    return {nTeams: duos + 1, nTrios: 1};
-  }
-}
-
-function makeTeams(list){
-  T=[];
-  const {nTeams, nTrios} = calcTeams(list.length);
-  const nDuos = nTeams - nTrios;
-  let idx=0;
-  for(let i=0; i<nDuos; i++){
-    T.push({id:i, name:`${list[idx]} & ${list[idx+1]}`, trio:false});
-    idx+=2;
-  }
-  if(nTrios && list[idx] && list[idx+1] && list[idx+2]){
-    T.push({id:nDuos, name:`${list[idx]} / ${list[idx+1]} / ${list[idx+2]}`, trio:true});
-  }
-}
-
-function doShuffle(){
-  const n=names();
-  if(n.length<4){alert(t('val_min4'));return;}
-  lastShuffle=[...n].sort(()=>Math.random()-.5);
-  makeTeams(lastShuffle);
-  $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${t.name}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
-}
-
-function doStart(){
-  const n=names();
-  if(n.length<4){alert(t('val_min4'));return;}
-  if(lastShuffle.length!==n.length){ lastShuffle=[...n].sort(()=>Math.random()-.5); }
-  makeTeams(lastShuffle);
-  startTournament();
-}
-
-function startTournamentUI(){
-  $('screen-setup').style.display='none';
-  const el=$('screen-tournament');
-  el.style.display='block';
-  el.classList.remove('screen-enter');
-  requestAnimationFrame(()=>el.classList.add('screen-enter'));
-  $('btn-back').style.display='';
-  $('btn-print').style.display='';
-  const tname=$('logo-tname'), phdr=$('phdr-el');
-  if(tname) tname.textContent=tournamentName||'';
-  if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
-  if(PM.length && PM.every(m=>m.winner) && (!pDone || !PW.length || PW.every(m=>!m.a&&!m.b&&!m.skip))){
-    pDone=true;
-    fillPlayoff();
-  }
-  renderPoule(); renderSt(); renderBracket();
-  showTab(pDone?'bracket':'poule');
-}
-
-function startTournament(){
-  buildPoule();
-  buildPlayoffShell();
-  startTournamentUI();
-  saveState();
-}
-
-function goSetup(){
-  mode='team';
-  $('screen-setup').style.display='block';
-  $('screen-tournament').style.display='none';
-  $('screen-americano').style.display='none';
-  $('btn-back').style.display='none';
-  $('btn-print').style.display='none';
-  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];AP=[];AM=[];
-  tournamentName='';
-  const tn=$('inp-tname'); if(tn) tn.value='';
-  const ltname=$('logo-tname'); if(ltname) ltname.textContent='';
-  setTType('team');
-  setGpm(R.gpm);
-  clearSavedState();
-}
-
-// ── Poule — dynamic round-robin ────────────────
-// Each team plays at least 3 matches. Works for any team count.
-function buildPoule(){
-  PM=[]; pmid=0; pDone=false; PW=[]; PL=[];
-  const n=T.length;
-  if(n<2) return;
-
-  // Generate round-robin schedule using circle method
-  // For n teams: n-1 rounds if n even, n rounds if n odd
-  // Each round: floor(n/2) matches
-  const teamIds=[...Array(n).keys()];
-  // If odd number of teams, add a "bye" phantom team
-  const ids = n%2===0 ? [...teamIds] : [...teamIds, -1];
-  const N=ids.length; // even
-  const rounds=[];
-  const fixed=ids[0];
-  const rotating=[...ids.slice(1)];
-
-  for(let r=0;r<N-1;r++){
-    const round=[];
-    const circle=[fixed,...rotating];
-    for(let i=0;i<N/2;i++){
-      const a=circle[i], b=circle[N-1-i];
-      if(a!==-1&&b!==-1) round.push([a,b]);
-    }
-    rounds.push(round);
-    rotating.unshift(rotating.pop()); // rotate
-  }
-
-  // Take enough rounds so each team has ≥5 matches
-  const playCount=Array(n).fill(0);
-  const selected=[];
-  let ri=0;
-  while(playCount.some(c=>c<5)){
-    const r=rounds[ri%rounds.length];
-    selected.push({round:selected.length+1, matches:r});
-    r.forEach(([a,b])=>{playCount[a]++;playCount[b]++;});
-    ri++;
-    if(ri>rounds.length*10) break; // safety
-  }
-
-  selected.forEach(({round,matches})=>{
-    matches.forEach(([a,b],mi)=>{
-      PM.push({id:pmid++,round,a,b,ga:0,gb:0,winner:null,court:(mi%R.courts)+1});
-    });
-  });
-}
-
-function renderPoule(){
-  const maxR=Math.max(...PM.map(m=>m.round),0);
-  let html='';
-  for(let r=1;r<=maxR;r++){
-    const rm=PM.filter(m=>m.round===r);
-    if(!rm.length) continue;
-    const done=rm.every(m=>m.winner);
-    html+=`<div class="rblock"><div class="rlbl">${t('rnd_label',{r})} ${done?icon('ic-check','icon-gold'):''}</div>`;
-    for(const m of rm) html+=mrow(m);
-    html+='</div>';
-  }
-  $('pm').innerHTML=html;
-  const done=PM.filter(m=>m.winner).length, tot=PM.length;
-  $('prog').style.width=tot?`${Math.round(done/tot*100)}%`:'0%';
-  $('progtxt').textContent=t('rnd_progress',{done,tot});
-  renderPouleInBracket();
-}
-
-function renderPouleInBracket(){
-  const el=$('bracket-poule-rounds');
-  if(!el) return;
-  const maxR=Math.max(...PM.map(m=>m.round),0);
-  let html='';
-  for(let r=1;r<=maxR;r++){
-    const rm=PM.filter(m=>m.round===r);
-    if(!rm.length) continue;
-    const done=rm.every(m=>m.winner);
-    html+=`<div style="margin-bottom:14px">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--b-muted);margin-bottom:6px">
-        ${t('rnd_label',{r})} ${done?icon('ic-check','icon-gold'):''}
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">`;
-    for(const m of rm){
-      const na=T[m.a].name, nb=T[m.b].name;
-      const wA=m.winner==='A', wB=m.winner==='B';
-      const scoreColor=m.winner?'var(--accent)':'var(--b-muted)';
-      html+=`<div style="background:var(--b-card);border:1.5px solid var(--b-line);border-radius:6px;display:flex;align-items:center;padding:7px 10px;gap:8px;font-size:.8rem">
-        <span style="flex:1;font-weight:${wA?700:400};color:${wA?'var(--b-win-txt)':wB?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${na}</span>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:${scoreColor};flex-shrink:0;letter-spacing:1px">${m.ga}–${m.gb}</span>
-        <span style="flex:1;text-align:right;font-weight:${wB?700:400};color:${wB?'var(--b-win-txt)':wA?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl">${nb}</span>
-        ${m.winner?`<button onclick="undoPM(${m.id})" style="flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;border:1px solid #4b5563;background:#374151;color:#d1d5db;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700">${icon('ic-undo')}</button>`:''}
-      </div>`;
-    }
-    html+='</div></div>';
-  }
-  el.innerHTML=html;
-}
-
-function mrow(m){
-  const na=T[m.a].name, nb=T[m.b].name;
-  const sa=sn(na), sb=sn(nb);
-  const totalGames = m.ga + m.gb;
-  const allPlayed = totalGames >= R.gpm;
-
-  const courtBadge=R.courts>1&&m.court?`<div class="court-badge">${t('rnd_court',{n:m.court})}</div>`:'';
-  if(m.winner){
-    const wA=m.winner==='A';
-    return `<div class="mcard">
-      ${courtBadge}
-      <div class="mteams">
-        <div class="mteam ${wA?'won':'lost'}">${na}</div>
-        <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
-        <div class="mteam r ${!wA?'won':'lost'}">${nb}</div>
-      </div>
-      <div class="mresult">
-        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
-        <button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} ${t('rnd_undo')}</button>
-      </div>
-    </div>`;
-  }
-
-  // Show all 3 game buttons, one at a time
-  const gn = totalGames + 1;
-  const progress = totalGames > 0
-    ? `<div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-        ${Array.from({length:totalGames},(_,i)=>`<span style="font-size:.7rem;color:var(--b-muted)">Game ${i+1}: ${m['g'+(i+1)]==='A'?sa:sb} ✓</span>`).join('<span style="color:var(--b-muted);margin:0 2px">·</span>')}
-       </div>` : '';
-
-  return `<div class="mcard">
-    ${courtBadge}
-    <div class="mteams">
-      <div class="mteam">${na}</div>
-      <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
-      <div class="mteam r">${nb}</div>
-    </div>
-    ${progress}
-    <div class="mgame-label">${t('rnd_game',{gn,total:R.gpm})}</div>
-    <div class="mbtns">
-      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">${icon('ic-check')} ${sa}</button>
-      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">${icon('ic-check')} ${sb}</button>
-    </div>
-  </div>`;
-}
-
-function pg(id,side){
-  const m=PM.find(x=>x.id===id);
-  if(!m||m.winner) return;
-  const gn = m.ga + m.gb + 1;
-  m['g'+gn] = side; // track individual game results
-  if(side==='A') m.ga++; else m.gb++;
-  if(m.ga + m.gb >= R.gpm){
-    if(m.ga > m.gb) m.winner='A';
-    else if(m.gb > m.ga) m.winner='B';
-    else m.winner='A';
-    launchConfetti(45,10);
-  }
-  renderPoule(); renderSt(); saveState();
-  if(PM.every(x=>x.winner)) checkDone();
-}
-
-function undoPM(id){
-  const m=PM.find(x=>x.id===id);
-  if(!m) return;
-  // Full reset
-  m.ga=0; m.gb=0; m.winner=null;
-  m.g1=null; m.g2=null; m.g3=null;
-  renderPoule(); renderSt(); saveState();
-}
-
-// ── Standings ─────────────────────────────────
-function getStandings(){
-  return T.map(t=>{
-    const my=PM.filter(m=>m.winner&&(m.a===t.id||m.b===t.id));
-    const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
-    return{...t,played:my.length,wins,losses:my.length-wins};
-  }).sort((a,b)=>b.wins-a.wins||a.losses-b.losses||a.id-b.id);
-}
-
-function renderSt(){
-  const st=getStandings();
-  const topN=Math.min(4,Math.ceil(st.length/2));
-  const gameMap={};
-  PM.filter(m=>m.winner).forEach(m=>{
-    [m.a,m.b].forEach(id=>{
-      if(!gameMap[id]) gameMap[id]={gW:0,gL:0};
-      gameMap[id].gW+=m.a===id?m.ga:m.gb;
-      gameMap[id].gL+=m.a===id?m.gb:m.ga;
-    });
-  });
-  let h=`<tr><th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th style="color:var(--b-muted)">${t('st_col_games')}</th></tr>`;
-  st.forEach((tm,i)=>{
-    const g=gameMap[tm.id]||{gW:0,gL:0};
-    if(i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
-    h+=`<tr class="${i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''} <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button></td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
-  });
-  $('sttbl').innerHTML=h;
-}
-
-// ── Playoff ───────────────────────────────────
-function checkDone(){
-  if(pDone) return;
-  pDone=true;
-  fillPlayoff();
-  saveState();
-  $('tab-bracket').style.color='var(--accent)';
-  renderBracket();
-  setTimeout(()=>showTab('bracket'),500);
-}
-
-function buildPlayoffShell(){
-  // Determine split: top half = winners bracket, bottom half = losers
-  const half=Math.max(2,Math.floor(T.length/2));
-  const topN=Math.min(4,half); // up to 4 in winners bracket
-  // Build empty shells
-  PW=[
-    {id:'wsf1',labelKey:'brk_semifinal',label:'Halve Finale 1',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'wsf2',labelKey:'brk_semifinal',label:'Halve Finale 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'wf',labelKey:'brk_final',label:'Finale',a:null,b:null,ga:0,gb:0,winner:null},
-  ];
-  PL=[
-    {id:'lsf1',labelKey:'brk_consolation',label:'Troostfinale SF 1',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'lsf2',labelKey:'brk_consolation',label:'Troostfinale SF 2',a:null,b:null,ga:0,gb:0,winner:null},
-    {id:'lf',labelKey:'brk_consolation',label:'Troostfinale',a:null,b:null,ga:0,gb:0,winner:null},
-  ];
-}
-
-function fillPlayoff(){
-  const st=getStandings();
-  const n=st.length;
-  // Always put top 4 (or fewer) in winners bracket, rest in losers
-  const topN=Math.min(4,Math.floor(n/2)+n%2);
-  const top=st.slice(0,topN);
-  const bot=st.slice(topN);
-
-  // Winners bracket: need at least 2 teams
-  if(top.length>=2){
-    PW=[
-      {id:'wsf1',labelKey:'brk_semifinal',label:'SF 1',a:top[0].id,b:(top[3]||top[1]).id,ga:0,gb:0,winner:null},
-      {id:'wsf2',labelKey:'brk_semifinal',label:'SF 2',a:top[1].id,b:(top[2]||top[0]).id,ga:0,gb:0,winner:null},
-      {id:'wf',labelKey:'brk_final',label:'Final',a:null,b:null,ga:0,gb:0,winner:null},
-    ];
-    if(top.length===2){
-      PW=[
-        {id:'wsf1',labelKey:'brk_final',label:'Final',a:top[0].id,b:top[1].id,ga:0,gb:0,winner:null},
-        {id:'wf',labelKey:'',label:'',a:null,b:null,ga:0,gb:0,winner:null,skip:true},
-      ];
-    } else if(top.length===3){
-      PW=[
-        {id:'wsf1',labelKey:'brk_semifinal',label:'SF',a:top[1].id,b:top[2].id,ga:0,gb:0,winner:null},
-        {id:'wsf2',labelKey:'',label:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null},
-        {id:'wf',labelKey:'brk_final',label:'Final',a:top[0].id,b:null,ga:0,gb:0,winner:null},
-      ];
-    }
-  }
-
-  // Losers bracket
-  PL=[];
-  if(bot.length>=2){
-    PL=[
-      {id:'lsf1',labelKey:'brk_consolation',label:'C-SF 1',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},
-    ];
-    if(bot.length>=4){
-      PL.push({id:'lsf2',labelKey:'brk_consolation',label:'C-SF 2',a:bot[2].id,b:bot[3].id,ga:0,gb:0,winner:null});
-    }
-    if(bot.length>=5){
-      PL.push({id:'lbye',bye:true,labelKey:'',label:'Bye',a:bot[4].id,b:null,ga:0,gb:0,winner:'A'});
-    }
-    PL.push({id:'lf',labelKey:'brk_consolation',label:'Consolation',a:bot.length===2?bot[0].id:null,b:bot.length===2?bot[1].id:null,ga:0,gb:0,winner:null});
-    if(bot.length===2) PL=[{id:'lsf1',labelKey:'brk_consolation',label:'Consolation',a:bot[0].id,b:bot[1].id,ga:0,gb:0,winner:null},{id:'lf',labelKey:'',skip:true,a:null,b:null,ga:0,gb:0,winner:null}];
-  }
-  // Assign courts to bracket matches
-  [...PW,...PL].filter(m=>!m.skip&&!m.bye).forEach((m,i)=>{ m.court=(i%R.courts)+1; });
-}
-
-// ── Bracket render ────────────────────────────
-function renderBracket(){
-  renderPouleInBracket();
-  renderHalf('bw',PW,'w');
-  renderHalf('bl',PL,'l');
-  renderChamp();
-}
-
-function renderHalf(elId,matches,pfx){
-  const el=$(elId);
-  if(!matches||!matches.length){el.innerHTML='';return;}
-  const sf1=matches.find(m=>m.id===pfx+'sf1');
-  const sf2=matches.find(m=>m.id===pfx+'sf2');
-  const fin=matches.find(m=>m.id===pfx+'f');
-  const bye=pfx==='l'?matches.find(m=>m.id==='lbye'):null;
-  if(!sf1){el.innerHTML='';return;}
-
-  const isW=pfx==='w';
-  const title=isW?`${icon('ic-trophy')} ${t('brk_winner')}`:`${icon('ic-medal')} ${t('brk_consolation_lbl')}`;
-  const hasSf2=sf2&&!sf2.skip;
-  const hasBye=!!bye;
-
-  // Direct final: sf1 IS the final (no real sf2, fin is skip or absent)
-  if(!hasSf2&&(!fin||fin.skip)){
-    const winTeam=sf1.winner?tn(sf1.winner==='A'?sf1.a:sf1.b):null;
-    el.innerHTML=`<div class="br1" id="br1-${pfx}">${mcard(sf1,pfx)}</div>
-      <div class="bwcol" style="margin-top:8px">
-        <div class="bwtitle">${title}</div>
-        <div class="bwname">${winTeam||'?'}</div>
-      </div>`;
-    return;
-  }
-  if(!fin){el.innerHTML='';return;}
-
-  const winTeam=fin.winner?tn(fin.winner==='A'?fin.a:fin.b):null;
-  el.innerHTML=`
-    <div class="br1" id="br1-${pfx}">
-      ${mcard(sf1,pfx)}${hasSf2?mcard(sf2,pfx):''}${hasBye?mcard(bye,pfx):''}
-    </div>
-    ${hasSf2?`<div class="bspacer" id="bsp-${pfx}"><svg id="svg-${pfx}"></svg></div>`:''}
-    <div class="br2">${mcard(fin,pfx)}</div>
-    <div class="barrow"></div>
-    <div class="bwcol">
-      <div class="bwtitle">${title}</div>
-      <div class="bwname">${winTeam||'?'}</div>
-    </div>`;
-
-  if(hasSf2) requestAnimationFrame(()=>drawSVG(pfx,hasBye));
-}
-
-function drawSVG(pfx,hasBye){
-  const svg=$('svg-'+pfx), sp=$('bsp-'+pfx);
-  if(!svg||!sp) return;
-  const spR=sp.getBoundingClientRect();
-  const h=sp.offsetHeight||200;
-  svg.setAttribute('height',h);
-  svg.setAttribute('viewBox',`0 0 32 ${h}`);
-  function midY(id){
-    const el=$(id); if(!el) return h/2;
-    const r=el.getBoundingClientRect();
-    return r.top+r.height/2-spR.top;
-  }
-  const y1=midY('bm-'+pfx+'sf1'), y2=midY('bm-'+pfx+'sf2');
-  const y3=hasBye?midY('bm-lbye'):null;
-  const yf=midY('bm-'+pfx+'f');
-  const x=16;
-  const lc=getComputedStyle(document.body).getPropertyValue('--b-line').trim()||'#374151';
-  const S=`stroke="${lc}" stroke-width="2" stroke-linecap="round"`;
-  let d=`<line x1="0" y1="${y1}" x2="${x}" y2="${y1}" ${S}/>`;
-  d+=`<line x1="0" y1="${y2}" x2="${x}" y2="${y2}" ${S}/>`;
-  if(hasBye&&y3!==null){
-    d+=`<line x1="0" y1="${y3}" x2="${x}" y2="${y3}" ${S} stroke-dasharray="4"/>`;
-    d+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y3}" ${S}/>`;
-  } else {
-    d+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" ${S}/>`;
-  }
-  d+=`<line x1="${x}" y1="${yf}" x2="32" y2="${yf}" ${S}/>`;
-  svg.innerHTML=d;
-}
-
-function mcard(m,pfx){
-  if(!m) return '';
-  const isBye=m.bye;
-  const na=tn(m.a), nb=isBye?'— bye —':tn(m.b);
-  const emA=m.a===null, emB=m.b===null||isBye;
-  const wa=m.winner==='A', wb=m.winner==='B';
-  const tA=`<div class="bteam ${m.winner?(wa?'won':'lost'):(emA?'empty':'')}">
-    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emA?'— ?—':na}</span>
-    ${m.winner?`<span class="bsc">${m.ga}</span>`:''}
-  </div>`;
-  const tB=`<div class="bteam ${m.winner?(wb?'won':'lost'):(emB?'empty':'')}">
-    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emB?'— ?—':nb}</span>
-    ${m.winner&&!isBye?`<span class="bsc">${m.gb}</span>`:''}
-  </div>`;
-  const totalGames = m.ga + m.gb;
-  const canPlay = !m.winner && !emA && !emB && !isBye && totalGames < R.gpm;
-  const gn = totalGames + 1;
-  const sa=na?sn(na):'?', sb=nb?sn(nb):'?';
-  const btns = canPlay
-    ? `<div class="bmbtns">
-        <button class="bgbtn bgbtn-a" onclick="ppg('${m.id}','A','${pfx}')">G${gn}: ${sa}</button>
-        <button class="bgbtn bgbtn-b" onclick="ppg('${m.id}','B','${pfx}')">${sb}</button>
-       </div>`
-    : m.winner
-      ? `<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">${icon('ic-undo')}</button></div>`
-      : '';
-  const courtLbl=R.courts>1&&m.court&&!isBye?`<span class="court-badge" style="padding:0;display:inline;font-size:.55rem;letter-spacing:1px"> · ${t('rnd_court',{n:m.court})}</span>`:'';
-  const displayLabel = m.labelKey ? t(m.labelKey) : (m.label||'');
-  return `<div class="bmatch" id="bm-${m.id}">
-    <div class="bmlbl">${displayLabel}${courtLbl}</div>${tA}${tB}${btns}
-  </div>`;
-}
-
-function ppg(matchId,side,pfx){
-  const list=pfx==='w'?PW:PL;
-  const m=list.find(x=>x.id===matchId);
-  if(!m||m.winner) return;
-  const gn = m.ga + m.gb + 1;
-  m['g'+gn] = side;
-  if(side==='A') m.ga++; else m.gb++;
-  if(m.ga + m.gb >= R.gpm){
-    if(m.ga > m.gb) m.winner='A';
-    else m.winner='B';
-    launchConfetti(80,14);
-  }
-  advancePlayoff(pfx);
-  renderBracket(); saveState();
-}
-
-function undoPPG(matchId,pfx){
-  const list=pfx==='w'?PW:PL;
-  const m=list.find(x=>x.id===matchId);
-  if(!m) return;
-  m.ga=0; m.gb=0; m.winner=null;
-  // If this was a semi, clear the final teams too
-  if(pfx==='w'){
-    const wf=PW.find(x=>x.id==='wf');
-    if(wf&&!wf.skip){wf.a=null;wf.b=null;wf.ga=0;wf.gb=0;wf.winner=null;}
-  }
-  if(pfx==='l'){
-    const lf=PL.find(x=>x.id==='lf');
-    if(lf&&!lf.skip){lf.a=null;lf.b=null;lf.ga=0;lf.gb=0;lf.winner=null;}
-  }
-  renderBracket(); saveState();
-}
-
-function advancePlayoff(pfx){
-  if(pfx==='w'){
-    const sf1=PW.find(x=>x.id==='wsf1'),sf2=PW.find(x=>x.id==='wsf2'),wf=PW.find(x=>x.id==='wf');
-    if(!wf||wf.winner) return;
-    if(sf2?.skip){
-      // 3-team bracket: wf.a is already the bye team, sf1 winner fills wf.b
-      if(sf1?.winner&&wf.b===null)
-        wf.b=sf1.winner==='A'?sf1.a:sf1.b;
-    } else if(sf1?.winner&&sf2?.winner&&wf.a===null){
-      wf.a=sf1.winner==='A'?sf1.a:sf1.b;
-      wf.b=sf2.winner==='A'?sf2.a:sf2.b;
-    }
-  }
-  if(pfx==='l'){
-    const lsf1=PL.find(x=>x.id==='lsf1'),lsf2=PL.find(x=>x.id==='lsf2');
-    const lbye=PL.find(x=>x.id==='lbye'),lf=PL.find(x=>x.id==='lf');
-    if(lf.a!==null) return;
-    const w1=lsf1?.winner?(lsf1.winner==='A'?lsf1.a:lsf1.b):null;
-    const w2=lsf2?.winner?(lsf2.winner==='A'?lsf2.a:lsf2.b):null;
-    if(w1!==null&&w2!==null){lf.a=w1;lf.b=w2;}
-    else if(w1!==null&&lbye?.a!=null&&!lsf2){lf.a=w1;lf.b=lbye.a;}
-  }
-}
-
-function getFinalMatch(){
-  const wf=PW.find(x=>x.id==='wf');
-  return (wf&&!wf.skip)?wf:PW.find(x=>x.id==='wsf1');
-}
-
-function renderChamp(){
-  const wf=getFinalMatch();
-  const area=$('champ');
-  if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
-  const c=T[wf.winner==='A'?wf.a:wf.b];
-  const alreadyShown = area.innerHTML.includes('champ-wrap');
-  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${c.name}</h2><p>${t(c.trio?'fin_winner_trio':'fin_winner')}</p></div>`;
-  if(!alreadyShown) champConfetti();
-  renderStats();
-}
-
-// ── Tabs & Print ──────────────────────────────
-function showTab(t){
-  const poule=$('tb-poule'), bracket=$('tb-bracket');
-  poule.style.display=t==='poule'?'':'none';
-  bracket.style.display=t==='bracket'?'':'none';
-  $('tab-poule').classList.toggle('active',t==='poule');
-  $('tab-bracket').classList.toggle('active',t==='bracket');
-  const active=t==='poule'?poule:bracket;
-  active.classList.remove('tab-fade');
-  requestAnimationFrame(()=>active.classList.add('tab-fade'));
-  if(t==='bracket') requestAnimationFrame(()=>{
-    drawSVG('w',false);
-    drawSVG('l',PL.some(m=>m.id==='lbye'));
-  });
-}
-function doPrint(){ showTab('bracket'); setTimeout(()=>window.print(),300); }
-
-// ── Thema ─────────────────────────────────────
-function applyTheme(t){
-  document.body.classList.toggle('light', t==='light');
-  const use=document.querySelector('#icon-theme use');
-  if(use) use.setAttribute('href', t==='light'?'#ic-sun':'#ic-moon');
-}
-function toggleTheme(){
-  const t=document.body.classList.contains('light')?'dark':'light';
-  localStorage.setItem('padel-theme',t);
-  applyTheme(t);
-}
-
-// ── Confetti ──────────────────────────────────
-function launchConfetti(count,spread,fromY){
-  const cvs=document.createElement('canvas');
-  cvs.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998';
-  document.body.appendChild(cvs);
-  cvs.width=innerWidth; cvs.height=innerHeight;
-  const ctx=cvs.getContext('2d');
-  const COLORS=['#10b981','#fbbf24','#3b82f6','#8b5cf6','#ef4444','#f97316','#ec4899'];
-  const ps=Array.from({length:count},()=>({
-    x:innerWidth/2+(Math.random()-.5)*140,
-    y:fromY??innerHeight*.32,
-    vx:(Math.random()-.5)*spread,
-    vy:-(Math.random()*11+5),
-    color:COLORS[Math.floor(Math.random()*COLORS.length)],
-    w:Math.random()*9+4, h:Math.random()*5+3,
-    rot:Math.random()*360, rv:(Math.random()-.5)*13,
-    alpha:1
-  }));
-  (function draw(){
-    ctx.clearRect(0,0,cvs.width,cvs.height);
-    let alive=false;
-    for(const p of ps){
-      p.x+=p.vx; p.y+=p.vy; p.vy+=.36; p.vx*=.985;
-      p.rot+=p.rv; p.alpha-=.012;
-      if(p.alpha<=0) continue;
-      alive=true;
-      ctx.save(); ctx.globalAlpha=Math.max(0,p.alpha);
-      ctx.fillStyle=p.color;
-      ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-      ctx.restore();
-    }
-    if(alive) requestAnimationFrame(draw); else cvs.remove();
-  })();
-}
-function champConfetti(){
-  launchConfetti(160,18,innerHeight*.22);
-  setTimeout(()=>launchConfetti(120,22,innerHeight*.18),420);
-  setTimeout(()=>launchConfetti(80,16,innerHeight*.28),920);
-}
-
-// ── Onboarding ────────────────────────────────
-const OB_ICONS = [
-  icon('ic-padel','icon-xl'),
-  icon('ic-trophy','icon-xl'),
-  icon('ic-rotate','icon-xl'),
-  icon('ic-check','icon-xl'),
-];
-let obStep = 0;
-
-function showOnboarding(){
-  if(localStorage.getItem('padel-onboarding')) return;
-  obStep = 0;
-  $('onboarding').classList.remove('hidden');
-  renderObStep();
-}
-
-function renderObStep(){
-  const n = obStep + 1;
-  const last = obStep === OB_ICONS.length - 1;
-  $('ob-dots').innerHTML = OB_ICONS.map((_,i)=>`<div class="ob-dot${i===obStep?' active':''}"></div>`).join('');
-  $('ob-icon').innerHTML = OB_ICONS[obStep];
-  $('ob-title').textContent = t(`ob${n}_title`);
-  $('ob-body').innerHTML = t(`ob${n}_body`);
-  const prev = obStep > 0 ? `<button class="btn btn-ghost" onclick="obNav(-1)">${t('ob_back')}</button>` : '';
-  const next = last
-    ? `<button class="btn btn-green" onclick="dismissOnboarding()">${icon('ic-padel')} ${t('ob_start')}</button>`
-    : `<button class="btn btn-green" onclick="obNav(1)">${t('ob_next')}</button>`;
-  $('ob-btns').innerHTML = prev + next;
-  $('ob-skip').textContent = t('ob_skip');
-  $('ob-skip').style.display = last ? 'none' : '';
-}
-
-function obNav(dir){
-  obStep = Math.max(0, Math.min(OB_ICONS.length - 1, obStep + dir));
-  renderObStep();
-}
-
-function dismissOnboarding(){
-  localStorage.setItem('padel-onboarding', '1');
-  $('onboarding').classList.add('hidden');
-}
-
-// ── Teamnaam bewerken ─────────────────────────
-function editTeam(id){
-  const cell=document.querySelector(`[data-team-id="${id}"]`);
-  if(!cell) return;
-  const old=T[id].name;
-  const inp=document.createElement('input');
-  inp.value=old;
-  inp.className='team-name-input';
-  cell.innerHTML='';
-  cell.appendChild(inp);
-  inp.focus(); inp.select();
-  let saved=false;
-  const save=()=>{
-    if(saved) return; saved=true;
-    const v=inp.value.trim();
-    if(v) T[id].name=v;
-    renderSt(); renderPoule(); renderBracket(); saveState();
-  };
-  inp.addEventListener('blur',save);
-  inp.addEventListener('keydown',e=>{
-    if(e.key==='Enter') inp.blur();
-    if(e.key==='Escape'){ saved=true; T[id].name=old; renderSt(); }
-  });
-}
-
-// ── Americano ─────────────────────────────────
-function buildAmericanoSchedule(n){
-  // Uses circle algorithm: fix player 0, rotate rest.
-  // Pairs are formed by mirroring positions: arr[i]+arr[n-1-i].
-  // Guarantees each player partners every other exactly once over n-1 rounds.
-  let circle=[];
-  for(let i=1;i<n;i++) circle.push(i);
-  const rounds=[];
-  for(let r=0;r<n-1;r++){
-    const arr=[0,...circle];
-    const pairs=[];
-    for(let i=0;i<n/2;i++) pairs.push([arr[i],arr[n-1-i]]);
-    const matches=[];
-    for(let i=0;i<pairs.length/2;i++){
-      matches.push({
-        id:`am-${r}-${i}`, round:r+1,
-        a1:pairs[i][0], a2:pairs[i][1],
-        b1:pairs[pairs.length-1-i][0], b2:pairs[pairs.length-1-i][1],
-        sa:0, sb:0, done:false
-      });
-    }
-    rounds.push(matches);
-    circle=[circle[circle.length-1],...circle.slice(0,-1)];
-  }
-  return rounds;
-}
-
-function startAmericano(){
-  const ns=names().filter(Boolean);
-  if(ns.length<4){alert(t('val_min4'));return;}
-  if(ns.length%4!==0){
-    const add=4-ns.length%4;
-    alert(t('val_am_div4',{n:ns.length,add,rem:ns.length%4}));
-    return;
-  }
-  const shuffled=[...ns].sort(()=>Math.random()-.5);
-  AP=shuffled.map((name,id)=>({id,name,pts:0}));
-  AM=buildAmericanoSchedule(AP.length);
-  showAmericano();
-  saveState();
-}
-
-function showAmericano(){
-  $('screen-setup').style.display='none';
-  $('screen-tournament').style.display='none';
-  const el=$('screen-americano');
-  el.style.display='block';
-  el.classList.remove('screen-enter');
-  requestAnimationFrame(()=>el.classList.add('screen-enter'));
-  $('btn-back').style.display='';
-  $('btn-print').style.display='none';
-  const tname=$('logo-tname');
-  if(tname) tname.textContent=tournamentName||'';
-  renderAmericano();
-}
-
-function renderAmericano(){
-  let h='';
-  AM.forEach((matches,ri)=>{
-    const done=matches.every(m=>m.done);
-    h+=`<div class="am-round${done?' am-round-done':''}">
-      <div class="am-round-hdr">
-        <span class="am-round-lbl">${t('am_round',{n:ri+1})} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
-        ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':''}
-      </div>
-      ${matches.map(m=>renderAmMatch(m)).join('')}
-    </div>`;
-  });
-  h+=renderAmSt();
-  $('am-rounds-wrap').innerHTML=h;
-}
-
-function renderAmMatch(m){
-  const pa=AP[m.a1],pb=AP[m.a2],pc=AP[m.b1],pd=AP[m.b2];
-  const tA=`${pa.name} & ${pb.name}`;
-  const tB=`${pc.name} & ${pd.name}`;
-  if(m.done){
-    const wA=m.sa>m.sb, wB=m.sb>m.sa;
-    return `<div class="am-match">
-      <div class="am-match-teams">
-        <span class="am-team${wA?' won':''}">${tA}</span>
-        <span class="am-score-done">${m.sa}–${m.sb}</span>
-        <span class="am-team r${wB?' won':''}">${tB}</span>
-      </div>
-      <div style="text-align:center">
-        <button class="mundo-btn" onclick="amUndo('${m.id}')">${icon('ic-undo')} ${t('am_undo')}</button>
-      </div>
-    </div>`;
-  }
-  const total=m.sa+m.sb, ready=total===R.matchPts;
-  return `<div class="am-match" id="amm-${m.id}">
-    <div class="am-match-teams">
-      <span class="am-team">${tA}</span>
-      <span class="am-vs">vs</span>
-      <span class="am-team r">${tB}</span>
-    </div>
-    <div class="am-score-ctrl">
-      <div class="am-sc-side">
-        <button class="am-sc-btn" onclick="amAdj('${m.id}','a',-1)">−</button>
-        <span class="am-sc-val" id="amsa-${m.id}">${m.sa}</span>
-        <button class="am-sc-btn" onclick="amAdj('${m.id}','a',1)">+</button>
-      </div>
-      <span class="am-sc-sep">—</span>
-      <div class="am-sc-side">
-        <button class="am-sc-btn" onclick="amAdj('${m.id}','b',-1)">−</button>
-        <span class="am-sc-val" id="amsb-${m.id}">${m.sb}</span>
-        <button class="am-sc-btn" onclick="amAdj('${m.id}','b',1)">+</button>
-      </div>
-    </div>
-    <div class="am-sc-footer">
-      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
-      ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
-    </div>
-  </div>`;
-}
-
-function amAdj(matchId,side,delta){
-  const m=AM.flat().find(x=>x.id===matchId);
-  if(!m||m.done) return;
-  if(side==='a'){
-    m.sa=Math.max(0,Math.min(R.matchPts,m.sa+delta));
-    if(m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
-  } else {
-    m.sb=Math.max(0,Math.min(R.matchPts,m.sb+delta));
-    if(m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
-  }
-  // Targeted DOM update — no full re-render, keeps button focus
-  const saEl=$(`amsa-${matchId}`), sbEl=$(`amsb-${matchId}`), totEl=$(`amtot-${matchId}`);
-  if(saEl) saEl.textContent=m.sa;
-  if(sbEl) sbEl.textContent=m.sb;
-  const total=m.sa+m.sb, ready=total===R.matchPts;
-  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=t('am_pts',{total,max:R.matchPts}); }
-  const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
-  if(foot){
-    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">${t('am_save')}</button>`:''}`;
-  }
-}
-
-function amSave(matchId){
-  const m=AM.flat().find(x=>x.id===matchId);
-  if(!m||m.done||m.sa+m.sb!==R.matchPts) return;
-  m.done=true;
-  AP[m.a1].pts+=m.sa; AP[m.a2].pts+=m.sa;
-  AP[m.b1].pts+=m.sb; AP[m.b2].pts+=m.sb;
-  renderAmericano(); saveState();
-}
-
-function amUndo(matchId){
-  const m=AM.flat().find(x=>x.id===matchId);
-  if(!m||!m.done) return;
-  AP[m.a1].pts-=m.sa; AP[m.a2].pts-=m.sa;
-  AP[m.b1].pts-=m.sb; AP[m.b2].pts-=m.sb;
-  m.done=false; m.sa=0; m.sb=0;
-  renderAmericano(); saveState();
-}
-
-function renderAmSt(){
-  const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
-  let h=`<div class="am-st-wrap"><h3>${t('am_standings')}</h3><table class="st-tbl">
-    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th></tr>`;
-  sorted.forEach((p,i)=>{
-    h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
-  });
-  return h+`</table></div>`;
-}
-
-// ── State opslaan ─────────────────────────────
-function saveState(){
-  if(mode==='americano'){
-    if(!AP.length) return;
-    localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName}));
-    return;
-  }
-  if(!T.length) return;
-  localStorage.setItem('padel-state', JSON.stringify({mode:'team',T,PM,PW,PL,pmid,pDone,R,tournamentName}));
-}
-
-function loadState(){
-  try{
-    const raw=localStorage.getItem('padel-state');
-    if(!raw) return;
-    const s=JSON.parse(raw);
-    if(!s.T?.length&&s.mode!=='americano') return;
-    savedState=s;
-    const label=s.tournamentName?`${s.tournamentName} · `:'';
-    if(s.mode==='americano'){
-      $('resume-info').textContent=t('res_am',{label,n:s.AP?.length||0});
-    } else {
-      const done=s.PM.filter(m=>m.winner).length, tot=s.PM.length;
-      $('resume-info').textContent=t('res_team',{label,teams:s.T.length,done,tot})+(s.pDone?t('res_bracket_done'):'');
-    }
-    $('resume-banner').classList.remove('hidden');
-  }catch(e){ localStorage.removeItem('padel-state'); }
-}
-
-function resumeFromBanner(){
-  if(!savedState) return;
-  if(savedState.R) R=savedState.R;
-  tournamentName=savedState.tournamentName||'';
-  const inp=$('inp-tname'); if(inp) inp.value=tournamentName;
-  $('resume-banner').classList.add('hidden');
-  if(savedState.mode==='americano'){
-    mode='americano';
-    ({AP,AM}=savedState);
-    savedState=null;
-    showAmericano();
-    return;
-  }
-  mode='team';
-  ({T,PM,PW,PL,pmid,pDone}=savedState);
-  savedState=null;
-  startTournamentUI();
-}
-
-function discardSaved(){
-  localStorage.removeItem('padel-state');
-  savedState=null;
-  $('resume-banner').classList.add('hidden');
-}
-
-function clearSavedState(){
-  localStorage.removeItem('padel-state');
-  savedState=null;
-}
-
-// ── Statistieken & eindstand ───────────────────
-function renderStats(){
-  const wf=getFinalMatch();
-  const lf=PL.find(x=>x.id==='lf');
-  if(!wf||!wf.winner){ $('stats').innerHTML=''; return; }
-
-  statsGold=T[wf.winner==='A'?wf.a:wf.b];
-  statsSilver=T[wf.winner==='A'?wf.b:wf.a];
-  statsBronze=lf?.winner?T[lf.winner==='A'?lf.a:lf.b]:null;
-
-  const all=[...PM,...PW,...PL].filter(m=>m.winner&&m.a!==null&&m.b!==null&&!m.skip&&!m.bye);
-  statsData=T.map(t=>{
-    const my=all.filter(m=>m.a===t.id||m.b===t.id);
-    const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
-    const gW=my.reduce((s,m)=>s+(m.a===t.id?m.ga:m.gb),0);
-    const gL=my.reduce((s,m)=>s+(m.a===t.id?m.gb:m.ga),0);
-    return{...t,played:my.length,wins,losses:my.length-wins,gW,gL};
-  }).sort((a,b)=>b.wins-a.wins||b.gW-a.gW||a.id-b.id);
-
-  const rows=statsData.map(t=>{
-    const medal=T[t.id]===statsGold   ? icon('ic-gold','icon-lg icon-gold')
-              : T[t.id]===statsSilver ? icon('ic-silver','icon-lg icon-silver')
-              : (statsBronze&&T[t.id]===statsBronze) ? icon('ic-bronze','icon-lg icon-bronze') : '';
-    const pct=t.played?Math.round(t.wins/t.played*100):0;
-    return`<tr><td class="medal-cell">${medal}</td><td>${t.name}${t.trio?'<span style="opacity:.4;font-size:.6rem"> trio</span>':''}</td><td>${t.played}</td><td style="color:var(--accent)">${t.wins}</td><td style="color:var(--red)">${t.losses}</td><td>${t.gW}</td><td>${t.gL}</td><td style="color:var(--txt2)">${pct}%</td></tr>`;
-  }).join('');
-
-  $('stats').innerHTML=`<div class="stats-wrap">
-    <div class="stats-title">${t('fin_title')}</div>
-    <div class="podium">
-      <div class="podium-item">
-        <div class="podium-medal">${icon('ic-silver','icon-lg icon-silver')}</div>
-        <div class="podium-place">${t('fin_2nd')}</div>
-        <div class="podium-name">${statsSilver.name}</div>
-      </div>
-      <div class="podium-item first">
-        <div class="podium-medal">${icon('ic-gold','icon-lg icon-gold')}</div>
-        <div class="podium-place">${t('fin_1st')}</div>
-        <div class="podium-name">${statsGold.name}</div>
-      </div>
-      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">${t('fin_3rd')}</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
-    </div>
-    <table class="stats-tbl">
-      <tr><th></th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th>GW</th><th>GV</th><th>%</th></tr>
-      ${rows}
-    </table>
-    <div class="stats-export">
-      <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} ${t('fin_copy')}</button>
-    </div>
-  </div>`;
-}
-
-function copyStats(){
-  const locale=LANG==='nl'?'nl-NL':LANG;
-  const d=new Date().toLocaleDateString(locale);
-  let txt=t('fin_export_hdr',{name:tournamentName||t('ob1_title'),date:d})+'\n\n';
-  if(statsGold) txt+=t('fin_export_gold',{name:statsGold.name})+'\n';
-  if(statsSilver) txt+=t('fin_export_silver',{name:statsSilver.name})+'\n';
-  if(statsBronze) txt+=t('fin_export_bronze',{name:statsBronze.name})+'\n';
-  txt+='\n'+t('fin_export_full')+'\n';
-  statsData.forEach((s,i)=>{ txt+=t('fin_export_row',{pos:i+1,name:s.name,w:s.wins,l:s.losses,gw:s.gW,gl:s.gL})+'\n'; });
-  navigator.clipboard.writeText(txt).then(()=>{
-    const btn=$('stats-copy-btn');
-    if(btn){ btn.innerHTML=`${icon('ic-check')} ${t('fin_copied')}`; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} ${t('fin_copy')}`,2000); }
-  }).catch(()=>alert(t('fin_copy_err')));
-}
-
-// ── Swipe-navigatie ────────────────────────────
-(function(){
-  const tb=document.querySelector('.tab-body');
-  if(!tb) return;
-  let tx=0;
-  tb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-  tb.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>60) showTab(dx<0?'bracket':'poule');
-  },{passive:true});
-})();
-
-// ── PWA Install Banner ────────────────────────
-let deferredPrompt = null;
-
-function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent); }
-function isInStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
-function isDismissed(){ return sessionStorage.getItem('install-dismissed') === '1'; }
-
-function showInstallBanner(){
-  if(isInStandalone() || isDismissed()) return;
-  const banner = document.getElementById('install-banner');
-  const steps  = document.getElementById('install-steps');
-  const btn    = document.getElementById('install-btn-main');
-  const sub    = document.getElementById('install-subtitle');
-
-  if(isIOS()){
-    sub.textContent = t('inst_ios_title');
-    steps.innerHTML = t('inst_ios_steps');
-    btn.innerHTML = `${icon('ic-check')} ${t('inst_ios_ok')}`;
-    btn.onclick = dismissInstall;
-  } else if(deferredPrompt){
-    sub.textContent = t('inst_and_title');
-    steps.innerHTML = t('inst_and_body');
-    btn.innerHTML = `${icon('ic-install')} ${t('inst_install')}`;
-    btn.onclick = triggerInstall;
-  } else {
-    // Generic: browser doesn't support prompt or already installed
-    return;
-  }
-
-  banner.classList.remove('hidden');
-  document.body.classList.add('banner-open');
-}
-
-function triggerInstall(){
-  if(deferredPrompt){
+  async function installApp() {
+    if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(c => {
-      deferredPrompt = null;
-      dismissInstall();
-    });
-  } else {
-    dismissInstall();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    if (outcome === 'accepted') {
+      document.getElementById('installBtn').style.display = 'none';
+      document.getElementById('howBtn').style.display = 'inline-flex';
+    }
   }
-}
-
-function dismissInstall(){
-  sessionStorage.setItem('install-dismissed', '1');
-  document.getElementById('install-banner').classList.add('hidden');
-  document.body.classList.remove('banner-open');
-}
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  setTimeout(showInstallBanner, 2500);
-});
-
-window.addEventListener('appinstalled', () => {
-  deferredPrompt = null;
-  dismissInstall();
-});
-
-// Show iOS banner after a short delay
-if(isIOS() && !isInStandalone()){
-  setTimeout(showInstallBanner, 2500);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  applyI18n();
-  // Initialize placeholder text in nc elements
-  const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
-  const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
-  $('app-version').textContent = APP_VERSION;
-  applyTheme(localStorage.getItem('padel-theme') || 'dark');
-  loadState();
-  showOnboarding();
-});
-
-// ── Service Worker ────────────────────────────
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  window.addEventListener('appinstalled', () => {
+    document.getElementById('installBtn').style.display = 'none';
+    document.getElementById('howBtn').style.display = 'inline-flex';
   });
-}
 </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+{
+  "name": "PadelBracket — Padel Toernooi Generator",
+  "short_name": "PadelBracket",
+  "description": "Gratis padel toernooien: brackets, Americano en Round Robin. Offline, geen account.",
+  "lang": "nl",
+  "start_url": "./?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "../icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "../icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
