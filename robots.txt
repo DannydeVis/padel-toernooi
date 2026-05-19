@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /*?utm_
 
-Sitemap: https://app.padel-bracket.com/sitemap.xml
+Sitemap: https://padel-bracket.com/sitemap.xml
