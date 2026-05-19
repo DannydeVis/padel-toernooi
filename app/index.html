@@ -709,8 +709,8 @@ const SUPPORTED_LANGS=['nl','en','fr','de','es','sv'];
 function detectLang(){
   const s=localStorage.getItem('padel-lang');
   if(s&&SUPPORTED_LANGS.includes(s)) return s;
-  const nav=(navigator.language||'nl').slice(0,2).toLowerCase();
-  return SUPPORTED_LANGS.includes(nav)?nav:'nl';
+  const nav=(navigator.language||'en').slice(0,2).toLowerCase();
+  return SUPPORTED_LANGS.includes(nav)?nav:'en';
 }
 let LANG=detectLang();
 localStorage.setItem('padel-lang',LANG);
