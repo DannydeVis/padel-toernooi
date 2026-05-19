@@ -29,7 +29,8 @@
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -98,6 +99,18 @@
       --txt:     #f9fafb;
       --txt2:    rgba(249,250,251,.55);
       --bdr:     rgba(255,255,255,.08);
+      --nav-bg:  rgba(10,15,26,.85);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:      #f9fafb;
+        --surface: #ffffff;
+        --surface2:#f3f4f6;
+        --txt:     #111827;
+        --txt2:    rgba(17,24,39,.55);
+        --bdr:     rgba(0,0,0,.10);
+        --nav-bg:  rgba(249,250,251,.85);
+      }
     }
 
     html { scroll-behavior: smooth; }
@@ -109,7 +122,7 @@
       padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
-      background: rgba(10,15,26,.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--bdr);
     }
@@ -201,7 +214,7 @@
       width: 100%; max-width: 680px;
     }
     .mockup-bar {
-      background: #1f2937; padding: 12px 16px;
+      background: var(--surface2); padding: 12px 16px;
       display: flex; align-items: center; gap: 10px;
       border-bottom: 1px solid var(--bdr);
     }
@@ -223,7 +236,7 @@
     .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:4px; }
     .mock-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
     .mock-card {
-      background: #1f2937; border-radius:10px; padding:12px;
+      background: var(--surface2); border-radius:10px; padding:12px;
       border: 1px solid var(--bdr);
     }
     .mock-card-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:4px; }
