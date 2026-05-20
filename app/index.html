@@ -391,22 +391,23 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 #install-banner.hidden{display:none}
 .install-card{
   pointer-events:all;
+  position:relative;
   background:#1f2937;
   border:1px solid rgba(16,185,129,.35);
   border-radius:20px 20px 16px 16px;
   box-shadow:0 -4px 32px rgba(0,0,0,.5),0 0 0 1px rgba(16,185,129,.1);
-  padding:16px 18px 14px;
+  padding:20px 18px 14px;
   max-width:480px;width:100%;text-align:center;
   animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes slideUp{from{transform:translateY(120%);opacity:0}to{transform:translateY(0);opacity:1}}
-.install-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.install-icon{width:48px;height:48px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#111827;border:1px solid rgba(255,255,255,.1)}
+.install-top{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:14px}
+.install-icon{width:52px;height:52px;border-radius:14px;overflow:hidden;flex-shrink:0;background:#111827;border:1px solid rgba(255,255,255,.1)}
 .install-icon img{width:100%;height:100%}
-.install-text{flex:1;min-width:0}
+.install-text{text-align:center}
 .install-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px;color:#f9fafb}
 .install-text span{font-size:.78rem;color:rgba(249,250,251,.5);margin-top:1px;display:block}
-.install-close{background:none;border:none;color:rgba(249,250,251,.4);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;flex-shrink:0;border-radius:6px;transition:.15s}
+.install-close{position:absolute;top:12px;right:12px;background:none;border:none;color:rgba(249,250,251,.4);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;border-radius:6px;transition:.15s}
 .install-close:hover{color:#f9fafb;background:rgba(255,255,255,.08)}
 .install-steps{font-size:.8rem;color:rgba(249,250,251,.6);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:10px;text-align:left}
 .install-steps b{color:#10b981}
