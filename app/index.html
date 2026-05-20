@@ -2199,29 +2199,37 @@ function _getSharePayload(){
 }
 
 async function pushToSupabase(){
-  if(!shareCode) return;
-  const sb=getSB(); if(!sb) return;
+  if(!shareCode) return false;
+  const sb=getSB(); if(!sb) return false;
   try{
-    await sb.from('tournaments').upsert(
+    const {error}=await sb.from('tournaments').upsert(
       {code:shareCode,data:_getSharePayload(),updated_at:new Date().toISOString()},
       {onConflict:'code'}
     );
-  }catch(e){ console.warn('Supabase push failed',e); }
+    if(error) throw error;
+    return true;
+  }catch(e){ console.warn('Supabase push failed',e); return false; }
 }
 
 async function shareTournament(){
   if(!shareCode){
     const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     shareCode=Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+    localStorage.setItem('padel-share-code',shareCode);
   }
   const btn=$('btn-share'); if(btn) btn.disabled=true;
   const modal=$('share-modal'); modal.classList.remove('hidden');
   const inp=$('share-link-inp'); if(inp) inp.value=t('share_loading');
   const cpbtn=$('share-copy-btn'); if(cpbtn) cpbtn.disabled=true;
-  await pushToSupabase();
-  const url=`${location.origin}${location.pathname}?view=${shareCode}`;
-  if(inp) inp.value=url;
-  if(cpbtn){ cpbtn.disabled=false; cpbtn.querySelector('span').textContent=t('share_copy'); }
+  const ok=await pushToSupabase();
+  if(ok){
+    const url=`${location.origin}${location.pathname}?view=${shareCode}`;
+    if(inp) inp.value=url;
+    if(cpbtn){ cpbtn.disabled=false; cpbtn.querySelector('span').textContent=t('share_copy'); }
+  } else {
+    if(inp) inp.value=t('share_error');
+    shareCode=null; localStorage.removeItem('padel-share-code');
+  }
   if(btn) btn.disabled=false;
 }
 
@@ -2255,15 +2263,27 @@ function _applyViewState(s){
   }
 }
 
+function _showViewError(msg){
+  $('screen-setup').style.display='none';
+  const el=$('screen-tournament'); el.style.display='block';
+  const ph=$('phdr-el'); if(ph) ph.textContent='PadelBracket';
+  const err=document.createElement('div');
+  err.style.cssText='display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px;padding:32px;text-align:center';
+  err.innerHTML=`<svg style="width:48px;height:48px;opacity:.4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p style="font-size:1.1rem;font-weight:700;margin:0">${msg}</p>`;
+  const tabs=el.querySelector('.tabs'); if(tabs) tabs.style.display='none';
+  const tabBody=el.querySelector('.tab-body'); if(tabBody) tabBody.style.display='none';
+  el.appendChild(err);
+}
+
 async function initViewMode(code){
   viewMode=true;
+  const sb=getSB();
+  if(!sb){ _showViewError(t('share_error')); return; }
   $('screen-setup').style.display='none';
   const el=$('screen-tournament'); el.style.display='block';
   const ph=$('phdr-el'); if(ph) ph.textContent=t('share_loading');
-  const sb=getSB();
-  if(!sb){ if(ph) ph.textContent=t('share_error'); return; }
   const {data,error}=await sb.from('tournaments').select('data,updated_at').eq('code',code).single();
-  if(error||!data){ if(ph) ph.textContent=t('share_not_found'); return; }
+  if(error||!data){ _showViewError(t('share_not_found')); return; }
   let lastUpdated=data.updated_at;
   _applyViewState(data.data);
   viewPollInterval=setInterval(async()=>{
