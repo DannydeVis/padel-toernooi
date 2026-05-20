@@ -480,11 +480,12 @@ body.banner-open .app{padding-bottom:140px}
 .cookie-accept{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
 .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
 .cookie-decline:hover{background:var(--surface2)}
-.feedback-wrap{position:relative;display:inline-flex}
-.feedback-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--bdr);border-radius:10px;padding:4px;min-width:180px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.feedback-menu.open{display:flex;flex-direction:column}
-.feedback-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:7px;color:var(--txt);font-size:.85rem;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.5px}
-.feedback-item:hover{background:var(--surface2)}
+.more-wrap{position:relative;display:inline-flex}
+.more-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:4px;min-width:190px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.more-menu.open{display:flex;flex-direction:column}
+.more-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:var(--txt);font-size:.88rem;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.5px;background:none;border:none;cursor:pointer;width:100%;text-align:left}
+.more-item:hover{background:var(--surface2)}
+.more-divider{height:1px;background:var(--bdr);margin:4px 0}
 
 /* ── Share modal ──────────────────────────────── */
 #share-modal{position:fixed;bottom:0;left:0;right:0;z-index:1001;padding:0 12px 12px;pointer-events:none;display:flex;justify-content:center}
@@ -564,6 +565,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <symbol id="ic-idea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6m-6-4h6"/><path d="M12 3a6 6 0 0 1 4.243 10.243C15.05 15.45 15 15.72 15 16H9c0-.28-.05-.55-.243-.757A6 6 0 0 1 12 3z"/></symbol>
   <!-- Share -->
   <symbol id="ic-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
+  <symbol id="ic-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -583,17 +585,19 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 <header>
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
-    <div class="feedback-wrap" id="feedback-wrap">
-      <button class="btn btn-ghost btn-sm" onclick="toggleFeedback()" data-i18n-aria="feedback_btn" aria-label="Feedback"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-feedback"></use></svg></button>
-      <div class="feedback-menu" id="feedback-menu">
-        <a class="feedback-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bug"></use></svg> <span data-i18n="feedback_bug">Bug report</span></a>
-        <a class="feedback-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-idea"></use></svg> <span data-i18n="feedback_feature">Feature request</span></a>
+    <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
+    <div class="more-wrap" id="more-wrap">
+      <button class="btn btn-ghost btn-sm" onclick="toggleMore()" aria-label="Meer opties"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-more"></use></svg></button>
+      <div class="more-menu" id="more-menu">
+        <button class="more-item" onclick="toggleTheme();closeMore()"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg> <span data-i18n="hdr_theme">Thema wisselen</span></button>
+        <div class="more-divider" id="more-divider" style="display:none"></div>
+        <button class="more-item" id="btn-back" style="display:none" onclick="goSetup();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="hdr_edit">Aanpassen</span></button>
+        <button class="more-item" id="btn-print" style="display:none" onclick="doPrint();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span data-i18n="hdr_print">Afdrukken</span></button>
+        <div class="more-divider"></div>
+        <a class="more-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bug"></use></svg> <span data-i18n="feedback_bug">Bug melden</span></a>
+        <a class="more-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-idea"></use></svg> <span data-i18n="feedback_feature">Idee indienen</span></a>
       </div>
     </div>
-    <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" data-i18n-aria="hdr_theme" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
-    <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label" data-i18n="hdr_edit">Aanpassen</span></button>
-    <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label" data-i18n="hdr_print">Afdrukken</span></button>
-    <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
   </div>
 </header>
 
@@ -1334,6 +1338,7 @@ function startTournamentUI(){
   $('btn-back').style.display = viewMode ? 'none' : '';
   $('btn-print').style.display = viewMode ? 'none' : '';
   $('btn-share').style.display = viewMode ? 'none' : '';
+  $('more-divider').style.display = viewMode ? 'none' : '';
   const badge=$('share-badge');
   if(badge) badge.style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'':'none';
   const tname=$('logo-tname'), phdr=$('phdr-el');
@@ -1365,6 +1370,7 @@ function goSetup(){
   $('btn-back').style.display='none';
   $('btn-print').style.display='none';
   $('btn-share').style.display='none';
+  $('more-divider').style.display='none';
   if(viewPollInterval){ clearInterval(viewPollInterval); viewPollInterval=null; }
   viewMode=false; _viewInitialized=false;
   $('view-banner').style.display='none';
@@ -1908,13 +1914,12 @@ _sysMq.addEventListener('change', e=>{
   if(!localStorage.getItem('padel-theme')) applyTheme(e.matches?'light':'dark');
 });
 
-// ── Feedback ──────────────────────────────────
-function toggleFeedback(){
-  document.getElementById('feedback-menu').classList.toggle('open');
-}
+// ── More menu ─────────────────────────────────
+function toggleMore(){ $('more-menu').classList.toggle('open'); }
+function closeMore(){ $('more-menu').classList.remove('open'); }
 document.addEventListener('click', e=>{
-  const wrap=document.getElementById('feedback-wrap');
-  if(wrap&&!wrap.contains(e.target)) document.getElementById('feedback-menu').classList.remove('open');
+  const wrap=$('more-wrap');
+  if(wrap&&!wrap.contains(e.target)) closeMore();
 });
 
 // ── Confetti ──────────────────────────────────
@@ -2078,6 +2083,7 @@ function showAmericano(){
   $('btn-back').style.display = viewMode ? 'none' : '';
   $('btn-print').style.display='none';
   $('btn-share').style.display = viewMode ? 'none' : '';
+  $('more-divider').style.display = viewMode ? 'none' : '';
   const tname=$('logo-tname');
   if(tname) tname.textContent=tournamentName||'';
   renderAmericano();
