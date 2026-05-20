@@ -396,7 +396,7 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   border-radius:20px 20px 16px 16px;
   box-shadow:0 -4px 32px rgba(0,0,0,.5),0 0 0 1px rgba(16,185,129,.1);
   padding:16px 18px 14px;
-  max-width:480px;width:100%;
+  max-width:480px;width:100%;text-align:center;
   animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes slideUp{from{transform:translateY(120%);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -408,9 +408,9 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .install-text span{font-size:.78rem;color:rgba(249,250,251,.5);margin-top:1px;display:block}
 .install-close{background:none;border:none;color:rgba(249,250,251,.4);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;flex-shrink:0;border-radius:6px;transition:.15s}
 .install-close:hover{color:#f9fafb;background:rgba(255,255,255,.08)}
-.install-steps{font-size:.8rem;color:rgba(249,250,251,.6);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:10px}
+.install-steps{font-size:.8rem;color:rgba(249,250,251,.6);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:10px;text-align:left}
 .install-steps b{color:#10b981}
-.install-actions{display:flex;gap:8px}
+.install-actions{display:flex;gap:8px;justify-content:center}
 .install-btn-primary{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;background:#10b981;color:#fff;border:none;border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s}
 .install-btn-primary:hover{background:#059669}
 .install-btn-skip{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.5px;background:rgba(255,255,255,.06);color:rgba(249,250,251,.5);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 16px;cursor:pointer;transition:.15s;white-space:nowrap}
@@ -570,6 +570,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <!-- Share -->
   <symbol id="ic-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
   <symbol id="ic-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-ios-share" viewBox="0 0 24 24"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -804,7 +805,7 @@ document.documentElement.lang=LANG;
 
 const I18N={
 nl:{
-  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',feedback_btn:'Feedback',feedback_bug:'Bug melden',feedback_feature:'Idee indienen',cookie_txt:'We gebruiken analytics om te begrijpen hoe bezoekers de site gebruiken. Geen advertenties, geen persoonlijke data.',cookie_accept:'Accepteren',cookie_decline:'Weigeren',share_btn:'Deel',share_title:'Deel dit toernooi',share_desc:'Iedereen met deze link ziet live de bracket en tussenstand — alleen lezen.',share_copy:'Kopieer link',share_copied:'Gekopieerd!',share_close:'Sluiten',share_loading:'Toernooi laden…',share_not_found:'Toernooi niet gevonden.',share_error:'Verbinding mislukt.',share_nudge:'Laat iedereen live meekijken — tik op Deel',view_banner:'👁 Live meekijken — alleen lezen',
+  hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',feedback_btn:'Feedback',feedback_bug:'Bug melden',feedback_feature:'Idee indienen',cookie_txt:'We gebruiken analytics om te begrijpen hoe bezoekers de site gebruiken. Geen advertenties, geen persoonlijke data.',cookie_accept:'Accepteren',cookie_decline:'Weigeren',share_btn:'Deel',share_title:'Deel dit toernooi',share_desc:'Iedereen met deze link ziet live de bracket en tussenstand — alleen lezen.',share_copy:'Kopieer link',share_copied:'Gekopieerd!',share_close:'Sluiten',share_loading:'Toernooi laden…',share_not_found:'Toernooi niet gevonden.',share_error:'Verbinding mislukt.',share_nudge:'Laat iedereen live meekijken — tik op Deel',view_banner:'Live meekijken',
   ob_skip:'Overslaan',ob_back:'← Terug',ob_next:'Volgende →',ob_start:'Starten',
   ob1_title:'Padel Toernooi',
   ob1_body:'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.',
@@ -861,12 +862,12 @@ nl:{
   inst_subtitle_default:'Zet op je beginscherm',inst_close:'Sluiten',
   inst_install:'Installeren',inst_skip:'Niet nu',
   inst_ios_title:'Zet op je beginscherm via Safari',
-  inst_ios_steps:'1. Tik op het <b>Deel</b>-icoon <b>⎦↑⎡</b> onderaan Safari<br>2. Scrol en tik op <b>Zet op beginscherm</b><br>3. Tik op <b>Voeg toe</b> — klaar!',
+  inst_ios_steps:'1. Tik op het <b>Deel</b>-icoon <svg class="icon" viewBox="0 0 24 24" style="vertical-align:middle"><use href="#ic-ios-share"></use></svg> onderaan Safari<br>2. Scrol en tik op <b>Zet op beginscherm</b><br>3. Tik op <b>Voeg toe</b> — klaar!',
   inst_ios_ok:'Begrepen',inst_and_title:'Installeer de app op je beginscherm',
   inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
 },
 en:{
-  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'👁 Live view — read only',
+  hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',
   ob_skip:'Skip',ob_back:'← Back',ob_next:'Next →',ob_start:'Start',
   ob1_title:'Padel Tournament',
   ob1_body:'Organise your own tournament in a few taps — from entering names to the final standings. All in one app, even offline.',
@@ -923,12 +924,12 @@ en:{
   inst_subtitle_default:'Add to home screen',inst_close:'Close',
   inst_install:'Install',inst_skip:'Not now',
   inst_ios_title:'Add to home screen via Safari',
-  inst_ios_steps:'1. Tap the <b>Share</b> icon <b>⎦↑⎡</b> at the bottom of Safari<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
+  inst_ios_steps:'1. Tap the <b>Share</b> icon <svg class="icon" viewBox="0 0 24 24" style="vertical-align:middle"><use href="#ic-ios-share"></use></svg> at the bottom of Safari<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',
 },
 fr:{
-  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'👁 Vue en direct — lecture seule',
+  hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'Vue en direct',
   ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
   ob1_title:'Tournoi de Padel',
   ob1_body:"Organisez votre propre tournoi en quelques clics — de la saisie des noms au classement final. Tout dans une appli, même hors ligne.",
@@ -985,12 +986,12 @@ fr:{
   inst_subtitle_default:"Ajouter à l'écran d'accueil",inst_close:'Fermer',
   inst_install:'Installer',inst_skip:'Pas maintenant',
   inst_ios_title:"Ajouter à l'écran d'accueil via Safari",
-  inst_ios_steps:"1. Appuyez sur l'icône <b>Partager</b> <b>⎦↑⎡</b> en bas de Safari<br>2. Faites défiler et appuyez sur <b>Sur l'écran d'accueil</b><br>3. Appuyez sur <b>Ajouter</b> — terminé !",
+  inst_ios_steps:"1. Appuyez sur l'icône <b>Partager</b> <svg class=\"icon\" viewBox=\"0 0 24 24\" style=\"vertical-align:middle\"><use href=\"#ic-ios-share\"></use></svg> en bas de Safari<br>2. Faites défiler et appuyez sur <b>Sur l'écran d'accueil</b><br>3. Appuyez sur <b>Ajouter</b> — terminé !",
   inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
 },
 de:{
-  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'👁 Live ansehen — nur lesen',
+  hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',
   ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
   ob1_title:'Padel Turnier',
   ob1_body:'Organisiere dein eigenes Turnier in wenigen Taps — von der Namenseingabe bis zur Endabrechnung. Alles in einer App, auch offline.',
@@ -1047,12 +1048,12 @@ de:{
   inst_subtitle_default:'Zum Startbildschirm hinzufügen',inst_close:'Schließen',
   inst_install:'Installieren',inst_skip:'Nicht jetzt',
   inst_ios_title:'Zum Startbildschirm über Safari hinzufügen',
-  inst_ios_steps:'1. Tippe auf das <b>Teilen</b>-Symbol <b>⎦↑⎡</b> unten in Safari<br>2. Scrolle und tippe auf <b>Zum Home-Bildschirm</b><br>3. Tippe auf <b>Hinzufügen</b> — fertig!',
+  inst_ios_steps:'1. Tippe auf das <b>Teilen</b>-Symbol <svg class="icon" viewBox="0 0 24 24" style="vertical-align:middle"><use href="#ic-ios-share"></use></svg> unten in Safari<br>2. Scrolle und tippe auf <b>Zum Home-Bildschirm</b><br>3. Tippe auf <b>Hinzufügen</b> — fertig!',
   inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
 },
 es:{
-  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'👁 Ver en vivo — solo lectura',
+  hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',
   ob_skip:'Saltar',ob_back:'← Atrás',ob_next:'Siguiente →',ob_start:'Iniciar',
   ob1_title:'Torneo de Pádel',
   ob1_body:'Organiza tu propio torneo en pocos toques — desde introducir nombres hasta la clasificación final. Todo en una app, incluso sin conexión.',
@@ -1109,12 +1110,12 @@ es:{
   inst_subtitle_default:'Añadir a la pantalla de inicio',inst_close:'Cerrar',
   inst_install:'Instalar',inst_skip:'Ahora no',
   inst_ios_title:'Añadir a la pantalla de inicio via Safari',
-  inst_ios_steps:'1. Toca el icono de <b>Compartir</b> <b>⎦↑⎡</b> en la parte inferior de Safari<br>2. Desplázate y toca <b>En la pantalla de inicio</b><br>3. Toca <b>Añadir</b> — ¡listo!',
+  inst_ios_steps:'1. Toca el icono de <b>Compartir</b> <svg class="icon" viewBox="0 0 24 24" style="vertical-align:middle"><use href="#ic-ios-share"></use></svg> en la parte inferior de Safari<br>2. Desplázate y toca <b>En la pantalla de inicio</b><br>3. Toca <b>Añadir</b> — ¡listo!',
   inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
 },
 sv:{
-  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'👁 Livevisning — skrivskyddat',
+  hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',
   ob_skip:'Hoppa över',ob_back:'← Tillbaka',ob_next:'Nästa →',ob_start:'Starta',
   ob1_title:'Padelturnering',
   ob1_body:'Organisera din egen turnering med några tryck — från att ange namn till slutresultatet. Allt i en app, även offline.',
@@ -1171,7 +1172,7 @@ sv:{
   inst_subtitle_default:'Lägg till på hemskärmen',inst_close:'Stäng',
   inst_install:'Installera',inst_skip:'Inte nu',
   inst_ios_title:'Lägg till på hemskärmen via Safari',
-  inst_ios_steps:'1. Tryck på <b>Dela</b>-ikonen <b>⎦↑⎡</b> längst ner i Safari<br>2. Scrolla och tryck på <b>Lägg till på hemskärmen</b><br>3. Tryck på <b>Lägg till</b> — klart!',
+  inst_ios_steps:'1. Tryck på <b>Dela</b>-ikonen <svg class="icon" viewBox="0 0 24 24" style="vertical-align:middle"><use href="#ic-ios-share"></use></svg> längst ner i Safari<br>2. Scrolla och tryck på <b>Lägg till på hemskärmen</b><br>3. Tryck på <b>Lägg till</b> — klart!',
   inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
 },
