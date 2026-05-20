@@ -502,6 +502,8 @@ body.light .share-desc{background:rgba(0,0,0,.05)}
 body.light .share-link-inp{background:#f3f4f6;color:#111827}
 .share-copy-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.5px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:9px 14px;cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0}
 .share-copy-btn:hover{opacity:.85}
+#btn-share{position:relative}
+.share-badge{position:absolute;top:3px;right:3px;width:7px;height:7px;background:var(--accent);border-radius:50%;border:1.5px solid var(--bg);animation:vp 1.5s ease-in-out infinite;pointer-events:none}
 /* ── View-only banner ─────────────────────────── */
 #view-banner{background:rgba(16,185,129,.1);border-bottom:1px solid rgba(16,185,129,.25);padding:8px 16px;display:none;align-items:center;justify-content:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.5px;color:var(--accent)}
 .view-pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:vp 1.5s ease-in-out infinite}
@@ -591,7 +593,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
     <button class="btn btn-ghost btn-sm" id="btn-theme" onclick="toggleTheme()" data-i18n-aria="hdr_theme" aria-label="Thema wisselen"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg></button>
     <button class="btn btn-ghost btn-sm" id="btn-back" style="display:none" onclick="goSetup()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span class="btn-label" data-i18n="hdr_edit">Aanpassen</span></button>
     <button class="btn btn-ghost btn-sm" id="btn-print" style="display:none" onclick="doPrint()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span class="btn-label" data-i18n="hdr_print">Afdrukken</span></button>
-    <button class="btn btn-ghost btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
+    <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
   </div>
 </header>
 
@@ -776,7 +778,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.14';
+const APP_VERSION = 'v1.15';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -803,6 +805,7 @@ nl:{
   ob3_body:'<b>Wisselende koppels</b> elke ronde. Iedereen speelt met iedereen samen. De meeste punten over alle rondes wint.',
   ob4_title:'Klaar om te spelen',
   ob4_body:'Kies je type, voer namen in en tik op <b>Starten</b>. Tijdens het toernooi zie je live scores en de tussenstand.',
+  ob5_title:'Deel live met kijkers',ob5_body:'Stuur één link — vrienden volgen de bracket live mee zonder in te loggen.',
   set_title_team:'Teams instellen',set_title_am:'Americano instellen',
   set_lbl_name:'Naam',set_ph_name:'Toernooinaam (optioneel)',
   set_lbl_courts:'Banen',set_lbl_type:'Type',
@@ -864,6 +867,7 @@ en:{
   ob3_body:'<b>Rotating pairs</b> every round. Everyone plays with everyone. The most points across all rounds wins.',
   ob4_title:'Ready to play',
   ob4_body:'Choose your type, enter names and tap <b>Start</b>. During the tournament you\'ll see live scores and standings.',
+  ob5_title:'Share live with viewers',ob5_body:'Send one link — friends follow the bracket live without logging in.',
   set_title_team:'Set up teams',set_title_am:'Set up Americano',
   set_lbl_name:'Name',set_ph_name:'Tournament name (optional)',
   set_lbl_courts:'Courts',set_lbl_type:'Type',
@@ -925,6 +929,7 @@ fr:{
   ob3_body:'<b>Paires tournantes</b> à chaque manche. Tout le monde joue avec tout le monde. Le plus de points sur toutes les manches gagne.',
   ob4_title:'Prêt à jouer',
   ob4_body:'Choisissez votre type, entrez les noms et appuyez sur <b>Démarrer</b>. Pendant le tournoi vous verrez les scores en direct.',
+  ob5_title:'Partagez en direct',ob5_body:'Envoyez un lien — les amis suivent le bracket en direct sans connexion.',
   set_title_team:'Configurer les équipes',set_title_am:'Configurer Americano',
   set_lbl_name:'Nom',set_ph_name:'Nom du tournoi (optionnel)',
   set_lbl_courts:'Courts',set_lbl_type:'Type',
@@ -986,6 +991,7 @@ de:{
   ob3_body:'<b>Wechselnde Paare</b> jede Runde. Jeder spielt mit jedem. Die meisten Punkte über alle Runden gewinnt.',
   ob4_title:'Bereit zum Spielen',
   ob4_body:'Wähle deinen Typ, gib Namen ein und tippe auf <b>Starten</b>. Während des Turniers siehst du Live-Scores und die Tabelle.',
+  ob5_title:'Live teilen',ob5_body:'Link senden — Freunde verfolgen die Bracket live ohne Anmeldung.',
   set_title_team:'Teams einrichten',set_title_am:'Americano einrichten',
   set_lbl_name:'Name',set_ph_name:'Turniername (optional)',
   set_lbl_courts:'Plätze',set_lbl_type:'Typ',
@@ -1047,6 +1053,7 @@ es:{
   ob3_body:'<b>Parejas rotativas</b> cada ronda. Todos juegan con todos. El que más puntos acumule en todas las rondas gana.',
   ob4_title:'Listo para jugar',
   ob4_body:'Elige tu tipo, introduce los nombres y pulsa <b>Iniciar</b>. Durante el torneo verás puntuaciones en directo y la clasificación.',
+  ob5_title:'Comparte en vivo',ob5_body:'Envía un enlace — los amigos siguen el bracket en vivo sin iniciar sesión.',
   set_title_team:'Configurar equipos',set_title_am:'Configurar Americano',
   set_lbl_name:'Nombre',set_ph_name:'Nombre del torneo (opcional)',
   set_lbl_courts:'Pistas',set_lbl_type:'Tipo',
@@ -1108,6 +1115,7 @@ sv:{
   ob3_body:'<b>Roterande par</b> varje runda. Alla spelar med alla. Den med flest poäng totalt vinner.',
   ob4_title:'Redo att spela',
   ob4_body:'Välj din typ, ange namn och tryck på <b>Starta</b>. Under turneringen ser du live-poäng och tabellen.',
+  ob5_title:'Dela live med åskådare',ob5_body:'Skicka en länk — vänner följer bracketen live utan att logga in.',
   set_title_team:'Ställ in lag',set_title_am:'Ställ in Americano',
   set_lbl_name:'Namn',set_ph_name:'Turneringsnamn (valfritt)',
   set_lbl_courts:'Banor',set_lbl_type:'Typ',
@@ -1326,6 +1334,8 @@ function startTournamentUI(){
   $('btn-back').style.display = viewMode ? 'none' : '';
   $('btn-print').style.display = viewMode ? 'none' : '';
   $('btn-share').style.display = viewMode ? 'none' : '';
+  const badge=$('share-badge');
+  if(badge) badge.style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'':'none';
   const tname=$('logo-tname'), phdr=$('phdr-el');
   if(tname) tname.textContent=tournamentName||'';
   if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
@@ -1953,12 +1963,13 @@ const OB_ICONS = [
   icon('ic-padel','icon-xl'),
   icon('ic-trophy','icon-xl'),
   icon('ic-rotate','icon-xl'),
+  icon('ic-share','icon-xl'),
   icon('ic-check','icon-xl'),
 ];
 let obStep = 0;
 
 function showOnboarding(){
-  if(localStorage.getItem('padel-onboarding')) return;
+  if(localStorage.getItem('padel-ob-v2')) return;
   obStep = 0;
   $('onboarding').classList.remove('hidden');
   renderObStep();
@@ -1986,7 +1997,7 @@ function obNav(dir){
 }
 
 function dismissOnboarding(){
-  localStorage.setItem('padel-onboarding', '1');
+  localStorage.setItem('padel-ob-v2', '1');
   $('onboarding').classList.add('hidden');
 }
 
@@ -2212,6 +2223,8 @@ async function pushToSupabase(){
 }
 
 async function shareTournament(){
+  localStorage.setItem('padel-share-seen','1');
+  const badge=$('share-badge'); if(badge) badge.style.display='none';
   if(!shareCode){
     const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     shareCode=Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
