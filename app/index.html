@@ -651,6 +651,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <div class="rules-opts" id="rules-type">
         <button class="rbtn active" onclick="setTType('team')" id="rbtn-type-team">Team<span class="rbtn-sub" data-i18n="set_type_sub_team">vast koppel</span></button>
         <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
+        <button class="rbtn" onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano<span class="rbtn-sub" data-i18n="set_type_sub_mex">stand koppels</span></button>
         <button class="rbtn" onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin<span class="rbtn-sub" data-i18n="set_type_sub_rr">iedereen vs iedereen</span></button>
       </div>
     </div>
@@ -792,7 +793,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.15';
+const APP_VERSION = 'v1.16';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -825,6 +826,8 @@ nl:{
   set_lbl_courts:'Banen',set_lbl_type:'Type',
   set_type_team:'Team',set_type_sub_team:'vast koppel',
   set_type_am:'Americano',set_type_sub_am:'wissel koppel',
+  set_type_mex:'Mexicano',set_type_sub_mex:'stand koppels',set_title_mex:'Mexicano instellen',
+  set_desc_auto_mex:'Één naam per regel. Deelbaar door 4. Koppels worden elke ronde opnieuw ingedeeld op basis van de actuele stand.',
   set_type_sub_rr:'iedereen vs iedereen',set_title_rr:'Round Robin instellen',
   set_desc_auto_rr:"Één naam per regel, minimaal 4. Iedereen speelt tegen iedereen. De eindstand bepaalt de winnaar.",
   set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',
@@ -853,7 +856,7 @@ nl:{
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
   am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
-  res_am:'{label}Americano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
+  res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
   res_bracket_done:' · Bracket klaar',
   fin_winner:'Toernooi winnaar!',fin_winner_trio:'Toernooi winnaar (Trio)!',
   fin_title:'Eindstand',fin_1st:'Winnaar',fin_2nd:'2e plaats',fin_3rd:'3e plaats',
@@ -887,6 +890,8 @@ en:{
   set_lbl_courts:'Courts',set_lbl_type:'Type',
   set_type_team:'Team',set_type_sub_team:'fixed pair',
   set_type_am:'Americano',set_type_sub_am:'rotating pair',
+  set_type_mex:'Mexicano',set_type_sub_mex:'ranking pairs',set_title_mex:'Set up Mexicano',
+  set_desc_auto_mex:'One name per line. Divisible by 4. Partners are re-paired by current standings each round.',
   set_type_sub_rr:'everyone vs everyone',set_title_rr:'Set up Round Robin',
   set_desc_auto_rr:'One name per line, minimum 4. Everyone plays against everyone. Final standings determine the winner.',
   set_lbl_format:'Match format',set_lbl_pts:'Points/match',
@@ -915,7 +920,7 @@ en:{
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
   am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
-  res_am:'{label}Americano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
+  res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
   res_bracket_done:' · Bracket done',
   fin_winner:'Tournament winner!',fin_winner_trio:'Tournament winner (Trio)!',
   fin_title:'Final standings',fin_1st:'Winner',fin_2nd:'2nd place',fin_3rd:'3rd place',
@@ -949,6 +954,8 @@ fr:{
   set_lbl_courts:'Courts',set_lbl_type:'Type',
   set_type_team:'Équipe',set_type_sub_team:'paire fixe',
   set_type_am:'Americano',set_type_sub_am:'paire tournante',
+  set_type_mex:'Mexicano',set_type_sub_mex:'paires par classement',set_title_mex:'Configurer Mexicano',
+  set_desc_auto_mex:'Un nom par ligne. Divisible par 4. Les partenaires sont reformés selon le classement actuel à chaque manche.',
   set_type_sub_rr:'tout le monde vs tout le monde',set_title_rr:'Configurer Round Robin',
   set_desc_auto_rr:"Un nom par ligne, minimum 4. Tout le monde joue contre tout le monde. Le classement final détermine le vainqueur.",
   set_lbl_format:'Format de match',set_lbl_pts:'Points/match',
@@ -977,7 +984,7 @@ fr:{
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
   am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
-  res_am:'{label}Americano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
+  res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
   res_bracket_done:' · Bracket terminé',
   fin_winner:'Vainqueur du tournoi !',fin_winner_trio:'Vainqueur du tournoi (Trio) !',
   fin_title:'Classement final',fin_1st:'Vainqueur',fin_2nd:'2e place',fin_3rd:'3e place',
@@ -1011,6 +1018,8 @@ de:{
   set_lbl_courts:'Plätze',set_lbl_type:'Typ',
   set_type_team:'Team',set_type_sub_team:'festes Paar',
   set_type_am:'Americano',set_type_sub_am:'wechselndes Paar',
+  set_type_mex:'Mexicano',set_type_sub_mex:'Tabellen-Paare',set_title_mex:'Mexicano einrichten',
+  set_desc_auto_mex:'Ein Name pro Zeile. Durch 4 teilbar. Partner werden jede Runde nach dem aktuellen Tabellenstand neu eingeteilt.',
   set_type_sub_rr:'alle gegen alle',set_title_rr:'Round Robin einrichten',
   set_desc_auto_rr:'Ein Name pro Zeile, mindestens 4. Jeder spielt gegen jeden. Die Endtabelle bestimmt den Sieger.',
   set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',
@@ -1039,7 +1048,7 @@ de:{
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
   am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
-  res_am:'{label}Americano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
+  res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
   res_bracket_done:' · Bracket fertig',
   fin_winner:'Turniersieger!',fin_winner_trio:'Turniersieger (Trio)!',
   fin_title:'Endabrechnung',fin_1st:'Sieger',fin_2nd:'2. Platz',fin_3rd:'3. Platz',
@@ -1073,6 +1082,8 @@ es:{
   set_lbl_courts:'Pistas',set_lbl_type:'Tipo',
   set_type_team:'Equipo',set_type_sub_team:'pareja fija',
   set_type_am:'Americano',set_type_sub_am:'pareja rotativa',
+  set_type_mex:'Mexicano',set_type_sub_mex:'parejas por ranking',set_title_mex:'Configurar Mexicano',
+  set_desc_auto_mex:'Un nombre por línea. Divisible entre 4. Las parejas se reforoman según la clasificación actual en cada ronda.',
   set_type_sub_rr:'todos contra todos',set_title_rr:'Configurar Round Robin',
   set_desc_auto_rr:'Un nombre por línea, mínimo 4. Todos juegan contra todos. La clasificación final determina al ganador.',
   set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',
@@ -1101,7 +1112,7 @@ es:{
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
   am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
-  res_am:'{label}Americano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
+  res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
   res_bracket_done:' · Bracket completado',
   fin_winner:'¡Ganador del torneo!',fin_winner_trio:'¡Ganador del torneo (Trío)!',
   fin_title:'Clasificación final',fin_1st:'Ganador',fin_2nd:'2.º puesto',fin_3rd:'3.er puesto',
@@ -1135,6 +1146,8 @@ sv:{
   set_lbl_courts:'Banor',set_lbl_type:'Typ',
   set_type_team:'Lag',set_type_sub_team:'fast par',
   set_type_am:'Americano',set_type_sub_am:'roterande par',
+  set_type_mex:'Mexicano',set_type_sub_mex:'rankingpar',set_title_mex:'Ställ in Mexicano',
+  set_desc_auto_mex:'Ett namn per rad. Delbart med 4. Parners sätts ihop efter aktuell tabell varje runda.',
   set_type_sub_rr:'alla mot alla',set_title_rr:'Ställ in Round Robin',
   set_desc_auto_rr:'Ett namn per rad, minst 4. Alla spelar mot alla. Slutresultatet avgör vinnaren.',
   set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',
@@ -1163,7 +1176,7 @@ sv:{
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
   am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
-  res_am:'{label}Americano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
+  res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
   res_bracket_done:' · Bracket klart',
   fin_winner:'Turneringsvinnare!',fin_winner_trio:'Turneringsvinnare (Trio)!',
   fin_title:'Slutresultat',fin_1st:'Vinnare',fin_2nd:'2:a plats',fin_3rd:'3:e plats',
@@ -1213,17 +1226,18 @@ function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUP
 function setTType(typ){
   mode=typ;
   document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',['team','americano','roundrobin'][i]===typ);
+    b.classList.toggle('active',['team','americano','mexicano','roundrobin'][i]===typ);
   });
-  $('rules-gpm-row').style.display = typ==='americano' ? 'none' : '';
-  $('rules-pts-row').style.display = typ==='americano' ? '' : 'none';
-  $('mode-toggle-row').style.display = typ==='americano' ? 'none' : '';
-  const titleKey = typ==='americano'?'set_title_am':typ==='roundrobin'?'set_title_rr':'set_title_team';
+  const isAm=typ==='americano'||typ==='mexicano';
+  $('rules-gpm-row').style.display = isAm ? 'none' : '';
+  $('rules-pts-row').style.display = isAm ? '' : 'none';
+  $('mode-toggle-row').style.display = isAm ? 'none' : '';
+  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
-  const descKey = typ==='americano'?'set_desc_auto_am':typ==='roundrobin'?'set_desc_auto_rr':'set_desc_auto_team';
+  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':'set_desc_auto_team';
   $('mode-auto-desc').textContent = t(descKey);
-  $('btn-shuffle').style.display = typ==='americano' ? 'none' : '';
-  if(typ==='americano') setMode('auto');
+  $('btn-shuffle').style.display = isAm ? 'none' : '';
+  if(isAm) setMode('auto');
 }
 
 function setMatchPts(n){
@@ -1247,6 +1261,7 @@ function setCourts(n){
 
 function doStartAny(){
   if(mode==='americano') return startAmericano();
+  if(mode==='mexicano') return startMexicano();
   return doStart();
 }
 
@@ -2075,6 +2090,38 @@ function buildAmericanoSchedule(n){
   return rounds;
 }
 
+// ── Mexicano ──────────────────────────────────
+// Builds one round of Mexicano: players sorted by pts descending,
+// then paired: rank1+rank2 vs rank3+rank4, rank5+rank6 vs rank7+rank8, etc.
+function buildMexicanoRound(roundNum){
+  const ranked=[...AP].sort((a,b)=>b.pts-a.pts);
+  const matches=[];
+  for(let i=0;i<AP.length;i+=4){
+    matches.push({
+      id:`mex-${roundNum}-${i/4}`, round:roundNum,
+      a1:ranked[i].id, a2:ranked[i+1].id,
+      b1:ranked[i+2].id, b2:ranked[i+3].id,
+      sa:0, sb:0, done:false
+    });
+  }
+  return matches;
+}
+
+function startMexicano(){
+  const ns=names().filter(Boolean);
+  if(ns.length<4){alert(t('val_min4'));return;}
+  if(ns.length%4!==0){
+    const add=4-ns.length%4;
+    alert(t('val_am_div4',{n:ns.length,add,rem:ns.length%4}));
+    return;
+  }
+  const shuffled=[...ns].sort(()=>Math.random()-.5);
+  AP=shuffled.map((name,id)=>({id,name,pts:0}));
+  AM=[buildMexicanoRound(1)]; // Only round 1 — subsequent rounds generated after each round completes
+  showAmericano();
+  saveState();
+}
+
 function startAmericano(){
   const ns=names().filter(Boolean);
   if(ns.length<4){alert(t('val_min4'));return;}
@@ -2111,9 +2158,10 @@ function renderAmericano(){
   let h='';
   AM.forEach((matches,ri)=>{
     const done=matches.every(m=>m.done);
+    const mexBadge=mode==='mexicano'?`<span style="font-size:.72rem;opacity:.5;font-weight:400;margin-left:8px">★ stand</span>`:'';
     h+=`<div class="am-round${done?' am-round-done':''}">
       <div class="am-round-hdr">
-        <span class="am-round-lbl">${t('am_round',{n:ri+1})} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
+        <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':''}
       </div>
       ${matches.map(m=>renderAmMatch(m)).join('')}
@@ -2204,6 +2252,13 @@ function amSave(matchId){
   m.done=true;
   AP[m.a1].pts+=m.sa; AP[m.a2].pts+=m.sa;
   AP[m.b1].pts+=m.sb; AP[m.b2].pts+=m.sb;
+  // Mexicano: auto-generate next round when current round is complete
+  if(mode==='mexicano'){
+    const ri=m.round-1; // 0-indexed round index
+    if(AM[ri].every(x=>x.done) && AM.length<AP.length-1){
+      AM.push(buildMexicanoRound(AM.length+1));
+    }
+  }
   renderAmericano(); saveState();
 }
 
@@ -2213,6 +2268,8 @@ function amUndo(matchId){
   AP[m.a1].pts-=m.sa; AP[m.a2].pts-=m.sa;
   AP[m.b1].pts-=m.sb; AP[m.b2].pts-=m.sb;
   m.done=false; m.sa=0; m.sb=0;
+  // Mexicano: pairings after this round are based on standings — truncate them
+  if(mode==='mexicano') AM=AM.slice(0,m.round);
   renderAmericano(); saveState();
 }
 
@@ -2229,7 +2286,7 @@ function renderAmSt(){
 // ── Supabase sharing ──────────────────────────
 
 function _getSharePayload(){
-  if(mode==='americano') return {mode,AP,AM,R,tournamentName};
+  if(mode==='americano'||mode==='mexicano') return {mode,AP,AM,R,tournamentName};
   return {mode,T,PM,PW,PL,pmid,pDone,R,tournamentName};
 }
 
@@ -2284,7 +2341,7 @@ function copyShareLink(){
 function _loadStateObj(s){
   if(!s) return;
   if(s.R) R=s.R; tournamentName=s.tournamentName||'';
-  if(s.mode==='americano'){ mode='americano'; AP=s.AP||[]; AM=s.AM||[]; }
+  if(s.mode==='americano'||s.mode==='mexicano'){ mode=s.mode; AP=s.AP||[]; AM=s.AM||[]; }
   else{ mode=s.mode||'team'; T=s.T||[]; PM=s.PM||[]; PW=s.PW||[]; PL=s.PL||[]; pmid=s.pmid||0; pDone=s.pDone||false; }
 }
 
@@ -2292,11 +2349,11 @@ function _applyViewState(s){
   _loadStateObj(s);
   if(!_viewInitialized){
     _viewInitialized=true;
-    if(mode==='americano') showAmericano();
+    if(mode==='americano'||mode==='mexicano') showAmericano();
     else startTournamentUI();
     $('view-banner').style.display='flex';
   } else {
-    if(mode==='americano') renderAmericano();
+    if(mode==='americano'||mode==='mexicano') renderAmericano();
     else{ renderPoule(); renderSt(); if(mode!=='roundrobin') renderBracket(); else if(pDone) renderRRChamp(); }
   }
 }
@@ -2337,7 +2394,7 @@ async function initViewMode(code){
 // ── State opslaan ─────────────────────────────
 function saveState(){
   if(viewMode) return;
-  if(mode==='americano'){
+  if(mode==='americano'||mode==='mexicano'){
     if(!AP.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName}));
   } else {
@@ -2352,11 +2409,12 @@ function loadState(){
     const raw=localStorage.getItem('padel-state');
     if(!raw) return;
     const s=JSON.parse(raw);
-    if(!s.T?.length&&s.mode!=='americano') return;
+    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano') return;
     savedState=s;
     const label=s.tournamentName?`${s.tournamentName} · `:'';
-    if(s.mode==='americano'){
-      $('resume-info').textContent=t('res_am',{label,n:s.AP?.length||0});
+    if(s.mode==='americano'||s.mode==='mexicano'){
+      const key=s.mode==='mexicano'?'res_mex':'res_am';
+      $('resume-info').textContent=t(key,{label,n:s.AP?.length||0});
     } else {
       const done=s.PM.filter(m=>m.winner).length, tot=s.PM.length;
       $('resume-info').textContent=t('res_team',{label,teams:s.T.length,done,tot})+(s.pDone?t('res_bracket_done'):'');
@@ -2371,8 +2429,8 @@ function resumeFromBanner(){
   tournamentName=savedState.tournamentName||'';
   const inp=$('inp-tname'); if(inp) inp.value=tournamentName;
   $('resume-banner').classList.add('hidden');
-  if(savedState.mode==='americano'){
-    mode='americano';
+  if(savedState.mode==='americano'||savedState.mode==='mexicano'){
+    mode=savedState.mode;
     ({AP,AM}=savedState);
     savedState=null;
     showAmericano();
