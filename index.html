@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gratis Padel Bracket Generator — Knockout, Americano &amp; Round Robin | Geen account, Werkt offline</title>
-  <meta name="description" content="Maak gratis padel toernooien in seconden. Knockout brackets, Americano en Round Robin. Geen account nodig, werkt offline, beschikbaar in 6 talen.">
-  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel round robin, tournament bracket maker, padel toernooi maken">
+  <title>Gratis Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin | Geen account, Werkt offline</title>
+  <meta name="description" content="Maak gratis padel toernooien in seconden. Knockout brackets, Americano, Mexicano en Round Robin. Geen account nodig, werkt offline, beschikbaar in 6 talen.">
+  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel mexicano generator, padel round robin, tournament bracket maker, padel toernooi maken">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -15,8 +15,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/">
-  <meta property="og:title" content="Gratis Padel Bracket Generator — Knockout, Americano &amp; Round Robin">
-  <meta property="og:description" content="Maak gratis padel toernooien in seconden. Knockout brackets, Americano en Round Robin. Geen account nodig, werkt offline, beschikbaar in 6 talen.">
+  <meta property="og:title" content="Gratis Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin">
+  <meta property="og:description" content="Maak gratis padel toernooien in seconden. Knockout brackets, Americano, Mexicano en Round Robin. Geen account nodig, werkt offline, beschikbaar in 6 talen.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
   <meta property="og:locale:alternate" content="sv_SE">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gratis Padel Bracket Generator — Geen account, Werkt offline">
-  <meta name="twitter:description" content="Knockout brackets, Americano &amp; Round Robin — gratis, geen account, werkt offline. 6 talen.">
+  <meta name="twitter:description" content="Knockout brackets, Americano, Mexicano &amp; Round Robin — gratis, geen account, werkt offline. 6 talen.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/">
@@ -48,7 +48,7 @@
     "url": "https://padel-bracket.com",
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Knockout bracket generator","Padel Americano generator","Round Robin generator","Works offline","No account needed","6 languages"]
+    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","Works offline","No account needed","6 languages"]
   }
   </script>
   <script type="application/ld+json">
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "Welke toernooiformats worden ondersteund?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt drie formats: knockout bracket (poule → halve finale → finale), Americano (wisselende koppels, punten per speler) en Round Robin (iedereen speelt tegen iedereen)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt vier formats: knockout bracket (poule → halve finale → finale), Americano (wisselende koppels, punten per speler), Mexicano (koppels op basis van tussenstand) en Round Robin (iedereen speelt tegen iedereen)." }
       },
       {
         "@type": "Question",
@@ -515,8 +515,8 @@
   <div class="features">
     <div class="feature">
       <div class="feature-icon" style="background:rgba(16,185,129,.12)">🏆</div>
-      <h3>Drie formats: Bracket, Americano & Round Robin</h3>
-      <p>Kies het format dat bij jouw groep past. Bracket (poule + knock-out), Americano (wisselende koppels) of Round Robin (iedereen vs iedereen).</p>
+      <h3>Vier formats: Bracket, Americano, Mexicano & Round Robin</h3>
+      <p>Kies het format dat bij jouw groep past. Bracket (poule + knock-out), Americano (wisselende koppels), Mexicano (koppels op basis van stand) of Round Robin (iedereen vs iedereen).</p>
     </div>
     <div class="feature">
       <div class="feature-icon" style="background:rgba(251,191,36,.1)">🔄</div>
@@ -576,9 +576,9 @@
 
 <!-- FORMATS -->
 <section class="section">
-  <h2 class="section-title">Twee toernooiformats</h2>
+  <h2 class="section-title">Vier toernooiformats</h2>
   <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
-  <div class="formats">
+  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="format team">
       <h3>Team toernooi</h3>
       <p>Vaste duo's of trio's spelen poules, waarna de top 4 doorgaat naar de finale-bracket en de rest naar de troostfinale.</p>
@@ -596,7 +596,26 @@
         <li>Partners wisselen elke ronde</li>
         <li>Puntentelling per speler</li>
         <li>Live ranglijst</li>
-        <li>8, 12 of 16 spelers</li>
+        <li>8, 12, 16 of 24 spelers</li>
+      </ul>
+    </div>
+    <div class="format am">
+      <h3>Mexicano</h3>
+      <p>Net als Americano, maar de koppels worden na elke ronde opnieuw bepaald op basis van de actuele tussenstand.</p>
+      <ul>
+        <li>Koppels op basis van ranglijst</li>
+        <li>Puntentelling per speler</li>
+        <li>Wordt competitiever per ronde</li>
+        <li>8, 12, 16 of 24 spelers</li>
+      </ul>
+    </div>
+    <div class="format team">
+      <h3>Round Robin</h3>
+      <p>Elk team speelt tegen elk ander team. Eerlijk, overzichtelijk en geschikt voor competitieve clubtoernooien.</p>
+      <ul>
+        <li>Iedereen speelt tegen iedereen</li>
+        <li>Automatische standen</li>
+        <li>4 tot 16 spelers</li>
       </ul>
     </div>
   </div>
@@ -612,7 +631,11 @@
     </details>
     <details class="faq-item">
       <summary>Welke toernooiformats worden ondersteund?</summary>
-      <p>PadelBracket ondersteunt drie formats: <strong>knockout bracket</strong> (poule → halve finale → finale), <strong>Americano</strong> (wisselende koppels, punten per speler) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+      <p>PadelBracket ondersteunt vier formats: <strong>knockout bracket</strong> (poule → halve finale → finale), <strong>Americano</strong> (wisselende koppels, punten per speler), <strong>Mexicano</strong> (koppels op basis van tussenstand) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+    </details>
+    <details class="faq-item">
+      <summary>Wat is het verschil tussen Americano en Mexicano?</summary>
+      <p>Bij <strong>Americano</strong> worden de koppels vooraf bepaald via een vast rotatieschema — iedereen speelt precies één keer samen. Bij <strong>Mexicano</strong> worden de koppels na elke ronde opnieuw bepaald op basis van de actuele ranglijst: rank 1 en 2 spelen samen tegen rank 3 en 4, enzovoort. Mexicano wordt steeds competitiever naarmate het toernooi vordert.</p>
     </details>
     <details class="faq-item">
       <summary>Hoeveel spelers kan ik gebruiken?</summary>
