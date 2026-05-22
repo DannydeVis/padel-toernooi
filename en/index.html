@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PadelBracket — Free Padel Tournament Generator &amp; Bracket Maker</title>
-  <meta name="description" content="Create free padel tournaments: knockout brackets, Americano and Round Robin. No account needed. Works offline on the court. In 6 languages.">
+  <title>Free Padel Bracket Generator — Knockout, Americano &amp; Round Robin | No Signup, Works Offline</title>
+  <meta name="description" content="Make free padel tournaments in seconds. Knockout brackets, Americano and Round Robin. No account needed, works offline, available in 6 languages.">
   <meta name="keywords" content="padel tournament generator, padel bracket maker, padel americano generator, padel round robin, tournament bracket maker, free padel app">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://padel-bracket.com/en/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/en/">
-  <meta property="og:title" content="PadelBracket — Free Padel Tournament Generator">
-  <meta property="og:description" content="Create free padel tournaments: knockout brackets, Americano &amp; Round Robin. No account, works offline.">
+  <meta property="og:title" content="Free Padel Bracket Generator — Knockout, Americano &amp; Round Robin">
+  <meta property="og:description" content="Make free padel tournaments in seconds. Knockout brackets, Americano and Round Robin. No account needed, works offline, available in 6 languages.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="nl_NL">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PadelBracket — Free Padel Tournament Generator">
-  <meta name="twitter:description" content="Brackets, Americano &amp; Round Robin — free, no account, offline.">
+  <meta name="twitter:title" content="Free Padel Bracket Generator — No Signup, Works Offline">
+  <meta name="twitter:description" content="Knockout brackets, Americano &amp; Round Robin — free, no account, works offline. 6 languages.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/">
@@ -40,7 +40,7 @@
     "url": "https://padel-bracket.com",
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Knockout brackets","Americano format","Round robin","Live scoring","No signup required","Offline support"]
+    "featureList": ["Knockout bracket generator","Padel Americano generator","Round Robin generator","Works offline","No account needed","6 languages"]
   }
   </script>
   <script type="application/ld+json">
@@ -371,6 +371,8 @@
       .step:not(:last-child)::after { display:none; }
       .stats-bar { gap: 28px; }
     }
+    .players-row{text-align:center;padding:20px 24px 0;font-size:.9rem;color:var(--txt2);margin-bottom:-40px}
+    .players-row strong{color:var(--txt);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px}
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
     #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
@@ -402,9 +404,9 @@
     Free · No account needed · Works offline too
   </div>
 
-  <h1>Free Padel <em>Tournament Generator</em></h1>
-  <p class="hero-kicker">Brackets · Americano · Round Robin</p>
-  <p class="hero-sub">Set up a padel tournament in 30 seconds. Groups, bracket and live standings — all on your phone.</p>
+  <h1>Free Padel <em>Bracket Generator</em></h1>
+  <p class="hero-kicker">Padel Tournament Generator · Knockout · Americano · Round Robin</p>
+  <p class="hero-sub">Set up a padel tournament in 30 seconds. Free, no account, works offline. Knockout brackets, Americano and Round Robin. Available in 6 languages.</p>
 
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
@@ -499,6 +501,8 @@
   <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Languages supported</div></div>
   <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
 </div>
+
+<div class="players-row"><span>Supported player counts: </span><strong>4 · 6 · 8 · 10 · 12 · 16 · 20 · 24</strong> players</div>
 
 <!-- FEATURES -->
 <section class="section">
@@ -635,8 +639,43 @@
   </a>
 </section>
 
+<!-- FORMAT LINKS -->
+<section class="section" style="padding-bottom:60px">
+  <h2 class="section-title">Choose your format</h2>
+  <p class="section-sub">Each format has its own generator, rules and FAQ.</p>
+  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+    <div class="format am" style="text-decoration:none">
+      <h3><a href="/americano/" style="color:inherit;text-decoration:none">Americano Generator →</a></h3>
+      <p>Rotating partners, live leaderboard. 4–24 players. The most popular padel format for social sessions.</p>
+      <ul>
+        <li>Partners rotate every round</li>
+        <li>Points per player</li>
+        <li>4 to 24 players</li>
+      </ul>
+    </div>
+    <div class="format team">
+      <h3><a href="/round-robin/" style="color:inherit;text-decoration:none">Round Robin Generator →</a></h3>
+      <p>Every team plays every other team. Fair and complete. Ideal for smaller groups.</p>
+      <ul>
+        <li>Fixed pairs throughout</li>
+        <li>Everyone plays everyone</li>
+        <li>4 to 16 players</li>
+      </ul>
+    </div>
+    <div class="format team" style="--c1:#10b981;--c2:#fbbf24">
+      <h3><a href="/knockout/" style="color:inherit;text-decoration:none">Knockout Bracket Generator →</a></h3>
+      <p>Group stage into knockout rounds. Semi-finals, final and consolation bracket included.</p>
+      <ul>
+        <li>Groups + knockout rounds</li>
+        <li>Consolation bracket</li>
+        <li>4 to 24 players</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <p>Padel Bracket — Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a></p>
+  <p>Padel Bracket — Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a></p>
 </footer>
 
 <script>
