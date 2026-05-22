@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padel Knockout Bracket Generator — Free Tournament Draw | PadelBracket</title>
+  <meta name="description" content="Free padel knockout bracket generator. Create a single elimination draw in seconds. No account needed, works offline. 4 to 24 players.">
+  <meta name="keywords" content="padel knockout bracket generator, padel bracket generator, padel knockout tournament, padel draw maker, padel single elimination, free padel bracket">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="/thumbnail.png" type="image/png" sizes="240x240">
+  <link rel="apple-touch-icon" href="/thumbnail.png">
+  <link rel="canonical" href="https://padel-bracket.com/knockout/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PadelBracket">
+  <meta property="og:url" content="https://padel-bracket.com/knockout/">
+  <meta property="og:title" content="Padel Knockout Bracket Generator — Free Tournament Draw">
+  <meta property="og:description" content="Free padel knockout bracket generator. Groups, semi-finals and final. No account needed, works offline. 4 to 24 players.">
+  <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Padel Knockout Bracket Generator — Free Tournament Draw">
+  <meta name="twitter:description" content="Generate a padel knockout bracket in seconds. Groups, semi-finals and final. No account, works offline.">
+  <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
+  <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
+  <link rel="alternate" hreflang="en" href="https://padel-bracket.com/knockout/">
+  <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/knockout/">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PadelBracket — Knockout Generator",
+    "alternateName": "Padel Knockout Bracket Generator",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Web, iOS, Android (PWA)",
+    "description": "Free padel knockout bracket generator with group stage, semi-finals and final. Works offline, no account needed.",
+    "url": "https://padel-bracket.com/app/",
+    "inLanguage": ["nl","en","fr","de","es","sv"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "featureList": ["Padel knockout bracket generator","Group stage + knockout rounds","Consolation bracket","Works offline","No account needed","4 to 24 players"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does the knockout bracket generator work offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser or lose internet on the court." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an account to use the knockout generator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. No registration or login required. Open the app and create your knockout bracket directly — completely free." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many players does knockout work for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's knockout format works for 4 to 24 players (2 to 12 teams). The app automatically creates groups, quarter-finals, semi-finals and a final." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the group stage work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Teams are divided into groups and play a Round Robin within their group. The top teams from each group advance to the knockout bracket. The remaining teams play a consolation bracket for lower places." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between knockout and Americano?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In a knockout tournament, pairs are fixed and teams are eliminated after losing. In Americano, partners rotate every round and everyone plays until the end. Knockout suits structured club tournaments; Americano is perfect for casual social sessions." }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0f1a;
+      --surface: #111827;
+      --surface2:#1f2937;
+      --accent:  #10b981;
+      --accent2: #059669;
+      --gold:    #fbbf24;
+      --txt:     #f9fafb;
+      --txt2:    rgba(249,250,251,.55);
+      --bdr:     rgba(255,255,255,.08);
+      --nav-bg:  rgba(10,15,26,.85);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:      #f9fafb;
+        --surface: #ffffff;
+        --surface2:#f3f4f6;
+        --txt:     #111827;
+        --txt2:    rgba(17,24,39,.55);
+        --bdr:     rgba(0,0,0,.10);
+        --nav-bg:  rgba(249,250,251,.85);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Barlow', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
+      color: var(--txt); text-decoration: none;
+    }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-cta {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      padding: 9px 20px; font-family: 'Barlow', sans-serif; font-weight: 600;
+      font-size: .9rem; cursor: pointer; text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .nav-cta:hover { background: var(--accent2); }
+    .nav-cta:active { transform: scale(.96); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,191,36,.1) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(16,185,129,.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: .04;
+      background-image: linear-gradient(var(--bdr) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3);
+      color: var(--accent); border-radius: 99px; padding: 6px 16px;
+      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
+      margin-bottom: 28px;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
+      line-height: .95; letter-spacing: -1px; margin-bottom: 10px;
+    }
+    h1 em { color: var(--accent); font-style: normal; display: block; }
+    .hero-kicker {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--txt2);
+      max-width: 520px; margin: 20px auto 44px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      border-radius: 12px; padding: 16px 32px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.15rem; letter-spacing: .5px;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      box-shadow: 0 4px 24px rgba(16,185,129,.3);
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(16,185,129,.45); }
+    .btn-primary:active { transform: scale(.97); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--txt2); text-decoration: none;
+      border: 1px solid var(--bdr); border-radius: 12px; padding: 15px 28px;
+      font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 1rem;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.25); color: var(--txt); }
+    .hero-note { margin-top: 20px; font-size: .82rem; color: var(--txt2); }
+
+    .stats-bar {
+      display: flex; justify-content: center; gap: 48px;
+      padding: 40px 24px; flex-wrap: wrap;
+      border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr);
+      margin: 0 0 24px;
+    }
+    .stat { text-align: center; }
+    .stat-n {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2.6rem; color: var(--accent); line-height: 1;
+    }
+    .stat-lbl { font-size: .82rem; color: var(--txt2); margin-top: 4px; }
+
+    .players-row{text-align:center;padding:0 24px 60px;font-size:.9rem;color:var(--txt2)}
+    .players-row strong{color:var(--txt);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px}
+
+    .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 12px;
+    }
+    .section-sub { text-align: center; color: var(--txt2); max-width: 480px; margin: 0 auto 56px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 28px; transition: border-color .2s, transform .2s;
+    }
+    .feature:hover { border-color: rgba(16,185,129,.3); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-size: 1.4rem;
+    }
+    .feature h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; letter-spacing: .3px; margin-bottom: 8px;
+    }
+    .feature p { font-size: .92rem; color: var(--txt2); line-height: 1.6; }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+    .step { padding: 32px 24px; text-align: center; position: relative; }
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+      color: var(--txt2); font-size: 1.2rem;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--accent);
+      color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
+    .step p { font-size:.85rem; color:var(--txt2); }
+
+    .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--bdr);
+      border-radius: 12px; overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer; padding: 18px 20px;
+      font-weight: 600; font-size: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 1.4rem; color: var(--accent);
+      transition: transform .2s; flex-shrink: 0; margin-left: 12px;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { padding: 0 20px 18px; color: var(--txt2); line-height: 1.65; }
+
+    .cta-wrap {
+      text-align: center; padding: 80px 24px 100px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,.08) 0%, transparent 70%);
+    }
+    .cta-wrap h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 16px;
+    }
+    .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
+
+    .other-formats {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    }
+    .format-link {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 12px;
+      padding: 16px 24px; text-decoration: none; color: var(--txt2);
+      font-size: .9rem; font-weight: 600; transition: border-color .15s, color .15s;
+    }
+    .format-link:hover { border-color: rgba(16,185,129,.3); color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--bdr); padding: 32px 24px;
+      text-align: center; color: var(--txt2); font-size: .82rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step:not(:last-child)::after { display:none; }
+      .stats-bar { gap: 28px; }
+    }
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    #cookie-banner.hidden{display:none}
+    #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
+    .cookie-accept{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
+    .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
+    .cookie-decline:hover{background:var(--surface2)}
+  </style>
+</head>
+<body>
+
+<div id="cookie-banner" class="hidden">
+  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Privacy policy</a></p>
+  <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+  <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+</div>
+
+<nav>
+  <a class="nav-logo" href="/en/">Padel <em>•</em> Bracket</a>
+  <a class="nav-cta" href="/app/">Start Knockout →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Free · No account · Works offline
+  </div>
+
+  <h1>Padel Knockout <em>Bracket Generator</em></h1>
+  <p class="hero-kicker">Free · No Signup · Works Offline</p>
+  <p class="hero-sub">Generate a padel knockout tournament bracket instantly. Groups, semi-finals and final — all managed automatically.</p>
+
+  <div class="hero-btns">
+    <a class="btn-primary" href="/app/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Create knockout bracket
+    </a>
+    <a class="btn-secondary" href="#how-it-works">
+      How does it work?
+    </a>
+  </div>
+  <p class="hero-note">Works on phone, tablet and desktop · No install required</p>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Setup time</div></div>
+  <div class="stat"><div class="stat-n">24</div><div class="stat-lbl">Max. players</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Languages</div></div>
+</div>
+<div class="players-row"><span>Supported player counts: </span><strong>4 · 6 · 8 · 10 · 12 · 16 · 20 · 24</strong> players</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <h2 class="section-title">Everything you need for a knockout tournament</h2>
+  <p class="section-sub">Group stage to grand final — fully automatic, free, and offline.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">🏆</div>
+      <h3>Groups + knockout rounds</h3>
+      <p>Teams are divided into groups, play a round robin within the group, and the top teams advance directly to the knockout bracket with semi-finals and final.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🥉</div>
+      <h3>Consolation bracket</h3>
+      <p>Teams that don't advance to the winners bracket play a consolation bracket so everyone gets more games. Places 5 through 9 are determined.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">📱</div>
+      <h3>Offline &amp; free</h3>
+      <p>After the first load, the app works fully offline on the court. No registration, no login — open and play immediately. No App Store needed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <h2 class="section-title">Ready in 4 steps</h2>
+  <p class="section-sub">Set up your knockout tournament in under a minute.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Enter names</h4>
+      <p>Type one name per line. The app automatically creates pairs and divides them into groups.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Play group stage</h4>
+      <p>Teams play a round robin within their group. Enter scores after each match.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Knockout rounds</h4>
+      <p>Top teams advance to semi-finals and final. The bracket is drawn automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Champion 🏆</h4>
+      <p>After the final, the winner is shown with confetti and full final standings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Does it work offline?</summary>
+      <p>Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser or lose internet on the court.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need an account?</summary>
+      <p>No. No registration or login required. Open the app and create your knockout bracket directly — completely free.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How many players does knockout work for?</summary>
+      <p>PadelBracket's knockout format works for <strong>4 to 24 players</strong> (2 to 12 teams). The app automatically creates groups, semi-finals and a final based on the number of players.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How does the group stage work?</summary>
+      <p>Teams are divided into groups and play a Round Robin within their group. The top teams from each group advance to the winners bracket. The remaining teams play a consolation bracket so everyone gets more games.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is the difference between knockout and Americano?</summary>
+      <p>In a knockout tournament, pairs are fixed and teams can be eliminated. In Americano, partners rotate every round and everyone plays until the end. Knockout suits structured club tournaments; Americano is perfect for casual social sessions.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-wrap">
+  <h2>Ready to compete?</h2>
+  <p>Open the app, enter the names and create your knockout bracket. Free, no account, works offline.</p>
+  <a class="btn-primary" href="/app/" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Create bracket for free
+  </a>
+</section>
+
+<!-- OTHER FORMATS -->
+<div class="other-formats">
+  <a class="format-link" href="/en/">🏠 All formats</a>
+  <a class="format-link" href="/americano/">Americano Generator →</a>
+  <a class="format-link" href="/round-robin/">Round Robin Generator →</a>
+</div>
+
+<footer>
+  <p>Padel Bracket — Free knockout bracket generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a></p>
+</footer>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{analytics_storage:'denied'});
+  gtag('js',new Date());
+  gtag('config','G-M5L2R20XXD',{anonymize_ip:true});
+  if(localStorage.getItem('padel-consent')==='granted'){
+    gtag('consent','update',{analytics_storage:'granted'});
+  }
+  (function(){
+    if(!localStorage.getItem('padel-consent')){
+      document.getElementById('cookie-banner').classList.remove('hidden');
+    }
+  })();
+  function acceptCookies(){
+    localStorage.setItem('padel-consent','granted');
+    gtag('consent','update',{analytics_storage:'granted'});
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+  function declineCookies(){
+    localStorage.setItem('padel-consent','denied');
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+</script>
+</body>
+</html>
