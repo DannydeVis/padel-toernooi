@@ -319,6 +319,7 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-round-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--b-muted)}
 .am-round-done .am-round-hdr{opacity:.65}
 .am-match{padding:12px 14px;border-top:1px solid var(--bdr)}
+.am-bye{text-align:center;padding:6px 14px 10px;font-size:.8rem;color:var(--txt2);opacity:.6;font-style:italic;border-top:1px solid var(--bdr)}
 .am-match-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:10px}
 .am-team{font-weight:600;font-size:.83rem;color:var(--card-txt);line-height:1.3}
 .am-team.r{text-align:right}.am-team.won{color:var(--accent);font-weight:700}
@@ -827,13 +828,13 @@ nl:{
   set_type_team:'Team',set_type_sub_team:'vast koppel',
   set_type_am:'Americano',set_type_sub_am:'wissel koppel',
   set_type_mex:'Mexicano',set_type_sub_mex:'stand koppels',set_title_mex:'Mexicano instellen',
-  set_desc_auto_mex:'Één naam per regel. Deelbaar door 4. Koppels worden elke ronde opnieuw ingedeeld op basis van de actuele stand.',
+  set_desc_auto_mex:'Één naam per regel. Even aantal vereist (4–24 spelers). Koppels worden elke ronde opnieuw ingedeeld op basis van de actuele stand.',
   set_type_sub_rr:'iedereen vs iedereen',set_title_rr:'Round Robin instellen',
   set_desc_auto_rr:"Één naam per regel, minimaal 4. Iedereen speelt tegen iedereen. De eindstand bepaalt de winnaar.",
   set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',
   set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
   set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
-  set_desc_auto_am:'Één naam per regel. Deelbaar door 4 (bijv. 8, 12 of 16 spelers). Partners wisselen elke ronde.',
+  set_desc_auto_am:'Één naam per regel. Even aantal vereist (4–24 spelers). Bij 6, 10, 14 of 18 spelers: 2 spelers rusten per ronde. Partners wisselen elke ronde.',
   set_ph_auto:'Voer namen in...',set_ph_manual:'Voer teamnamen in...',
   set_desc_manual:'Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.',
   set_btn_start:'Starten',set_btn_shuffle:'Schudden',set_default:'standaard',
@@ -844,6 +845,7 @@ nl:{
   val_ok_names_trio:"✓ {n} spelers → {nTeams} teams ({nDuo} duo's, {nTrio} trio's)",
   val_min4:'Voer minimaal 4 namen in.',
   val_am_div4:'Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt {n} spelers — voeg nog {add} toe of verwijder {rem}.',
+  val_am_even:'Americano vereist een even aantal spelers.\n\nJij hebt {n} spelers — voeg er 1 toe of verwijder er 1.',
   tab_poule:'Pouleronde',tab_bracket:'Bracket',tab_standings:'Tussenstand',
   sec_poule:'Pouleronde',sec_winners:'Winnaarsbracket — Top 4',sec_losers:'Verliezersfinale — Plaatsen 5–9',
   rnd_label:'Ronde {r}',rnd_progress:'{done} van {tot} wedstrijden gespeeld',
@@ -854,7 +856,7 @@ nl:{
   brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
-  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',
+  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
   res_bracket_done:' · Bracket klaar',
@@ -891,13 +893,13 @@ en:{
   set_type_team:'Team',set_type_sub_team:'fixed pair',
   set_type_am:'Americano',set_type_sub_am:'rotating pair',
   set_type_mex:'Mexicano',set_type_sub_mex:'ranking pairs',set_title_mex:'Set up Mexicano',
-  set_desc_auto_mex:'One name per line. Divisible by 4. Partners are re-paired by current standings each round.',
+  set_desc_auto_mex:'One name per line. Even number required (4–24 players). Partners are re-paired by current standings each round.',
   set_type_sub_rr:'everyone vs everyone',set_title_rr:'Set up Round Robin',
   set_desc_auto_rr:'One name per line, minimum 4. Everyone plays against everyone. Final standings determine the winner.',
   set_lbl_format:'Match format',set_lbl_pts:'Points/match',
   set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
   set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
-  set_desc_auto_am:'One name per line. Must be divisible by 4 (e.g. 8, 12 or 16 players). Partners rotate each round.',
+  set_desc_auto_am:'One name per line. Even number required (4–24 players). With 6, 10, 14 or 18 players: 2 players rest per round. Partners rotate each round.',
   set_ph_auto:'Enter names...',set_ph_manual:'Enter team names...',
   set_desc_manual:'One team name per line. Use <b style="color:var(--accent)">/</b> for a trio, <b style="color:var(--accent)">&</b> for a pair — or just type a name.',
   set_btn_start:'Start',set_btn_shuffle:'Shuffle',set_default:'default',
@@ -908,6 +910,7 @@ en:{
   val_ok_names_trio:'✓ {n} players → {nTeams} teams ({nDuo} pairs, {nTrio} trios)',
   val_min4:'Enter at least 4 names.',
   val_am_div4:'Americano requires a number of players divisible by 4.\n\nYou have {n} players — add {add} more or remove {rem}.',
+  val_am_even:'Americano requires an even number of players.\n\nYou have {n} players — add or remove 1.',
   tab_poule:'Pool round',tab_bracket:'Bracket',tab_standings:'Standings',
   sec_poule:'Pool round',sec_winners:'Winners bracket — Top 4',sec_losers:'Consolation bracket — Places 5–9',
   rnd_label:'Round {r}',rnd_progress:'{done} of {tot} matches played',
@@ -918,7 +921,7 @@ en:{
   brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
-  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',
+  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
   res_bracket_done:' · Bracket done',
@@ -955,13 +958,13 @@ fr:{
   set_type_team:'Équipe',set_type_sub_team:'paire fixe',
   set_type_am:'Americano',set_type_sub_am:'paire tournante',
   set_type_mex:'Mexicano',set_type_sub_mex:'paires par classement',set_title_mex:'Configurer Mexicano',
-  set_desc_auto_mex:'Un nom par ligne. Divisible par 4. Les partenaires sont reformés selon le classement actuel à chaque manche.',
+  set_desc_auto_mex:'Un nom par ligne. Nombre pair requis (4–24 joueurs). Les partenaires sont reformés selon le classement actuel à chaque manche.',
   set_type_sub_rr:'tout le monde vs tout le monde',set_title_rr:'Configurer Round Robin',
   set_desc_auto_rr:"Un nom par ligne, minimum 4. Tout le monde joue contre tout le monde. Le classement final détermine le vainqueur.",
   set_lbl_format:'Format de match',set_lbl_pts:'Points/match',
   set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
   set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
-  set_desc_auto_am:'Un nom par ligne. Doit être divisible par 4 (p.ex. 8, 12 ou 16 joueurs). Les partenaires changent chaque manche.',
+  set_desc_auto_am:'Un nom par ligne. Nombre pair requis (4–24 joueurs). Avec 6, 10, 14 ou 18 joueurs : 2 joueurs se reposent par manche. Les partenaires changent chaque manche.',
   set_ph_auto:'Entrez les noms...',set_ph_manual:"Entrez les noms d'équipes...",
   set_desc_manual:'Un nom d\'équipe par ligne. Utilisez <b style="color:var(--accent)">/</b> pour un trio, <b style="color:var(--accent)">&</b> pour une paire — ou tapez simplement un nom.',
   set_btn_start:'Démarrer',set_btn_shuffle:'Mélanger',set_default:'défaut',
@@ -972,6 +975,7 @@ fr:{
   val_ok_names_trio:'✓ {n} joueurs → {nTeams} équipes ({nDuo} paires, {nTrio} trios)',
   val_min4:'Saisissez au moins 4 noms.',
   val_am_div4:'Americano nécessite un nombre de joueurs divisible par 4.\n\nVous avez {n} joueurs — ajoutez {add} de plus ou supprimez {rem}.',
+  val_am_even:'Americano nécessite un nombre pair de joueurs.\n\nVous avez {n} joueurs — ajoutez ou supprimez-en 1.',
   tab_poule:'Poule',tab_bracket:'Bracket',tab_standings:'Classement',
   sec_poule:'Poule',sec_winners:'Tableau des gagnants — Top 4',sec_losers:'Finale de consolation — Places 5–9',
   rnd_label:'Manche {r}',rnd_progress:'{done} sur {tot} matchs joués',
@@ -982,7 +986,7 @@ fr:{
   brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
-  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',
+  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
   res_bracket_done:' · Bracket terminé',
@@ -1019,13 +1023,13 @@ de:{
   set_type_team:'Team',set_type_sub_team:'festes Paar',
   set_type_am:'Americano',set_type_sub_am:'wechselndes Paar',
   set_type_mex:'Mexicano',set_type_sub_mex:'Tabellen-Paare',set_title_mex:'Mexicano einrichten',
-  set_desc_auto_mex:'Ein Name pro Zeile. Durch 4 teilbar. Partner werden jede Runde nach dem aktuellen Tabellenstand neu eingeteilt.',
+  set_desc_auto_mex:'Ein Name pro Zeile. Gerade Zahl erforderlich (4–24 Spieler). Partner werden jede Runde nach dem aktuellen Tabellenstand neu eingeteilt.',
   set_type_sub_rr:'alle gegen alle',set_title_rr:'Round Robin einrichten',
   set_desc_auto_rr:'Ein Name pro Zeile, mindestens 4. Jeder spielt gegen jeden. Die Endtabelle bestimmt den Sieger.',
   set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',
   set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
   set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
-  set_desc_auto_am:'Ein Name pro Zeile. Muss durch 4 teilbar sein (z.B. 8, 12 oder 16 Spieler). Partner wechseln jede Runde.',
+  set_desc_auto_am:'Ein Name pro Zeile. Gerade Zahl erforderlich (4–24 Spieler). Bei 6, 10, 14 oder 18 Spielern: 2 Spieler haben jede Runde Pause. Partner wechseln jede Runde.',
   set_ph_auto:'Namen eingeben...',set_ph_manual:'Teamnamen eingeben...',
   set_desc_manual:'Ein Teamname pro Zeile. Verwende <b style="color:var(--accent)">/</b> für ein Trio, <b style="color:var(--accent)">&</b> für ein Paar — oder gib einfach einen Namen ein.',
   set_btn_start:'Starten',set_btn_shuffle:'Mischen',set_default:'Standard',
@@ -1036,6 +1040,7 @@ de:{
   val_ok_names_trio:'✓ {n} Spieler → {nTeams} Teams ({nDuo} Paare, {nTrio} Trios)',
   val_min4:'Mindestens 4 Namen eingeben.',
   val_am_div4:'Americano benötigt eine durch 4 teilbare Spielerzahl.\n\nDu hast {n} Spieler — füge {add} hinzu oder entferne {rem}.',
+  val_am_even:'Americano benötigt eine gerade Anzahl Spieler.\n\nDu hast {n} Spieler — füge einen hinzu oder entferne einen.',
   tab_poule:'Gruppenphase',tab_bracket:'Bracket',tab_standings:'Tabelle',
   sec_poule:'Gruppenphase',sec_winners:'Gewinnerbracket — Top 4',sec_losers:'Verliererfinale — Plätze 5–9',
   rnd_label:'Runde {r}',rnd_progress:'{done} von {tot} Spielen gespielt',
@@ -1046,7 +1051,7 @@ de:{
   brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
-  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',
+  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
   res_bracket_done:' · Bracket fertig',
@@ -1083,13 +1088,13 @@ es:{
   set_type_team:'Equipo',set_type_sub_team:'pareja fija',
   set_type_am:'Americano',set_type_sub_am:'pareja rotativa',
   set_type_mex:'Mexicano',set_type_sub_mex:'parejas por ranking',set_title_mex:'Configurar Mexicano',
-  set_desc_auto_mex:'Un nombre por línea. Divisible entre 4. Las parejas se reforoman según la clasificación actual en cada ronda.',
+  set_desc_auto_mex:'Un nombre por línea. Número par requerido (4–24 jugadores). Las parejas se reforman según la clasificación actual en cada ronda.',
   set_type_sub_rr:'todos contra todos',set_title_rr:'Configurar Round Robin',
   set_desc_auto_rr:'Un nombre por línea, mínimo 4. Todos juegan contra todos. La clasificación final determina al ganador.',
   set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',
   set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
   set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
-  set_desc_auto_am:'Un nombre por línea. Debe ser divisible entre 4 (p.ej. 8, 12 o 16 jugadores). Las parejas rotan cada ronda.',
+  set_desc_auto_am:'Un nombre por línea. Número par requerido (4–24 jugadores). Con 6, 10, 14 o 18 jugadores: 2 descansan cada ronda. Las parejas rotan cada ronda.',
   set_ph_auto:'Introduce nombres...',set_ph_manual:'Introduce nombres de equipos...',
   set_desc_manual:'Un nombre de equipo por línea. Usa <b style="color:var(--accent)">/</b> para un trío, <b style="color:var(--accent)">&</b> para una pareja — o simplemente escribe un nombre.',
   set_btn_start:'Iniciar',set_btn_shuffle:'Mezclar',set_default:'por defecto',
@@ -1100,6 +1105,7 @@ es:{
   val_ok_names_trio:'✓ {n} jugadores → {nTeams} equipos ({nDuo} parejas, {nTrio} tríos)',
   val_min4:'Introduce al menos 4 nombres.',
   val_am_div4:'Americano requiere un número de jugadores divisible entre 4.\n\nTienes {n} jugadores — añade {add} más o elimina {rem}.',
+  val_am_even:'Americano requiere un número par de jugadores.\n\nTienes {n} jugadores — añade o elimina 1.',
   tab_poule:'Fase de grupos',tab_bracket:'Bracket',tab_standings:'Clasificación',
   sec_poule:'Fase de grupos',sec_winners:'Bracket de ganadores — Top 4',sec_losers:'Final de consolación — Puestos 5–9',
   rnd_label:'Ronda {r}',rnd_progress:'{done} de {tot} partidos jugados',
@@ -1110,7 +1116,7 @@ es:{
   brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
-  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',
+  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
   res_bracket_done:' · Bracket completado',
@@ -1147,13 +1153,13 @@ sv:{
   set_type_team:'Lag',set_type_sub_team:'fast par',
   set_type_am:'Americano',set_type_sub_am:'roterande par',
   set_type_mex:'Mexicano',set_type_sub_mex:'rankingpar',set_title_mex:'Ställ in Mexicano',
-  set_desc_auto_mex:'Ett namn per rad. Delbart med 4. Parners sätts ihop efter aktuell tabell varje runda.',
+  set_desc_auto_mex:'Ett namn per rad. Jämnt antal krävs (4–24 spelare). Partners sätts ihop efter aktuell tabell varje runda.',
   set_type_sub_rr:'alla mot alla',set_title_rr:'Ställ in Round Robin',
   set_desc_auto_rr:'Ett namn per rad, minst 4. Alla spelar mot alla. Slutresultatet avgör vinnaren.',
   set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',
   set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
   set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
-  set_desc_auto_am:'Ett namn per rad. Måste vara delbart med 4 (t.ex. 8, 12 eller 16 spelare). Partners roterar varje runda.',
+  set_desc_auto_am:'Ett namn per rad. Jämnt antal krävs (4–24 spelare). Med 6, 10, 14 eller 18 spelare: 2 spelare vilar per runda. Partners roterar varje runda.',
   set_ph_auto:'Ange namn...',set_ph_manual:'Ange lagnamn...',
   set_desc_manual:'Ett lagnamn per rad. Använd <b style="color:var(--accent)">/</b> för en trio, <b style="color:var(--accent)">&</b> för ett par — eller skriv bara ett namn.',
   set_btn_start:'Starta',set_btn_shuffle:'Blanda',set_default:'standard',
@@ -1164,6 +1170,7 @@ sv:{
   val_ok_names_trio:'✓ {n} spelare → {nTeams} lag ({nDuo} par, {nTrio} trior)',
   val_min4:'Ange minst 4 namn.',
   val_am_div4:'Americano kräver ett antal spelare delbart med 4.\n\nDu har {n} spelare — lägg till {add} till eller ta bort {rem}.',
+  val_am_even:'Americano kräver ett jämnt antal spelare.\n\nDu har {n} spelare — lägg till eller ta bort 1.',
   tab_poule:'Poolrunda',tab_bracket:'Bracket',tab_standings:'Tabell',
   sec_poule:'Poolrunda',sec_winners:'Vinnarbracket — Topp 4',sec_losers:'Tröstfinal — Plats 5–9',
   rnd_label:'Runda {r}',rnd_progress:'{done} av {tot} matcher spelade',
@@ -1174,7 +1181,7 @@ sv:{
   brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
-  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',
+  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
   res_bracket_done:' · Bracket klart',
@@ -2065,18 +2072,18 @@ function editTeam(id){
 
 // ── Americano ─────────────────────────────────
 function buildAmericanoSchedule(n){
-  // Uses circle algorithm: fix player 0, rotate rest.
-  // Pairs are formed by mirroring positions: arr[i]+arr[n-1-i].
-  // Guarantees each player partners every other exactly once over n-1 rounds.
+  // Circle algorithm: fix player 0, rotate rest. n-1 rounds, floor(n/4) courts per round.
+  // When n%4==2, the middle pair sits out (bye) each round — rotates naturally.
+  const courts=Math.floor(n/4);
   let circle=[];
   for(let i=1;i<n;i++) circle.push(i);
   const rounds=[];
   for(let r=0;r<n-1;r++){
     const arr=[0,...circle];
     const pairs=[];
-    for(let i=0;i<n/2;i++) pairs.push([arr[i],arr[n-1-i]]);
+    for(let i=0;i<Math.floor(n/2);i++) pairs.push([arr[i],arr[n-1-i]]);
     const matches=[];
-    for(let i=0;i<pairs.length/2;i++){
+    for(let i=0;i<courts;i++){
       matches.push({
         id:`am-${r}-${i}`, round:r+1,
         a1:pairs[i][0], a2:pairs[i][1],
@@ -2095,12 +2102,13 @@ function buildAmericanoSchedule(n){
 // then paired: rank1+rank2 vs rank3+rank4, rank5+rank6 vs rank7+rank8, etc.
 function buildMexicanoRound(roundNum){
   const ranked=[...AP].sort((a,b)=>b.pts-a.pts);
+  const courts=Math.floor(AP.length/4);
   const matches=[];
-  for(let i=0;i<AP.length;i+=4){
+  for(let i=0;i<courts;i++){
     matches.push({
-      id:`mex-${roundNum}-${i/4}`, round:roundNum,
-      a1:ranked[i].id, a2:ranked[i+1].id,
-      b1:ranked[i+2].id, b2:ranked[i+3].id,
+      id:`mex-${roundNum}-${i}`, round:roundNum,
+      a1:ranked[i*4].id, a2:ranked[i*4+1].id,
+      b1:ranked[i*4+2].id, b2:ranked[i*4+3].id,
       sa:0, sb:0, done:false
     });
   }
@@ -2110,11 +2118,7 @@ function buildMexicanoRound(roundNum){
 function startMexicano(){
   const ns=names().filter(Boolean);
   if(ns.length<4){alert(t('val_min4'));return;}
-  if(ns.length%4!==0){
-    const add=4-ns.length%4;
-    alert(t('val_am_div4',{n:ns.length,add,rem:ns.length%4}));
-    return;
-  }
+  if(ns.length%2!==0){alert(t('val_am_even',{n:ns.length}));return;}
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=[buildMexicanoRound(1)]; // Only round 1 — subsequent rounds generated after each round completes
@@ -2125,11 +2129,7 @@ function startMexicano(){
 function startAmericano(){
   const ns=names().filter(Boolean);
   if(ns.length<4){alert(t('val_min4'));return;}
-  if(ns.length%4!==0){
-    const add=4-ns.length%4;
-    alert(t('val_am_div4',{n:ns.length,add,rem:ns.length%4}));
-    return;
-  }
+  if(ns.length%2!==0){alert(t('val_am_even',{n:ns.length}));return;}
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=buildAmericanoSchedule(AP.length);
@@ -2154,17 +2154,25 @@ function showAmericano(){
   renderAmericano();
 }
 
+function getByePlayers(matches){
+  const active=new Set();
+  matches.forEach(m=>{active.add(m.a1);active.add(m.a2);active.add(m.b1);active.add(m.b2);});
+  return AP.filter(p=>!active.has(p.id));
+}
+
 function renderAmericano(){
   let h='';
   AM.forEach((matches,ri)=>{
     const done=matches.every(m=>m.done);
     const mexBadge=mode==='mexicano'?`<span style="font-size:.72rem;opacity:.5;font-weight:400;margin-left:8px">★ stand</span>`:'';
+    const byes=getByePlayers(matches);
+    const byeHtml=byes.length?`<div class="am-bye">${t('am_bye')}: ${byes.map(p=>p.name).join(' & ')}</div>`:'';
     h+=`<div class="am-round${done?' am-round-done':''}">
       <div class="am-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':''}
       </div>
-      ${matches.map(m=>renderAmMatch(m)).join('')}
+      ${matches.map(m=>renderAmMatch(m)).join('')}${byeHtml}
     </div>`;
   });
   h+=renderAmSt();
