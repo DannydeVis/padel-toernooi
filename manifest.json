@@ -3,7 +3,7 @@
   "short_name": "PadelBracket",
   "description": "Gratis padel toernooien: brackets, Americano en Round Robin. Offline, geen account.",
   "lang": "nl",
-  "start_url": "./?utm_source=pwa",
+  "start_url": "/app/?utm_source=pwa",
   "display": "standalone",
   "background_color": "#111827",
   "theme_color": "#10b981",
