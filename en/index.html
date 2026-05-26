@@ -148,10 +148,9 @@
     .nav-cta { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:9px 20px; font-family:'Barlow',sans-serif; font-weight:600; font-size:.9rem; cursor:pointer; text-decoration:none; transition:background .15s,transform .1s; }
     .nav-cta:hover { background:var(--accent2); }
     .nav-cta:active { transform:scale(.96); }
-    .nav-lang { display:flex; align-items:center; gap:2px; background:var(--bdr); border-radius:8px; padding:4px; font-family:'Barlow',sans-serif; font-size:.8rem; font-weight:700; }
-    .nav-lang a,.nav-lang span { padding:4px 10px; border-radius:5px; text-decoration:none; color:var(--txt-muted); transition:background .15s,color .15s; }
-    .nav-lang a:hover { background:rgba(255,255,255,.08); color:var(--txt); }
-    .nav-lang span { background:var(--card); color:var(--txt); }
+    .nav-lang select { appearance:none; -webkit-appearance:none; background:var(--card); color:var(--txt); border:1px solid var(--bdr); border-radius:8px; padding:6px 28px 6px 10px; font-family:'Barlow',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 8px center; transition:border-color .15s; }
+    .nav-lang select:hover { border-color:var(--accent); }
+    .nav-lang select:focus { outline:none; border-color:var(--accent); }
 
     .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 24px 60px; position:relative; overflow:hidden; }
     .hero-bg { position:absolute; inset:0; z-index:0; background: radial-gradient(ellipse 80% 60% at 50% 0%,rgba(16,185,129,.13) 0%,transparent 70%), radial-gradient(ellipse 50% 40% at 80% 80%,rgba(139,92,246,.08) 0%,transparent 60%); }
@@ -285,9 +284,26 @@
 
 <nav>
   <a class="nav-logo" href="/en/">Padel <em>•</em> Bracket</a>
-  <div class="nav-lang"><a href="/">NL</a><span>EN</span></div>
+  <div class="nav-lang">
+    <select onchange="switchLang(this.value)" aria-label="Choose language">
+      <option value="nl">🇳🇱 NL</option>
+      <option value="en" selected>🇬🇧 EN</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="sv">🇸🇪 SV</option>
+    </select>
+  </div>
   <a class="nav-cta" href="/app/">Open app →</a>
 </nav>
+<script>
+function switchLang(l){
+  if(l==='nl'){location.href='/';return;}
+  if(l==='en'){location.href='/en/';return;}
+  localStorage.setItem('padel-lang',l);
+  location.href='/app/';
+}
+</script>
 
 <!-- HERO -->
 <section class="hero">
