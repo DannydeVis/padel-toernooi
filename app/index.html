@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadelBracket — Padel Toernooi Generator &amp; Bracket Maker</title>
 <meta name="description" content="Organiseer padel toernooien met poules, brackets en live stand. Gratis, offline, geen account.">
+<meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano, padel mexicano, round robin, export padel results, download padel tournament results, padel americano export csv">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
@@ -374,8 +375,13 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   .champ-wrap p{color:#666!important}
   /* Print header */
   .phdr{display:block!important;color:#111!important;border-bottom-color:#ccc!important}
-  @page{size:landscape;margin:1.2cm}
+  /* Export print overlay */
+  #export-print-wrap{display:block!important;position:fixed;top:0;left:0;width:100%;background:#fff;padding:24px;font-family:sans-serif;color:#111;z-index:9999}
+  #screen-tournament,#screen-americano,#screen-setup,header{display:none!important}
+  @page{size:A4;margin:1.5cm}
 }
+#export-print-wrap{display:none}
+.export-bar{display:flex;gap:8px;justify-content:flex-end;padding:10px 18px 4px;border-top:1px solid var(--bdr)}
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
 /* SVG ICONS */
@@ -547,6 +553,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <!-- Users -->
   <symbol id="ic-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <!-- Clipboard/list -->
+  <symbol id="ic-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
   <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></symbol>
   <!-- Trophy -->
   <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M6 5h12v5a6 6 0 0 1-12 0z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></symbol>
@@ -727,6 +734,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <div class="st-wrap">
         <h3 data-i18n="tab_standings">Tussenstand</h3>
         <table class="st-tbl" id="sttbl"></table>
+        <div id="st-export-bar"></div>
       </div>
       <div id="rr-champ" style="display:none"></div>
     </div>
@@ -857,6 +865,7 @@ nl:{
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
   am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',
+  export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
   res_bracket_done:' · Bracket klaar',
@@ -922,6 +931,7 @@ en:{
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
   am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',
+  export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
   res_bracket_done:' · Bracket done',
@@ -987,6 +997,7 @@ fr:{
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
   am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',
+  export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
   res_bracket_done:' · Bracket terminé',
@@ -1052,6 +1063,7 @@ de:{
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
   am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',
+  export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
   res_bracket_done:' · Bracket fertig',
@@ -1117,6 +1129,7 @@ es:{
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
   am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',
+  export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
   res_bracket_done:' · Bracket completado',
@@ -1182,6 +1195,7 @@ sv:{
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
   am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',
+  export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
   res_bracket_done:' · Bracket klart',
@@ -1624,6 +1638,8 @@ function renderSt(){
     h+=`<tr class="${topN>=0 && i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
+  const eb=$('st-export-bar');
+  if(eb) eb.innerHTML=PM.some(m=>m.winner)?renderExportBar():'';
 }
 
 // ── Playoff ───────────────────────────────────
@@ -2286,7 +2302,8 @@ function renderAmSt(){
   sorted.forEach((p,i)=>{
     h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
   });
-  return h+`</table></div>`;
+  const bar=AM.flat().some(m=>m.done)?renderExportBar():'';
+  return h+`</table></div>`+bar;
 }
 
 // ── Supabase sharing ──────────────────────────
@@ -2507,6 +2524,8 @@ function renderStats(){
     </table>
     <div class="stats-export">
       <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} ${t('fin_copy')}</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
     </div>
   </div>`;
 }
@@ -2524,6 +2543,87 @@ function copyStats(){
     const btn=$('stats-copy-btn');
     if(btn){ btn.innerHTML=`${icon('ic-check')} ${t('fin_copied')}`; setTimeout(()=>btn.innerHTML=`${icon('ic-clipboard')} ${t('fin_copy')}`,2000); }
   }).catch(()=>alert(t('fin_copy_err')));
+}
+
+// ── Export ────────────────────────────────────
+function renderExportBar(){
+  return `<div class="export-bar">
+    <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
+    <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
+  </div>`;
+}
+
+function _apName(id){ return (AP.find(p=>p.id===id)||AP[id]||{name:'?'}).name; }
+
+function buildExportData(){
+  const locale=LANG==='nl'?'nl-NL':LANG;
+  const date=new Date().toLocaleDateString(locale);
+  const name=tournamentName||'Padel Toernooi';
+  const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',roundrobin:'Round Robin'}[mode]||mode;
+  if(mode==='americano'||mode==='mexicano'){
+    const standings=[...AP].sort((a,b)=>b.pts-a.pts);
+    const matches=AM.flat().filter(m=>m.done);
+    return{name,date,fmtLabel,standings,matches};
+  }
+  const standings=getStandings();
+  const matches=PM.filter(m=>m.winner);
+  return{name,date,fmtLabel,standings,matches};
+}
+
+function exportCSV(){
+  const{name,date,fmtLabel,standings,matches}=buildExportData();
+  const esc=v=>{const s=String(v??'');return(s.includes(',')||s.includes('"')||s.includes('\n'))?'"'+s.replace(/"/g,'""')+'"':s;};
+  const row=(...cols)=>cols.map(esc).join(',');
+  let lines=['sep=,'];
+  lines.push(row(t('export_tournament'),name));
+  lines.push(row(t('export_format'),fmtLabel));
+  lines.push(row('Datum',date));
+  lines.push('');
+  if(mode==='americano'||mode==='mexicano'){
+    lines.push(row('#',t('am_col_player'),t('am_col_pts')));
+    standings.forEach((p,i)=>lines.push(row(i+1,p.name,p.pts)));
+    lines.push('');
+    lines.push(row(t('export_round'),'Team A','','Team B','',t('export_score')));
+    matches.forEach(m=>lines.push(row(m.round,_apName(m.a1)+' & '+_apName(m.a2),m.sa,_apName(m.b1)+' & '+_apName(m.b2),m.sb,m.sa+'-'+m.sb)));
+  } else {
+    lines.push(row('#',t('st_col_team'),t('st_col_played'),t('st_col_wins'),t('st_col_losses')));
+    standings.forEach((s,i)=>lines.push(row(i+1,s.name,s.played,s.wins,s.losses)));
+    lines.push('');
+    lines.push(row(t('export_round'),'Team A','','Team B','',t('export_score')));
+    matches.forEach(m=>lines.push(row(m.round,(T[m.a]||{name:'?'}).name,m.ga,(T[m.b]||{name:'?'}).name,m.gb,m.ga+'-'+m.gb)));
+  }
+  const csv='﻿'+lines.join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=(name.replace(/\s+/g,'-').toLowerCase()||'padel-toernooi')+'.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function exportPrint(){
+  const{name,date,fmtLabel,standings,matches}=buildExportData();
+  let stRows='',mRows='';
+  if(mode==='americano'||mode==='mexicano'){
+    stRows=standings.map((p,i)=>`<tr><td>${i+1}</td><td>${p.name}</td><td>${p.pts}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td>${m.sa}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td><td>${m.sb}</td></tr>`).join('');
+  } else {
+    stRows=standings.map((s,i)=>`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.played}</td><td>${s.wins}</td><td>${s.losses}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td>${m.ga}</td><td>${(T[m.b]||{name:'?'}).name}</td><td>${m.gb}</td></tr>`).join('');
+  }
+  const amSt=(mode==='americano'||mode==='mexicano');
+  const stHead=amSt?`<th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th>`:`<th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th>`;
+  const wrap=$('export-print-wrap');
+  wrap.innerHTML=`<h2 style="margin:0 0 4px;font-size:1.4rem">${name}</h2>
+    <p style="margin:0 0 18px;color:#555;font-size:.9rem">${fmtLabel} — ${date} — ${standings.length} ${amSt?t('am_col_player').toLowerCase()+'s':'teams'}</p>
+    <h3 style="margin:0 0 8px;font-size:1rem">${t('fin_title')}</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:20px"><thead><tr style="background:#f3f4f6">${stHead}</tr></thead><tbody>${stRows}</tbody></table>
+    <h3 style="margin:0 0 8px;font-size:1rem">${t('export_matches')}</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.85rem"><thead><tr style="background:#f3f4f6"><th>${t('export_round')}</th><th>Team A</th><th></th><th>Team B</th><th></th></tr></thead><tbody>${mRows}</tbody></table>`;
+  const style=document.createElement('style');
+  style.textContent='#export-print-wrap table td,#export-print-wrap table th{padding:5px 8px;border-bottom:1px solid #e5e7eb;text-align:left}';
+  wrap.appendChild(style);
+  window.print();
+  window.addEventListener('afterprint',()=>{ wrap.innerHTML=''; },{ once:true });
 }
 
 // ── Swipe-navigatie ────────────────────────────
@@ -2652,5 +2752,6 @@ if('serviceWorker' in navigator){
     document.getElementById('cookie-banner').classList.add('hidden');
   }
 </script>
+<div id="export-print-wrap"></div>
 </body>
 </html>
