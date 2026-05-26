@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadelBracket — Padel Toernooi Generator &amp; Bracket Maker</title>
 <meta name="description" content="Organiseer padel toernooien met poules, brackets en live stand. Gratis, offline, geen account.">
-<meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano, padel mexicano, round robin, export padel results, download padel tournament results, padel americano export csv">
+<meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano, padel mexicano, round robin, export padel results, download padel tournament results, padel americano export csv, padel tournament scoreboard, padel live scoreboard, padel americano live scores screen">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
@@ -452,6 +452,22 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .stats-tbl .medal-cell{font-size:.9rem;padding-right:4px;width:24px}
 .stats-export{display:flex;align-items:center;gap:8px;margin-top:14px;justify-content:flex-end}
 .stats-export-lbl{font-size:.72rem;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.7px;flex:1}
+/* ── Presentatiemodus ── */
+#pres-screen{display:none;position:fixed;inset:0;background:#0f172a;z-index:9000;overflow-y:auto;padding:40px 48px;font-family:'Barlow Condensed',sans-serif;color:#fff}
+body.pres-mode .app{visibility:hidden}
+body.pres-mode #pres-screen{display:block}
+.pres-header{margin-bottom:36px}
+.pres-title{font-size:2.2rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.pres-badge{display:inline-block;background:#10b981;color:#fff;font-size:.9rem;font-weight:700;padding:3px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:1px}
+.pres-row{display:flex;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid #1e293b}
+.pres-row:last-child{border-bottom:none}
+.pres-pos{font-size:1.6rem;font-weight:800;width:48px;text-align:center;color:#475569}
+.pres-medal{font-size:2rem;width:48px;text-align:center}
+.pres-name{font-size:2rem;font-weight:700;flex:1;letter-spacing:.5px}
+.pres-pts{font-size:2.5rem;font-weight:900;color:#10b981;min-width:80px;text-align:right}
+.pres-row.pres-leader .pres-name{color:#10b981}
+.pres-sub{font-size:1rem;color:#475569;text-align:right;margin-top:32px;letter-spacing:.5px}
+.pres-refresh{position:fixed;bottom:20px;right:24px;font-size:.8rem;color:#334155;font-family:sans-serif;user-select:none}
 @media print{
   .stats-wrap{display:none!important}
 }
@@ -553,6 +569,8 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
   <!-- Pencil -->
   <symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+  <!-- Monitor / Presentation -->
+  <symbol id="ic-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="3"/></symbol>
   <!-- Print -->
   <symbol id="ic-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
   <!-- Padel racket -->
@@ -611,6 +629,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 <header>
   <div class="logo">Padel <em>•</em> Toernooi <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
+    <button class="btn btn-ghost btn-sm" id="btn-pres" style="display:none" onclick="openPresentation()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg> <span class="btn-label" data-i18n="pres_btn">Presentatie</span></button>
     <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
     <div class="more-wrap" id="more-wrap">
       <button class="btn btn-ghost btn-sm" onclick="toggleMore()" aria-label="Meer opties"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-more"></use></svg></button>
@@ -876,7 +895,7 @@ nl:{
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
   am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',
-  export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',
+  export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
   res_bracket_done:' · Bracket klaar',
@@ -942,7 +961,7 @@ en:{
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
   am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',
-  export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',
+  export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
   res_bracket_done:' · Bracket done',
@@ -1008,7 +1027,7 @@ fr:{
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
   am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',
-  export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',
+  export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
   res_bracket_done:' · Bracket terminé',
@@ -1074,7 +1093,7 @@ de:{
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
   am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',
-  export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',
+  export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
   res_bracket_done:' · Bracket fertig',
@@ -1140,7 +1159,7 @@ es:{
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
   am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',
-  export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',
+  export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
   res_bracket_done:' · Bracket completado',
@@ -1206,7 +1225,7 @@ sv:{
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
   am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',
-  export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',
+  export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
   res_bracket_done:' · Bracket klart',
@@ -1395,6 +1414,7 @@ function startTournamentUI(){
   $('btn-back').style.display = viewMode ? 'none' : '';
   $('btn-print').style.display = viewMode ? 'none' : '';
   $('btn-share').style.display = viewMode ? 'none' : '';
+  $('btn-pres').style.display = viewMode ? 'none' : '';
   $('more-divider').style.display = viewMode ? 'none' : '';
   const badge=$('share-badge');
   if(badge) badge.style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'':'none';
@@ -1428,6 +1448,7 @@ function goSetup(){
   $('btn-back').style.display='none';
   $('btn-print').style.display='none';
   $('btn-share').style.display='none';
+  $('btn-pres').style.display='none';
   $('more-divider').style.display='none';
   $('share-nudge').style.display='none';
   if(viewPollInterval){ clearInterval(viewPollInterval); viewPollInterval=null; }
@@ -2174,6 +2195,7 @@ function showAmericano(){
   $('btn-back').style.display = viewMode ? 'none' : '';
   $('btn-print').style.display='none';
   $('btn-share').style.display = viewMode ? 'none' : '';
+  $('btn-pres').style.display = viewMode ? 'none' : '';
   $('more-divider').style.display = viewMode ? 'none' : '';
   $('share-nudge').style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'flex':'none';
   const tname=$('logo-tname');
@@ -2438,6 +2460,7 @@ function saveState(){
     localStorage.setItem('padel-state', JSON.stringify({mode,T,PM,PW,PL,pmid,pDone,R,tournamentName}));
   }
   if(shareCode) pushToSupabase();
+  updatePresentation();
 }
 
 function loadState(){
@@ -2683,6 +2706,54 @@ tr.top td{font-weight:700}
   win.document.close();
 }
 
+// ── Presentatiemodus ──────────────────────────
+function updatePresentation(){
+  if(!mode) return;
+  let standings;
+  if(mode==='americano'||mode==='mexicano'){
+    standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({pos:i+1,name:p.name,pts:p.pts}));
+  } else {
+    standings=getStandings().map((s,i)=>({pos:i+1,name:s.name,wins:s.wins,played:s.played,losses:s.losses}));
+  }
+  localStorage.setItem('padel-presentation',JSON.stringify({
+    mode,name:tournamentName||'',standings,ts:Date.now()
+  }));
+}
+
+function openPresentation(){
+  updatePresentation();
+  window.open(location.origin+location.pathname+'?pres=1','_blank');
+}
+
+function initPresentation(){
+  document.body.classList.add('pres-mode');
+  function render(){
+    const raw=localStorage.getItem('padel-presentation');
+    if(!raw){$('pres-screen').innerHTML='<div style="padding:60px;font-size:1.5rem;color:#475569">Wacht op toernooi data…</div>';return;}
+    const d=JSON.parse(raw);
+    const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',roundrobin:'Round Robin'}[d.mode]||d.mode;
+    const medals=['🥇','🥈','🥉'];
+    const amMode=d.mode==='americano'||d.mode==='mexicano';
+    const rows=d.standings.map(s=>{
+      const medal=s.pos<=3?`<span class="pres-medal">${medals[s.pos-1]}</span>`:`<span class="pres-pos">${s.pos}</span>`;
+      const score=amMode
+        ?`<span class="pres-pts">${s.pts}</span>`
+        :`<span class="pres-pts">${s.wins}<span style="font-size:1.2rem;color:#475569"> W</span></span>`;
+      return`<div class="pres-row${s.pos===1?' pres-leader':''}">${medal}<span class="pres-name">${s.name}</span>${score}</div>`;
+    }).join('');
+    $('pres-screen').innerHTML=`
+      <div class="pres-header">
+        <div class="pres-title">${d.name||'Padel Toernooi'}</div>
+        <span class="pres-badge">${fmtLabel}</span>
+      </div>
+      ${rows}
+      <div class="pres-sub">${t('pres_live')}</div>
+      <div class="pres-refresh" id="pres-ts">↻ ${new Date(d.ts).toLocaleTimeString()}</div>`;
+  }
+  render();
+  setInterval(render,10000);
+}
+
 // ── Swipe-navigatie ────────────────────────────
 (function(){
   const tb=document.querySelector('.tab-body');
@@ -2770,6 +2841,8 @@ document.addEventListener('DOMContentLoaded', () => {
   $('app-version').textContent = APP_VERSION;
   applyTheme(localStorage.getItem('padel-theme') ||
     (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  const _pres=new URLSearchParams(location.search).get('pres');
+  if(_pres==='1'){ initPresentation(); return; }
   const _vc=new URLSearchParams(location.search).get('view');
   if(_vc){ initViewMode(_vc.toUpperCase()); return; }
   loadState();
@@ -2810,5 +2883,6 @@ if('serviceWorker' in navigator){
   }
 </script>
 <div id="export-print-wrap"></div>
+<div id="pres-screen"></div>
 </body>
 </html>
