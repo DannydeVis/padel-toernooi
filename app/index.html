@@ -478,9 +478,18 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   .app{max-width:1200px}
   #tb-poule{display:grid;grid-template-columns:1fr 300px;column-gap:24px;align-items:start}
   .prog-wrap{grid-column:1/-1}
-  .st-wrap{position:sticky;top:76px}
+  .st-wrap{position:sticky;top:68px}
   .bmatch{min-width:200px;max-width:260px}
   .bracket-body{padding:28px 32px}
+  /* ── Desktop layout ── */
+  header{position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+  #screen-tournament .tabs{display:none}
+  #tb-poule,#tb-bracket{display:block!important}
+  #tb-bracket{margin-top:32px;padding-top:24px;border-top:1px solid var(--bdr)}
+  .dt-panel-lbl{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--txt2);margin-bottom:16px}
+  #am-rounds-wrap{display:grid;grid-template-columns:1fr 300px;column-gap:24px;align-items:start}
+  #am-rounds-wrap .am-round{grid-column:1}
+  #am-rounds-wrap .am-st-wrap{grid-column:2;grid-row:1/999;position:sticky;top:68px}
 }
 body.banner-open .app{padding-bottom:140px}
 #install-banner{padding-bottom:max(12px,env(safe-area-inset-bottom))}
@@ -725,6 +734,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   </div>
   <div class="tab-body">
     <div id="tb-poule">
+      <div class="dt-panel-lbl" style="display:none"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="tab_poule">Pouleronde</span></div>
       <div class="prog-wrap">
         <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
         <div class="prog-txt" id="progtxt"></div>
@@ -738,6 +748,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <div id="rr-champ" style="display:none"></div>
     </div>
     <div id="tb-bracket" style="display:none">
+      <div class="dt-panel-lbl" style="display:none"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="tab_bracket">Bracket</span></div>
       <div class="bracket-body">
         <div class="bsec">
           <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="sec_poule">Pouleronde</span></div>
@@ -1750,6 +1761,8 @@ function renderBracket(){
   renderHalf('bw',PW,'w');
   renderHalf('bl',PL,'l');
   renderChamp();
+  if(window.matchMedia('(min-width:1024px)').matches)
+    requestAnimationFrame(()=>{drawSVG('w',false);drawSVG('l',PL.some(m=>m.id==='lbye'));});
 }
 
 function renderHalf(elId,matches,pfx){
