@@ -1,4 +1,4 @@
-const CACHE = 'padel-v19';
+const CACHE = 'padel-v19'; // presentation mode
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
