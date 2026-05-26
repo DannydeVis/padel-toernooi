@@ -382,6 +382,28 @@
     .faq-item[open] summary::after { transform: rotate(45deg); }
     .faq-item p { padding: 0 20px 18px; color: var(--txt2); line-height: 1.65; }
 
+    /* ── SCREENSHOTS ── */
+    .screenshots-section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+    .screens-grid { display: flex; justify-content: center; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-top: 56px; }
+    .screen-item { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .phone-frame {
+      position: relative;
+      background: #0f172a;
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow: 0 0 0 2px #1e293b, 0 32px 64px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06);
+      width: 220px;
+    }
+    .phone-frame img {
+      width: 100%; border-radius: 34px; display: block;
+    }
+    .screen-label {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.1rem; letter-spacing: .3px; text-align: center;
+    }
+    .screen-desc { font-size: .88rem; color: var(--txt2); text-align: center; max-width: 200px; }
+    .screen-item.featured .phone-frame { width: 260px; box-shadow: 0 0 0 2px #1e293b, 0 40px 80px rgba(16,185,129,.15), 0 32px 64px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06); }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--bdr); padding: 32px 24px;
@@ -589,6 +611,28 @@
       <div class="feature-icon" style="background:rgba(16,185,129,.12)">🌍</div>
       <h3>6 talen, automatisch</h3>
       <p>Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat — ook voor internationale groepen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section">
+  <h2 class="section-title">Zo ziet de app eruit</h2>
+  <p class="section-sub">Overzichtelijk, snel en op elk scherm.</p>
+  <div class="screens-grid">
+    <div class="screen-item">
+      <div class="phone-frame">
+        <img src="/screenshot-bracket.png" alt="Padel knockout bracket met winnaarsboom en troostfinale" width="196" height="422" loading="lazy">
+      </div>
+      <div class="screen-label">Knockout bracket</div>
+      <div class="screen-desc">Pouleronde, halvefinale, finale en troostfinale — alles automatisch.</div>
+    </div>
+    <div class="screen-item featured">
+      <div class="phone-frame">
+        <img src="/screenshot-americano.png" alt="Americano live ranglijst met punten per speler" width="196" height="422" loading="lazy">
+      </div>
+      <div class="screen-label">Americano live stand</div>
+      <div class="screen-desc">Live punten per speler, voortgang per ronde en LIVE-badge voor meekijkers.</div>
     </div>
   </div>
 </section>
