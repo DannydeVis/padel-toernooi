@@ -469,8 +469,10 @@ body.pres-mode #pres-screen{display:block}
 .pres-layout{display:flex;gap:48px;align-items:flex-start}
 .pres-left{flex:1;min-width:0}
 .pres-right{width:380px;flex-shrink:0}
-.pres-matches-title{font-size:1rem;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
-.pres-match{background:#1e293b;border-radius:10px;padding:14px 18px;margin-bottom:10px}
+.pres-round-block{margin-bottom:20px;opacity:.35;transition:opacity .3s}
+.pres-round-block.pres-round-active{opacity:1}
+.pres-matches-title{font-size:1rem;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.pres-match{background:#1e293b;border-radius:10px;padding:14px 18px;margin-bottom:8px}
 .pres-match-done{opacity:.45}
 .pres-match-team-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:1.3rem;font-weight:700;gap:12px}
 .pres-match-team{flex:1}
@@ -2723,23 +2725,22 @@ tr.top td{font-weight:700}
 // ── Presentatiemodus ──────────────────────────
 function updatePresentation(){
   if(!mode) return;
-  let standings, matches=[];
+  let standings, rounds=[];
   if(mode==='americano'||mode==='mexicano'){
     standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({pos:i+1,name:p.name,pts:p.pts}));
-    const activeRound=AM.slice().reverse().find(r=>r.some(m=>!m.done))||(AM.length?AM[AM.length-1]:null);
-    if(activeRound){
-      matches=activeRound.map(m=>({
-        round:m.round,
+    rounds=AM.map(r=>({
+      round:r[0]?.round||0,
+      matches:r.map(m=>({
         a1:AP[m.a1].name,a2:AP[m.a2].name,
         b1:AP[m.b1].name,b2:AP[m.b2].name,
         sa:m.sa,sb:m.sb,done:m.done
-      }));
-    }
+      }))
+    }));
   } else {
     standings=getStandings().map((s,i)=>({pos:i+1,name:s.name,wins:s.wins,played:s.played,losses:s.losses}));
   }
   localStorage.setItem('padel-presentation',JSON.stringify({
-    mode,name:tournamentName||'',standings,matches,ts:Date.now()
+    mode,name:tournamentName||'',standings,rounds,ts:Date.now()
   }));
 }
 
@@ -2765,20 +2766,26 @@ function initPresentation(){
       return`<div class="pres-row${s.pos===1?' pres-leader':''}">${medal}<span class="pres-name">${s.name}</span>${score}</div>`;
     }).join('');
     let matchesHtml='';
-    if(amMode&&d.matches&&d.matches.length){
-      const roundNum=d.matches[0].round;
-      const cards=d.matches.map(m=>`
-        <div class="pres-match${m.done?' pres-match-done':''}">
-          <div class="pres-match-team-row">
-            <span class="pres-match-team">${m.a1} &amp; ${m.a2}</span>
-            <span class="pres-match-score">${m.sa}</span>
-          </div>
-          <div class="pres-match-team-row">
-            <span class="pres-match-team">${m.b1} &amp; ${m.b2}</span>
-            <span class="pres-match-score">${m.sb}</span>
-          </div>
-        </div>`).join('');
-      matchesHtml=`<div class="pres-right"><div class="pres-matches-title">Ronde ${roundNum}</div>${cards}</div>`;
+    if(amMode&&d.rounds&&d.rounds.length){
+      const activeIdx=d.rounds.findIndex(r=>r.matches.some(m=>!m.done));
+      const allDone=activeIdx===-1;
+      const sections=d.rounds.map((r,i)=>{
+        const isActive=allDone||(i===activeIdx);
+        const cards=r.matches.map(m=>`
+          <div class="pres-match${m.done?' pres-match-done':''}">
+            <div class="pres-match-team-row">
+              <span class="pres-match-team">${m.a1} &amp; ${m.a2}</span>
+              <span class="pres-match-score">${m.sa}</span>
+            </div>
+            <div class="pres-match-team-row">
+              <span class="pres-match-team">${m.b1} &amp; ${m.b2}</span>
+              <span class="pres-match-score">${m.sb}</span>
+            </div>
+          </div>`).join('');
+        return`<div class="pres-round-block${isActive?' pres-round-active':''}">
+          <div class="pres-matches-title">Ronde ${r.round}</div>${cards}</div>`;
+      }).join('');
+      matchesHtml=`<div class="pres-right">${sections}</div>`;
     }
     $('pres-screen').innerHTML=`
       <div class="pres-header">
@@ -2793,7 +2800,7 @@ function initPresentation(){
       <div class="pres-refresh" id="pres-ts">↻ ${new Date(d.ts).toLocaleTimeString()}</div>`;
   }
   render();
-  setInterval(render,10000);
+  setInterval(render,3000);
 }
 
 // ── Swipe-navigatie ────────────────────────────
