@@ -32,6 +32,11 @@
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Padel">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,18 +84,18 @@
       },
       {
         "@type": "Question",
+        "name": "What is the difference between Americano and Mexicano?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In Americano, partners are determined in advance via a fixed rotation — everyone plays exactly once together. In Mexicano, partners are reassigned after each round based on the current standings: rank 1 and 2 play together against rank 3 and 4, and so on. Mexicano gets more competitive as the tournament progresses." }
+      },
+      {
+        "@type": "Question",
         "name": "How many players can I use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For a team tournament, a minimum of 4 players (2 teams). For Americano and Mexicano, 4 or more players work — even or odd. With an odd count (5, 7, 9…) one player rotates on a bye each round." }
+        "acceptedAnswer": { "@type": "Answer", "text": "For Americano and Mexicano up to 24 players. For a team bracket 4 to 9 teams (8–18 players). With an odd number of players (5, 7, 9…) one player rotates on a bye each round." }
       },
       {
         "@type": "Question",
         "name": "Does the app work without internet?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser." }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need to create an account?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. No registration or login required. Open the app and start your tournament directly." }
       },
       {
         "@type": "Question",
@@ -132,266 +137,132 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--txt); font-family: 'Barlow', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
+      padding: 0 24px; display: flex; align-items: center; justify-content: space-between;
+      height: 60px; background: var(--nav-bg); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--bdr);
     }
-    .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
-      color: var(--txt); text-decoration: none;
-    }
-    .nav-logo em { color: var(--accent); font-style: normal; }
-    .nav-cta {
-      background: var(--accent); color: #fff; border: none; border-radius: 8px;
-      padding: 9px 20px; font-family: 'Barlow', sans-serif; font-weight: 600;
-      font-size: .9rem; cursor: pointer; text-decoration: none;
-      transition: background .15s, transform .1s;
-    }
-    .nav-cta:hover { background: var(--accent2); }
-    .nav-cta:active { transform: scale(.96); }
+    .nav-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.3rem; letter-spacing:1px; color:var(--txt); text-decoration:none; }
+    .nav-logo em { color:var(--accent); font-style:normal; }
+    .nav-cta { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:9px 20px; font-family:'Barlow',sans-serif; font-weight:600; font-size:.9rem; cursor:pointer; text-decoration:none; transition:background .15s,transform .1s; }
+    .nav-cta:hover { background:var(--accent2); }
+    .nav-cta:active { transform:scale(.96); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 80px 24px 60px;
-      position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,.13) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(139,92,246,.08) 0%, transparent 60%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0; opacity: .04;
-      background-image: linear-gradient(var(--bdr) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .hero > * { position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3);
-      color: var(--accent); border-radius: 99px; padding: 6px 16px;
-      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
-      margin-bottom: 28px;
-    }
-    .hero-badge svg { width: 14px; height: 14px; }
-    h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
-      line-height: .95; letter-spacing: -1px; margin-bottom: 10px;
-    }
-    h1 em { color: var(--accent); font-style: normal; display: block; }
-    .hero-sub {
-      font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--txt2);
-      max-width: 520px; margin: 20px auto 44px;
-    }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #fff; text-decoration: none;
-      border-radius: 12px; padding: 16px 32px;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-      font-size: 1.15rem; letter-spacing: .5px;
-      transition: background .15s, transform .1s, box-shadow .15s;
-      box-shadow: 0 4px 24px rgba(16,185,129,.3);
-    }
-    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(16,185,129,.45); }
-    .btn-primary:active { transform: scale(.97); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--txt2); text-decoration: none;
-      border: 1px solid var(--bdr); border-radius: 12px; padding: 15px 28px;
-      font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 1rem;
-      transition: border-color .15s, color .15s;
-    }
-    .btn-secondary:hover { border-color: rgba(255,255,255,.25); color: var(--txt); }
-    .hero-note { margin-top: 20px; font-size: .82rem; color: var(--txt2); }
+    .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 24px 60px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; z-index:0; background: radial-gradient(ellipse 80% 60% at 50% 0%,rgba(16,185,129,.13) 0%,transparent 70%), radial-gradient(ellipse 50% 40% at 80% 80%,rgba(139,92,246,.08) 0%,transparent 60%); }
+    .hero-grid { position:absolute; inset:0; z-index:0; opacity:.04; background-image:linear-gradient(var(--bdr) 1px,transparent 1px),linear-gradient(90deg,var(--bdr) 1px,transparent 1px); background-size:40px 40px; }
+    .hero > * { position:relative; z-index:1; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.3); color:var(--accent); border-radius:99px; padding:6px 16px; font-size:.82rem; font-weight:600; letter-spacing:.5px; margin-bottom:28px; }
+    .hero-badge svg { width:14px; height:14px; }
+    h1 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(3rem,10vw,6.5rem); line-height:.95; letter-spacing:-1px; margin-bottom:10px; }
+    h1 em { color:var(--accent); font-style:normal; display:block; }
+    .hero-kicker { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+    .hero-sub { font-size:clamp(1.05rem,2.5vw,1.3rem); color:var(--txt2); max-width:560px; margin:20px auto 44px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+    .btn-primary { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#fff; text-decoration:none; border-radius:12px; padding:16px 32px; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.15rem; letter-spacing:.5px; transition:background .15s,transform .1s,box-shadow .15s; box-shadow:0 4px 24px rgba(16,185,129,.3); }
+    .btn-primary:hover { background:var(--accent2); box-shadow:0 6px 32px rgba(16,185,129,.45); }
+    .btn-primary:active { transform:scale(.97); }
+    .btn-secondary { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--txt2); text-decoration:none; border:1px solid var(--bdr); border-radius:12px; padding:15px 28px; font-family:'Barlow',sans-serif; font-weight:500; font-size:1rem; transition:border-color .15s,color .15s; }
+    .btn-secondary:hover { border-color:rgba(255,255,255,.25); color:var(--txt); }
+    .hero-note { margin-top:20px; font-size:.82rem; color:var(--txt2); }
 
-    /* ── MOCKUP ── */
-    .mockup-wrap {
-      max-width: 900px; margin: 0 auto;
-      padding: 0 24px 100px;
-      display: flex; justify-content: center;
-    }
-    .mockup {
-      background: var(--surface); border: 1px solid var(--bdr);
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
-      width: 100%; max-width: 680px;
-    }
-    .mockup-bar {
-      background: var(--surface2); padding: 12px 16px;
-      display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid var(--bdr);
-    }
-    .mockup-dot { width: 11px; height: 11px; border-radius: 50%; }
-    .mockup-screen {
-      padding: 20px; display: flex; flex-direction: column; gap: 10px;
-    }
-    .mock-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 4px 12px; border-bottom: 1px solid var(--bdr);
-    }
+    .mockup-wrap { max-width:960px; margin:0 auto; padding:0 24px 100px; display:flex; justify-content:center; }
+    .mockup { background:var(--surface); border:1px solid var(--bdr); border-radius:20px; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04); width:100%; max-width:760px; }
+    .mockup-bar { background:var(--surface2); padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--bdr); }
+    .mockup-dot { width:11px; height:11px; border-radius:50%; }
+    .mockup-screen { padding:20px; display:flex; flex-direction:column; gap:12px; }
+    .mock-header { display:flex; justify-content:space-between; align-items:center; padding:0 4px 12px; border-bottom:1px solid var(--bdr); }
     .mock-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.1rem; }
-    .mock-logo em { color: var(--accent); font-style:normal; }
-    .mock-tabs { display:flex; gap:4px; }
-    .mock-tab { padding:6px 14px; border-radius:8px; font-size:.78rem; font-weight:600; }
-    .mock-tab.active { background:var(--accent); color:#fff; }
-    .mock-tab:not(.active) { color:var(--txt2); }
-    .mock-rounds { display:flex; flex-direction:column; gap:8px; }
-    .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:4px; }
-    .mock-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .mock-card {
-      background: var(--surface2); border-radius:10px; padding:12px;
-      border: 1px solid var(--bdr);
-    }
-    .mock-card-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:4px; }
-    .mock-team { font-size:.72rem; font-weight:600; }
-    .mock-team.r { text-align:right; }
-    .mock-score { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; color:var(--txt); text-align:center; }
-    .mock-btns { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:8px; }
-    .mock-btn { border-radius:6px; padding:6px; font-size:.65rem; font-weight:700; text-align:center; }
-    .mock-btn.a { background:#1d4ed8; color:#fff; }
-    .mock-btn.b { background:#7c3aed; color:#fff; }
-    .mock-card.done .mock-winner { font-size:.68rem; color:var(--accent); margin-top:6px; }
+    .mock-logo em { color:var(--accent); font-style:normal; }
+    .mock-actions { display:flex; gap:6px; }
+    .mock-action-btn { padding:5px 12px; border-radius:7px; font-size:.72rem; font-weight:700; display:flex; align-items:center; gap:5px; }
+    .mock-action-btn.pres { background:var(--surface2); color:var(--txt2); border:1px solid var(--bdr); }
+    .mock-action-btn.share { background:var(--accent); color:#fff; }
+    .mock-body { display:flex; gap:16px; }
+    .mock-rounds { display:flex; flex-direction:column; gap:10px; flex:1; }
+    .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:6px; }
+    .mock-match { background:var(--surface2); border-radius:10px; padding:12px 14px; border:1px solid var(--bdr); }
+    .mock-match-row { display:flex; align-items:center; justify-content:space-between; padding:3px 0; }
+    .mock-team-name { font-size:.8rem; font-weight:600; }
+    .mock-score-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.3rem; color:var(--accent); }
+    .mock-score-num.done { color:var(--txt2); }
+    .mock-controls { display:flex; align-items:center; gap:6px; margin-top:8px; }
+    .mock-adj { width:26px; height:26px; border-radius:6px; background:var(--surface); border:1px solid var(--bdr); display:flex; align-items:center; justify-content:center; font-size:.9rem; color:var(--txt2); }
+    .mock-pts-bar { flex:1; text-align:center; font-size:.68rem; color:var(--txt2); }
+    .mock-sidebar { width:160px; flex-shrink:0; }
+    .mock-sidebar-title { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:8px; }
+    .mock-rank-row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid var(--bdr); }
+    .mock-rank-row:last-child { border-bottom:none; }
+    .mock-rank-pos { font-size:.75rem; font-weight:800; width:18px; color:var(--txt2); }
+    .mock-rank-name { font-size:.82rem; font-weight:600; flex:1; }
+    .mock-rank-pts { font-size:.82rem; font-weight:800; color:var(--accent); }
 
-    /* ── STATS BAR ── */
-    .stats-bar {
-      display: flex; justify-content: center; gap: 48px;
-      padding: 40px 24px; flex-wrap: wrap;
-      border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr);
-      margin: 0 0 80px;
-    }
-    .stat { text-align: center; }
-    .stat-n {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-      font-size: 2.6rem; color: var(--accent); line-height: 1;
-    }
-    .stat-lbl { font-size: .82rem; color: var(--txt2); margin-top: 4px; }
+    .stats-bar { display:flex; justify-content:center; gap:48px; padding:40px 24px; flex-wrap:wrap; border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr); margin:0 0 80px; }
+    .stat { text-align:center; }
+    .stat-n { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2.6rem; color:var(--accent); line-height:1; }
+    .stat-lbl { font-size:.82rem; color:var(--txt2); margin-top:4px; }
 
-    /* ── FEATURES ── */
-    .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
-    .section-title {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-      font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 12px;
-    }
-    .section-sub { text-align: center; color: var(--txt2); max-width: 480px; margin: 0 auto 56px; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .feature {
-      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
-      padding: 28px; transition: border-color .2s, transform .2s;
-    }
-    .feature:hover { border-color: rgba(16,185,129,.3); transform: translateY(-2px); }
-    .feature-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px; font-size: 1.4rem;
-    }
-    .feature h3 {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-      font-size: 1.2rem; letter-spacing: .3px; margin-bottom: 8px;
-    }
-    .feature p { font-size: .92rem; color: var(--txt2); line-height: 1.6; }
+    .section { max-width:1100px; margin:0 auto; padding:0 24px 100px; }
+    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,3rem); text-align:center; margin-bottom:12px; }
+    .section-sub { text-align:center; color:var(--txt2); max-width:480px; margin:0 auto 56px; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+    .feature { background:var(--surface); border:1px solid var(--bdr); border-radius:16px; padding:28px; transition:border-color .2s,transform .2s; }
+    .feature:hover { border-color:rgba(16,185,129,.3); transform:translateY(-2px); }
+    .feature-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; font-size:1.4rem; }
+    .feature h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:.3px; margin-bottom:8px; }
+    .feature p { font-size:.92rem; color:var(--txt2); line-height:1.6; }
 
-    /* ── HOW IT WORKS ── */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
-    .step { padding: 32px 24px; text-align: center; position: relative; }
-    .step:not(:last-child)::after {
-      content: '→';
-      position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
-      color: var(--txt2); font-size: 1.2rem;
-    }
-    .step-num {
-      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--accent);
-      color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-      font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-    }
+    .screenshots-section { max-width:1200px; margin:0 auto; padding:0 24px 100px; }
+    .screens-grid { display:flex; justify-content:center; align-items:flex-end; gap:24px; margin-top:56px; overflow-x:auto; padding:0 32px 16px; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; scrollbar-width:none; }
+    .screens-grid::-webkit-scrollbar { display:none; }
+    .screen-item { display:flex; flex-direction:column; align-items:center; gap:16px; flex-shrink:0; scroll-snap-align:center; }
+    .phone-frame { background:#1a1a2e; border-radius:40px; padding:10px; box-shadow:0 0 0 2px #2d2d44,0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.05); width:185px; }
+    .phone-frame img { width:100%; border-radius:32px; display:block; }
+    .screen-label { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; letter-spacing:.3px; text-align:center; }
+    .screen-desc { font-size:.82rem; color:var(--txt2); text-align:center; max-width:175px; line-height:1.45; }
+    .screen-item.featured .phone-frame { width:215px; box-shadow:0 0 0 2px #2d2d44,0 32px 64px rgba(16,185,129,.12),0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.05); }
+
+    .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; }
+    .step { padding:32px 24px; text-align:center; position:relative; }
+    .step:not(:last-child)::after { content:'→'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color:var(--txt2); font-size:1.2rem; }
+    .step-num { width:44px; height:44px; border-radius:50%; border:2px solid var(--accent); color:var(--accent); font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
     .step h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
     .step p { font-size:.85rem; color:var(--txt2); }
 
-    /* ── FORMATS ── */
-    .formats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .format {
-      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
-      padding: 32px; overflow: hidden; position: relative;
-    }
-    .format::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    }
-    .format.team::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
-    .format.am::before   { background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .formats { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .format { background:var(--surface); border:1px solid var(--bdr); border-radius:16px; padding:32px; overflow:hidden; position:relative; }
+    .format::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .format.team::before { background:linear-gradient(90deg,#3b82f6,#8b5cf6); }
+    .format.am::before { background:linear-gradient(90deg,var(--accent),var(--gold)); }
     .format h3 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; margin-bottom:10px; }
-    .format p  { color:var(--txt2); font-size:.92rem; line-height:1.6; margin-bottom:20px; }
+    .format p { color:var(--txt2); font-size:.92rem; line-height:1.6; margin-bottom:20px; }
     .format ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
     .format ul li { font-size:.88rem; display:flex; align-items:flex-start; gap:8px; }
     .format ul li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; }
 
-    /* ── CTA ── */
-    .cta-wrap {
-      text-align: center; padding: 80px 24px 100px;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,.08) 0%, transparent 70%);
-    }
-    .cta-wrap h2 {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-      font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 16px;
-    }
+    .cta-wrap { text-align:center; padding:80px 24px 100px; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(16,185,129,.08) 0%,transparent 70%); }
+    .cta-wrap h2 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.2rem,6vw,4rem); margin-bottom:16px; }
     .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
 
-    /* ── HERO KICKER ── */
-    .hero-kicker {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
+    .faq-list { max-width:680px; margin:0 auto; display:flex; flex-direction:column; gap:8px; }
+    .faq-item { background:var(--surface); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; }
+    .faq-item summary { list-style:none; cursor:pointer; padding:18px 20px; font-weight:600; font-size:1rem; display:flex; justify-content:space-between; align-items:center; user-select:none; }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary::after { content:'+'; font-size:1.4rem; color:var(--accent); transition:transform .2s; flex-shrink:0; margin-left:12px; }
+    .faq-item[open] summary::after { transform:rotate(45deg); }
+    .faq-item p { padding:0 20px 18px; color:var(--txt2); line-height:1.65; }
 
-    /* ── FAQ ── */
-    .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
-    .faq-item {
-      background: var(--surface); border: 1px solid var(--bdr);
-      border-radius: 12px; overflow: hidden;
-    }
-    .faq-item summary {
-      list-style: none; cursor: pointer; padding: 18px 20px;
-      font-weight: 600; font-size: 1rem;
-      display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
-    }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after {
-      content: '+'; font-size: 1.4rem; color: var(--accent);
-      transition: transform .2s; flex-shrink: 0; margin-left: 12px;
-    }
-    .faq-item[open] summary::after { transform: rotate(45deg); }
-    .faq-item p { padding: 0 20px 18px; color: var(--txt2); line-height: 1.65; }
+    footer { border-top:1px solid var(--bdr); padding:32px 24px; text-align:center; color:var(--txt2); font-size:.82rem; }
+    footer a { color:var(--accent); text-decoration:none; }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--bdr); padding: 32px 24px;
-      text-align: center; color: var(--txt2); font-size: .82rem;
-    }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .formats { grid-template-columns: 1fr; }
-      .mock-cards { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
+      .formats { grid-template-columns:1fr; }
+      .mock-sidebar { display:none; }
+      .steps { grid-template-columns:1fr 1fr; }
       .step:not(:last-child)::after { display:none; }
-      .stats-bar { gap: 28px; }
+      .stats-bar { gap:28px; }
     }
-    .players-row{text-align:center;padding:20px 24px 0;font-size:.9rem;color:var(--txt2);margin-bottom:-40px}
-    .players-row strong{color:var(--txt);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px}
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
     #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
@@ -417,16 +288,13 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-
   <div class="hero-badge">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-    Free · No account needed · Works offline too
+    Free · No account · Works offline too
   </div>
-
-  <h1>Free Padel <em>Bracket Generator</em></h1>
-  <p class="hero-kicker">Padel Tournament Generator · Knockout · Americano · Round Robin</p>
-  <p class="hero-sub">Set up a padel tournament in 30 seconds. Free, no account, works offline. Knockout brackets, Americano and Round Robin. Available in 6 languages.</p>
-
+  <h1>Free Padel <em>Tournament Generator</em></h1>
+  <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
+  <p class="hero-sub">Set up a tournament in 30 seconds. Live scores on big screen, share link for everyone on their phone, export results to PDF.</p>
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -436,11 +304,9 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13M7 11l5 5 5-5"/><path d="M3 19h18"/></svg>
       Install app
     </button>
-    <a class="btn-secondary" href="#how-it-works" id="howBtn">
-      How does it work?
-    </a>
+    <a class="btn-secondary" href="#how-it-works" id="howBtn">How does it work?</a>
   </div>
-  <p class="hero-note">Works on phone, tablet and desktop · Installable as app</p>
+  <p class="hero-note">Works on phone, tablet and desktop · Installable as app · 6 languages</p>
 </section>
 
 <!-- MOCKUP -->
@@ -453,60 +319,53 @@
     </div>
     <div class="mockup-screen">
       <div class="mock-header">
-        <div class="mock-logo">Padel <em>•</em> Bracket</div>
-        <div class="mock-tabs">
-          <div class="mock-tab active">Groups</div>
-          <div class="mock-tab">Bracket</div>
+        <div class="mock-logo">Padel <em>•</em> Bracket <span style="font-size:.65rem;background:rgba(16,185,129,.15);color:var(--accent);padding:2px 7px;border-radius:5px;font-family:'Barlow',sans-serif;font-weight:700;margin-left:6px">AMERICANO</span></div>
+        <div class="mock-actions">
+          <div class="mock-action-btn pres">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Presentation
+          </div>
+          <div class="mock-action-btn share">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+            Share
+          </div>
         </div>
       </div>
-      <div class="mock-rounds">
-        <div>
-          <div class="mock-round-lbl">Round 1 ✓</div>
-          <div class="mock-cards">
-            <div class="mock-card done">
-              <div class="mock-card-teams">
-                <div class="mock-team">Tom &amp; Lisa</div>
-                <div class="mock-score">2–1</div>
-                <div class="mock-team r">Sara &amp; Mark</div>
-              </div>
-              <div class="mock-winner">✓ Tom &amp; Lisa wins</div>
+      <div class="mock-body">
+        <div class="mock-rounds">
+          <div>
+            <div class="mock-round-lbl">Round 1 ✓</div>
+            <div class="mock-match" style="opacity:.5">
+              <div class="mock-match-row"><span class="mock-team-name">Tom &amp; Lisa</span><span class="mock-score-num done">18</span></div>
+              <div class="mock-match-row"><span class="mock-team-name">Sara &amp; Mark</span><span class="mock-score-num done">14</span></div>
             </div>
-            <div class="mock-card done">
-              <div class="mock-card-teams">
-                <div class="mock-team">Jan &amp; Kim</div>
-                <div class="mock-score">3–0</div>
-                <div class="mock-team r">Roos &amp; Bas</div>
+          </div>
+          <div>
+            <div class="mock-round-lbl">Round 2 — in progress</div>
+            <div class="mock-match">
+              <div class="mock-match-row"><span class="mock-team-name">Tom &amp; Sara</span><span class="mock-score-num">9</span></div>
+              <div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Mark</span><span class="mock-score-num">7</span></div>
+              <div class="mock-controls">
+                <div class="mock-adj">−</div><div class="mock-adj">+</div>
+                <div class="mock-pts-bar">16/32 points</div>
+                <div class="mock-adj">−</div><div class="mock-adj">+</div>
               </div>
-              <div class="mock-winner">✓ Jan &amp; Kim wins</div>
+            </div>
+          </div>
+          <div>
+            <div class="mock-round-lbl">Round 3</div>
+            <div class="mock-match" style="opacity:.4">
+              <div class="mock-match-row"><span class="mock-team-name">Tom &amp; Mark</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div>
+              <div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Sara</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div>
             </div>
           </div>
         </div>
-        <div>
-          <div class="mock-round-lbl">Round 2</div>
-          <div class="mock-cards">
-            <div class="mock-card">
-              <div class="mock-card-teams">
-                <div class="mock-team">Tom &amp; Lisa</div>
-                <div class="mock-score">1–1</div>
-                <div class="mock-team r">Jan &amp; Kim</div>
-              </div>
-              <div class="mock-btns">
-                <div class="mock-btn a">Tom &amp; Lisa</div>
-                <div class="mock-btn b">Jan &amp; Kim</div>
-              </div>
-            </div>
-            <div class="mock-card">
-              <div class="mock-card-teams">
-                <div class="mock-team">Sara &amp; Mark</div>
-                <div class="mock-score">0–0</div>
-                <div class="mock-team r">Roos &amp; Bas</div>
-              </div>
-              <div class="mock-btns">
-                <div class="mock-btn a">Sara &amp; Mark</div>
-                <div class="mock-btn b">Roos &amp; Bas</div>
-              </div>
-            </div>
-          </div>
+        <div class="mock-sidebar">
+          <div class="mock-sidebar-title">Standings</div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">🥇</div><div class="mock-rank-name">Tom</div><div class="mock-rank-pts">27</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">🥈</div><div class="mock-rank-name">Lisa</div><div class="mock-rank-pts">25</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">🥉</div><div class="mock-rank-name">Sara</div><div class="mock-rank-pts">21</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Mark</div><div class="mock-rank-pts">19</div></div>
         </div>
       </div>
     </div>
@@ -515,48 +374,82 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Tournament setup</div></div>
-  <div class="stat"><div class="stat-n">16</div><div class="stat-lbl">Max. players</div></div>
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Setup time</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Tournament formats</div></div>
   <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Languages supported</div></div>
   <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
 </div>
 
-<div class="players-row"><span>Supported player counts: </span><strong>4 · 6 · 8 · 10 · 12 · 14 · 16 · 18 · 20 · 24</strong> players</div>
-
 <!-- FEATURES -->
 <section class="section">
   <h2 class="section-title">Everything you need</h2>
-  <p class="section-sub">From entering names to crowning a champion — the app handles the rest automatically.</p>
+  <p class="section-sub">From entering names to exporting the final standings — the app handles the rest automatically.</p>
   <div class="features">
     <div class="feature">
       <div class="feature-icon" style="background:rgba(16,185,129,.12)">🏆</div>
-      <h3>Three formats: Bracket, Americano &amp; Round Robin</h3>
-      <p>Pick the format that fits your group. Bracket (pools + knockout), Americano (rotating pairs) or Round Robin (everyone vs everyone).</p>
+      <h3>Four tournament formats</h3>
+      <p>Knockout bracket (groups + final), Americano (rotating partners), Mexicano (partners based on standings) and Round Robin (everyone vs. everyone). Choose what suits your group.</p>
     </div>
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(251,191,36,.1)">🔄</div>
-      <h3>Americano mode</h3>
-      <p>Partners rotate every round. Perfect for casual sessions where everyone plays with everyone. Live point tracking.</p>
+      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
+      <h3>Presentation mode</h3>
+      <p>Open a fullscreen scoreboard on a TV or projector. All active matches and the live standings are visible to everyone in the room — updates every 3 seconds.</p>
     </div>
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📊</div>
-      <h3>Live standings</h3>
-      <p>Standings are automatically updated during the tournament. Afterwards a summary with winner, podium and stats.</p>
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
+      <h3>Live viewing on phone</h3>
+      <p>Share one link with participants. They see live standings and scores on their own phone — no account or installation needed.</p>
     </div>
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(139,92,246,.1)">📱</div>
-      <h3>Installable as app</h3>
-      <p>Add to your home screen — works offline afterwards. No App Store, no account required.</p>
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div>
+      <h3>Export to CSV &amp; PDF</h3>
+      <p>Download final standings and all match results as CSV for Excel, or print as PDF. Handy as a keepsake or for club administration.</p>
     </div>
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(239,68,68,.1)">🌍</div>
-      <h3>6 languages</h3>
-      <p>Automatically in your language: Dutch, English, French, German, Spanish and Swedish. Based on your device setting.</p>
+      <div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div>
+      <h3>Installable, works offline</h3>
+      <p>Add the app to your home screen — works without internet after that. No App Store, no account, no password.</p>
     </div>
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(16,185,129,.12)">🔗</div>
-      <h3>Live share link</h3>
-      <p>Share one link with participants — they follow the bracket and standings live on their phone, no account or install needed.</p>
+      <div class="feature-icon" style="background:rgba(16,185,129,.12)">🌍</div>
+      <h3>6 languages, automatic</h3>
+      <p>Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language — great for international groups.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section">
+  <h2 class="section-title">See the app in action</h2>
+  <p class="section-sub">Clean, fast and works on every screen.</p>
+  <div class="screens-grid">
+    <div class="screen-item" style="transform:translateY(24px)">
+      <div class="phone-frame">
+        <img src="/screenshot-team-poule.png" alt="Team tournament group stage with winner buttons" loading="lazy">
+      </div>
+      <div class="screen-label">Team tournament</div>
+      <div class="screen-desc">Matches per round, tap the winner, live progress.</div>
+    </div>
+    <div class="screen-item featured">
+      <div class="phone-frame">
+        <img src="/screenshot-americano-scoring.png" alt="Americano score entry with plus and minus buttons" loading="lazy">
+      </div>
+      <div class="screen-label">Americano scoring</div>
+      <div class="screen-desc">Track scores per pair with +/− buttons, live points per round.</div>
+    </div>
+    <div class="screen-item featured">
+      <div class="phone-frame">
+        <img src="/screenshot-americano.png" alt="Americano live standings with points per player" loading="lazy">
+      </div>
+      <div class="screen-label">Live standings</div>
+      <div class="screen-desc">Standings per player, round progress and LIVE badge for spectators.</div>
+    </div>
+    <div class="screen-item" style="transform:translateY(24px)">
+      <div class="phone-frame">
+        <img src="/screenshot-winner.png" alt="Champion screen with confetti and final standings" loading="lazy">
+      </div>
+      <div class="screen-label">Champion 🏆</div>
+      <div class="screen-desc">Final standings with winner, podium and export buttons for CSV and PDF.</div>
     </div>
   </div>
 </section>
@@ -564,41 +457,25 @@
 <!-- HOW IT WORKS -->
 <section class="section" id="how-it-works">
   <h2 class="section-title">Ready in 4 steps</h2>
-  <p class="section-sub">In less than a minute you have a complete tournament set up.</p>
+  <p class="section-sub">In less than a minute you have a complete tournament ready to go.</p>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h4>Enter names</h4>
-      <p>Type one name per line. The app automatically creates pairs or trios.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h4>Choose format</h4>
-      <p>Team tournament (fixed pairs) or Americano (rotating partners).</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h4>Enter scores</h4>
-      <p>Tap the winner after each game. Standings update live.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h4>Champion 🏆</h4>
-      <p>After the final the winner is shown with confetti and final standings.</p>
-    </div>
+    <div class="step"><div class="step-num">1</div><h4>Enter names</h4><p>Type the player names. The app automatically creates pairs and rounds.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Choose format</h4><p>Americano, Mexicano, Knockout or Round Robin — pick what fits your group.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Track scores</h4><p>Enter live scores. Standings update instantly on screen and on participants' phones.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Champion 🏆</h4><p>After the last round the final standings appear. Export as PDF or CSV as a keepsake.</p></div>
   </div>
 </section>
 
 <!-- FORMATS -->
 <section class="section">
-  <h2 class="section-title">Two tournament formats</h2>
-  <p class="section-sub">Choose the format that suits your group.</p>
-  <div class="formats">
+  <h2 class="section-title">Four tournament formats</h2>
+  <p class="section-sub">Choose the format that fits your group.</p>
+  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="format team">
       <h3>Team tournament</h3>
-      <p>Fixed pairs or trios play group matches, after which the top 4 advance to the finals bracket and the rest to the consolation final.</p>
+      <p>Fixed pairs play groups, then the top 4 advance to the finals bracket. The rest play a consolation bracket.</p>
       <ul>
-        <li>Fixed pairs throughout the day</li>
+        <li>Fixed pairs all day</li>
         <li>Group stage + winners bracket</li>
         <li>Consolation final for places 5–9</li>
         <li>4 to 9 teams (8–18 players)</li>
@@ -606,12 +483,32 @@
     </div>
     <div class="format am">
       <h3>Americano</h3>
-      <p>New partners every round. Everyone plays with and against everyone — perfect for a fun social session.</p>
+      <p>New partners every round via a fixed rotation. Everyone plays with and against everyone — ideal for a fun social session.</p>
       <ul>
-        <li>Partners rotate every round</li>
-        <li>Points counted per player</li>
-        <li>Live leaderboard</li>
-        <li>4 to 24 players (even numbers)</li>
+        <li>Partners rotate each round</li>
+        <li>Points tracked per player</li>
+        <li>Live standings &amp; presentation mode</li>
+        <li>4 to 24 players</li>
+      </ul>
+    </div>
+    <div class="format am">
+      <h3>Mexicano</h3>
+      <p>Like Americano, but pairs are reassigned after each round based on current standings. Gets more competitive as it goes.</p>
+      <ul>
+        <li>Partners based on standings</li>
+        <li>Points tracked per player</li>
+        <li>More competitive each round</li>
+        <li>4 to 24 players</li>
+      </ul>
+    </div>
+    <div class="format team">
+      <h3>Round Robin</h3>
+      <p>Every team plays every other team. Fair, clear and suited for competitive club tournaments.</p>
+      <ul>
+        <li>Everyone plays everyone</li>
+        <li>Automatic standings</li>
+        <li>Export to PDF &amp; CSV</li>
+        <li>4 to 16 players</li>
       </ul>
     </div>
   </div>
@@ -627,23 +524,31 @@
     </details>
     <details class="faq-item">
       <summary>Which tournament formats are supported?</summary>
-      <p>PadelBracket supports four formats: <strong>knockout bracket</strong> (groups → semi-finals → final), <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners re-paired by standings each round) and <strong>Round Robin</strong> (everyone plays everyone).</p>
+      <p>PadelBracket supports four formats: <strong>knockout bracket</strong> (groups → semi-finals → final), <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners based on standings) and <strong>Round Robin</strong> (everyone plays everyone).</p>
     </details>
     <details class="faq-item">
       <summary>What is the difference between Americano and Mexicano?</summary>
-      <p>In <strong>Americano</strong>, partner rotations are fixed in advance using a circle algorithm — every player partners every other player exactly once. In <strong>Mexicano</strong>, partners are re-paired dynamically after every round: rank 1 plays with rank 2 against rank 3 and 4, rank 5 with rank 6 against rank 7 and 8, and so on. This means stronger players increasingly face each other, making Mexicano more competitive as the tournament progresses.</p>
+      <p>In <strong>Americano</strong>, partners are determined in advance via a fixed rotation — everyone plays exactly once together. In <strong>Mexicano</strong>, partners are reassigned after each round based on current standings: rank 1 and 2 play together against rank 3 and 4. Mexicano gets more competitive as the tournament progresses.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What does presentation mode do?</summary>
+      <p>Presentation mode opens a fullscreen scoreboard, ideal for a TV or projector in the clubhouse. You see the live standings and all active matches with live scores. The screen refreshes automatically every 3 seconds.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How can participants watch live?</summary>
+      <p>Use the <strong>Share</strong> button in the app to generate a unique link. Participants open it on their phone and see the live standings — no account, no installation. Scores update as you enter them.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can I export the results?</summary>
+      <p>Yes. After the tournament you can export the final standings and all match results as <strong>CSV</strong> (for Excel or Google Sheets) or print as <strong>PDF</strong>. The export button appears as soon as the first match is played.</p>
     </details>
     <details class="faq-item">
       <summary>How many players can I use?</summary>
-      <p>For a team tournament, a minimum of 4 players (2 teams). For Americano and Mexicano, 4 or more players work — even or odd. With an odd count (5, 7, 9…) one player rotates on a bye each round.</p>
+      <p>For Americano and Mexicano up to 24 players. For a team bracket 4 to 9 teams (8–18 players). With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
     </details>
     <details class="faq-item">
       <summary>Does the app work without internet?</summary>
       <p>Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Do I need to create an account?</summary>
-      <p>No. No registration or login required. Open the app and start your tournament directly.</p>
     </details>
     <details class="faq-item">
       <summary>Which languages is the app available in?</summary>
@@ -662,59 +567,14 @@
   </a>
 </section>
 
-<!-- FORMAT LINKS -->
-<section class="section" style="padding-bottom:60px">
-  <h2 class="section-title">Choose your format</h2>
-  <p class="section-sub">Each format has its own generator, rules and FAQ.</p>
-  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format am" style="text-decoration:none">
-      <h3><a href="/americano/" style="color:inherit;text-decoration:none">Americano Generator →</a></h3>
-      <p>Rotating partners, live leaderboard. 4–24 players. The most popular padel format for social sessions.</p>
-      <ul>
-        <li>Partners rotate every round</li>
-        <li>Points per player</li>
-        <li>4 to 24 players</li>
-      </ul>
-    </div>
-    <div class="format am" style="text-decoration:none">
-      <h3><a href="/app/" style="color:inherit;text-decoration:none">Mexicano Generator →</a></h3>
-      <p>Partners re-paired by standings each round. The leader plays with rank 2 against rank 3 &amp; 4 — gets more competitive every round.</p>
-      <ul>
-        <li>Dynamic pairings by ranking</li>
-        <li>Points per player</li>
-        <li>4 to 24 players</li>
-      </ul>
-    </div>
-    <div class="format team">
-      <h3><a href="/round-robin/" style="color:inherit;text-decoration:none">Round Robin Generator →</a></h3>
-      <p>Every team plays every other team. Fair and complete. Ideal for smaller groups.</p>
-      <ul>
-        <li>Fixed pairs throughout</li>
-        <li>Everyone plays everyone</li>
-        <li>4 to 16 players</li>
-      </ul>
-    </div>
-    <div class="format team" style="--c1:#10b981;--c2:#fbbf24">
-      <h3><a href="/knockout/" style="color:inherit;text-decoration:none">Knockout Bracket Generator →</a></h3>
-      <p>Group stage into knockout rounds. Semi-finals, final and consolation bracket included.</p>
-      <ul>
-        <li>Groups + knockout rounds</li>
-        <li>Consolation bracket</li>
-        <li>4 to 24 players</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <p>Padel Bracket — Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a></p>
+  <p>Padel Bracket — Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a></p>
 </footer>
 
 <script>
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
+    e.preventDefault(); deferredPrompt = e;
     document.getElementById('installBtn').style.display = 'inline-flex';
     document.getElementById('howBtn').style.display = 'none';
   });
@@ -733,7 +593,6 @@
     document.getElementById('howBtn').style.display = 'inline-flex';
   });
 </script>
-<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>
 <script>
   window.dataLayer=window.dataLayer||[];
@@ -741,23 +600,10 @@
   gtag('consent','default',{analytics_storage:'denied'});
   gtag('js',new Date());
   gtag('config','G-M5L2R20XXD',{anonymize_ip:true});
-  if(localStorage.getItem('padel-consent')==='granted'){
-    gtag('consent','update',{analytics_storage:'granted'});
-  }
-  (function(){
-    if(!localStorage.getItem('padel-consent')){
-      document.getElementById('cookie-banner').classList.remove('hidden');
-    }
-  })();
-  function acceptCookies(){
-    localStorage.setItem('padel-consent','granted');
-    gtag('consent','update',{analytics_storage:'granted'});
-    document.getElementById('cookie-banner').classList.add('hidden');
-  }
-  function declineCookies(){
-    localStorage.setItem('padel-consent','denied');
-    document.getElementById('cookie-banner').classList.add('hidden');
-  }
+  if(localStorage.getItem('padel-consent')==='granted'){gtag('consent','update',{analytics_storage:'granted'});}
+  (function(){if(!localStorage.getItem('padel-consent')){document.getElementById('cookie-banner').classList.remove('hidden');}})();
+  function acceptCookies(){localStorage.setItem('padel-consent','granted');gtag('consent','update',{analytics_storage:'granted'});document.getElementById('cookie-banner').classList.add('hidden');}
+  function declineCookies(){localStorage.setItem('padel-consent','denied');document.getElementById('cookie-banner').classList.add('hidden');}
 </script>
 </body>
 </html>
