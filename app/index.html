@@ -375,12 +375,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   .champ-wrap p{color:#666!important}
   /* Print header */
   .phdr{display:block!important;color:#111!important;border-bottom-color:#ccc!important}
-  /* Export print overlay */
-  #export-print-wrap{display:block!important;position:fixed;top:0;left:0;width:100%;background:#fff;padding:24px;font-family:sans-serif;color:#111;z-index:9999}
-  #screen-tournament,#screen-americano,#screen-setup,header{display:none!important}
-  @page{size:A4;margin:1.5cm}
+  @page{size:landscape;margin:1.2cm}
 }
-#export-print-wrap{display:none}
 .export-bar{display:flex;gap:8px;justify-content:flex-end;padding:10px 0 2px;border-top:1px solid var(--bdr)}
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
@@ -2602,28 +2598,43 @@ function exportCSV(){
 
 function exportPrint(){
   const{name,date,fmtLabel,standings,matches}=buildExportData();
+  const amSt=(mode==='americano'||mode==='mexicano');
   let stRows='',mRows='';
-  if(mode==='americano'||mode==='mexicano'){
+  if(amSt){
     stRows=standings.map((p,i)=>`<tr><td>${i+1}</td><td>${p.name}</td><td>${p.pts}</td></tr>`).join('');
-    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td>${m.sa}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td><td>${m.sb}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td>${m.sa}–${m.sb}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td></tr>`).join('');
   } else {
     stRows=standings.map((s,i)=>`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.played}</td><td>${s.wins}</td><td>${s.losses}</td></tr>`).join('');
-    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td>${m.ga}</td><td>${(T[m.b]||{name:'?'}).name}</td><td>${m.gb}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td>${m.ga}–${m.gb}</td><td>${(T[m.b]||{name:'?'}).name}</td></tr>`).join('');
   }
-  const amSt=(mode==='americano'||mode==='mexicano');
-  const stHead=amSt?`<th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th>`:`<th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th>`;
-  const wrap=$('export-print-wrap');
-  wrap.innerHTML=`<h2 style="margin:0 0 4px;font-size:1.4rem">${name}</h2>
-    <p style="margin:0 0 18px;color:#555;font-size:.9rem">${fmtLabel} — ${date} — ${standings.length} ${amSt?t('am_col_player').toLowerCase()+'s':'teams'}</p>
-    <h3 style="margin:0 0 8px;font-size:1rem">${t('fin_title')}</h3>
-    <table style="width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:20px"><thead><tr style="background:#f3f4f6">${stHead}</tr></thead><tbody>${stRows}</tbody></table>
-    <h3 style="margin:0 0 8px;font-size:1rem">${t('export_matches')}</h3>
-    <table style="width:100%;border-collapse:collapse;font-size:.85rem"><thead><tr style="background:#f3f4f6"><th>${t('export_round')}</th><th>Team A</th><th></th><th>Team B</th><th></th></tr></thead><tbody>${mRows}</tbody></table>`;
-  const style=document.createElement('style');
-  style.textContent='#export-print-wrap table td,#export-print-wrap table th{padding:5px 8px;border-bottom:1px solid #e5e7eb;text-align:left}';
-  wrap.appendChild(style);
-  window.print();
-  window.addEventListener('afterprint',()=>{ wrap.innerHTML=''; },{ once:true });
+  const stHead=amSt
+    ?`<th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th>`
+    :`<th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th>`;
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${name}</title><style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:sans-serif;color:#111;padding:28px;font-size:14px}
+    h1{font-size:1.4rem;font-weight:700;margin-bottom:4px}
+    .sub{color:#555;font-size:.85rem;margin-bottom:20px}
+    h2{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#374151;margin:18px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb}
+    table{width:100%;border-collapse:collapse;margin-bottom:4px}
+    th{background:#f3f4f6;text-align:left;padding:6px 10px;font-size:.8rem;text-transform:uppercase;letter-spacing:.4px;color:#6b7280}
+    td{padding:6px 10px;border-bottom:1px solid #f3f4f6}
+    tr:last-child td{border-bottom:none}
+    .print-btn{margin-top:24px;padding:8px 20px;background:#10b981;color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;letter-spacing:.5px}
+    @media print{.print-btn{display:none}@page{size:A4;margin:1.5cm}}
+  </style></head><body>
+    <h1>${name}</h1>
+    <p class="sub">${fmtLabel} &nbsp;·&nbsp; ${date} &nbsp;·&nbsp; ${standings.length} ${amSt?t('am_col_player').toLowerCase()+'s':'teams'}</p>
+    <h2>${t('fin_title')}</h2>
+    <table><thead><tr>${stHead}</tr></thead><tbody>${stRows}</tbody></table>
+    <h2>${t('export_matches')}</h2>
+    <table><thead><tr><th>${t('export_round')}</th><th>Team A</th><th>${t('export_score')}</th><th>Team B</th></tr></thead><tbody>${mRows}</tbody></table>
+    <button class="print-btn" onclick="window.print()">${t('export_print')}</button>
+  </body></html>`;
+  const win=window.open('','_blank','width=800,height=600');
+  if(!win){ alert('Pop-up geblokkeerd. Sta pop-ups toe voor padel-bracket.com.'); return; }
+  win.document.write(html);
+  win.document.close();
 }
 
 // ── Swipe-navigatie ────────────────────────────
