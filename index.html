@@ -156,6 +156,17 @@
     }
     .nav-cta:hover { background: var(--accent2); }
     .nav-cta:active { transform: scale(.96); }
+    .nav-lang {
+      display: flex; align-items: center; gap: 2px;
+      background: var(--bdr); border-radius: 8px; padding: 4px;
+      font-family: 'Barlow', sans-serif; font-size: .8rem; font-weight: 700;
+    }
+    .nav-lang a, .nav-lang span {
+      padding: 4px 10px; border-radius: 5px; text-decoration: none;
+      color: var(--txt-muted); transition: background .15s, color .15s;
+    }
+    .nav-lang a:hover { background: rgba(255,255,255,.08); color: var(--txt); }
+    .nav-lang span { background: var(--card); color: var(--txt); }
 
     /* ── HERO ── */
     .hero {
@@ -445,6 +456,7 @@
 
 <nav>
   <a class="nav-logo" href="#">Padel <em>•</em> Bracket</a>
+  <div class="nav-lang"><span>NL</span><a href="/en/">EN</a></div>
   <a class="nav-cta" href="/app/">Open app →</a>
 </nav>
 
