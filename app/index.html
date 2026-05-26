@@ -381,7 +381,7 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   @page{size:A4;margin:1.5cm}
 }
 #export-print-wrap{display:none}
-.export-bar{display:flex;gap:8px;justify-content:flex-end;padding:10px 18px 4px;border-top:1px solid var(--bdr)}
+.export-bar{display:flex;gap:8px;justify-content:flex-end;padding:10px 0 2px;border-top:1px solid var(--bdr)}
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
 /* SVG ICONS */
@@ -2303,7 +2303,7 @@ function renderAmSt(){
     h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
   });
   const bar=AM.flat().some(m=>m.done)?renderExportBar():'';
-  return h+`</table></div>`+bar;
+  return h+`</table>${bar}</div>`;
 }
 
 // ── Supabase sharing ──────────────────────────
