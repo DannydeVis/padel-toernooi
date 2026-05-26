@@ -40,6 +40,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Padel">
+  <meta name="geo.region" content="SE">
+  <meta name="geo.placename" content="Sverige">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,6 +66,40 @@
       { "@type": "Question", "name": "Vilka turneringsformat stöds?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket stöder fyra format: knockout-bracket (grupper → semifinaler → final), Americano (roterande partners, poäng per spelare), Mexicano (partners baserat på ställning) och Round Robin (alla mot alla)." } },
       { "@type": "Question", "name": "Vad är skillnaden mellan Americano och Mexicano?", "acceptedAnswer": { "@type": "Answer", "text": "I Americano bestäms partners i förväg via fast rotation. I Mexicano tilldelas partners om efter varje rond baserat på aktuell ställning: rang 1 och 2 spelar mot rang 3 och 4. Mexicano blir mer tävlingsinriktat för varje rond." } },
       { "@type": "Question", "name": "Fungerar appen utan internet?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Efter första laddningen fungerar PadelBracket helt offline. Turneringen sparas lokalt på din enhet, även om du stänger webbläsaren." } }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Hur man skapar en padelturnering",
+    "description": "Skapa en fullständig padelturnering i 4 steg med PadelBracket.",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Ange namnen", "text": "Skriv in namnen på alla deltagare eller klistra in dem från en lista." },
+      { "@type": "HowToStep", "position": 2, "name": "Välj format", "text": "Välj mellan Americano, Mexicano, Knockout eller Round Robin." },
+      { "@type": "HowToStep", "position": 3, "name": "Följ poängen", "text": "Ange resultatet efter varje match. Ställningen uppdateras automatiskt." },
+      { "@type": "HowToStep", "position": 4, "name": "Kora mästaren", "text": "I slutet ser du den slutliga ställningen och kan exportera som PDF eller CSV." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PadelBracket",
+    "url": "https://padel-bracket.com",
+    "description": "Gratis padel-turneringsgenerator för Americano, Mexicano, Knockout och Round Robin.",
+    "inLanguage": ["nl","en","fr","de","es","sv"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "PadelBracket", "item": "https://padel-bracket.com" },
+      { "@type": "ListItem", "position": 2, "name": "Svenska", "item": "https://padel-bracket.com/sv/" }
     ]
   }
   </script>

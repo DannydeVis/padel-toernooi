@@ -40,6 +40,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Padel">
+  <meta name="geo.region" content="ES">
+  <meta name="geo.placename" content="España">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -65,6 +67,40 @@
       { "@type": "Question", "name": "¿Cuál es la diferencia entre Americano y Mexicano?", "acceptedAnswer": { "@type": "Answer", "text": "En Americano, las parejas se determinan de antemano mediante una rotación fija. En Mexicano, las parejas se reasignan después de cada ronda según la clasificación actual: rango 1 y 2 juegan contra rango 3 y 4. El Mexicano se vuelve más competitivo a medida que avanza." } },
       { "@type": "Question", "name": "¿Cómo funciona el modo presentación?", "acceptedAnswer": { "@type": "Answer", "text": "El modo presentación abre un marcador a pantalla completa, ideal para una TV o proyector. Ves la clasificación en directo y todos los partidos activos. La pantalla se actualiza automáticamente cada 3 segundos." } },
       { "@type": "Question", "name": "¿Funciona la app sin internet?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Después de la primera carga, PadelBracket funciona completamente sin conexión. El torneo se guarda localmente en tu dispositivo, aunque cierres el navegador." } }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Cómo crear un torneo de pádel",
+    "description": "Crea un torneo de pádel completo en 4 pasos con PadelBracket.",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Introduce los nombres", "text": "Escribe los nombres de todos los participantes o pégalos desde una lista." },
+      { "@type": "HowToStep", "position": 2, "name": "Elige el formato", "text": "Elige entre Americano, Mexicano, Knockout o Round Robin." },
+      { "@type": "HowToStep", "position": 3, "name": "Sigue los marcadores", "text": "Introduce el marcador después de cada partido. La clasificación se actualiza automáticamente." },
+      { "@type": "HowToStep", "position": 4, "name": "Corona al campeón", "text": "Al final verás la clasificación final y podrás exportar como PDF o CSV." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PadelBracket",
+    "url": "https://padel-bracket.com",
+    "description": "Generador de torneo de pádel gratuito para Americano, Mexicano, Knockout y Round Robin.",
+    "inLanguage": ["nl","en","fr","de","es","sv"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "PadelBracket", "item": "https://padel-bracket.com" },
+      { "@type": "ListItem", "position": 2, "name": "Español", "item": "https://padel-bracket.com/es/" }
     ]
   }
   </script>
