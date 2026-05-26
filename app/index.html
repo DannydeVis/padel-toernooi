@@ -377,7 +377,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
   .phdr{display:block!important;color:#111!important;border-bottom-color:#ccc!important}
   @page{size:landscape;margin:1.2cm}
 }
-.export-bar{display:flex;gap:8px;justify-content:flex-end;padding:10px 0 2px;border-top:1px solid var(--bdr)}
+.export-bar{display:flex;align-items:center;gap:8px;padding:12px 0 4px;border-top:1px solid var(--bdr);margin-top:4px}
+.export-bar-lbl{font-size:.72rem;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.7px;flex:1}
 .phdr{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:3px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
 /* SVG ICONS */
@@ -448,7 +449,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .stats-tbl td{padding:6px 8px;border-bottom:1px solid #374151;color:var(--b-txt)}
 .stats-tbl tr:last-child td{border-bottom:none}
 .stats-tbl .medal-cell{font-size:.9rem;padding-right:4px;width:24px}
-.stats-export{display:flex;justify-content:flex-end;margin-top:14px}
+.stats-export{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.stats-export-lbl{font-size:.72rem;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.7px;flex:1}
 @media print{
   .stats-wrap{display:none!important}
 }
@@ -2519,6 +2521,7 @@ function renderStats(){
       ${rows}
     </table>
     <div class="stats-export">
+      <span class="stats-export-lbl">Export</span>
       <button class="btn btn-ghost btn-sm" id="stats-copy-btn" onclick="copyStats()">${icon('ic-clipboard')} ${t('fin_copy')}</button>
       <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
       <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
@@ -2544,6 +2547,7 @@ function copyStats(){
 // ── Export ────────────────────────────────────
 function renderExportBar(){
   return `<div class="export-bar">
+    <span class="export-bar-lbl">Export</span>
     <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
     <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
   </div>`;
@@ -2601,38 +2605,65 @@ function exportPrint(){
   const amSt=(mode==='americano'||mode==='mexicano');
   let stRows='',mRows='';
   if(amSt){
-    stRows=standings.map((p,i)=>`<tr><td>${i+1}</td><td>${p.name}</td><td>${p.pts}</td></tr>`).join('');
-    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td>${m.sa}–${m.sb}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td></tr>`).join('');
+    stRows=standings.map((p,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${p.name}</td><td class="pts">${p.pts}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td class="sc">${m.sa}–${m.sb}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td></tr>`).join('');
   } else {
-    stRows=standings.map((s,i)=>`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.played}</td><td>${s.wins}</td><td>${s.losses}</td></tr>`).join('');
-    mRows=matches.map(m=>`<tr><td>${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td>${m.ga}–${m.gb}</td><td>${(T[m.b]||{name:'?'}).name}</td></tr>`).join('');
+    stRows=standings.map((s,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${s.name}</td><td class="n">${s.played}</td><td class="n wn">${s.wins}</td><td class="n ls">${s.losses}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td class="sc">${m.ga}–${m.gb}</td><td>${(T[m.b]||{name:'?'}).name}</td></tr>`).join('');
   }
   const stHead=amSt
-    ?`<th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th>`
-    :`<th>#</th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th>`;
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${name}</title><style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:sans-serif;color:#111;padding:28px;font-size:14px}
-    h1{font-size:1.4rem;font-weight:700;margin-bottom:4px}
-    .sub{color:#555;font-size:.85rem;margin-bottom:20px}
-    h2{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#374151;margin:18px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb}
-    table{width:100%;border-collapse:collapse;margin-bottom:4px}
-    th{background:#f3f4f6;text-align:left;padding:6px 10px;font-size:.8rem;text-transform:uppercase;letter-spacing:.4px;color:#6b7280}
-    td{padding:6px 10px;border-bottom:1px solid #f3f4f6}
-    tr:last-child td{border-bottom:none}
-    .print-btn{margin-top:24px;padding:8px 20px;background:#10b981;color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;letter-spacing:.5px}
-    @media print{.print-btn{display:none}@page{size:A4;margin:1.5cm}}
-  </style></head><body>
-    <h1>${name}</h1>
-    <p class="sub">${fmtLabel} &nbsp;·&nbsp; ${date} &nbsp;·&nbsp; ${standings.length} ${amSt?t('am_col_player').toLowerCase()+'s':'teams'}</p>
-    <h2>${t('fin_title')}</h2>
+    ?`<th class="n">#</th><th>Speler</th><th class="pts">Ptn</th>`
+    :`<th class="n">#</th><th>Team</th><th class="n">G</th><th class="n wn">W</th><th class="n ls">V</th>`;
+  const html=`<!DOCTYPE html>
+<html lang="nl"><head><meta charset="UTF-8"><title>${name}</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;color:#1f2937;background:#fff}
+.pg{padding:28px 36px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #10b981;padding-bottom:12px;margin-bottom:20px}
+.hdr-l h1{font-size:20px;font-weight:800;color:#111;letter-spacing:-.3px}
+.site{font-size:11px;color:#9ca3af;margin-top:3px}
+.hdr-r{text-align:right}
+.badge{display:inline-block;background:#10b981;color:#fff;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.dt{font-size:11px;color:#6b7280;margin-top:5px}
+.sec{margin-bottom:22px}
+.sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#6b7280;padding:5px 8px;background:#f9fafb;text-align:left;border-bottom:2px solid #e5e7eb}
+td{padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:12px}
+tr:last-child td{border-bottom:none}
+tr.top td{font-weight:700}
+.n{text-align:center;width:44px}.nm{font-weight:600}
+.sc{text-align:center;width:52px;font-weight:700;color:#10b981}
+.pts{text-align:center;width:52px;font-weight:700}
+.wn{color:#059669}.ls{color:#dc2626}
+.foot{border-top:1px solid #e5e7eb;padding-top:8px;font-size:10px;color:#9ca3af;text-align:center;margin-top:16px}
+.actions{display:flex;gap:10px;margin-top:18px}
+.btn-p{padding:9px 22px;background:#10b981;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-cl{padding:9px 22px;background:#fff;color:#374151;border:1.5px solid #d1d5db;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+@media print{.actions{display:none!important}@page{size:A4 portrait;margin:1.5cm 1.8cm}}
+</style></head>
+<body><div class="pg">
+  <div class="hdr">
+    <div class="hdr-l"><h1>${name}</h1><div class="site">padel-bracket.com</div></div>
+    <div class="hdr-r"><span class="badge">${fmtLabel}</span><div class="dt">${date} &nbsp;·&nbsp; ${standings.length} ${amSt?'spelers':'teams'}</div></div>
+  </div>
+  <div class="sec">
+    <div class="sec-lbl">Eindstand</div>
     <table><thead><tr>${stHead}</tr></thead><tbody>${stRows}</tbody></table>
-    <h2>${t('export_matches')}</h2>
-    <table><thead><tr><th>${t('export_round')}</th><th>Team A</th><th>${t('export_score')}</th><th>Team B</th></tr></thead><tbody>${mRows}</tbody></table>
-    <button class="print-btn" onclick="window.print()">${t('export_print')}</button>
-  </body></html>`;
-  const win=window.open('','_blank','width=800,height=600');
-  if(!win){ alert('Pop-up geblokkeerd. Sta pop-ups toe voor padel-bracket.com.'); return; }
+  </div>
+  <div class="sec">
+    <div class="sec-lbl">Wedstrijden (${matches.length})</div>
+    <table><thead><tr><th class="n">#</th><th>Team A</th><th class="sc">Score</th><th>Team B</th></tr></thead><tbody>${mRows}</tbody></table>
+  </div>
+  <div class="foot">PadelBracket &mdash; padel-bracket.com</div>
+  <div class="actions">
+    <button class="btn-p" onclick="window.print()">Afdrukken / PDF</button>
+    <button class="btn-cl" onclick="window.close()">Sluiten</button>
+  </div>
+</div><script>window.onload=function(){setTimeout(function(){window.print();},350);}<\/script>
+</body></html>`;
+  const win=window.open('','_blank','width=840,height=720');
+  if(!win){alert('Pop-up geblokkeerd. Sta pop-ups toe voor padel-bracket.com.');return;}
   win.document.write(html);
   win.document.close();
 }
