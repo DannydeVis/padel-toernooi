@@ -854,7 +854,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.21.0';
+const APP_VERSION = 'v1.21.1';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -1289,11 +1289,18 @@ let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
-let shareCode=null, viewMode=false, viewPollInterval=null, _viewInitialized=false;
+let shareCode=localStorage.getItem('padel-share-code')||null;
+let sessionToken=localStorage.getItem('padel-session-token')||null;
+let viewMode=false, viewPollInterval=null, _viewInitialized=false;
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
-let _sb=null;
+let _sb=null, _sbWrite=null;
 function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
+function getSBWrite(){
+  if(!_sbWrite&&sessionToken&&window.supabase)
+    _sbWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':sessionToken}}});
+  return _sbWrite||getSB();
+}
 
 // ── Spelregels ────────────────────────────────
 function setTType(typ){
@@ -1485,6 +1492,8 @@ function goSetup(){
   viewMode=false; _viewInitialized=false;
   $('view-banner').style.display='none';
   T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];AP=[];AM=[];
+  shareCode=null; sessionToken=null; _sbWrite=null;
+  localStorage.removeItem('padel-share-code'); localStorage.removeItem('padel-session-token');
   tournamentName='';
   const tn=$('inp-tname'); if(tn) tn.value='';
   const ltname=$('logo-tname'); if(ltname) ltname.textContent='';
@@ -2386,11 +2395,11 @@ function _getSharePayload(){
 }
 
 async function pushToSupabase(){
-  if(!shareCode) return false;
-  const sb=getSB(); if(!sb) return false;
+  if(!shareCode||!sessionToken) return false;
+  const sb=getSBWrite(); if(!sb) return false;
   try{
     const {error}=await sb.from('tournaments').upsert(
-      {code:shareCode,data:_getSharePayload(),updated_at:new Date().toISOString()},
+      {code:shareCode,data:_getSharePayload(),updated_at:new Date().toISOString(),session_token:sessionToken},
       {onConflict:'code'}
     );
     if(error) throw error;
@@ -2406,6 +2415,9 @@ async function shareTournament(){
     const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     shareCode=Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
     localStorage.setItem('padel-share-code',shareCode);
+    sessionToken=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
+    localStorage.setItem('padel-session-token',sessionToken);
+    _sbWrite=null; // reset write-client zodat die de nieuwe token pikt
   }
   const btn=$('btn-share'); if(btn) btn.disabled=true;
   const modal=$('share-modal');
@@ -2426,7 +2438,8 @@ async function shareTournament(){
     modal.classList.remove('hidden');
   } else {
     if(inp) inp.value=t('share_error');
-    shareCode=null; localStorage.removeItem('padel-share-code');
+    shareCode=null; sessionToken=null; _sbWrite=null;
+    localStorage.removeItem('padel-share-code'); localStorage.removeItem('padel-session-token');
     modal.classList.remove('hidden');
   }
   if(btn) btn.disabled=false;
