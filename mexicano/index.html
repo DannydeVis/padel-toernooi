@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Padel Mexicano Generator — Free, No Signup | PadelBracket</title>
-  <meta name="description" content="Free padel Mexicano generator. Partners based on standings — the most competitive format. Works for 4 to 24 players. No account, works offline.">
-  <meta name="keywords" content="padel mexicano generator, padel mexicano app, free padel mexicano, padel mexicano online, padel mexicano schedule, padel mexicano standings, padel americano vs mexicano">
+  <meta name="description" content="Free padel Mexicano generator. Partners based on live standings, gets more competitive every round. 4 to 24 players. No account, works offline.">
+  <meta name="keywords" content="padel mexicano generator, padel mexicano app, free padel mexicano, padel mexicano no signup, padel mexicano vs americano, mexicano padel rules">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -319,6 +319,8 @@
       font-size: .9rem; font-weight: 600; transition: border-color .15s, color .15s;
     }
     .format-link:hover { border-color: rgba(16,185,129,.3); color: var(--accent); }
+    .pcount-title{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:12px}
+    .pcount-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 24px 60px}
 
     footer {
       border-top: 1px solid var(--bdr); padding: 32px 24px;
@@ -487,6 +489,18 @@ function switchLang(l){const p={nl:'/',en:'/mexicano/',fr:'/fr/',de:'/de/',es:'/
     Start Mexicano for free
   </a>
 </section>
+
+<!-- PLAYER COUNT NAV -->
+<div class="player-count-links">
+  <p class="pcount-title">Mexicano by player count</p>
+  <div class="pcount-grid">
+    <a class="format-link" href="/mexicano/8-players/">8 players</a>
+    <a class="format-link" href="/mexicano/12-players/">12 players</a>
+    <a class="format-link" href="/mexicano/16-players/">16 players</a>
+    <a class="format-link" href="/mexicano/20-players/">20 players</a>
+    <a class="format-link" href="/mexicano/24-players/">24 players</a>
+  </div>
+</div>
 
 <!-- OTHER FORMATS -->
 <div class="other-formats">

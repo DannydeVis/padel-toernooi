@@ -324,6 +324,8 @@
       font-size: .9rem; font-weight: 600; transition: border-color .15s, color .15s;
     }
     .format-link:hover { border-color: rgba(16,185,129,.3); color: var(--accent); }
+    .pcount-title{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:12px}
+    .pcount-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 24px 60px}
 
     footer {
       border-top: 1px solid var(--bdr); padding: 32px 24px;
@@ -496,6 +498,20 @@ function switchLang(l){const p={nl:'/',en:'/americano/',fr:'/fr/',de:'/de/',es:'
     Start Americano for free
   </a>
 </section>
+
+<!-- PLAYER COUNT NAV -->
+<div class="player-count-links">
+  <p class="pcount-title">Americano by player count</p>
+  <div class="pcount-grid">
+    <a class="format-link" href="/americano/4-players/">4 players</a>
+    <a class="format-link" href="/americano/8-players/">8 players</a>
+    <a class="format-link" href="/americano/10-players/">10 players</a>
+    <a class="format-link" href="/americano/12-players/">12 players</a>
+    <a class="format-link" href="/americano/16-players/">16 players</a>
+    <a class="format-link" href="/americano/20-players/">20 players</a>
+    <a class="format-link" href="/americano/24-players/">24 players</a>
+  </div>
+</div>
 
 <!-- OTHER FORMATS -->
 <div class="other-formats">
