@@ -498,7 +498,7 @@
   <a class="nav-cta" href="/app/">Open app →</a>
 </nav>
 <script>
-function switchLang(l){const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';
 }
 </script>
 

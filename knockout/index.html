@@ -362,7 +362,7 @@
   <a class="nav-cta" href="/app/">Start Knockout →</a>
 </nav>
 <script>
-function switchLang(l){const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->

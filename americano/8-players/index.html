@@ -145,7 +145,7 @@
   <a class="nav-cta" href="/app/">Start Americano →</a>
 </nav>
 <script>
-function switchLang(l){const p={nl:'/',en:'/americano/8-players/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/americano/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/americano/8-players/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/americano/';}
 </script>
 
 <section class="hero">
