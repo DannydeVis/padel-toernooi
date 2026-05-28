@@ -52,22 +52,22 @@
   function injectStyles() {
     if (document.getElementById("padel-cta-styles")) return;
     var css = ""
-      + ".padel-cta{box-sizing:border-box;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;z-index:2147483000;-webkit-tap-highlight-color:transparent}"
+      + ".padel-cta{box-sizing:border-box;font-family:'Barlow Condensed','Barlow',-apple-system,BlinkMacSystemFont,sans-serif;z-index:2147483000;-webkit-tap-highlight-color:transparent}"
       + ".padel-cta *{box-sizing:border-box}"
-      + ".padel-cta--spectator{position:fixed;left:50%;bottom:14px;transform:translateX(-50%) translateY(140%);width:calc(100% - 24px);max-width:520px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:#fff;border:1px solid #f0e6e6;border-radius:16px;box-shadow:0 8px 30px rgba(180,0,0,.12),0 2px 6px rgba(0,0,0,.06);animation:padel-cta-up .5s cubic-bezier(.2,.8,.2,1) .6s forwards}"
-      + ".padel-cta--spectator .padel-cta__txt{font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.25}"
-      + ".padel-cta--spectator .padel-cta__btn{flex:0 0 auto;white-space:nowrap;text-decoration:none;background:#e11d2a;color:#fff;font-weight:800;font-size:15px;padding:11px 18px;border-radius:12px;box-shadow:0 4px 12px rgba(225,29,42,.32);transition:transform .12s ease,box-shadow .12s ease}"
-      + ".padel-cta--spectator .padel-cta__btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(225,29,42,.4)}"
+      + ".padel-cta--spectator{position:fixed;left:50%;bottom:14px;transform:translateX(-50%) translateY(140%);width:calc(100% - 24px);max-width:520px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:#1a2540;border:1px solid rgba(16,185,129,.25);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);animation:padel-cta-up .5s cubic-bezier(.2,.8,.2,1) .6s forwards}"
+      + ".padel-cta--spectator .padel-cta__txt{font-size:16px;font-weight:700;color:#e2e8f0;line-height:1.25;letter-spacing:.2px}"
+      + ".padel-cta--spectator .padel-cta__btn{flex:0 0 auto;white-space:nowrap;text-decoration:none;background:#10b981;color:#fff;font-weight:800;font-size:13px;letter-spacing:.6px;text-transform:uppercase;padding:11px 18px;border-radius:12px;box-shadow:0 4px 12px rgba(16,185,129,.35);transition:transform .12s ease,box-shadow .12s ease}"
+      + ".padel-cta--spectator .padel-cta__btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(16,185,129,.5)}"
       + ".padel-cta--spectator .padel-cta__btn:active{transform:translateY(0)}"
-      + ".padel-cta--presentation{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 32px;background:linear-gradient(180deg,#fff 0%,#fff7f7 100%);border-top:3px solid #e11d2a;box-shadow:0 -6px 24px rgba(0,0,0,.06)}"
-      + ".padel-cta--presentation .padel-cta__qr{flex:0 0 auto;width:104px;height:104px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 2px 8px rgba(0,0,0,.1)}"
+      + ".padel-cta--presentation{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 32px;background:linear-gradient(180deg,#1a2540 0%,#0f172a 100%);border-top:3px solid #10b981;box-shadow:0 -4px 24px rgba(0,0,0,.4)}"
+      + ".padel-cta--presentation .padel-cta__qr{flex:0 0 auto;width:104px;height:104px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 2px 8px rgba(0,0,0,.3)}"
       + ".padel-cta--presentation .padel-cta__qr img{width:100%;height:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges}"
       + ".padel-cta--presentation .padel-cta__col{display:flex;flex-direction:column;gap:4px;text-align:left}"
-      + ".padel-cta--presentation .padel-cta__head{font-size:clamp(20px,2.4vw,30px);font-weight:800;color:#1a1a1a;line-height:1.1}"
-      + ".padel-cta--presentation .padel-cta__sub{font-size:clamp(14px,1.4vw,18px);font-weight:600;color:#6b6b6b}"
-      + ".padel-cta--presentation .padel-cta__url{font-size:clamp(18px,2vw,26px);font-weight:800;color:#e11d2a;letter-spacing:.2px}"
+      + ".padel-cta--presentation .padel-cta__head{font-size:clamp(20px,2.4vw,30px);font-weight:800;color:#f1f5f9;line-height:1.1;letter-spacing:.3px}"
+      + ".padel-cta--presentation .padel-cta__sub{font-size:clamp(14px,1.4vw,18px);font-weight:600;color:#94a3b8}"
+      + ".padel-cta--presentation .padel-cta__url{font-size:clamp(18px,2vw,26px);font-weight:800;color:#10b981;letter-spacing:.2px}"
       + "@keyframes padel-cta-up{to{transform:translateX(-50%) translateY(0)}}"
-      + "@media (max-width:380px){.padel-cta--spectator .padel-cta__txt{font-size:14px}.padel-cta--spectator .padel-cta__btn{font-size:14px;padding:10px 14px}}";
+      + "@media (max-width:380px){.padel-cta--spectator .padel-cta__txt{font-size:14px}.padel-cta--spectator .padel-cta__btn{font-size:12px;padding:10px 14px}}";
     var s = document.createElement("style");
     s.id = "padel-cta-styles";
     s.textContent = css;

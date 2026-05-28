@@ -855,7 +855,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.21.2';
+const APP_VERSION = 'v1.21.3';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -2481,7 +2481,7 @@ function _applyViewState(s){
     if(ogT) ogT.setAttribute('content',`${s.tournamentName} — live padel score`);
     if(ogD) ogD.setAttribute('content',`Volg ${s.tournamentName} live op PadelBracket — padel-bracket.com`);
   }
-  if(window.PadelCTA) PadelCTA.mount({mode:'spectator'});
+  if(window.PadelCTA) PadelCTA.mount({mode:'spectator',lang:LANG});
 }
 
 function _showViewError(msg){
@@ -2859,7 +2859,7 @@ function initPresentation(){
   }
   render();
   setInterval(render,3000);
-  if(window.PadelCTA) PadelCTA.mount({mode:'presentation'});
+  if(window.PadelCTA) PadelCTA.mount({mode:'presentation',lang:LANG});
 }
 
 // ── Swipe-navigatie ────────────────────────────
