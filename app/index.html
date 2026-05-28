@@ -178,6 +178,18 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .pchip{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:7px 10px;font-size:.8rem;color:var(--txt);display:flex;align-items:center;gap:6px}
 .pchip .nn{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--accent);font-size:.9rem;min-width:18px}
 .trio-pill{margin-left:auto;background:var(--gold);color:#000;font-size:.58rem;font-weight:800;padding:1px 5px;border-radius:4px;letter-spacing:.5px}
+/* ── Opgeslagen groepen ── */
+#saved-groups-wrap{margin-bottom:16px}
+.grp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.grp-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
+.grp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.grp-chip{display:flex;align-items:center;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;overflow:hidden;font-size:.85rem}
+.grp-chip-load{background:none;border:none;cursor:pointer;padding:7px 10px;color:var(--txt);font-weight:600;font-size:.85rem;font-family:inherit}
+.grp-chip-load:hover{background:rgba(16,185,129,.12)}
+.grp-chip-actions{display:flex;border-left:1px solid rgba(16,185,129,.2)}
+.grp-chip-action{background:none;border:none;cursor:pointer;padding:5px 7px;font-size:.75rem;color:var(--txt2);transition:.12s}
+.grp-chip-action:hover{color:var(--txt);background:rgba(255,255,255,.06)}
+.grp-empty{font-size:.82rem;color:var(--txt2);padding:4px 0}
 
 /* TABS */
 .tabs{display:flex;gap:3px;background:var(--bg)}
@@ -737,6 +749,8 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="set_btn_manual">Teams zelf invoeren</span></button>
     </div>
 
+    <div id="saved-groups-wrap"></div>
+
     <!-- AUTO MODE: player names -->
     <div id="mode-auto">
       <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
@@ -855,7 +869,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.21.4';
+const APP_VERSION = 'v1.22.0';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -872,7 +886,7 @@ document.documentElement.lang=LANG;
 
 const I18N={
 nl:{
-  logo_word:'Toernooi',hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',feedback_btn:'Feedback',feedback_bug:'Bug melden',feedback_feature:'Idee indienen',cookie_txt:'We gebruiken analytics om te begrijpen hoe bezoekers de site gebruiken. Geen advertenties, geen persoonlijke data.',cookie_accept:'Accepteren',cookie_decline:'Weigeren',share_btn:'Deel',share_title:'Deel dit toernooi',share_desc:'Iedereen met deze link ziet live de bracket en tussenstand — alleen lezen.',share_copy:'Kopieer link',share_copied:'Gekopieerd!',share_close:'Sluiten',share_loading:'Toernooi laden…',share_not_found:'Toernooi niet gevonden.',share_error:'Verbinding mislukt.',share_nudge:'Laat iedereen live meekijken — tik op Deel',view_banner:'Live meekijken',share_wa_text:'Volg live mee via PadelBracket',share_whatsapp:'Deel via WhatsApp',share_result_cta:'Deel de uitslag',reset_btn:'Begin opnieuw',reset_confirm:'Weet je zeker dat je opnieuw wilt beginnen? Alle scores gaan verloren.',
+  logo_word:'Toernooi',savedGroups:'Opgeslagen groepen',saveGroup:'Groep opslaan',groupName:'Naam van de groep',loadGroup:'Laden',renameGroup:'Hernoemen',deleteGroup:'Verwijderen',noGroups:'Nog geen groepen opgeslagen',groupSaved:'Groep opgeslagen',confirmDeleteGroup:'Deze groep verwijderen?',overwriteGroup:'Er bestaat al een groep met deze naam. Overschrijven?',hdr_theme:'Thema wisselen',hdr_edit:'Aanpassen',hdr_print:'Afdrukken',feedback_btn:'Feedback',feedback_bug:'Bug melden',feedback_feature:'Idee indienen',cookie_txt:'We gebruiken analytics om te begrijpen hoe bezoekers de site gebruiken. Geen advertenties, geen persoonlijke data.',cookie_accept:'Accepteren',cookie_decline:'Weigeren',share_btn:'Deel',share_title:'Deel dit toernooi',share_desc:'Iedereen met deze link ziet live de bracket en tussenstand — alleen lezen.',share_copy:'Kopieer link',share_copied:'Gekopieerd!',share_close:'Sluiten',share_loading:'Toernooi laden…',share_not_found:'Toernooi niet gevonden.',share_error:'Verbinding mislukt.',share_nudge:'Laat iedereen live meekijken — tik op Deel',view_banner:'Live meekijken',share_wa_text:'Volg live mee via PadelBracket',share_whatsapp:'Deel via WhatsApp',share_result_cta:'Deel de uitslag',reset_btn:'Begin opnieuw',reset_confirm:'Weet je zeker dat je opnieuw wilt beginnen? Alle scores gaan verloren.',
   ob_skip:'Overslaan',ob_back:'← Terug',ob_next:'Volgende →',ob_start:'Starten',
   ob1_title:'Padel Toernooi',
   ob1_body:'Organiseer je eigen toernooi in een paar tikken — van namen invoeren tot eindstand. Alles in één app, ook offline.',
@@ -938,7 +952,7 @@ nl:{
   inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
 },
 en:{
-  logo_word:'Tournament',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'Watch live on PadelBracket',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
+  logo_word:'Tournament',savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'Watch live on PadelBracket',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
   ob_skip:'Skip',ob_back:'← Back',ob_next:'Next →',ob_start:'Start',
   ob1_title:'Padel Tournament',
   ob1_body:'Organise your own tournament in a few taps — from entering names to the final standings. All in one app, even offline.',
@@ -1004,7 +1018,7 @@ en:{
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',
 },
 fr:{
-  logo_word:'Tournoi',hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'Vue en direct',share_wa_text:'Suivez en direct sur PadelBracket',share_whatsapp:'Partager via WhatsApp',share_result_cta:'Partager les résultats',reset_btn:'Recommencer',reset_confirm:'Recommencer ? Tous les scores seront perdus.',
+  logo_word:'Tournoi',savedGroups:'Groupes enregistrés',saveGroup:'Enregistrer le groupe',groupName:'Nom du groupe',loadGroup:'Charger',renameGroup:'Renommer',deleteGroup:'Supprimer',noGroups:'Aucun groupe enregistré',groupSaved:'Groupe enregistré',confirmDeleteGroup:'Supprimer ce groupe ?',overwriteGroup:'Un groupe avec ce nom existe déjà. Remplacer ?',hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'Vue en direct',share_wa_text:'Suivez en direct sur PadelBracket',share_whatsapp:'Partager via WhatsApp',share_result_cta:'Partager les résultats',reset_btn:'Recommencer',reset_confirm:'Recommencer ? Tous les scores seront perdus.',
   ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
   ob1_title:'Tournoi de Padel',
   ob1_body:"Organisez votre propre tournoi en quelques clics — de la saisie des noms au classement final. Tout dans une appli, même hors ligne.",
@@ -1070,7 +1084,7 @@ fr:{
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
 },
 de:{
-  logo_word:'Turnier',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live verfolgen auf PadelBracket',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
+  logo_word:'Turnier',savedGroups:'Gespeicherte Gruppen',saveGroup:'Gruppe speichern',groupName:'Gruppenname',loadGroup:'Laden',renameGroup:'Umbenennen',deleteGroup:'Löschen',noGroups:'Noch keine Gruppen gespeichert',groupSaved:'Gruppe gespeichert',confirmDeleteGroup:'Diese Gruppe löschen?',overwriteGroup:'Eine Gruppe mit diesem Namen existiert bereits. Überschreiben?',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live verfolgen auf PadelBracket',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
   ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
   ob1_title:'Padel Turnier',
   ob1_body:'Organisiere dein eigenes Turnier in wenigen Taps — von der Namenseingabe bis zur Endabrechnung. Alles in einer App, auch offline.',
@@ -1136,7 +1150,7 @@ de:{
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
 },
 es:{
-  logo_word:'Torneo',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'Sigue en directo en PadelBracket',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
+  logo_word:'Torneo',savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'Sigue en directo en PadelBracket',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
   ob_skip:'Saltar',ob_back:'← Atrás',ob_next:'Siguiente →',ob_start:'Iniciar',
   ob1_title:'Torneo de Pádel',
   ob1_body:'Organiza tu propio torneo en pocos toques — desde introducir nombres hasta la clasificación final. Todo en una app, incluso sin conexión.',
@@ -1202,7 +1216,7 @@ es:{
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
 },
 sv:{
-  logo_word:'Turnering',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'Följ live på PadelBracket',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
+  logo_word:'Turnering',savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'Följ live på PadelBracket',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
   ob_skip:'Hoppa över',ob_back:'← Tillbaka',ob_next:'Nästa →',ob_start:'Starta',
   ob1_title:'Padelturnering',
   ob1_body:'Organisera din egen turnering med några tryck — från att ange namn till slutresultatet. Allt i en app, även offline.',
@@ -1272,6 +1286,69 @@ sv:{
 function t(key,vars={}){
   const s=(I18N[LANG]||I18N.nl)[key]||I18N.nl[key]||key;
   return s.replace(/\{(\w+)\}/g,(_,k)=>vars[k]??'');
+}
+
+// ── Opgeslagen groepen ──────────────────────────
+function _loadGroups(){
+  try{ return JSON.parse(localStorage.getItem('padel_groups'))||[]; }catch{ return []; }
+}
+function _saveGroups(arr){ localStorage.setItem('padel_groups',JSON.stringify(arr)); }
+function _activeLines(){
+  const manual=$('mode-manual').style.display!=='none';
+  return (manual?$('ta-manual'):$('ta')).value.split('\n').map(s=>s.trim()).filter(Boolean);
+}
+function _setActiveTA(lines){
+  const manual=$('mode-manual').style.display!=='none';
+  const ta=manual?$('ta-manual'):$('ta');
+  ta.value=lines.join('\n');
+  ta.dispatchEvent(new Event('input'));
+}
+function renderGroupsUI(){
+  const wrap=$('saved-groups-wrap');
+  if(!wrap) return;
+  const sorted=[..._loadGroups()].sort((a,b)=>b.updatedAt-a.updatedAt);
+  const chips=sorted.length
+    ? sorted.map(g=>`<div class="grp-chip"><button class="grp-chip-load" onclick="loadGroup('${g.id}')">${g.name.replace(/</g,'&lt;')}</button><div class="grp-chip-actions"><button class="grp-chip-action" onclick="renameGroup('${g.id}')" title="${t('renameGroup')}">✎</button><button class="grp-chip-action" onclick="deleteGroup('${g.id}')" title="${t('deleteGroup')}">✕</button></div></div>`).join('')
+    : `<span class="grp-empty">${t('noGroups')}</span>`;
+  wrap.innerHTML=`<div class="grp-hdr"><span class="grp-lbl">${t('savedGroups')}</span><button class="btn btn-ghost btn-sm" onclick="saveCurrentGroup()">${t('saveGroup')}</button></div><div class="grp-chips">${chips}</div>`;
+}
+function saveCurrentGroup(){
+  const lines=_activeLines();
+  if(!lines.length) return;
+  const name=(window.prompt(t('groupName'))||'').trim();
+  if(!name) return;
+  const groups=_loadGroups();
+  const existing=groups.find(g=>g.name===name);
+  if(existing){
+    if(!window.confirm(t('overwriteGroup'))) return;
+    existing.lines=lines; existing.updatedAt=Date.now();
+  } else {
+    const id=typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
+    groups.push({id,name,lines,updatedAt:Date.now()});
+  }
+  _saveGroups(groups); renderGroupsUI();
+}
+function loadGroup(id){
+  const g=_loadGroups().find(g=>g.id===id);
+  if(g) _setActiveTA(g.lines);
+}
+function deleteGroup(id){
+  if(!window.confirm(t('confirmDeleteGroup'))) return;
+  _saveGroups(_loadGroups().filter(g=>g.id!==id));
+  renderGroupsUI();
+}
+function renameGroup(id){
+  const groups=_loadGroups();
+  const g=groups.find(g=>g.id===id);
+  if(!g) return;
+  const name=(window.prompt(t('groupName'),g.name)||'').trim();
+  if(!name||name===g.name) return;
+  const clash=groups.find(h=>h.name===name&&h.id!==id);
+  if(clash&&!window.confirm(t('overwriteGroup'))) return;
+  const final=clash?groups.filter(h=>h.id!==clash.id):groups;
+  const tgt=final.find(h=>h.id===id);
+  if(tgt){tgt.name=name;tgt.updatedAt=Date.now();}
+  _saveGroups(final); renderGroupsUI();
 }
 
 function applyI18n(){
@@ -2943,6 +3020,7 @@ if(isIOS() && !isInStandalone()){
 
 document.addEventListener('DOMContentLoaded', () => {
   applyI18n();
+  renderGroupsUI();
   // Initialize placeholder text in nc elements
   const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
   const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
