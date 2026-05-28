@@ -66,6 +66,8 @@
       + ".padel-cta--presentation .padel-cta__head{font-size:clamp(20px,2.4vw,30px);font-weight:800;color:#f1f5f9;line-height:1.1;letter-spacing:.3px}"
       + ".padel-cta--presentation .padel-cta__sub{font-size:clamp(14px,1.4vw,18px);font-weight:600;color:#94a3b8}"
       + ".padel-cta--presentation .padel-cta__url{font-size:clamp(18px,2vw,26px);font-weight:800;color:#10b981;letter-spacing:.2px}"
+      + ".padel-cta--spectator .padel-cta__close{flex:0 0 auto;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:20px;line-height:1;padding:4px 2px;margin-left:4px;transition:color .12s ease}"
+      + ".padel-cta--spectator .padel-cta__close:hover{color:#f1f5f9}"
       + "@keyframes padel-cta-up{to{transform:translateX(-50%) translateY(0)}}"
       + "@media (max-width:380px){.padel-cta--spectator .padel-cta__txt{font-size:14px}.padel-cta--spectator .padel-cta__btn{font-size:12px;padding:10px 14px}}";
     var s = document.createElement("style");
@@ -90,11 +92,12 @@
     el.className = "padel-cta padel-cta--" + mode;
 
     if (mode === "spectator") {
-      el.innerHTML = '<span class="padel-cta__txt"></span><a class="padel-cta__btn" target="_blank" rel="noopener"></a>';
+      el.innerHTML = '<span class="padel-cta__txt"></span><a class="padel-cta__btn" target="_blank" rel="noopener"></a><button class="padel-cta__close" aria-label="Sluiten">&#x2715;</button>';
       el.querySelector(".padel-cta__txt").textContent = t.head;
       var a = el.querySelector(".padel-cta__btn");
       a.textContent = t.btn; a.href = href;
       a.setAttribute("aria-label", t.head + " " + t.btn);
+      el.querySelector(".padel-cta__close").onclick = function(){ el.style.display = "none"; };
     } else {
       var qr = opts.qrSrc || EMBEDDED_QR;
       el.innerHTML =
