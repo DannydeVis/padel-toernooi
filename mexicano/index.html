@@ -28,7 +28,7 @@
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/mexicano/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mexicano/">
-  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#0E1114" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
   <script type="application/ld+json">
   {
@@ -103,36 +103,38 @@
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #0a0f1a;
-      --surface: #111827;
-      --surface2:#1f2937;
-      --accent:  #10b981;
-      --accent2: #059669;
+      --bg:      #0E1114;
+      --surface: #1A1F24;
+      --surface2:#252B32;
+      --accent:  #C7FF5E;
+      --accent2: #a8d94e;
       --gold:    #fbbf24;
       --txt:     #f9fafb;
       --txt2:    rgba(249,250,251,.55);
       --bdr:     rgba(255,255,255,.08);
-      --nav-bg:  rgba(10,15,26,.85);
+      --nav-bg:  rgba(14,17,20,.85);
     }
     @media (prefers-color-scheme: light) {
       :root {
         --bg:      #f9fafb;
         --surface: #ffffff;
         --surface2:#f3f4f6;
-        --txt:     #111827;
+        --txt:     #1A1F24;
         --txt2:    rgba(17,24,39,.55);
         --bdr:     rgba(0,0,0,.10);
         --nav-bg:  rgba(249,250,251,.85);
+        --accent:  #4a7c00;
+        --accent2: #3a6200;
       }
     }
 
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--txt); font-family: 'Barlow', sans-serif; line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -144,20 +146,20 @@
       border-bottom: 1px solid var(--bdr);
     }
     .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
       color: var(--txt); text-decoration: none;
     }
     .nav-logo em { color: var(--accent); font-style: normal; }
     .nav-cta {
-      background: var(--accent); color: #fff; border: none; border-radius: 8px;
-      padding: 9px 20px; font-family: 'Barlow', sans-serif; font-weight: 600;
+      background: var(--accent); color: #0E1114; border: none; border-radius: 8px;
+      padding: 9px 20px; font-family: 'Inter', sans-serif; font-weight: 600;
       font-size: .9rem; cursor: pointer; text-decoration: none;
       transition: background .15s, transform .1s;
     }
     .nav-cta:hover { background: var(--accent2); }
     .nav-cta:active { transform: scale(.96); }
-    .nav-lang select { appearance:none; -webkit-appearance:none; background:var(--surface); color:var(--txt); border:1px solid var(--bdr); border-radius:8px; padding:6px 28px 6px 10px; font-family:'Barlow',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 8px center; transition:border-color .15s; }
+    .nav-lang select { appearance:none; -webkit-appearance:none; background:var(--surface); color:var(--txt); border:1px solid var(--bdr); border-radius:8px; padding:6px 28px 6px 10px; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 8px center; transition:border-color .15s; }
     .nav-lang select:hover { border-color:var(--accent); }
     .nav-lang select:focus { outline:none; border-color:var(--accent); }
 
@@ -170,7 +172,7 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(199,255,94,.13) 0%, transparent 70%),
         radial-gradient(ellipse 50% 40% at 80% 80%, rgba(251,191,36,.08) 0%, transparent 60%);
     }
     .hero-grid {
@@ -182,21 +184,21 @@
     .hero > * { position: relative; z-index: 1; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3);
+      background: rgba(199,255,94,.12); border: 1px solid rgba(199,255,94,.3);
       color: var(--accent); border-radius: 99px; padding: 6px 16px;
       font-size: .82rem; font-weight: 600; letter-spacing: .5px;
       margin-bottom: 28px;
     }
     .hero-badge svg { width: 14px; height: 14px; }
     h1 {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
       line-height: .95; letter-spacing: -1px; margin-bottom: 10px;
     }
     h1 em { color: var(--accent); font-style: normal; display: block; }
     .hero-kicker {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      font-family: 'Inter', sans-serif; font-weight: 700;
+      font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
       color: var(--accent); margin-bottom: 12px;
     }
     .hero-sub {
@@ -206,20 +208,20 @@
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #fff; text-decoration: none;
+      background: var(--accent); color: #0E1114; text-decoration: none;
       border-radius: 12px; padding: 16px 32px;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-family: 'Inter', sans-serif; font-weight: 800;
       font-size: 1.15rem; letter-spacing: .5px;
       transition: background .15s, transform .1s, box-shadow .15s;
-      box-shadow: 0 4px 24px rgba(16,185,129,.3);
+      box-shadow: 0 4px 24px rgba(199,255,94,.3);
     }
-    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(16,185,129,.45); }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(199,255,94,.45); }
     .btn-primary:active { transform: scale(.97); }
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
       background: transparent; color: var(--txt2); text-decoration: none;
       border: 1px solid var(--bdr); border-radius: 12px; padding: 15px 28px;
-      font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 1rem;
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1rem;
       transition: border-color .15s, color .15s;
     }
     .btn-secondary:hover { border-color: rgba(255,255,255,.25); color: var(--txt); }
@@ -233,17 +235,17 @@
     }
     .stat { text-align: center; }
     .stat-n {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: 2.6rem; color: var(--accent); line-height: 1;
     }
     .stat-lbl { font-size: .82rem; color: var(--txt2); margin-top: 4px; }
 
     .players-row{text-align:center;padding:0 24px 60px;font-size:.9rem;color:var(--txt2)}
-    .players-row strong{color:var(--txt);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px}
+    .players-row strong{color:var(--txt);font-family:'Inter',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px}
 
     .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
     .section-title {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 12px;
     }
     .section-sub { text-align: center; color: var(--txt2); max-width: 480px; margin: 0 auto 56px; }
@@ -252,14 +254,14 @@
       background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
       padding: 28px; transition: border-color .2s, transform .2s;
     }
-    .feature:hover { border-color: rgba(16,185,129,.3); transform: translateY(-2px); }
+    .feature:hover { border-color: rgba(199,255,94,.3); transform: translateY(-2px); }
     .feature-icon {
       width: 48px; height: 48px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 18px; font-size: 1.4rem;
     }
     .feature h3 {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-family: 'Inter', sans-serif; font-weight: 800;
       font-size: 1.2rem; letter-spacing: .3px; margin-bottom: 8px;
     }
     .feature p { font-size: .92rem; color: var(--txt2); line-height: 1.6; }
@@ -273,11 +275,11 @@
     }
     .step-num {
       width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--accent);
-      color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      color: var(--accent); font-family: 'Inter', sans-serif; font-weight: 800;
       font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
       margin: 0 auto 16px;
     }
-    .step h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
+    .step h4 { font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
     .step p { font-size:.85rem; color:var(--txt2); }
 
     .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
@@ -301,10 +303,10 @@
 
     .cta-wrap {
       text-align: center; padding: 80px 24px 100px;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(199,255,94,.08) 0%, transparent 70%);
     }
     .cta-wrap h2 {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 16px;
     }
     .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 40px; }
@@ -318,8 +320,8 @@
       padding: 16px 24px; text-decoration: none; color: var(--txt2);
       font-size: .9rem; font-weight: 600; transition: border-color .15s, color .15s;
     }
-    .format-link:hover { border-color: rgba(16,185,129,.3); color: var(--accent); }
-    .pcount-title{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:12px}
+    .format-link:hover { border-color: rgba(199,255,94,.3); color: var(--accent); }
+    .pcount-title{text-align:center;font-family:'Inter',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:12px}
     .pcount-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 24px 60px}
 
     footer {
@@ -336,7 +338,7 @@
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
     #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
-    .cookie-accept{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
+    .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
     .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
     .cookie-decline:hover{background:var(--surface2)}
   </style>
@@ -344,13 +346,13 @@
 <body>
 
 <div id="cookie-banner" class="hidden">
-  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Privacy policy</a></p>
+  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="/privacy/" style="color:var(--accent)">Privacy policy</a></p>
   <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
   <button class="cookie-decline" onclick="declineCookies()">Decline</button>
 </div>
 
 <nav>
-  <a class="nav-logo" href="/en/">Padel <em>•</em> Bracket</a>
+  <a class="nav-logo" href="/en/">Padel <em>Bracket</em></a>
   <div class="nav-lang">
     <select onchange="switchLang(this.value)" aria-label="Choose language">
       <option value="nl">🇳🇱 NL</option>
@@ -408,7 +410,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <p class="section-sub">From entering names to the final leaderboard — fully automatic.</p>
   <div class="features">
     <div class="feature">
-      <div class="feature-icon" style="background:rgba(16,185,129,.12)">📈</div>
+      <div class="feature-icon" style="background:rgba(199,255,94,.12)">📈</div>
       <h3>Standings-based partners</h3>
       <p>After each round, rank 1 and 2 play together against rank 3 and 4. Every round pairs evenly matched players, so the competition intensifies naturally.</p>
     </div>
@@ -511,7 +513,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </div>
 
 <footer>
-  <p>Padel Bracket — Free Mexicano generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a></p>
+  <p>Padel Bracket — Free Mexicano generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
 </footer>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>
