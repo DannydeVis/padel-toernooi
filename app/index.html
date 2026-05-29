@@ -780,6 +780,17 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       </div>
     </div>
 
+    <!-- Timer per ronde (americano only) -->
+    <div class="rules-row" id="rules-timer-row" style="display:none">
+      <span class="rules-lbl" data-i18n="set_lbl_timer">Timer/ronde</span>
+      <div class="rules-opts" id="rules-timer">
+        <button class="rbtn active" onclick="setTimerMins(0)" data-i18n="set_timer_off">Geen</button>
+        <button class="rbtn" onclick="setTimerMins(15)">15 min</button>
+        <button class="rbtn" onclick="setTimerMins(20)">20 min</button>
+        <button class="rbtn" onclick="setTimerMins(30)">30 min</button>
+      </div>
+    </div>
+
     <!-- Mode toggle (team only) -->
     <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
       <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> <span data-i18n="set_btn_auto">Spelersnamen invoeren</span></button>
@@ -911,7 +922,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.0';
+const APP_VERSION = 'v1.27.1';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -948,7 +959,7 @@ nl:{
   set_desc_auto_mex:'Één naam per regel. Minimaal 4 spelers. Bij oneven aantal: laagst gerangschikte speler rust per ronde. Koppels op basis van stand.',
   set_type_sub_rr:'iedereen vs iedereen',set_title_rr:'Round Robin instellen',
   set_desc_auto_rr:"Één naam per regel, minimaal 4. Iedereen speelt tegen iedereen. De eindstand bepaalt de winnaar.",
-  set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',
+  set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',set_lbl_timer:'Timer/ronde',set_timer_off:'Geen',
   set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
   set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
   set_desc_auto_am:'Één naam per regel. Minimaal 4 spelers. Bij oneven aantal (5, 7, 9…): 1 speler heeft elke ronde een bye. Partners wisselen elke ronde.',
@@ -973,7 +984,7 @@ nl:{
   brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
-  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',timer_start:'▶ Start ronde',timer_prompt:'Tijdslimiet (minuten)',timer_done:'TIJD OM',
+  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',timer_start:'Start ronde',timer_done:'TIJD OM',
   export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
@@ -1014,7 +1025,7 @@ en:{
   set_desc_auto_mex:'One name per line. Minimum 4 players. With an odd count: lowest-ranked player rests each round. Partners re-paired by standings.',
   set_type_sub_rr:'everyone vs everyone',set_title_rr:'Set up Round Robin',
   set_desc_auto_rr:'One name per line, minimum 4. Everyone plays against everyone. Final standings determine the winner.',
-  set_lbl_format:'Match format',set_lbl_pts:'Points/match',
+  set_lbl_format:'Match format',set_lbl_pts:'Points/match',set_lbl_timer:'Timer/round',set_timer_off:'Off',
   set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
   set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
   set_desc_auto_am:'One name per line. Minimum 4 players. With an odd count (5, 7, 9…): 1 player gets a bye each round. Partners rotate each round.',
@@ -1039,7 +1050,7 @@ en:{
   brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
-  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',timer_start:'▶ Start round',timer_prompt:'Time limit (minutes)',timer_done:'TIME UP',
+  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',timer_start:'Start round',timer_done:'TIME UP',
   export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
@@ -1080,7 +1091,7 @@ fr:{
   set_desc_auto_mex:'Un nom par ligne. Minimum 4 joueurs. Avec un nombre impair : le joueur classé dernier est exempt par manche. Partenaires selon classement.',
   set_type_sub_rr:'tout le monde vs tout le monde',set_title_rr:'Configurer Round Robin',
   set_desc_auto_rr:"Un nom par ligne, minimum 4. Tout le monde joue contre tout le monde. Le classement final détermine le vainqueur.",
-  set_lbl_format:'Format de match',set_lbl_pts:'Points/match',
+  set_lbl_format:'Format de match',set_lbl_pts:'Points/match',set_lbl_timer:'Minuterie/tour',set_timer_off:'Non',
   set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
   set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
   set_desc_auto_am:'Un nom par ligne. Minimum 4 joueurs. Avec un nombre impair (5, 7, 9…) : 1 joueur est exempt par manche. Les partenaires changent chaque manche.',
@@ -1105,7 +1116,7 @@ fr:{
   brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
-  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',timer_start:'▶ Lancer le tour',timer_prompt:'Limite de temps (minutes)',timer_done:'TEMPS ÉCOULÉ',
+  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',timer_start:'Lancer le tour',timer_done:'TEMPS ÉCOULÉ',
   export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
@@ -1146,7 +1157,7 @@ de:{
   set_desc_auto_mex:'Ein Name pro Zeile. Mindestens 4 Spieler. Bei ungerader Anzahl: niedrigst platzierter Spieler hat Freilos. Partner nach Tabellenstand.',
   set_type_sub_rr:'alle gegen alle',set_title_rr:'Round Robin einrichten',
   set_desc_auto_rr:'Ein Name pro Zeile, mindestens 4. Jeder spielt gegen jeden. Die Endtabelle bestimmt den Sieger.',
-  set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',
+  set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',set_lbl_timer:'Timer/Runde',set_timer_off:'Kein',
   set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
   set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
   set_desc_auto_am:'Ein Name pro Zeile. Mindestens 4 Spieler. Bei ungerader Anzahl (5, 7, 9…): 1 Spieler hat jede Runde Freilos. Partner wechseln jede Runde.',
@@ -1171,7 +1182,7 @@ de:{
   brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
-  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',timer_start:'▶ Runde starten',timer_prompt:'Zeitlimit (Minuten)',timer_done:'ZEIT ABGELAUFEN',
+  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',timer_start:'Runde starten',timer_done:'ZEIT ABGELAUFEN',
   export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
@@ -1212,7 +1223,7 @@ es:{
   set_desc_auto_mex:'Un nombre por línea. Mínimo 4 jugadores. Con número impar: el jugador con menos puntos descansa. Parejas según clasificación.',
   set_type_sub_rr:'todos contra todos',set_title_rr:'Configurar Round Robin',
   set_desc_auto_rr:'Un nombre por línea, mínimo 4. Todos juegan contra todos. La clasificación final determina al ganador.',
-  set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',
+  set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',set_lbl_timer:'Temporizador',set_timer_off:'No',
   set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
   set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
   set_desc_auto_am:'Un nombre por línea. Mínimo 4 jugadores. Con número impar (5, 7, 9…): 1 jugador descansa cada ronda. Las parejas rotan cada ronda.',
@@ -1237,7 +1248,7 @@ es:{
   brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
-  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',timer_start:'▶ Iniciar ronda',timer_prompt:'Límite de tiempo (minutos)',timer_done:'TIEMPO',
+  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',timer_start:'Iniciar ronda',timer_done:'TIEMPO',
   export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
@@ -1278,7 +1289,7 @@ sv:{
   set_desc_auto_mex:'Ett namn per rad. Minst 4 spelare. Med ojämnt antal: lägst rankad spelare vilar. Partners sätts ihop efter aktuell tabell.',
   set_type_sub_rr:'alla mot alla',set_title_rr:'Ställ in Round Robin',
   set_desc_auto_rr:'Ett namn per rad, minst 4. Alla spelar mot alla. Slutresultatet avgör vinnaren.',
-  set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',
+  set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',set_lbl_timer:'Timer/rond',set_timer_off:'Ingen',
   set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
   set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
   set_desc_auto_am:'Ett namn per rad. Minst 4 spelare. Med ojämnt antal (5, 7, 9…): 1 spelare vilar per runda. Partners roterar varje runda.',
@@ -1303,7 +1314,7 @@ sv:{
   brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
-  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',timer_start:'▶ Starta rond',timer_prompt:'Tidsgräns (minuter)',timer_done:'SLUTTID',
+  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',timer_start:'Starta rond',timer_done:'SLUTTID',
   export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
@@ -1404,7 +1415,7 @@ const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
 const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="true" viewBox="0 0 24 24"><use href="#${id}"></use></svg>`;
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
-let R={gpm:3, matchPts:32, courts:2};
+let R={gpm:3, matchPts:32, courts:2, timerMins:0};
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
@@ -1431,6 +1442,7 @@ function setTType(typ){
   const isAm=typ==='americano'||typ==='mexicano';
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
+  $('rules-timer-row').style.display = isAm ? '' : 'none';
   $('mode-toggle-row').style.display = isAm ? 'none' : '';
   const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
@@ -1444,6 +1456,13 @@ function setMatchPts(n){
   R.matchPts=n;
   document.querySelectorAll('#rules-pts .rbtn').forEach((b,i)=>{
     b.classList.toggle('active',[24,32,40][i]===n);
+  });
+}
+
+function setTimerMins(n){
+  R.timerMins=n;
+  document.querySelectorAll('#rules-timer .rbtn').forEach((b,i)=>{
+    b.classList.toggle('active',[0,15,20,30][i]===n);
   });
 }
 
@@ -2339,6 +2358,7 @@ function startMexicano(){
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=[buildMexicanoRound(1)]; // Only round 1 — subsequent rounds generated after each round completes
+  localStorage.removeItem('padel-round-timer');
   showAmericano();
   saveState();
 }
@@ -2349,6 +2369,7 @@ function startAmericano(){
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=buildAmericanoSchedule(AP.length);
+  localStorage.removeItem('padel-round-timer');
   showAmericano();
   saveState();
 }
@@ -2378,15 +2399,9 @@ function getByePlayers(matches){
   return AP.filter(p=>!active.has(p.id));
 }
 
-let _timerMinutes = null;
-
 function startRoundTimer(ri){
-  const def=_timerMinutes||20;
-  const inp=window.prompt(t('timer_prompt'), def);
-  if(inp===null) return;
-  const mins=parseInt(inp,10);
-  if(!mins||mins<1) return;
-  _timerMinutes=mins;
+  const mins=R.timerMins;
+  if(!mins) return;
   localStorage.setItem('padel-round-timer',JSON.stringify({round:ri,start:Date.now(),limit:mins*60}));
   renderAmericano();
 }
@@ -2401,7 +2416,7 @@ function renderAmericano(){
     const byes=getByePlayers(matches);
     const byeHtml=byes.length?`<div class="am-bye">${t('am_bye')}: ${byes.map(p=>p.name).join(' & ')}</div>`:'';
     let timerEl='';
-    if(!done && !viewMode){
+    if(!done && !viewMode && R.timerMins>0){
       const myTimer=timerData&&timerData.round===ri;
       if(myTimer){
         const rem=timerData.limit-Math.floor((Date.now()-timerData.start)/1000);
