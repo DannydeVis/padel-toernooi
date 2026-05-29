@@ -922,7 +922,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.3';
+const APP_VERSION = 'v1.27.4';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1754,6 +1754,7 @@ function renderPouleInBracket(){
 function mrow(m){
   const na=T[m.a].name, nb=T[m.b].name;
   const sa=sn(na), sb=sn(nb);
+  const ena=esc(na), enb=esc(nb), esa=esc(sa), esb=esc(sb);
   const totalGames = m.ga + m.gb;
   const allPlayed = totalGames >= R.gpm;
 
@@ -1763,12 +1764,12 @@ function mrow(m){
     return `<div class="mcard">
       ${courtBadge}
       <div class="mteams">
-        <div class="mteam ${wA?'won':'lost'}">${na}</div>
+        <div class="mteam ${wA?'won':'lost'}">${ena}</div>
         <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
-        <div class="mteam r ${!wA?'won':'lost'}">${nb}</div>
+        <div class="mteam r ${!wA?'won':'lost'}">${enb}</div>
       </div>
       <div class="mresult">
-        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?sa:sb} wint (${m.ga}–${m.gb})</span>
+        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?esa:esb} wint (${m.ga}–${m.gb})</span>
         ${viewMode?'':`<button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} ${t('rnd_undo')}</button>`}
       </div>
     </div>`;
@@ -1778,21 +1779,21 @@ function mrow(m){
   const gn = totalGames + 1;
   const progress = totalGames > 0
     ? `<div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-        ${Array.from({length:totalGames},(_,i)=>`<span style="font-size:.7rem;color:var(--b-muted)">Game ${i+1}: ${m['g'+(i+1)]==='A'?sa:sb} ✓</span>`).join('<span style="color:var(--b-muted);margin:0 2px">·</span>')}
+        ${Array.from({length:totalGames},(_,i)=>`<span style="font-size:.7rem;color:var(--b-muted)">Game ${i+1}: ${m['g'+(i+1)]==='A'?esa:esb} ✓</span>`).join('<span style="color:var(--b-muted);margin:0 2px">·</span>')}
        </div>` : '';
 
   return `<div class="mcard">
     ${courtBadge}
     <div class="mteams">
-      <div class="mteam">${na}</div>
+      <div class="mteam">${ena}</div>
       <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
-      <div class="mteam r">${nb}</div>
+      <div class="mteam r">${enb}</div>
     </div>
     ${progress}
     ${viewMode?'':`<div class="mgame-label">${t('rnd_game',{gn,total:R.gpm})}</div>
     <div class="mbtns">
-      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">${icon('ic-check')} ${sa}</button>
-      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">${icon('ic-check')} ${sb}</button>
+      <button class="mbtn mbtn-a" onclick="pg(${m.id},'A')">${icon('ic-check')} ${esa}</button>
+      <button class="mbtn mbtn-b" onclick="pg(${m.id},'B')">${icon('ic-check')} ${esb}</button>
     </div>`}
   </div>`;
 }
@@ -2058,11 +2059,11 @@ function mcard(m,pfx){
   const emA=m.a===null, emB=m.b===null||isBye;
   const wa=m.winner==='A', wb=m.winner==='B';
   const tA=`<div class="bteam ${m.winner?(wa?'won':'lost'):(emA?'empty':'')}">
-    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emA?'— ?—':na}</span>
+    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emA?'— ?—':esc(na)}</span>
     ${m.winner?`<span class="bsc">${m.ga}</span>`:''}
   </div>`;
   const tB=`<div class="bteam ${m.winner?(wb?'won':'lost'):(emB?'empty':'')}">
-    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emB?'— ?—':nb}</span>
+    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emB?'— ?—':esc(nb)}</span>
     ${m.winner&&!isBye?`<span class="bsc">${m.gb}</span>`:''}
   </div>`;
   const totalGames = m.ga + m.gb;
@@ -2071,8 +2072,8 @@ function mcard(m,pfx){
   const sa=na?sn(na):'?', sb=nb?sn(nb):'?';
   const btns = viewMode ? '' : canPlay
     ? `<div class="bmbtns">
-        <button class="bgbtn bgbtn-a" onclick="ppg('${m.id}','A','${pfx}')">G${gn}: ${sa}</button>
-        <button class="bgbtn bgbtn-b" onclick="ppg('${m.id}','B','${pfx}')">${sb}</button>
+        <button class="bgbtn bgbtn-a" onclick="ppg('${m.id}','A','${pfx}')">G${gn}: ${esc(sa)}</button>
+        <button class="bgbtn bgbtn-b" onclick="ppg('${m.id}','B','${pfx}')">${esc(sb)}</button>
        </div>`
     : m.winner
       ? `<div class="bmbtns"><button class="bgbtn bgbtn-undo" onclick="undoPPG('${m.id}','${pfx}')">${icon('ic-undo')}</button></div>`
@@ -2415,7 +2416,7 @@ function renderAmericano(){
     const done=matches.every(m=>m.done);
     const mexBadge=mode==='mexicano'?`<span style="font-size:.72rem;opacity:.5;font-weight:400;margin-left:8px">★ stand</span>`:'';
     const byes=getByePlayers(matches);
-    const byeHtml=byes.length?`<div class="am-bye">${t('am_bye')}: ${byes.map(p=>p.name).join(' & ')}</div>`:'';
+    const byeHtml=byes.length?`<div class="am-bye">${t('am_bye')}: ${byes.map(p=>esc(p.name)).join(' &amp; ')}</div>`:'';
     let timerEl='';
     if(!done && !viewMode && R.timerMins>0){
       const myTimer=timerData&&timerData.round===ri;
