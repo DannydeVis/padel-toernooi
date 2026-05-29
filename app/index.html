@@ -922,7 +922,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.1';
+const APP_VERSION = 'v1.27.2';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -1443,7 +1443,7 @@ function setTType(typ){
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
   $('rules-timer-row').style.display = isAm ? '' : 'none';
-  $('mode-toggle-row').style.display = isAm ? 'none' : '';
+  $('mode-toggle-row').style.display = isAm ? 'none' : 'flex';
   const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
   const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':'set_desc_auto_team';
