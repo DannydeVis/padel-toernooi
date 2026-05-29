@@ -497,7 +497,13 @@ body.light .team-stats-btn{text-decoration-color:rgba(17,24,39,.2)}
 body.pres-mode .app{visibility:hidden}
 body.pres-mode #pres-screen{display:block}
 .pres-header{margin-bottom:36px}
-.pres-title{font-size:2.2rem;font-weight:900;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px}
+.pres-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:10px}
+.pres-header-bot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pres-clock{font-size:2.8rem;font-weight:900;letter-spacing:2px;color:#fff;font-variant-numeric:tabular-nums;flex-shrink:0;line-height:1}
+.pres-timer-wrap{display:inline-flex;align-items:center;gap:8px;background:#1A1F24;border:1px solid #252B32;border-radius:10px;padding:6px 14px}
+.pres-timer-lbl{font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px}
+.pres-timer-val{font-size:1.3rem;font-weight:800;color:#C7FF5E;font-variant-numeric:tabular-nums;letter-spacing:1px}
+.pres-title{font-size:2.2rem;font-weight:900;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0}
 .pres-badge{display:inline-block;background:#C7FF5E;color:#0E1114;font-size:.9rem;font-weight:700;padding:3px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
 .pres-row{display:flex;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid #1A1F24}
 .pres-row:last-child{border-bottom:none}
@@ -900,7 +906,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.25.2';
+const APP_VERSION = 'v1.26.0';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -2994,6 +3000,21 @@ function openPresentation(){
 
 function initPresentation(){
   document.body.classList.add('pres-mode');
+  let _roundStart=null, _lastRound=-2;
+
+  function _elapsed(){
+    if(!_roundStart) return null;
+    const s=Math.floor((Date.now()-_roundStart)/1000);
+    return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  }
+  function _clockStr(){
+    return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }
+  function tickClock(){
+    const ce=$('pres-clock'); if(ce) ce.textContent=_clockStr();
+    const te=$('pres-timer'); if(te&&_roundStart) te.textContent=_elapsed();
+  }
+
   function render(){
     const raw=localStorage.getItem('padel-presentation');
     if(!raw){$('pres-screen').innerHTML='<div style="padding:60px;font-size:1.5rem;color:#475569">Wacht op toernooi data…</div>';return;}
@@ -3008,9 +3029,13 @@ function initPresentation(){
         :`<span class="pres-pts">${s.wins}<span style="font-size:1.2rem;color:#475569"> W</span></span>`;
       return`<div class="pres-row${s.pos===1?' pres-leader':''}">${medal}<span class="pres-name">${s.name}</span>${score}</div>`;
     }).join('');
-    let matchesHtml='';
+    let matchesHtml='', activeIdx=-1;
     if(amMode&&d.rounds&&d.rounds.length){
-      const activeIdx=d.rounds.findIndex(r=>r.matches.some(m=>!m.done));
+      activeIdx=d.rounds.findIndex(r=>r.matches.some(m=>!m.done));
+      if(activeIdx!==_lastRound){
+        _lastRound=activeIdx;
+        _roundStart=activeIdx>=0?Date.now():null;
+      }
       const allDone=activeIdx===-1;
       const sections=d.rounds.map((r,i)=>{
         const isActive=allDone||(i===activeIdx);
@@ -3030,10 +3055,19 @@ function initPresentation(){
       }).join('');
       matchesHtml=`<div class="pres-right">${sections}</div>`;
     }
+    const timerHtml=_roundStart
+      ?`<div class="pres-timer-wrap"><span class="pres-timer-lbl">Ronde ${activeIdx+1}</span><span class="pres-timer-val" id="pres-timer">${_elapsed()}</span></div>`
+      :'';
     $('pres-screen').innerHTML=`
       <div class="pres-header">
-        <div class="pres-title">${d.name||'Padel Toernooi'}</div>
-        <span class="pres-badge">${fmtLabel}</span>
+        <div class="pres-header-top">
+          <div class="pres-title">${d.name||'Padel Toernooi'}</div>
+          <div class="pres-clock" id="pres-clock">${_clockStr()}</div>
+        </div>
+        <div class="pres-header-bot">
+          <span class="pres-badge">${fmtLabel}</span>
+          ${timerHtml}
+        </div>
       </div>
       <div class="pres-layout">
         <div class="pres-left">${rows}</div>
@@ -3044,6 +3078,7 @@ function initPresentation(){
   }
   render();
   setInterval(render,3000);
+  setInterval(tickClock,1000);
   if(window.PadelCTA) PadelCTA.mount({mode:'presentation',lang:LANG});
 }
 
