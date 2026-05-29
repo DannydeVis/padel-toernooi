@@ -872,7 +872,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.24.0';
+const APP_VERSION = 'v1.24.1';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -2114,10 +2114,6 @@ function toggleTheme(){
   localStorage.setItem('padel-theme',t);
   applyTheme(t);
 }
-const _sysMq=window.matchMedia('(prefers-color-scheme: light)');
-_sysMq.addEventListener('change', e=>{
-  if(!localStorage.getItem('padel-theme')) applyTheme(e.matches?'light':'dark');
-});
 
 // ── More menu ─────────────────────────────────
 function toggleMore(){ $('more-menu').classList.toggle('open'); }
@@ -3028,8 +3024,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
   const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
   $('app-version').textContent = APP_VERSION;
-  applyTheme(localStorage.getItem('padel-theme') ||
-    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  applyTheme(localStorage.getItem('padel-theme') || 'dark');
   const _pres=new URLSearchParams(location.search).get('pres');
   if(_pres==='1'){ initPresentation(); return; }
   const _vc=new URLSearchParams(location.search).get('view');
