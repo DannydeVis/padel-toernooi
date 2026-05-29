@@ -922,8 +922,9 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.2';
+const APP_VERSION = 'v1.27.3';
 const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
 // ── i18n ──────────────────────────────────────
 const SUPPORTED_LANGS=['nl','en','fr','de','es','sv'];
@@ -1562,7 +1563,7 @@ function doShuffle(){
   if(n.length<4){alert(t('val_min4'));return;}
   lastShuffle=[...n].sort(()=>Math.random()-.5);
   makeTeams(lastShuffle);
-  $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${t.name}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
+  $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${esc(t.name)}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
 }
 
 function doStart(){
@@ -1856,7 +1857,7 @@ function renderSt(){
   st.forEach((tm,i)=>{
     const g=gameMap[tm.id]||{gW:0,gL:0};
     if(topN>=0 && i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
-    const tmName=viewMode?tm.name:`<button class="team-stats-btn" onclick="openTeamModal(${tm.id})">${tm.name}</button>`;
+    const tmName=viewMode?esc(tm.name):`<button class="team-stats-btn" onclick="openTeamModal(${tm.id})">${esc(tm.name)}</button>`;
     h+=`<tr class="${topN>=0 && i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
@@ -1891,12 +1892,12 @@ function renderRRChamp(){
   const f=st[0], s=st[1]||null, th=st[2]||null;
   area.innerHTML=`<div class="champ-wrap">
     <div class="trophy">${icon('ic-trophy','icon-xl')}</div>
-    <h2>${f.name}</h2>
+    <h2>${esc(f.name)}</h2>
     <p>${t(f.trio?'fin_winner_trio':'fin_winner')}</p>
     <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;align-items:center;font-size:.9rem;opacity:.8">
-      <span>🥇 ${t('fin_1st')}: <b>${f.name}</b></span>
-      ${s?`<span>🥈 ${t('fin_2nd')}: <b>${s.name}</b></span>`:''}
-      ${th?`<span>🥉 ${t('fin_3rd')}: <b>${th.name}</b></span>`:''}
+      <span>🥇 ${t('fin_1st')}: <b>${esc(f.name)}</b></span>
+      ${s?`<span>🥈 ${t('fin_2nd')}: <b>${esc(s.name)}</b></span>`:''}
+      ${th?`<span>🥉 ${t('fin_3rd')}: <b>${esc(th.name)}</b></span>`:''}
     </div>
   </div>
   <div style="margin-top:16px;display:flex;justify-content:center">${renderShareCTA()}</div>`;
@@ -2151,7 +2152,7 @@ function renderChamp(){
   if(!wf||!wf.winner){area.innerHTML='';$('stats').innerHTML='';return;}
   const c=T[wf.winner==='A'?wf.a:wf.b];
   const alreadyShown = area.innerHTML.includes('champ-wrap');
-  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${c.name}</h2><p>${t(c.trio?'fin_winner_trio':'fin_winner')}</p></div>`;
+  area.innerHTML=`<div class="champ-wrap"><div class="trophy">${icon('ic-trophy','icon-xl')}</div><h2>${esc(c.name)}</h2><p>${t(c.trio?'fin_winner_trio':'fin_winner')}</p></div>`;
   if(!alreadyShown) champConfetti();
   renderStats();
 }
@@ -2441,8 +2442,8 @@ function renderAmericano(){
 
 function renderAmMatch(m){
   const pa=AP[m.a1],pb=AP[m.a2],pc=AP[m.b1],pd=AP[m.b2];
-  const tA=`${pa.name} & ${pb.name}`;
-  const tB=`${pc.name} & ${pd.name}`;
+  const tA=`${esc(pa.name)} &amp; ${esc(pb.name)}`;
+  const tB=`${esc(pc.name)} &amp; ${esc(pd.name)}`;
   if(m.done){
     const wA=m.sa>m.sb, wB=m.sb>m.sa;
     return `<div class="am-match">
@@ -2576,7 +2577,7 @@ function renderAmSt(){
     <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>`;
   sorted.forEach((p,i)=>{
     const s=anyDone?getAmPlayerStats(p.id):{w:0,d:0,l:0};
-    const nameCell=viewMode?p.name:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${p.name}</button>`;
+    const nameCell=viewMode?esc(p.name):`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)}</button>`;
     h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td></tr>`;
   });
   const bar=anyDone?renderExportBar():'';
@@ -2654,10 +2655,10 @@ function openPlayerModal(pid){
   const partE=Object.keys(s.partners).map(Number).sort((a,b)=>{const ra=s.partners[a],rb=s.partners[b];return(rb.w+rb.d+rb.l)-(ra.w+ra.d+ra.l);});
   const oppE=Object.keys(s.opps).map(Number).sort((a,b)=>{const ra=s.opps[a],rb=s.opps[b];return(rb.w+rb.d+rb.l)-(ra.w+ra.d+ra.l);});
   let partRows='', oppRows='';
-  partE.forEach(id2=>{const pp=AP.find(x=>x.id===id2);if(!pp)return;const r=s.partners[id2];partRows+=`<tr><td>${pp.name}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
-  oppE.forEach(oid=>{const op=AP.find(x=>x.id===oid);if(!op)return;const r=s.opps[oid];oppRows+=`<tr><td>${op.name}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
+  partE.forEach(id2=>{const pp=AP.find(x=>x.id===id2);if(!pp)return;const r=s.partners[id2];partRows+=`<tr><td>${esc(pp.name)}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
+  oppE.forEach(oid=>{const op=AP.find(x=>x.id===oid);if(!op)return;const r=s.opps[oid];oppRows+=`<tr><td>${esc(op.name)}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
   $('dm-card').innerHTML=`
-    <div class="dm-top"><span class="dm-title">${p.name}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    <div class="dm-top"><span class="dm-title">${esc(p.name)}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
     <div class="dm-hero">
       <div class="dm-stat"><div class="dm-stat-val">#${rank}</div><div class="dm-stat-lbl">${t('dm_rank')}</div></div>
       <div class="dm-stat"><div class="dm-stat-val wc">${p.pts}</div><div class="dm-stat-lbl">${t('am_col_pts')}</div></div>
@@ -2677,9 +2678,9 @@ function openTeamModal(tid){
   const h2h=getTeamStats(tid);
   const entries=Object.keys(h2h).map(Number).sort((a,b)=>(h2h[b].w+h2h[b].l)-(h2h[a].w+h2h[a].l));
   let rows='';
-  entries.forEach(oid=>{const ot=T.find(x=>x.id===oid);if(!ot)return;const r=h2h[oid];rows+=`<tr><td>${ot.name}${ot.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}</td><td class="wc">${r.w}</td><td class="lc">${r.l}</td></tr>`;});
+  entries.forEach(oid=>{const ot=T.find(x=>x.id===oid);if(!ot)return;const r=h2h[oid];rows+=`<tr><td>${esc(ot.name)}${ot.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}</td><td class="wc">${r.w}</td><td class="lc">${r.l}</td></tr>`;});
   $('dm-card').innerHTML=`
-    <div class="dm-top"><span class="dm-title">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.75rem;font-weight:400"> trio</span>':''}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    <div class="dm-top"><span class="dm-title">${esc(tm.name)}${tm.trio?' <span style="opacity:.5;font-size:.75rem;font-weight:400"> trio</span>':''}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
     ${rows?`<div class="dm-section"><div class="dm-section-title">${t('dm_h2h')}</div><table class="st-tbl"><tr><th>${t('st_col_team')}</th><th class="wc">${t('st_col_wins')}</th><th class="lc">${t('st_col_losses')}</th></tr>${rows}</table></div>`:`<p style="color:var(--txt2);font-size:.85rem;text-align:center;padding:16px 0">${t('dm_no_matches')}</p>`}
   `;
   $('detail-modal').classList.remove('hidden');
@@ -2841,7 +2842,7 @@ function renderStats(){
               : T[t.id]===statsSilver ? icon('ic-silver','icon-lg icon-silver')
               : (statsBronze&&T[t.id]===statsBronze) ? icon('ic-bronze','icon-lg icon-bronze') : '';
     const pct=t.played?Math.round(t.wins/t.played*100):0;
-    return`<tr><td class="medal-cell">${medal}</td><td>${t.name}${t.trio?'<span style="opacity:.4;font-size:.6rem"> trio</span>':''}</td><td>${t.played}</td><td style="color:var(--accent)">${t.wins}</td><td style="color:var(--red)">${t.losses}</td><td>${t.gW}</td><td>${t.gL}</td><td style="color:var(--txt2)">${pct}%</td></tr>`;
+    return`<tr><td class="medal-cell">${medal}</td><td>${esc(t.name)}${t.trio?'<span style="opacity:.4;font-size:.6rem"> trio</span>':''}</td><td>${t.played}</td><td style="color:var(--accent)">${t.wins}</td><td style="color:var(--red)">${t.losses}</td><td>${t.gW}</td><td>${t.gL}</td><td style="color:var(--txt2)">${pct}%</td></tr>`;
   }).join('');
 
   $('stats').innerHTML=`<div class="stats-wrap">
@@ -2850,14 +2851,14 @@ function renderStats(){
       <div class="podium-item">
         <div class="podium-medal">${icon('ic-silver','icon-lg icon-silver')}</div>
         <div class="podium-place">${t('fin_2nd')}</div>
-        <div class="podium-name">${statsSilver.name}</div>
+        <div class="podium-name">${esc(statsSilver.name)}</div>
       </div>
       <div class="podium-item first">
         <div class="podium-medal">${icon('ic-gold','icon-lg icon-gold')}</div>
         <div class="podium-place">${t('fin_1st')}</div>
-        <div class="podium-name">${statsGold.name}</div>
+        <div class="podium-name">${esc(statsGold.name)}</div>
       </div>
-      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">${t('fin_3rd')}</div><div class="podium-name">${statsBronze.name}</div></div>`:'<div class="podium-item"></div>'}
+      ${statsBronze?`<div class="podium-item"><div class="podium-medal">${icon('ic-bronze','icon-lg icon-bronze')}</div><div class="podium-place">${t('fin_3rd')}</div><div class="podium-name">${esc(statsBronze.name)}</div></div>`:'<div class="podium-item"></div>'}
     </div>
     <table class="stats-tbl">
       <tr><th></th><th>${t('st_col_team')}</th><th>${t('st_col_played')}</th><th>${t('st_col_wins')}</th><th>${t('st_col_losses')}</th><th>GW</th><th>GV</th><th>%</th></tr>
@@ -2954,11 +2955,11 @@ function exportPrint(){
   const amSt=(mode==='americano'||mode==='mexicano');
   let stRows='',mRows='';
   if(amSt){
-    stRows=standings.map((p,i)=>{const s=getAmPlayerStats(p.id);return`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${p.name}</td><td class="pts">${p.pts}</td><td class="n wn">${s.w}</td><td class="n">${s.d}</td><td class="n ls">${s.l}</td></tr>`;}).join('');
-    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td class="sc">${m.sa}–${m.sb}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td></tr>`).join('');
+    stRows=standings.map((p,i)=>{const s=getAmPlayerStats(p.id);return`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${esc(p.name)}</td><td class="pts">${p.pts}</td><td class="n wn">${s.w}</td><td class="n">${s.d}</td><td class="n ls">${s.l}</td></tr>`;}).join('');
+    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${esc(_apName(m.a1))} &amp; ${esc(_apName(m.a2))}</td><td class="sc">${m.sa}–${m.sb}</td><td>${esc(_apName(m.b1))} &amp; ${esc(_apName(m.b2))}</td></tr>`).join('');
   } else {
-    stRows=standings.map((s,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${s.name}</td><td class="n">${s.played}</td><td class="n wn">${s.wins}</td><td class="n ls">${s.losses}</td></tr>`).join('');
-    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td class="sc">${m.ga}–${m.gb}</td><td>${(T[m.b]||{name:'?'}).name}</td></tr>`).join('');
+    stRows=standings.map((s,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${esc(s.name)}</td><td class="n">${s.played}</td><td class="n wn">${s.wins}</td><td class="n ls">${s.losses}</td></tr>`).join('');
+    mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${esc((T[m.a]||{name:"?"}).name)}</td><td class="sc">${m.ga}–${m.gb}</td><td>${esc((T[m.b]||{name:"?"}).name)}</td></tr>`).join('');
   }
   const stHead=amSt
     ?`<th class="n">#</th><th>Speler</th><th class="pts">Ptn</th><th class="n wn">W</th><th class="n">G</th><th class="n ls">V</th>`
@@ -3086,7 +3087,7 @@ function initPresentation(){
       const score=amMode
         ?`<span class="pres-pts">${s.pts}</span>`
         :`<span class="pres-pts">${s.wins}<span style="font-size:1.2rem;color:#475569"> W</span></span>`;
-      return`<div class="pres-row${s.pos===1?' pres-leader':''}">${medal}<span class="pres-name">${s.name}</span>${score}</div>`;
+      return`<div class="pres-row${s.pos===1?' pres-leader':''}">${medal}<span class="pres-name">${esc(s.name)}</span>${score}</div>`;
     }).join('');
     let matchesHtml='', activeIdx=-1;
     if(amMode&&d.rounds&&d.rounds.length){
@@ -3097,11 +3098,11 @@ function initPresentation(){
         const cards=r.matches.map(m=>`
           <div class="pres-match${m.done?' pres-match-done':''}">
             <div class="pres-match-team-row">
-              <span class="pres-match-team">${m.a1} &amp; ${m.a2}</span>
+              <span class="pres-match-team">${esc(m.a1)} &amp; ${esc(m.a2)}</span>
               <span class="pres-match-score">${m.sa}</span>
             </div>
             <div class="pres-match-team-row">
-              <span class="pres-match-team">${m.b1} &amp; ${m.b2}</span>
+              <span class="pres-match-team">${esc(m.b1)} &amp; ${esc(m.b2)}</span>
               <span class="pres-match-score">${m.sb}</span>
             </div>
           </div>`).join('');
@@ -3118,7 +3119,7 @@ function initPresentation(){
     $('pres-screen').innerHTML=`
       <div class="pres-header">
         <div class="pres-header-top">
-          <div class="pres-title">${d.name||'Padel Toernooi'}</div>
+          <div class="pres-title">${esc(d.name||'Padel Toernooi')}</div>
           <div class="pres-clock" id="pres-clock">${_clockStr()}</div>
         </div>
         <div class="pres-header-bot">
