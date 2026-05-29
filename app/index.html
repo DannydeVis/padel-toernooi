@@ -900,7 +900,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.25.0';
+const APP_VERSION = 'v1.25.1';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -2877,8 +2877,8 @@ function exportCSV(){
   lines.push(row('Datum',date));
   lines.push('');
   if(mode==='americano'||mode==='mexicano'){
-    lines.push(row('#',t('am_col_player'),t('am_col_pts')));
-    standings.forEach((p,i)=>lines.push(row(i+1,p.name,p.pts)));
+    lines.push(row('#',t('am_col_player'),t('am_col_pts'),t('am_col_w'),t('am_col_d'),t('am_col_l')));
+    standings.forEach((p,i)=>{const s=getAmPlayerStats(p.id);lines.push(row(i+1,p.name,p.pts,s.w,s.d,s.l));});
     lines.push('');
     lines.push(row(t('export_round'),'Team A','','Team B','',t('export_score')));
     matches.forEach(m=>lines.push(row(m.round,_apName(m.a1)+' & '+_apName(m.a2),m.sa,_apName(m.b1)+' & '+_apName(m.b2),m.sb,m.sa+'-'+m.sb)));
@@ -2902,14 +2902,14 @@ function exportPrint(){
   const amSt=(mode==='americano'||mode==='mexicano');
   let stRows='',mRows='';
   if(amSt){
-    stRows=standings.map((p,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${p.name}</td><td class="pts">${p.pts}</td></tr>`).join('');
+    stRows=standings.map((p,i)=>{const s=getAmPlayerStats(p.id);return`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${p.name}</td><td class="pts">${p.pts}</td><td class="n wn">${s.w}</td><td class="n">${s.d}</td><td class="n ls">${s.l}</td></tr>`;}).join('');
     mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${_apName(m.a1)} &amp; ${_apName(m.a2)}</td><td class="sc">${m.sa}–${m.sb}</td><td>${_apName(m.b1)} &amp; ${_apName(m.b2)}</td></tr>`).join('');
   } else {
     stRows=standings.map((s,i)=>`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${s.name}</td><td class="n">${s.played}</td><td class="n wn">${s.wins}</td><td class="n ls">${s.losses}</td></tr>`).join('');
     mRows=matches.map(m=>`<tr><td class="n">${m.round}</td><td>${(T[m.a]||{name:'?'}).name}</td><td class="sc">${m.ga}–${m.gb}</td><td>${(T[m.b]||{name:'?'}).name}</td></tr>`).join('');
   }
   const stHead=amSt
-    ?`<th class="n">#</th><th>Speler</th><th class="pts">Ptn</th>`
+    ?`<th class="n">#</th><th>Speler</th><th class="pts">Ptn</th><th class="n wn">W</th><th class="n">G</th><th class="n ls">V</th>`
     :`<th class="n">#</th><th>Team</th><th class="n">G</th><th class="n wn">W</th><th class="n ls">V</th>`;
   const html=`<!DOCTYPE html>
 <html lang="nl"><head><meta charset="UTF-8"><title>${name}</title><style>
