@@ -34,8 +34,7 @@
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/">
-  <meta name="theme-color" content="#0E1114" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1114">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -95,29 +94,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #0E1114;
-      --surface: #1A1F24;
+      --bg:#0E1114;
+      --surface:#1A1F24;
       --surface2:#252B32;
-      --accent:  #C7FF5E;
-      --accent2: #a8d94e;
+      --accent:#C7FF5E;
+      --accent2:#a8d94e;
       --gold:    #fbbf24;
       --txt:     #f9fafb;
-      --txt2:    rgba(249,250,251,.55);
-      --bdr:     rgba(255,255,255,.08);
-      --nav-bg:  rgba(14,17,20,.85);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg:      #f9fafb;
-        --surface: #ffffff;
-        --surface2:#f3f4f6;
-        --txt:     #1A1F24;
-        --txt2:    rgba(17,24,39,.55);
-        --bdr:     rgba(0,0,0,.10);
-        --nav-bg:  rgba(249,250,251,.85);
-        --accent:  #4a7c00;
-        --accent2: #3a6200;
-      }
+      --txt2:rgba(249,250,251,.5);
+      --bdr:rgba(255,255,255,.1);
+      --nav-bg:rgba(14,17,20,.92);
     }
 
     html { scroll-behavior: smooth; }
