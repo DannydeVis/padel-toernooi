@@ -353,6 +353,29 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-sc-prog.ready{color:var(--accent);font-weight:600}
 .am-st-wrap{background:var(--surface);border-radius:14px;padding:16px 18px;margin-top:4px;border:1px solid var(--bdr)}
 .am-st-wrap h3{font-family:'Inter',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
+/* ── Detail modal (speler / team stats) ── */
+#detail-modal{position:fixed;inset:0;z-index:1002;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+#detail-modal.hidden{display:none}
+.dm-card{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:520px;padding:22px 20px 32px;box-shadow:0 -8px 40px rgba(0,0,0,.4);max-height:82vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+body.light .dm-card{background:#fff;box-shadow:0 -8px 40px rgba(0,0,0,.15)}
+.dm-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.dm-title{font-weight:800;font-size:1.1rem;letter-spacing:.5px;color:var(--txt);flex:1}
+.dm-close-btn{background:none;border:none;color:var(--txt2);cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;flex-shrink:0;border-radius:6px;transition:.15s;touch-action:manipulation}
+.dm-close-btn:hover{color:var(--txt);background:rgba(255,255,255,.08)}
+.dm-hero{display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+.dm-stat{background:var(--surface2);border-radius:10px;padding:8px 14px;text-align:center;min-width:56px}
+.dm-stat-val{font-weight:800;font-size:1.3rem;color:var(--txt)}
+.dm-stat-val.wc{color:var(--accent)}
+.dm-stat-val.lc{color:var(--red)}
+.dm-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-top:2px}
+.dm-section{margin-top:14px}
+.dm-section-title{font-weight:700;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bdr)}
+.am-player-btn{background:none;border:none;color:inherit;font:inherit;font-weight:inherit;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:rgba(255,255,255,.2);text-underline-offset:2px;transition:.15s;touch-action:manipulation}
+.am-player-btn:hover{color:var(--accent);text-decoration-color:var(--accent)}
+body.light .am-player-btn{text-decoration-color:rgba(17,24,39,.2)}
+.team-stats-btn{background:none;border:none;color:inherit;font:inherit;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,.2);text-underline-offset:2px;transition:.15s;touch-action:manipulation}
+.team-stats-btn:hover{color:var(--accent);text-decoration-color:var(--accent)}
+body.light .team-stats-btn{text-decoration-color:rgba(17,24,39,.2)}
 
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -832,6 +855,11 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 
 </div><!-- /app -->
 
+<!-- PLAYER / TEAM DETAIL MODAL -->
+<div id="detail-modal" class="hidden" onclick="if(event.target===this)closeDetailModal()">
+  <div class="dm-card" id="dm-card"></div>
+</div>
+
 <!-- SHARE MODAL -->
 <div id="share-modal" class="hidden">
   <div class="share-card">
@@ -872,7 +900,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.24.1';
+const APP_VERSION = 'v1.25.0';
 const $ = id => document.getElementById(id);
 
 // ── i18n ──────────────────────────────────────
@@ -934,7 +962,7 @@ nl:{
   brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
-  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',
+  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',
   export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
@@ -1000,7 +1028,7 @@ en:{
   brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
-  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',
+  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',
   export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
@@ -1066,7 +1094,7 @@ fr:{
   brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
-  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',
+  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',
   export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
@@ -1132,7 +1160,7 @@ de:{
   brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
-  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',
+  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',
   export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
@@ -1198,7 +1226,7 @@ es:{
   brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
-  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',
+  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',
   export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
@@ -1264,7 +1292,7 @@ sv:{
   brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
-  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',
+  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',
   export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
@@ -1764,6 +1792,17 @@ function undoPM(id){
 }
 
 // ── Standings ─────────────────────────────────
+function getTeamStats(tid){
+  const h2h={};
+  PM.filter(m=>m.winner&&(m.a===tid||m.b===tid)).forEach(m=>{
+    const oId=m.a===tid?m.b:m.a;
+    if(!h2h[oId]) h2h[oId]={w:0,l:0};
+    const won=(m.a===tid&&m.winner==='A')||(m.b===tid&&m.winner==='B');
+    if(won) h2h[oId].w++; else h2h[oId].l++;
+  });
+  return h2h;
+}
+
 function getStandings(){
   return T.map(t=>{
     const my=PM.filter(m=>m.winner&&(m.a===t.id||m.b===t.id));
@@ -1787,7 +1826,8 @@ function renderSt(){
   st.forEach((tm,i)=>{
     const g=gameMap[tm.id]||{gW:0,gL:0};
     if(topN>=0 && i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
-    h+=`<tr class="${topN>=0 && i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
+    const tmName=viewMode?tm.name:`<button class="team-stats-btn" onclick="openTeamModal(${tm.id})">${tm.name}</button>`;
+    h+=`<tr class="${topN>=0 && i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
   const eb=$('st-export-bar');
@@ -2453,14 +2493,41 @@ function amUndo(matchId){
   renderAmericano(); saveState();
 }
 
+function getAmPlayerStats(pid){
+  const stats={w:0,d:0,l:0,ptsFor:0,matches:0,partners:{},opps:{}};
+  AM.flat().forEach(m=>{
+    if(!m.done) return;
+    const onA=m.a1===pid||m.a2===pid;
+    const onB=m.b1===pid||m.b2===pid;
+    if(!onA&&!onB) return;
+    stats.matches++;
+    const myPts=onA?m.sa:m.sb, theirPts=onA?m.sb:m.sa;
+    stats.ptsFor+=myPts;
+    const outcome=myPts>theirPts?'w':myPts<theirPts?'l':'d';
+    stats[outcome]++;
+    const partId=onA?(m.a1===pid?m.a2:m.a1):(m.b1===pid?m.b2:m.b1);
+    if(!stats.partners[partId]) stats.partners[partId]={w:0,d:0,l:0};
+    stats.partners[partId][outcome]++;
+    const oppIds=onA?[m.b1,m.b2]:[m.a1,m.a2];
+    oppIds.forEach(oid=>{
+      if(!stats.opps[oid]) stats.opps[oid]={w:0,d:0,l:0};
+      stats.opps[oid][outcome]++;
+    });
+  });
+  return stats;
+}
+
 function renderAmSt(){
   const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
+  const anyDone=AM.flat().some(m=>m.done);
   let h=`<div class="am-st-wrap"><h3>${t('am_standings')}</h3><table class="st-tbl">
-    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th></tr>`;
+    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>`;
   sorted.forEach((p,i)=>{
-    h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${p.name}</td><td class="wc">${p.pts}</td></tr>`;
+    const s=anyDone?getAmPlayerStats(p.id):{w:0,d:0,l:0};
+    const nameCell=viewMode?p.name:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${p.name}</button>`;
+    h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td></tr>`;
   });
-  const bar=AM.flat().some(m=>m.done)?renderExportBar():'';
+  const bar=anyDone?renderExportBar():'';
   return h+`</table>${bar}</div>`;
 }
 
@@ -2523,6 +2590,48 @@ async function shareTournament(){
 }
 
 function closeShareModal(){ $('share-modal').classList.add('hidden'); }
+
+// ── Detail modal ──────────────────────────────
+function closeDetailModal(){ $('detail-modal').classList.add('hidden'); }
+
+function openPlayerModal(pid){
+  const p=AP.find(x=>x.id===pid); if(!p) return;
+  const s=getAmPlayerStats(pid);
+  const rank=[...AP].sort((a,b)=>b.pts-a.pts).findIndex(x=>x.id===pid)+1;
+  const avg=s.matches>0?Math.round(s.ptsFor/s.matches*10)/10:0;
+  const partE=Object.keys(s.partners).map(Number).sort((a,b)=>{const ra=s.partners[a],rb=s.partners[b];return(rb.w+rb.d+rb.l)-(ra.w+ra.d+ra.l);});
+  const oppE=Object.keys(s.opps).map(Number).sort((a,b)=>{const ra=s.opps[a],rb=s.opps[b];return(rb.w+rb.d+rb.l)-(ra.w+ra.d+ra.l);});
+  let partRows='', oppRows='';
+  partE.forEach(id2=>{const pp=AP.find(x=>x.id===id2);if(!pp)return;const r=s.partners[id2];partRows+=`<tr><td>${pp.name}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
+  oppE.forEach(oid=>{const op=AP.find(x=>x.id===oid);if(!op)return;const r=s.opps[oid];oppRows+=`<tr><td>${op.name}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
+  $('dm-card').innerHTML=`
+    <div class="dm-top"><span class="dm-title">${p.name}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    <div class="dm-hero">
+      <div class="dm-stat"><div class="dm-stat-val">#${rank}</div><div class="dm-stat-lbl">${t('dm_rank')}</div></div>
+      <div class="dm-stat"><div class="dm-stat-val wc">${p.pts}</div><div class="dm-stat-lbl">${t('am_col_pts')}</div></div>
+      <div class="dm-stat"><div class="dm-stat-val wc">${s.w}</div><div class="dm-stat-lbl">${t('am_col_w')}</div></div>
+      <div class="dm-stat"><div class="dm-stat-val" style="color:var(--txt2)">${s.d}</div><div class="dm-stat-lbl">${t('am_col_d')}</div></div>
+      <div class="dm-stat"><div class="dm-stat-val lc">${s.l}</div><div class="dm-stat-lbl">${t('am_col_l')}</div></div>
+      <div class="dm-stat"><div class="dm-stat-val">${avg}</div><div class="dm-stat-lbl">${t('dm_avg')}</div></div>
+    </div>
+    ${partRows?`<div class="dm-section"><div class="dm-section-title">${t('dm_partners')}</div><table class="st-tbl"><tr><th>${t('am_col_player')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>${partRows}</table></div>`:''}
+    ${oppRows?`<div class="dm-section"><div class="dm-section-title">${t('dm_opponents')}</div><table class="st-tbl"><tr><th>${t('am_col_player')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>${oppRows}</table></div>`:''}
+  `;
+  $('detail-modal').classList.remove('hidden');
+}
+
+function openTeamModal(tid){
+  const tm=T.find(x=>x.id===tid); if(!tm) return;
+  const h2h=getTeamStats(tid);
+  const entries=Object.keys(h2h).map(Number).sort((a,b)=>(h2h[b].w+h2h[b].l)-(h2h[a].w+h2h[a].l));
+  let rows='';
+  entries.forEach(oid=>{const ot=T.find(x=>x.id===oid);if(!ot)return;const r=h2h[oid];rows+=`<tr><td>${ot.name}${ot.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}</td><td class="wc">${r.w}</td><td class="lc">${r.l}</td></tr>`;});
+  $('dm-card').innerHTML=`
+    <div class="dm-top"><span class="dm-title">${tm.name}${tm.trio?' <span style="opacity:.5;font-size:.75rem;font-weight:400"> trio</span>':''}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    ${rows?`<div class="dm-section"><div class="dm-section-title">${t('dm_h2h')}</div><table class="st-tbl"><tr><th>${t('st_col_team')}</th><th class="wc">${t('st_col_wins')}</th><th class="lc">${t('st_col_losses')}</th></tr>${rows}</table></div>`:`<p style="color:var(--txt2);font-size:.85rem;text-align:center;padding:16px 0">${t('dm_no_matches')}</p>`}
+  `;
+  $('detail-modal').classList.remove('hidden');
+}
 
 function copyShareLink(){
   const inp=$('share-link-inp'); if(!inp||!shareCode) return;
