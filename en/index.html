@@ -275,12 +275,59 @@
     footer { border-top:1px solid var(--bdr); padding:32px 24px; text-align:center; color:var(--txt2); font-size:.82rem; }
     footer a { color:var(--accent); text-decoration:none; }
 
+    /* ── PRESENTATION SHOWCASE ── */
+    .pres-showcase{background:var(--surface);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:80px 24px}
+    .pres-showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+    .pres-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 14px;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#93c5fd;margin-bottom:18px}
+    .pres-showcase h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+    .pres-showcase .pres-sub{color:var(--txt2);font-size:.95rem;line-height:1.7;margin-bottom:24px}
+    .pres-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
+    .pres-feat{display:flex;align-items:flex-start;gap:10px}
+    .pres-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
+    .pres-feat span{color:var(--txt2);font-size:.88rem;line-height:1.5}
+    .pres-feat strong{color:var(--txt);font-weight:700}
+    .pres-cta-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:10px;padding:10px 22px;font-weight:700;font-size:.88rem;text-decoration:none;transition:.15s}
+    .pres-cta-btn:hover{background:rgba(199,255,94,.08)}
+    .tv-outer{background:#0a0a0a;border-radius:14px;padding:10px 10px 0;box-shadow:0 0 0 2px rgba(255,255,255,.07),0 32px 80px rgba(0,0,0,.7)}
+    .tv-stand{width:50px;height:8px;background:#111;margin:0 auto;border-radius:0 0 8px 8px}
+    .tv-screen{background:var(--bg);border-radius:6px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column}
+    .tv-hdr{background:var(--surface);border-bottom:1px solid var(--bdr);padding:7px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .tv-hdr-title{font-size:.6rem;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:5px}
+    .tv-hdr-badge{font-size:.48rem;font-weight:700;padding:2px 5px;border-radius:3px}
+    .tv-hdr-clock{font-size:.58rem;font-weight:700;color:var(--txt2);font-variant-numeric:tabular-nums}
+    .tv-body{display:grid;grid-template-columns:1fr 1.15fr;gap:5px;padding:5px;flex:1;overflow:hidden;min-height:0}
+    .tv-standings{background:var(--surface);border-radius:5px;padding:5px 7px;overflow:hidden}
+    .tv-section-lbl{font-size:.42rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:4px}
+    .tv-row{display:flex;align-items:center;gap:4px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .tv-row:last-child{border-bottom:none}
+    .tv-pos{font-size:.48rem;width:13px;text-align:center;flex-shrink:0}
+    .tv-bar-wrap{flex:1;min-width:0}
+    .tv-name{font-size:.48rem;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+    .tv-bar-bg{height:2px;background:var(--surface2);border-radius:2px}
+    .tv-bar-fill{height:2px;border-radius:2px;background:var(--accent)}
+    .tv-pts{font-size:.48rem;font-weight:800;color:var(--accent)}
+    .tv-matches-col{display:flex;flex-direction:column;gap:4px}
+    .tv-round-lbl{font-size:.42rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
+    .tv-match{background:var(--surface);border-radius:5px;padding:4px 6px;border:1px solid var(--bdr)}
+    .tv-court{font-size:.4rem;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+    .tv-match-row{display:flex;align-items:center;justify-content:space-between;padding:1px 0}
+    .tv-team{font-size:.48rem;font-weight:600;color:var(--txt)}
+    .tv-score{font-size:.56rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+    .tv-timer-row{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.18);border-radius:4px;padding:3px 7px;margin-top:2px}
+    .tv-timer-lbl{font-size:.4rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
+    .tv-timer-val{font-size:.58rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+
     @media (max-width: 640px) {
       .formats { grid-template-columns:1fr; }
       .mock-sidebar { display:none; }
       .steps { grid-template-columns:1fr 1fr; }
       .step:not(:last-child)::after { display:none; }
       .stats-bar { gap:28px; }
+      .pres-showcase-inner { grid-template-columns:1fr; gap:36px; }
+    }
+    @media (max-width: 900px) {
+      .pres-showcase-inner { grid-template-columns:1fr; gap:40px; }
+      .pres-showcase { padding:56px 24px; }
     }
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
@@ -425,7 +472,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="feature">
       <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
       <h3>Presentation mode</h3>
-      <p>Open a fullscreen scoreboard on a TV or projector. All active matches and the live standings are visible to everyone in the room — updates every 3 seconds.</p>
+      <p>Fullscreen scoreboard on TV or projector — standings, active matches and countdown timer, updated live. No extra app needed.</p>
     </div>
     <div class="feature">
       <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
@@ -446,6 +493,98 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div>
       <h3>6 languages, automatic</h3>
       <p>Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language — great for international groups.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENTATION SHOWCASE -->
+<section class="pres-showcase">
+  <div class="pres-showcase-inner">
+    <div>
+      <div class="pres-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Presentation mode
+      </div>
+      <h2>Scoreboard on<br><em style="color:var(--accent);font-style:normal">big screen</em></h2>
+      <p class="pres-sub">Open a fullscreen scoreboard on your TV or projector. All matches and the live leaderboard update automatically — no extra hardware, just one click.</p>
+      <div class="pres-feats">
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Fullscreen TV mode</strong> — works on any laptop via HDMI, Chromecast or Apple TV</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Live updates every 3 seconds</strong> — scores appear on screen as soon as you enter them on your phone</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Countdown timer per round</strong> — set a round time limit and start counting down with one tap</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Leaderboard + active matches</strong> — everyone sees their position and the ongoing matches at once</span></div>
+      </div>
+      <a class="pres-cta-btn" href="/app/">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Try presentation mode
+      </a>
+    </div>
+    <!-- TV frame mockup -->
+    <div>
+      <div class="tv-outer">
+        <div class="tv-screen">
+          <div class="tv-hdr">
+            <div class="tv-hdr-title">
+              Padel <span style="color:var(--accent)">Bracket</span>
+              <span class="tv-hdr-badge" style="background:rgba(199,255,94,.15);color:var(--accent)">AMERICANO</span>
+              <span class="tv-hdr-badge" style="background:rgba(239,68,68,.15);color:#ef4444">● LIVE</span>
+            </div>
+            <div class="tv-hdr-clock">14:32</div>
+          </div>
+          <div class="tv-body">
+            <div class="tv-standings">
+              <div class="tv-section-lbl">Standings</div>
+              <div class="tv-row">
+                <div class="tv-pos">🥇</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Tom</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:90%"></div></div></div>
+                <div class="tv-pts">54</div>
+              </div>
+              <div class="tv-row">
+                <div class="tv-pos">🥈</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Lisa</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:78%"></div></div></div>
+                <div class="tv-pts">47</div>
+              </div>
+              <div class="tv-row">
+                <div class="tv-pos">🥉</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Sara</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:65%"></div></div></div>
+                <div class="tv-pts">39</div>
+              </div>
+              <div class="tv-row">
+                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">4</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Mark</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:55%"></div></div></div>
+                <div class="tv-pts">33</div>
+              </div>
+              <div class="tv-row">
+                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">5</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Koen</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:45%"></div></div></div>
+                <div class="tv-pts">27</div>
+              </div>
+              <div class="tv-row">
+                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">6</div>
+                <div class="tv-bar-wrap"><div class="tv-name">Anna</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:36%"></div></div></div>
+                <div class="tv-pts">21</div>
+              </div>
+            </div>
+            <div class="tv-matches-col">
+              <div class="tv-round-lbl">Round 3 — in progress</div>
+              <div class="tv-match">
+                <div class="tv-court">Court 1</div>
+                <div class="tv-match-row"><span class="tv-team">Tom &amp; Sara</span><span class="tv-score">12</span></div>
+                <div class="tv-match-row"><span class="tv-team">Lisa &amp; Koen</span><span class="tv-score">9</span></div>
+              </div>
+              <div class="tv-match">
+                <div class="tv-court">Court 2</div>
+                <div class="tv-match-row"><span class="tv-team">Mark &amp; Anna</span><span class="tv-score">8</span></div>
+                <div class="tv-match-row"><span class="tv-team">Bas &amp; Eva</span><span class="tv-score">11</span></div>
+              </div>
+              <div class="tv-timer-row">
+                <span class="tv-timer-lbl">Timer</span>
+                <span class="tv-timer-val">12:34</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tv-stand"></div>
     </div>
   </div>
 </section>
