@@ -76,6 +76,7 @@
       <h1>PadelBracket Admin</h1>
       <div class="subtitle">Live statistieken uit Supabase</div>
     </div>
+    <button class="logout-btn" id="refresh-btn" onclick="refreshDashboard()">Vernieuwen</button>
     <button class="logout-btn" onclick="logout()">Uitloggen</button>
   </div>
 
@@ -145,7 +146,22 @@ function logout(){
 async function showDashboard(sb){
   $('key-screen').style.display = 'none';
   $('dashboard').style.display = 'block';
+  await loadAll(sb);
+}
+
+async function loadAll(sb){
   await Promise.all([ loadStats(sb), loadModes(sb), loadDaily(sb), loadPlayerDist(sb), loadModeAvg(sb) ]);
+}
+
+async function refreshDashboard(){
+  const btn = $('refresh-btn');
+  btn.textContent = 'Bezig...';
+  btn.disabled = true;
+  const key = getKey();
+  const sb = supabase.createClient(SUPABASE_URL, key);
+  await loadAll(sb);
+  btn.textContent = 'Vernieuwen';
+  btn.disabled = false;
 }
 
 async function loadStats(sb){
