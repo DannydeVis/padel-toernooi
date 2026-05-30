@@ -955,7 +955,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.29.2';
+const APP_VERSION = 'v1.29.3';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1466,8 +1466,8 @@ const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
 let _sb=null, _sbWrite=null, _startId=null;
 function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
-async function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; const{data}=await sb.from('tournament_starts').insert({mode:m,player_count:n}).select('id').single(); if(data) _startId=data.id; }catch{} }
-function trackEnd(){ try{ if(!_startId) return; const sb=getSB(); if(sb) sb.from('tournament_starts').update({ended_at:new Date().toISOString()}).eq('id',_startId).then(()=>{}); _startId=null; }catch{} }
+function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; _startId=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)); sb.from('tournament_starts').insert({mode:m,player_count:n,client_id:_startId}).then(()=>{}); }catch{} }
+function trackEnd(){ try{ if(!_startId) return; const sb=getSB(); if(sb) sb.from('tournament_starts').update({ended_at:new Date().toISOString()}).eq('client_id',_startId).then(()=>{}); _startId=null; }catch{} }
 function getSBWrite(){
   if(!_sbWrite&&sessionToken&&window.supabase)
     _sbWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':sessionToken}}});
