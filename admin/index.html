@@ -94,6 +94,16 @@
     <div class="section-title">Afgelopen 14 dagen</div>
     <div id="daily-chart"><div class="loading">Laden...</div></div>
   </div>
+
+  <div class="card">
+    <div class="section-title">Aantal spelers per toernooi</div>
+    <div id="player-dist"><div class="loading">Laden...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Gemiddeld aantal spelers per format</div>
+    <div id="mode-avg"><div class="loading">Laden...</div></div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -133,7 +143,7 @@ function logout(){
 async function showDashboard(sb){
   $('key-screen').style.display = 'none';
   $('dashboard').style.display = 'block';
-  await Promise.all([ loadStats(sb), loadModes(sb), loadDaily(sb) ]);
+  await Promise.all([ loadStats(sb), loadModes(sb), loadDaily(sb), loadPlayerDist(sb), loadModeAvg(sb) ]);
 }
 
 async function loadStats(sb){
@@ -199,6 +209,42 @@ async function loadDaily(sb){
       </div>`;
     }).join('')
   }</div>`;
+}
+
+async function loadPlayerDist(sb){
+  const { data } = await sb.from('tournament_starts').select('player_count').not('player_count','is',null);
+  if(!data || !data.length){ $('player-dist').textContent = 'Geen data'; return; }
+  const counts = {};
+  data.forEach(r => counts[r.player_count] = (counts[r.player_count]||0) + 1);
+  const keys = Object.keys(counts).map(Number).sort((a,b) => a-b);
+  const max = Math.max(...Object.values(counts), 1);
+  $('player-dist').innerHTML = keys.map(n => {
+    const c = counts[n];
+    const pct = Math.round(c / max * 100);
+    return `<div class="mode-row">
+      <span class="mode-label">${n} spelers</span>
+      <div class="mode-bar-bg"><div class="mode-bar-fill" style="width:${pct}%"></div></div>
+      <span class="mode-count">${fmt(c)}</span>
+    </div>`;
+  }).join('');
+}
+
+async function loadModeAvg(sb){
+  const { data } = await sb.from('tournament_starts').select('mode,player_count').not('player_count','is',null);
+  if(!data || !data.length){ $('mode-avg').textContent = 'Geen data'; return; }
+  const sums = {}, counts = {};
+  data.forEach(r => {
+    sums[r.mode]   = (sums[r.mode]  ||0) + r.player_count;
+    counts[r.mode] = (counts[r.mode]||0) + 1;
+  });
+  $('mode-avg').innerHTML = MODE_ORDER.filter(m => counts[m]).map(m => {
+    const avg = (sums[m] / counts[m]).toFixed(1);
+    return `<div class="mode-row">
+      <span class="mode-label">${MODE_LABELS[m]||m}</span>
+      <div class="mode-bar-bg"><div class="mode-bar-fill" style="width:${Math.min(parseFloat(avg)/24*100,100)}%"></div></div>
+      <span class="mode-count">${avg}</span>
+    </div>`;
+  }).join('');
 }
 
 function fmt(n){ if(n == null) return '—'; return n >= 1000 ? (n/1000).toFixed(1)+'k' : String(n); }
