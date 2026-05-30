@@ -955,7 +955,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.29.3';
+const APP_VERSION = 'v1.29.4';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1660,6 +1660,8 @@ function resetTournament(){
 
 function goSetup(){
   trackEnd();
+  clearSavedState();
+  $('resume-banner').classList.add('hidden');
   mode='team';
   $('screen-setup').style.display='block';
   $('screen-tournament').style.display='none';
