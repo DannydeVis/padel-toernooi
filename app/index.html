@@ -921,9 +921,9 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <li class="pres-ios-step"><span class="pres-ios-step-num">2</span><span data-i18n="pres_ios_s2">Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)</span></li>
       <li class="pres-ios-step"><span class="pres-ios-step-num">3</span><span data-i18n="pres_ios_s3">Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst</span></li>
     </ol>
-    <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="pres-ios-ok" style="flex:1;background:var(--accent);color:#0E1114" onclick="openPresentationTab()" data-i18n="pres_ios_open">Open presentatie</button>
-      <button class="pres-ios-ok" style="flex:0 0 auto;padding:10px 16px" onclick="closePresIosHint()" data-i18n="pres_ios_ok">Sluiten</button>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+      <button class="pres-ios-ok" style="background:var(--accent);color:#0E1114;font-size:.95rem" onclick="openPresentationTab()" data-i18n="pres_ios_open">Open presentatie</button>
+      <button onclick="closePresIosHint()" data-i18n="pres_ios_ok" style="background:none;border:none;color:var(--txt2);font-size:.82rem;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;padding:6px">Sluiten</button>
     </div>
   </div>
 </div>
@@ -948,7 +948,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.8';
+const APP_VERSION = 'v1.27.9';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
