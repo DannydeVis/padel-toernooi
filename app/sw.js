@@ -1,4 +1,4 @@
-const CACHE = 'padel-v19'; // presentation mode
+const CACHE = 'padel-v20'; // chromecast + ios airplay hint
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
