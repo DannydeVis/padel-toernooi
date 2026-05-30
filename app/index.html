@@ -915,13 +915,16 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       <span class="pres-ios-title" data-i18n="pres_ios_title">Weergeven op TV</span>
       <button class="share-close-btn" onclick="closePresIosHint()">✕</button>
     </div>
-    <p class="pres-ios-body" data-i18n="pres_ios_body">De presentatie is geopend in een nieuw tabblad. Om dit op een TV te tonen via AirPlay:</p>
+    <p class="pres-ios-body" data-i18n="pres_ios_body">Tik op 'Open presentatie' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:</p>
     <ol class="pres-ios-steps">
       <li class="pres-ios-step"><span class="pres-ios-step-num">1</span><span data-i18n="pres_ios_s1">Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)</span></li>
       <li class="pres-ios-step"><span class="pres-ios-step-num">2</span><span data-i18n="pres_ios_s2">Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)</span></li>
       <li class="pres-ios-step"><span class="pres-ios-step-num">3</span><span data-i18n="pres_ios_s3">Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst</span></li>
     </ol>
-    <button class="pres-ios-ok" style="margin-top:14px" onclick="closePresIosHint()" data-i18n="pres_ios_ok">Begrepen</button>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="pres-ios-ok" style="flex:1;background:var(--accent);color:#0E1114" onclick="openPresentationTab()" data-i18n="pres_ios_open">Open presentatie</button>
+      <button class="pres-ios-ok" style="flex:0 0 auto;padding:10px 16px" onclick="closePresIosHint()" data-i18n="pres_ios_ok">Sluiten</button>
+    </div>
   </div>
 </div>
 
@@ -945,7 +948,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.6';
+const APP_VERSION = 'v1.27.7';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1090,7 +1093,7 @@ en:{
   inst_subtitle_default:'Add to home screen',inst_close:'Close',
   inst_install:'Install',inst_skip:'Not now',
   cast_btn:'Cast to TV',cast_stop:'Stop casting',
-  pres_ios_title:'Show on TV',pres_ios_body:'The presentation opened in a new tab. To display it on a TV via AirPlay:',pres_ios_s1:'Open <strong>Control Center</strong> (swipe down from the top-right corner)',pres_ios_s2:'Tap <strong>Screen Mirroring</strong> (square with triangle icon)',pres_ios_s3:'Select your <strong>Apple TV</strong> or AirPlay-compatible TV from the list',pres_ios_ok:'Got it',
+  pres_ios_title:'Show on TV',pres_ios_body:'Tap \'Open presentation\' to open the scoreboard. To display it on a TV via AirPlay:',pres_ios_s1:'Open <strong>Control Center</strong> (swipe down from the top-right corner)',pres_ios_s2:'Tap <strong>Screen Mirroring</strong> (square with triangle icon)',pres_ios_s3:'Select your <strong>Apple TV</strong> or AirPlay-compatible TV from the list',pres_ios_open:'Open presentation',pres_ios_ok:'Close',
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
@@ -3109,9 +3112,13 @@ function updatePresentation(){
 
 function openPresentation(){
   updatePresentation();
-  window.open(location.origin+location.pathname+'?pres=1','_blank');
   const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  if(isIOS&&!localStorage.getItem('padel-pres-ios-seen')) _showPresIosHint();
+  if(isIOS){ _showPresIosHint(); return; }
+  window.open(location.origin+location.pathname+'?pres=1','_blank');
+}
+function openPresentationTab(){
+  window.open(location.origin+location.pathname+'?pres=1','_blank');
+  closePresIosHint();
 }
 function _showPresIosHint(){
   const hint=$('pres-ios-hint'); if(!hint) return;
@@ -3123,7 +3130,6 @@ function _showPresIosHint(){
 }
 function closePresIosHint(){
   $('pres-ios-hint').classList.add('hidden');
-  localStorage.setItem('padel-pres-ios-seen','1');
 }
 
 function initPresentation(){
