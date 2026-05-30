@@ -32,7 +32,8 @@
     .logout-btn { background: none; border: 1px solid var(--bdr); border-radius: 8px; padding: 7px 14px; color: var(--txt2); font-size: .82rem; cursor: pointer; font-family: inherit; }
     .logout-btn:hover { border-color: var(--txt2); color: var(--txt); }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    @media(max-width:480px){ .stats-grid{ grid-template-columns: repeat(2,1fr); } }
     .stat-card { background: var(--surface); border: 1px solid var(--bdr); border-radius: 14px; padding: 16px; }
     .stat-card-n { font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; }
     .stat-card-lbl { font-size: .72rem; color: var(--txt2); margin-top: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
@@ -83,6 +84,7 @@
     <div class="stat-card"><div class="stat-card-n" id="stat-shared">—</div><div class="stat-card-lbl">Toernooien gedeeld</div></div>
     <div class="stat-card"><div class="stat-card-n" id="stat-today">—</div><div class="stat-card-lbl">Vandaag gestart</div></div>
     <div class="stat-card"><div class="stat-card-n" id="stat-week">—</div><div class="stat-card-lbl">Afgelopen 7 dagen</div></div>
+    <div class="stat-card"><div class="stat-card-n" id="stat-duration">—</div><div class="stat-card-lbl">Gem. speelduur (min)</div></div>
   </div>
 
   <div class="card">
@@ -150,17 +152,23 @@ async function loadStats(sb){
   const today = new Date(); today.setHours(0,0,0,0);
   const week = new Date(); week.setDate(week.getDate() - 7); week.setHours(0,0,0,0);
 
-  const [total, shared, todayRes, weekRes] = await Promise.all([
+  const [total, shared, todayRes, weekRes, durRes] = await Promise.all([
     sb.from('tournament_starts').select('*', { count: 'exact', head: true }),
     sb.from('tournaments').select('*', { count: 'exact', head: true }),
     sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', today.toISOString()),
     sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', week.toISOString()),
+    sb.from('tournament_starts').select('created_at,ended_at').not('ended_at','is',null),
   ]);
 
   $('stat-total').textContent  = fmt(total.count);
   $('stat-shared').textContent = fmt(shared.count);
   $('stat-today').textContent  = fmt(todayRes.count);
   $('stat-week').textContent   = fmt(weekRes.count);
+
+  if(durRes.data && durRes.data.length){
+    const mins = durRes.data.map(r => (new Date(r.ended_at) - new Date(r.created_at)) / 60000).filter(m => m > 0 && m < 600);
+    $('stat-duration').textContent = mins.length ? Math.round(mins.reduce((a,b)=>a+b,0)/mins.length) : '—';
+  }
 }
 
 async function loadModes(sb){

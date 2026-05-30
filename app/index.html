@@ -955,7 +955,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.29.0';
+const APP_VERSION = 'v1.29.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1464,9 +1464,10 @@ let sessionToken=localStorage.getItem('padel-session-token')||null;
 let viewMode=false, viewPollInterval=null, _viewInitialized=false;
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
-let _sb=null, _sbWrite=null;
+let _sb=null, _sbWrite=null, _startId=null;
 function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
-function trackStart(m,n){ try{ const sb=getSB(); if(sb) sb.from('tournament_starts').insert({mode:m,player_count:n}).then(()=>{}); }catch{} }
+async function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; const{data}=await sb.from('tournament_starts').insert({mode:m,player_count:n}).select('id').single(); if(data) _startId=data.id; }catch{} }
+function trackEnd(){ try{ if(!_startId) return; const sb=getSB(); if(sb) sb.from('tournament_starts').update({ended_at:new Date().toISOString()}).eq('id',_startId).then(()=>{}); _startId=null; }catch{} }
 function getSBWrite(){
   if(!_sbWrite&&sessionToken&&window.supabase)
     _sbWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':sessionToken}}});
@@ -1658,6 +1659,7 @@ function resetTournament(){
 }
 
 function goSetup(){
+  trackEnd();
   mode='team';
   $('screen-setup').style.display='block';
   $('screen-tournament').style.display='none';
@@ -2668,6 +2670,7 @@ async function shareTournament(){
   const cpbtn=$('share-copy-btn'); if(cpbtn) cpbtn.disabled=true;
   const ok=await pushToSupabase();
   if(ok){
+    trackEnd();
     const url=`${location.origin}${location.pathname}?view=${shareCode}`;
     if(inp) inp.value=url;
     if(cpbtn){ cpbtn.disabled=false; cpbtn.querySelector('span').textContent=t('share_copy'); }
@@ -2997,6 +3000,7 @@ function exportCSV(){
 }
 
 function exportPrint(){
+  trackEnd();
   const{name,date,fmtLabel,standings,matches}=buildExportData();
   const amSt=(mode==='americano'||mode==='mexicano');
   let stRows='',mRows='';
