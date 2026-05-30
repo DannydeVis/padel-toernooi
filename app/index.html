@@ -530,6 +530,7 @@ body.pres-mode #pres-screen{display:block}
 .pres-match-score{font-size:1.6rem;font-weight:900;color:#C7FF5E;min-width:36px;text-align:right}
 .pres-match-done .pres-match-score{color:#475569}
 .pres-sub{font-size:1rem;color:#475569;text-align:right;margin-top:32px;letter-spacing:.5px}
+#btn-cast.btn-cast-active{color:var(--accent);border-color:rgba(199,255,94,.4)}
 .pres-refresh{position:fixed;bottom:20px;right:24px;font-size:.8rem;color:#334155;font-family:sans-serif;user-select:none}
 @media print{
   .stats-wrap{display:none!important}
@@ -638,6 +639,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
   <!-- Monitor / Presentation -->
   <symbol id="ic-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="3"/></symbol>
+  <symbol id="ic-cast" viewBox="0 0 24 24"><path d="M1 18v3h3a3 3 0 0 0-3-3z"/><path d="M1 14v2a7 7 0 0 1 7 7h2a9 9 0 0 0-9-9z"/><path d="M1 10v2c6.07 0 11 4.93 11 11h2c0-7.18-5.82-13-13-13z"/><rect x="3" y="3" width="18" height="14" rx="1" fill="none"/></symbol>
   <!-- Print -->
   <symbol id="ic-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
   <!-- Padel racket -->
@@ -697,6 +699,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <div class="logo"><svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 95" fill="none" aria-hidden="true"><path d="M40,66 L10,86 L25,62 A30,30 0 1,1 40,66 Z" stroke="var(--accent)" stroke-width="5" stroke-linejoin="round"/><circle cx="28" cy="12" r="3" fill="var(--txt)"/><circle cx="36" cy="12" r="3" fill="var(--txt)"/><circle cx="44" cy="12" r="3" fill="var(--txt)"/><circle cx="52" cy="12" r="3" fill="var(--txt)"/><circle cx="28" cy="20" r="3" fill="var(--txt)"/><circle cx="36" cy="20" r="3" fill="var(--txt)"/><circle cx="52" cy="20" r="3" fill="var(--txt)"/><circle cx="60" cy="20" r="3" fill="var(--txt)"/><circle cx="28" cy="28" r="3" fill="var(--txt)"/><circle cx="36" cy="28" r="3" fill="var(--txt)"/><circle cx="52" cy="28" r="3" fill="var(--txt)"/><circle cx="60" cy="28" r="3" fill="var(--txt)"/><circle cx="28" cy="36" r="3" fill="var(--txt)"/><circle cx="36" cy="36" r="3" fill="var(--txt)"/><circle cx="44" cy="36" r="3" fill="var(--txt)"/><circle cx="52" cy="36" r="3" fill="var(--txt)"/><circle cx="28" cy="44" r="3" fill="var(--txt)"/><circle cx="36" cy="44" r="3" fill="var(--txt)"/><circle cx="28" cy="52" r="3" fill="var(--txt)"/><circle cx="36" cy="52" r="3" fill="var(--txt)"/><circle cx="28" cy="60" r="3" fill="var(--txt)"/><circle cx="36" cy="60" r="3" fill="var(--txt)"/></svg>Padel <em>Bracket</em> <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
     <button class="btn btn-ghost btn-sm" id="btn-pres" style="display:none" onclick="openPresentation()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg> <span class="btn-label" data-i18n="pres_btn">Presentatie</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-cast" style="display:none" onclick="toggleCast()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-cast"></use></svg> <span class="btn-label">Cast</span></button>
     <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
     <div class="more-wrap" id="more-wrap">
       <button class="btn btn-ghost btn-sm" onclick="toggleMore()" aria-label="Meer opties"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-more"></use></svg></button>
@@ -922,7 +925,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.4';
+const APP_VERSION = 'v1.27.5';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1066,6 +1069,7 @@ en:{
   fin_export_row:'{pos}. {name} — {w}W {l}L ({gw}–{gl} games)',
   inst_subtitle_default:'Add to home screen',inst_close:'Close',
   inst_install:'Install',inst_skip:'Not now',
+  cast_btn:'Cast to TV',cast_stop:'Stop casting',
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
@@ -1416,6 +1420,7 @@ const tn = id => (id!==null&&id!==undefined) ? (T[id]?.name||'?') : null;
 const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="true" viewBox="0 0 24 24"><use href="#${id}"></use></svg>`;
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
+let _castReq=null, _castConn=null, _castAvail=false;
 let R={gpm:3, matchPts:32, courts:2, timerMins:0};
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
@@ -1585,6 +1590,7 @@ function startTournamentUI(){
   $('btn-print').style.display = viewMode ? 'none' : '';
   $('btn-share').style.display = viewMode ? 'none' : '';
   $('btn-pres').style.display = viewMode ? 'none' : '';
+  _updateCastBtn();
   $('more-divider').style.display = viewMode ? 'none' : '';
   const badge=$('share-badge');
   if(badge) badge.style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'':'none';
@@ -1626,6 +1632,7 @@ function goSetup(){
   $('btn-print').style.display='none';
   $('btn-share').style.display='none';
   $('btn-pres').style.display='none';
+  $('btn-cast').style.display='none';
   $('more-divider').style.display='none';
   $('share-nudge').style.display='none';
   if(viewPollInterval){ clearInterval(viewPollInterval); viewPollInterval=null; }
@@ -2388,6 +2395,7 @@ function showAmericano(){
   $('btn-print').style.display='none';
   $('btn-share').style.display = viewMode ? 'none' : '';
   $('btn-pres').style.display = viewMode ? 'none' : '';
+  _updateCastBtn();
   $('more-divider').style.display = viewMode ? 'none' : '';
   $('share-nudge').style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'flex':'none';
   const tname=$('logo-tname');
@@ -3020,6 +3028,40 @@ tr.top td{font-weight:700}
 }
 
 // ── Presentatiemodus ──────────────────────────
+
+// ── Chromecast ────────────────────────────────
+function initCast(){
+  if(!window.PresentationRequest) return;
+  const url=location.origin+location.pathname+'?pres=1';
+  _castReq=new PresentationRequest([url]);
+  _castReq.getAvailability().then(av=>{
+    _castAvail=av.value;
+    av.addEventListener('change',()=>{ _castAvail=av.value; _updateCastBtn(); });
+  }).catch(()=>{});
+}
+
+function _updateCastBtn(){
+  const btn=$('btn-cast'); if(!btn) return;
+  const presVis=$('btn-pres')&&$('btn-pres').style.display!=='none';
+  btn.style.display=(presVis&&(_castAvail||_castConn))?'':'none';
+  btn.classList.toggle('btn-cast-active',!!_castConn);
+  const lbl=btn.querySelector('.btn-label');
+  if(lbl) lbl.textContent=t(_castConn?'cast_stop':'cast_btn');
+}
+
+async function toggleCast(){
+  if(_castConn){ _castConn.terminate(); return; }
+  if(!_castReq) return;
+  updatePresentation();
+  try{
+    _castConn=await _castReq.start();
+    _castConn.addEventListener('terminate',()=>{ _castConn=null; _updateCastBtn(); });
+    const d=localStorage.getItem('padel-presentation');
+    if(d) _castConn.send(d);
+    _updateCastBtn();
+  }catch(e){ if(e.name!=='AbortError') console.warn('Cast failed:',e); }
+}
+
 function updatePresentation(){
   if(!mode) return;
   let standings, rounds=[];
@@ -3039,6 +3081,9 @@ function updatePresentation(){
   localStorage.setItem('padel-presentation',JSON.stringify({
     mode,name:tournamentName||'',standings,rounds,ts:Date.now()
   }));
+  if(_castConn&&_castConn.state==='connected'){
+    try{ _castConn.send(localStorage.getItem('padel-presentation')||''); }catch{}
+  }
 }
 
 function openPresentation(){
@@ -3048,6 +3093,13 @@ function openPresentation(){
 
 function initPresentation(){
   document.body.classList.add('pres-mode');
+  if(navigator.presentation&&navigator.presentation.receiver){
+    navigator.presentation.receiver.connectionList.then(list=>{
+      function _onCastMsg(e){ try{ localStorage.setItem('padel-presentation',e.data); }catch{} }
+      list.connections.forEach(c=>c.addEventListener('message',_onCastMsg));
+      list.addEventListener('connectionavailable',e=>e.connection.addEventListener('message',_onCastMsg));
+    }).catch(()=>{});
+  }
 
   function _getTimerData(){
     try{ return JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{ return null; }
@@ -3233,6 +3285,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const _vc=new URLSearchParams(location.search).get('view');
   if(_vc){ initViewMode(_vc.toUpperCase()); return; }
   loadState();
+  initCast();
   showOnboarding();
 });
 
