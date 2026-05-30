@@ -610,6 +610,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 .nudge-close{background:none;border:none;color:var(--accent);opacity:.6;cursor:pointer;font-size:.9rem;padding:0 2px;line-height:1;flex-shrink:0}
 .nudge-close:hover{opacity:1}
 /* ── View-only banner ─────────────────────────── */
+#pres-ios-hint{position:fixed;bottom:0;left:0;right:0;z-index:1001;padding:0 12px 12px;pointer-events:none;display:flex;justify-content:center}#pres-ios-hint.hidden{display:none}.pres-ios-card{pointer-events:all;background:var(--surface);border:1px solid rgba(255,255,255,.12);border-radius:20px 20px 16px 16px;box-shadow:0 -4px 32px rgba(0,0,0,.5);padding:16px 18px 14px;max-width:480px;width:100%;animation:slideUp .35s cubic-bezier(.34,1.56,.64,1)}.pres-ios-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}.pres-ios-title{font-family:'Inter',sans-serif;font-weight:800;font-size:1rem;color:var(--txt);flex:1}.pres-ios-body{font-size:.85rem;color:var(--txt2);line-height:1.6;margin-bottom:14px}.pres-ios-steps{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}.pres-ios-step{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--txt2)}.pres-ios-step-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0;margin-top:1px}.pres-ios-ok{width:100%;background:rgba(255,255,255,.08);border:none;border-radius:10px;padding:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.9rem;color:var(--txt);cursor:pointer;transition:.15s}.pres-ios-ok:hover{background:rgba(255,255,255,.14)}
 #view-banner{background:rgba(199,255,94,.08);border-bottom:1px solid rgba(199,255,94,.2);padding:8px 16px;display:none;align-items:center;justify-content:center;gap:8px;font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.5px;color:var(--accent)}
 .view-pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:vp 1.5s ease-in-out infinite}
 .view-brand-link{margin-left:auto;font-size:.75rem;opacity:.55;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.3px;flex-shrink:0}
@@ -678,6 +679,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <!-- Share -->
   <symbol id="ic-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
   <symbol id="ic-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-airplay" viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/><polygon points="12 15 17 21 7 21 12 15"/></symbol>
   <symbol id="ic-ios-share" viewBox="0 0 24 24"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
 </svg>
 
@@ -905,6 +907,24 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   </div>
 </div>
 
+<!-- iOS AIRPLAY HINT -->
+<div id="pres-ios-hint" class="hidden">
+  <div class="pres-ios-card">
+    <div class="pres-ios-top">
+      <svg class="icon" viewBox="0 0 24 24"><use href="#ic-airplay"></use></svg>
+      <span class="pres-ios-title" data-i18n="pres_ios_title">Weergeven op TV</span>
+      <button class="share-close-btn" onclick="closePresIosHint()">✕</button>
+    </div>
+    <p class="pres-ios-body" data-i18n="pres_ios_body">De presentatie is geopend in een nieuw tabblad. Om dit op een TV te tonen via AirPlay:</p>
+    <ol class="pres-ios-steps">
+      <li class="pres-ios-step"><span class="pres-ios-step-num">1</span><span data-i18n="pres_ios_s1">Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)</span></li>
+      <li class="pres-ios-step"><span class="pres-ios-step-num">2</span><span data-i18n="pres_ios_s2">Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)</span></li>
+      <li class="pres-ios-step"><span class="pres-ios-step-num">3</span><span data-i18n="pres_ios_s3">Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst</span></li>
+    </ol>
+    <button class="pres-ios-ok" style="margin-top:14px" onclick="closePresIosHint()" data-i18n="pres_ios_ok">Begrepen</button>
+  </div>
+</div>
+
 <!-- INSTALL BANNER -->
 <div id="install-banner" class="hidden">
   <div class="install-card">
@@ -925,7 +945,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.27.5';
+const APP_VERSION = 'v1.27.6';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1070,6 +1090,7 @@ en:{
   inst_subtitle_default:'Add to home screen',inst_close:'Close',
   inst_install:'Install',inst_skip:'Not now',
   cast_btn:'Cast to TV',cast_stop:'Stop casting',
+  pres_ios_title:'Show on TV',pres_ios_body:'The presentation opened in a new tab. To display it on a TV via AirPlay:',pres_ios_s1:'Open <strong>Control Center</strong> (swipe down from the top-right corner)',pres_ios_s2:'Tap <strong>Screen Mirroring</strong> (square with triangle icon)',pres_ios_s3:'Select your <strong>Apple TV</strong> or AirPlay-compatible TV from the list',pres_ios_ok:'Got it',
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
@@ -3089,6 +3110,20 @@ function updatePresentation(){
 function openPresentation(){
   updatePresentation();
   window.open(location.origin+location.pathname+'?pres=1','_blank');
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(isIOS&&!localStorage.getItem('padel-pres-ios-seen')) _showPresIosHint();
+}
+function _showPresIosHint(){
+  const hint=$('pres-ios-hint'); if(!hint) return;
+  hint.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  hint.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+  // Use inline html keys for the steps
+  hint.querySelectorAll('.pres-ios-step span[data-i18n]').forEach(el=>el.innerHTML=t(el.dataset.i18n));
+  hint.classList.remove('hidden');
+}
+function closePresIosHint(){
+  $('pres-ios-hint').classList.add('hidden');
+  localStorage.setItem('padel-pres-ios-seen','1');
 }
 
 function initPresentation(){
