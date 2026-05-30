@@ -1466,6 +1466,7 @@ const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
 let _sb=null, _sbWrite=null;
 function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
+function trackStart(m,n){ try{ const sb=getSB(); if(sb) sb.from('tournament_starts').insert({mode:m,player_count:n}).then(()=>{}); }catch{} }
 function getSBWrite(){
   if(!_sbWrite&&sessionToken&&window.supabase)
     _sbWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':sessionToken}}});
@@ -1645,6 +1646,7 @@ function startTournamentUI(){
 function startTournament(){
   buildPoule();
   if(mode!=='roundrobin') buildPlayoffShell();
+  trackStart(mode, T.length);
   startTournamentUI();
   saveState();
 }
@@ -2401,6 +2403,7 @@ function startMexicano(){
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=[buildMexicanoRound(1)]; // Only round 1 — subsequent rounds generated after each round completes
   localStorage.removeItem('padel-round-timer');
+  trackStart('mexicano', AP.length);
   showAmericano();
   saveState();
 }
@@ -2412,6 +2415,7 @@ function startAmericano(){
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
   AM=buildAmericanoSchedule(AP.length);
   localStorage.removeItem('padel-round-timer');
+  trackStart('americano', AP.length);
   showAmericano();
   saveState();
 }

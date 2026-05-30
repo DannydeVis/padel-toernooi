@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadelBracket — Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0E1114; --surface: #1A1F24; --surface2: #252B32;
+      --accent: #C7FF5E; --txt: #f9fafb; --txt2: rgba(249,250,251,.5);
+      --bdr: rgba(255,255,255,.1); --red: #ef4444; --gold: #fbbf24;
+    }
+    body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 24px; }
+    h1 { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+    .subtitle { color: var(--txt2); font-size: .85rem; margin-bottom: 32px; }
+
+    /* Key prompt */
+    #key-screen { max-width: 440px; margin: 80px auto; }
+    #key-screen h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    #key-screen p { color: var(--txt2); font-size: .85rem; margin-bottom: 20px; line-height: 1.5; }
+    #key-input { width: 100%; background: var(--surface); border: 1px solid var(--bdr); border-radius: 10px; padding: 12px 14px; color: var(--txt); font-size: .9rem; font-family: inherit; outline: none; }
+    #key-input:focus { border-color: var(--accent); }
+    #key-btn { margin-top: 12px; width: 100%; background: var(--accent); color: #0E1114; border: none; border-radius: 10px; padding: 12px; font-weight: 700; font-size: .95rem; cursor: pointer; font-family: inherit; }
+    #key-error { color: var(--red); font-size: .82rem; margin-top: 8px; display: none; }
+
+    /* Dashboard */
+    #dashboard { max-width: 900px; margin: 0 auto; display: none; }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+    .logout-btn { background: none; border: 1px solid var(--bdr); border-radius: 8px; padding: 7px 14px; color: var(--txt2); font-size: .82rem; cursor: pointer; font-family: inherit; }
+    .logout-btn:hover { border-color: var(--txt2); color: var(--txt); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--bdr); border-radius: 14px; padding: 20px; }
+    .stat-card-n { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .stat-card-lbl { font-size: .78rem; color: var(--txt2); margin-top: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+    .section-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--txt2); margin-bottom: 14px; }
+    .card { background: var(--surface); border: 1px solid var(--bdr); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+
+    /* Mode breakdown */
+    .mode-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--bdr); }
+    .mode-row:last-child { border-bottom: none; }
+    .mode-label { width: 110px; font-size: .88rem; font-weight: 600; flex-shrink: 0; }
+    .mode-bar-bg { flex: 1; height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
+    .mode-bar-fill { height: 6px; border-radius: 6px; background: var(--accent); transition: width .6s ease; }
+    .mode-count { width: 48px; text-align: right; font-size: .88rem; font-weight: 700; color: var(--accent); }
+
+    /* Daily chart */
+    .chart-wrap { display: flex; align-items: flex-end; gap: 4px; height: 100px; padding-top: 8px; }
+    .chart-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .chart-bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--accent); min-height: 2px; transition: height .4s ease; }
+    .chart-lbl { font-size: .6rem; color: var(--txt2); white-space: nowrap; }
+
+    .loading { color: var(--txt2); font-size: .88rem; padding: 20px 0; }
+  </style>
+</head>
+<body>
+
+<!-- Key prompt -->
+<div id="key-screen">
+  <h2>PadelBracket Admin</h2>
+  <p>Voer je Supabase <strong>service_role</strong> key in. Deze wordt alleen lokaal opgeslagen in je browser en nooit verstuurd naar derden.</p>
+  <input id="key-input" type="password" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+  <button id="key-btn" onclick="submitKey()">Inloggen</button>
+  <div id="key-error">Ongeldige key of geen toegang tot de database.</div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard">
+  <div class="dash-header">
+    <div>
+      <h1>PadelBracket Admin</h1>
+      <div class="subtitle">Live statistieken uit Supabase</div>
+    </div>
+    <button class="logout-btn" onclick="logout()">Uitloggen</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-card-n" id="stat-total">—</div><div class="stat-card-lbl">Toernooien gestart</div></div>
+    <div class="stat-card"><div class="stat-card-n" id="stat-shared">—</div><div class="stat-card-lbl">Toernooien gedeeld</div></div>
+    <div class="stat-card"><div class="stat-card-n" id="stat-today">—</div><div class="stat-card-lbl">Vandaag gestart</div></div>
+    <div class="stat-card"><div class="stat-card-n" id="stat-week">—</div><div class="stat-card-lbl">Afgelopen 7 dagen</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Per format</div>
+    <div id="mode-breakdown"><div class="loading">Laden...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Afgelopen 14 dagen</div>
+    <div id="daily-chart"><div class="loading">Laden...</div></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+const SUPABASE_URL = 'https://yaakmxarwdvovvqgtkwb.supabase.co';
+const SESSION_KEY = 'padel-admin-key';
+
+const MODE_LABELS = { americano: 'Americano', mexicano: 'Mexicano', team: 'Team', roundrobin: 'Round Robin' };
+const MODE_ORDER = ['americano', 'mexicano', 'team', 'roundrobin'];
+
+function $(id){ return document.getElementById(id); }
+
+function getKey(){ return sessionStorage.getItem(SESSION_KEY); }
+
+async function submitKey(){
+  const key = $('key-input').value.trim();
+  if(!key){ return; }
+  $('key-error').style.display = 'none';
+  $('key-btn').textContent = 'Bezig...';
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, key);
+    const { error } = await sb.from('tournament_starts').select('id', { count: 'exact', head: true });
+    if(error) throw error;
+    sessionStorage.setItem(SESSION_KEY, key);
+    showDashboard(sb);
+  } catch(e) {
+    $('key-error').style.display = 'block';
+    $('key-btn').textContent = 'Inloggen';
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+async function showDashboard(sb){
+  $('key-screen').style.display = 'none';
+  $('dashboard').style.display = 'block';
+  await Promise.all([ loadStats(sb), loadModes(sb), loadDaily(sb) ]);
+}
+
+async function loadStats(sb){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const week = new Date(); week.setDate(week.getDate() - 7); week.setHours(0,0,0,0);
+
+  const [total, shared, todayRes, weekRes] = await Promise.all([
+    sb.from('tournament_starts').select('*', { count: 'exact', head: true }),
+    sb.from('tournaments').select('*', { count: 'exact', head: true }),
+    sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', today.toISOString()),
+    sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', week.toISOString()),
+  ]);
+
+  $('stat-total').textContent  = fmt(total.count);
+  $('stat-shared').textContent = fmt(shared.count);
+  $('stat-today').textContent  = fmt(todayRes.count);
+  $('stat-week').textContent   = fmt(weekRes.count);
+}
+
+async function loadModes(sb){
+  const { data } = await sb.from('tournament_starts').select('mode');
+  if(!data){ return; }
+  const counts = {};
+  data.forEach(r => counts[r.mode] = (counts[r.mode]||0) + 1);
+  const max = Math.max(...Object.values(counts), 1);
+  const el = $('mode-breakdown');
+  el.innerHTML = MODE_ORDER.map(m => {
+    const n = counts[m] || 0;
+    const pct = Math.round(n / max * 100);
+    return `<div class="mode-row">
+      <span class="mode-label">${MODE_LABELS[m]||m}</span>
+      <div class="mode-bar-bg"><div class="mode-bar-fill" style="width:${pct}%"></div></div>
+      <span class="mode-count">${fmt(n)}</span>
+    </div>`;
+  }).join('');
+}
+
+async function loadDaily(sb){
+  const from = new Date(); from.setDate(from.getDate() - 13); from.setHours(0,0,0,0);
+  const { data } = await sb.from('tournament_starts').select('created_at').gte('created_at', from.toISOString());
+  if(!data){ return; }
+
+  const days = [];
+  for(let i = 13; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate() - i); d.setHours(0,0,0,0);
+    days.push({ date: d, count: 0 });
+  }
+  data.forEach(r => {
+    const d = new Date(r.created_at); d.setHours(0,0,0,0);
+    const day = days.find(x => x.date.toDateString() === d.toDateString());
+    if(day) day.count++;
+  });
+
+  const max = Math.max(...days.map(d => d.count), 1);
+  const labels = ['zo','ma','di','wo','do','vr','za'];
+  $('daily-chart').innerHTML = `<div class="chart-wrap">${
+    days.map(d => {
+      const h = Math.max(Math.round(d.count / max * 90), d.count > 0 ? 4 : 2);
+      const lbl = `${d.date.getDate()}/${d.date.getMonth()+1}`;
+      return `<div class="chart-bar-col">
+        <div class="chart-bar" style="height:${h}px" title="${d.count} toernooien"></div>
+        <span class="chart-lbl">${lbl}</span>
+      </div>`;
+    }).join('')
+  }</div>`;
+}
+
+function fmt(n){ if(n == null) return '—'; return n >= 1000 ? (n/1000).toFixed(1)+'k' : String(n); }
+
+// Auto-login als key al in sessionStorage staat
+window.addEventListener('DOMContentLoaded', () => {
+  const key = getKey();
+  if(key){
+    const sb = supabase.createClient(SUPABASE_URL, key);
+    showDashboard(sb);
+  }
+});
+</script>
+</body>
+</html>
