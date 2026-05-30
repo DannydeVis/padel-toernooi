@@ -509,6 +509,13 @@
     .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
     .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
     .cookie-decline:hover{background:var(--surface2)}
+    .hero-perks{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .hero-perk{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--txt2)}
+    .hero-perk-icon{font-size:1rem}
+    .trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:16px 24px;font-size:.82rem;color:var(--txt2);border-bottom:1px solid var(--bdr)}
+    .trust-sep{color:var(--bdr);font-size:1rem}
+    @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
+    @media(max-width:640px){.trust-sep{display:none}.trust-bar{gap:8px 16px}}
   </style>
 </head>
 <body>
@@ -548,9 +555,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     Gratis · Geen account · Offline werkt ook
   </div>
 
-  <h1>Gratis Padel <em>Toernooi Generator</em></h1>
+  <h1>Geen account. Geen gedoe. <em>Gewoon spelen.</em></h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Toernooi opzetten in 30 seconden. Live scores op groot scherm, deel-link voor iedereen op de telefoon, resultaten exporteren naar PDF.</p>
+  <p class="hero-sub">Toernooi aanmaken in 30 seconden. QR-link voor alle spelers, live standen op elke telefoon en fullscreen tv-scorebord — gratis inbegrepen.</p>
 
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
@@ -564,6 +571,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <a class="btn-secondary" href="#hoe-werkt-het" id="howBtn">
       Hoe werkt het?
     </a>
+  </div>
+  <div class="hero-perks">
+    <div class="hero-perk"><span class="hero-perk-icon">📺</span> Live tv-scorebord</div>
+    <div class="hero-perk"><span class="hero-perk-icon">📱</span> QR-link voor spelers</div>
+    <div class="hero-perk"><span class="hero-perk-icon">⚡</span> Klaar in 30 seconden</div>
   </div>
   <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
 </section>
@@ -675,43 +687,13 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
 </div>
 
-<!-- FEATURES -->
-<section class="section">
-  <h2 class="section-title">Alles wat je nodig hebt</h2>
-  <p class="section-sub">Van namen invoeren tot eindstand exporteren — de app regelt de rest automatisch.</p>
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🏆</div>
-      <h3>Vier toernooiformats</h3>
-      <p>Knockout bracket (poule + finale), Americano (wisselende koppels), Mexicano (koppels op basis van stand) en Round Robin (iedereen vs. iedereen). Kies wat bij jouw groep past.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
-      <h3>Presentatiemodus</h3>
-      <p>Fullscreen scorebord op TV of beamer — ranglijst, actieve wedstrijden en countdown-timer, live bijgewerkt. Geen extra app nodig.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
-      <h3>Live meekijken op telefoon</h3>
-      <p>Deel één link met deelnemers. Ze zien live de tussenstand en scores op hun eigen telefoon — zonder account of installatie.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div>
-      <h3>Exporteren naar CSV &amp; PDF</h3>
-      <p>Download de eindstand en alle wedstrijdresultaten als CSV voor Excel, of druk een overzicht af als PDF. Handig als aandenken of voor de clubadministratie.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div>
-      <h3>Installeerbaar, werkt offline</h3>
-      <p>Voeg de app toe aan je beginscherm — werkt daarna ook zonder internet. Geen App Store, geen account, geen wachtwoord.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div>
-      <h3>6 talen, automatisch</h3>
-      <p>Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat — ook voor internationale groepen.</p>
-    </div>
-  </div>
-</section>
+<div class="trust-bar">
+  <span>🏆 Gebruikt door padelclubs door heel Europa</span>
+  <span class="trust-sep">·</span>
+  <span>🌍 Beschikbaar in 40+ landen</span>
+  <span class="trust-sep">·</span>
+  <span>📱 Werkt op elk apparaat, ook offline</span>
+</div>
 
 <!-- PRESENTATION SHOWCASE -->
 <section class="pres-showcase">
@@ -801,6 +783,44 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         </div>
       </div>
       <div class="tv-stand"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <h2 class="section-title">Alles wat je nodig hebt</h2>
+  <p class="section-sub">Van namen invoeren tot eindstand exporteren — de app regelt de rest automatisch.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🏆</div>
+      <h3>Vier toernooiformats</h3>
+      <p>Knockout bracket (poule + finale), Americano (wisselende koppels), Mexicano (koppels op basis van stand) en Round Robin (iedereen vs. iedereen). Kies wat bij jouw groep past.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
+      <h3>Presentatiemodus</h3>
+      <p>Fullscreen scorebord op TV of beamer — ranglijst, actieve wedstrijden en countdown-timer, live bijgewerkt. Geen extra app nodig.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
+      <h3>Live meekijken op telefoon</h3>
+      <p>Deel één link met deelnemers. Ze zien live de tussenstand en scores op hun eigen telefoon — zonder account of installatie.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div>
+      <h3>Exporteren naar CSV &amp; PDF</h3>
+      <p>Download de eindstand en alle wedstrijdresultaten als CSV voor Excel, of druk een overzicht af als PDF. Handig als aandenken of voor de clubadministratie.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div>
+      <h3>Installeerbaar, werkt offline</h3>
+      <p>Voeg de app toe aan je beginscherm — werkt daarna ook zonder internet. Geen App Store, geen account, geen wachtwoord.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div>
+      <h3>6 talen, automatisch</h3>
+      <p>Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat — ook voor internationale groepen.</p>
     </div>
   </div>
 </section>

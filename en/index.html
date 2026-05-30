@@ -335,6 +335,13 @@
     .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
     .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
     .cookie-decline:hover{background:var(--surface2)}
+    .hero-perks{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .hero-perk{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--txt2)}
+    .hero-perk-icon{font-size:1rem}
+    .trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:16px 24px;font-size:.82rem;color:var(--txt2);border-bottom:1px solid var(--bdr)}
+    .trust-sep{color:var(--bdr);font-size:1rem}
+    @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
+    @media(max-width:640px){.trust-sep{display:none}.trust-bar{gap:8px 16px}}
   </style>
 </head>
 <body>
@@ -371,9 +378,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
     Free · No account · Works offline too
   </div>
-  <h1>Free Padel <em>Tournament Generator</em></h1>
+  <h1>No login. No spreadsheets. <em>No chaos.</em></h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Set up a tournament in 30 seconds. Live scores on big screen, share link for everyone on their phone, export results to PDF.</p>
+  <p class="hero-sub">Create a live padel tournament in 30 seconds. QR share link, live standings on any phone, and fullscreen TV scoreboard — all included. Free.</p>
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -384,6 +391,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       Install app
     </button>
     <a class="btn-secondary" href="#how-it-works" id="howBtn">How does it work?</a>
+  </div>
+  <div class="hero-perks">
+    <div class="hero-perk"><span class="hero-perk-icon">📺</span> Live TV scoreboard</div>
+    <div class="hero-perk"><span class="hero-perk-icon">📱</span> QR share link</div>
+    <div class="hero-perk"><span class="hero-perk-icon">⚡</span> 30-second setup</div>
   </div>
   <p class="hero-note">Works on phone, tablet and desktop · Installable as app · 6 languages</p>
 </section>
@@ -459,43 +471,13 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
 </div>
 
-<!-- FEATURES -->
-<section class="section">
-  <h2 class="section-title">Everything you need</h2>
-  <p class="section-sub">From entering names to exporting the final standings — the app handles the rest automatically.</p>
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🏆</div>
-      <h3>Four tournament formats</h3>
-      <p>Knockout bracket (groups + final), Americano (rotating partners), Mexicano (partners based on standings) and Round Robin (everyone vs. everyone). Choose what suits your group.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
-      <h3>Presentation mode</h3>
-      <p>Fullscreen scoreboard on TV or projector — standings, active matches and countdown timer, updated live. No extra app needed.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
-      <h3>Live viewing on phone</h3>
-      <p>Share one link with participants. They see live standings and scores on their own phone — no account or installation needed.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div>
-      <h3>Export to CSV &amp; PDF</h3>
-      <p>Download final standings and all match results as CSV for Excel, or print as PDF. Handy as a keepsake or for club administration.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div>
-      <h3>Installable, works offline</h3>
-      <p>Add the app to your home screen — works without internet after that. No App Store, no account, no password.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div>
-      <h3>6 languages, automatic</h3>
-      <p>Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language — great for international groups.</p>
-    </div>
-  </div>
-</section>
+<div class="trust-bar">
+  <span>🏆 Used by padel clubs across Europe</span>
+  <span class="trust-sep">·</span>
+  <span>🌍 Available in 40+ countries</span>
+  <span class="trust-sep">·</span>
+  <span>📱 Works on any device, even offline</span>
+</div>
 
 <!-- PRESENTATION SHOWCASE -->
 <section class="pres-showcase">
@@ -585,6 +567,44 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         </div>
       </div>
       <div class="tv-stand"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <h2 class="section-title">Everything you need</h2>
+  <p class="section-sub">From entering names to exporting the final standings — the app handles the rest automatically.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🏆</div>
+      <h3>Four tournament formats</h3>
+      <p>Knockout bracket (groups + final), Americano (rotating partners), Mexicano (partners based on standings) and Round Robin (everyone vs. everyone). Choose what suits your group.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div>
+      <h3>Presentation mode</h3>
+      <p>Fullscreen scoreboard on TV or projector — standings, active matches and countdown timer, updated live. No extra app needed.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div>
+      <h3>Live viewing on phone</h3>
+      <p>Share one link with participants. They see live standings and scores on their own phone — no account or installation needed.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div>
+      <h3>Export to CSV &amp; PDF</h3>
+      <p>Download final standings and all match results as CSV for Excel, or print as PDF. Handy as a keepsake or for club administration.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div>
+      <h3>Installable, works offline</h3>
+      <p>Add the app to your home screen — works without internet after that. No App Store, no account, no password.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div>
+      <h3>6 languages, automatic</h3>
+      <p>Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language — great for international groups.</p>
     </div>
   </div>
 </section>
