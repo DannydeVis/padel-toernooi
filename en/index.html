@@ -288,6 +288,15 @@
     .pres-feat strong{color:var(--txt);font-weight:700}
     .pres-cta-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:10px;padding:10px 22px;font-weight:700;font-size:.88rem;text-decoration:none;transition:.15s}
     .pres-cta-btn:hover{background:rgba(199,255,94,.08)}
+    /* ── QR JOIN ── */
+    .qr-showcase{padding:80px 24px;border-bottom:1px solid var(--bdr)}
+    .qr-showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+    .phone-col{display:flex;justify-content:center}
+    .phone-frame-lg{width:220px;background:#111;border-radius:32px;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 32px 80px rgba(0,0,0,.6)}
+    .phone-frame-lg img{width:100%;border-radius:22px;display:block}
+    .qr-showcase h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+    .qr-showcase .pres-sub{color:var(--txt2);font-size:.95rem;line-height:1.7;margin-bottom:24px}
+    @media(max-width:900px){.qr-showcase-inner{grid-template-columns:1fr;gap:36px}.phone-col{order:2}.qr-showcase{padding:56px 24px}}
     .tv-outer{background:#0a0a0a;border-radius:14px;padding:10px 10px 0;box-shadow:0 0 0 2px rgba(255,255,255,.07),0 32px 80px rgba(0,0,0,.7)}
     .tv-stand{width:50px;height:8px;background:#111;margin:0 auto;border-radius:0 0 8px 8px}
     .tv-screen{background:var(--bg);border-radius:6px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column}
@@ -479,16 +488,44 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <span>Works on any device, even offline</span>
 </div>
 
+<!-- QR JOIN -->
+<section class="qr-showcase">
+  <div class="qr-showcase-inner">
+    <div class="phone-col">
+      <div class="phone-frame-lg">
+        <img src="/screenshot-americano.png" alt="Live standings on phone" loading="lazy">
+      </div>
+    </div>
+    <div>
+      <div class="pres-badge" style="background:rgba(139,92,246,.12);color:#a78bfa;border-color:rgba(139,92,246,.25)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        QR share link
+      </div>
+      <h2>Everyone follows live.<br><em style="color:var(--accent);font-style:normal">On their own phone.</em></h2>
+      <p class="pres-sub">Share one link in the group chat. No app download, no account — participants open it and see live standings update in real time throughout the tournament.</p>
+      <div class="pres-feats">
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>One link for everyone</strong> — share via WhatsApp, iMessage or any chat app</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Real-time standings</strong> — scores appear the moment the organiser enters them</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>No account needed</strong> — spectators just open the link, nothing to install</span></div>
+      </div>
+      <a class="pres-cta-btn" href="/app/">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Try live sharing
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- PRESENTATION SHOWCASE -->
 <section class="pres-showcase">
   <div class="pres-showcase-inner">
     <div>
       <div class="pres-badge">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        Presentation mode
+        Live Club Screen
       </div>
-      <h2>Scoreboard on<br><em style="color:var(--accent);font-style:normal">big screen</em></h2>
-      <p class="pres-sub">Open a fullscreen scoreboard on your TV or projector. All matches and the live leaderboard update automatically — no extra hardware, just one click.</p>
+      <h2>Your club TV.<br><em style="color:var(--accent);font-style:normal">Live scores.</em></h2>
+      <p class="pres-sub">Turn any TV into a live tournament scoreboard. Connect via HDMI or cast from Chrome — scores update automatically every 3 seconds, no extra app, no setup needed.</p>
       <div class="pres-feats">
         <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Fullscreen TV mode</strong> — display on big screen via HDMI or cast from Chrome to Chromecast</span></div>
         <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Live updates every 3 seconds</strong> — scores appear on screen as soon as you enter them on your phone</span></div>
