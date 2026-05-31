@@ -173,7 +173,7 @@ async function loadStats(sb){
     sb.from('tournaments').select('*', { count: 'exact', head: true }),
     sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', today.toISOString()),
     sb.from('tournament_starts').select('*', { count: 'exact', head: true }).gte('created_at', week.toISOString()),
-    sb.from('tournament_starts').select('created_at,ended_at').not('ended_at','is',null),
+    sb.from('tournament_durations').select('duration_seconds'),
   ]);
 
   $('stat-total').textContent  = fmt(total.count);
@@ -182,7 +182,7 @@ async function loadStats(sb){
   $('stat-week').textContent   = fmt(weekRes.count);
 
   const durData = durRes.data || [];
-  const all = durData.map(r => (new Date(r.ended_at) - new Date(r.created_at)) / 60000).filter(m => m >= 0 && m < 600);
+  const all = durData.map(r => r.duration_seconds / 60).filter(m => m >= 0 && m < 600);
   const real = all.filter(m => m >= 5);
   const tests = all.filter(m => m < 5);
   const avg = real.length ? Math.round(real.reduce((a,b)=>a+b,0)/real.length) : null;
