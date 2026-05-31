@@ -182,8 +182,14 @@ async function loadStats(sb){
   $('stat-week').textContent   = fmt(weekRes.count);
 
   if(durRes.data && durRes.data.length){
-    const mins = durRes.data.map(r => (new Date(r.ended_at) - new Date(r.created_at)) / 60000).filter(m => m > 0 && m < 600);
-    $('stat-duration').textContent = mins.length ? Math.round(mins.reduce((a,b)=>a+b,0)/mins.length) : '—';
+    const all = durRes.data.map(r => (new Date(r.ended_at) - new Date(r.created_at)) / 60000).filter(m => m >= 0 && m < 600);
+    const real = all.filter(m => m >= 5);
+    const tests = all.filter(m => m < 5);
+    const avg = real.length ? Math.round(real.reduce((a,b)=>a+b,0)/real.length) : null;
+    $('stat-duration').textContent = avg != null ? avg : '—';
+    const el = document.getElementById('stat-duration');
+    const lbl = el.parentElement.querySelector('.stat-card-lbl');
+    lbl.innerHTML = `Gem. speelduur (min)<br><span style="font-size:.65rem;color:var(--txt2);font-weight:400">${real.length} echt · ${tests.length} test (&lt;5 min)</span>`;
   }
 }
 
