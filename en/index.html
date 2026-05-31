@@ -51,6 +51,7 @@
     "description": "Free padel tournament bracket generator for recreational players and clubs.",
     "url": "https://padel-bracket.com",
     "inLanguage": ["nl","en","fr","de","es","sv"],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".hero-sub", ".faq-item p"] },
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
     "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","Live presentation scoreboard","Live share link","Export to CSV and PDF","Works offline","No account needed","6 languages"]
   }
@@ -104,6 +105,26 @@
         "@type": "Question",
         "name": "Which languages is the app available in?",
         "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is available in Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is padel Americano?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Padel Americano is a tournament format where partners rotate after every round following a fixed schedule. Every player plays with and against every other player. Points are tracked individually, not per team. It's the most popular social padel format for groups of 4–24 players." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is padel Mexicano?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Padel Mexicano is a tournament format where partners are determined by the live standings after each round. The top-ranked players always play together against the next-ranked players. This makes the tournament progressively more competitive and is ideal for groups where skill levels are mixed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which padel tournament format is best for a group of friends?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Americano is the most popular format for social groups. Partners rotate automatically so everyone plays with and against everyone — no one is left out and skill differences are naturally balanced. For a more competitive experience, Mexicano is a great alternative." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a padel Americano tournament take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A padel Americano tournament typically takes 1.5 to 3 hours depending on the number of players and rounds. With 8 players on 2 courts, expect around 90 minutes. With 12–16 players, plan for 2 to 3 hours. Each match is usually played as one game to 16 or 21 points." }
       }
     ]
   }
@@ -130,6 +151,17 @@
     "url": "https://padel-bracket.com",
     "description": "Free padel tournament generator for Americano, Mexicano, Knockout and Round Robin.",
     "inLanguage": ["nl","en","fr","de","es","sv"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PadelBracket",
+    "url": "https://padel-bracket.com",
+    "description": "Free padel tournament generator for Americano, Mexicano, Knockout and Round Robin. No account needed, works offline, available in 6 languages.",
+    "applicationCategory": "SportsApplication",
+    "availableLanguage": ["Dutch","English","French","German","Spanish","Swedish"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -785,6 +817,22 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <details class="faq-item">
       <summary>Which languages is the app available in?</summary>
       <p>PadelBracket is available in Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is padel Americano?</summary>
+      <p>Padel Americano is a tournament format where partners rotate on a fixed schedule each round. Everyone plays with and against everyone else. It works for 4 to 24 players and is the most popular social padel format — no fixed teams needed.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is padel Mexicano?</summary>
+      <p>Padel Mexicano is a format where partners are determined by the live standings after each round. Rank 1 and 2 always play against rank 3 and 4, making the tournament progressively more competitive. PadelBracket handles the pairings automatically.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Which padel tournament format is best for a group of friends?</summary>
+      <p>Americano is ideal for social groups — partners rotate so everyone plays with everyone, and no prior team is needed. For a more competitive experience where standings matter, try Mexicano. Both formats are supported in PadelBracket.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How long does a padel Americano tournament take?</summary>
+      <p>A padel Americano tournament typically takes between 1.5 and 3 hours depending on the number of players and match duration. With 8 players and 10-minute matches, expect around 90 minutes total.</p>
     </details>
   </div>
 </section>

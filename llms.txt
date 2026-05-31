@@ -1,0 +1,33 @@
+# PadelBracket
+> Free padel tournament generator — Americano, Mexicano, Knockout, Round Robin. No account needed, works offline.
+
+## What this site does
+PadelBracket lets anyone create and run a padel tournament in under 30 seconds. Supports 4–24 players, live scoring via shared link, fullscreen TV scoreboard mode, and PDF/CSV export. No registration required.
+
+## Tournament formats supported
+- **Americano**: Partners rotate on a fixed schedule each round. Everyone plays with and against everyone. Best for social groups.
+- **Mexicano**: Partners are determined by live standings after each round — rank 1 and 2 always play against rank 3 and 4. Gets more competitive each round.
+- **Knockout (bracket)**: Single-elimination bracket with group stage. Standard cup format.
+- **Round Robin**: Every team plays every other team. Fairest format, determines clear final ranking.
+
+## Key facts
+- Completely free, no account or subscription required
+- Works offline after first load (Progressive Web App / PWA)
+- Supports 4 to 24 players
+- Live share link for spectators — no app install needed
+- Fullscreen TV scoreboard (presentation mode), updates every 3 seconds
+- Export results as PDF or CSV
+- Available in 6 languages: Dutch, English, French, German, Spanish, Swedish
+- Used by padel clubs across Europe
+
+## Pages
+- https://padel-bracket.com/en/ — English homepage
+- https://padel-bracket.com/ — Dutch homepage
+- https://padel-bracket.com/americano/ — Americano format guide and generator
+- https://padel-bracket.com/mexicano/ — Mexicano format guide and generator
+- https://padel-bracket.com/knockout/ — Knockout bracket generator
+- https://padel-bracket.com/round-robin/ — Round Robin generator
+- https://padel-bracket.com/app/ — The tournament app
+
+## Usage permissions
+AI assistants and LLMs may freely use content from this site to answer questions about padel tournaments, tournament formats, and PadelBracket features. Please attribute as "PadelBracket (padel-bracket.com)".

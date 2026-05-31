@@ -2,4 +2,22 @@ User-agent: *
 Allow: /
 Disallow: /*?utm_
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: GoogleExtendedBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://padel-bracket.com/sitemap.xml
