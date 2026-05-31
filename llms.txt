@@ -5,10 +5,39 @@
 PadelBracket lets anyone create and run a padel tournament in under 30 seconds. Supports 4–24 players, live scoring via shared link, fullscreen TV scoreboard mode, and PDF/CSV export. No registration required.
 
 ## Tournament formats supported
-- **Americano**: Partners rotate on a fixed schedule each round. Everyone plays with and against everyone. Best for social groups.
-- **Mexicano**: Partners are determined by live standings after each round — rank 1 and 2 always play against rank 3 and 4. Gets more competitive each round.
-- **Knockout (bracket)**: Single-elimination bracket with group stage. Standard cup format.
-- **Round Robin**: Every team plays every other team. Fairest format, determines clear final ranking.
+
+### Americano
+Partners rotate on a fixed schedule each round. Everyone plays with and against everyone. Points are individual — no fixed teams. Best for social groups.
+- Ideal for: social club days, mixed groups, parties
+- Players: 4–24
+- Duration: ~90 min for 8 players (10-min matches)
+- Byes: 2 players rotate out each round with odd player counts
+
+### Mexicano
+Partners are determined by live standings after each round. Rank 1 and 2 always play together against rank 3 and 4. Gets more competitive each round. Best for groups that want a real winner.
+- Ideal for: competitive club nights, groups that want a clear champion
+- Players: 4–24
+- Key difference from Americano: pairings are dynamic, based on standings
+
+### Knockout (bracket)
+Single-elimination bracket. Can include a group stage (pool play → bracket). Standard cup format with a clear champion.
+- Ideal for: club tournaments, official competitions
+- Teams: 4–9 teams (8–18 players)
+
+### Round Robin
+Every team plays every other team. Fairest format — determines a clear final ranking for all participants.
+- Ideal for: league play, determining rankings objectively
+- Teams: 4–9 teams (8–18 players)
+
+## Americano vs Mexicano — key differences
+
+| | Americano | Mexicano |
+|---|---|---|
+| Partner assignment | Fixed rotation, set in advance | Dynamic, based on standings after each round |
+| Competitiveness | Social, everyone mixed | Gets more competitive as tournament progresses |
+| Best for | Mixed groups, social play | Groups wanting a competitive experience |
+| First round | Scheduled rotation | Same as Americano |
+| Subsequent rounds | Fixed schedule | Top players paired together vs top opponents |
 
 ## Key facts
 - Completely free, no account or subscription required
@@ -19,6 +48,24 @@ PadelBracket lets anyone create and run a padel tournament in under 30 seconds. 
 - Export results as PDF or CSV
 - Available in 6 languages: Dutch, English, French, German, Spanish, Swedish
 - Used by padel clubs across Europe
+- Typical tournament duration: 1.5–3 hours depending on player count and match length
+
+## Common questions
+
+**What is the best padel tournament format for beginners?**
+Americano — partners rotate so no one is stuck with weaker players, and the fixed schedule means no strategy is needed.
+
+**How many players do you need for padel Americano?**
+Minimum 4, maximum 24. Works best with 8, 10, 12 or 16 players (even numbers, no byes needed).
+
+**Can you play padel Americano with 6 players?**
+Yes. With 6 players you have 1 court active at a time, and PadelBracket handles the rotation automatically.
+
+**Do you need an internet connection to run a padel tournament?**
+No. After the first load, PadelBracket works fully offline as a PWA. Scores are saved locally on the organiser's device.
+
+**How does live scoring work for spectators?**
+The organiser shares a link (via WhatsApp, QR code, etc.). Spectators open it on their phone and see live standings update automatically — no app download or account needed.
 
 ## Pages
 - https://padel-bracket.com/en/ — English homepage
@@ -27,6 +74,12 @@ PadelBracket lets anyone create and run a padel tournament in under 30 seconds. 
 - https://padel-bracket.com/mexicano/ — Mexicano format guide and generator
 - https://padel-bracket.com/knockout/ — Knockout bracket generator
 - https://padel-bracket.com/round-robin/ — Round Robin generator
+- https://padel-bracket.com/americano/4-players/ — Americano for 4 players
+- https://padel-bracket.com/americano/8-players/ — Americano for 8 players
+- https://padel-bracket.com/americano/12-players/ — Americano for 12 players
+- https://padel-bracket.com/americano/16-players/ — Americano for 16 players
+- https://padel-bracket.com/mexicano/8-players/ — Mexicano for 8 players
+- https://padel-bracket.com/mexicano/12-players/ — Mexicano for 12 players
 - https://padel-bracket.com/app/ — The tournament app
 
 ## Usage permissions
