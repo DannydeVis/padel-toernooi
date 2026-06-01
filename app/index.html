@@ -331,6 +331,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 
 /* AMERICANO */
 #screen-americano{padding-top:4px}
+.am-tourn-hdr{text-align:center;padding:18px 16px 10px;font-size:1.45rem;font-weight:800;color:var(--txt);letter-spacing:-.3px;line-height:1.15}
+.am-tourn-hdr em{color:var(--accent);font-style:normal}
 .am-round{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
 .am-round-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2)}
 .am-round-lbl{font-family:'Inter',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted)}
@@ -909,6 +911,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
   <div id="view-banner"><span class="view-pulse"></span><span data-i18n="view_banner">👁 Live meekijken — alleen lezen</span><span id="viewer-player-chip" style="display:none" class="view-player-chip" onclick="resetViewerPlayer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span id="viewer-player-name"></span></span><a href="https://padel-bracket.com" target="_blank" rel="noopener" class="view-brand-link">padel-bracket.com</a></div>
   <div id="share-nudge" role="button" onclick="shareTournament()"><span data-i18n="share_nudge">Laat iedereen live meekijken — tik op Deel</span><button class="nudge-close" onclick="event.stopPropagation();dismissShareNudge()" aria-label="Sluiten">&#x2715;</button></div>
   <div class="phdr" id="phdr-el">Padel Toernooi — Bracket</div>
+  <div id="tm-tourn-hdr" class="am-tourn-hdr" style="display:none"></div>
   <div class="tabs">
     <button class="tab active" id="tab-poule" onclick="showTab('poule')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg> <span data-i18n="tab_poule">Pouleronde</span></button>
     <button class="tab" id="tab-bracket" onclick="showTab('bracket')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg> <span data-i18n="tab_bracket">Bracket</span></button>
@@ -952,6 +955,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 
 <!-- AMERICANO TOURNAMENT -->
 <div id="screen-americano" style="display:none">
+  <div id="am-tourn-hdr" class="am-tourn-hdr" style="display:none"></div>
   <div id="am-rounds-wrap"></div>
 </div>
 
@@ -1037,7 +1041,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.4';
+const APP_VERSION = 'v1.34.5';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1732,6 +1736,8 @@ function startTournamentUI(){
   const tname=$('logo-tname'), phdr=$('phdr-el');
   if(tname) tname.textContent=tournamentName||'';
   if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
+  const tmHdr=$('tm-tourn-hdr');
+  if(tmHdr){ if(tournamentName){ tmHdr.textContent=tournamentName; tmHdr.style.display='block'; } else { tmHdr.style.display='none'; } }
   $('tab-bracket').style.display = mode==='roundrobin' ? 'none' : '';
   if(mode!=='roundrobin' && PM.length && PM.every(m=>m.winner) && (!pDone || !PW.length || PW.every(m=>!m.a&&!m.b&&!m.skip))){
     pDone=true;
@@ -2837,6 +2843,8 @@ function showAmericano(){
   $('share-nudge').style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'flex':'none';
   const tname=$('logo-tname');
   if(tname) tname.textContent=tournamentName||'';
+  const amHdr=$('am-tourn-hdr');
+  if(amHdr){ if(tournamentName){ amHdr.textContent=tournamentName; amHdr.style.display='block'; } else { amHdr.style.display='none'; } }
   renderAmericano();
   if(!viewMode&&shareCode) startCourtPendingPoll();
 }
