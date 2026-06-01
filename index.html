@@ -197,13 +197,21 @@
     }
     .nav-logo em { color: var(--accent); font-style: normal; }
     .nav-cta {
-      background: var(--accent); color: #0E1114; border: none; border-radius: 8px;
-      padding: 9px 20px; font-family: 'Inter', sans-serif; font-weight: 600;
-      font-size: .9rem; cursor: pointer; text-decoration: none;
+      background: var(--accent); color: #0E1114; border: none; border-radius: 999px;
+      padding: 8px 20px; font-family: 'Inter', sans-serif; font-weight: 700;
+      font-size: .88rem; cursor: pointer; text-decoration: none; white-space: nowrap;
       transition: background .15s, transform .1s;
     }
     .nav-cta:hover { background: var(--accent2); }
     .nav-cta:active { transform: scale(.96); }
+    .nav-cta .full { display: inline; }
+    .nav-cta .short { display: none; }
+    @media (max-width: 480px) {
+      .nav-cta { padding: 7px 14px; font-size: .82rem; }
+      .nav-cta .full { display: none; }
+      .nav-cta .short { display: inline; }
+      .nav-lang { display: none; }
+    }
     .nav-lang select {
       appearance: none; -webkit-appearance: none;
       background: var(--card); color: var(--txt);
@@ -579,7 +587,7 @@
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
-  <a class="nav-cta" href="/app/">Open app →</a>
+  <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
 </nav>
 <script>
 function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';
