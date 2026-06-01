@@ -135,7 +135,7 @@ button,a{touch-action:manipulation}
 /* HEADER */
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;margin-bottom:14px;border-bottom:1px solid var(--bdr);background:var(--bg);gap:8px}
 .logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:0.5px;color:var(--txt);display:flex;align-items:center;gap:6px;min-width:0;flex-shrink:1}
-.logo-icon{height:36px;width:auto;flex-shrink:0}
+.logo-icon{height:32px;width:32px;flex-shrink:0;border-radius:7px;object-fit:cover}
 .logo em{color:var(--accent);font-style:normal}
 .logo-version{font-size:.58rem;font-weight:700;letter-spacing:.5px;color:var(--accent);opacity:.85;font-family:'Inter',sans-serif;text-transform:none;background:rgba(199,255,94,.1);border:1px solid rgba(199,255,94,.2);border-radius:5px;padding:1px 5px;flex-shrink:0}
 .logo-tname{display:block;font-size:.62rem;font-weight:500;letter-spacing:.5px;color:var(--txt2);text-transform:none;font-family:'Inter',sans-serif;margin-top:2px;line-height:1}
@@ -705,7 +705,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 <div class="app">
 
 <header>
-  <div class="logo"><svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 95" fill="none" aria-hidden="true"><path d="M40,66 L10,86 L25,62 A30,30 0 1,1 40,66 Z" stroke="var(--accent)" stroke-width="5" stroke-linejoin="round"/><circle cx="28" cy="12" r="3" fill="var(--txt)"/><circle cx="36" cy="12" r="3" fill="var(--txt)"/><circle cx="44" cy="12" r="3" fill="var(--txt)"/><circle cx="52" cy="12" r="3" fill="var(--txt)"/><circle cx="28" cy="20" r="3" fill="var(--txt)"/><circle cx="36" cy="20" r="3" fill="var(--txt)"/><circle cx="52" cy="20" r="3" fill="var(--txt)"/><circle cx="60" cy="20" r="3" fill="var(--txt)"/><circle cx="28" cy="28" r="3" fill="var(--txt)"/><circle cx="36" cy="28" r="3" fill="var(--txt)"/><circle cx="52" cy="28" r="3" fill="var(--txt)"/><circle cx="60" cy="28" r="3" fill="var(--txt)"/><circle cx="28" cy="36" r="3" fill="var(--txt)"/><circle cx="36" cy="36" r="3" fill="var(--txt)"/><circle cx="44" cy="36" r="3" fill="var(--txt)"/><circle cx="52" cy="36" r="3" fill="var(--txt)"/><circle cx="28" cy="44" r="3" fill="var(--txt)"/><circle cx="36" cy="44" r="3" fill="var(--txt)"/><circle cx="28" cy="52" r="3" fill="var(--txt)"/><circle cx="36" cy="52" r="3" fill="var(--txt)"/><circle cx="28" cy="60" r="3" fill="var(--txt)"/><circle cx="36" cy="60" r="3" fill="var(--txt)"/></svg>Padel <em>Bracket</em> <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
+  <div class="logo"><img src="../icon.svg" class="logo-icon" alt="" aria-hidden="true">Padel <em>Bracket</em> <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
   <div class="hbtns">
     <button class="btn btn-ghost btn-sm" id="btn-pres" style="display:none" onclick="openPresentation()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg> <span class="btn-label" data-i18n="pres_btn">Presentatie</span></button>
     <button class="btn btn-ghost btn-sm" id="btn-cast" style="display:none" onclick="toggleCast()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-cast"></use></svg> <span class="btn-label">Cast</span></button>
@@ -955,7 +955,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.29.8';
+const APP_VERSION = 'v1.29.9';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
