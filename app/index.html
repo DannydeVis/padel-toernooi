@@ -1036,7 +1036,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.1';
+const APP_VERSION = 'v1.34.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2538,19 +2538,22 @@ function showPlayerPicker(){
   document.body.appendChild(modal);
 }
 
+function _vpKey(){ return _viewCode?`padel-vpid-${_viewCode}`:null; }
+
 function selectViewerPlayer(pid){
   const modal=document.getElementById('player-picker-modal');
   if(modal) modal.remove();
   viewerPlayerId = pid; // null means "just watching"
+  const key=_vpKey();
   if(pid!==null){
-    sessionStorage.setItem('padel-viewer-pid',String(pid));
+    if(key) localStorage.setItem(key,String(pid));
     const p=AP.find(x=>x.id===pid);
     if(p){
       const chip=$('viewer-player-chip'), nm=$('viewer-player-name');
       if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; }
     }
   } else {
-    sessionStorage.removeItem('padel-viewer-pid');
+    if(key) localStorage.removeItem(key);
     const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
   }
   renderAmericano();
@@ -2558,7 +2561,7 @@ function selectViewerPlayer(pid){
 
 function resetViewerPlayer(){
   viewerPlayerId=null;
-  sessionStorage.removeItem('padel-viewer-pid');
+  const key=_vpKey(); if(key) localStorage.removeItem(key);
   const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
   if(playerScoring) showPlayerPicker();
   else renderAmericano();
@@ -2659,27 +2662,36 @@ function showCourtLinksModal(roundIdx){
   document.body.appendChild(modal);
 }
 
+async function _pollCourtPending(){
+  if(!shareCode) return;
+  try{
+    const sb=getSB(); if(!sb) return;
+    const {data:row}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
+    if(!row) return;
+    const remote=row.data||{};
+    if(remote.courtTokens) Object.assign(courtTokens,remote.courtTokens);
+    const rp=remote.courtPending||[];
+    if(JSON.stringify(rp)!==JSON.stringify(pendingFromCourt)){
+      pendingFromCourt=rp;
+      if(mode==='americano'||mode==='mexicano') renderAmericano();
+    }
+  }catch{}
+}
+
 function startCourtPendingPoll(){
   if(_courtPollInterval) return;
-  _courtPollInterval=setInterval(async()=>{
-    if(!shareCode) return;
-    try{
-      const sb=getSB(); if(!sb) return;
-      const {data:row}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
-      if(!row) return;
-      const remote=row.data||{};
-      if(remote.courtTokens) Object.assign(courtTokens,remote.courtTokens);
-      const rp=remote.courtPending||[];
-      if(JSON.stringify(rp)!==JSON.stringify(pendingFromCourt)){
-        pendingFromCourt=rp;
-        if(mode==='americano'||mode==='mexicano') renderAmericano();
-      }
-    }catch{}
-  },3000);
+  _courtPollInterval=setInterval(_pollCourtPending,2000);
+  // Fire immediately when tab becomes visible again (iOS suspends timers in background tabs)
+  document.addEventListener('visibilitychange',_onVisibilityChange);
+}
+
+function _onVisibilityChange(){
+  if(!document.hidden&&shareCode&&!viewMode) _pollCourtPending();
 }
 
 function stopCourtPendingPoll(){
   if(_courtPollInterval){ clearInterval(_courtPollInterval); _courtPollInterval=null; }
+  document.removeEventListener('visibilitychange',_onVisibilityChange);
 }
 
 function acceptCourtScore(matchId,sa,sb){
@@ -3234,7 +3246,8 @@ function _applyViewState(s){
   if(!_viewInitialized){
     _viewInitialized=true;
     if(playerScoring){
-      const stored=sessionStorage.getItem('padel-viewer-pid');
+      const key=_vpKey();
+      const stored=key?localStorage.getItem(key):null;
       if(stored){
         const pid=parseInt(stored,10);
         if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid;
