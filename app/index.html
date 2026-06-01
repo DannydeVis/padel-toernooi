@@ -1041,7 +1041,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.5';
+const APP_VERSION = 'v1.34.6';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1737,7 +1737,7 @@ function startTournamentUI(){
   if(tname) tname.textContent=tournamentName||'';
   if(phdr) phdr.textContent=tournamentName?tournamentName+' — Bracket':t('ob1_title')+' — Bracket';
   const tmHdr=$('tm-tourn-hdr');
-  if(tmHdr){ if(tournamentName){ tmHdr.textContent=tournamentName; tmHdr.style.display='block'; } else { tmHdr.style.display='none'; } }
+  if(tmHdr){ const label=tournamentName||(mode==='roundrobin'?'Round Robin':'Knockout'); tmHdr.textContent=label; tmHdr.style.display='block'; }
   $('tab-bracket').style.display = mode==='roundrobin' ? 'none' : '';
   if(mode!=='roundrobin' && PM.length && PM.every(m=>m.winner) && (!pDone || !PW.length || PW.every(m=>!m.a&&!m.b&&!m.skip))){
     pDone=true;
@@ -2844,7 +2844,7 @@ function showAmericano(){
   const tname=$('logo-tname');
   if(tname) tname.textContent=tournamentName||'';
   const amHdr=$('am-tourn-hdr');
-  if(amHdr){ if(tournamentName){ amHdr.textContent=tournamentName; amHdr.style.display='block'; } else { amHdr.style.display='none'; } }
+  if(amHdr){ const label=tournamentName||(mode==='mexicano'?'Mexicano':'Americano'); amHdr.textContent=label; amHdr.style.display='block'; }
   renderAmericano();
   if(!viewMode&&shareCode) startCourtPendingPoll();
 }
