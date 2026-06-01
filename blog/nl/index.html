@@ -73,7 +73,7 @@
     .nav-logo {
       font-family: 'Inter', sans-serif;
       font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
-      color: var(--txt); text-decoration: none;
+      color: var(--txt); text-decoration: none; display:flex; align-items:center; gap:8px;
     }
     .nav-logo em { color: var(--accent); font-style: normal; }
     .nav-cta {
@@ -124,7 +124,7 @@
 </div>
 
 <nav>
-  <a class="nav-logo" href="/">Padel <em>Bracket</em></a>
+  <a class="nav-logo" href="/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
   <div class="nav-lang">
     <select onchange="switchLang(this.value)" aria-label="Taal kiezen">
       <option value="nl" selected>🇳🇱 NL</option>
