@@ -1027,7 +1027,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.32.0';
+const APP_VERSION = 'v1.32.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2572,11 +2572,13 @@ async function submitViewerScore(matchId,sa,sb){
   if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='…'; }
   try{
     const sb2=getSB();
-    const {data:cur}=await sb2.from('tournaments').select('data,updated_at').eq('code',_viewCode).single();
-    const d=cur?.data||{};
+    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at').eq('code',_viewCode).single();
+    if(selErr||!cur) throw new Error(selErr?.message||'not found');
+    const d=cur.data||{};
     d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
     d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName:(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?'});
-    await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',_viewCode);
+    const {error:updErr}=await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',_viewCode);
+    if(updErr) throw new Error(updErr.message);
     if(!viewerScores[matchId]) viewerScores[matchId]={sa,sb,submitted:false};
     viewerScores[matchId].sa=sa; viewerScores[matchId].sb=sb; viewerScores[matchId].submitted=true;
     if(card){
@@ -2757,12 +2759,13 @@ async function initCourtMode(code,courtN,tok){
     if(btn){ btn.disabled=true; btn.textContent='…'; }
     try{
       const sb2=window.supabase?.createClient('https://yaakmxarwdvovvqgtkwb.supabase.co','sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i');
-      // fetch-then-merge
-      const {data:cur}=await sb2.from('tournaments').select('data,updated_at').eq('code',code).single();
-      const d=cur?.data||{};
+      const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at').eq('code',code).single();
+      if(selErr||!cur) throw new Error(selErr?.message||'not found');
+      const d=cur.data||{};
       d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==activeMatch.id);
       d.courtPending.push({matchId:activeMatch.id,court:courtN,sa,sb,at:new Date().toISOString()});
-      await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',code);
+      const {error:updErr}=await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',code);
+      if(updErr) throw new Error(updErr.message);
       $ct('ct-body',`<div class="court-done">
         <div class="court-done-icon">✓</div>
         <div class="court-done-txt">${t('court_submitted').split('—')[0].trim()}</div>
@@ -2770,7 +2773,7 @@ async function initCourtMode(code,courtN,tok){
       </div>`);
     }catch(e){
       if(btn){ btn.disabled=false; btn.textContent=t('court_submit'); }
-      alert('Error: '+e.message);
+      alert('Fout bij opslaan: '+e.message);
     }
   };
 
@@ -2837,7 +2840,6 @@ function renderAmericano(){
       <div class="am-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         <span style="display:flex;align-items:center;gap:4px">
-          ${!done&&shareCode?`<button class="court-links-btn" onclick="showCourtLinksModal(${ri})">${t('court_links_btn')}</button>`:''}
           ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
         </span>
       </div>
