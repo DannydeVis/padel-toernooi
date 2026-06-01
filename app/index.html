@@ -158,6 +158,7 @@ body.light .tname-input{background:#f3f4f6;color:#111827}
 .rules-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .rules-lbl{font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
 .rules-opts{display:flex;gap:5px}
+#rules-type{flex-wrap:wrap}
 .rbtn{font-family:'Inter',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.5px;border:1px solid var(--bdr);border-radius:8px;padding:7px 13px;cursor:pointer;background:var(--surface2);color:var(--txt);transition:.15s;line-height:1.2;touch-action:manipulation}
 .rbtn.active{background:var(--accent);color:#0E1114;border-color:var(--accent)}
 .rbtn:hover:not(.active){background:var(--surface);border-color:var(--accent)}
@@ -851,7 +852,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
         <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
         <button class="rbtn" onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano<span class="rbtn-sub" data-i18n="set_type_sub_mex">stand koppels</span></button>
         <button class="rbtn" onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin<span class="rbtn-sub" data-i18n="set_type_sub_rr">iedereen vs iedereen</span></button>
-        <button class="rbtn" onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.<span class="rbtn-sub" data-i18n="set_type_sub_tam">vast koppel</span></button>
+        <button class="rbtn" onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.<span class="rbtn-sub" data-i18n="set_type_sub_tam">americano</span></button>
       </div>
     </div>
 
@@ -1058,7 +1059,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.35.0';
+const APP_VERSION = 'v1.35.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1096,7 +1097,7 @@ nl:{
   set_desc_auto_mex:'Één naam per regel. Minimaal 4 spelers. Bij oneven aantal: laagst gerangschikte speler rust per ronde. Koppels op basis van stand.',
   set_type_sub_rr:'iedereen vs iedereen',set_title_rr:'Round Robin instellen',
   set_desc_auto_rr:"Één naam per regel, minimaal 4. Iedereen speelt tegen iedereen. De eindstand bepaalt de winnaar.",
-  set_type_sub_tam:'vast duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Voer per rij een koppel in — minimaal 3 koppels.',ta_add_pair:'+ Koppel toevoegen',ta_player1:'Speler',ta_player2:'Speler',ta_standings:'Stand koppels',ta_col_pair:'Koppel',ta_min3:'Minimaal 3 koppels nodig.',res_tam:'{label}Team Americano · {n} koppels',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Voer per rij een koppel in — minimaal 3 koppels.',ta_add_pair:'+ Koppel toevoegen',ta_player1:'Speler',ta_player2:'Speler',ta_standings:'Stand koppels',ta_col_pair:'Koppel',ta_min3:'Minimaal 3 koppels nodig.',res_tam:'{label}Team Americano · {n} koppels',
   set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',set_lbl_timer:'Timer/ronde',set_timer_off:'Geen',
   set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
   set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
@@ -1167,7 +1168,7 @@ en:{
   set_desc_auto_mex:'One name per line. Minimum 4 players. With an odd count: lowest-ranked player rests each round. Partners re-paired by standings.',
   set_type_sub_rr:'everyone vs everyone',set_title_rr:'Set up Round Robin',
   set_desc_auto_rr:'One name per line, minimum 4. Everyone plays against everyone. Final standings determine the winner.',
-  set_type_sub_tam:'fixed duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Enter one pair per row — minimum 3 pairs.',ta_add_pair:'+ Add pair',ta_player1:'Player',ta_player2:'Player',ta_standings:'Pair standings',ta_col_pair:'Pair',ta_min3:'Minimum 3 pairs required.',res_tam:'{label}Team Americano · {n} pairs',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Enter one pair per row — minimum 3 pairs.',ta_add_pair:'+ Add pair',ta_player1:'Player',ta_player2:'Player',ta_standings:'Pair standings',ta_col_pair:'Pair',ta_min3:'Minimum 3 pairs required.',res_tam:'{label}Team Americano · {n} pairs',
   set_lbl_format:'Match format',set_lbl_pts:'Points/match',set_lbl_timer:'Timer/round',set_timer_off:'Off',
   set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
   set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
@@ -1238,7 +1239,7 @@ fr:{
   set_desc_auto_mex:'Un nom par ligne. Minimum 4 joueurs. Avec un nombre impair : le joueur classé dernier est exempt par manche. Partenaires selon classement.',
   set_type_sub_rr:'tout le monde vs tout le monde',set_title_rr:'Configurer Round Robin',
   set_desc_auto_rr:"Un nom par ligne, minimum 4. Tout le monde joue contre tout le monde. Le classement final détermine le vainqueur.",
-  set_type_sub_tam:'duo fixe',set_title_tam:'Team Americano',set_desc_auto_tam:'Entrez une paire par ligne — minimum 3 paires.',ta_add_pair:'+ Ajouter une paire',ta_player1:'Joueur',ta_player2:'Joueur',ta_standings:'Classement des paires',ta_col_pair:'Paire',ta_min3:'Minimum 3 paires requises.',res_tam:'{label}Team Americano · {n} paires',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Entrez une paire par ligne — minimum 3 paires.',ta_add_pair:'+ Ajouter une paire',ta_player1:'Joueur',ta_player2:'Joueur',ta_standings:'Classement des paires',ta_col_pair:'Paire',ta_min3:'Minimum 3 paires requises.',res_tam:'{label}Team Americano · {n} paires',
   set_lbl_format:'Format de match',set_lbl_pts:'Points/match',set_lbl_timer:'Minuterie/tour',set_timer_off:'Non',
   set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
   set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
@@ -1307,7 +1308,7 @@ de:{
   set_desc_auto_mex:'Ein Name pro Zeile. Mindestens 4 Spieler. Bei ungerader Anzahl: niedrigst platzierter Spieler hat Freilos. Partner nach Tabellenstand.',
   set_type_sub_rr:'alle gegen alle',set_title_rr:'Round Robin einrichten',
   set_desc_auto_rr:'Ein Name pro Zeile, mindestens 4. Jeder spielt gegen jeden. Die Endtabelle bestimmt den Sieger.',
-  set_type_sub_tam:'festes Duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Pro Zeile ein Paar eingeben — mindestens 3 Paare.',ta_add_pair:'+ Paar hinzufügen',ta_player1:'Spieler',ta_player2:'Spieler',ta_standings:'Paare Rangliste',ta_col_pair:'Paar',ta_min3:'Mindestens 3 Paare erforderlich.',res_tam:'{label}Team Americano · {n} Paare',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Pro Zeile ein Paar eingeben — mindestens 3 Paare.',ta_add_pair:'+ Paar hinzufügen',ta_player1:'Spieler',ta_player2:'Spieler',ta_standings:'Paare Rangliste',ta_col_pair:'Paar',ta_min3:'Mindestens 3 Paare erforderlich.',res_tam:'{label}Team Americano · {n} Paare',
   set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',set_lbl_timer:'Timer/Runde',set_timer_off:'Kein',
   set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
   set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
@@ -1376,7 +1377,7 @@ es:{
   set_desc_auto_mex:'Un nombre por línea. Mínimo 4 jugadores. Con número impar: el jugador con menos puntos descansa. Parejas según clasificación.',
   set_type_sub_rr:'todos contra todos',set_title_rr:'Configurar Round Robin',
   set_desc_auto_rr:'Un nombre por línea, mínimo 4. Todos juegan contra todos. La clasificación final determina al ganador.',
-  set_type_sub_tam:'dúo fijo',set_title_tam:'Team Americano',set_desc_auto_tam:'Introduce una pareja por fila — mínimo 3 parejas.',ta_add_pair:'+ Añadir pareja',ta_player1:'Jugador',ta_player2:'Jugador',ta_standings:'Clasificación de parejas',ta_col_pair:'Pareja',ta_min3:'Se necesitan mínimo 3 parejas.',res_tam:'{label}Team Americano · {n} parejas',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Introduce una pareja por fila — mínimo 3 parejas.',ta_add_pair:'+ Añadir pareja',ta_player1:'Jugador',ta_player2:'Jugador',ta_standings:'Clasificación de parejas',ta_col_pair:'Pareja',ta_min3:'Se necesitan mínimo 3 parejas.',res_tam:'{label}Team Americano · {n} parejas',
   set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',set_lbl_timer:'Temporizador',set_timer_off:'No',
   set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
   set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
@@ -1445,7 +1446,7 @@ sv:{
   set_desc_auto_mex:'Ett namn per rad. Minst 4 spelare. Med ojämnt antal: lägst rankad spelare vilar. Partners sätts ihop efter aktuell tabell.',
   set_type_sub_rr:'alla mot alla',set_title_rr:'Ställ in Round Robin',
   set_desc_auto_rr:'Ett namn per rad, minst 4. Alla spelar mot alla. Slutresultatet avgör vinnaren.',
-  set_type_sub_tam:'fast duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Ange ett par per rad — minst 3 par.',ta_add_pair:'+ Lägg till par',ta_player1:'Spelare',ta_player2:'Spelare',ta_standings:'Parrankning',ta_col_pair:'Par',ta_min3:'Minst 3 par krävs.',res_tam:'{label}Team Americano · {n} par',
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Ange ett par per rad — minst 3 par.',ta_add_pair:'+ Lägg till par',ta_player1:'Spelare',ta_player2:'Spelare',ta_standings:'Parrankning',ta_col_pair:'Par',ta_min3:'Minst 3 par krävs.',res_tam:'{label}Team Americano · {n} par',
   set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',set_lbl_timer:'Timer/rond',set_timer_off:'Ingen',
   set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
   set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
@@ -2820,22 +2821,26 @@ async function submitViewerScore(matchId,sa,sb){
   if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='…'; }
   try{
     const sb2=getSB();
-    // Fetch session_token too so we can use authenticated write (anon UPDATE is blocked by RLS)
-    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at,session_token').eq('code',_viewCode).single();
+    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,session_token').eq('code',_viewCode).single();
     if(selErr||!cur) throw new Error(selErr?.message||'not found');
     const d=cur.data||{};
     d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
     d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName:(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?'});
-    // Use authenticated client if row contains session_token (bypasses RLS)
-    const writeSb=cur.session_token&&window.supabase
-      ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':cur.session_token}}})
-      : sb2;
-    const {data:updData,error:updErr}=await writeSb.from('tournaments')
-      .update({data:d,updated_at:new Date().toISOString()})
-      .eq('code',_viewCode)
-      .select('code');
-    if(updErr) throw new Error(updErr.message);
-    if(!updData||updData.length===0) throw new Error('write_blocked');
+    // Use direct fetch so x-session-token header is guaranteed to be sent (RLS requires it)
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/tournaments?code=eq.${encodeURIComponent(_viewCode)}`,{
+      method:'PATCH',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':`Bearer ${SUPABASE_KEY}`,
+        'Content-Type':'application/json',
+        'Prefer':'return=representation',
+        'x-session-token':cur.session_token||''
+      },
+      body:JSON.stringify({data:d,updated_at:new Date().toISOString()})
+    });
+    if(!res.ok){const t2=await res.text();throw new Error(t2||'update_failed');}
+    const json=await res.json();
+    if(!json||json.length===0) throw new Error('write_blocked');
     if(!viewerScores[matchId]) viewerScores[matchId]={sa,sb,submitted:false};
     viewerScores[matchId].sa=sa; viewerScores[matchId].sb=sb; viewerScores[matchId].submitted=true;
     if(card){
