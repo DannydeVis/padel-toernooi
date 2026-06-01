@@ -331,8 +331,11 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 
 /* AMERICANO */
 #screen-americano{padding-top:4px}
-.am-tourn-hdr{text-align:center;padding:18px 16px 10px;font-size:1.45rem;font-weight:800;color:var(--txt);letter-spacing:-.3px;line-height:1.15}
-.am-tourn-hdr em{color:var(--accent);font-style:normal}
+.am-tourn-hdr{text-align:center;padding:18px 16px 6px;line-height:1.15}
+.am-tourn-hdr .amh-player{font-size:2rem;font-weight:800;color:var(--txt);letter-spacing:1px;text-transform:uppercase}
+.am-tourn-hdr .amh-sub{font-size:.75rem;font-weight:600;color:var(--txt2);letter-spacing:.5px;margin-top:2px;cursor:pointer}
+.am-tourn-hdr .amh-sub:hover{color:var(--accent)}
+.am-tourn-hdr .amh-tname{font-size:1.45rem;font-weight:800;color:var(--txt);letter-spacing:-.3px}
 .am-round{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
 .am-round-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2)}
 .am-round-lbl{font-family:'Inter',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted)}
@@ -1041,7 +1044,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.6';
+const APP_VERSION = 'v1.34.7';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2563,6 +2566,7 @@ function selectViewerPlayer(pid){
     if(key) localStorage.removeItem(key);
     const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
   }
+  _updateAmHeader();
   renderAmericano();
 }
 
@@ -2570,6 +2574,7 @@ function resetViewerPlayer(){
   viewerPlayerId=null;
   const key=_vpKey(); if(key) localStorage.removeItem(key);
   const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
+  _updateAmHeader();
   if(playerScoring) showPlayerPicker();
   else renderAmericano();
 }
@@ -2826,6 +2831,20 @@ async function initCourtMode(code,courtN,tok){
 
 function $ct(id,html){ const el=document.getElementById(id); if(el) el.innerHTML=html; }
 
+function _updateAmHeader(){
+  const hdr=$('am-tourn-hdr'); if(!hdr) return;
+  if(viewMode&&playerScoring&&viewerPlayerId!==null){
+    const p=AP.find(x=>x.id===viewerPlayerId);
+    if(p){
+      hdr.innerHTML=`<div class="amh-player">${esc(p.name)}</div><div class="amh-sub" onclick="resetViewerPlayer()">${t('viewer_change_player')}</div>`;
+      hdr.style.display='block'; return;
+    }
+  }
+  const label=tournamentName||(mode==='mexicano'?'Mexicano':'Americano');
+  hdr.innerHTML=`<div class="amh-tname">${esc(label)}</div>`;
+  hdr.style.display='block';
+}
+
 function showAmericano(){
   $('screen-setup').style.display='none';
   $('screen-tournament').style.display='none';
@@ -2843,8 +2862,7 @@ function showAmericano(){
   $('share-nudge').style.display=(!viewMode&&!localStorage.getItem('padel-share-seen'))?'flex':'none';
   const tname=$('logo-tname');
   if(tname) tname.textContent=tournamentName||'';
-  const amHdr=$('am-tourn-hdr');
-  if(amHdr){ const label=tournamentName||(mode==='mexicano'?'Mexicano':'Americano'); amHdr.textContent=label; amHdr.style.display='block'; }
+  _updateAmHeader();
   renderAmericano();
   if(!viewMode&&shareCode) startCourtPendingPoll();
 }
