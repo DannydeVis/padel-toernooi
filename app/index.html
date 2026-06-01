@@ -404,6 +404,15 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 /* My match highlight */
 .am-match.my-match{border-top:2px solid rgba(204,244,33,.5);background:rgba(204,244,33,.03)}
 .am-team.my-side{color:var(--accent);font-weight:800}
+.ta-pair-row{display:grid;grid-template-columns:1fr auto 1fr auto;gap:6px;align-items:center;margin-bottom:6px}
+.ta-inp{background:var(--surface2);border:1px solid var(--bdr);border-radius:8px;padding:8px 10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;outline:none;width:100%}
+.ta-inp:focus{border-color:var(--accent)}
+.ta-sep{color:var(--txt2);font-weight:700;text-align:center;font-size:.9rem}
+.ta-del{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:1rem;padding:4px 8px;border-radius:6px}
+.ta-del:hover{color:var(--txt);background:rgba(255,255,255,.07)}
+.ta-pair-names{display:flex;flex-direction:column;gap:1px}
+.ta-pair-n1{font-weight:700;font-size:.9rem}
+.ta-pair-n2{font-size:.78rem;color:var(--txt2)}
 .my-match-badge{font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;display:block}
 .viewer-submit-btn{display:block;width:100%;background:var(--accent);color:#0E1114;border:none;border-radius:10px;padding:12px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:10px;transition:.15s}
 .viewer-submit-btn:disabled{opacity:.35;cursor:not-allowed}
@@ -842,6 +851,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
         <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
         <button class="rbtn" onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano<span class="rbtn-sub" data-i18n="set_type_sub_mex">stand koppels</span></button>
         <button class="rbtn" onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin<span class="rbtn-sub" data-i18n="set_type_sub_rr">iedereen vs iedereen</span></button>
+        <button class="rbtn" onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.<span class="rbtn-sub" data-i18n="set_type_sub_tam">vast koppel</span></button>
       </div>
     </div>
 
@@ -887,6 +897,10 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
     <!-- AUTO MODE: player names -->
     <div id="mode-auto">
       <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
+      <div id="ta-pairs-section" style="display:none">
+        <div id="ta-pairs-wrap"></div>
+        <button class="btn btn-ghost btn-sm" onclick="addTAPairRow()" style="width:100%;margin-top:8px" data-i18n="ta_add_pair">+ Koppel toevoegen</button>
+      </div>
       <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
       <div class="nc" id="nc"></div>
       <div class="setup-btns">
@@ -1044,7 +1058,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.8';
+const APP_VERSION = 'v1.35.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1082,6 +1096,7 @@ nl:{
   set_desc_auto_mex:'Één naam per regel. Minimaal 4 spelers. Bij oneven aantal: laagst gerangschikte speler rust per ronde. Koppels op basis van stand.',
   set_type_sub_rr:'iedereen vs iedereen',set_title_rr:'Round Robin instellen',
   set_desc_auto_rr:"Één naam per regel, minimaal 4. Iedereen speelt tegen iedereen. De eindstand bepaalt de winnaar.",
+  set_type_sub_tam:'vast duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Voer per rij een koppel in — minimaal 3 koppels.',ta_add_pair:'+ Koppel toevoegen',ta_player1:'Speler',ta_player2:'Speler',ta_standings:'Stand koppels',ta_col_pair:'Koppel',ta_min3:'Minimaal 3 koppels nodig.',res_tam:'{label}Team Americano · {n} koppels',
   set_lbl_format:'Match formaat',set_lbl_pts:'Punten/match',set_lbl_timer:'Timer/ronde',set_timer_off:'Geen',
   set_btn_auto:'Spelersnamen invoeren',set_btn_manual:'Teams zelf invoeren',
   set_desc_auto_team:"Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.",
@@ -1152,6 +1167,7 @@ en:{
   set_desc_auto_mex:'One name per line. Minimum 4 players. With an odd count: lowest-ranked player rests each round. Partners re-paired by standings.',
   set_type_sub_rr:'everyone vs everyone',set_title_rr:'Set up Round Robin',
   set_desc_auto_rr:'One name per line, minimum 4. Everyone plays against everyone. Final standings determine the winner.',
+  set_type_sub_tam:'fixed duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Enter one pair per row — minimum 3 pairs.',ta_add_pair:'+ Add pair',ta_player1:'Player',ta_player2:'Player',ta_standings:'Pair standings',ta_col_pair:'Pair',ta_min3:'Minimum 3 pairs required.',res_tam:'{label}Team Americano · {n} pairs',
   set_lbl_format:'Match format',set_lbl_pts:'Points/match',set_lbl_timer:'Timer/round',set_timer_off:'Off',
   set_btn_auto:'Enter player names',set_btn_manual:'Enter teams manually',
   set_desc_auto_team:'One name per line, minimum 4. App creates pairs and trios automatically.',
@@ -1222,6 +1238,7 @@ fr:{
   set_desc_auto_mex:'Un nom par ligne. Minimum 4 joueurs. Avec un nombre impair : le joueur classé dernier est exempt par manche. Partenaires selon classement.',
   set_type_sub_rr:'tout le monde vs tout le monde',set_title_rr:'Configurer Round Robin',
   set_desc_auto_rr:"Un nom par ligne, minimum 4. Tout le monde joue contre tout le monde. Le classement final détermine le vainqueur.",
+  set_type_sub_tam:'duo fixe',set_title_tam:'Team Americano',set_desc_auto_tam:'Entrez une paire par ligne — minimum 3 paires.',ta_add_pair:'+ Ajouter une paire',ta_player1:'Joueur',ta_player2:'Joueur',ta_standings:'Classement des paires',ta_col_pair:'Paire',ta_min3:'Minimum 3 paires requises.',res_tam:'{label}Team Americano · {n} paires',
   set_lbl_format:'Format de match',set_lbl_pts:'Points/match',set_lbl_timer:'Minuterie/tour',set_timer_off:'Non',
   set_btn_auto:'Saisir les noms des joueurs',set_btn_manual:'Saisir les équipes manuellement',
   set_desc_auto_team:"Un nom par ligne, minimum 4. L'appli crée automatiquement des paires et des trios.",
@@ -1290,6 +1307,7 @@ de:{
   set_desc_auto_mex:'Ein Name pro Zeile. Mindestens 4 Spieler. Bei ungerader Anzahl: niedrigst platzierter Spieler hat Freilos. Partner nach Tabellenstand.',
   set_type_sub_rr:'alle gegen alle',set_title_rr:'Round Robin einrichten',
   set_desc_auto_rr:'Ein Name pro Zeile, mindestens 4. Jeder spielt gegen jeden. Die Endtabelle bestimmt den Sieger.',
+  set_type_sub_tam:'festes Duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Pro Zeile ein Paar eingeben — mindestens 3 Paare.',ta_add_pair:'+ Paar hinzufügen',ta_player1:'Spieler',ta_player2:'Spieler',ta_standings:'Paare Rangliste',ta_col_pair:'Paar',ta_min3:'Mindestens 3 Paare erforderlich.',res_tam:'{label}Team Americano · {n} Paare',
   set_lbl_format:'Matchformat',set_lbl_pts:'Punkte/Match',set_lbl_timer:'Timer/Runde',set_timer_off:'Kein',
   set_btn_auto:'Spielernamen eingeben',set_btn_manual:'Teams manuell eingeben',
   set_desc_auto_team:'Ein Name pro Zeile, mindestens 4. App erstellt automatisch Paare und Trios.',
@@ -1358,6 +1376,7 @@ es:{
   set_desc_auto_mex:'Un nombre por línea. Mínimo 4 jugadores. Con número impar: el jugador con menos puntos descansa. Parejas según clasificación.',
   set_type_sub_rr:'todos contra todos',set_title_rr:'Configurar Round Robin',
   set_desc_auto_rr:'Un nombre por línea, mínimo 4. Todos juegan contra todos. La clasificación final determina al ganador.',
+  set_type_sub_tam:'dúo fijo',set_title_tam:'Team Americano',set_desc_auto_tam:'Introduce una pareja por fila — mínimo 3 parejas.',ta_add_pair:'+ Añadir pareja',ta_player1:'Jugador',ta_player2:'Jugador',ta_standings:'Clasificación de parejas',ta_col_pair:'Pareja',ta_min3:'Se necesitan mínimo 3 parejas.',res_tam:'{label}Team Americano · {n} parejas',
   set_lbl_format:'Formato de partido',set_lbl_pts:'Puntos/partido',set_lbl_timer:'Temporizador',set_timer_off:'No',
   set_btn_auto:'Introducir nombres de jugadores',set_btn_manual:'Introducir equipos manualmente',
   set_desc_auto_team:'Un nombre por línea, mínimo 4. La app crea parejas y tríos automáticamente.',
@@ -1426,6 +1445,7 @@ sv:{
   set_desc_auto_mex:'Ett namn per rad. Minst 4 spelare. Med ojämnt antal: lägst rankad spelare vilar. Partners sätts ihop efter aktuell tabell.',
   set_type_sub_rr:'alla mot alla',set_title_rr:'Ställ in Round Robin',
   set_desc_auto_rr:'Ett namn per rad, minst 4. Alla spelar mot alla. Slutresultatet avgör vinnaren.',
+  set_type_sub_tam:'fast duo',set_title_tam:'Team Americano',set_desc_auto_tam:'Ange ett par per rad — minst 3 par.',ta_add_pair:'+ Lägg till par',ta_player1:'Spelare',ta_player2:'Spelare',ta_standings:'Parrankning',ta_col_pair:'Par',ta_min3:'Minst 3 par krävs.',res_tam:'{label}Team Americano · {n} par',
   set_lbl_format:'Matchformat',set_lbl_pts:'Poäng/match',set_lbl_timer:'Timer/rond',set_timer_off:'Ingen',
   set_btn_auto:'Ange spelarnamn',set_btn_manual:'Ange lag manuellt',
   set_desc_auto_team:'Ett namn per rad, minst 4. Appen skapar par och trior automatiskt.',
@@ -1559,6 +1579,7 @@ let R={gpm:3, matchPts:32, courts:2, timerMins:0};
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
+let TAP=[], TAM=[]; // team americano pairs & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
 let shareCode=localStorage.getItem('padel-share-code')||null;
 let sessionToken=localStorage.getItem('padel-session-token')||null;
@@ -1584,18 +1605,23 @@ function getSBWrite(){
 function setTType(typ){
   mode=typ;
   document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',['team','americano','mexicano','roundrobin'][i]===typ);
+    b.classList.toggle('active',['team','americano','mexicano','roundrobin','teamamericano'][i]===typ);
   });
-  const isAm=typ==='americano'||typ==='mexicano';
+  const isAm=typ==='americano'||typ==='mexicano'||typ==='teamamericano';
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
   $('rules-timer-row').style.display = isAm ? '' : 'none';
   $('mode-toggle-row').style.display = isAm ? 'none' : 'flex';
-  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':'set_title_team';
+  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
-  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':'set_desc_auto_team';
+  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':'set_desc_auto_team';
   $('mode-auto-desc').textContent = t(descKey);
   $('btn-shuffle').style.display = isAm ? 'none' : '';
+  // Show/hide pair input vs normal textarea for TAm
+  const isTAm = typ==='teamamericano';
+  if($('ta-pairs-section')) $('ta-pairs-section').style.display = isTAm ? '' : 'none';
+  $('ta').style.display = isTAm ? 'none' : '';
+  if(isTAm && !document.querySelectorAll('.ta-pair-row').length) _initTAPairs();
   if(isAm) setMode('auto');
 }
 
@@ -1628,6 +1654,7 @@ function setCourts(n){
 function doStartAny(){
   if(mode==='americano') return startAmericano();
   if(mode==='mexicano') return startMexicano();
+  if(mode==='teamamericano') return startTeamAmericano();
   return doStart();
 }
 
@@ -1785,7 +1812,7 @@ function goSetup(){
   if(viewPollInterval){ clearInterval(viewPollInterval); viewPollInterval=null; }
   viewMode=false; _viewInitialized=false;
   $('view-banner').style.display='none';
-  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];AP=[];AM=[];
+  T=[];PM=[];PW=[];PL=[];pDone=false;lastShuffle=[];AP=[];AM=[];TAP=[];TAM=[];
   shareCode=null; sessionToken=null; _sbWrite=null;
   localStorage.removeItem('padel-share-code'); localStorage.removeItem('padel-session-token');
   tournamentName='';
@@ -2463,6 +2490,200 @@ function editTeam(id){
   });
 }
 
+// ── Team Americano ──────────────────────────────────────────
+
+function _initTAPairs(){
+  const wrap=$('ta-pairs-wrap'); if(!wrap) return;
+  wrap.innerHTML='';
+  for(let i=0;i<4;i++) _addTAPairRowToWrap(wrap,i);
+}
+
+function addTAPairRow(){
+  const wrap=$('ta-pairs-wrap'); if(!wrap) return;
+  const idx=wrap.querySelectorAll('.ta-pair-row').length;
+  _addTAPairRowToWrap(wrap,idx);
+}
+
+function _addTAPairRowToWrap(wrap,idx){
+  const row=document.createElement('div');
+  row.className='ta-pair-row';
+  row.innerHTML=`<input class="ta-inp ta-p1" type="text" placeholder="${t('ta_player1')} ${idx*2+1}"><span class="ta-sep">&amp;</span><input class="ta-inp ta-p2" type="text" placeholder="${t('ta_player2')} ${idx*2+2}"><button class="ta-del" onclick="removeTAPairRow(this)">✕</button>`;
+  wrap.appendChild(row);
+}
+
+function removeTAPairRow(btn){
+  const row=btn.closest('.ta-pair-row');
+  if(row&&$('ta-pairs-wrap').querySelectorAll('.ta-pair-row').length>2) row.remove();
+}
+
+function startTeamAmericano(){
+  const rows=document.querySelectorAll('.ta-pair-row');
+  const pairs=[];
+  rows.forEach(r=>{
+    const n1=r.querySelector('.ta-p1').value.trim();
+    const n2=r.querySelector('.ta-p2').value.trim();
+    if(n1&&n2) pairs.push({n1,n2});
+  });
+  if(pairs.length<3){alert(t('ta_min3'));return;}
+  TAP=pairs.map((p,id)=>({id,n1:p.n1,n2:p.n2,pts:0}));
+  TAM=buildTASchedule(TAP.length);
+  localStorage.removeItem('padel-round-timer');
+  trackStart('teamamericano',TAP.length*2);
+  showAmericano();
+  saveState();
+}
+
+function buildTASchedule(n){
+  // Standard round-robin for pairs using circle algorithm
+  // If n is odd, add dummy (id=n) so every pair gets a bye
+  const even=n%2===0, size=even?n:n+1;
+  let circle=[];
+  for(let i=1;i<size;i++) circle.push(i);
+  const rounds=[];
+  for(let r=0;r<size-1;r++){
+    const arr=[0,...circle];
+    const matches=[];
+    for(let i=0;i<size/2;i++){
+      const a=arr[i],b=arr[size-1-i];
+      if(a<n&&b<n) matches.push({id:`ta-r${r}-${i}`,round:rounds.length+1,a,b,sa:0,sb:0,done:false,court:matches.length+1});
+    }
+    if(matches.length) rounds.push(matches);
+    circle=[circle[circle.length-1],...circle.slice(0,-1)];
+  }
+  return rounds;
+}
+
+function renderTeamAmericano(){
+  let h='';
+  let timerData=null;
+  try{ timerData=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
+  const activeIdx=TAM.findIndex(round=>round.some(m=>!m.done));
+  TAM.forEach((matches,ri)=>{
+    const allDone=matches.every(m=>m.done);
+    const byePairs=TAP.filter(p=>!matches.some(m=>m.a===p.id||m.b===p.id));
+    const byeHtml=byePairs.length?`<div class="am-bye">${t('am_bye')}: ${byePairs.map(p=>`${esc(p.n1)} &amp; ${esc(p.n2)}`).join(', ')}</div>`:'';
+    let timerEl='';
+    if(!allDone && !viewMode && R.timerMins>0){
+      const myTimer=timerData&&timerData.round===ri;
+      if(myTimer){
+        const rem=timerData.limit-Math.floor((Date.now()-timerData.start)/1000);
+        const mm=Math.floor(Math.max(0,rem)/60), ss=String(Math.max(0,rem)%60).padStart(2,'0');
+        timerEl=`<span class="am-timer-status">${rem<=0?t('timer_done'):`${mm}:${ss}`}</span>`;
+      } else {
+        timerEl=`<button class="am-timer-btn" onclick="startRoundTimer(${ri})">${t('timer_start')}</button>`;
+      }
+    }
+    h+=`<div class="am-round${allDone?' am-round-done':''}">
+      <div class="am-round-hdr">
+        <span class="am-round-lbl">${t('am_round',{n:ri+1})} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
+        <span style="display:flex;align-items:center;gap:4px">
+          ${allDone?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
+        </span>
+      </div>
+      ${matches.map(m=>renderTAMatch(m,ri===activeIdx)).join('')}${byeHtml}
+    </div>`;
+  });
+  h+=renderTAStandings();
+  $('am-rounds-wrap').innerHTML=h;
+  updatePresentation();
+}
+
+function renderTAMatch(m,isActive=true){
+  const pa=TAP[m.a], pb=TAP[m.b];
+  const tA=`<div class="ta-pair-names"><span class="ta-pair-n1">${esc(pa.n1)}</span><span class="ta-pair-n2">${esc(pa.n2)}</span></div>`;
+  const tB=`<div class="ta-pair-names"><span class="ta-pair-n1">${esc(pb.n1)}</span><span class="ta-pair-n2">${esc(pb.n2)}</span></div>`;
+  if(m.done){
+    const wA=m.sa>m.sb,wB=m.sb>m.sa;
+    return `<div class="am-match"><div class="am-match-teams">
+      <span class="am-team${wA?' won':''}">${tA}</span>
+      <span class="am-score-done">${m.sa}–${m.sb}</span>
+      <span class="am-team r${wB?' won':''}">${tB}</span>
+    </div>
+    ${viewMode?'':` <div style="text-align:center"><button class="mundo-btn" onclick="taUndo('${m.id}')">${icon('ic-undo')} ${t('am_undo')}</button></div>`}
+    </div>`;
+  }
+  if(!isActive||viewMode) return `<div class="am-match"><div class="am-match-teams">
+    <span class="am-team">${tA}</span>
+    <span class="am-score-done" style="opacity:.35">–</span>
+    <span class="am-team r">${tB}</span>
+  </div></div>`;
+  const total=m.sa+m.sb,ready=total===R.matchPts;
+  return `<div class="am-match" id="amm-${m.id}">
+    <div class="am-match-teams">
+      <span class="am-team">${tA}</span>
+      <span class="am-score-done" style="opacity:.4">vs</span>
+      <span class="am-team r">${tB}</span>
+    </div>
+    <div class="am-score-ctrl">
+      <div class="am-sc-side">
+        <button class="am-sc-btn" onclick="taAdj('${m.id}','a',-1)">−</button>
+        <span class="am-sc-val" id="tsa-${m.id}">${m.sa}</span>
+        <button class="am-sc-btn" onclick="taAdj('${m.id}','a',1)">+</button>
+      </div>
+      <span class="am-sc-sep">—</span>
+      <div class="am-sc-side">
+        <button class="am-sc-btn" onclick="taAdj('${m.id}','b',-1)">−</button>
+        <span class="am-sc-val" id="tsb-${m.id}">${m.sb}</span>
+        <button class="am-sc-btn" onclick="taAdj('${m.id}','b',1)">+</button>
+      </div>
+    </div>
+    <div class="am-sc-footer" id="tafoot-${m.id}">
+      <span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>
+      ${ready?`<button class="btn btn-green btn-sm" onclick="taSave('${m.id}')">${t('am_save')}</button>`:''}
+    </div>
+  </div>`;
+}
+
+function renderTAStandings(){
+  const sorted=[...TAP].sort((a,b)=>b.pts-a.pts);
+  let h=`<div class="am-st-wrap"><h3>${t('ta_standings')}</h3><table class="st-tbl">
+    <tr><th>#</th><th>${t('ta_col_pair')}</th><th>${t('am_col_pts')}</th></tr>`;
+  sorted.forEach((p,i)=>{
+    h+=`<tr${i===0?' class="qq"':''}><td>${i+1}</td><td><span class="ta-pair-n1">${esc(p.n1)}</span> <span class="ta-pair-n2">&amp; ${esc(p.n2)}</span></td><td class="wc">${p.pts}</td></tr>`;
+  });
+  const anyDone=TAM.flat().some(m=>m.done);
+  return h+`</table>${anyDone?renderExportBar():''}</div>`;
+}
+
+function taAdj(matchId,side,delta){
+  const m=TAM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  if(side==='a'){
+    m.sa=Math.max(0,Math.min(R.matchPts,m.sa+delta));
+    if(m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
+  } else {
+    m.sb=Math.max(0,Math.min(R.matchPts,m.sb+delta));
+    if(m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
+  }
+  const saEl=$('tsa-'+matchId),sbEl=$('tsb-'+matchId);
+  if(saEl) saEl.textContent=m.sa;
+  if(sbEl) sbEl.textContent=m.sb;
+  const total=m.sa+m.sb,ready=total===R.matchPts;
+  const foot=$('tafoot-'+matchId);
+  if(foot) foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="btn btn-green btn-sm" onclick="taSave('${matchId}')">${t('am_save')}</button>`:''}`;
+}
+
+function taSave(matchId){
+  const m=TAM.flat().find(x=>x.id===matchId);
+  if(!m||m.done||m.sa+m.sb!==R.matchPts) return;
+  m.done=true;
+  TAP[m.a].pts+=m.sa;
+  TAP[m.b].pts+=m.sb;
+  saveState();
+  renderTeamAmericano();
+}
+
+function taUndo(matchId){
+  const m=TAM.flat().find(x=>x.id===matchId);
+  if(!m||!m.done) return;
+  m.done=false;
+  TAP[m.a].pts-=m.sa;
+  TAP[m.b].pts-=m.sb;
+  m.sa=0; m.sb=0;
+  saveState();
+  renderTeamAmericano();
+}
+
 // ── Americano ─────────────────────────────────
 function buildAmericanoSchedule(n){
   // Circle algorithm: fix player 0, rotate rest. n-1 rounds, floor(n/4) courts per round.
@@ -2881,6 +3102,7 @@ function startRoundTimer(ri){
 }
 
 function renderAmericano(){
+  if(mode==='teamamericano'){ renderTeamAmericano(); return; }
   let h='';
   let timerData=null;
   try{ timerData=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
@@ -3154,6 +3376,9 @@ function renderAmSt(){
 // ── Supabase sharing ──────────────────────────
 
 function _getSharePayload(){
+  if(mode==='teamamericano'){
+    return {mode,TAP,TAM,R,tournamentName};
+  }
   const base=(mode==='americano'||mode==='mexicano')
     ? {mode,AP,AM,R,tournamentName}
     : {mode,T,PM,PW,PL,pmid,pDone,R,tournamentName};
@@ -3281,6 +3506,7 @@ function _loadStateObj(s){
   if(!s) return;
   if(s.R) R=s.R; tournamentName=s.tournamentName||'';
   if(s.mode==='americano'||s.mode==='mexicano'){ mode=s.mode; AP=s.AP||[]; AM=s.AM||[]; }
+  else if(s.mode==='teamamericano'){ mode='teamamericano'; TAP=s.TAP||[]; TAM=s.TAM||[]; }
   else{ mode=s.mode||'team'; T=s.T||[]; PM=s.PM||[]; PW=s.PW||[]; PL=s.PL||[]; pmid=s.pmid||0; pDone=s.pDone||false; }
   if(!viewMode && s.playerScoring!==undefined) playerScoring=!!s.playerScoring;
 }
@@ -3299,7 +3525,7 @@ function _applyViewState(s){
         if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid;
       }
     }
-    if(mode==='americano'||mode==='mexicano') showAmericano();
+    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano') showAmericano();
     else startTournamentUI();
     $('view-banner').style.display='flex';
     if(playerScoring&&viewerPlayerId!==null){
@@ -3307,7 +3533,7 @@ function _applyViewState(s){
       if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; } }
     }
   } else {
-    if(mode==='americano'||mode==='mexicano') renderAmericano();
+    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano') renderAmericano();
     else{ renderPoule(); renderSt(); if(mode!=='roundrobin') renderBracket(); else if(pDone) renderRRChamp(); }
   }
   if(s.tournamentName){
@@ -3359,6 +3585,9 @@ function saveState(){
   if(mode==='americano'||mode==='mexicano'){
     if(!AP.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName,playerScoring}));
+  } else if(mode==='teamamericano'){
+    if(!TAP.length) return;
+    localStorage.setItem('padel-state', JSON.stringify({mode,TAP,TAM,R,tournamentName}));
   } else {
     if(!T.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,T,PM,PW,PL,pmid,pDone,R,tournamentName,playerScoring}));
@@ -3372,12 +3601,14 @@ function loadState(){
     const raw=localStorage.getItem('padel-state');
     if(!raw) return;
     const s=JSON.parse(raw);
-    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano') return;
+    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano'&&s.mode!=='teamamericano') return;
     savedState=s;
     const label=s.tournamentName?`${s.tournamentName} · `:'';
     if(s.mode==='americano'||s.mode==='mexicano'){
       const key=s.mode==='mexicano'?'res_mex':'res_am';
       $('resume-info').textContent=t(key,{label,n:s.AP?.length||0});
+    } else if(s.mode==='teamamericano'){
+      $('resume-info').textContent=t('res_tam',{label,n:s.TAP?.length||0});
     } else {
       const done=s.PM.filter(m=>m.winner).length, tot=s.PM.length;
       $('resume-info').textContent=t('res_team',{label,teams:s.T.length,done,tot})+(s.pDone?t('res_bracket_done'):'');
@@ -3396,6 +3627,13 @@ function resumeFromBanner(){
   if(savedState.mode==='americano'||savedState.mode==='mexicano'){
     mode=savedState.mode;
     ({AP,AM}=savedState);
+    savedState=null;
+    showAmericano();
+    return;
+  }
+  if(savedState.mode==='teamamericano'){
+    mode='teamamericano';
+    ({TAP,TAM}=savedState);
     savedState=null;
     showAmericano();
     return;
@@ -3669,6 +3907,16 @@ function updatePresentation(){
       matches:r.map(m=>({
         a1:AP[m.a1].name,a2:AP[m.a2].name,
         b1:AP[m.b1].name,b2:AP[m.b2].name,
+        sa:m.sa,sb:m.sb,done:m.done,court:m.court||null
+      }))
+    }));
+  } else if(mode==='teamamericano'){
+    standings=[...TAP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({pos:i+1,name:`${p.n1} & ${p.n2}`,pts:p.pts}));
+    rounds=TAM.map(r=>({
+      round:r[0]?.round||0,
+      matches:r.map(m=>({
+        a1:TAP[m.a].n1,a2:TAP[m.a].n2,
+        b1:TAP[m.b].n1,b2:TAP[m.b].n2,
         sa:m.sa,sb:m.sb,done:m.done,court:m.court||null
       }))
     }));
