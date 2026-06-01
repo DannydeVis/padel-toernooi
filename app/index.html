@@ -1036,7 +1036,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.0';
+const APP_VERSION = 'v1.34.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2567,7 +2567,7 @@ function resetViewerPlayer(){
 function setShareMode(isPlayers){
   playerScoring=isPlayers;
   syncScoringToggle();
-  pushToSupabase();
+  saveState(); // persists to localStorage AND pushes to Supabase
   if(isPlayers&&shareCode) startCourtPendingPoll();
 }
 
@@ -2832,6 +2832,7 @@ function renderAmericano(){
   let h='';
   let timerData=null;
   try{ timerData=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
+  const activeRoundIdx=AM.findIndex(round=>round.some(m=>!m.done));
   AM.forEach((matches,ri)=>{
     const done=matches.every(m=>m.done);
     const mexBadge=mode==='mexicano'?`<span style="font-size:.72rem;opacity:.5;font-weight:400;margin-left:8px">★ stand</span>`:'';
@@ -2855,7 +2856,7 @@ function renderAmericano(){
           ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
         </span>
       </div>
-      ${matches.map(m=>renderAmMatch(m)).join('')}${byeHtml}
+      ${matches.map(m=>renderAmMatch(m,ri===activeRoundIdx)).join('')}${byeHtml}
     </div>`;
   });
   h+=renderAmSt();
@@ -2863,7 +2864,7 @@ function renderAmericano(){
   updatePresentation();
 }
 
-function renderAmMatch(m){
+function renderAmMatch(m,isActiveRound=true){
   const pa=AP[m.a1],pb=AP[m.a2],pc=AP[m.b1],pd=AP[m.b2];
   const tA=`${esc(pa.name)} &amp; ${esc(pb.name)}`;
   const tB=`${esc(pc.name)} &amp; ${esc(pd.name)}`;
@@ -2898,6 +2899,17 @@ function renderAmMatch(m){
             <div class="viewer-submitted-msg">${t('viewer_score_done')}</div>
           </div>`;
         }
+        if(!isActiveRound){
+          // Future round — show read-only with "my match" label, no controls
+          return `<div class="am-match my-match" id="amm-${m.id}">
+            <div class="my-match-badge">${t('my_match_lbl')}</div>
+            <div class="am-match-teams">
+              <span class="am-team${onA?' my-side':''}">${tA}</span>
+              <span class="am-vs">vs</span>
+              <span class="am-team r${!onA?' my-side':''}">${tB}</span>
+            </div>
+          </div>`;
+        }
         const total=vs.sa+vs.sb,ready=total===R.matchPts;
         return `<div class="am-match my-match" id="amm-${m.id}">
           <div class="my-match-badge">${t('my_match_lbl')}</div>
@@ -2925,8 +2937,8 @@ function renderAmMatch(m){
           </div>
         </div>`;
       }
-      // playerScoring && no identity chosen yet — show tappable names
-      if(viewerPlayerId===null){
+      // playerScoring && no identity chosen yet — show tappable names only in active round
+      if(viewerPlayerId===null&&isActiveRound){
         return `<div class="am-match">
           <div class="am-match-teams">
             <span class="am-team"><button class="am-player-pick" onclick="selectViewerPlayer(${m.a1})">${esc(pa.name)}</button> &amp; <button class="am-player-pick" onclick="selectViewerPlayer(${m.a2})">${esc(pb.name)}</button></span>
@@ -3103,8 +3115,9 @@ async function pushToSupabase(){
     if(playerScoring){
       const {data:remote}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
       if(remote?.data?.courtPending?.length){
+        const doneIds=new Set(AM.flat().filter(m=>m.done).map(m=>m.id));
         const myIds=new Set(pendingFromCourt.map(p=>p.matchId));
-        const remoteOnly=remote.data.courtPending.filter(p=>!myIds.has(p.matchId));
+        const remoteOnly=remote.data.courtPending.filter(p=>!myIds.has(p.matchId)&&!doneIds.has(p.matchId));
         if(remoteOnly.length) payload.courtPending=[...remoteOnly,...pendingFromCourt];
       }
     }
