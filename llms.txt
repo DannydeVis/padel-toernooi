@@ -44,6 +44,7 @@ Every team plays every other team. Fairest format — determines a clear final r
 - Works offline after first load (Progressive Web App / PWA)
 - Supports 4 to 24 players
 - Live share link for spectators — no app install needed
+- Players can submit their own scores via the shared link — organiser approves with one tap
 - Fullscreen TV scoreboard (presentation mode), updates every 3 seconds
 - Export results as PDF or CSV
 - Available in 6 languages: Dutch, English, French, German, Spanish, Swedish
@@ -64,8 +65,11 @@ Yes. With 6 players you have 1 court active at a time, and PadelBracket handles 
 **Do you need an internet connection to run a padel tournament?**
 No. After the first load, PadelBracket works fully offline as a PWA. Scores are saved locally on the organiser's device.
 
+**Can players submit their own scores?**
+Yes. The organiser enables "Players enter scores" mode via the Share button. Each player opens the shared link, taps their name to identify themselves, and enters the score using +/− controls. The organiser sees the submitted score as a pending badge and approves it with one tap. Only after approval is the score saved.
+
 **How does live scoring work for spectators?**
-The organiser shares a link (via WhatsApp, QR code, etc.). Spectators open it on their phone and see live standings update automatically — no app download or account needed.
+The organiser shares a link (via WhatsApp, QR code, etc.). Spectators open it on their phone and see live standings update automatically — no app download or account needed. Players can also use the same link to submit their own scores (see above).
 
 ## Pages
 - https://padel-bracket.com/en/ — English homepage
