@@ -1034,7 +1034,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.33.1';
+const APP_VERSION = 'v1.33.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2566,6 +2566,7 @@ function setShareMode(isPlayers){
   playerScoring=isPlayers;
   syncScoringToggle();
   pushToSupabase();
+  if(isPlayers&&shareCode) startCourtPendingPoll();
 }
 
 function syncScoringToggle(){
@@ -3082,8 +3083,18 @@ async function pushToSupabase(){
   if(!shareCode||!sessionToken) return false;
   const sb=getSBWrite(); if(!sb) return false;
   try{
+    const payload=_getSharePayload();
+    // Merge remote courtPending so organizer saves don't wipe player submissions
+    if(playerScoring){
+      const {data:remote}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
+      if(remote?.data?.courtPending?.length){
+        const myIds=new Set(pendingFromCourt.map(p=>p.matchId));
+        const remoteOnly=remote.data.courtPending.filter(p=>!myIds.has(p.matchId));
+        if(remoteOnly.length) payload.courtPending=[...remoteOnly,...pendingFromCourt];
+      }
+    }
     const {error}=await sb.from('tournaments').upsert(
-      {code:shareCode,data:_getSharePayload(),updated_at:new Date().toISOString(),session_token:sessionToken},
+      {code:shareCode,data:payload,updated_at:new Date().toISOString(),session_token:sessionToken},
       {onConflict:'code'}
     );
     if(error) throw error;
@@ -3115,6 +3126,7 @@ async function shareTournament(){
     if(cpbtn){ cpbtn.disabled=false; cpbtn.querySelector('span').textContent=t('share_copy'); }
     const waText=encodeURIComponent(`${tournamentName||'Padel'} 🏓 — ${t('share_wa_text')}\n${url}`);
     const waBtn=$('share-wa-btn'); if(waBtn) waBtn.href=`https://wa.me/?text=${waText}`;
+    startCourtPendingPoll(); // ensure poll is running once link is shared
     syncScoringToggle();
     modal.classList.remove('hidden');
   } else {
