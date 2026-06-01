@@ -351,6 +351,38 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
 .am-sc-prog{font-size:.74rem;color:var(--b-muted)}
 .am-sc-prog.ready{color:var(--accent);font-weight:600}
+/* Court pending badge (organizer view) */
+.court-pending-badge{display:flex;align-items:center;gap:8px;background:rgba(204,244,33,.07);border:1px solid rgba(204,244,33,.22);border-radius:8px;padding:7px 11px;margin-top:6px;font-size:.8rem}
+.court-pending-info{flex:1;color:var(--txt2)}
+.court-pending-score{font-weight:700;color:var(--accent)}
+.court-accept-btn{background:var(--accent);color:#0E1114;border:none;border-radius:6px;padding:4px 11px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.court-links-btn{background:none;border:1px solid rgba(255,255,255,.14);color:var(--txt2);border-radius:6px;padding:3px 9px;font-size:.72rem;font-weight:600;cursor:pointer;transition:.15s;margin-left:6px}
+.court-links-btn:hover{border-color:var(--accent);color:var(--accent)}
+/* Court score entry page */
+#court-screen{min-height:100vh;background:var(--bg);padding:28px 20px 80px;display:flex;flex-direction:column;align-items:center}
+.court-hdr{text-align:center;margin-bottom:28px;width:100%}
+.court-badge{display:inline-block;background:rgba(204,244,33,.1);border:1px solid rgba(204,244,33,.25);border-radius:20px;padding:4px 14px;font-size:.76rem;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-bottom:10px;text-transform:uppercase}
+.court-title{font-size:1.3rem;font-weight:800;color:var(--txt);margin:0 0 4px}
+.court-tnm{font-size:.82rem;color:var(--txt2)}
+.court-teams-grid{display:grid;grid-template-columns:1fr 44px 1fr;align-items:start;gap:8px;width:100%;max-width:400px;margin:0 auto 20px}
+.court-team-block{background:var(--surface);border-radius:12px;padding:12px 10px;text-align:center;border:1px solid var(--bdr)}
+.court-team-names{font-size:.84rem;font-weight:600;color:var(--txt);line-height:1.4}
+.court-vs{display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--txt2);padding-top:18px;font-size:.8rem}
+.court-score-row{display:flex;align-items:center;justify-content:center;width:100%;max-width:400px;margin:0 auto 12px;gap:16px}
+.court-sc-side{display:flex;align-items:center;gap:12px}
+.court-sc-val{font-size:2.6rem;font-weight:800;color:var(--txt);min-width:52px;text-align:center;font-family:'Inter',sans-serif}
+.court-sc-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1.5rem;font-weight:700;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;line-height:1}
+.court-sc-btn:active{background:var(--accent);color:#0E1114;border-color:var(--accent)}
+.court-sc-divider{font-size:1.3rem;font-weight:700;color:var(--txt2)}
+.court-progress{text-align:center;font-size:.8rem;color:var(--txt2);margin-bottom:20px;width:100%;max-width:400px}
+.court-progress.ready{color:var(--accent);font-weight:600}
+.court-submit-btn{background:var(--accent);color:#0E1114;border:none;border-radius:12px;padding:14px;font-size:1rem;font-weight:700;cursor:pointer;width:100%;max-width:400px;transition:.15s}
+.court-submit-btn:disabled{opacity:.35;cursor:not-allowed}
+.court-done{text-align:center;padding:48px 20px;max-width:360px;margin:0 auto}
+.court-done-icon{font-size:3.2rem;margin-bottom:14px}
+.court-done-txt{font-size:1.1rem;font-weight:700;color:var(--txt);margin-bottom:8px}
+.court-done-sub{font-size:.84rem;color:var(--txt2);line-height:1.6}
+.court-err{text-align:center;padding:60px 20px;color:var(--txt2)}
 .am-st-wrap{background:var(--surface);border-radius:14px;padding:16px 18px;margin-top:4px;border:1px solid var(--bdr)}
 .am-st-wrap h3{font-family:'Inter',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
 /* ── Detail modal (speler / team stats) ── */
@@ -955,7 +987,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.30.0';
+const APP_VERSION = 'v1.31.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1039,6 +1071,7 @@ nl:{
   inst_and_body:'Gebruik Padel Toernooi als een echte app — <b>snel starten</b> vanaf je beginscherm, ook zonder internet.',
   cast_btn:'Cast naar tv',cast_stop:'Stop casten',
   pres_ios_title:'Weergeven op TV',pres_ios_body:'Tik op \'Open presentatie\' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:',pres_ios_s1:'Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)',pres_ios_s2:'Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)',pres_ios_s3:'Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst',pres_ios_open:'Open presentatie',pres_ios_ok:'Sluiten',
+  court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'Watch live on PadelBracket',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
@@ -1103,6 +1136,7 @@ en:{
   inst_install:'Install',inst_skip:'Not now',
   cast_btn:'Cast to TV',cast_stop:'Stop casting',
   pres_ios_title:'Show on TV',pres_ios_body:'Tap \'Open presentation\' to open the scoreboard. To display it on a TV via AirPlay:',pres_ios_s1:'Open <strong>Control Center</strong> (swipe down from the top-right corner)',pres_ios_s2:'Tap <strong>Screen Mirroring</strong> (square with triangle icon)',pres_ios_s3:'Select your <strong>Apple TV</strong> or AirPlay-compatible TV from the list',pres_ios_open:'Open presentation',pres_ios_ok:'Close',
+  court_links_btn:'Court links',court_enter_score:'Enter score',court_submit:'Submit',court_submitted:'Score submitted — waiting for organiser',court_invalid:'Invalid court link',court_no_match:'No active match on this court',court_accept:'Accept',court_pending_lbl:'Score submitted by player',
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
@@ -1173,6 +1207,7 @@ fr:{
   inst_ios_steps:"1. Appuyez sur l'icône <b>Partager</b> <svg viewBox='0 0 24 24' fill='none' stroke='#C7FF5E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='width:1.2em;height:1.2em;vertical-align:middle;display:inline-block'><path d='M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6'/><polyline points='16 6 12 2 8 6'/><line x1='12' y1='2' x2='12' y2='15'/></svg> en bas de Browser<br>2. Faites défiler et appuyez sur <b>Sur l'écran d'accueil</b><br>3. Appuyez sur <b>Ajouter</b> — terminé !",
   inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
+  court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
 },
 de:{
   savedGroups:'Gespeicherte Gruppen',saveGroup:'Gruppe speichern',groupName:'Gruppenname',loadGroup:'Laden',renameGroup:'Umbenennen',deleteGroup:'Löschen',noGroups:'Noch keine Gruppen gespeichert',groupSaved:'Gruppe gespeichert',confirmDeleteGroup:'Diese Gruppe löschen?',overwriteGroup:'Eine Gruppe mit diesem Namen existiert bereits. Überschreiben?',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live verfolgen auf PadelBracket',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
@@ -1239,6 +1274,7 @@ de:{
   inst_ios_steps:'1. Tippe auf das <b>Teilen</b>-Symbol <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> unten in Browser<br>2. Scrolle und tippe auf <b>Zum Home-Bildschirm</b><br>3. Tippe auf <b>Hinzufügen</b> — fertig!',
   inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
+  court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'Sigue en directo en PadelBracket',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
@@ -1305,6 +1341,7 @@ es:{
   inst_ios_steps:'1. Toca el icono de <b>Compartir</b> <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> en la parte inferior de Browser<br>2. Desplázate y toca <b>En la pantalla de inicio</b><br>3. Toca <b>Añadir</b> — ¡listo!',
   inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
+  court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'Följ live på PadelBracket',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
@@ -1371,6 +1408,7 @@ sv:{
   inst_ios_steps:'1. Tryck på <b>Dela</b>-ikonen <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> längst ner i Browser<br>2. Scrolla och tryck på <b>Lägg till på hemskärmen</b><br>3. Tryck på <b>Lägg till</b> — klart!',
   inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
+  court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
 },
 };
 
@@ -1462,6 +1500,7 @@ let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze
 let shareCode=localStorage.getItem('padel-share-code')||null;
 let sessionToken=localStorage.getItem('padel-session-token')||null;
 let viewMode=false, viewPollInterval=null, _viewInitialized=false;
+let courtTokens={}, pendingFromCourt=[], _courtPollInterval=null;
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
 let _sb=null, _sbWrite=null, _startId=null, _startTs=null;
@@ -2424,6 +2463,176 @@ function startAmericano(){
   saveState();
 }
 
+// ── Court Score Entry ────────────────────────
+function _genToken(){ return Array.from(crypto.getRandomValues(new Uint8Array(6)),b=>b.toString(36)).join(''); }
+
+function showCourtLinksModal(roundIdx){
+  if(!shareCode){ shareTournament(); return; }
+  const matches=AM[roundIdx]||[];
+  const courts=[...new Set(matches.map(m=>m.court))].sort((a,b)=>a-b);
+  // Generate tokens for any courts that don't have one yet
+  courts.forEach(c=>{ if(!courtTokens[c]) courtTokens[c]=_genToken(); });
+  pushToSupabase();
+  const baseUrl=`${location.origin}${location.pathname}`;
+  const rows=courts.map(c=>{
+    const url=`${baseUrl}?score=${shareCode}&court=${c}&tok=${courtTokens[c]}`;
+    return `<div style="margin-bottom:12px">
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-bottom:4px">${t('am_courts_one').replace('1 ','')&&''}Baan ${c}</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input readonly value="${url}" style="flex:1;background:var(--surface2);border:1px solid var(--bdr);border-radius:8px;padding:8px 10px;font-size:.72rem;color:var(--txt);font-family:'Inter',sans-serif" onclick="this.select()">
+        <button class="btn btn-ghost btn-sm" onclick="navigator.clipboard.writeText('${url}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='${t('share_copy')}',1500)})" style="flex-shrink:0">${t('share_copy')}</button>
+      </div>
+    </div>`;
+  }).join('');
+  const modal=document.createElement('div');
+  modal.id='court-links-modal';
+  modal.style.cssText='position:fixed;inset:0;z-index:1003;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)';
+  modal.innerHTML=`<div style="width:100%;max-width:520px;background:var(--surface);border-radius:20px 20px 0 0;padding:20px 18px 32px;max-height:80vh;overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <span style="font-weight:800;font-size:1rem;color:var(--txt)">${t('court_links_btn')}</span>
+      <button onclick="document.getElementById('court-links-modal').remove()" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:1.1rem;padding:4px">✕</button>
+    </div>
+    <p style="font-size:.82rem;color:var(--txt2);margin-bottom:16px">${t('court_enter_score')} — ${t('court_submitted').split('—')[1]?.trim()||''}</p>
+    ${rows}
+  </div>`;
+  modal.addEventListener('click',e=>{ if(e.target===modal) modal.remove(); });
+  document.body.appendChild(modal);
+}
+
+function startCourtPendingPoll(){
+  if(_courtPollInterval) return;
+  _courtPollInterval=setInterval(async()=>{
+    if(!shareCode) return;
+    try{
+      const sb=getSB(); if(!sb) return;
+      const {data:row}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
+      if(!row) return;
+      const remote=row.data||{};
+      if(remote.courtTokens) Object.assign(courtTokens,remote.courtTokens);
+      const rp=remote.courtPending||[];
+      if(JSON.stringify(rp)!==JSON.stringify(pendingFromCourt)){
+        pendingFromCourt=rp;
+        if(mode==='americano'||mode==='mexicano') renderAmericano();
+      }
+    }catch{}
+  },3000);
+}
+
+function stopCourtPendingPoll(){
+  if(_courtPollInterval){ clearInterval(_courtPollInterval); _courtPollInterval=null; }
+}
+
+function acceptCourtScore(matchId,sa,sb){
+  const m=AM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  m.sa=sa; m.sb=sb;
+  amSave(matchId);
+  pendingFromCourt=pendingFromCourt.filter(p=>p.matchId!==matchId);
+  // pushToSupabase already called by amSave via saveState — courtPending will be empty for this match
+}
+
+async function initCourtMode(code,courtN,tok){
+  document.body.innerHTML='';
+  document.body.style.cssText='background:var(--bg);color:var(--txt);font-family:\'Inter\',sans-serif';
+  // Apply theme
+  const theme=localStorage.getItem('padel-theme')||'dark';
+  if(theme==='light') document.body.classList.add('light');
+  const wrap=document.createElement('div');
+  wrap.id='court-screen';
+  wrap.innerHTML=`<div class="court-hdr"><div class="court-badge">Baan ${courtN}</div><div class="court-title" id="ct-title">…</div><div class="court-tnm" id="ct-tnm"></div></div><div id="ct-body"></div>`;
+  document.body.appendChild(wrap);
+
+  let row;
+  try{
+    const sb=window.supabase?.createClient('https://yaakmxarwdvovvqgtkwb.supabase.co','sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i');
+    const res=await sb.from('tournaments').select('data').eq('code',code).single();
+    row=res.data;
+  }catch(e){}
+
+  if(!row){ $ct('ct-body',`<div class="court-err">${t('court_invalid')}</div>`); return; }
+  const state=row.data||{};
+
+  // Validate token
+  if(!state.courtTokens||state.courtTokens[String(courtN)]!==tok){
+    $ct('ct-body',`<div class="court-err">${t('court_invalid')}</div>`); return;
+  }
+
+  if(state.tournamentName) document.getElementById('ct-title').textContent=state.tournamentName;
+  document.getElementById('ct-tnm').textContent=code;
+
+  // Find active match for this court
+  const allMatches=(state.AM||[]).flat();
+  const activeMatch=allMatches.find(m=>m.court===courtN&&!m.done);
+  if(!activeMatch){ $ct('ct-body',`<div class="court-err">${t('court_no_match')}</div>`); return; }
+
+  const maxPts=(state.R&&state.R.matchPts)||32;
+  const aps=state.AP||[];
+  const pa=aps[activeMatch.a1], pb=aps[activeMatch.a2], pc=aps[activeMatch.b1], pd=aps[activeMatch.b2];
+  const nameA=pa&&pb?`${pa.name}\n${pb.name}`:'Team A';
+  const nameB=pc&&pd?`${pc.name}\n${pd.name}`:'Team B';
+
+  let sa=0, sb=0;
+  function render(){
+    const total=sa+sb, ready=total===maxPts;
+    $ct('ct-body',`
+      <div class="court-teams-grid">
+        <div class="court-team-block"><div class="court-team-names">${nameA.replace('\n','<br>')}</div></div>
+        <div class="court-vs">vs</div>
+        <div class="court-team-block"><div class="court-team-names">${nameB.replace('\n','<br>')}</div></div>
+      </div>
+      <div class="court-score-row">
+        <div class="court-sc-side">
+          <button class="court-sc-btn" onclick="csAdj('a',-1)">−</button>
+          <span class="court-sc-val" id="cs-a">${sa}</span>
+          <button class="court-sc-btn" onclick="csAdj('a',1)">+</button>
+        </div>
+        <span class="court-sc-divider">–</span>
+        <div class="court-sc-side">
+          <button class="court-sc-btn" onclick="csAdj('b',-1)">−</button>
+          <span class="court-sc-val" id="cs-b">${sb}</span>
+          <button class="court-sc-btn" onclick="csAdj('b',1)">+</button>
+        </div>
+      </div>
+      <div class="court-progress${ready?' ready':''}">
+        ${total} / ${maxPts} ${t('am_col_pts')||'punten'}
+      </div>
+      <button class="court-submit-btn" id="cs-submit" onclick="csSubmit()" ${ready?'':'disabled'}>${t('court_submit')}</button>
+    `);
+  }
+
+  window.csAdj=function(side,d){
+    if(side==='a'){ sa=Math.max(0,Math.min(sa+d,maxPts-sb)); }
+    else { sb=Math.max(0,Math.min(sb+d,maxPts-sa)); }
+    render();
+  };
+
+  window.csSubmit=async function(){
+    const btn=document.getElementById('cs-submit');
+    if(btn){ btn.disabled=true; btn.textContent='…'; }
+    try{
+      const sb2=window.supabase?.createClient('https://yaakmxarwdvovvqgtkwb.supabase.co','sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i');
+      // fetch-then-merge
+      const {data:cur}=await sb2.from('tournaments').select('data,updated_at').eq('code',code).single();
+      const d=cur?.data||{};
+      d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==activeMatch.id);
+      d.courtPending.push({matchId:activeMatch.id,court:courtN,sa,sb,at:new Date().toISOString()});
+      await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',code);
+      $ct('ct-body',`<div class="court-done">
+        <div class="court-done-icon">✓</div>
+        <div class="court-done-txt">${t('court_submitted').split('—')[0].trim()}</div>
+        <div class="court-done-sub">${t('court_submitted').split('—')[1]?.trim()||''}</div>
+      </div>`);
+    }catch(e){
+      if(btn){ btn.disabled=false; btn.textContent=t('court_submit'); }
+      alert('Error: '+e.message);
+    }
+  };
+
+  render();
+}
+
+function $ct(id,html){ const el=document.getElementById(id); if(el) el.innerHTML=html; }
+
 function showAmericano(){
   $('screen-setup').style.display='none';
   $('screen-tournament').style.display='none';
@@ -2442,6 +2651,7 @@ function showAmericano(){
   const tname=$('logo-tname');
   if(tname) tname.textContent=tournamentName||'';
   renderAmericano();
+  if(!viewMode&&shareCode) startCourtPendingPoll();
 }
 
 function getByePlayers(matches){
@@ -2480,7 +2690,10 @@ function renderAmericano(){
     h+=`<div class="am-round${done?' am-round-done':''}">
       <div class="am-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
-        ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
+        <span style="display:flex;align-items:center;gap:4px">
+          ${!done&&shareCode?`<button class="court-links-btn" onclick="showCourtLinksModal(${ri})">${t('court_links_btn')}</button>`:''}
+          ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
+        </span>
       </div>
       ${matches.map(m=>renderAmMatch(m)).join('')}${byeHtml}
     </div>`;
@@ -2517,6 +2730,11 @@ function renderAmMatch(m){
       </div>
     </div>`;
   }
+  const pending=pendingFromCourt.find(p=>p.matchId===m.id);
+  const pendingBadge=pending&&!viewMode?`<div class="court-pending-badge">
+    <span class="court-pending-info">${t('court_pending_lbl')} — <span class="court-pending-score">${pending.sa}–${pending.sb}</span></span>
+    <button class="court-accept-btn" onclick="acceptCourtScore('${m.id}',${pending.sa},${pending.sb})">${t('court_accept')}</button>
+  </div>`:'';
   return `<div class="am-match" id="amm-${m.id}">
     <div class="am-match-teams">
       <span class="am-team">${tA}</span>
@@ -2540,6 +2758,7 @@ function renderAmMatch(m){
       <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
       ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
     </div>
+    ${pendingBadge}
   </div>`;
 }
 
@@ -2637,8 +2856,12 @@ function renderAmSt(){
 // ── Supabase sharing ──────────────────────────
 
 function _getSharePayload(){
-  if(mode==='americano'||mode==='mexicano') return {mode,AP,AM,R,tournamentName};
-  return {mode,T,PM,PW,PL,pmid,pDone,R,tournamentName};
+  const base=(mode==='americano'||mode==='mexicano')
+    ? {mode,AP,AM,R,tournamentName}
+    : {mode,T,PM,PW,PL,pmid,pDone,R,tournamentName};
+  if(Object.keys(courtTokens).length) base.courtTokens=courtTokens;
+  if(pendingFromCourt.length) base.courtPending=pendingFromCourt;
+  return base;
 }
 
 async function pushToSupabase(){
@@ -3365,9 +3588,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
   $('app-version').textContent = APP_VERSION;
   applyTheme(localStorage.getItem('padel-theme') || 'dark');
-  const _pres=new URLSearchParams(location.search).get('pres');
+  const _sp=new URLSearchParams(location.search);
+  const _sc=_sp.get('score'),_ct=_sp.get('court'),_tk=_sp.get('tok');
+  if(_sc&&_ct&&_tk){ initCourtMode(_sc.toUpperCase(),parseInt(_ct),_tk); return; }
+  const _pres=_sp.get('pres');
   if(_pres==='1'){ initPresentation(); return; }
-  const _vc=new URLSearchParams(location.search).get('view');
+  const _vc=_sp.get('view');
   if(_vc){ initViewMode(_vc.toUpperCase()); return; }
   loadState();
   initCast();
