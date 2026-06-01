@@ -1034,7 +1034,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.33.0';
+const APP_VERSION = 'v1.33.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3115,11 +3115,6 @@ async function shareTournament(){
     if(cpbtn){ cpbtn.disabled=false; cpbtn.querySelector('span').textContent=t('share_copy'); }
     const waText=encodeURIComponent(`${tournamentName||'Padel'} 🏓 — ${t('share_wa_text')}\n${url}`);
     const waBtn=$('share-wa-btn'); if(waBtn) waBtn.href=`https://wa.me/?text=${waText}`;
-    const shareData={title:`${tournamentName||'Padel'} — live score`,text:t('share_wa_text'),url};
-    if(navigator.share&&navigator.canShare?.(shareData)){
-      try{ await navigator.share(shareData); if(btn) btn.disabled=false; return; }
-      catch(e){ if(e.name==='AbortError'){ if(btn) btn.disabled=false; return; } }
-    }
     syncScoringToggle();
     modal.classList.remove('hidden');
   } else {
