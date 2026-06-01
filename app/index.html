@@ -403,6 +403,7 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .viewer-submit-btn{display:block;width:100%;background:var(--accent);color:#0E1114;border:none;border-radius:10px;padding:12px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:10px;transition:.15s}
 .viewer-submit-btn:disabled{opacity:.35;cursor:not-allowed}
 .viewer-submitted-msg{text-align:center;padding:10px 0;color:var(--accent);font-weight:700;font-size:.88rem}
+.viewer-submit-err{text-align:center;padding:6px 0;color:#f87171;font-size:.82rem;margin-top:4px}
 /* Player scoring toggle in share modal */
 .share-mode-choice{margin:4px 0 14px}
 .share-mode-lbl{font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:10px}
@@ -1036,7 +1037,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.34.3';
+const APP_VERSION = 'v1.34.4';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1121,7 +1122,7 @@ nl:{
   cast_btn:'Cast naar tv',cast_stop:'Stop casten',
   pres_ios_title:'Weergeven op TV',pres_ios_body:'Tik op \'Open presentatie\' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:',pres_ios_s1:'Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)',pres_ios_s2:'Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)',pres_ios_s3:'Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst',pres_ios_open:'Open presentatie',pres_ios_ok:'Sluiten',
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
-  player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',
+  player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'Watch live on PadelBracket',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
@@ -1187,7 +1188,7 @@ en:{
   cast_btn:'Cast to TV',cast_stop:'Stop casting',
   pres_ios_title:'Show on TV',pres_ios_body:'Tap \'Open presentation\' to open the scoreboard. To display it on a TV via AirPlay:',pres_ios_s1:'Open <strong>Control Center</strong> (swipe down from the top-right corner)',pres_ios_s2:'Tap <strong>Screen Mirroring</strong> (square with triangle icon)',pres_ios_s3:'Select your <strong>Apple TV</strong> or AirPlay-compatible TV from the list',pres_ios_open:'Open presentation',pres_ios_ok:'Close',
   court_links_btn:'Court links',court_enter_score:'Enter score',court_submit:'Submit',court_submitted:'Score submitted — waiting for organiser',court_invalid:'Invalid court link',court_no_match:'No active match on this court',court_accept:'Accept',court_pending_lbl:'Score submitted by player',
-  player_scoring_toggle:'Players enter scores',player_scoring_sub:'Players pick their name and submit their score via the link',ppick_title:'Who are you?',ppick_sub:'Tap your name. You can then enter the score for your match.',ppick_skip:'Just watching',my_match_lbl:'Your match',viewer_score_submit:'Submit score',viewer_score_done:'Submitted ✓',viewer_change_player:'(change player)',share_mode_who:'Who enters the scores?',share_mode_self:'Myself',share_mode_self_sub:'Organiser enters',share_mode_players:'Players',share_mode_players_sub:'Via the link',am_pick_hint:'Tap your name',am_waiting_players:'Waiting for players to submit…',
+  player_scoring_toggle:'Players enter scores',player_scoring_sub:'Players pick their name and submit their score via the link',ppick_title:'Who are you?',ppick_sub:'Tap your name. You can then enter the score for your match.',ppick_skip:'Just watching',my_match_lbl:'Your match',viewer_score_submit:'Submit score',viewer_score_done:'Submitted ✓',viewer_score_err_blocked:'Submit failed — please try again',viewer_change_player:'(change player)',share_mode_who:'Who enters the scores?',share_mode_self:'Myself',share_mode_self_sub:'Organiser enters',share_mode_players:'Players',share_mode_players_sub:'Via the link',am_pick_hint:'Tap your name',am_waiting_players:'Waiting for players to submit…',
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
@@ -1259,7 +1260,7 @@ fr:{
   inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
-  player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',
+  player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',
 },
 de:{
   savedGroups:'Gespeicherte Gruppen',saveGroup:'Gruppe speichern',groupName:'Gruppenname',loadGroup:'Laden',renameGroup:'Umbenennen',deleteGroup:'Löschen',noGroups:'Noch keine Gruppen gespeichert',groupSaved:'Gruppe gespeichert',confirmDeleteGroup:'Diese Gruppe löschen?',overwriteGroup:'Eine Gruppe mit diesem Namen existiert bereits. Überschreiben?',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live verfolgen auf PadelBracket',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
@@ -1327,7 +1328,7 @@ de:{
   inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
-  player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',
+  player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'Sigue en directo en PadelBracket',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
@@ -1395,7 +1396,7 @@ es:{
   inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
-  player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',
+  player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'Följ live på PadelBracket',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
@@ -1463,7 +1464,7 @@ sv:{
   inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
-  player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',
+  player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',
 },
 };
 
@@ -2587,13 +2588,22 @@ async function submitViewerScore(matchId,sa,sb){
   if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='…'; }
   try{
     const sb2=getSB();
-    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at').eq('code',_viewCode).single();
+    // Fetch session_token too so we can use authenticated write (anon UPDATE is blocked by RLS)
+    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at,session_token').eq('code',_viewCode).single();
     if(selErr||!cur) throw new Error(selErr?.message||'not found');
     const d=cur.data||{};
     d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
     d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName:(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?'});
-    const {error:updErr}=await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',_viewCode);
+    // Use authenticated client if row contains session_token (bypasses RLS)
+    const writeSb=cur.session_token&&window.supabase
+      ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':cur.session_token}}})
+      : sb2;
+    const {data:updData,error:updErr}=await writeSb.from('tournaments')
+      .update({data:d,updated_at:new Date().toISOString()})
+      .eq('code',_viewCode)
+      .select('code');
     if(updErr) throw new Error(updErr.message);
+    if(!updData||updData.length===0) throw new Error('write_blocked');
     if(!viewerScores[matchId]) viewerScores[matchId]={sa,sb,submitted:false};
     viewerScores[matchId].sa=sa; viewerScores[matchId].sb=sb; viewerScores[matchId].submitted=true;
     if(card){
@@ -2603,6 +2613,9 @@ async function submitViewerScore(matchId,sa,sb){
     }
   }catch(e){
     if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent=t('viewer_score_submit'); }
+    const errDiv=card?.querySelector('.viewer-submit-err');
+    const msg=e.message==='write_blocked'?t('viewer_score_err_blocked'):(e.message||'error');
+    if(card&&!errDiv) card.insertAdjacentHTML('beforeend',`<div class="viewer-submit-err">${msg}</div>`);
   }
 }
 
