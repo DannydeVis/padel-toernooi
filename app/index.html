@@ -1059,7 +1059,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.35.1';
+const APP_VERSION = 'v1.35.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1588,6 +1588,7 @@ let viewMode=false, viewPollInterval=null, _viewInitialized=false;
 let courtTokens={}, pendingFromCourt=[], _courtPollInterval=null;
 let playerScoring=false;
 let viewerPlayerId=null; // pid of identified viewer in playerScoring mode
+let viewerTAPairIdx=null; // pair index (TAP[i]) of identified viewer in TA playerScoring mode
 let viewerScores={}; // draft scores for viewer's own match (matchId→{sa,sb,submitted})
 let _viewCode=null; // share code in view mode
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
@@ -2603,11 +2604,67 @@ function renderTAMatch(m,isActive=true){
     ${viewMode?'':` <div style="text-align:center"><button class="mundo-btn" onclick="taUndo('${m.id}')">${icon('ic-undo')} ${t('am_undo')}</button></div>`}
     </div>`;
   }
-  if(!isActive||viewMode) return `<div class="am-match"><div class="am-match-teams">
-    <span class="am-team">${tA}</span>
-    <span class="am-score-done" style="opacity:.35">–</span>
-    <span class="am-team r">${tB}</span>
-  </div></div>`;
+  if(!isActive||viewMode){
+    if(viewMode&&playerScoring&&isActive&&!m.done){
+      const isMyMatch=viewerTAPairIdx!==null&&viewerTAPairIdx>=0&&(m.a===viewerTAPairIdx||m.b===viewerTAPairIdx);
+      const onA=viewerTAPairIdx===m.a;
+      if(isMyMatch){
+        let vs=viewerScores[m.id]||{sa:0,sb:0,submitted:false};
+        const rp=pendingFromCourt.find(p=>p.matchId===m.id);
+        if(!vs.submitted&&rp){ vs={sa:rp.sa,sb:rp.sb,submitted:true}; viewerScores[m.id]=vs; }
+        if(vs.submitted) return `<div class="am-match my-match" id="amm-${m.id}">
+          <div class="my-match-badge">${t('my_match_lbl')}</div>
+          <div class="am-match-teams">
+            <span class="am-team${onA?' my-side':''}">${tA}</span>
+            <span class="am-vs">${vs.sa}–${vs.sb}</span>
+            <span class="am-team r${!onA?' my-side':''}">${tB}</span>
+          </div>
+          <div class="viewer-submitted-msg">${t('viewer_score_done')}</div>
+        </div>`;
+        const total=vs.sa+vs.sb,ready=total===R.matchPts;
+        return `<div class="am-match my-match" id="amm-${m.id}">
+          <div class="my-match-badge">${t('my_match_lbl')}</div>
+          <div class="am-match-teams">
+            <span class="am-team${onA?' my-side':''}">${tA}</span>
+            <span class="am-vs">vs</span>
+            <span class="am-team r${!onA?' my-side':''}">${tB}</span>
+          </div>
+          <div class="am-score-ctrl">
+            <div class="am-sc-side">
+              <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','a',-1)">−</button>
+              <span class="am-sc-val" id="vsa-${m.id}">${vs.sa}</span>
+              <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','a',1)">+</button>
+            </div>
+            <span class="am-sc-sep">—</span>
+            <div class="am-sc-side">
+              <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','b',-1)">−</button>
+              <span class="am-sc-val" id="vsb-${m.id}">${vs.sb}</span>
+              <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','b',1)">+</button>
+            </div>
+          </div>
+          <div class="am-sc-footer" id="vsfoot-${m.id}">
+            <span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>
+            ${ready?`<button class="viewer-submit-btn" onclick="submitViewerScore('${m.id}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`:''}
+          </div>
+        </div>`;
+      }
+      if(viewerTAPairIdx===null){
+        return `<div class="am-match">
+          <div class="am-match-teams">
+            <span class="am-team"><button class="am-player-pick" onclick="selectViewerTAPair(${m.a})">${esc(pa.n1)}<br><span style="font-size:.82em;opacity:.65">${esc(pa.n2)}</span></button></span>
+            <span class="am-vs">vs</span>
+            <span class="am-team r"><button class="am-player-pick" onclick="selectViewerTAPair(${m.b})">${esc(pb.n1)}<br><span style="font-size:.82em;opacity:.65">${esc(pb.n2)}</span></button></span>
+          </div>
+          <div class="am-pick-hint">${t('am_pick_hint')}</div>
+        </div>`;
+      }
+    }
+    return `<div class="am-match"><div class="am-match-teams">
+      <span class="am-team">${tA}</span>
+      <span class="am-score-done" style="opacity:.35">–</span>
+      <span class="am-team r">${tB}</span>
+    </div></div>`;
+  }
   const total=m.sa+m.sb,ready=total===R.matchPts;
   return `<div class="am-match" id="amm-${m.id}">
     <div class="am-match-teams">
@@ -2793,12 +2850,31 @@ function selectViewerPlayer(pid){
 }
 
 function resetViewerPlayer(){
+  if(mode==='teamamericano'){
+    viewerTAPairIdx=null;
+    const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
+    _updateAmHeader();
+    renderAmericano();
+    return;
+  }
   viewerPlayerId=null;
   const key=_vpKey(); if(key) localStorage.removeItem(key);
   const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
   _updateAmHeader();
   if(playerScoring) showPlayerPicker();
   else renderAmericano();
+}
+
+function selectViewerTAPair(idx){
+  viewerTAPairIdx=idx; // -1 = "just watching"
+  const key=_viewCode?`padel-vtpi-${_viewCode}`:null;
+  if(key) localStorage.setItem(key,String(idx));
+  const p=idx>=0?TAP[idx]:null;
+  const chip=$('viewer-player-chip'),nm=$('viewer-player-name');
+  if(p&&chip&&nm){ nm.textContent=`${p.n1} & ${p.n2}`; chip.style.display='inline-flex'; }
+  else if(chip) chip.style.display='none';
+  _updateAmHeader();
+  renderAmericano();
 }
 
 function setShareMode(isPlayers){
@@ -2825,7 +2901,10 @@ async function submitViewerScore(matchId,sa,sb){
     if(selErr||!cur) throw new Error(selErr?.message||'not found');
     const d=cur.data||{};
     d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
-    d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName:(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?'});
+    const playerName=mode==='teamamericano'&&viewerTAPairIdx>=0
+      ?`${(TAP[viewerTAPairIdx]||{}).n1||'?'} & ${(TAP[viewerTAPairIdx]||{}).n2||'?'}`
+      :(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?';
+    d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName});
     // Use direct fetch so x-session-token header is guaranteed to be sent (RLS requires it)
     const res=await fetch(`${SUPABASE_URL}/rest/v1/tournaments?code=eq.${encodeURIComponent(_viewCode)}`,{
       method:'PATCH',
@@ -2860,6 +2939,26 @@ function viewAdj(matchId,side,delta){
   const m=AM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
   if(!viewerScores[matchId]) viewerScores[matchId]={sa:m.sa,sb:m.sb,submitted:false};
+  const vs=viewerScores[matchId];
+  if(side==='a'){
+    vs.sa=Math.max(0,Math.min(R.matchPts,vs.sa+delta));
+    if(vs.sa+vs.sb>R.matchPts) vs.sb=R.matchPts-vs.sa;
+  } else {
+    vs.sb=Math.max(0,Math.min(R.matchPts,vs.sb+delta));
+    if(vs.sa+vs.sb>R.matchPts) vs.sa=R.matchPts-vs.sb;
+  }
+  const saEl=$('vsa-'+matchId),sbEl=$('vsb-'+matchId);
+  if(saEl) saEl.textContent=vs.sa;
+  if(sbEl) sbEl.textContent=vs.sb;
+  const total=vs.sa+vs.sb,ready=total===R.matchPts;
+  const foot=$('vsfoot-'+matchId);
+  if(foot) foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`:''}`;
+}
+
+function viewTAAdj(matchId,side,delta){
+  const m=TAM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:0,submitted:false};
   const vs=viewerScores[matchId];
   if(side==='a'){
     vs.sa=Math.max(0,Math.min(R.matchPts,vs.sa+delta));
@@ -3059,6 +3158,13 @@ function $ct(id,html){ const el=document.getElementById(id); if(el) el.innerHTML
 
 function _updateAmHeader(){
   const hdr=$('am-tourn-hdr'); if(!hdr) return;
+  if(viewMode&&playerScoring&&mode==='teamamericano'&&viewerTAPairIdx!==null&&viewerTAPairIdx>=0){
+    const p=TAP[viewerTAPairIdx];
+    if(p){
+      hdr.innerHTML=`<div class="amh-player">${esc(p.n1)} &amp; ${esc(p.n2)}</div><div class="amh-sub" onclick="resetViewerPlayer()">${t('viewer_change_player')}</div>`;
+      hdr.style.display='block'; return;
+    }
+  }
   if(viewMode&&playerScoring&&viewerPlayerId!==null){
     const p=AP.find(x=>x.id===viewerPlayerId);
     if(p){
@@ -3066,7 +3172,7 @@ function _updateAmHeader(){
       hdr.style.display='block'; return;
     }
   }
-  const label=tournamentName||(mode==='mexicano'?'Mexicano':'Americano');
+  const label=tournamentName||(mode==='mexicano'?'Mexicano':mode==='teamamericano'?'Team Americano':'Americano');
   hdr.innerHTML=`<div class="amh-tname">${esc(label)}</div>`;
   hdr.style.display='block';
 }
@@ -3523,17 +3629,30 @@ function _applyViewState(s){
   if(!_viewInitialized){
     _viewInitialized=true;
     if(playerScoring){
-      const key=_vpKey();
-      const stored=key?localStorage.getItem(key):null;
-      if(stored){
-        const pid=parseInt(stored,10);
-        if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid;
+      if(mode==='teamamericano'){
+        const key=_viewCode?`padel-vtpi-${_viewCode}`:null;
+        const stored=key?localStorage.getItem(key):null;
+        if(stored!==null){
+          const pidx=parseInt(stored,10);
+          if(!isNaN(pidx)&&pidx>=0&&TAP[pidx]) viewerTAPairIdx=pidx;
+          else if(!isNaN(pidx)&&pidx===-1) viewerTAPairIdx=-1;
+        }
+      } else {
+        const key=_vpKey();
+        const stored=key?localStorage.getItem(key):null;
+        if(stored){
+          const pid=parseInt(stored,10);
+          if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid;
+        }
       }
     }
     if(mode==='americano'||mode==='mexicano'||mode==='teamamericano') showAmericano();
     else startTournamentUI();
     $('view-banner').style.display='flex';
-    if(playerScoring&&viewerPlayerId!==null){
+    if(mode==='teamamericano'&&playerScoring&&viewerTAPairIdx>=0){
+      const p=TAP[viewerTAPairIdx];
+      if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=`${p.n1} & ${p.n2}`; chip.style.display='inline-flex'; } }
+    } else if(playerScoring&&viewerPlayerId!==null){
       const p=AP.find(x=>x.id===viewerPlayerId);
       if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; } }
     }
