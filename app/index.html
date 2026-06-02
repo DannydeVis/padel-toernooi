@@ -128,7 +128,7 @@ body.light .champ-wrap{background:#fff;border-top-color:#e5e7eb}
 .team-edit-btn:hover{opacity:1}
 .team-name-input{background:var(--surface2);border:1px solid var(--accent);border-radius:6px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.84rem;padding:3px 8px;width:calc(100% - 8px);outline:none}
 
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;touch-action:manipulation}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;touch-action:pan-x pan-y}
 button,a{touch-action:manipulation}
 .app{max-width:980px;margin:0 auto;padding:16px;background:var(--bg);min-height:100vh}
 
@@ -1062,7 +1062,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.35.6';
+const APP_VERSION = 'v1.35.7';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2591,6 +2591,7 @@ function renderTeamAmericano(){
   h+=renderTAStandings();
   $('am-rounds-wrap').innerHTML=h;
   updatePresentation();
+  if(timerData&&!viewMode) _startAmTimerTick();
 }
 
 function renderTAMatch(m,isActive=true){
@@ -3227,11 +3228,27 @@ function getByePlayers(matches){
   return AP.filter(p=>!active.has(p.id));
 }
 
+let _amTimerTick=null;
+function _tickAmTimer(){
+  let td=null;
+  try{ td=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
+  const el=document.querySelector('.am-timer-status');
+  if(!td||!el){ clearInterval(_amTimerTick); _amTimerTick=null; return; }
+  const rem=td.limit-Math.floor((Date.now()-td.start)/1000);
+  el.textContent=rem<=0?t('timer_done'):`${Math.floor(Math.max(0,rem)/60)}:${String(Math.max(0,rem)%60).padStart(2,'0')}`;
+  if(rem<=0){ clearInterval(_amTimerTick); _amTimerTick=null; }
+}
+function _startAmTimerTick(){
+  if(_amTimerTick) return;
+  _amTimerTick=setInterval(_tickAmTimer,1000);
+}
 function startRoundTimer(ri){
   const mins=R.timerMins;
   if(!mins) return;
   localStorage.setItem('padel-round-timer',JSON.stringify({round:ri,start:Date.now(),limit:mins*60}));
+  if(_amTimerTick){ clearInterval(_amTimerTick); _amTimerTick=null; }
   renderAmericano();
+  _startAmTimerTick();
 }
 
 function renderAmericano(){
@@ -3269,6 +3286,7 @@ function renderAmericano(){
   h+=renderAmSt();
   $('am-rounds-wrap').innerHTML=h;
   updatePresentation();
+  if(timerData&&!viewMode) _startAmTimerTick();
 }
 
 function renderAmMatch(m,isActiveRound=true){
@@ -4281,6 +4299,14 @@ if(isIOS() && !isInStandalone()){
 
 window.addEventListener('pagehide', () => trackEnd());
 window.addEventListener('beforeunload', () => trackEnd());
+
+// Prevent double-tap zoom (iOS ignores user-scalable=no since iOS 10)
+let _lastTouchEnd=0;
+document.addEventListener('touchend',function(e){
+  const now=Date.now();
+  if(now-_lastTouchEnd<=300) e.preventDefault();
+  _lastTouchEnd=now;
+},false);
 
 document.addEventListener('DOMContentLoaded', () => {
   applyI18n();
