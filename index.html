@@ -570,11 +570,6 @@
     .trust-sep{color:var(--bdr);font-size:1rem}
     @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
     @media(max-width:640px){.trust-sep{display:none}.trust-bar{gap:8px 16px}}
-  /* photo soul */
-  .hero-photo{position:absolute;inset:0;z-index:0;opacity:.18;background-image:url('/photos/hero.jpg');background-size:cover;background-position:center;background-repeat:no-repeat}
-  .photo-band{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;text-align:center;padding:64px 24px;background-color:var(--surface);background-image:linear-gradient(rgba(14,17,20,.55),rgba(14,17,20,.72)),url('/photos/play.jpg');background-size:cover;background-position:center;background-repeat:no-repeat}
-  .photo-band h2{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;max-width:760px;margin:0;line-height:1.15}
-  .photo-band .accent{color:var(--accent)}
   </style>
 </head>
 <body>
@@ -608,7 +603,6 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-photo"></div>
 
   <div class="hero-badge">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
@@ -638,63 +632,6 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
   </div>
   <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
-</section>
-
-<!-- PHOTO BAND -->
-<section class="photo-band">
-  <h2>Padel zoals het hoort — <span class="accent">jij op de baan</span>, niet achter een spreadsheet.</h2>
-</section>
-
-<!-- FORMATS -->
-<section class="section">
-  <h2 class="section-title">Vier toernooiformats</h2>
-  <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
-  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format team">
-      <h3>Team toernooi</h3>
-      <p>Vaste duo's spelen poules, waarna de top 4 doorgaat naar de finale-bracket. De rest speelt een troostfinale.</p>
-      <ul>
-        <li>Vaste koppels de hele dag</li>
-        <li>Pouleronde + winnaarsbracket</li>
-        <li>Troostfinale voor plaatsen 5–9</li>
-        <li>4 tot 9 teams (8–18 spelers)</li>
-      </ul>
-      <a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout generator →</a>
-    </div>
-    <div class="format am">
-      <h3>Americano</h3>
-      <p>Elke ronde nieuwe partners via een vast rotatieschema. Iedereen speelt met en tegen iedereen — ideaal voor een gezellige sessie.</p>
-      <ul>
-        <li>Partners wisselen elke ronde</li>
-        <li>Puntentelling per speler</li>
-        <li>Live ranglijst &amp; presentatiemodus</li>
-        <li>4 t/m 24 spelers</li>
-      </ul>
-      <a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano generator →</a>
-    </div>
-    <div class="format am">
-      <h3>Mexicano</h3>
-      <p>Net als Americano, maar koppels worden na elke ronde opnieuw bepaald op basis van de actuele tussenstand. Wordt steeds spannender.</p>
-      <ul>
-        <li>Koppels op basis van ranglijst</li>
-        <li>Puntentelling per speler</li>
-        <li>Competitiever per ronde</li>
-        <li>4 t/m 24 spelers</li>
-      </ul>
-      <a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano generator →</a>
-    </div>
-    <div class="format team">
-      <h3>Round Robin</h3>
-      <p>Elk team speelt tegen elk ander team. Eerlijk, overzichtelijk en geschikt voor competitieve clubtoernooien.</p>
-      <ul>
-        <li>Iedereen speelt tegen iedereen</li>
-        <li>Automatische standen</li>
-        <li>Exporteerbaar naar PDF &amp; CSV</li>
-        <li>4 tot 16 spelers</li>
-      </ul>
-      <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
-    </div>
-  </div>
 </section>
 
 <!-- MOCKUP -->
@@ -796,38 +733,46 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </div>
 
-<!-- SCREENSHOTS -->
-<section class="screenshots-section">
-  <h2 class="section-title">Zo ziet de app eruit</h2>
-  <p class="section-sub">Overzichtelijk, snel en op elk scherm.</p>
-  <div class="screens-grid">
-    <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame">
-        <img src="/screenshot-team-poule.png" alt="Team toernooi pouleronde met winnaar-knoppen" loading="lazy">
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Toernooi opzetten</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Toernooiformats</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Talen ondersteund</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
+</div>
+
+<div class="trust-bar">
+  <span>Gebruikt door padelclubs door heel Europa</span>
+  <span class="trust-sep">·</span>
+  <span>Beschikbaar in 40+ landen</span>
+  <span class="trust-sep">·</span>
+  <span>Werkt op elk apparaat, ook offline</span>
+</div>
+
+<!-- QR JOIN -->
+<section class="qr-showcase">
+  <div class="qr-showcase-inner">
+    <div class="phone-col">
+      <div class="phone-frame-lg">
+        <img src="/screenshot-americano.png" alt="Live stand op telefoon" loading="lazy">
       </div>
-      <div class="screen-label">Team toernooi</div>
-      <div class="screen-desc">Wedstrijden per ronde, winnaar aantippen, live voortgang.</div>
     </div>
-    <div class="screen-item featured">
-      <div class="phone-frame">
-        <img src="/screenshot-americano-scoring.png" alt="Americano score invoeren met plus en min knoppen" loading="lazy">
+    <div>
+      <div class="pres-badge" style="background:rgba(139,92,246,.12);color:#a78bfa;border-color:rgba(139,92,246,.25)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        QR-link delen
       </div>
-      <div class="screen-label">Americano scoring</div>
-      <div class="screen-desc">Scores bijhouden per koppel met +/− knoppen, live punten per ronde.</div>
-    </div>
-    <div class="screen-item featured">
-      <div class="phone-frame">
-        <img src="/screenshot-americano.png" alt="Americano live ranglijst met punten per speler" loading="lazy">
+      <h2>Iedereen volgt live.<br><em style="color:var(--accent);font-style:normal">Spelers vullen zelf in.</em></h2>
+      <p class="pres-sub">Deel één link in de groepsapp. Spelers kiezen hun naam, vullen hun score in via de link — de organisator keurt goed met één tik. Geen download, geen account.</p>
+      <div class="pres-feats">
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Één link voor iedereen</strong> — deel via WhatsApp, iMessage of een andere chatapp</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Spelers voeren scores in</strong> — kies je naam via de link en dien je score in</span></div>
+        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Geen account nodig</strong> — open de link, niets te installeren</span></div>
       </div>
-      <div class="screen-label">Live ranglijst</div>
-      <div class="screen-desc">Stand per speler, voortgang per ronde en LIVE-badge voor meekijkers.</div>
-    </div>
-    <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame">
-        <img src="/screenshot-winner.png" alt="Kampioen scherm met confetti en eindstand" loading="lazy">
-      </div>
-      <div class="screen-label">Kampioen</div>
-      <div class="screen-desc">Eindstand met winnaar, podium en exportknoppen voor CSV en PDF.</div>
+      <a class="pres-cta-btn" href="/app/">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Probeer nu
+      </a>
     </div>
   </div>
 </section>
@@ -924,34 +869,6 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
-<!-- QR JOIN -->
-<section class="qr-showcase">
-  <div class="qr-showcase-inner">
-    <div class="phone-col">
-      <div class="phone-frame-lg">
-        <img src="/screenshot-americano.png" alt="Live stand op telefoon" loading="lazy">
-      </div>
-    </div>
-    <div>
-      <div class="pres-badge" style="background:rgba(139,92,246,.12);color:#a78bfa;border-color:rgba(139,92,246,.25)">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        QR-link delen
-      </div>
-      <h2>Iedereen volgt live.<br><em style="color:var(--accent);font-style:normal">Spelers vullen zelf in.</em></h2>
-      <p class="pres-sub">Deel één link in de groepsapp. Spelers kiezen hun naam, vullen hun score in via de link — de organisator keurt goed met één tik. Geen download, geen account.</p>
-      <div class="pres-feats">
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Één link voor iedereen</strong> — deel via WhatsApp, iMessage of een andere chatapp</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Spelers voeren scores in</strong> — kies je naam via de link en dien je score in</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Geen account nodig</strong> — open de link, niets te installeren</span></div>
-      </div>
-      <a class="pres-cta-btn" href="/app/">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Probeer nu
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- FEATURES -->
 <section class="section">
   <h2 class="section-title">Alles wat je nodig hebt</h2>
@@ -990,6 +907,42 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
+<!-- SCREENSHOTS -->
+<section class="screenshots-section">
+  <h2 class="section-title">Zo ziet de app eruit</h2>
+  <p class="section-sub">Overzichtelijk, snel en op elk scherm.</p>
+  <div class="screens-grid">
+    <div class="screen-item" style="transform:translateY(24px)">
+      <div class="phone-frame">
+        <img src="/screenshot-team-poule.png" alt="Team toernooi pouleronde met winnaar-knoppen" loading="lazy">
+      </div>
+      <div class="screen-label">Team toernooi</div>
+      <div class="screen-desc">Wedstrijden per ronde, winnaar aantippen, live voortgang.</div>
+    </div>
+    <div class="screen-item featured">
+      <div class="phone-frame">
+        <img src="/screenshot-americano-scoring.png" alt="Americano score invoeren met plus en min knoppen" loading="lazy">
+      </div>
+      <div class="screen-label">Americano scoring</div>
+      <div class="screen-desc">Scores bijhouden per koppel met +/− knoppen, live punten per ronde.</div>
+    </div>
+    <div class="screen-item featured">
+      <div class="phone-frame">
+        <img src="/screenshot-americano.png" alt="Americano live ranglijst met punten per speler" loading="lazy">
+      </div>
+      <div class="screen-label">Live ranglijst</div>
+      <div class="screen-desc">Stand per speler, voortgang per ronde en LIVE-badge voor meekijkers.</div>
+    </div>
+    <div class="screen-item" style="transform:translateY(24px)">
+      <div class="phone-frame">
+        <img src="/screenshot-winner.png" alt="Kampioen scherm met confetti en eindstand" loading="lazy">
+      </div>
+      <div class="screen-label">Kampioen</div>
+      <div class="screen-desc">Eindstand met winnaar, podium en exportknoppen voor CSV en PDF.</div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="section" id="hoe-werkt-het">
   <h2 class="section-title">Klaar in 4 stappen</h2>
@@ -1018,21 +971,57 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Toernooi opzetten</div></div>
-  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Toernooiformats</div></div>
-  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Talen ondersteund</div></div>
-  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
-</div>
-
-<div class="trust-bar">
-  <span>Gebruikt door padelclubs door heel Europa</span>
-  <span class="trust-sep">·</span>
-  <span>Beschikbaar in 40+ landen</span>
-  <span class="trust-sep">·</span>
-  <span>Werkt op elk apparaat, ook offline</span>
-</div>
+<!-- FORMATS -->
+<section class="section">
+  <h2 class="section-title">Vier toernooiformats</h2>
+  <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
+  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+    <div class="format team">
+      <h3>Team toernooi</h3>
+      <p>Vaste duo's spelen poules, waarna de top 4 doorgaat naar de finale-bracket. De rest speelt een troostfinale.</p>
+      <ul>
+        <li>Vaste koppels de hele dag</li>
+        <li>Pouleronde + winnaarsbracket</li>
+        <li>Troostfinale voor plaatsen 5–9</li>
+        <li>4 tot 9 teams (8–18 spelers)</li>
+      </ul>
+      <a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout generator →</a>
+    </div>
+    <div class="format am">
+      <h3>Americano</h3>
+      <p>Elke ronde nieuwe partners via een vast rotatieschema. Iedereen speelt met en tegen iedereen — ideaal voor een gezellige sessie.</p>
+      <ul>
+        <li>Partners wisselen elke ronde</li>
+        <li>Puntentelling per speler</li>
+        <li>Live ranglijst &amp; presentatiemodus</li>
+        <li>4 t/m 24 spelers</li>
+      </ul>
+      <a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano generator →</a>
+    </div>
+    <div class="format am">
+      <h3>Mexicano</h3>
+      <p>Net als Americano, maar koppels worden na elke ronde opnieuw bepaald op basis van de actuele tussenstand. Wordt steeds spannender.</p>
+      <ul>
+        <li>Koppels op basis van ranglijst</li>
+        <li>Puntentelling per speler</li>
+        <li>Competitiever per ronde</li>
+        <li>4 t/m 24 spelers</li>
+      </ul>
+      <a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano generator →</a>
+    </div>
+    <div class="format team">
+      <h3>Round Robin</h3>
+      <p>Elk team speelt tegen elk ander team. Eerlijk, overzichtelijk en geschikt voor competitieve clubtoernooien.</p>
+      <ul>
+        <li>Iedereen speelt tegen iedereen</li>
+        <li>Automatische standen</li>
+        <li>Exporteerbaar naar PDF &amp; CSV</li>
+        <li>4 tot 16 spelers</li>
+      </ul>
+      <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
+    </div>
+  </div>
+</section>
 
 <!-- FAQ -->
 <section class="section" id="faq">
