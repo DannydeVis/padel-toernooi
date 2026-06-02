@@ -387,7 +387,6 @@
     .hero-perks{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
     .hero-perk{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--txt2)}
     .hero-perk svg{flex-shrink:0;opacity:.7}
-    .scenario-line{text-align:center;color:var(--txt2);font-size:.9rem;padding:28px 24px 0;border-top:1px solid var(--bdr)}
     .trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:16px 24px;font-size:.82rem;color:var(--txt2);border-bottom:1px solid var(--bdr)}
     .trust-sep{color:var(--bdr);font-size:1rem}
     @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
@@ -428,9 +427,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
     Free · No account · Works offline too
   </div>
-  <h1>16 names. 3 courts. <em>One afternoon of padel.</em></h1>
+  <h1>No login. No spreadsheets. <em>No chaos.</em></h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Enter the player names — PadelBracket handles the pairings, schedule and live standings. You play, the app tracks. Free, no account needed.</p>
+  <p class="hero-sub">Create a live padel tournament in 30 seconds. Players submit scores via the link, live standings on any phone, and fullscreen TV scoreboard — all included. Free.</p>
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -442,7 +441,12 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </button>
     <a class="btn-secondary" href="#how-it-works" id="howBtn">How does it work?</a>
   </div>
-  <p class="hero-note">Works offline too · Add to home screen · 6 languages</p>
+  <div class="hero-perks">
+    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Live TV scoreboard</div>
+    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Players submit scores</div>
+    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> 30-second setup</div>
+  </div>
+  <p class="hero-note">Works on phone, tablet and desktop · Installable as app · 6 languages</p>
 </section>
 
 <!-- MOCKUP -->
@@ -509,12 +513,19 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </div>
 
 <!-- STATS -->
-<p class="scenario-line">Works for 4 friends on a lunch break and for a 24-player club tournament on Saturday — same app, no setup.</p>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Setup time</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Tournament formats</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Languages supported</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
+</div>
 
 <div class="trust-bar">
-  <span>No account. No installation.</span>
+  <span>Used by padel clubs across Europe</span>
   <span class="trust-sep">·</span>
-  <span>Works offline too — even if the Wi-Fi drops mid-tournament.</span>
+  <span>Available in 40+ countries</span>
+  <span class="trust-sep">·</span>
+  <span>Works on any device, even offline</span>
 </div>
 
 <!-- QR JOIN -->
@@ -639,8 +650,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- FEATURES -->
 <section class="section">
-  <h2 class="section-title">Less admin, more padel</h2>
-  <p class="section-sub">Everyone has tried tracking an Americano in a group chat at least once. This is better.</p>
+  <h2 class="section-title">Everything you need</h2>
+  <p class="section-sub">From entering names to exporting the final standings — the app handles the rest automatically.</p>
   <div class="features">
     <div class="feature">
       <div class="feature-icon" style="background:rgba(199,255,94,.12)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v10a6 6 0 0 1-12 0V2z"/><path d="M6 7H2a4 4 0 0 0 4 4"/><path d="M18 7h4a4 4 0 0 1-4 4"/><path d="M12 18v-2"/><path d="M9 22h6"/></svg></div>
@@ -713,11 +724,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- HOW IT WORKS -->
 <section class="section" id="how-it-works">
-  <h2 class="section-title">How it works in practice</h2>
-  <p class="section-sub">Enter names, pick a format, play.</p>
+  <h2 class="section-title">Ready in 4 steps</h2>
+  <p class="section-sub">In less than a minute you have a complete tournament ready to go.</p>
   <div class="steps">
     <div class="step"><div class="step-num">1</div><h4>Enter names</h4><p>Type the player names. The app automatically creates pairs and rounds.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Choose format</h4><p>Not sure which? Pick Americano — it always works.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Choose format</h4><p>Americano, Mexicano, Knockout or Round Robin — pick what fits your group.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Track scores</h4><p>Enter live scores. Standings update instantly on screen and on participants' phones.</p></div>
     <div class="step"><div class="step-num">4</div><h4>Champion</h4><p>After the last round the final standings appear. Export as PDF or CSV as a keepsake.</p></div>
   </div>
@@ -840,8 +851,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- CTA -->
 <section class="cta-wrap">
-  <h2>One phone. Everyone plays.</h2>
-  <p>Enter the names and start. Takes 60 seconds — the rest of the afternoon is for playing.</p>
+  <h2>Ready to play?</h2>
+  <p>Open the app, enter the names and start your tournament. Free and always available.</p>
   <a class="btn-primary" href="/app/" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     Start for free
