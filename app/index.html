@@ -1089,7 +1089,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.36.2';
+const APP_VERSION = 'v1.36.3';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3408,6 +3408,42 @@ function renderAmMatch(m,isActiveRound=true){
     <span class="court-pending-info">${t('court_pending_lbl')} — <span class="court-pending-score">${pending.sa}–${pending.sb}</span></span>
     <button class="court-accept-btn" onclick="acceptCourtScore('${m.id}',${pending.sa},${pending.sb})">${t('court_accept')}</button>
   </div>`:'';
+  if(isActiveRound&&!m.done){
+    const courtLbl=m.court?t('rnd_court',{n:m.court}):'';
+    return `<div class="am-court-card" id="amm-${m.id}">
+      <div class="am-court-card-hdr"><span class="am-court-num">${courtLbl}</span></div>
+      <div class="am-court-card-body">
+        <div class="am-court-teams">
+          <div class="am-court-team-col">
+            <span class="am-court-player">${esc(pa.name)}</span><span class="am-court-amp">&amp;</span><span class="am-court-player">${esc(pb.name)}</span>
+          </div>
+          <div class="am-court-vs-col">VS</div>
+          <div class="am-court-team-col r">
+            <span class="am-court-player">${esc(pc.name)}</span><span class="am-court-amp">&amp;</span><span class="am-court-player">${esc(pd.name)}</span>
+          </div>
+        </div>
+        <div class="am-score-ctrl" style="margin-top:14px">
+          <div class="am-sc-side">
+            <button class="am-sc-btn" onclick="amAdj('${m.id}','a',-1)">−</button>
+            <span class="am-sc-val" id="amsa-${m.id}">${m.sa}</span>
+            <button class="am-sc-btn" onclick="amAdj('${m.id}','a',1)">+</button>
+          </div>
+          <span class="am-sc-sep">—</span>
+          <div class="am-sc-side">
+            <button class="am-sc-btn" onclick="amAdj('${m.id}','b',-1)">−</button>
+            <span class="am-sc-val" id="amsb-${m.id}">${m.sb}</span>
+            <button class="am-sc-btn" onclick="amAdj('${m.id}','b',1)">+</button>
+          </div>
+        </div>
+        <div class="am-sc-footer">
+          <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
+          ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
+        </div>
+        ${pendingBadge}
+        ${playerScoring&&!pending?`<div class="am-waiting-lbl">${t('am_waiting_players')}</div>`:''}
+      </div>
+    </div>`;
+  }
   return `<div class="am-match" id="amm-${m.id}">
     <div class="am-match-teams">
       <span class="am-team">${tA}</span>
