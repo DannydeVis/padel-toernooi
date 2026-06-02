@@ -1090,7 +1090,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.36.6';
+const APP_VERSION = 'v1.36.7';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3256,6 +3256,8 @@ function getByePlayers(matches){
 }
 
 let _amTimerTick=null, _timerBeeped=false;
+// Don't replay beep if timer was already expired when page loaded
+(function(){try{const _td=JSON.parse(localStorage.getItem('padel-round-timer')||'null');if(_td&&(_td.limit-Math.floor((Date.now()-_td.start)/1000))<=0)_timerBeeped=true;}catch{}}());
 function _playTimerBeep(){
   try{
     const AC=window.AudioContext||window.webkitAudioContext;
@@ -3272,7 +3274,7 @@ function _playTimerBeep(){
       };
       beep(0,.3,880); beep(.4,.3,880); beep(.8,.8,880);
       setTimeout(()=>{try{ctx.close();}catch(e){}},2500);
-    });
+    }).catch(()=>{});
   }catch(e){}
 }
 function _tickAmTimer(){
@@ -3320,7 +3322,7 @@ function renderAmericano(){
         timerEl=`<button class="am-timer-btn" onclick="startRoundTimer(${ri})">${t('timer_start')}</button>`;
       }
     }
-    if(!done && ri===activeRoundIdx){
+    if(ri===activeRoundIdx){
       h+=`<div class="am-active-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         <span style="display:flex;align-items:center;gap:4px">${timerEl}</span>
@@ -3505,9 +3507,8 @@ function renderAmViewCourtCard(m, withPicker){
   const pa=AP[m.a1],pb=AP[m.a2],pc=AP[m.b1],pd=AP[m.b2];
   const isMyMatch=viewerPlayerId!==null&&[m.a1,m.a2,m.b1,m.b2].includes(viewerPlayerId);
   function pn(p,pid){
-    const me=viewerPlayerId===pid;
     if(withPicker) return `<button class="am-court-pick-btn" onclick="selectViewerPlayer(${pid})">${esc(p.name)}</button>`;
-    return `<span class="am-court-player${me?' my-side':''}">${esc(p.name)}</span>`;
+    return `<span class="am-court-player${viewerPlayerId===pid?' my-side':''}">${esc(p.name)}</span>`;
   }
   const courtLbl=m.court?t('rnd_court',{n:m.court}):'';
   const myBadge=isMyMatch?`<span class="am-court-my-badge">${t('my_match_lbl')}</span>`:'';
