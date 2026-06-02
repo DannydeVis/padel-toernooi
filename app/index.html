@@ -169,7 +169,7 @@ body.light .rbtn.active{background:var(--accent);color:#0E1114}
 /* SETUP */
 #screen-setup{display:block}
 #screen-tournament{display:none}
-.setup-box{background:var(--surface);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:600px;margin:0 auto}
+.setup-box{padding:16px;max-width:600px;margin:0 auto}
 .setup-box h2{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;margin-bottom:4px}
 .setup-box p{color:var(--txt2);font-size:.86rem;margin-bottom:16px}
 textarea{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.8;padding:12px 14px;resize:vertical;min-height:180px;outline:none}
@@ -194,6 +194,23 @@ textarea::placeholder{color:rgba(255,255,255,.18)}
 .grp-chip-action{background:none;border:none;cursor:pointer;padding:5px 7px;font-size:.75rem;color:var(--txt2);transition:.12s}
 .grp-chip-action:hover{color:var(--txt);background:rgba(255,255,255,.06)}
 .grp-empty{font-size:.82rem;color:var(--txt2);padding:4px 0}
+.setup-intro{margin-bottom:18px}
+.setup-intro-sub{color:var(--txt2);font-size:.88rem;margin-top:2px}
+.setup-card{background:var(--surface2);border-radius:12px;padding:14px 16px 16px;margin-bottom:8px}
+.setup-card-hdr{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.setup-card-icon{width:16px;height:16px;color:var(--accent);flex-shrink:0}
+.setup-card-step{font-size:.75rem;font-weight:700;color:var(--txt2)}
+.setup-card-title{font-size:.88rem;font-weight:700;color:var(--txt)}
+.setup-card-sub{color:var(--txt2);font-size:.8rem;margin-bottom:10px}
+.setup-row-lbl{display:block;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:6px;margin-top:12px}
+.mode-toggle-btns{display:flex;gap:8px}
+.mode-toggle-btns .btn{flex:1}
+.mode-btn-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left}
+.btn-sub{display:block;font-size:.67rem;font-weight:500;opacity:.65;letter-spacing:0;text-transform:none}
+.setup-actions{display:flex;gap:8px;margin-top:12px;margin-bottom:6px}
+.setup-btn-start{flex:1.5}
+.setup-btn-shuffle{flex:1}
+body.light .setup-card{background:#f3f4f6}
 
 /* TABS */
 .tabs{display:flex;gap:3px;background:var(--bg)}
@@ -856,17 +873,31 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 <!-- SETUP -->
 <div id="screen-setup">
   <div class="setup-box">
-    <h2 id="setup-box-title" data-i18n="set_title_team">Teams instellen</h2>
 
-    <!-- Toernooinaam -->
-    <div class="rules-row">
-      <span class="rules-lbl" data-i18n="set_lbl_name">Naam</span>
+    <!-- Intro -->
+    <div class="setup-intro">
+      <h2 id="setup-box-title" data-i18n="set_title_team">Teams instellen</h2>
+      <p class="setup-intro-sub" data-i18n="set_intro_sub">Maak en speel je toernooi in een paar stappen.</p>
+    </div>
+
+    <!-- Card 1: Toernooinaam -->
+    <div class="setup-card">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg>
+        <span class="setup-card-step">1.</span>
+        <span class="setup-card-title" data-i18n="set_lbl_name">Toernooi</span>
+      </div>
       <input id="inp-tname" class="tname-input" type="text" data-i18n-ph="set_ph_name" placeholder="Toernooinaam (optioneel)" maxlength="48" oninput="tournamentName=this.value.trim()">
     </div>
 
-    <!-- Banen -->
-    <div class="rules-row" id="rules-courts-row">
-      <span class="rules-lbl" data-i18n="set_lbl_courts">Banen</span>
+    <!-- Card 2: Banen -->
+    <div class="setup-card" id="rules-courts-row">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg>
+        <span class="setup-card-step">2.</span>
+        <span class="setup-card-title" data-i18n="set_lbl_courts">Banen</span>
+      </div>
+      <p class="setup-card-sub" data-i18n="set_sub_courts">Kies het aantal beschikbare banen.</p>
       <div class="rules-opts" id="rules-courts">
         <button class="rbtn" onclick="setCourts(1)">1</button>
         <button class="rbtn active" onclick="setCourts(2)">2<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
@@ -875,9 +906,14 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       </div>
     </div>
 
-    <!-- Toernooi type -->
-    <div class="rules-row">
-      <span class="rules-lbl" data-i18n="set_lbl_type">Type</span>
+    <!-- Card 3: Type toernooi -->
+    <div class="setup-card">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg>
+        <span class="setup-card-step">3.</span>
+        <span class="setup-card-title" data-i18n="set_lbl_type">Type toernooi</span>
+      </div>
+      <p class="setup-card-sub" data-i18n="set_sub_type">Kies het speelformat dat bij jullie past.</p>
       <div class="rules-opts" id="rules-type">
         <button class="rbtn active" onclick="setTType('team')" id="rbtn-type-team">Team<span class="rbtn-sub" data-i18n="set_type_sub_team">vast koppel</span></button>
         <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
@@ -887,70 +923,115 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
       </div>
     </div>
 
-    <!-- Match formaat (team only) -->
-    <div class="rules-row" id="rules-gpm-row">
-      <span class="rules-lbl" data-i18n="set_lbl_format">Match formaat</span>
-      <div class="rules-opts" id="rules-gpm">
-        <button class="rbtn" onclick="setGpm(1)">1 game</button>
-        <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setGpm(5)">Best of 5</button>
+    <!-- Card 4: Match formaat -->
+    <div class="setup-card">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg>
+        <span class="setup-card-step">4.</span>
+        <span class="setup-card-title" data-i18n="set_lbl_format">Match formaat</span>
+      </div>
+      <p class="setup-card-sub" data-i18n="set_sub_format">Kies de lengte van de wedstrijden.</p>
+      <div id="rules-gpm-row">
+        <div class="rules-opts" id="rules-gpm">
+          <button class="rbtn" onclick="setGpm(1)">1 game</button>
+          <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
+          <button class="rbtn" onclick="setGpm(5)">Best of 5</button>
+        </div>
+      </div>
+      <div id="rules-pts-row" style="display:none">
+        <span class="setup-row-lbl" data-i18n="set_lbl_pts">Punten/match</span>
+        <div class="rules-opts" id="rules-pts">
+          <button class="rbtn" onclick="setMatchPts(24)">24</button>
+          <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
+          <button class="rbtn" onclick="setMatchPts(40)">40</button>
+        </div>
+      </div>
+      <div id="rules-timer-row" style="display:none">
+        <span class="setup-row-lbl" data-i18n="set_lbl_timer">Timer/ronde</span>
+        <div class="rules-opts" id="rules-timer">
+          <button class="rbtn active" onclick="setTimerMins(0)" data-i18n="set_timer_off">Geen</button>
+          <button class="rbtn" onclick="setTimerMins(15)">15 min</button>
+          <button class="rbtn" onclick="setTimerMins(20)">20 min</button>
+          <button class="rbtn" onclick="setTimerMins(30)">30 min</button>
+        </div>
       </div>
     </div>
 
-    <!-- Punten per match (americano only) -->
-    <div class="rules-row" id="rules-pts-row" style="display:none">
-      <span class="rules-lbl" data-i18n="set_lbl_pts">Punten/match</span>
-      <div class="rules-opts" id="rules-pts">
-        <button class="rbtn" onclick="setMatchPts(24)">24</button>
-        <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setMatchPts(40)">40</button>
+    <!-- Card 5: Teams samenstellen (verborgen voor Americano types) -->
+    <div class="setup-card" id="mode-toggle-row">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg>
+        <span class="setup-card-step">5.</span>
+        <span class="setup-card-title" data-i18n="set_card_teams">Teams samenstellen</span>
+      </div>
+      <p class="setup-card-sub" data-i18n="set_sub_teams">Voeg spelers toe en maak teams automatisch of zelf.</p>
+      <div class="mode-toggle-btns">
+        <button class="btn btn-green" id="mode-auto-btn" onclick="setMode('auto')">
+          <svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg>
+          <span class="mode-btn-text">
+            <span data-i18n="set_btn_auto">Spelersnamen invoeren</span>
+            <span class="btn-sub" data-i18n="set_btn_auto_sub">App maakt duo's en trio's</span>
+          </span>
+        </button>
+        <button class="btn btn-ghost" id="mode-manual-btn" onclick="setMode('manual')">
+          <svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg>
+          <span class="mode-btn-text">
+            <span data-i18n="set_btn_manual">Teams zelf invoeren</span>
+            <span class="btn-sub" data-i18n="set_btn_manual_sub">Zelf teams samenstellen</span>
+          </span>
+        </button>
       </div>
     </div>
 
-    <!-- Timer per ronde (americano only) -->
-    <div class="rules-row" id="rules-timer-row" style="display:none">
-      <span class="rules-lbl" data-i18n="set_lbl_timer">Timer/ronde</span>
-      <div class="rules-opts" id="rules-timer">
-        <button class="rbtn active" onclick="setTimerMins(0)" data-i18n="set_timer_off">Geen</button>
-        <button class="rbtn" onclick="setTimerMins(15)">15 min</button>
-        <button class="rbtn" onclick="setTimerMins(20)">20 min</button>
-        <button class="rbtn" onclick="setTimerMins(30)">30 min</button>
+    <!-- Card 6: Spelers (AUTO mode) -->
+    <div class="setup-card" id="mode-auto">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg>
+        <span class="setup-card-step">6.</span>
+        <span class="setup-card-title" data-i18n="set_card_players">Spelers toevoegen</span>
       </div>
-    </div>
-
-    <!-- Mode toggle (team only) -->
-    <div id="mode-toggle-row" style="display:flex;gap:8px;margin-bottom:18px;">
-      <button class="btn btn-green btn-sm" id="mode-auto-btn" onclick="setMode('auto')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg> <span data-i18n="set_btn_auto">Spelersnamen invoeren</span></button>
-      <button class="btn btn-ghost btn-sm" id="mode-manual-btn" onclick="setMode('manual')" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="set_btn_manual">Teams zelf invoeren</span></button>
-    </div>
-
-    <div id="saved-groups-wrap"></div>
-
-    <!-- AUTO MODE: player names -->
-    <div id="mode-auto">
-      <p id="mode-auto-desc" style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
       <div id="ta-pairs-section" style="display:none">
         <div id="ta-pairs-wrap"></div>
-        <button class="btn btn-ghost btn-sm" onclick="addTAPairRow()" style="width:100%;margin-top:8px" data-i18n="ta_add_pair">+ Koppel toevoegen</button>
+        <button class="btn btn-ghost btn-sm" onclick="addTAPairRow()" style="width:100%;margin-bottom:10px" data-i18n="ta_add_pair">+ Koppel toevoegen</button>
       </div>
       <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
+      <p class="setup-card-sub" id="mode-auto-desc" style="margin-top:6px;margin-bottom:0" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
       <div class="nc" id="nc"></div>
-      <div class="setup-btns">
-        <button class="btn btn-green" id="btn-start-main" onclick="doStartAny()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
-        <button class="btn btn-ghost" id="btn-shuffle" onclick="doShuffle()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg> <span data-i18n="set_btn_shuffle">Schudden</span></button>
-      </div>
-      <div class="pgrid" id="prev"></div>
     </div>
 
-    <!-- MANUAL MODE: team names directly -->
-    <div id="mode-manual" style="display:none">
-      <p style="color:var(--txt2);font-size:.86rem;margin-bottom:12px" data-i18n-html="set_desc_manual">Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.</p>
-      <textarea id="ta-manual" data-i18n-ph="set_ph_manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
-      <div class="nc" id="nc-manual"></div>
-      <div class="setup-btns">
-        <button class="btn btn-green" onclick="doStartManual()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg> <span data-i18n="set_btn_start">Starten</span></button>
+    <!-- Card 6: Teams (MANUAL mode) -->
+    <div class="setup-card" id="mode-manual" style="display:none">
+      <div class="setup-card-hdr">
+        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg>
+        <span class="setup-card-step">6.</span>
+        <span class="setup-card-title" data-i18n="set_card_players">Teams invoeren</span>
       </div>
+      <textarea id="ta-manual" data-i18n-ph="set_ph_manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
+      <p class="setup-card-sub" style="margin-top:6px;margin-bottom:0" data-i18n-html="set_desc_manual">Één teamnaam per regel...</p>
+      <div class="nc" id="nc-manual"></div>
     </div>
+
+    <!-- Opgeslagen groepen -->
+    <div id="saved-groups-wrap"></div>
+
+    <!-- Actie-knoppen -->
+    <div class="setup-actions">
+      <button class="btn btn-green setup-btn-start" id="btn-start-main" onclick="doStartCurrent()">
+        <svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg>
+        <span class="mode-btn-text">
+          <span data-i18n="set_btn_start">Starten</span>
+          <span class="btn-sub" data-i18n="set_btn_start_sub">Toernooi starten</span>
+        </span>
+      </button>
+      <button class="btn btn-ghost setup-btn-shuffle" id="btn-shuffle" onclick="doShuffle()">
+        <svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg>
+        <span class="mode-btn-text">
+          <span data-i18n="set_btn_shuffle">Schudden</span>
+          <span class="btn-sub" data-i18n="set_btn_shuffle_sub">Teams opnieuw indelen</span>
+        </span>
+      </button>
+    </div>
+    <div class="pgrid" id="prev"></div>
 
   </div>
 </div>
@@ -1090,7 +1171,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.36.7';
+const APP_VERSION = 'v1.37.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1135,6 +1216,7 @@ nl:{
   set_desc_auto_am:'Één naam per regel. Minimaal 4 spelers. Bij oneven aantal (5, 7, 9…): 1 speler heeft elke ronde een bye. Partners wisselen elke ronde.',
   set_ph_auto:'Voer namen in...',set_ph_manual:'Voer teamnamen in...',
   set_desc_manual:'Één teamnaam per regel. Gebruik <b style="color:var(--accent)">/</b> voor een trio, <b style="color:var(--accent)">&</b> voor een duo — of typ gewoon een naam.',
+  set_intro_sub:'Maak en speel je toernooi in een paar stappen.',set_sub_courts:'Kies het aantal beschikbare banen.',set_sub_type:'Kies het speelformat dat bij jullie past.',set_sub_format:'Kies de lengte van de wedstrijden.',set_card_teams:'Teams samenstellen',set_sub_teams:'Voeg spelers toe en maak teams automatisch of zelf.',set_card_players:'Spelers toevoegen',set_btn_auto_sub:"App maakt duo's en trio's",set_btn_manual_sub:'Zelf teams samenstellen',set_btn_start_sub:'Toernooi starten',set_btn_shuffle_sub:'Teams opnieuw indelen',
   set_btn_start:'Starten',set_btn_shuffle:'Schudden',set_default:'standaard',
   val_min_teams:'{n} team — minimaal 2 nodig',val_ok_teams:'✓ {n} teams klaar',
   val_need2:'Voer minimaal 2 teams in.',
@@ -1206,6 +1288,7 @@ en:{
   set_desc_auto_am:'One name per line. Minimum 4 players. With an odd count (5, 7, 9…): 1 player gets a bye each round. Partners rotate each round.',
   set_ph_auto:'Enter names...',set_ph_manual:'Enter team names...',
   set_desc_manual:'One team name per line. Use <b style="color:var(--accent)">/</b> for a trio, <b style="color:var(--accent)">&</b> for a pair — or just type a name.',
+  set_intro_sub:'Create and play your tournament in a few steps.',set_sub_courts:'Choose the number of available courts.',set_sub_type:'Choose the format that fits your group.',set_sub_format:'Choose the length of the matches.',set_card_teams:'Set up teams',set_sub_teams:'Add players and create teams automatically or manually.',set_card_players:'Add players',set_btn_auto_sub:'App creates pairs and trios',set_btn_manual_sub:'Manually configure teams',set_btn_start_sub:'Start tournament',set_btn_shuffle_sub:'Reshuffle teams',
   set_btn_start:'Start',set_btn_shuffle:'Shuffle',set_default:'default',
   val_min_teams:'{n} team — minimum 2 needed',val_ok_teams:'✓ {n} teams ready',
   val_need2:'Enter at least 2 teams.',
@@ -1277,6 +1360,7 @@ fr:{
   set_desc_auto_am:'Un nom par ligne. Minimum 4 joueurs. Avec un nombre impair (5, 7, 9…) : 1 joueur est exempt par manche. Les partenaires changent chaque manche.',
   set_ph_auto:'Entrez les noms...',set_ph_manual:"Entrez les noms d'équipes...",
   set_desc_manual:'Un nom d\'équipe par ligne. Utilisez <b style="color:var(--accent)">/</b> pour un trio, <b style="color:var(--accent)">&</b> pour une paire — ou tapez simplement un nom.',
+  set_intro_sub:'Créez et jouez votre tournoi en quelques étapes.',set_sub_courts:'Choisissez le nombre de courts disponibles.',set_sub_type:'Choisissez le format adapté à votre groupe.',set_sub_format:'Choisissez la durée des matchs.',set_card_teams:'Constituer les équipes',set_sub_teams:'Ajoutez des joueurs et créez des équipes auto. ou manuellement.',set_card_players:'Ajouter des joueurs',set_btn_auto_sub:'L\'app crée les paires et trios',set_btn_manual_sub:'Configurer les équipes manuellement',set_btn_start_sub:'Lancer le tournoi',set_btn_shuffle_sub:'Redistribuer les équipes',
   set_btn_start:'Démarrer',set_btn_shuffle:'Mélanger',set_default:'défaut',
   val_min_teams:'{n} équipe — minimum 2 nécessaire',val_ok_teams:'✓ {n} équipes prêtes',
   val_need2:'Saisissez au moins 2 équipes.',
@@ -1346,6 +1430,7 @@ de:{
   set_desc_auto_am:'Ein Name pro Zeile. Mindestens 4 Spieler. Bei ungerader Anzahl (5, 7, 9…): 1 Spieler hat jede Runde Freilos. Partner wechseln jede Runde.',
   set_ph_auto:'Namen eingeben...',set_ph_manual:'Teamnamen eingeben...',
   set_desc_manual:'Ein Teamname pro Zeile. Verwende <b style="color:var(--accent)">/</b> für ein Trio, <b style="color:var(--accent)">&</b> für ein Paar — oder gib einfach einen Namen ein.',
+  set_intro_sub:'Erstelle und spiele dein Turnier in wenigen Schritten.',set_sub_courts:'Wähle die Anzahl der verfügbaren Courts.',set_sub_type:'Wähle das Format, das zu eurer Gruppe passt.',set_sub_format:'Wähle die Länge der Spiele.',set_card_teams:'Teams zusammenstellen',set_sub_teams:'Spieler hinzufügen und Teams auto. oder manuell erstellen.',set_card_players:'Spieler hinzufügen',set_btn_auto_sub:'App erstellt Paare und Trios',set_btn_manual_sub:'Teams manuell zusammenstellen',set_btn_start_sub:'Turnier starten',set_btn_shuffle_sub:'Teams neu einteilen',
   set_btn_start:'Starten',set_btn_shuffle:'Mischen',set_default:'Standard',
   val_min_teams:'{n} Team — mindestens 2 erforderlich',val_ok_teams:'✓ {n} Teams bereit',
   val_need2:'Mindestens 2 Teams eingeben.',
@@ -1415,6 +1500,7 @@ es:{
   set_desc_auto_am:'Un nombre por línea. Mínimo 4 jugadores. Con número impar (5, 7, 9…): 1 jugador descansa cada ronda. Las parejas rotan cada ronda.',
   set_ph_auto:'Introduce nombres...',set_ph_manual:'Introduce nombres de equipos...',
   set_desc_manual:'Un nombre de equipo por línea. Usa <b style="color:var(--accent)">/</b> para un trío, <b style="color:var(--accent)">&</b> para una pareja — o simplemente escribe un nombre.',
+  set_intro_sub:'Crea y juega tu torneo en pocos pasos.',set_sub_courts:'Elige el número de pistas disponibles.',set_sub_type:'Elige el formato que mejor se adapte a tu grupo.',set_sub_format:'Elige la duración de los partidos.',set_card_teams:'Configurar equipos',set_sub_teams:'Añade jugadores y crea equipos auto. o manualmente.',set_card_players:'Añadir jugadores',set_btn_auto_sub:'La app crea parejas y tríos',set_btn_manual_sub:'Configurar equipos manualmente',set_btn_start_sub:'Iniciar torneo',set_btn_shuffle_sub:'Redistribuir equipos',
   set_btn_start:'Iniciar',set_btn_shuffle:'Mezclar',set_default:'por defecto',
   val_min_teams:'{n} equipo — mínimo 2 necesario',val_ok_teams:'✓ {n} equipos listos',
   val_need2:'Introduce al menos 2 equipos.',
@@ -1484,6 +1570,7 @@ sv:{
   set_desc_auto_am:'Ett namn per rad. Minst 4 spelare. Med ojämnt antal (5, 7, 9…): 1 spelare vilar per runda. Partners roterar varje runda.',
   set_ph_auto:'Ange namn...',set_ph_manual:'Ange lagnamn...',
   set_desc_manual:'Ett lagnamn per rad. Använd <b style="color:var(--accent)">/</b> för en trio, <b style="color:var(--accent)">&</b> för ett par — eller skriv bara ett namn.',
+  set_intro_sub:'Skapa och spela ditt turnering i några steg.',set_sub_courts:'Välj antal tillgängliga banor.',set_sub_type:'Välj det format som passar er grupp.',set_sub_format:'Välj matchernas längd.',set_card_teams:'Sätt ihop lag',set_sub_teams:'Lägg till spelare och skapa lag automatiskt eller manuellt.',set_card_players:'Lägg till spelare',set_btn_auto_sub:'Appen skapar par och trior',set_btn_manual_sub:'Konfigurera lag manuellt',set_btn_start_sub:'Starta turnering',set_btn_shuffle_sub:'Dela om lagen',
   set_btn_start:'Starta',set_btn_shuffle:'Blanda',set_default:'standard',
   val_min_teams:'{n} lag — minst 2 krävs',val_ok_teams:'✓ {n} lag redo',
   val_need2:'Ange minst 2 lag.',
@@ -1644,7 +1731,7 @@ function setTType(typ){
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
   $('rules-timer-row').style.display = isAm ? '' : 'none';
-  $('mode-toggle-row').style.display = isAm ? 'none' : 'flex';
+  $('mode-toggle-row').style.display = isAm ? 'none' : '';
   const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
   const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':'set_desc_auto_team';
@@ -1684,6 +1771,10 @@ function setCourts(n){
   document.querySelectorAll('#rules-courts .rbtn').forEach((b,i)=>b.classList.toggle('active',i===n-1));
 }
 
+function doStartCurrent(){
+  if($('mode-manual').style.display!=='none') doStartManual();
+  else doStartAny();
+}
 function doStartAny(){
   if(mode==='americano') return startAmericano();
   if(mode==='mexicano') return startMexicano();
