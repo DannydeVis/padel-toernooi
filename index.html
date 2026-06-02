@@ -566,6 +566,7 @@
     .hero-perks{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
     .hero-perk{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--txt2)}
     .hero-perk svg{flex-shrink:0;opacity:.7}
+    .scenario-line{text-align:center;color:var(--txt2);font-size:.9rem;padding:28px 24px 0;border-top:1px solid var(--bdr)}
     .trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:16px 24px;font-size:.82rem;color:var(--txt2);border-bottom:1px solid var(--bdr)}
     .trust-sep{color:var(--bdr);font-size:1rem}
     @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
@@ -609,9 +610,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     Gratis · Geen account · Offline werkt ook
   </div>
 
-  <h1>Geen account. Geen gedoe. <em>Gewoon spelen.</em></h1>
+  <h1>16 namen. 3 banen. <em>Één middag padelplezier.</em></h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Toernooi aanmaken in 30 seconden. Spelers vullen scores in via de link, live standen op elke telefoon en fullscreen tv-scorebord — gratis inbegrepen.</p>
+  <p class="hero-sub">Typ de spelersnamen in — PadelBracket maakt de koppels, het schema en de live tussenstand. Jij speelt, de app bijhoudt. Gratis, geen account.</p>
 
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
@@ -626,12 +627,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       Hoe werkt het?
     </a>
   </div>
-  <div class="hero-perks">
-    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Live tv-scorebord</div>
-    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Spelers vullen scores in</div>
-    <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
-  </div>
-  <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
+  <p class="hero-note">Offline werkt ook · Voeg toe aan beginscherm · 6 talen</p>
 </section>
 
 <!-- MOCKUP -->
@@ -734,19 +730,12 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </div>
 
 <!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Toernooi opzetten</div></div>
-  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Toernooiformats</div></div>
-  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Talen ondersteund</div></div>
-  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratis, geen account</div></div>
-</div>
+<p class="scenario-line">Werkt voor 4 vrienden in het park én voor een clubtoernooi met 24 spelers op zaterdag — zelfde app, geen setup.</p>
 
 <div class="trust-bar">
-  <span>Gebruikt door padelclubs door heel Europa</span>
+  <span>Geen account. Geen installatie.</span>
   <span class="trust-sep">·</span>
-  <span>Beschikbaar in 40+ landen</span>
-  <span class="trust-sep">·</span>
-  <span>Werkt op elk apparaat, ook offline</span>
+  <span>Offline werkt ook — zelfs als de wifi op de baan wegvalt.</span>
 </div>
 
 <!-- QR JOIN -->
@@ -871,8 +860,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- FEATURES -->
 <section class="section">
-  <h2 class="section-title">Alles wat je nodig hebt</h2>
-  <p class="section-sub">Van namen invoeren tot eindstand exporteren — de app regelt de rest automatisch.</p>
+  <h2 class="section-title">Minder gedoe op de baan</h2>
+  <p class="section-sub">Iedereen heeft weleens geprobeerd een Americano bij te houden in een WhatsApp-groep. Dit werkt beter.</p>
   <div class="features">
     <div class="feature">
       <div class="feature-icon" style="background:rgba(199,255,94,.12)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v10a6 6 0 0 1-12 0V2z"/><path d="M6 7H2a4 4 0 0 0 4 4"/><path d="M18 7h4a4 4 0 0 1-4 4"/><path d="M12 18v-2"/><path d="M9 22h6"/></svg></div>
@@ -945,8 +934,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- HOW IT WORKS -->
 <section class="section" id="hoe-werkt-het">
-  <h2 class="section-title">Klaar in 4 stappen</h2>
-  <p class="section-sub">In minder dan een minuut heb je een volledig toernooi klaarstaan.</p>
+  <h2 class="section-title">Zo werkt het in de praktijk</h2>
+  <p class="section-sub">Typ namen, kies een format, speel.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
@@ -956,7 +945,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step">
       <div class="step-num">2</div>
       <h4>Format kiezen</h4>
-      <p>Americano, Mexicano, Knockout of Round Robin — kies wat past bij je groep.</p>
+      <p>Twijfel je? Kies Americano — dat werkt altijd.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
@@ -1088,8 +1077,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- CTA -->
 <section class="cta-wrap">
-  <h2>Klaar om te spelen?</h2>
-  <p>Open de app, voer de namen in en start je toernooi. Gratis en altijd beschikbaar.</p>
+  <h2>Eén telefoon. Iedereen speelt.</h2>
+  <p>Typ de namen in en start. Het duurt 60 seconden — de rest van de middag is voor het spelen.</p>
   <a class="btn-primary" href="/app/" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     Start nu gratis
