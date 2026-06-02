@@ -167,19 +167,28 @@
     .mock-rank-pos { font-size:.75rem; font-weight:800; width:18px; color:var(--txt2); }
     .mock-rank-name { font-size:.82rem; font-weight:600; flex:1; }
     .mock-rank-pts { font-size:.82rem; font-weight:800; color:var(--accent); }
-    .stats-bar { display:flex; justify-content:center; gap:48px; padding:40px 24px; flex-wrap:wrap; border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr); margin:0 0 80px; }
-    .stat { text-align:center; }
-    .stat-n { font-family:'Inter',sans-serif; font-weight:900; font-size:2.6rem; color:var(--accent); line-height:1; }
-    .stat-lbl { font-size:.82rem; color:var(--txt2); margin-top:4px; }
     .section { max-width:1100px; margin:0 auto; padding:0 24px 100px; }
     .section-title { font-family:'Inter',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,3rem); text-align:center; margin-bottom:12px; }
     .section-sub { text-align:center; color:var(--txt2); max-width:480px; margin:0 auto 56px; }
-    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-    .feature { background:var(--surface); border:1px solid var(--bdr); border-radius:16px; padding:28px; transition:border-color .2s,transform .2s; }
-    .feature:hover { border-color:rgba(199,255,94,.3); transform:translateY(-2px); }
-    .feature-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; font-size:1.4rem; }
-    .feature h3 { font-family:'Inter',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:.3px; margin-bottom:8px; }
-    .feature p { font-size:.92rem; color:var(--txt2); line-height:1.6; }
+    /* Founder */
+    .founder-block{padding:56px 24px;border-bottom:1px solid var(--bdr)}
+    .founder-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:160px 1fr;gap:40px;align-items:start}
+    .founder-avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;background:var(--surface2);border:2px solid var(--bdr)}
+    .founder-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .founder-eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+    .founder-body{color:var(--txt2);font-size:.95rem;line-height:1.75;margin:0}
+    @media(max-width:640px){.founder-inner{grid-template-columns:1fr;gap:24px;text-align:center}.founder-avatar{margin:0 auto}}
+    /* Feature columns */
+    .fc-section{padding:48px 24px 56px;border-bottom:1px solid var(--bdr)}
+    .fc-inner{max-width:1000px;margin:0 auto}
+    .fc-title{font-size:1.1rem;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:28px}
+    .fc-list{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px}
+    .fc-item{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+    .fc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+    .fc-icon svg{width:20px;height:20px}
+    .fc-text h3{font-size:.95rem;font-weight:700;margin-bottom:6px;color:var(--txt)}
+    .fc-text p{font-size:.83rem;color:var(--txt2);line-height:1.6;margin:0}
+    @media(max-width:760px){.fc-list{grid-template-columns:1fr;gap:24px}}
     .screenshots-section { max-width:1200px; margin:0 auto; padding:0 24px 100px; }
     .screens-grid { display:flex; justify-content:center; align-items:flex-end; gap:24px; margin-top:56px; overflow-x:auto; padding:0 32px 16px; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; scrollbar-width:none; }
     .screens-grid::-webkit-scrollbar { display:none; }
@@ -217,7 +226,7 @@
     .faq-item p { padding:0 20px 18px; color:var(--txt2); line-height:1.65; }
     footer { border-top:1px solid var(--bdr); padding:32px 24px; text-align:center; color:var(--txt2); font-size:.82rem; }
     footer a { color:var(--accent); text-decoration:none; }
-    @media (max-width: 640px) { .formats { grid-template-columns:1fr; } .mock-sidebar { display:none; } .steps { grid-template-columns:1fr 1fr; } .step:not(:last-child)::after { display:none; } .stats-bar { gap:28px; } }
+    @media (max-width: 640px) { .formats { grid-template-columns:1fr; } .mock-sidebar { display:none; } .steps { grid-template-columns:1fr 1fr; } .step:not(:last-child)::after { display:none; } }
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
     #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
@@ -309,23 +318,77 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Durée d'installation</div></div>
-  <div class="stat"><div class="stat-n">4</div><div class="stat-lbl">Formats de tournoi</div></div>
-  <div class="stat"><div class="stat-n">6</div><div class="stat-lbl">Langues</div></div>
-  <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Gratuit, sans compte</div></div>
-</div>
+<!-- FOUNDER -->
+<section class="founder-block">
+  <div class="founder-inner">
+    <div class="founder-photo-wrap">
+      <div class="founder-avatar">
+        <img src="/photos/founder.jpg" alt="Fondateur PadelBracket" loading="lazy">
+      </div>
+    </div>
+    <div class="founder-text-col">
+      <span class="founder-eyebrow">La personne derriere PadelBracket</span>
+      <p class="founder-body">[Votre histoire. Ajoutez ici 2 a 4 phrases sur pourquoi vous avez cree PadelBracket et ce que le padel represente pour vous.]</p>
+    </div>
+  </div>
+</section>
 
-<section class="section">
-  <h2 class="section-title">Tout ce dont vous avez besoin</h2>
-  <p class="section-sub">De la saisie des noms à l'export du classement final — l'app gère le reste automatiquement.</p>
-  <div class="features">
-    <div class="feature"><div class="feature-icon" style="background:rgba(199,255,94,.12)">🏆</div><h3>Quatre formats de tournoi</h3><p>Bracket knockout (groupes + finale), Americano (partenaires tournants), Mexicano (partenaires selon le classement) et Round Robin (tous contre tous). Choisissez selon votre groupe.</p></div>
-    <div class="feature"><div class="feature-icon" style="background:rgba(59,130,246,.1)">📺</div><h3>Mode présentation</h3><p>Ouvrez un tableau de score plein écran sur une TV ou un projecteur. Tous les matchs actifs et le classement en direct sont visibles par tous — mise à jour toutes les 3 secondes.</p></div>
-    <div class="feature"><div class="feature-icon" style="background:rgba(139,92,246,.1)">🔗</div><h3>Suivi en direct sur téléphone</h3><p>Partagez un lien avec les participants. Ils voient le classement et les scores en direct sur leur téléphone — sans compte ni installation.</p></div>
-    <div class="feature"><div class="feature-icon" style="background:rgba(251,191,36,.1)">📤</div><h3>Export CSV &amp; PDF</h3><p>Téléchargez le classement final et tous les résultats en CSV pour Excel, ou imprimez en PDF. Pratique comme souvenir ou pour l'administration du club.</p></div>
-    <div class="feature"><div class="feature-icon" style="background:rgba(239,68,68,.1)">📱</div><h3>Installable, fonctionne hors ligne</h3><p>Ajoutez l'app à votre écran d'accueil — fonctionne sans internet. Sans App Store, sans compte, sans mot de passe.</p></div>
-    <div class="feature"><div class="feature-icon" style="background:rgba(199,255,94,.12)">🌍</div><h3>6 langues, automatique</h3><p>Néerlandais, Anglais, Français, Allemand, Espagnol et Suédois. L'app détecte automatiquement la langue de votre appareil — idéal pour les groupes internationaux.</p></div>
+<!-- FEATURES-A -->
+<section class="fc-section">
+  <div class="fc-inner">
+    <h2 class="fc-title">Formats et utilisation hors ligne</h2>
+    <div class="fc-list">
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(199,255,94,.12)">🏆</div>
+        <div class="fc-text">
+          <h3>Quatre formats de tournoi</h3>
+          <p>Bracket knockout (groupes + finale), Americano (partenaires tournants), Mexicano (partenaires selon le classement) et Round Robin (tous contre tous). Choisissez selon votre groupe.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(59,130,246,.12)">📱</div>
+        <div class="fc-text">
+          <h3>Installable, fonctionne hors ligne</h3>
+          <p>Ajoutez l'app a votre ecran d'accueil — fonctionne sans internet. Sans App Store, sans compte, sans mot de passe.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(168,85,247,.12)">🌍</div>
+        <div class="fc-text">
+          <h3>6 langues, automatique</h3>
+          <p>Neerlandais, Anglais, Francais, Allemand, Espagnol et Suedois. L'app detecte automatiquement la langue de votre appareil — ideal pour les groupes internationaux.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FEATURES-B -->
+<section class="fc-section">
+  <div class="fc-inner">
+    <h2 class="fc-title">Presentation, scores et export</h2>
+    <div class="fc-list">
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(239,68,68,.12)">📺</div>
+        <div class="fc-text">
+          <h3>Mode presentation</h3>
+          <p>Ouvrez un tableau de score plein ecran sur une TV ou un projecteur. Tous les matchs actifs et le classement en direct sont visibles par tous — mise a jour toutes les 3 secondes.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(34,197,94,.12)">🔗</div>
+        <div class="fc-text">
+          <h3>Suivi en direct sur telephone</h3>
+          <p>Partagez un lien avec les participants. Ils voient le classement et les scores en direct sur leur telephone — sans compte ni installation.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(251,191,36,.12)">📤</div>
+        <div class="fc-text">
+          <h3>Export CSV &amp; PDF</h3>
+          <p>Telechargez le classement final et tous les resultats en CSV pour Excel, ou imprimez en PDF. Pratique comme souvenir ou pour l'administration du club.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
