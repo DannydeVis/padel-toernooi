@@ -409,9 +409,10 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-match.my-match{border-top:2px solid rgba(204,244,33,.5);background:rgba(204,244,33,.03)}
 .am-team.my-side{color:var(--accent);font-weight:800}
 /* Court cards (viewMode active round) */
-.am-court-card{background:var(--surface);border-radius:14px;margin-bottom:10px;border:1px solid var(--bdr)}
+.am-court-card{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--bdr)}
 .am-court-card.my-match{border-color:rgba(199,255,94,.4);background:rgba(199,255,94,.03)}
-.am-court-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--surface2);border-radius:13px 13px 0 0}
+.am-court-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--surface2)}
+.am-active-round-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 4px 8px;font-size:.78rem}
 .am-court-num{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt2)}
 .am-court-my-badge{font-size:.66rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent)}
 .am-court-card-body{padding:16px 14px}
@@ -1089,7 +1090,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.36.4';
+const APP_VERSION = 'v1.36.5';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3299,15 +3300,23 @@ function renderAmericano(){
         timerEl=`<button class="am-timer-btn" onclick="startRoundTimer(${ri})">${t('timer_start')}</button>`;
       }
     }
-    h+=`<div class="am-round${done?' am-round-done':''}">
-      <div class="am-round-hdr">
+    if(!done && ri===activeRoundIdx){
+      h+=`<div class="am-active-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
-        <span style="display:flex;align-items:center;gap:4px">
-          ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
-        </span>
+        <span style="display:flex;align-items:center;gap:4px">${timerEl}</span>
       </div>
-      ${matches.map(m=>renderAmMatch(m,ri===activeRoundIdx)).join('')}${byeHtml}
-    </div>`;
+      ${matches.map(m=>renderAmMatch(m,true)).join('')}${byeHtml}`;
+    } else {
+      h+=`<div class="am-round${done?' am-round-done':''}">
+        <div class="am-round-hdr">
+          <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
+          <span style="display:flex;align-items:center;gap:4px">
+            ${done?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
+          </span>
+        </div>
+        ${matches.map(m=>renderAmMatch(m,ri===activeRoundIdx)).join('')}${byeHtml}
+      </div>`;
+    }
   });
   h+=renderAmSt();
   $('am-rounds-wrap').innerHTML=h;
