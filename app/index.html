@@ -128,7 +128,7 @@ body.light .champ-wrap{background:#fff;border-top-color:#e5e7eb}
 .team-edit-btn:hover{opacity:1}
 .team-name-input{background:var(--surface2);border:1px solid var(--accent);border-radius:6px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.84rem;padding:3px 8px;width:calc(100% - 8px);outline:none}
 
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;touch-action:pan-x pan-y}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;touch-action:manipulation}
 button,a{touch-action:manipulation}
 .app{max-width:980px;margin:0 auto;padding:16px;background:var(--bg);min-height:100vh}
 
@@ -353,6 +353,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-sc-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1.3rem;font-weight:700;cursor:pointer;transition:.15s;touch-action:manipulation;display:flex;align-items:center;justify-content:center;line-height:1}
 .am-sc-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .am-sc-val{font-family:'Inter',sans-serif;font-weight:800;font-size:1.6rem;color:var(--card-txt);min-width:32px;text-align:center}
+.am-sc-input{background:none;border:none;border-bottom:2px solid var(--bdr);outline:none;width:52px;text-align:center;padding:2px 0;caret-color:var(--accent)}
+.am-sc-input:focus{border-bottom-color:var(--accent)}
 .am-sc-sep{color:var(--b-muted);font-size:1rem;padding:0 4px}
 .vs-readonly{opacity:.45}
 .am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
@@ -1060,7 +1062,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.35.5';
+const APP_VERSION = 'v1.35.6';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2637,7 +2639,7 @@ function renderTAMatch(m,isActive=true){
           <div class="am-score-ctrl">
             <div class="am-sc-side">
               <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','${mySide}',-1)">−</button>
-              <span class="am-sc-val" id="${ownId}">${ownVal}</span>
+              <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewTAAdjInput('${m.id}','${mySide}',this.value)">
               <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','${mySide}',1)">+</button>
             </div>
             <span class="am-sc-sep">—</span>
@@ -2935,6 +2937,8 @@ async function submitViewerScore(matchId,sa,sb){
   }
 }
 
+function _scoreSet(id,v){const el=$(id);if(!el)return;el.tagName==='INPUT'?el.value=v:el.textContent=v;}
+
 function viewAdj(matchId,side,delta){
   const m=AM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
@@ -2947,9 +2951,19 @@ function viewAdj(matchId,side,delta){
     vs.sb=Math.max(0,Math.min(R.matchPts,vs.sb+delta));
     vs.sa=R.matchPts-vs.sb;
   }
-  const saEl=$('vsa-'+matchId),sbEl=$('vsb-'+matchId);
-  if(saEl) saEl.textContent=vs.sa;
-  if(sbEl) sbEl.textContent=vs.sb;
+  _scoreSet('vsa-'+matchId,vs.sa); _scoreSet('vsb-'+matchId,vs.sb);
+  const foot=$('vsfoot-'+matchId);
+  if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
+}
+
+function viewAdjInput(matchId,side,val){
+  const m=AM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:R.matchPts,submitted:false};
+  const vs=viewerScores[matchId];
+  const n=Math.max(0,Math.min(R.matchPts,parseInt(val)||0));
+  if(side==='a'){vs.sa=n;vs.sb=R.matchPts-n;}else{vs.sb=n;vs.sa=R.matchPts-n;}
+  _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
   const foot=$('vsfoot-'+matchId);
   if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
 }
@@ -2966,9 +2980,19 @@ function viewTAAdj(matchId,side,delta){
     vs.sb=Math.max(0,Math.min(R.matchPts,vs.sb+delta));
     vs.sa=R.matchPts-vs.sb;
   }
-  const saEl=$('vsa-'+matchId),sbEl=$('vsb-'+matchId);
-  if(saEl) saEl.textContent=vs.sa;
-  if(sbEl) sbEl.textContent=vs.sb;
+  _scoreSet('vsa-'+matchId,vs.sa); _scoreSet('vsb-'+matchId,vs.sb);
+  const foot=$('vsfoot-'+matchId);
+  if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
+}
+
+function viewTAAdjInput(matchId,side,val){
+  const m=TAM.flat().find(x=>x.id===matchId);
+  if(!m||m.done) return;
+  if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:R.matchPts,submitted:false};
+  const vs=viewerScores[matchId];
+  const n=Math.max(0,Math.min(R.matchPts,parseInt(val)||0));
+  if(side==='a'){vs.sa=n;vs.sb=R.matchPts-n;}else{vs.sb=n;vs.sa=R.matchPts-n;}
+  _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
   const foot=$('vsfoot-'+matchId);
   if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
 }
@@ -3309,7 +3333,7 @@ function renderAmMatch(m,isActiveRound=true){
           <div class="am-score-ctrl">
             <div class="am-sc-side">
               <button class="am-sc-btn" onclick="viewAdj('${m.id}','${mySide}',-1)">−</button>
-              <span class="am-sc-val" id="${ownId}">${ownVal}</span>
+              <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewAdjInput('${m.id}','${mySide}',this.value)">
               <button class="am-sc-btn" onclick="viewAdj('${m.id}','${mySide}',1)">+</button>
             </div>
             <span class="am-sc-sep">—</span>
@@ -3342,19 +3366,6 @@ function renderAmMatch(m,isActiveRound=true){
     </div>`;
   }
   const pending=pendingFromCourt.find(p=>p.matchId===m.id);
-  if(playerScoring&&!m.done){
-    return `<div class="am-match${pending?' am-match-pending':''}" id="amm-${m.id}">
-      <div class="am-match-teams">
-        <span class="am-team">${tA}</span>
-        <span class="am-vs">vs</span>
-        <span class="am-team r">${tB}</span>
-      </div>
-      ${pending?`<div class="court-pending-badge">
-        <span class="court-pending-info">${t('court_pending_lbl')} — <span class="court-pending-score">${pending.sa}–${pending.sb}</span></span>
-        <button class="court-accept-btn" onclick="acceptCourtScore('${m.id}',${pending.sa},${pending.sb})">${t('court_accept')}</button>
-      </div>`:`<div class="am-waiting-lbl">${t('am_waiting_players')}</div>`}
-    </div>`;
-  }
   const pendingBadge=pending&&!viewMode?`<div class="court-pending-badge">
     <span class="court-pending-info">${t('court_pending_lbl')} — <span class="court-pending-score">${pending.sa}–${pending.sb}</span></span>
     <button class="court-accept-btn" onclick="acceptCourtScore('${m.id}',${pending.sa},${pending.sb})">${t('court_accept')}</button>
@@ -3383,6 +3394,7 @@ function renderAmMatch(m,isActiveRound=true){
       ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
     </div>
     ${pendingBadge}
+    ${playerScoring&&!pending?`<div class="am-waiting-lbl">${t('am_waiting_players')}</div>`:''}
   </div>`;
 }
 
