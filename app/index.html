@@ -456,7 +456,8 @@ body.light .dm-card{background:#fff;box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 .dm-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-top:2px}
 .dm-section{margin-top:14px}
 .dm-section-title{font-weight:700;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bdr)}
-.dm-actions{margin-top:18px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--bdr);padding-top:14px}
+.dm-actions{margin-bottom:18px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--bdr);padding-bottom:14px}
+.am-edit-icon{font-size:.75rem;opacity:.35;margin-left:3px}
 .dm-rename-row{display:flex;gap:8px}
 .dm-rename-input{flex:1;background:var(--surface2);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.9rem;padding:8px 10px;outline:none;min-width:0}
 .dm-rename-input:focus{border-color:var(--accent)}
@@ -1071,7 +1072,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.36.0';
+const APP_VERSION = 'v1.36.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3537,7 +3538,7 @@ function renderAmSt(){
   sorted.forEach((p,i)=>{
     const s=anyDone?getAmPlayerStats(p.id):{w:0,d:0,l:0};
     const pauseBadge=p.paused?` <span class="player-paused-badge">${t('player_paused')}</span>`:'';
-    const nameCell=viewMode?esc(p.name)+pauseBadge:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)}</button>${pauseBadge}`;
+    const nameCell=viewMode?esc(p.name)+pauseBadge:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)} <span class="am-edit-icon">✎</span></button>${pauseBadge}`;
     h+=`<tr${i===0&&!p.paused?' class="qq"':''}${p.paused?' class="am-player-paused"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td></tr>`;
   });
   const bar=anyDone?renderExportBar():'';
@@ -3638,6 +3639,15 @@ function openPlayerModal(pid){
   oppE.forEach(oid=>{const op=AP.find(x=>x.id===oid);if(!op)return;const r=s.opps[oid];oppRows+=`<tr><td>${esc(op.name)}</td><td class="wc">${r.w}</td><td style="color:var(--txt2)">${r.d}</td><td class="lc">${r.l}</td></tr>`;});
   $('dm-card').innerHTML=`
     <div class="dm-top"><span class="dm-title">${esc(p.name)}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    ${!viewMode?`<div class="dm-actions">
+      <div class="dm-rename-row">
+        <input type="text" class="dm-rename-input" id="dm-ri-${pid}" value="${esc(p.name)}" placeholder="${t('player_new_name')}">
+        <button class="dm-rename-btn" onclick="renamePlayer(${pid},$('dm-ri-${pid}').value)">${t('player_save')}</button>
+      </div>
+      <button class="dm-pause-btn${p.paused?' dm-pause-active':''}" onclick="${p.paused?`resumePlayer(${pid})`:`pausePlayer(${pid})`}">
+        ${p.paused?t('player_resume'):t('player_pause')}
+      </button>
+    </div>`:''}
     <div class="dm-hero">
       <div class="dm-stat"><div class="dm-stat-val">#${rank}</div><div class="dm-stat-lbl">${t('dm_rank')}</div></div>
       <div class="dm-stat"><div class="dm-stat-val wc">${p.pts}</div><div class="dm-stat-lbl">${t('am_col_pts')}</div></div>
@@ -3648,15 +3658,6 @@ function openPlayerModal(pid){
     </div>
     ${partRows?`<div class="dm-section"><div class="dm-section-title">${t('dm_partners')}</div><table class="st-tbl"><tr><th>${t('am_col_player')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>${partRows}</table></div>`:''}
     ${oppRows?`<div class="dm-section"><div class="dm-section-title">${t('dm_opponents')}</div><table class="st-tbl"><tr><th>${t('am_col_player')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>${oppRows}</table></div>`:''}
-    ${!viewMode?`<div class="dm-actions">
-      <div class="dm-rename-row">
-        <input type="text" class="dm-rename-input" id="dm-ri-${pid}" value="${esc(p.name)}" placeholder="${t('player_new_name')}">
-        <button class="dm-rename-btn" onclick="renamePlayer(${pid},$('dm-ri-${pid}').value)">${t('player_save')}</button>
-      </div>
-      <button class="dm-pause-btn${p.paused?' dm-pause-active':''}" onclick="${p.paused?`resumePlayer(${pid})`:`pausePlayer(${pid})`}">
-        ${p.paused?t('player_resume'):t('player_pause')}
-      </button>
-    </div>`:''}
   `;
   $('detail-modal').classList.remove('hidden');
 }
