@@ -354,9 +354,6 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-sc-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .am-sc-val{font-family:'Inter',sans-serif;font-weight:800;font-size:1.6rem;color:var(--card-txt);min-width:32px;text-align:center}
 .am-sc-sep{color:var(--b-muted);font-size:1rem;padding:0 4px}
-.vs-lbl{font-size:.65rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:4px;text-align:center}
-.viewer-own-side{display:flex;align-items:center;gap:10px}
-.viewer-opp-side{display:flex;flex-direction:column;align-items:center;gap:4px}
 .vs-readonly{opacity:.45}
 .am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
 .am-sc-prog{font-size:.74rem;color:var(--b-muted)}
@@ -1063,7 +1060,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.35.4';
+const APP_VERSION = 'v1.35.5';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2638,17 +2635,13 @@ function renderTAMatch(m,isActive=true){
             <span class="am-team r${!onA?' my-side':''}">${tB}</span>
           </div>
           <div class="am-score-ctrl">
-            <div class="viewer-own-side">
-              <div class="vs-lbl">${t('viewer_score_own')}</div>
+            <div class="am-sc-side">
               <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','${mySide}',-1)">−</button>
               <span class="am-sc-val" id="${ownId}">${ownVal}</span>
               <button class="am-sc-btn" onclick="viewTAAdj('${m.id}','${mySide}',1)">+</button>
             </div>
             <span class="am-sc-sep">—</span>
-            <div class="viewer-opp-side">
-              <div class="vs-lbl">${t('viewer_score_opp')}</div>
-              <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
-            </div>
+            <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
           </div>
           <div class="am-sc-footer" id="vsfoot-${m.id}">
             <button class="viewer-submit-btn" onclick="submitViewerScore('${m.id}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>
@@ -3314,17 +3307,13 @@ function renderAmMatch(m,isActiveRound=true){
             <span class="am-team r${!onA?' my-side':''}">${tB}</span>
           </div>
           <div class="am-score-ctrl">
-            <div class="viewer-own-side">
-              <div class="vs-lbl">${t('viewer_score_own')}</div>
+            <div class="am-sc-side">
               <button class="am-sc-btn" onclick="viewAdj('${m.id}','${mySide}',-1)">−</button>
               <span class="am-sc-val" id="${ownId}">${ownVal}</span>
               <button class="am-sc-btn" onclick="viewAdj('${m.id}','${mySide}',1)">+</button>
             </div>
             <span class="am-sc-sep">—</span>
-            <div class="viewer-opp-side">
-              <div class="vs-lbl">${t('viewer_score_opp')}</div>
-              <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
-            </div>
+            <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
           </div>
           <div class="am-sc-footer" id="vsfoot-${m.id}">
             <button class="viewer-submit-btn" onclick="submitViewerScore('${m.id}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>
