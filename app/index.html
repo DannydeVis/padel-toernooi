@@ -681,6 +681,14 @@ body.pres-mode #pres-screen{display:block}
 .pres-brk-score{font-size:1.4rem;font-weight:900;color:#C7FF5E;min-width:32px;text-align:right;flex-shrink:0}
 .pres-brk-row.winner .pres-brk-team{color:#C7FF5E}
 .pres-brk-row.lost .pres-brk-team{opacity:.4}
+.pres-champ-banner{background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.25);border-radius:14px;padding:22px 18px;margin-bottom:20px;text-align:center}
+.pres-champ-icon{color:#C7FF5E;display:flex;justify-content:center;margin-bottom:8px}
+.pres-champ-icon svg{width:36px;height:36px}
+.pres-champ-lbl{font-size:.72rem;font-weight:700;color:#C7FF5E;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.pres-champ-name{font-size:2rem;font-weight:900;color:#fff;line-height:1.2;word-break:break-word}
+.pres-consol-banner{border-top:1px solid rgba(199,255,94,.15);margin-top:14px;padding-top:14px}
+.pres-consol-lbl{font-size:.66rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px}
+.pres-consol-name{font-size:1.25rem;font-weight:800;color:rgba(255,255,255,.75);line-height:1.2}
 @media print{
   .stats-wrap{display:none!important}
 }
@@ -1189,7 +1197,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.39.0';
+const APP_VERSION = 'v1.39.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4502,7 +4510,22 @@ function initPresentation(){
           <div class="pres-brk-grid">${matches.map(_brkMatchCard).join('')}</div>
         </div>`;
       };
+      const wFinal=d.bracket.winners&&d.bracket.winners.length?d.bracket.winners[d.bracket.winners.length-1]:null;
+      const wChamp=wFinal&&wFinal.winner?(wFinal.winner==='A'?wFinal.a:wFinal.b):null;
+      const nonByeLosers=(d.bracket.losers||[]).filter(m=>!m.bye);
+      const lFinal=nonByeLosers.length?nonByeLosers[nonByeLosers.length-1]:null;
+      const lChamp=lFinal&&lFinal.winner?(lFinal.winner==='A'?lFinal.a:lFinal.b):null;
+      const champBanner=(wChamp||lChamp)?`<div class="pres-champ-banner">
+        ${wChamp?`<div class="pres-champ-icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M6 3h12v8a6 6 0 0 1-12 0V3z"/></svg></div>
+          <div class="pres-champ-lbl">${t('brk_winner')}</div>
+          <div class="pres-champ-name">${esc(wChamp)}</div>`:''}
+        ${lChamp?`<div class="pres-consol-banner">
+          <div class="pres-consol-lbl">${t('brk_consolation_lbl')}</div>
+          <div class="pres-consol-name">${esc(lChamp)}</div>
+        </div>`:''}
+      </div>`:'';
       matchesHtml=`<div class="pres-right" style="width:480px">
+        ${champBanner}
         ${_brkSec(d.bracket.winners,t('sec_winners'))}
         ${_brkSec(d.bracket.losers,t('sec_losers'))}
       </div>`;
