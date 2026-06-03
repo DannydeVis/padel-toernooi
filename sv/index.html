@@ -422,24 +422,24 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <p class="section-sub">Ren, snabb och fungerar på alla skärmar.</p>
   <div class="screens-grid">
     <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame"><img src="/screenshot-team-poule.png" alt="Lagturnering med val av vinnare" loading="lazy"></div>
-      <div class="screen-label">Lagturnering</div>
-      <div class="screen-desc">Matcher per rond, tryck på vinnaren, live-framsteg.</div>
+      <div class="phone-frame"><img src="/screenshot-team-poule.png" alt="Knockout gruppfas med val av vinnare" loading="lazy"></div>
+      <div class="screen-label">Knockout gruppfas</div>
+      <div class="screen-desc">Matcher per omgang, ange resultat, automatisk övergång till nästa omgang.</div>
     </div>
     <div class="screen-item featured">
       <div class="phone-frame"><img src="/screenshot-americano-scoring.png" alt="Americano poänginmatning med plus och minus knappar" loading="lazy"></div>
-      <div class="screen-label">Americano-poäng</div>
-      <div class="screen-desc">Följ poäng per par med +/−, live-poäng per rond.</div>
+      <div class="screen-label">Americano scoring</div>
+      <div class="screen-desc">Följ poäng per par med +/- knappar, livepoäng per omgang.</div>
     </div>
     <div class="screen-item featured">
       <div class="phone-frame"><img src="/screenshot-americano.png" alt="Americano live-ställning med poäng per spelare" loading="lazy"></div>
-      <div class="screen-label">Live-ställning</div>
-      <div class="screen-desc">Ställning per spelare, rond-framsteg och LIVE-badge för åskådare.</div>
+      <div class="screen-label">Spelarvy</div>
+      <div class="screen-desc">Varje spelare ser sin egen match markerad och kan skicka in sitt resultat.</div>
     </div>
     <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame"><img src="/screenshot-winner.png" alt="Mästare-skärm med konfetti och slutresultat" loading="lazy"></div>
-      <div class="screen-label">Mästare</div>
-      <div class="screen-desc">Slutresultat med vinnare, prispall och exportknappar för CSV och PDF.</div>
+      <div class="phone-frame"><img src="/screenshot-winner.png" alt="Slutresultat-skärm med konfetti och slutresultat" loading="lazy"></div>
+      <div class="screen-label">Slutresultat</div>
+      <div class="screen-desc">Vinnarbracket, tröstfinal och fullständig ranglista i en vy.</div>
     </div>
   </div>
 </section>
@@ -451,7 +451,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step"><div class="step-num">1</div><h4>Ange namnen</h4><p>Skriv in spelarnas namn. Appen skapar automatiskt par och ronder.</p></div>
     <div class="step"><div class="step-num">2</div><h4>Välj format</h4><p>Americano, Mexicano, Knockout eller Round Robin. Välj vad som passar din grupp.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Följ poängen</h4><p>Ange live-resultat. Ställningen uppdateras omedelbart på skärmen och deltagarnas telefoner.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Mästare</h4><p>Efter sista ronden visas slutresultaten. Exportera som PDF eller CSV som minne.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Slutresultat</h4><p>Efter sista ronden visas slutresultaten. Exportera som PDF eller CSV som minne.</p></div>
   </div>
 </section>
 
@@ -459,8 +459,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <h2 class="section-title">Fyra turneringsformat</h2>
   <p class="section-sub">Välj det format som passar din grupp.</p>
   <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format team"><h3>Lagturnering</h3><p>Fasta par spelar grupper, sedan avancerar de 4 bästa till finalbracket. Övriga spelar ett tröstbracket.</p><ul><li>Fasta par hela dagen</li><li>Gruppspel + vinnarspel</li><li>Tröstfinal för plats 5 till 9</li><li>4 till 9 lag (8 till 18 spelare)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
-    <div class="format am"><h3>Americano</h3><p>Nya partners varje rond via fast rotation. Alla spelar med och mot alla. Perfekt för en social session.</p><ul><li>Partners roterar varje rond</li><li>Poäng per spelare</li><li>Live-ställning &amp; presentationsläge</li><li>4 till 24 spelare</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
+    <div class="format team"><h3>Knockout gruppfas</h3><p>Fasta par spelar grupper, sedan avancerar de 4 bästa till finalbracket. Övriga spelar ett tröstbracket.</p><ul><li>Fasta par hela dagen</li><li>Gruppspel + vinnarspel</li><li>Tröstfinal för plats 5 till 9</li><li>4 till 9 lag (8 till 18 spelare)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
+    <div class="format am"><h3>Americano</h3><p>Nya partners varje rond via fast rotation. Alla spelar med och mot alla. Perfekt för en social session.</p><ul><li>Partners roterar varje rond</li><li>Poäng per spelare</li><li>Spelarvy &amp; presentationsläge</li><li>4 till 24 spelare</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
     <div class="format am"><h3>Mexicano</h3><p>Som Americano, men partners tilldelas om efter varje rond baserat på nuvarande ställning. Blir mer tävlingsinriktat allteftersom.</p><ul><li>Partners efter ställning</li><li>Poäng per spelare</li><li>Mer tävlingsinriktat varje rond</li><li>4 till 24 spelare</li></ul><a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano →</a></div>
     <div class="format team"><h3>Round Robin</h3><p>Varje lag spelar mot alla andra. Rättvist, tydligt och lämpligt för tävlingsinriktade klubbturneringar.</p><ul><li>Alla spelar mot alla</li><li>Automatisk ställning</li><li>Exportera till PDF &amp; CSV</li><li>4 till 16 spelare</li></ul><a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin →</a></div>
   </div>

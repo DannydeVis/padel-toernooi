@@ -423,24 +423,24 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <p class="section-sub">Limpia, rápida y funciona en cualquier pantalla.</p>
   <div class="screens-grid">
     <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame"><img src="/screenshot-team-poule.png" alt="Torneo por equipos con selección del ganador" loading="lazy"></div>
-      <div class="screen-label">Torneo por equipos</div>
-      <div class="screen-desc">Partidos por ronda, toca el ganador, progreso en directo.</div>
+      <div class="phone-frame"><img src="/screenshot-team-poule.png" alt="Fase de grupos Knockout con selección del ganador" loading="lazy"></div>
+      <div class="screen-label">Fase de grupos Knockout</div>
+      <div class="screen-desc">Partidos por ronda, introduce puntuaciones, avance automatico a la siguiente ronda.</div>
     </div>
     <div class="screen-item featured">
-      <div class="phone-frame"><img src="/screenshot-americano-scoring.png" alt="Puntuación Americano con botones más y menos" loading="lazy"></div>
-      <div class="screen-label">Puntuación Americano</div>
-      <div class="screen-desc">Sigue los marcadores por pareja con +/−, puntos en directo por ronda.</div>
+      <div class="phone-frame"><img src="/screenshot-americano-scoring.png" alt="Marcador Americano con botones más y menos" loading="lazy"></div>
+      <div class="screen-label">Marcador Americano</div>
+      <div class="screen-desc">Sigue los marcadores por pareja con +/-, puntos en vivo por ronda.</div>
     </div>
     <div class="screen-item featured">
-      <div class="phone-frame"><img src="/screenshot-americano.png" alt="Clasificación en directo Americano con puntos por jugador" loading="lazy"></div>
-      <div class="screen-label">Clasificación en directo</div>
-      <div class="screen-desc">Clasificación por jugador, progreso de ronda y badge LIVE para espectadores.</div>
+      <div class="phone-frame"><img src="/screenshot-americano.png" alt="Vista jugador Americano con puntos por jugador" loading="lazy"></div>
+      <div class="screen-label">Vista jugador</div>
+      <div class="screen-desc">Cada jugador ve su propio partido resaltado y puede enviar su puntuacion.</div>
     </div>
     <div class="screen-item" style="transform:translateY(24px)">
       <div class="phone-frame"><img src="/screenshot-winner.png" alt="Pantalla campeón con confeti y clasificación final" loading="lazy"></div>
-      <div class="screen-label">Campeón</div>
-      <div class="screen-desc">Clasificación final con ganador, podio y botones de exportación CSV y PDF.</div>
+      <div class="screen-label">Clasificacion final</div>
+      <div class="screen-desc">Cuadro final, final de consolacion y clasificacion completa en una vista.</div>
     </div>
   </div>
 </section>
@@ -452,7 +452,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step"><div class="step-num">1</div><h4>Introduce los nombres</h4><p>Escribe los nombres de los jugadores. La app crea automáticamente parejas y rondas.</p></div>
     <div class="step"><div class="step-num">2</div><h4>Elige el formato</h4><p>Americano, Mexicano, Knockout o Round Robin. Elige lo que se adapte a tu grupo.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Sigue los marcadores</h4><p>Introduce los marcadores en directo. La clasificación se actualiza al instante en pantalla y en los móviles de los participantes.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Campeón</h4><p>Después de la última ronda aparece la clasificación final. Exporta en PDF o CSV como recuerdo.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Clasificacion final</h4><p>Después de la última ronda aparece la clasificación final. Exporta en PDF o CSV como recuerdo.</p></div>
   </div>
 </section>
 
@@ -460,8 +460,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <h2 class="section-title">Cuatro formatos de torneo</h2>
   <p class="section-sub">Elige el formato que se adapte a tu grupo.</p>
   <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format team"><h3>Torneo por equipos</h3><p>Las parejas fijas juegan grupos, luego los 4 mejores pasan al cuadro final. Los demás juegan un cuadro de consolación.</p><ul><li>Parejas fijas todo el día</li><li>Fase de grupos + cuadro de ganadores</li><li>Final de consolación puestos 5 al 9</li><li>4 a 9 equipos (8 a 18 jugadores)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
-    <div class="format am"><h3>Americano</h3><p>Nuevas parejas en cada ronda por rotación fija. Todos juegan con y contra todos. Ideal para una sesión social.</p><ul><li>Parejas rotativas cada ronda</li><li>Puntos por jugador</li><li>Clasificación en directo &amp; modo presentación</li><li>4 a 24 jugadores</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
+    <div class="format team"><h3>Fase de grupos Knockout</h3><p>Las parejas fijas juegan grupos, luego los 4 mejores pasan al cuadro final. Los demás juegan un cuadro de consolación.</p><ul><li>Parejas fijas todo el día</li><li>Fase de grupos + cuadro de ganadores</li><li>Final de consolación puestos 5 al 9</li><li>4 a 9 equipos (8 a 18 jugadores)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
+    <div class="format am"><h3>Americano</h3><p>Nuevas parejas en cada ronda por rotación fija. Todos juegan con y contra todos. Ideal para una sesión social.</p><ul><li>Parejas rotativas cada ronda</li><li>Puntos por jugador</li><li>Vista jugador &amp; modo presentación</li><li>4 a 24 jugadores</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
     <div class="format am"><h3>Mexicano</h3><p>Como el Americano, pero las parejas se reasignan después de cada ronda según la clasificación actual. Se vuelve más competitivo a medida que avanza.</p><ul><li>Parejas según clasificación</li><li>Puntos por jugador</li><li>Más competitivo en cada ronda</li><li>4 a 24 jugadores</li></ul><a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano →</a></div>
     <div class="format team"><h3>Round Robin</h3><p>Cada equipo juega contra todos los demás. Justo, claro y adecuado para torneos de club competitivos.</p><ul><li>Todos juegan contra todos</li><li>Clasificación automática</li><li>Exportar a PDF &amp; CSV</li><li>4 a 16 jugadores</li></ul><a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin →</a></div>
   </div>
