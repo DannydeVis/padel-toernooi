@@ -267,9 +267,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
     Kostenlos · Ohne Konto · Funktioniert offline
   </div>
-  <h1>Kostenloser Padel-<em>Turniergenerator</em></h1>
+  <h1>Kostenloses Padel-Turnier-Tool. Gebaut von einem Paddelfan.</h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Richte ein Turnier in 30 Sekunden ein. Live-Ergebnisse auf Großbildschirm, Freigabelink für Teilnehmer, Ergebnisse als PDF exportieren.</p>
+  <p class="hero-sub">Gib die Spielernamen ein. Die App erstellt den Spielplan, verfolgt den Stand und teilt alles uber einen Link. Kostenlos, ohne Konto.</p>
   <div class="hero-btns">
     <a class="btn-primary" href="/app/">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -302,7 +302,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="mock-body">
         <div class="mock-rounds">
           <div><div class="mock-round-lbl">Runde 1 ✓</div><div class="mock-match" style="opacity:.5"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Lisa</span><span class="mock-score-num done">18</span></div><div class="mock-match-row"><span class="mock-team-name">Sara &amp; Mark</span><span class="mock-score-num done">14</span></div></div></div>
-          <div><div class="mock-round-lbl">Runde 2 — läuft</div><div class="mock-match"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Sara</span><span class="mock-score-num">9</span></div><div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Mark</span><span class="mock-score-num">7</span></div><div class="mock-controls"><div class="mock-adj">−</div><div class="mock-adj">+</div><div class="mock-pts-bar">16/32 Punkte</div><div class="mock-adj">−</div><div class="mock-adj">+</div></div></div></div>
+          <div><div class="mock-round-lbl">Runde 2, läuft</div><div class="mock-match"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Sara</span><span class="mock-score-num">9</span></div><div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Mark</span><span class="mock-score-num">7</span></div><div class="mock-controls"><div class="mock-adj">−</div><div class="mock-adj">+</div><div class="mock-pts-bar">16/32 Punkte</div><div class="mock-adj">−</div><div class="mock-adj">+</div></div></div></div>
           <div><div class="mock-round-lbl">Runde 3</div><div class="mock-match" style="opacity:.4"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Mark</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div><div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Sara</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div></div></div>
         </div>
         <div class="mock-sidebar">
@@ -327,7 +327,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </div>
     <div class="founder-text-col">
       <span class="founder-eyebrow">Die Person hinter PadelBracket</span>
-      <p class="founder-body">[Ihre Geschichte. Fuegen Sie hier 2 bis 4 Saetze hinzu, warum Sie PadelBracket gebaut haben und was Padel fuer Sie bedeutet.]</p>
+      <p class="founder-body">Ich bin Danny, ein Paddelfan aus Rotterdam. Ich hatte das Chaos satt: Spieler auf einem Zettel aufteilen, Punkte im Gruppenchat verfolgen, und immer jemand der den Stand nicht mehr wusste. Tools die das loesten waren teuer oder voll mit Accounts und Werbung. Also baute ich es selbst, kostenlos, ohne Account. Ein Link, fertig.</p>
     </div>
   </div>
 </section>
@@ -348,14 +348,14 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="fc-icon" style="background:rgba(59,130,246,.12)">📱</div>
         <div class="fc-text">
           <h3>Installierbar, funktioniert offline</h3>
-          <p>Fuege die App zu deinem Startbildschirm hinzu — funktioniert ohne Internet. Kein App Store, kein Konto, kein Passwort.</p>
+          <p>Fuege die App zu deinem Startbildschirm hinzu. Funktioniert ohne Internet. Kein App Store, kein Konto, kein Passwort.</p>
         </div>
       </div>
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(168,85,247,.12)">🌍</div>
         <div class="fc-text">
           <h3>6 Sprachen, automatisch</h3>
-          <p>Niederlaendisch, Englisch, Franzoesisch, Deutsch, Spanisch und Schwedisch. Die App erkennt automatisch die Sprache deines Geraets — ideal fuer internationale Gruppen.</p>
+          <p>Niederlaendisch, Englisch, Franzoesisch, Deutsch, Spanisch und Schwedisch. Die App erkennt automatisch die Sprache deines Geraets, ideal fuer internationale Gruppen.</p>
         </div>
       </div>
     </div>
@@ -370,14 +370,14 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="fc-icon" style="background:rgba(239,68,68,.12)">📺</div>
         <div class="fc-text">
           <h3>Praesentationsmodus</h3>
-          <p>Oeffne eine Vollbild-Anzeigetafel auf einem TV oder Beamer. Alle aktiven Spiele und die Live-Rangliste sind fuer alle sichtbar — automatische Aktualisierung alle 3 Sekunden.</p>
+          <p>Oeffne eine Vollbild-Anzeigetafel auf einem TV oder Beamer. Alle aktiven Spiele und die Live-Rangliste sind fuer alle sichtbar. Automatische Aktualisierung alle 3 Sekunden.</p>
         </div>
       </div>
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(34,197,94,.12)">🔗</div>
         <div class="fc-text">
           <h3>Live-Verfolgung auf dem Handy</h3>
-          <p>Teile einen Link mit den Teilnehmern. Sie sehen die Live-Rangliste und Ergebnisse auf ihrem Handy — kein Konto, keine Installation.</p>
+          <p>Teile einen Link mit den Teilnehmern. Sie sehen die Live-Rangliste und Ergebnisse auf ihrem Handy, kein Konto, keine Installation.</p>
         </div>
       </div>
       <div class="fc-item">
@@ -423,7 +423,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <p class="section-sub">In weniger als einer Minute hast du ein komplettes Turnier bereit.</p>
   <div class="steps">
     <div class="step"><div class="step-num">1</div><h4>Namen eingeben</h4><p>Gib die Spielernamen ein. Die App erstellt automatisch Paare und Runden.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Format wählen</h4><p>Americano, Mexicano, Knockout oder Round Robin — wähle was zu deiner Gruppe passt.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Format wählen</h4><p>Americano, Mexicano, Knockout oder Round Robin. Waehle was zu deiner Gruppe passt.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Ergebnisse verfolgen</h4><p>Gib Live-Ergebnisse ein. Die Rangliste wird sofort auf dem Bildschirm und den Handys der Teilnehmer aktualisiert.</p></div>
     <div class="step"><div class="step-num">4</div><h4>Champion 🏆</h4><p>Nach der letzten Runde erscheint das Abschlussklassement. Als PDF oder CSV exportieren.</p></div>
   </div>
@@ -433,8 +433,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <h2 class="section-title">Vier Turnierformate</h2>
   <p class="section-sub">Wähle das Format, das zu deiner Gruppe passt.</p>
   <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format team"><h3>Teamturnier</h3><p>Feste Paare spielen Gruppen, dann rücken die Top 4 in das Finale vor. Die anderen spielen ein Trostturnier.</p><ul><li>Feste Paare den ganzen Tag</li><li>Gruppenphase + Siegerrunde</li><li>Trostfinale für Plätze 5–9</li><li>4 bis 9 Teams (8–18 Spieler)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
-    <div class="format am"><h3>Americano</h3><p>Neue Partner jede Runde durch feste Rotation. Jeder spielt mit und gegen jeden — ideal für eine gesellige Session.</p><ul><li>Partner wechseln jede Runde</li><li>Punkte pro Spieler</li><li>Live-Rangliste &amp; Präsentationsmodus</li><li>4 bis 24 Spieler</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
+    <div class="format team"><h3>Teamturnier</h3><p>Feste Paare spielen Gruppen, dann rücken die Top 4 in das Finale vor. Die anderen spielen ein Trostturnier.</p><ul><li>Feste Paare den ganzen Tag</li><li>Gruppenphase + Siegerrunde</li><li>Trostfinale für Plätze 5 bis 9</li><li>4 bis 9 Teams (8 bis 18 Spieler)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
+    <div class="format am"><h3>Americano</h3><p>Neue Partner jede Runde durch feste Rotation. Jeder spielt mit und gegen jeden. Ideal für eine gesellige Session.</p><ul><li>Partner wechseln jede Runde</li><li>Punkte pro Spieler</li><li>Live-Rangliste &amp; Präsentationsmodus</li><li>4 bis 24 Spieler</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
     <div class="format am"><h3>Mexicano</h3><p>Wie Americano, aber Partner werden nach jeder Runde neu zugewiesen basierend auf dem aktuellen Stand. Wird mit jeder Runde wettbewerbsfähiger.</p><ul><li>Partner nach Rangliste</li><li>Punkte pro Spieler</li><li>Kompetitiver mit jeder Runde</li><li>4 bis 24 Spieler</li></ul><a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano →</a></div>
     <div class="format team"><h3>Round Robin</h3><p>Jedes Team spielt gegen alle anderen. Fair, übersichtlich und für kompetitive Klub-Turniere geeignet.</p><ul><li>Jeder spielt gegen jeden</li><li>Automatische Rangliste</li><li>Export als PDF &amp; CSV</li><li>4 bis 16 Spieler</li></ul><a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin →</a></div>
   </div>
@@ -445,11 +445,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <div class="faq-list">
     <details class="faq-item"><summary>Ist PadelBracket kostenlos?</summary><p>Ja, PadelBracket ist vollständig kostenlos. Kein Abonnement, kein Konto, keine Bezahlschranke. Alle Funktionen sind sofort verfügbar.</p></details>
     <details class="faq-item"><summary>Welche Turnierformate werden unterstützt?</summary><p>PadelBracket unterstützt vier Formate: <strong>Knockout-Bracket</strong> (Gruppen → Halbfinale → Finale), <strong>Americano</strong> (rotierende Partner, Punkte pro Spieler), <strong>Mexicano</strong> (Partner nach Rangliste) und <strong>Round Robin</strong> (jeder gegen jeden).</p></details>
-    <details class="faq-item"><summary>Was ist der Unterschied zwischen Americano und Mexicano?</summary><p>Bei <strong>Americano</strong> werden Partner im Voraus durch eine feste Rotation bestimmt — jeder spielt genau einmal mit jedem anderen zusammen. Bei <strong>Mexicano</strong> werden Partner nach jeder Runde basierend auf dem aktuellen Stand neu zugewiesen: Rang 1 und 2 spielen gegen Rang 3 und 4. Mexicano wird mit jeder Runde wettbewerbsfähiger.</p></details>
+    <details class="faq-item"><summary>Was ist der Unterschied zwischen Americano und Mexicano?</summary><p>Bei <strong>Americano</strong> werden Partner im Voraus durch eine feste Rotation bestimmt. Jeder spielt genau einmal mit jedem anderen zusammen. Bei <strong>Mexicano</strong> werden Partner nach jeder Runde basierend auf dem aktuellen Stand neu zugewiesen: Rang 1 und 2 spielen gegen Rang 3 und 4. Mexicano wird mit jeder Runde wettbewerbsfähiger.</p></details>
     <details class="faq-item"><summary>Was macht der Präsentationsmodus?</summary><p>Der Präsentationsmodus öffnet eine Vollbild-Anzeigetafel, ideal für einen TV oder Beamer im Vereinsheim. Du siehst die Live-Rangliste und alle aktiven Spiele mit Live-Ergebnissen. Die Anzeige aktualisiert sich automatisch alle 3 Sekunden.</p></details>
-    <details class="faq-item"><summary>Wie können Teilnehmer live mitverfolgen?</summary><p>Nutze den <strong>Teilen</strong>-Button in der App, um einen einzigartigen Link zu generieren. Teilnehmer öffnen ihn auf ihrem Handy und sehen die Live-Rangliste — kein Konto, keine Installation. Ergebnisse aktualisieren sich bei der Eingabe.</p></details>
+    <details class="faq-item"><summary>Wie können Teilnehmer live mitverfolgen?</summary><p>Nutze den <strong>Teilen</strong>-Button in der App, um einen einzigartigen Link zu generieren. Teilnehmer öffnen ihn auf ihrem Handy und sehen die Live-Rangliste, kein Konto, keine Installation. Ergebnisse aktualisieren sich bei der Eingabe.</p></details>
     <details class="faq-item"><summary>Kann ich die Ergebnisse exportieren?</summary><p>Ja. Nach dem Turnier kannst du das Abschlussklassement und alle Spielergebnisse als <strong>CSV</strong> (für Excel oder Google Sheets) exportieren oder als <strong>PDF</strong> drucken. Der Export-Button erscheint sobald das erste Spiel gespielt wurde.</p></details>
-    <details class="faq-item"><summary>Wie viele Spieler kann ich nutzen?</summary><p>Für Americano und Mexicano bis zu 24 Spieler. Für ein Teamturnier 4 bis 9 Teams (8–18 Spieler). Bei einer ungeraden Spieleranzahl (5, 7, 9…) hat ein Spieler pro Runde ein Freilos.</p></details>
+    <details class="faq-item"><summary>Wie viele Spieler kann ich nutzen?</summary><p>Für Americano und Mexicano bis zu 24 Spieler. Für ein Teamturnier 4 bis 9 Teams (8 bis 18 Spieler). Bei einer ungeraden Spieleranzahl (5, 7, 9…) hat ein Spieler pro Runde ein Freilos.</p></details>
     <details class="faq-item"><summary>Funktioniert die App ohne Internet?</summary><p>Ja. Nach dem ersten Laden funktioniert PadelBracket vollständig offline. Das Turnier wird lokal auf deinem Gerät gespeichert, auch wenn du den Browser schließt.</p></details>
     <details class="faq-item"><summary>In welchen Sprachen ist die App verfügbar?</summary><p>PadelBracket ist auf Niederländisch, Englisch, Französisch, Deutsch, Spanisch und Schwedisch verfügbar. Die App erkennt automatisch die Sprache deines Geräts.</p></details>
   </div>
@@ -465,7 +465,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </section>
 
 <footer>
-  <p>Padel Bracket — Kostenlose Turnierapp &nbsp;·&nbsp; <a href="/app/">App öffnen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Fehler melden</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Funktionsanfrage</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket. Kostenlose Turnierapp &nbsp;·&nbsp; <a href="/app/">App öffnen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Fehler melden</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Funktionsanfrage</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
 </footer>
 
 <script>
