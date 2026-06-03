@@ -1919,6 +1919,7 @@ function startTournamentUI(){
   if(mode!=='roundrobin') renderBracket();
   if(mode==='roundrobin' && pDone) renderRRChamp();
   showTab(pDone && mode!=='roundrobin' ? 'bracket' : 'poule');
+  updatePresentation();
 }
 
 function startTournament(){
@@ -4475,8 +4476,8 @@ function initPresentation(){
           <div class="pres-matches-title">${roundLabel}</div>${cards}${roundTimer}</div>`;
       }).join('');
       matchesHtml=`<div class="pres-right">${sections}</div>`;
-    } else if(!amMode&&d.bracket){
-      function _brkMatchCard(m){
+    } else if(!amMode&&d.bracket&&(d.bracket.winners||d.bracket.losers)){
+      const _brkMatchCard=m=>{
         const done=!!m.winner;
         const aWon=m.winner==='A',bWon=m.winner==='B';
         const rowA=`<div class="pres-brk-row${aWon?' winner':bWon?' lost':''}">
@@ -4493,14 +4494,14 @@ function initPresentation(){
           <div class="pres-brk-lbl">${esc(m.label)}</div>
           ${rowA}${rowB}
         </div>`;
-      }
-      function _brkSec(matches,secLabel){
+      };
+      const _brkSec=(matches,secLabel)=>{
         if(!matches||!matches.length) return '';
         return`<div class="pres-brk-sec">
           <div class="pres-section-lbl">${secLabel}</div>
           <div class="pres-brk-grid">${matches.map(_brkMatchCard).join('')}</div>
         </div>`;
-      }
+      };
       matchesHtml=`<div class="pres-right" style="width:480px">
         ${_brkSec(d.bracket.winners,t('sec_winners'))}
         ${_brkSec(d.bracket.losers,t('sec_losers'))}
