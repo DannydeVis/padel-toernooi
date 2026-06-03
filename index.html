@@ -369,7 +369,8 @@
     /* Feature columns */
     .fc-section{padding:72px 24px;border-bottom:1px solid var(--bdr)}
     .fc-inner{max-width:1000px;margin:0 auto}
-    .fc-title{font-size:1.1rem;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:28px}
+    .fc-title{font-family:'Syne','Inter',sans-serif;font-size:clamp(1.35rem,2.5vw,1.7rem);font-weight:800;color:var(--txt);line-height:1.2;margin-bottom:28px}
+    .hero-h1-sub{display:block;font-weight:600;font-size:.5em;color:var(--txt2);margin-top:10px;line-height:1.25;}
     .fc-list{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px}
     .fc-item{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
     .fc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
@@ -611,7 +612,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     Gratis · Geen account · Offline werkt ook
   </div>
 
-  <h1>Gratis padel toernooi tool. Gebouwd door een padelfan.</h1>
+  <h1>Gebouwd door een padelfan.<span class="hero-h1-sub">Gratis padel toernooi tool.</span></h1>
   <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
   <p class="hero-sub">Voer de spelersnamen in. De app maakt het schema, houdt de stand bij en deelt alles via één link. Gratis, geen account.</p>
 
@@ -1122,7 +1123,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </section>
 
 <footer>
-  <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket. Gratis toernooi-app &nbsp;·&nbsp; <a href="/app/">App openen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug melden</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Idee insturen</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
   <p class="footer-maker">Gemaakt door Danny de Visser.</p>
   <p class="footer-tagline">Geen investor. Geen team. Gewoon een padelfan met een laptop.</p>
 </footer>
