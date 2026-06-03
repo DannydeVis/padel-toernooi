@@ -670,6 +670,17 @@ body.pres-mode #pres-screen{display:block}
 .pres-bar-bg{height:4px;background:#1A1F24;border-radius:4px;overflow:hidden}
 .pres-bar-fill{height:4px;border-radius:4px;background:#C7FF5E;transition:width .6s ease}
 .pres-court-lbl{font-size:.72rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.pres-brk-sec{margin-bottom:24px}
+.pres-brk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pres-brk-match{background:#1A1F24;border-radius:10px;padding:14px 18px;margin-bottom:0}
+.pres-brk-match.done{opacity:.45}
+.pres-brk-lbl{font-size:.66rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.pres-brk-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;font-size:1.2rem;font-weight:700;gap:10px}
+.pres-brk-row+.pres-brk-row{border-top:1px solid #252B32}
+.pres-brk-team{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pres-brk-score{font-size:1.4rem;font-weight:900;color:#C7FF5E;min-width:32px;text-align:right;flex-shrink:0}
+.pres-brk-row.winner .pres-brk-team{color:#C7FF5E}
+.pres-brk-row.lost .pres-brk-team{opacity:.4}
 @media print{
   .stats-wrap{display:none!important}
 }
@@ -697,8 +708,15 @@ body.pres-mode #pres-screen{display:block}
   #tb-poule{display:grid;grid-template-columns:1fr 300px;column-gap:24px;align-items:start}
   .prog-wrap{grid-column:1/-1}
   .st-wrap{position:sticky;top:68px}
-  .bmatch{min-width:200px;max-width:260px}
-  .bracket-body{padding:28px 32px}
+  .bmatch{min-width:220px;max-width:300px}
+  .bteam{font-size:.92rem;padding:8px 12px;min-height:36px}
+  .bteam .bsc{font-size:1.05rem}
+  .bmlbl{font-size:.65rem;padding:4px 10px}
+  .bwname{min-width:140px;font-size:1.05rem;padding:7px 12px;min-height:38px}
+  .bwtitle{font-size:.72rem}
+  .bsec-lbl{font-size:.8rem;margin-bottom:18px}
+  .bsec{margin-bottom:36px}
+  .bracket-body{padding:32px 40px}
   /* ── Desktop layout ── */
   header{position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
   #screen-tournament .tabs{display:none}
@@ -1171,7 +1189,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.38.4';
+const APP_VERSION = 'v1.39.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4301,7 +4319,7 @@ async function toggleCast(){
 
 function updatePresentation(){
   if(!mode) return;
-  let standings, rounds=[];
+  let standings, rounds=[], bracket=null;
   if(mode==='americano'||mode==='mexicano'){
     standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({pos:i+1,name:p.name,pts:p.pts}));
     rounds=AM.map(r=>({
@@ -4324,9 +4342,21 @@ function updatePresentation(){
     }));
   } else {
     standings=getStandings().map((s,i)=>({pos:i+1,name:s.name,wins:s.wins,played:s.played,losses:s.losses}));
+    if(mode==='team'&&(PW.length||PL.length)){
+      const serMatch=m=>({
+        label:m.labelKey?t(m.labelKey):(m.label||''),
+        a:m.a!==null?tn(m.a):null,
+        b:m.bye?null:(m.b!==null?tn(m.b):null),
+        ga:m.ga,gb:m.gb,winner:m.winner,bye:!!m.bye
+      });
+      bracket={
+        winners:PW.filter(m=>!m.skip).map(serMatch),
+        losers:PL.filter(m=>!m.skip).map(serMatch)
+      };
+    }
   }
   localStorage.setItem('padel-presentation',JSON.stringify({
-    mode,name:tournamentName||'',standings,rounds,ts:Date.now()
+    mode,name:tournamentName||'',standings,rounds,bracket,ts:Date.now()
   }));
   if(_castConn&&_castConn.state==='connected'){
     try{ _castConn.send(localStorage.getItem('padel-presentation')||''); }catch{}
@@ -4445,6 +4475,36 @@ function initPresentation(){
           <div class="pres-matches-title">${roundLabel}</div>${cards}${roundTimer}</div>`;
       }).join('');
       matchesHtml=`<div class="pres-right">${sections}</div>`;
+    } else if(!amMode&&d.bracket){
+      function _brkMatchCard(m){
+        const done=!!m.winner;
+        const aWon=m.winner==='A',bWon=m.winner==='B';
+        const rowA=`<div class="pres-brk-row${aWon?' winner':bWon?' lost':''}">
+          <span class="pres-brk-team">${esc(m.a||'...')}</span>
+          ${done?`<span class="pres-brk-score">${m.ga}</span>`:''}
+        </div>`;
+        const rowB=m.bye
+          ?`<div class="pres-brk-row${bWon?' winner':''}"><span class="pres-brk-team" style="opacity:.35;font-style:italic">bye</span></div>`
+          :`<div class="pres-brk-row${bWon?' winner':aWon?' lost':''}">
+            <span class="pres-brk-team">${esc(m.b||'...')}</span>
+            ${done?`<span class="pres-brk-score">${m.gb}</span>`:''}
+          </div>`;
+        return`<div class="pres-brk-match${done?' done':''}">
+          <div class="pres-brk-lbl">${esc(m.label)}</div>
+          ${rowA}${rowB}
+        </div>`;
+      }
+      function _brkSec(matches,secLabel){
+        if(!matches||!matches.length) return '';
+        return`<div class="pres-brk-sec">
+          <div class="pres-section-lbl">${secLabel}</div>
+          <div class="pres-brk-grid">${matches.map(_brkMatchCard).join('')}</div>
+        </div>`;
+      }
+      matchesHtml=`<div class="pres-right" style="width:480px">
+        ${_brkSec(d.bracket.winners,t('sec_winners'))}
+        ${_brkSec(d.bracket.losers,t('sec_losers'))}
+      </div>`;
     }
     $('pres-screen').innerHTML=`
       <div class="pres-header">
