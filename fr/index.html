@@ -252,6 +252,19 @@
     .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
     .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
     .cookie-decline:hover{background:var(--surface2)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal .fc-item:nth-child(2){transition-delay:.08s}
+.reveal .fc-item:nth-child(3){transition-delay:.16s}
+.reveal .step:nth-child(2){transition-delay:.08s}
+.reveal .step:nth-child(3){transition-delay:.16s}
+.reveal .step:nth-child(4){transition-delay:.24s}
+.reveal .format-card:nth-child(2){transition-delay:.08s}
+.reveal .format-card:nth-child(3){transition-delay:.16s}
+.reveal .format-card:nth-child(4){transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
   </style>
 </head>
 <body>
@@ -512,6 +525,20 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   (function(){if(!localStorage.getItem('padel-consent')){document.getElementById('cookie-banner').classList.remove('hidden');}})();
   function acceptCookies(){localStorage.setItem('padel-consent','granted');gtag('consent','update',{analytics_storage:'granted'});document.getElementById('cookie-banner').classList.add('hidden');}
   function declineCookies(){localStorage.setItem('padel-consent','denied');document.getElementById('cookie-banner').classList.add('hidden');}
+</script>
+<script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var sel='.founder-block,.trust-bar,.qr-showcase,.pres-showcase,.fc-section,.screenshots-section,.section,.cta-wrap';
+  var els=document.querySelectorAll(sel);
+  els.forEach(function(el){el.classList.add('reveal')});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });
+  },{threshold:0.07});
+  els.forEach(function(el){io.observe(el)});
+})();
 </script>
 </body>
 </html>
