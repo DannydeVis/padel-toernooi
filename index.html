@@ -358,12 +358,10 @@
 
     /* Founder */
     .founder-block{padding:56px 24px;border-bottom:1px solid var(--bdr)}
-    .founder-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:160px 1fr;gap:40px;align-items:start}
-    .founder-avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;background:var(--surface2);border:2px solid var(--bdr)}
-    .founder-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .founder-inner{max-width:860px;margin:0 auto}
     .founder-eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
     .founder-body{color:var(--txt2);font-size:.95rem;line-height:1.75;margin:0}
-    @media(max-width:640px){.founder-inner{grid-template-columns:1fr;gap:24px;text-align:center}.founder-avatar{margin:0 auto}}
+    
     /* Feature columns */
     .fc-section{padding:48px 24px 56px;border-bottom:1px solid var(--bdr)}
     .fc-inner{max-width:1000px;margin:0 auto}
@@ -631,11 +629,6 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <!-- FOUNDER -->
 <section class="founder-block">
   <div class="founder-inner">
-    <div class="founder-photo-wrap">
-      <div class="founder-avatar">
-        <img src="/photos/founder.jpg" alt="Oprichter PadelBracket" loading="lazy">
-      </div>
-    </div>
     <div class="founder-text-col">
       <span class="founder-eyebrow">Wie zit er achter PadelBracket</span>
       <p class="founder-body">Ik ben Danny, padelfan uit Rotterdam. Ik was het gedoe zat: spelers indelen op een kladblok, scores bijhouden in de groepsapp, en altijd wel iemand die de stand kwijt was. Tools die dit oplosten waren duur of vol met accounts en reclame. Dus bouwde ik het zelf, gratis, zonder account. Eén link, klaar.</p>
