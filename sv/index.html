@@ -250,12 +250,12 @@
   <a class="nav-logo" href="/sv/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
   <div class="nav-lang">
     <select onchange="switchLang(this.value)" aria-label="Välj språk">
-      <option value="nl">🇳🇱 NL</option>
-      <option value="en">🇬🇧 EN</option>
-      <option value="fr">🇫🇷 FR</option>
-      <option value="de">🇩🇪 DE</option>
-      <option value="es">🇪🇸 ES</option>
-      <option value="sv" selected>🇸🇪 SV</option>
+      <option value="nl">NL</option>
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="de">DE</option>
+      <option value="es">ES</option>
+      <option value="sv" selected>SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/">Öppna appen →</a>
@@ -311,9 +311,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         </div>
         <div class="mock-sidebar">
           <div class="mock-sidebar-title">Ställning</div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">🥇</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥈</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥉</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">1</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">2</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">3</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
           <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Lars</div><div class="mock-rank-pts">19</div></div>
         </div>
       </div>
@@ -342,21 +342,21 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <h2 class="fc-title">Format och offline-anvandning</h2>
     <div class="fc-list">
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(199,255,94,.12)">🏆</div>
+        <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
         <div class="fc-text">
           <h3>Fyra turneringsformat</h3>
           <p>Knockout-bracket (grupper + final), Americano (roterande partners), Mexicano (partners efter stallning) och Round Robin (alla mot alla). Valj vad som passar din grupp.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(59,130,246,.12)">📱</div>
+        <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
         <div class="fc-text">
           <h3>Installerbar, fungerar offline</h3>
           <p>Lagg till appen pa din startskarm. Fungerar utan internet. Ingen App Store, inget konto, inget losenord.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(168,85,247,.12)">🌍</div>
+        <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
           <h3>6 sprak, automatiskt</h3>
           <p>Nederlandska, Engelska, Franska, Tyska, Spanska och Svenska. Appen identifierar automatiskt enhetens sprak, perfekt for internationella grupper.</p>
@@ -371,21 +371,21 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <h2 class="fc-title">Presentation, poang och export</h2>
     <div class="fc-list">
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(239,68,68,.12)">📺</div>
+        <div class="fc-icon" style="background:rgba(239,68,68,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <div class="fc-text">
           <h3>Presentationslage</h3>
           <p>Oppna en helskarms-resultattavla pa en TV eller projektor. Alla aktiva matcher och live-stallningen ar synliga for alla. Uppdateras automatiskt var 3:e sekund.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(34,197,94,.12)">🔗</div>
+        <div class="fc-icon" style="background:rgba(34,197,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></div>
         <div class="fc-text">
           <h3>Live-foljning pa telefonen</h3>
           <p>Dela en lank med deltagarna. De ser live-stallning och resultat pa sin telefon, inget konto, ingen installation.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(251,191,36,.12)">📤</div>
+        <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
         <div class="fc-text">
           <h3>Exportera till CSV &amp; PDF</h3>
           <p>Ladda ner slutresultaten och alla matchresultat som CSV for Excel, eller skriv ut som PDF. Bra som minne eller for klubbadministration.</p>
@@ -416,7 +416,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </div>
     <div class="screen-item" style="transform:translateY(24px)">
       <div class="phone-frame"><img src="/screenshot-winner.png" alt="Mästare-skärm med konfetti och slutresultat" loading="lazy"></div>
-      <div class="screen-label">Mästare 🏆</div>
+      <div class="screen-label">Mästare</div>
       <div class="screen-desc">Slutresultat med vinnare, prispall och exportknappar för CSV och PDF.</div>
     </div>
   </div>
@@ -429,7 +429,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step"><div class="step-num">1</div><h4>Ange namnen</h4><p>Skriv in spelarnas namn. Appen skapar automatiskt par och ronder.</p></div>
     <div class="step"><div class="step-num">2</div><h4>Välj format</h4><p>Americano, Mexicano, Knockout eller Round Robin. Välj vad som passar din grupp.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Följ poängen</h4><p>Ange live-resultat. Ställningen uppdateras omedelbart på skärmen och deltagarnas telefoner.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Mästare 🏆</h4><p>Efter sista ronden visas slutresultaten. Exportera som PDF eller CSV som minne.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Mästare</h4><p>Efter sista ronden visas slutresultaten. Exportera som PDF eller CSV som minne.</p></div>
   </div>
 </section>
 

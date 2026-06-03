@@ -251,12 +251,12 @@
   <a class="nav-logo" href="/de/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
   <div class="nav-lang">
     <select onchange="switchLang(this.value)" aria-label="Sprache wählen">
-      <option value="nl">🇳🇱 NL</option>
-      <option value="en">🇬🇧 EN</option>
-      <option value="fr">🇫🇷 FR</option>
-      <option value="de" selected>🇩🇪 DE</option>
-      <option value="es">🇪🇸 ES</option>
-      <option value="sv">🇸🇪 SV</option>
+      <option value="nl">NL</option>
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="de" selected>DE</option>
+      <option value="es">ES</option>
+      <option value="sv">SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/">App öffnen →</a>
@@ -312,9 +312,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         </div>
         <div class="mock-sidebar">
           <div class="mock-sidebar-title">Rangliste</div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">🥇</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥈</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥉</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">1</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">2</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">3</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
           <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Lars</div><div class="mock-rank-pts">19</div></div>
         </div>
       </div>
@@ -343,21 +343,21 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <h2 class="fc-title">Formate und Offline-Nutzung</h2>
     <div class="fc-list">
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(199,255,94,.12)">🏆</div>
+        <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
         <div class="fc-text">
           <h3>Vier Turnierformate</h3>
           <p>Knockout-Bracket (Gruppen + Finale), Americano (rotierende Partner), Mexicano (Partner nach Rangliste) und Round Robin (jeder gegen jeden). Waehle das passende Format fuer deine Gruppe.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(59,130,246,.12)">📱</div>
+        <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
         <div class="fc-text">
           <h3>Installierbar, funktioniert offline</h3>
           <p>Fuege die App zu deinem Startbildschirm hinzu. Funktioniert ohne Internet. Kein App Store, kein Konto, kein Passwort.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(168,85,247,.12)">🌍</div>
+        <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
           <h3>6 Sprachen, automatisch</h3>
           <p>Niederlaendisch, Englisch, Franzoesisch, Deutsch, Spanisch und Schwedisch. Die App erkennt automatisch die Sprache deines Geraets, ideal fuer internationale Gruppen.</p>
@@ -372,21 +372,21 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <h2 class="fc-title">Prasentation, Ergebnisse und Export</h2>
     <div class="fc-list">
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(239,68,68,.12)">📺</div>
+        <div class="fc-icon" style="background:rgba(239,68,68,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <div class="fc-text">
           <h3>Praesentationsmodus</h3>
           <p>Oeffne eine Vollbild-Anzeigetafel auf einem TV oder Beamer. Alle aktiven Spiele und die Live-Rangliste sind fuer alle sichtbar. Automatische Aktualisierung alle 3 Sekunden.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(34,197,94,.12)">🔗</div>
+        <div class="fc-icon" style="background:rgba(34,197,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></div>
         <div class="fc-text">
           <h3>Live-Verfolgung auf dem Handy</h3>
           <p>Teile einen Link mit den Teilnehmern. Sie sehen die Live-Rangliste und Ergebnisse auf ihrem Handy, kein Konto, keine Installation.</p>
         </div>
       </div>
       <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(251,191,36,.12)">📤</div>
+        <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
         <div class="fc-text">
           <h3>Export als CSV &amp; PDF</h3>
           <p>Lade das Abschlussklassement und alle Spielergebnisse als CSV fuer Excel herunter, oder drucke als PDF. Nuetzlich als Andenken oder fuer die Klubverwaltung.</p>
@@ -417,7 +417,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </div>
     <div class="screen-item" style="transform:translateY(24px)">
       <div class="phone-frame"><img src="/screenshot-winner.png" alt="Champion-Bildschirm mit Konfetti und Abschlussrangliste" loading="lazy"></div>
-      <div class="screen-label">Champion 🏆</div>
+      <div class="screen-label">Champion</div>
       <div class="screen-desc">Abschlussrangliste mit Sieger, Podium und Export-Schaltflächen für CSV und PDF.</div>
     </div>
   </div>
@@ -430,7 +430,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step"><div class="step-num">1</div><h4>Namen eingeben</h4><p>Gib die Spielernamen ein. Die App erstellt automatisch Paare und Runden.</p></div>
     <div class="step"><div class="step-num">2</div><h4>Format wählen</h4><p>Americano, Mexicano, Knockout oder Round Robin. Waehle was zu deiner Gruppe passt.</p></div>
     <div class="step"><div class="step-num">3</div><h4>Ergebnisse verfolgen</h4><p>Gib Live-Ergebnisse ein. Die Rangliste wird sofort auf dem Bildschirm und den Handys der Teilnehmer aktualisiert.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Champion 🏆</h4><p>Nach der letzten Runde erscheint das Abschlussklassement. Als PDF oder CSV exportieren.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Champion</h4><p>Nach der letzten Runde erscheint das Abschlussklassement. Als PDF oder CSV exportieren.</p></div>
   </div>
 </section>
 
