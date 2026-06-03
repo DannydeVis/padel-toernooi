@@ -103,12 +103,14 @@
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --bg:#0E1114; --surface:#1A1F24; --surface2:#252B32; --accent:#C7FF5E; --accent2:#a8d94e; --gold:#fbbf24; --txt:#f9fafb; --txt2:rgba(249,250,251,.5); --bdr:rgba(255,255,255,.1); --nav-bg:rgba(14,17,20,.92); }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, .section-title, .fc-title, .founder-eyebrow, .nav-logo { font-family: 'Syne', 'Inter', sans-serif; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--bdr); }
     .nav-logo { font-family:'Inter',sans-serif; font-weight:900; font-size:1.3rem; letter-spacing:1px; color:var(--txt); text-decoration:none; }
     .nav-logo em { color:var(--accent); font-style:normal; }
@@ -224,6 +226,8 @@
     .faq-item p { padding:0 20px 18px; color:var(--txt2); line-height:1.65; }
     footer { border-top:1px solid var(--bdr); padding:32px 24px; text-align:center; color:var(--txt2); font-size:.82rem; }
     footer a { color:var(--accent); text-decoration:none; }
+    .footer-maker { margin-top: 10px; color: var(--txt2); font-size: .82rem; }
+    .footer-tagline { margin-top: 4px; color: var(--txt2); font-size: .78rem; opacity: .55; font-style: italic; }
     @media (max-width: 640px) { .formats { grid-template-columns:1fr; } .mock-sidebar { display:none; } .steps { grid-template-columns:1fr 1fr; } .step:not(:last-child)::after { display:none; } }
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     #cookie-banner.hidden{display:none}
@@ -300,16 +304,16 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       </div>
       <div class="mock-body">
         <div class="mock-rounds">
-          <div><div class="mock-round-lbl">Rond 1 ✓</div><div class="mock-match" style="opacity:.5"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Lisa</span><span class="mock-score-num done">18</span></div><div class="mock-match-row"><span class="mock-team-name">Sara &amp; Mark</span><span class="mock-score-num done">14</span></div></div></div>
-          <div><div class="mock-round-lbl">Rond 2, pågår</div><div class="mock-match"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Sara</span><span class="mock-score-num">9</span></div><div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Mark</span><span class="mock-score-num">7</span></div><div class="mock-controls"><div class="mock-adj">−</div><div class="mock-adj">+</div><div class="mock-pts-bar">16/32 poäng</div><div class="mock-adj">−</div><div class="mock-adj">+</div></div></div></div>
-          <div><div class="mock-round-lbl">Rond 3</div><div class="mock-match" style="opacity:.4"><div class="mock-match-row"><span class="mock-team-name">Tom &amp; Mark</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div><div class="mock-match-row"><span class="mock-team-name">Lisa &amp; Sara</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div></div></div>
+          <div><div class="mock-round-lbl">Rond 1 ✓</div><div class="mock-match" style="opacity:.5"><div class="mock-match-row"><span class="mock-team-name">Joost &amp; Roos</span><span class="mock-score-num done">18</span></div><div class="mock-match-row"><span class="mock-team-name">Eline &amp; Lars</span><span class="mock-score-num done">14</span></div></div></div>
+          <div><div class="mock-round-lbl">Rond 2, pågår</div><div class="mock-match"><div class="mock-match-row"><span class="mock-team-name">Joost &amp; Eline</span><span class="mock-score-num">9</span></div><div class="mock-match-row"><span class="mock-team-name">Roos &amp; Lars</span><span class="mock-score-num">7</span></div><div class="mock-controls"><div class="mock-adj">−</div><div class="mock-adj">+</div><div class="mock-pts-bar">16/32 poäng</div><div class="mock-adj">−</div><div class="mock-adj">+</div></div></div></div>
+          <div><div class="mock-round-lbl">Rond 3</div><div class="mock-match" style="opacity:.4"><div class="mock-match-row"><span class="mock-team-name">Joost &amp; Lars</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div><div class="mock-match-row"><span class="mock-team-name">Roos &amp; Eline</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div></div></div>
         </div>
         <div class="mock-sidebar">
           <div class="mock-sidebar-title">Ställning</div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">🥇</div><div class="mock-rank-name">Tom</div><div class="mock-rank-pts">27</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥈</div><div class="mock-rank-name">Lisa</div><div class="mock-rank-pts">25</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">🥉</div><div class="mock-rank-name">Sara</div><div class="mock-rank-pts">21</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Mark</div><div class="mock-rank-pts">19</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">🥇</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">🥈</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos">🥉</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
+          <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Lars</div><div class="mock-rank-pts">19</div></div>
         </div>
       </div>
     </div>
@@ -465,6 +469,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <footer>
   <p>Padel Bracket. Gratis turnerings-app &nbsp;·&nbsp; <a href="/app/">Öppna appen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Rapportera fel</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Funktionsförfrågan</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p class="footer-maker">Skapad av Danny de Visser.</p>
+  <p class="footer-tagline">Ingen investerare. Inget team. Bara en padelfan med en laptop.</p>
 </footer>
 
 <script>

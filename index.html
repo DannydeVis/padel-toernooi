@@ -165,7 +165,8 @@
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -184,6 +185,7 @@
 
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, .section-title, .fc-title, .founder-eyebrow, .nav-logo { font-family: 'Syne', 'Inter', sans-serif; }
 
     /* ── NAV ── */
     nav {
@@ -533,6 +535,8 @@
       text-align: center; color: var(--txt2); font-size: .82rem;
     }
     footer a { color: var(--accent); text-decoration: none; }
+    .footer-maker { margin-top: 10px; color: var(--txt2); font-size: .82rem; }
+    .footer-tagline { margin-top: 4px; color: var(--txt2); font-size: .78rem; opacity: .55; font-style: italic; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
@@ -666,11 +670,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
             <div class="mock-round-lbl">Ronde 1 ✓</div>
             <div class="mock-match" style="opacity:.5">
               <div class="mock-match-row">
-                <span class="mock-team-name">Tom &amp; Lisa</span>
+                <span class="mock-team-name">Joost &amp; Roos</span>
                 <span class="mock-score-num done">18</span>
               </div>
               <div class="mock-match-row">
-                <span class="mock-team-name">Sara &amp; Mark</span>
+                <span class="mock-team-name">Eline &amp; Lars</span>
                 <span class="mock-score-num done">14</span>
               </div>
             </div>
@@ -679,11 +683,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
             <div class="mock-round-lbl">Ronde 2, bezig</div>
             <div class="mock-match">
               <div class="mock-match-row">
-                <span class="mock-team-name">Tom &amp; Sara</span>
+                <span class="mock-team-name">Joost &amp; Eline</span>
                 <span class="mock-score-num">9</span>
               </div>
               <div class="mock-match-row">
-                <span class="mock-team-name">Lisa &amp; Mark</span>
+                <span class="mock-team-name">Roos &amp; Lars</span>
                 <span class="mock-score-num">7</span>
               </div>
               <div class="mock-controls">
@@ -699,11 +703,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
             <div class="mock-round-lbl">Ronde 3</div>
             <div class="mock-match" style="opacity:.4">
               <div class="mock-match-row">
-                <span class="mock-team-name">Tom &amp; Mark</span>
+                <span class="mock-team-name">Joost &amp; Lars</span>
                 <span class="mock-score-num" style="color:var(--txt2)">0</span>
               </div>
               <div class="mock-match-row">
-                <span class="mock-team-name">Lisa &amp; Sara</span>
+                <span class="mock-team-name">Roos &amp; Eline</span>
                 <span class="mock-score-num" style="color:var(--txt2)">0</span>
               </div>
             </div>
@@ -713,22 +717,22 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
           <div class="mock-sidebar-title">Ranglijst</div>
           <div class="mock-rank-row">
             <div class="mock-rank-pos gold">1</div>
-            <div class="mock-rank-name">Tom</div>
+            <div class="mock-rank-name">Joost</div>
             <div class="mock-rank-pts">27</div>
           </div>
           <div class="mock-rank-row">
             <div class="mock-rank-pos">2</div>
-            <div class="mock-rank-name">Lisa</div>
+            <div class="mock-rank-name">Roos</div>
             <div class="mock-rank-pts">25</div>
           </div>
           <div class="mock-rank-row">
             <div class="mock-rank-pos">3</div>
-            <div class="mock-rank-name">Sara</div>
+            <div class="mock-rank-name">Eline</div>
             <div class="mock-rank-pts">21</div>
           </div>
           <div class="mock-rank-row">
             <div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div>
-            <div class="mock-rank-name">Mark</div>
+            <div class="mock-rank-name">Lars</div>
             <div class="mock-rank-pts">19</div>
           </div>
         </div>
@@ -811,22 +815,22 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
               <div class="tv-section-lbl">Ranglijst</div>
               <div class="tv-row">
                 <div class="tv-pos" style="color:var(--gold)">1</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Tom</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:90%"></div></div></div>
+                <div class="tv-bar-wrap"><div class="tv-name">Joost</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:90%"></div></div></div>
                 <div class="tv-pts">54</div>
               </div>
               <div class="tv-row">
                 <div class="tv-pos">2</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Lisa</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:78%"></div></div></div>
+                <div class="tv-bar-wrap"><div class="tv-name">Roos</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:78%"></div></div></div>
                 <div class="tv-pts">47</div>
               </div>
               <div class="tv-row">
                 <div class="tv-pos">3</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Sara</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:65%"></div></div></div>
+                <div class="tv-bar-wrap"><div class="tv-name">Eline</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:65%"></div></div></div>
                 <div class="tv-pts">39</div>
               </div>
               <div class="tv-row">
                 <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">4</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Mark</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:55%"></div></div></div>
+                <div class="tv-bar-wrap"><div class="tv-name">Lars</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:55%"></div></div></div>
                 <div class="tv-pts">33</div>
               </div>
               <div class="tv-row">
@@ -844,12 +848,12 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
               <div class="tv-round-lbl">Ronde 3, bezig</div>
               <div class="tv-match">
                 <div class="tv-court">Baan 1</div>
-                <div class="tv-match-row"><span class="tv-team">Tom &amp; Sara</span><span class="tv-score">12</span></div>
-                <div class="tv-match-row"><span class="tv-team">Lisa &amp; Koen</span><span class="tv-score">9</span></div>
+                <div class="tv-match-row"><span class="tv-team">Joost &amp; Eline</span><span class="tv-score">12</span></div>
+                <div class="tv-match-row"><span class="tv-team">Roos &amp; Koen</span><span class="tv-score">9</span></div>
               </div>
               <div class="tv-match">
                 <div class="tv-court">Baan 2</div>
-                <div class="tv-match-row"><span class="tv-team">Mark &amp; Anna</span><span class="tv-score">8</span></div>
+                <div class="tv-match-row"><span class="tv-team">Lars &amp; Anna</span><span class="tv-score">8</span></div>
                 <div class="tv-match-row"><span class="tv-team">Bas &amp; Eva</span><span class="tv-score">11</span></div>
               </div>
               <div class="tv-timer-row">
@@ -1115,6 +1119,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <footer>
   <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p class="footer-maker">Gemaakt door Danny de Visser.</p>
+  <p class="footer-tagline">Geen investor. Geen team. Gewoon een padelfan met een laptop.</p>
 </footer>
 
 <script>
