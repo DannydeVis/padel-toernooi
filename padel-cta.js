@@ -81,7 +81,7 @@
   function mount(opts) {
     opts = opts || {};
     var mode = opts.mode === "presentation" ? "presentation" : "spectator";
-    if (mode === "spectator" && localStorage.getItem(DISMISSED_KEY)) return;
+    if (mode === "spectator" && sessionStorage.getItem(DISMISSED_KEY)) return;
     var id = "padel-cta-" + mode;
     if (document.getElementById(id)) return;
 
@@ -100,7 +100,7 @@
       var a = el.querySelector(".padel-cta__btn");
       a.textContent = t.btn; a.href = href;
       a.setAttribute("aria-label", t.head + " " + t.btn);
-      el.querySelector(".padel-cta__close").onclick = function(){ localStorage.setItem(DISMISSED_KEY, "1"); el.style.display = "none"; };
+      el.querySelector(".padel-cta__close").onclick = function(){ sessionStorage.setItem(DISMISSED_KEY, "1"); el.style.display = "none"; };
     } else {
       var qr = opts.qrSrc || EMBEDDED_QR;
       el.innerHTML =
