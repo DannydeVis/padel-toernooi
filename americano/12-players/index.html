@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Padel Americano 12 Players — Free Generator | PadelBracket</title>
-  <meta name="description" content="Generate a padel Americano schedule for 12 players in seconds. 3 courts, no byes. Free, no account, works offline.">
+  <title>Padel Americano 12 Players — Printable Schedule, Free PDF | PadelBracket</title>
+  <meta name="description" content="Generate a padel Americano schedule for 12 players in seconds. 3 courts, no byes. Free, no account, works offline. Print or download as PDF.">
   <meta name="keywords" content="padel americano 12 players, americano padel 12 spelers, padel americano 12 personen, padel americano generator">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -118,6 +118,67 @@
     .cookie-accept { background:var(--accent); color:#0E1114; border:none; border-radius:8px; padding:8px 18px; font-size:.82rem; font-weight:700; cursor:pointer; }
     .cookie-decline { background:transparent; color:var(--txt2); border:1px solid var(--bdr); border-radius:8px; padding:8px 14px; font-size:.82rem; cursor:pointer; }
     .cookie-decline:hover { background:var(--surface2); }
+  /* ── Printable Schedule ── */
+    .sched-section { padding:60px 24px 20px; border-top:1px solid var(--bdr); }
+    .sched-inner { max-width:900px; margin:0 auto; }
+    .sched-hdr { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:28px; flex-wrap:wrap; }
+    .sched-eyebrow { font-size:.72rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+    .sched-title { font-family:'Inter',sans-serif; font-weight:900; font-size:clamp(1.6rem,3.5vw,2.2rem); margin-bottom:8px; }
+    .sched-sub { color:var(--txt2); font-size:.9rem; }
+    .sched-btn-print { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0E1114; border:none; border-radius:10px; padding:12px 20px; font-family:'Inter',sans-serif; font-weight:700; font-size:.88rem; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:background .15s; }
+    .sched-btn-print:hover { background:var(--accent2); }
+    .player-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; margin-bottom:10px; }
+    .player-slot { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--bdr); border-radius:8px; padding:8px 12px; }
+    .player-letter { font-weight:800; font-size:1rem; color:var(--accent); flex-shrink:0; width:18px; }
+    .player-name-input { background:none; border:none; color:var(--txt); font-family:'Inter',sans-serif; font-size:.88rem; width:100%; outline:none; padding:0; }
+    .player-name-input::placeholder { color:var(--txt2); }
+    .player-hint { font-size:.78rem; color:var(--txt2); margin-bottom:20px; font-style:italic; }
+    .sched-table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--bdr); }
+    .sched-table { width:100%; border-collapse:collapse; font-size:.9rem; }
+    .sched-table thead tr { background:var(--surface2); }
+    .sched-table th { padding:12px 14px; text-align:left; font-size:.72rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--txt2); white-space:nowrap; }
+    .sched-table td { padding:11px 14px; border-top:1px solid var(--bdr); vertical-align:middle; }
+    .sched-table tbody tr:hover { background:rgba(255,255,255,.02); }
+    .sched-table tbody tr.rnd-start td { border-top:2px solid rgba(199,255,94,.2); }
+    .sched-table tbody tr.bye-row td { border-top:none; padding-top:2px; padding-bottom:8px; }
+    .rnd-cell { font-weight:800; color:var(--accent); font-size:.82rem; white-space:nowrap; }
+    .court-cell { color:var(--txt2); font-size:.8rem; white-space:nowrap; }
+    .team-cell { font-weight:600; color:var(--txt); }
+    .vs-cell { color:var(--txt2); font-size:.8rem; text-align:center; padding:11px 6px; }
+    .score-cell { width:80px; min-width:80px; }
+    .score-box { width:64px; height:32px; background:var(--surface2); border:1px solid var(--bdr); border-radius:6px; display:inline-block; }
+    .bye-cell { font-size:.8rem; color:var(--txt2); font-style:italic; }
+    .sched-print-footer { display:none; }
+    /* Print styles */
+    @media print {
+      *, *::before, *::after { box-sizing:border-box; }
+      body { background:#fff !important; color:#000 !important; font-family:'Inter',Arial,sans-serif; margin:0; padding:0; }
+      nav, .hero, .hero-bg, .hero-grid, .stats-bar, .section, #faq, .pcount-nav, .cta-wrap, .other-formats, footer, #cookie-banner, .sched-btn-print, .player-hint { display:none !important; }
+      .sched-section { padding:0 !important; border:none !important; }
+      .sched-inner { max-width:100% !important; padding:1.5cm !important; }
+      .sched-hdr { margin-bottom:16px !important; }
+      .sched-eyebrow { color:#4a7c00 !important; }
+      .sched-title { color:#000 !important; font-size:18pt !important; }
+      .sched-sub { color:#555 !important; }
+      .player-grid { margin-bottom:16px !important; }
+      .player-slot { background:#f5f5f5 !important; border-color:#ccc !important; }
+      .player-letter { color:#4a7c00 !important; }
+      .player-name-input { color:#000 !important; }
+      .sched-table-wrap { border:1px solid #ccc !important; border-radius:0 !important; overflow:visible !important; }
+      .sched-table { font-size:10pt !important; }
+      .sched-table thead tr { background:#f0f0f0 !important; }
+      .sched-table th { color:#333 !important; border-bottom:1px solid #ccc !important; }
+      .sched-table td { border-top-color:#e0e0e0 !important; }
+      .sched-table tbody tr.rnd-start td { border-top:2px solid #4a7c00 !important; }
+      .rnd-cell { color:#4a7c00 !important; }
+      .court-cell { color:#666 !important; }
+      .team-cell { color:#000 !important; }
+      .vs-cell { color:#888 !important; }
+      .score-box { background:#fff !important; border:1px solid #999 !important; }
+      .bye-cell { color:#888 !important; }
+      .sched-print-footer { display:block !important; text-align:center; margin-top:24px; font-size:9pt; color:#888; border-top:1px solid #e0e0e0; padding-top:12px; }
+      @page { margin:1.5cm; size:A4 portrait; }
+    }
   </style>
 </head>
 <body>
@@ -202,6 +263,111 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <a href="/americano/20-players/">20 players →</a>
   <a href="/americano/24-players/">24 players →</a>
 </div>
+
+
+<section class="sched-section" id="printable-schedule">
+  <div class="sched-inner">
+    <div class="sched-hdr">
+      <div>
+        <div class="sched-eyebrow">Printable Schedule</div>
+        <h2 class="sched-title">Americano rotation schedule for 12 players</h2>
+        <p class="sched-sub">12 players · 3 courts · No byes · 11 rounds · Complete rotation</p>
+      </div>
+      <button class="sched-btn-print" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / PDF
+      </button>
+    </div>
+
+    <div class="player-grid">
+        <div class="player-slot"><span class="player-letter">A</span><input type="text" placeholder="Player 1" class="player-name-input" id="pname-0" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">B</span><input type="text" placeholder="Player 2" class="player-name-input" id="pname-1" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">C</span><input type="text" placeholder="Player 3" class="player-name-input" id="pname-2" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">D</span><input type="text" placeholder="Player 4" class="player-name-input" id="pname-3" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">E</span><input type="text" placeholder="Player 5" class="player-name-input" id="pname-4" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">F</span><input type="text" placeholder="Player 6" class="player-name-input" id="pname-5" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">G</span><input type="text" placeholder="Player 7" class="player-name-input" id="pname-6" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">H</span><input type="text" placeholder="Player 8" class="player-name-input" id="pname-7" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">I</span><input type="text" placeholder="Player 9" class="player-name-input" id="pname-8" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">J</span><input type="text" placeholder="Player 10" class="player-name-input" id="pname-9" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">K</span><input type="text" placeholder="Player 11" class="player-name-input" id="pname-10" oninput="updateNames()"></div>
+        <div class="player-slot"><span class="player-letter">L</span><input type="text" placeholder="Player 12" class="player-name-input" id="pname-11" oninput="updateNames()"></div>
+    </div>
+    <p class="player-hint">Enter names above and they update live in the schedule below.</p>
+
+    <div class="sched-table-wrap">
+      <table class="sched-table" id="sched-table">
+        <thead>
+          <tr>
+            <th>Round</th>
+            <th>Court</th>
+            <th colspan="3">Match</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="sched-tbody">
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 1</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,11">A &amp; L</td><td class="vs-cell">vs</td><td class="team-cell" data-players="5,6">F &amp; G</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="1,10">B &amp; K</td><td class="vs-cell">vs</td><td class="team-cell" data-players="4,7">E &amp; H</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="2,9">C &amp; J</td><td class="vs-cell">vs</td><td class="team-cell" data-players="3,8">D &amp; I</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 2</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,10">A &amp; K</td><td class="vs-cell">vs</td><td class="team-cell" data-players="4,5">E &amp; F</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="11,9">L &amp; J</td><td class="vs-cell">vs</td><td class="team-cell" data-players="3,6">D &amp; G</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="1,8">B &amp; I</td><td class="vs-cell">vs</td><td class="team-cell" data-players="2,7">C &amp; H</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 3</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,9">A &amp; J</td><td class="vs-cell">vs</td><td class="team-cell" data-players="3,4">D &amp; E</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="10,8">K &amp; I</td><td class="vs-cell">vs</td><td class="team-cell" data-players="2,5">C &amp; F</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="11,7">L &amp; H</td><td class="vs-cell">vs</td><td class="team-cell" data-players="1,6">B &amp; G</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 4</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,8">A &amp; I</td><td class="vs-cell">vs</td><td class="team-cell" data-players="2,3">C &amp; D</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="9,7">J &amp; H</td><td class="vs-cell">vs</td><td class="team-cell" data-players="1,4">B &amp; E</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="10,6">K &amp; G</td><td class="vs-cell">vs</td><td class="team-cell" data-players="11,5">L &amp; F</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 5</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,7">A &amp; H</td><td class="vs-cell">vs</td><td class="team-cell" data-players="1,2">B &amp; C</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="8,6">I &amp; G</td><td class="vs-cell">vs</td><td class="team-cell" data-players="11,3">L &amp; D</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="9,5">J &amp; F</td><td class="vs-cell">vs</td><td class="team-cell" data-players="10,4">K &amp; E</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 6</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,6">A &amp; G</td><td class="vs-cell">vs</td><td class="team-cell" data-players="11,1">L &amp; B</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="7,5">H &amp; F</td><td class="vs-cell">vs</td><td class="team-cell" data-players="10,2">K &amp; C</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="8,4">I &amp; E</td><td class="vs-cell">vs</td><td class="team-cell" data-players="9,3">J &amp; D</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 7</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,5">A &amp; F</td><td class="vs-cell">vs</td><td class="team-cell" data-players="10,11">K &amp; L</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="6,4">G &amp; E</td><td class="vs-cell">vs</td><td class="team-cell" data-players="9,1">J &amp; B</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="7,3">H &amp; D</td><td class="vs-cell">vs</td><td class="team-cell" data-players="8,2">I &amp; C</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 8</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,4">A &amp; E</td><td class="vs-cell">vs</td><td class="team-cell" data-players="9,10">J &amp; K</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="5,3">F &amp; D</td><td class="vs-cell">vs</td><td class="team-cell" data-players="8,11">I &amp; L</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="6,2">G &amp; C</td><td class="vs-cell">vs</td><td class="team-cell" data-players="7,1">H &amp; B</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 9</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,3">A &amp; D</td><td class="vs-cell">vs</td><td class="team-cell" data-players="8,9">I &amp; J</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="4,2">E &amp; C</td><td class="vs-cell">vs</td><td class="team-cell" data-players="7,10">H &amp; K</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="5,1">F &amp; B</td><td class="vs-cell">vs</td><td class="team-cell" data-players="6,11">G &amp; L</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 10</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,2">A &amp; C</td><td class="vs-cell">vs</td><td class="team-cell" data-players="7,8">H &amp; I</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="3,1">D &amp; B</td><td class="vs-cell">vs</td><td class="team-cell" data-players="6,9">G &amp; J</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="4,11">E &amp; L</td><td class="vs-cell">vs</td><td class="team-cell" data-players="5,10">F &amp; K</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr class="rnd-start"><td rowspan="3" class="rnd-cell">Round 11</td><td class="court-cell">Court 1</td><td class="team-cell" data-players="0,1">A &amp; B</td><td class="vs-cell">vs</td><td class="team-cell" data-players="6,7">G &amp; H</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 2</td><td class="team-cell" data-players="2,11">C &amp; L</td><td class="vs-cell">vs</td><td class="team-cell" data-players="5,8">F &amp; I</td><td class="score-cell"><span class="score-box"></span></td></tr>
+          <tr><td class="court-cell">Court 3</td><td class="team-cell" data-players="3,10">D &amp; K</td><td class="vs-cell">vs</td><td class="team-cell" data-players="4,9">E &amp; J</td><td class="score-cell"><span class="score-box"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sched-print-footer">PadelBracket — padel-bracket.com — Free Americano generator</div>
+  </div>
+</section>
+<script>
+(function(){
+  var LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+  var NAMES = LABELS.slice();
+  function updateNames(){
+    for(var i=0;i<LABELS.length;i++){
+      var inp=document.getElementById('pname-'+i);
+      NAMES[i]=inp&&inp.value.trim()?inp.value.trim():LABELS[i];
+    }
+    var cells=document.querySelectorAll('.sched-table [data-players]');
+    cells.forEach(function(cell){
+      var ids=cell.getAttribute('data-players').split(',').map(Number);
+      var isBye=cell.classList.contains('bye-cell');
+      if(isBye){
+        cell.textContent='Bye: '+ids.map(function(id){return NAMES[id];}).join(' & ');
+      } else {
+        cell.innerHTML=ids.map(function(id){return NAMES[id];}).join(' &amp; ');
+      }
+    });
+  }
+  window.updateNames=updateNames;
+})();
+</script>
 
 <section class="cta-wrap">
   <h2>Ready to play?</h2>

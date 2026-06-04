@@ -133,35 +133,42 @@
   <!-- Americano player-count pages -->
   <url>
     <loc>https://padel-bracket.com/americano/4-players/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/americano/6-players/</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://padel-bracket.com/americano/8-players/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://padel-bracket.com/americano/10-players/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://padel-bracket.com/americano/12-players/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://padel-bracket.com/americano/16-players/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
