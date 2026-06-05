@@ -1202,7 +1202,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.41.0';
+const APP_VERSION = 'v1.41.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3685,11 +3685,19 @@ function amAdj(matchId,side,delta){
   if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=t('am_pts',{total,max:R.matchPts}); }
   const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
   if(foot){
-    foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}" id="amtot-${matchId}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${matchId}')">${t('am_save')}</button>`:''}`;
+    const hasBtn=!!foot.querySelector('.btn-green');
+    if(ready&&!hasBtn){
+      const btn=document.createElement('button');
+      btn.className='btn btn-green btn-sm';
+      btn.onclick=()=>amSave(matchId);
+      btn.textContent=t('am_save');
+      foot.appendChild(btn);
+    } else if(!ready&&hasBtn){
+      foot.querySelector('.btn-green').remove();
+    }
   }
-  updatePresentation();
   clearTimeout(_adjDebounce);
-  _adjDebounce=setTimeout(saveState,1500);
+  _adjDebounce=setTimeout(()=>{ updatePresentation(); saveState(); },1500);
 }
 
 function amSave(matchId){
@@ -4178,8 +4186,25 @@ function renderOrgCTA(){
   if(!viewMode) return '';
   return `<div class="org-cta"><span class="org-cta-txt">${t('org_cta_txt')}</span><a href="/app/" class="org-cta-btn" target="_blank" rel="noopener">${t('org_cta_btn')}</a></div>`;
 }
+async function shareStandings(){
+  const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
+  const locale=LANG==='nl'?'nl-NL':LANG;
+  const d=new Date().toLocaleDateString(locale);
+  let txt=(tournamentName||'Americano')+(d?` — ${d}`:'')+'\n\n';
+  sorted.forEach((p,i)=>{ txt+=`${i+1}. ${p.name}  ${p.pts} ${t('am_col_pts')}\n`; });
+  txt+='\npadel-bracket.com';
+  if(navigator.share){
+    try{ await navigator.share({title:tournamentName||t('share_result_cta'),text:txt}); return; }
+    catch(e){ if(e.name==='AbortError') return; }
+  }
+  try{
+    await navigator.clipboard.writeText(txt);
+    const btn=document.querySelector('.share-result-btn');
+    if(btn){ const orig=btn.innerHTML; btn.innerHTML=`${icon('ic-check')} <span>${t('fin_copied')}</span>`; setTimeout(()=>btn.innerHTML=orig,2000); }
+  }catch(e){}
+}
 function renderShareCTA(){
-  return `<button class="btn btn-green btn-sm share-result-btn" onclick="shareTournament()">${icon('ic-share')} <span>${t('share_result_cta')}</span></button>`;
+  return `<button class="btn btn-green btn-sm share-result-btn" onclick="shareStandings()">${icon('ic-share')} <span>${t('share_result_cta')}</span></button>`;
 }
 
 function renderExportBar(){
