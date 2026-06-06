@@ -264,7 +264,43 @@
 .reveal .format-card:nth-child(4){transition-delay:.24s}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
   h1,h2,h3,.section-title,.fc-title,.format-card h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:-.01em}
-  </style>
+  
+  /* ── HERO SPLIT (richting B) ── */
+  .hero.split{display:block;padding:104px 24px 60px}
+  .hero-split-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;text-align:left;position:relative;z-index:1}
+  .hero.split .hero-badge{margin-bottom:22px}
+  .hero.split h1{font-size:clamp(2.2rem,5vw,3.5rem)}
+  .hero.split .hero-kicker{text-align:left}
+  .hero.split .hero-sub{margin:18px 0 0;max-width:480px}
+  .hero.split .hero-btns{justify-content:flex-start;margin-top:30px}
+  .hero.split .hero-perks{justify-content:flex-start}
+  .hero.split .hero-note{text-align:left}
+  /* primary CTA: shine + pulse (clickbait energie) */
+  .btn-primary.hero-main{position:relative;overflow:hidden}
+  .btn-primary.hero-main::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);pointer-events:none}
+  @media(prefers-reduced-motion:no-preference){.btn-primary.hero-main::after{animation:hbShine 3.4s ease-in-out infinite}.btn-primary.hero-main{animation:hbCta 2.6s ease-in-out infinite}}
+  @keyframes hbShine{0%{left:-60%}28%,100%{left:140%}}
+  @keyframes hbCta{0%,100%{box-shadow:0 4px 24px rgba(199,255,94,.3)}50%{box-shadow:0 7px 34px rgba(199,255,94,.55)}}
+  /* live ranglijst paneel */
+  .hero-board{position:relative;background:var(--surface);border:1px solid var(--bdr);border-radius:18px;padding:20px 22px 14px;box-shadow:0 40px 100px rgba(0,0,0,.55);text-decoration:none;color:inherit;display:block;transition:transform .2s}
+  .hero-board:hover{transform:translateY(-3px)}
+  .hero-board::before{content:'';position:absolute;inset:-1px;border-radius:18px;padding:1px;background:linear-gradient(160deg,rgba(199,255,94,.5),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .hb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .hb-eyebrow{font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--txt2)}
+  .hb-live{display:inline-flex;align-items:center;gap:7px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#ff6b6b;border-radius:99px;padding:5px 11px;font-size:.72rem;font-weight:700}
+  .hb-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+  @media(prefers-reduced-motion:no-preference){.hb-dot{animation:hbPulse 1.6s ease-out infinite}}
+  @keyframes hbPulse{0%{box-shadow:0 0 0 0 rgba(255,107,107,.5)}70%{box-shadow:0 0 0 7px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
+  .hb-row{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .hb-rank{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;width:20px;color:var(--txt2);text-align:center}
+  .hb-av{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#0E1114;flex-shrink:0}
+  .hb-name{flex:1}
+  .hb-name b{font-weight:700;font-size:.95rem}
+  .hb-meta{font-size:.72rem;color:var(--txt2);margin-top:2px}
+  .hb-pts{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.65rem}
+  .hb-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;padding:10px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.22);border-radius:11px;color:var(--accent);font-size:.85rem;font-weight:700}
+  @media(max-width:900px){.hero-split-inner{grid-template-columns:1fr;gap:34px;text-align:center}.hero.split .hero-kicker,.hero.split .hero-note{text-align:center}.hero.split .hero-btns,.hero.split .hero-perks{justify-content:center}.hero.split .hero-sub{margin-left:auto;margin-right:auto}.hero-board{max-width:440px;margin:0 auto;width:100%}}
+</style>
 </head>
 <body>
 
@@ -292,28 +328,67 @@
 function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';}
 </script>
 
-<section class="hero">
+<!-- HERO -->
+<section class="hero split">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-    Gratis · Inget konto · Fungerar offline
-  </div>
-  <h1>Turnering klar på <em>30 sekunder</em></h1>
-  <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-  <p class="hero-sub">Ange spelarnas namn. Appen sköter schemat, håller koll på ställningen och delar allt via en länk. Gratis, utan konto.</p>
-  <div class="hero-btns">
-    <a class="btn-primary" href="/app/">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      Starta turnering
+
+  <div class="hero-split-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Gratis · Inget konto · Fungerar offline
+      </div>
+
+      <h1>Turnering klar på <em>30 sekunder</em></h1>
+      <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
+      <p class="hero-sub">Ange spelarnas namn. Appen sköter schemat, håller koll på ställningen och delar allt via en länk. Gratis, utan konto.</p>
+
+      <div class="hero-btns">
+        <a class="btn-primary hero-main" href="/app/">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Starta turnering
+        </a>
+        <button class="btn-secondary btn-install" id="installBtn" style="display:none" onclick="installApp()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13M7 11l5 5 5-5"/><path d="M3 19h18"/></svg>
+          Installera appen
+        </button>
+        <a class="btn-secondary" href="#how-it-works" id="howBtn">Hur fungerar det?</a>
+      </div>
+      <div class="hero-perks">
+        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Live TV-resultattavla</div>
+        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Spelare skickar in resultat</div>
+        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klart på 30 sekunder</div>
+      </div>
+      <p class="hero-note">Fungerar på telefon, surfplatta och dator · Installerbar · 6 språk</p>
+    </div>
+
+    <a class="hero-board" href="/app/" aria-label="Se live-ställningen i appen">
+      <div class="hb-head">
+        <span class="hb-eyebrow">Sommarturneringen · ställning</span>
+        <span class="hb-live"><span class="hb-dot"></span>LIVE</span>
+      </div>
+      <div class="hb-row">
+        <span class="hb-rank" style="color:var(--gold)">1</span>
+        <span class="hb-av" style="background:var(--gold)">J</span>
+        <span class="hb-name"><b>Joost &amp; Roos</b><div class="hb-meta">7 spelade · +21 saldo</div></span>
+        <span class="hb-pts" style="color:var(--gold)">54</span>
+      </div>
+      <div class="hb-row">
+        <span class="hb-rank">2</span>
+        <span class="hb-av" style="background:var(--accent)">L</span>
+        <span class="hb-name"><b>Lars &amp; Eline</b><div class="hb-meta">7 spelade · +14 saldo</div></span>
+        <span class="hb-pts" style="color:var(--accent)">47</span>
+      </div>
+      <div class="hb-row">
+        <span class="hb-rank">3</span>
+        <span class="hb-av" style="background:#b4a0f7">M</span>
+        <span class="hb-name"><b>Mees &amp; Sara</b><div class="hb-meta">7 spelade · +6 saldo</div></span>
+        <span class="hb-pts">39</span>
+      </div>
+      <div class="hb-foot">Se live-ställning →</div>
     </a>
-    <button class="btn-secondary btn-install" id="installBtn" style="display:none" onclick="installApp()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13M7 11l5 5 5-5"/><path d="M3 19h18"/></svg>
-      Installera appen
-    </button>
-    <a class="btn-secondary" href="#how-it-works" id="howBtn">Hur fungerar det?</a>
   </div>
-  <p class="hero-note">Fungerar på telefon, surfplatta och dator · Installerbar · 6 språk</p>
 </section>
 
 <div class="mockup-wrap">
