@@ -46,15 +46,17 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "PadelBracket",
-    "alternateName": "Padel Bracket Generator",
+    "alternateName": ["Padel Bracket", "padel-bracket.com", "PadelBracket app"],
     "applicationCategory": "SportsApplication",
-    "operatingSystem": "Web, iOS, Android (PWA)",
+    "operatingSystem": "Web, iOS (PWA), Android (PWA)",
     "description": "Free padel tournament bracket generator for recreational players and clubs.",
     "url": "https://padel-bracket.com",
+    "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://padel-bracket.com/en/about/" },
+    "sameAs": [],
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".hero-sub", ".faq-item p"] },
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","Live presentation scoreboard","Live share link","Export to CSV and PDF","Works offline","No account needed","6 languages"]
+    "featureList": ["Americano tournament generator","Mexicano tournament generator","Knockout bracket","Round Robin","Live scoreboard","TV presentation mode","PDF export","CSV export","Offline use","No account required","Share link for spectators","Player score submission"]
   }
   </script>
   <script type="application/ld+json">
@@ -131,6 +133,26 @@
         "@type": "Question",
         "name": "How long does a padel Americano tournament take?",
         "acceptedAnswer": { "@type": "Answer", "text": "A padel Americano tournament typically takes 1.5 to 3 hours depending on the number of players and rounds. With 8 players on 2 courts, expect around 90 minutes. With 12–16 players, plan for 2 to 3 hours. Each match is usually played as one game to 16 or 21 points." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a free padel tournament app?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is a completely free padel tournament app. No account, no subscription, no ads." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best free padel Americano generator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is a free Americano generator that works on any device, supports 4 to 24 players, and requires no account." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does padel-bracket.com work offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. After the first load, PadelBracket works fully offline as an installable PWA." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who made PadelBracket?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket was built by Danny de Visser, a padel player from Rotterdam, as a free alternative to paid tournament tools." }
       }
     ]
   }
