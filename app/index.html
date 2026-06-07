@@ -825,27 +825,72 @@ body.light header{background:rgba(255,255,255,.82)}
 @media(prefers-reduced-motion:reduce){.ob-btns .btn-green{animation:none}}
 @keyframes lmPulse{0%,100%{box-shadow:0 4px 22px rgba(199,255,94,.30)}50%{box-shadow:0 7px 32px rgba(199,255,94,.55)}}
 
-/* ── PRESENTATIEMODUS & LIVE-VIEW: afgestemd op de landing (TV-modus) ── */
-/* zachte lime/violet ambient glow, net als de hero */
+/* ── PRESENTATIEMODUS: volledig afgestemd op de landing TV-modus ── */
+/* ambient glow */
 #pres-screen::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 90% 50% at 50% -8%, rgba(199,255,94,.10), transparent 60%),
-            radial-gradient(ellipse 48% 42% at 90% 6%, rgba(139,92,246,.07), transparent 55%)}
+  background:radial-gradient(ellipse 90% 50% at 50% -8%,rgba(199,255,94,.10),transparent 60%),
+            radial-gradient(ellipse 48% 42% at 90% 6%,rgba(139,92,246,.07),transparent 55%)}
 #pres-screen > *{position:relative;z-index:1}
-/* display-typografie in Barlow Condensed (cijfers/titels), zoals de landing */
-.pres-title,.pres-clock,.pres-pos,.pres-pts,.pres-match-score{font-family:'Barlow Condensed',sans-serif!important;letter-spacing:-.01em}
-.pres-pts{font-weight:800}
-/* eyebrows/labels in Syne, zoals de landing */
-.pres-section-lbl,.pres-matches-title,.pres-court-lbl,.pres-timer-lbl{font-family:'Syne',sans-serif!important;letter-spacing:.1em}
-/* warm wit-muted i.p.v. koud slate (#475569) */
-.pres-pos{color:rgba(249,250,251,.4)!important}
-.pres-sub,.pres-matches-title,.pres-section-lbl,.pres-court-lbl,.pres-timer-lbl,.pres-refresh{color:rgba(249,250,251,.42)!important}
-/* panelen iets ronder + zachte rand, zoals de landing-cards */
-.pres-match{background:#1A1F24;border:1px solid rgba(255,255,255,.06);border-radius:13px}
-.pres-timer-wrap{border-radius:12px;border-color:rgba(255,255,255,.08)}
-/* gouden leider — net als #1 op het landing-podium */
+/* titel: normaal casing, Barlow Condensed, groot */
+.pres-title{font-family:'Barlow Condensed',sans-serif!important;font-weight:800!important;
+  font-size:clamp(2rem,4vw,3rem)!important;letter-spacing:-.01em!important;
+  text-transform:none!important;line-height:1.05!important}
+/* klok Barlow Condensed */
+.pres-clock{font-family:'Barlow Condensed',sans-serif!important;font-weight:800!important;letter-spacing:-.01em!important}
+/* format-badge: lime eyebrow stijl */
+.pres-badge{font-family:'Syne',sans-serif!important;font-weight:800!important;
+  font-size:.72rem!important;letter-spacing:.12em!important;text-transform:uppercase!important;
+  background:rgba(199,255,94,.1)!important;color:var(--accent)!important;
+  border:1px solid rgba(199,255,94,.22)!important;border-radius:7px!important;padding:4px 10px!important}
+/* live-badge: rood met pulserende dot */
+.pres-live-badge{display:inline-flex!important;align-items:center!important;gap:7px!important;
+  background:rgba(239,68,68,.12)!important;border:1px solid rgba(239,68,68,.3)!important;
+  color:#ff6b6b!important;border-radius:99px!important;padding:6px 14px!important;
+  font-size:.78rem!important;font-weight:700!important;letter-spacing:.04em!important}
+.pres-live-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#ff6b6b;flex-shrink:0}
+@media(prefers-reduced-motion:no-preference){.pres-live-badge::before{animation:presLiveDot 1.6s ease-out infinite}}
+@keyframes presLiveDot{0%{box-shadow:0 0 0 0 rgba(255,107,107,.5)}70%{box-shadow:0 0 0 6px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
+/* eyebrows/labels in Syne */
+.pres-section-lbl,.pres-matches-title,.pres-court-lbl,.pres-timer-lbl{font-family:'Syne',sans-serif!important;
+  letter-spacing:.1em!important;color:rgba(249,250,251,.42)!important;text-transform:uppercase!important}
+/* rang-nummers: groot zoals landing (62px) */
+.pres-pos{font-family:'Barlow Condensed',sans-serif!important;
+  font-size:clamp(2rem,4vw,3.5rem)!important;font-weight:800!important;
+  width:56px!important;color:rgba(249,250,251,.25)!important}
+/* medaille even groot */
+.pres-medal{font-size:clamp(1.8rem,3.5vw,2.8rem)!important;width:56px!important;
+  filter:drop-shadow(0 2px 8px rgba(251,191,36,.4))!important}
+/* namen: Inter 700 */
+.pres-name{font-size:clamp(1.3rem,2vw,1.75rem)!important;font-weight:700!important;letter-spacing:-.01em!important}
+/* punten: Barlow Condensed groot */
+.pres-pts{font-family:'Barlow Condensed',sans-serif!important;
+  font-size:clamp(2rem,3.5vw,3rem)!important;font-weight:800!important;color:var(--accent)!important}
+/* rij-layout */
+.pres-row{padding:14px 18px!important;gap:20px!important;border-bottom:1px solid rgba(255,255,255,.05)!important}
+/* #1 leider: goud-getinte achtergrondkaart */
+.pres-row.pres-leader{background:linear-gradient(100deg,rgba(251,191,36,.10),rgba(255,255,255,.02))!important;
+  border:1px solid rgba(251,191,36,.28)!important;border-radius:13px!important;margin-bottom:4px!important}
 .pres-row.pres-leader .pres-name{color:var(--gold)!important}
 .pres-row.pres-leader .pres-pts{color:var(--gold)!important}
-.pres-medal{filter:drop-shadow(0 2px 6px rgba(251,191,36,.35))}
+/* progress-bar: lime / goud */
+.pres-bar-bg{height:3px!important;background:rgba(255,255,255,.06)!important;border-radius:3px!important;margin-top:5px!important;overflow:hidden}
+.pres-bar-fill{background:var(--accent)!important;height:100%!important;border-radius:3px!important;transition:width .8s cubic-bezier(.3,.9,.3,1)}
+.pres-row.pres-leader .pres-bar-fill{background:var(--gold)!important}
+/* match-scores groter */
+.pres-match-score{font-family:'Barlow Condensed',sans-serif!important;
+  font-size:clamp(1.6rem,2.5vw,2.2rem)!important;font-weight:800!important;color:var(--accent)!important}
+.pres-match-done .pres-match-score{color:rgba(249,250,251,.25)!important}
+.pres-match-team{font-size:clamp(.95rem,1.5vw,1.25rem)!important;font-weight:700!important}
+/* match-panelen */
+.pres-match{background:#181d22!important;border:1px solid rgba(255,255,255,.07)!important;
+  border-radius:14px!important;padding:16px 20px!important;margin-bottom:10px!important}
+.pres-court-lbl{margin-bottom:10px!important}
+.pres-court-lbl::before{content:'\25CF  ';color:var(--accent)}
+/* timer-wrap: violet badge */
+.pres-timer-wrap{background:rgba(139,92,246,.1)!important;border:1px solid rgba(139,92,246,.28)!important;
+  border-radius:12px!important;color:#b4a0f7!important}
+.pres-timer-lbl{color:rgba(249,250,251,.42)!important}
+.pres-sub,.pres-refresh{color:rgba(249,250,251,.35)!important}
 
 /* ── SHARE / LIVE-MEEKIJK: kopieer-knop krijgt glow + shine zoals de landing-CTA ── */
 .share-copy-btn{position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(199,255,94,.30);transition:transform .15s, box-shadow .2s, opacity .15s}
@@ -886,6 +931,8 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 .setup-intro{margin-bottom:20px!important}
 #setup-box-title{font-family:'Inter',sans-serif!important;font-weight:900!important;font-size:clamp(1.25rem,3vw,1.6rem)!important;letter-spacing:-.02em!important;line-height:1.15!important}
 .setup-intro-sub{font-size:.78rem!important;color:rgba(249,250,251,.38)!important;margin-top:3px!important}
+/* kaart-titels ook gewone Inter (niet Barlow Condensed) */
+.setup-card-title{font-family:'Inter',sans-serif!important;font-weight:700!important;font-size:1rem!important;letter-spacing:-.01em!important}
 /* op mobiel: compacter */
 @media(max-width:600px){
   .setup-intro{margin-bottom:14px!important}
@@ -1355,7 +1402,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.44.1';
+const APP_VERSION = 'v1.45.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4738,7 +4785,7 @@ function initPresentation(){
         </div>
         <div class="pres-header-bot">
           <span class="pres-badge">${fmtLabel}</span>
-          <span class="pres-live-badge">● LIVE</span>
+          <span class="pres-live-badge">LIVE</span>
         </div>
       </div>
       <div class="pres-layout">
