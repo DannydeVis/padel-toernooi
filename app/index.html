@@ -806,6 +806,7 @@ header{position:sticky;top:0;z-index:60;
   background:rgba(14,17,20,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px}
 body.light header{background:rgba(255,255,255,.82)}
+@media(max-width:600px){header{padding-left:12px;padding-right:12px;margin-left:-12px;margin-right:-12px}}
 
 /* primaire actie-knop: glow + hover-lift + shine, identiek aan de landing-CTA */
 .btn-green{position:relative;overflow:hidden;
@@ -956,7 +957,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 <div class="app">
 
 <header>
-  <div style="display:flex;align-items:center;gap:12px">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;overflow:hidden">
     <a href="/" aria-label="Terug naar padel-bracket.com" style="display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:rgba(249,250,251,.35);text-decoration:none;letter-spacing:.03em;transition:color .15s;padding:4px 0" onmouseover="this.style.color='rgba(199,255,94,.7)'" onmouseout="this.style.color='rgba(249,250,251,.35)'">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
     </a>
@@ -1296,7 +1297,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.43.0';
+const APP_VERSION = 'v1.43.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
