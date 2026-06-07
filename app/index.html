@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-title" content="Padel">
 <link rel="apple-touch-icon" href="../thumbnail.png">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root {
@@ -788,6 +788,69 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 .share-wa-btn:hover{opacity:.87}
 @keyframes vp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 @media print{#share-modal,#view-banner{display:none!important}}
+
+/* ════════════════════════════════════════════════
+   LANDING-MATCH: premium chrome afgestemd op padel-bracket.com homepage
+   (puur additieve overrides — geen structuur/JS gewijzigd)
+   ════════════════════════════════════════════════ */
+/* soft lime ambient glow, net als de hero op de landing */
+body{position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 95% 45% at 50% -6%, rgba(199,255,94,.08) 0%, transparent 60%),
+             radial-gradient(ellipse 45% 40% at 92% 8%, rgba(139,92,246,.06) 0%, transparent 60%)}
+body.light::before{background:radial-gradient(ellipse 95% 45% at 50% -6%, rgba(159,204,24,.10) 0%, transparent 60%)}
+.app{background:transparent;position:relative;z-index:1}
+
+/* glas-nav header, zoals de landing-nav */
+header{position:sticky;top:0;z-index:60;
+  background:rgba(14,17,20,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px}
+body.light header{background:rgba(255,255,255,.82)}
+
+/* primaire actie-knop: glow + hover-lift + shine, identiek aan de landing-CTA */
+.btn-green{position:relative;overflow:hidden;
+  box-shadow:0 4px 22px rgba(199,255,94,.30);
+  transition:background .15s, transform .12s cubic-bezier(.2,.8,.2,1), box-shadow .2s}
+.btn-green:hover{box-shadow:0 7px 30px rgba(199,255,94,.48);transform:translateY(-1px)}
+.btn-green:active{transform:translateY(0) scale(.98)}
+.btn-green::after{content:'';position:absolute;top:0;left:-60%;width:38%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-18deg);pointer-events:none}
+@media(prefers-reduced-motion:no-preference){.btn-green::after{animation:lmShine 3.6s ease-in-out infinite}}
+@keyframes lmShine{0%{left:-60%}30%,100%{left:150%}}
+
+/* onboarding 'NEXT' krijgt extra nadruk (eerste indruk = landing-gevoel) */
+.ob-btns .btn-green{animation:lmPulse 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.ob-btns .btn-green{animation:none}}
+@keyframes lmPulse{0%,100%{box-shadow:0 4px 22px rgba(199,255,94,.30)}50%{box-shadow:0 7px 32px rgba(199,255,94,.55)}}
+
+/* ── PRESENTATIEMODUS & LIVE-VIEW: afgestemd op de landing (TV-modus) ── */
+/* zachte lime/violet ambient glow, net als de hero */
+#pres-screen::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 90% 50% at 50% -8%, rgba(199,255,94,.10), transparent 60%),
+            radial-gradient(ellipse 48% 42% at 90% 6%, rgba(139,92,246,.07), transparent 55%)}
+#pres-screen > *{position:relative;z-index:1}
+/* display-typografie in Barlow Condensed (cijfers/titels), zoals de landing */
+.pres-title,.pres-clock,.pres-pos,.pres-pts,.pres-match-score{font-family:'Barlow Condensed',sans-serif!important;letter-spacing:-.01em}
+.pres-pts{font-weight:800}
+/* eyebrows/labels in Syne, zoals de landing */
+.pres-section-lbl,.pres-matches-title,.pres-court-lbl,.pres-timer-lbl{font-family:'Syne',sans-serif!important;letter-spacing:.1em}
+/* warm wit-muted i.p.v. koud slate (#475569) */
+.pres-pos{color:rgba(249,250,251,.4)!important}
+.pres-sub,.pres-matches-title,.pres-section-lbl,.pres-court-lbl,.pres-timer-lbl,.pres-refresh{color:rgba(249,250,251,.42)!important}
+/* panelen iets ronder + zachte rand, zoals de landing-cards */
+.pres-match{background:#1A1F24;border:1px solid rgba(255,255,255,.06);border-radius:13px}
+.pres-timer-wrap{border-radius:12px;border-color:rgba(255,255,255,.08)}
+/* gouden leider — net als #1 op het landing-podium */
+.pres-row.pres-leader .pres-name{color:var(--gold)!important}
+.pres-row.pres-leader .pres-pts{color:var(--gold)!important}
+.pres-medal{filter:drop-shadow(0 2px 6px rgba(251,191,36,.35))}
+
+/* ── SHARE / LIVE-MEEKIJK: kopieer-knop krijgt glow + shine zoals de landing-CTA ── */
+.share-copy-btn{position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(199,255,94,.30);transition:transform .15s, box-shadow .2s, opacity .15s}
+.share-copy-btn:hover{box-shadow:0 6px 26px rgba(199,255,94,.46);transform:translateY(-1px)}
+.share-copy-btn::after{content:'';position:absolute;top:0;left:-60%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);pointer-events:none}
+@media(prefers-reduced-motion:no-preference){.share-copy-btn::after{animation:lmShine 3.6s ease-in-out infinite}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
@@ -1202,7 +1265,7 @@ body.light .share-link-inp{background:#f3f4f6;color:#111827}
 </div>
 
 <script>
-const APP_VERSION = 'v1.41.1';
+const APP_VERSION = 'v1.42.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
