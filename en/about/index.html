@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About PadelBracket — Who Built It & Why It's Free</title>
+  <meta name="description" content="PadelBracket is built and run by Danny de Visser, a padel player from Rotterdam. No investors, no team, no ads — just a free tournament app made by someone who plays the game. Learn who's behind it, why it costs nothing, and what it actually does.">
+  <meta name="keywords" content="padel bracket about, who made padelbracket, padel tournament app creator, free padel app no ads, danny de visser padel">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="/thumbnail.png" type="image/png" sizes="240x240">
+  <link rel="apple-touch-icon" href="/thumbnail.png">
+  <link rel="canonical" href="https://padel-bracket.com/en/about/">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="PadelBracket">
+  <meta property="og:url" content="https://padel-bracket.com/en/about/">
+  <meta property="og:title" content="About PadelBracket — Who Built It & Why It's Free">
+  <meta property="og:description" content="Built by Danny de Visser, a padel player from Rotterdam. No investors, no team, no ads — a free tournament app made by someone who actually plays the game.">
+  <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About PadelBracket — Who Built It & Why It's Free">
+  <meta name="twitter:description" content="Built by Danny de Visser, a padel player from Rotterdam. No investors, no team, no ads — just a free padel tournament app.">
+  <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
+  <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
+  <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/about/">
+  <link rel="alternate" hreflang="fr" href="https://padel-bracket.com/fr/">
+  <link rel="alternate" hreflang="de" href="https://padel-bracket.com/de/">
+  <link rel="alternate" hreflang="es" href="https://padel-bracket.com/es/">
+  <link rel="alternate" hreflang="sv" href="https://padel-bracket.com/sv/">
+  <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/about/">
+  <meta name="theme-color" content="#0E1114">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Danny de Visser",
+    "url": "https://padel-bracket.com/en/about/",
+    "jobTitle": "Creator of PadelBracket",
+    "description": "Padel player from Rotterdam, Netherlands, and the sole creator and maintainer of PadelBracket, a free padel tournament generator.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Rotterdam", "addressCountry": "NL" },
+    "knowsAbout": ["Padel", "Software development", "Tournament organisation"],
+    "sameAs": ["https://padel-bracket.com", "https://padel-bracket.com/en/"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PadelBracket",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Web",
+    "url": "https://padel-bracket.com/app/",
+    "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://padel-bracket.com/en/about/" },
+    "creator": { "@type": "Person", "name": "Danny de Visser", "url": "https://padel-bracket.com/en/about/" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "description": "Free padel tournament generator for Knockout, Americano, Mexicano and Round Robin formats. Works offline, no account needed, no ads.",
+    "inLanguage": ["nl","en","fr","de","es","sv"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PadelBracket",
+    "url": "https://padel-bracket.com",
+    "description": "Free padel tournament generator for Americano, Mexicano, Knockout and Round Robin.",
+    "inLanguage": ["nl","en","fr","de","es","sv"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "PadelBracket", "item": "https://padel-bracket.com/en/" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://padel-bracket.com/en/about/" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:#0E1114;
+      --surface:#1A1F24;
+      --surface2:#252B32;
+      --accent:#C7FF5E;
+      --accent2:#a8d94e;
+      --gold:    #fbbf24;
+      --txt:     #f9fafb;
+      --txt2:rgba(249,250,251,.5);
+      --bdr:rgba(255,255,255,.1);
+      --nav-bg:rgba(14,17,20,.92);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900; font-size: 1.3rem; letter-spacing: 1px;
+      color: var(--txt); text-decoration: none; display:flex; align-items:center; gap:8px;
+    }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-cta {
+      background: var(--accent); color: #0E1114; border: none; border-radius: 8px;
+      padding: 9px 20px; font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: .9rem; cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background .15s, transform .1s;
+    }
+    .nav-cta:hover { background: var(--accent2); }
+    .nav-cta:active { transform: scale(.96); }
+    .nav-lang select { appearance:none; -webkit-appearance:none; background:var(--surface); color:var(--txt); border:1px solid var(--bdr); border-radius:8px; padding:6px 28px 6px 10px; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 8px center; transition:border-color .15s; }
+    .nav-lang select:hover { border-color:var(--accent); }
+    .nav-lang select:focus { outline:none; border-color:var(--accent); }
+
+    /* ── ABOUT HERO (lighter than full-screen hero) ── */
+    .about-hero {
+      padding: 140px 24px 64px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .about-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(199,255,94,.13) 0%, transparent 70%);
+    }
+    .about-hero > * { position: relative; z-index: 1; }
+    .about-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(199,255,94,.12); border: 1px solid rgba(199,255,94,.3);
+      color: var(--accent); border-radius: 99px; padding: 6px 16px;
+      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
+      margin-bottom: 24px;
+    }
+    .about-hero h1 {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 3.4rem); letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .about-hero h1 em { color: var(--accent); font-style: normal; }
+    .about-hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.15rem); color: var(--txt2);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    .section { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+    .section-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 18px;
+    }
+    .section-eyebrow {
+      display: block; font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .about-prose { color: var(--txt2); font-size: .98rem; line-height: 1.8; max-width: 720px; }
+    .about-prose + .about-prose { margin-top: 16px; }
+    .about-prose strong { color: var(--txt); }
+
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    .about-item { display: flex; gap: 14px; align-items: flex-start; }
+    .about-item-dot {
+      flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(199,255,94,.12); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-top: 1px;
+    }
+    .about-item-txt strong { display: block; color: var(--txt); font-weight: 800; font-size: .96rem; margin-bottom: 2px; }
+    .about-item-txt span { color: var(--txt2); font-size: .9rem; line-height: 1.6; }
+
+    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; }
+    .testimonial-card {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 14px;
+      padding: 22px; transition: border-color .2s, transform .2s;
+    }
+    .testimonial-card:hover { border-color: rgba(199,255,94,.3); transform: translateY(-2px); }
+    .testimonial-quote { font-size: .92rem; color: var(--txt); line-height: 1.65; }
+    .testimonial-quote::before { content: '\201C'; color: var(--accent); font-weight: 800; font-size: 1.2rem; margin-right: 2px; }
+    .testimonial-quote::after { content: '\201D'; color: var(--accent); font-weight: 800; font-size: 1.2rem; margin-left: 2px; }
+
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 16px;
+      padding: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .contact-card p { color: var(--txt2); font-size: .92rem; max-width: 420px; }
+    .contact-card p strong { color: var(--txt); }
+    .contact-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface2); border: 1px solid var(--bdr); color: var(--txt);
+      text-decoration: none; border-radius: 10px; padding: 11px 18px;
+      font-size: .88rem; font-weight: 600; transition: border-color .15s, color .15s;
+      white-space: nowrap;
+    }
+    .contact-btn:hover { border-color: rgba(199,255,94,.3); color: var(--accent); }
+
+    .cta-wrap {
+      text-align: center; padding: 64px 24px 100px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(199,255,94,.08) 0%, transparent 70%);
+    }
+    .cta-wrap h2 {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 14px;
+    }
+    .cta-wrap p { color:var(--txt2); max-width:420px; margin:0 auto 32px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #0E1114; text-decoration: none;
+      border-radius: 12px; padding: 16px 32px;
+      font-family: 'Inter', sans-serif; font-weight: 800;
+      font-size: 1.1rem; letter-spacing: .5px;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      box-shadow: 0 4px 24px rgba(199,255,94,.3);
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 32px rgba(199,255,94,.45); }
+    .btn-primary:active { transform: scale(.97); }
+
+    .other-formats {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    }
+    .format-link {
+      background: var(--surface); border: 1px solid var(--bdr); border-radius: 12px;
+      padding: 16px 24px; text-decoration: none; color: var(--txt2);
+      font-size: .9rem; font-weight: 600; transition: border-color .15s, color .15s;
+    }
+    .format-link:hover { border-color: rgba(199,255,94,.3); color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--bdr); padding: 32px 24px;
+      text-align: center; color: var(--txt2); font-size: .82rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .contact-card { flex-direction: column; align-items: flex-start; }
+    }
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    #cookie-banner.hidden{display:none}
+    #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
+    .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
+    .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
+    .cookie-decline:hover{background:var(--surface2)}
+  </style>
+</head>
+<body>
+
+<div id="cookie-banner" class="hidden">
+  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="/privacy/" style="color:var(--accent)">Privacy policy</a></p>
+  <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+  <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+</div>
+
+<nav>
+  <a class="nav-logo" href="/en/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
+  <div class="nav-lang">
+    <select onchange="switchLang(this.value)" aria-label="Choose language">
+      <option value="nl">🇳🇱 NL</option>
+      <option value="en" selected>🇬🇧 EN</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="sv">🇸🇪 SV</option>
+    </select>
+  </div>
+  <a class="nav-cta" href="/app/">Open app →</a>
+</nav>
+<script>
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/about/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/en/about/';}
+</script>
+
+<!-- ABOUT HERO -->
+<section class="about-hero">
+  <div class="about-hero-bg"></div>
+  <div class="about-hero-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    About PadelBracket
+  </div>
+  <h1>Made by a padel player. <em>Not a company.</em></h1>
+  <p class="about-hero-sub">PadelBracket is a free tournament generator for Americano, Mexicano, Knockout and Round Robin padel. Here's who built it, why it doesn't cost anything, and what it actually does.</p>
+</section>
+
+<!-- WHO BUILT THIS -->
+<section class="section">
+  <span class="section-eyebrow">Who built this</span>
+  <h2 class="section-title">Hi, I'm Danny.</h2>
+  <p class="about-prose">I'm <strong>Danny de Visser</strong>, a padel player from Rotterdam, Netherlands. I built PadelBracket because every time I helped organise a tournament with friends or at the club, the existing tools were either expensive, locked behind subscriptions and accounts, or just too clunky to use standing on the side of the court with sweaty hands.</p>
+  <p class="about-prose">So I built my own. There are <strong>no investors, no team, and no roadmap meetings</strong> — just one person who plays padel and writes code, fixing the things that bothered him about every other tournament app out there. PadelBracket is the tool I wished existed when I was scribbling pairings on a notepad and tracking scores in a group chat.</p>
+</section>
+
+<!-- WHY IT'S FREE -->
+<section class="section">
+  <span class="section-eyebrow">Why it's free</span>
+  <h2 class="section-title">No ads. No subscription. No catch.</h2>
+  <p class="about-prose">PadelBracket has <strong>no advertisements</strong>, <strong>no paid plans</strong>, and your data is never sold to anyone. There's no account to create and nothing to pay for, ever.</p>
+  <p class="about-prose">It's free because padel is supposed to be a social game. The moment you put a paywall in front of something as basic as setting up a schedule or sharing the live score with your group, you add friction to an afternoon that should just be about playing. PadelBracket runs on a small hosting bill and the satisfaction of seeing it used at clubs and courts across Europe — that's the whole business model.</p>
+</section>
+
+<!-- WHAT THE APP DOES -->
+<section class="section">
+  <span class="section-eyebrow">What the app does</span>
+  <h2 class="section-title">Four formats. One link. Zero setup.</h2>
+  <p class="about-prose">PadelBracket generates and runs a complete padel tournament from start to finish, in your browser, in any of these formats:</p>
+  <ul class="about-list">
+    <li class="about-item">
+      <span class="about-item-dot">🏆</span>
+      <span class="about-item-txt"><strong>Knockout</strong><span>A single-elimination bracket — enter your teams, the app builds the bracket, and you advance the winners round by round until a champion is crowned.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">🔄</span>
+      <span class="about-item-txt"><strong>Americano</strong><span>Individual ranking with rotating partners. The app generates a fixed schedule so everyone plays with and against everyone else, and tracks points per player automatically.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">📈</span>
+      <span class="about-item-txt"><strong>Mexicano</strong><span>Like Americano, but partners are re-paired after every round based on the live standings — rank 1 and 2 play together against rank 3 and 4. The competition gets tighter as the rounds go on.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">🤝</span>
+      <span class="about-item-txt"><strong>Round Robin</strong><span>Fixed teams play every other team once. The app builds the full schedule and keeps a running league table of wins, losses and game difference.</span></span>
+    </li>
+  </ul>
+  <p class="about-prose" style="margin-top:28px">Beyond generating the schedule, PadelBracket also includes:</p>
+  <ul class="about-list">
+    <li class="about-item">
+      <span class="about-item-dot">📡</span>
+      <span class="about-item-txt"><strong>Offline support</strong><span>It's a Progressive Web App — after the first load it keeps working without an internet connection, and your tournament data is saved on your own device.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">📺</span>
+      <span class="about-item-txt"><strong>Live scoreboard &amp; presentation mode</strong><span>Cast the live standings and matches to a TV or big screen — perfect for showing the schedule and scores at the club bar during a tournament day.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">🔗</span>
+      <span class="about-item-txt"><strong>Share link for spectators</strong><span>Send one link to the group chat. Anyone can open it on their own phone and watch the live standings update in real time — no account, nothing to install.</span></span>
+    </li>
+    <li class="about-item">
+      <span class="about-item-dot">📄</span>
+      <span class="about-item-txt"><strong>PDF &amp; CSV export</strong><span>Export the final schedule and results to PDF or CSV in one tap, ready to print, archive or share with your club.</span></span>
+    </li>
+  </ul>
+</section>
+
+<!-- TRUSTED BY PLAYERS -->
+<section class="section">
+  <span class="section-eyebrow">Trusted by players</span>
+  <h2 class="section-title">What people say after using it</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card"><p class="testimonial-quote">we used brackets yesterday for a networking padel event and it was great, thanks for that!</p></div>
+    <div class="testimonial-card"><p class="testimonial-quote">App is actually great, specially the web</p></div>
+    <div class="testimonial-card"><p class="testimonial-quote">You have an amazing platform mate!</p></div>
+    <div class="testimonial-card"><p class="testimonial-quote">Everything worked really well</p></div>
+    <div class="testimonial-card"><p class="testimonial-quote">I used the app for a kids tournament and it was a big success!</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+  <span class="section-eyebrow">Contact</span>
+  <h2 class="section-title">Found a bug? Got an idea?</h2>
+  <div class="contact-card">
+    <p>PadelBracket is maintained in the open on GitHub. Bug reports and feature requests are always welcome — every issue is read by the person who actually built the app.</p>
+    <div class="contact-btns">
+      <a class="contact-btn" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Report a bug
+      </a>
+      <a class="contact-btn" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+        Suggest a feature
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-wrap">
+  <h2>Ready to play?</h2>
+  <p>Open the app, enter the names and start your tournament in under a minute. Free, no account, works offline.</p>
+  <a class="btn-primary" href="/app/">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Open PadelBracket
+  </a>
+</section>
+
+<!-- OTHER PAGES -->
+<div class="other-formats">
+  <a class="format-link" href="/en/">🏠 Home</a>
+  <a class="format-link" href="/americano/">Americano Generator →</a>
+  <a class="format-link" href="/mexicano/">Mexicano Generator →</a>
+  <a class="format-link" href="/round-robin/">Round Robin Generator →</a>
+  <a class="format-link" href="/knockout/">Knockout Bracket Generator →</a>
+</div>
+
+<footer>
+  <p>Padel Bracket — Free padel tournament generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/en/about/">About</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+</footer>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{analytics_storage:'denied'});
+  gtag('js',new Date());
+  gtag('config','G-M5L2R20XXD',{anonymize_ip:true});
+  if(localStorage.getItem('padel-consent')==='granted'){
+    gtag('consent','update',{analytics_storage:'granted'});
+  }
+  (function(){
+    if(!localStorage.getItem('padel-consent')){
+      document.getElementById('cookie-banner').classList.remove('hidden');
+    }
+  })();
+  function acceptCookies(){
+    localStorage.setItem('padel-consent','granted');
+    gtag('consent','update',{analytics_storage:'granted'});
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+  function declineCookies(){
+    localStorage.setItem('padel-consent','denied');
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+</script>
+</body>
+</html>
