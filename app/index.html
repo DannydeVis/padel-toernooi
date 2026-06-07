@@ -863,6 +863,14 @@ body.light header{background:rgba(255,255,255,.82)}
 /* medaille even groot */
 .pres-medal{font-size:clamp(1.8rem,3.5vw,2.8rem)!important;width:56px!important;
   filter:drop-shadow(0 2px 8px rgba(251,191,36,.4))!important}
+/* avatar-cirkel met initiaal — zoals de landing-mockup */
+.pres-avatar{width:clamp(34px,4vw,46px)!important;height:clamp(34px,4vw,46px)!important;border-radius:12px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;flex-shrink:0!important;
+  font-family:'Inter',sans-serif!important;font-weight:800!important;font-size:clamp(.85rem,1.4vw,1.15rem)!important}
+/* meta-regel onder de naam: gespeeld + saldo, zoals de landing-mockup */
+.pres-meta{font-family:'Inter',sans-serif!important;font-size:clamp(.66rem,1vw,.82rem)!important;
+  font-weight:500!important;color:rgba(249,250,251,.4)!important;margin:2px 0 5px!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}
 /* namen: Inter 700 */
 .pres-name{font-size:clamp(1.3rem,2vw,1.75rem)!important;font-weight:700!important;letter-spacing:-.01em!important}
 /* punten: Barlow Condensed groot */
@@ -1405,7 +1413,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.45.1';
+const APP_VERSION = 'v1.45.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1471,7 +1479,7 @@ nl:{
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
   am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',player_pause:'Pauzeer speler',player_resume:'Hervat speler',player_paused:'pauze',player_new_name:'Nieuwe naam…',player_save:'Opslaan',timer_start:'Start ronde',timer_done:'TIJD OM',
-  export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',pres_standings:'Ranglijst',pres_active:'bezig',
+  export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',pres_standings:'Ranglijst',pres_active:'bezig',pres_meta:'{p} gespeeld · {s} saldo',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
   res_bracket_done:' · Bracket klaar',
@@ -1543,7 +1551,7 @@ en:{
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
   am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',player_pause:'Pause player',player_resume:'Resume player',player_paused:'paused',player_new_name:'New name…',player_save:'Save',timer_start:'Start round',timer_done:'TIME UP',
-  export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Standings',pres_active:'active',
+  export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Standings',pres_active:'active',pres_meta:'{p} played · {s} diff',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
   res_bracket_done:' · Bracket done',
@@ -1615,7 +1623,7 @@ fr:{
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
   am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',player_pause:'Mettre en pause',player_resume:'Reprendre',player_paused:'pause',player_new_name:'Nouveau nom…',player_save:'Enregistrer',timer_start:'Lancer le tour',timer_done:'TEMPS ÉCOULÉ',
-  export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',pres_standings:'Classement',pres_active:'en cours',
+  export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',pres_standings:'Classement',pres_active:'en cours',pres_meta:'{p} joués · {s} diff',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
   res_bracket_done:' · Bracket terminé',
@@ -1685,7 +1693,7 @@ de:{
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
   am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',player_pause:'Spieler pausieren',player_resume:'Spieler fortsetzen',player_paused:'pausiert',player_new_name:'Neuer Name…',player_save:'Speichern',timer_start:'Runde starten',timer_done:'ZEIT ABGELAUFEN',
-  export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabelle',pres_active:'aktiv',
+  export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabelle',pres_active:'aktiv',pres_meta:'{p} gespielt · {s} Diff.',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
   res_bracket_done:' · Bracket fertig',
@@ -1755,7 +1763,7 @@ es:{
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
   am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',player_pause:'Pausar jugador',player_resume:'Reanudar jugador',player_paused:'pausado',player_new_name:'Nuevo nombre…',player_save:'Guardar',timer_start:'Iniciar ronda',timer_done:'TIEMPO',
-  export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',pres_standings:'Clasificación',pres_active:'en curso',
+  export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',pres_standings:'Clasificación',pres_active:'en curso',pres_meta:'{p} jugados · {s} dif.',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
   res_bracket_done:' · Bracket completado',
@@ -1825,7 +1833,7 @@ sv:{
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
   am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',player_pause:'Pausa spelare',player_resume:'Återuppta spelare',player_paused:'pausad',player_new_name:'Nytt namn…',player_save:'Spara',timer_start:'Starta rond',timer_done:'SLUTTID',
-  export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabell',pres_active:'pågår',
+  export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabell',pres_active:'pågår',pres_meta:'{p} spelade · {s} diff',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
   res_bracket_done:' · Bracket klart',
@@ -4580,7 +4588,16 @@ function updatePresentation(){
   if(!mode) return;
   let standings, rounds=[], bracket=null;
   if(mode==='americano'||mode==='mexicano'){
-    standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({pos:i+1,name:p.name,pts:p.pts}));
+    const _doneM=AM.flat().filter(m=>m.done);
+    standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>{
+      let played=0,saldo=0;
+      _doneM.forEach(m=>{
+        const onA=m.a1===p.id||m.a2===p.id, onB=m.b1===p.id||m.b2===p.id;
+        if(!onA&&!onB) return;
+        played++; saldo+=onA?(m.sa-m.sb):(m.sb-m.sa);
+      });
+      return{pos:i+1,name:p.name,pts:p.pts,played,saldo};
+    });
     rounds=AM.map(r=>({
       round:r[0]?.round||0,
       matches:r.map(m=>({
@@ -4690,16 +4707,25 @@ function initPresentation(){
     const medals=['🥇','🥈','🥉'];
     const amMode=d.mode==='americano'||d.mode==='mexicano';
     const maxVal=Math.max(1,...d.standings.map(s=>amMode?(s.pts||0):(s.wins||0)));
+    const avColors=['var(--gold)','var(--accent)','#b4a0f7'];
     const rows=d.standings.map(s=>{
       const medal=s.pos<=3?`<span class="pres-medal">${medals[s.pos-1]}</span>`:`<span class="pres-pos">${s.pos}</span>`;
       const score=amMode
         ?`<span class="pres-pts">${s.pts}</span>`
         :`<span class="pres-pts">${s.wins}<span style="font-size:1.2rem;color:#475569"> W</span></span>`;
       const pct=Math.round((amMode?(s.pts||0):(s.wins||0))/maxVal*100);
+      const avBg=avColors[s.pos-1]||'rgba(255,255,255,.1)';
+      const avFg=s.pos<=3?'#0E1114':'rgba(249,250,251,.65)';
+      const initial=esc((s.name||'?').trim().charAt(0).toUpperCase()||'?');
+      const avatar=`<span class="pres-avatar" style="background:${avBg};color:${avFg}">${initial}</span>`;
+      const meta=(amMode&&typeof s.saldo==='number')
+        ?`<div class="pres-meta">${t('pres_meta',{p:s.played,s:(s.saldo>0?'+':'')+s.saldo})}</div>`:'';
       return`<div class="pres-row${s.pos===1?' pres-leader':''}">
         ${medal}
+        ${avatar}
         <div class="pres-name-wrap">
           <div class="pres-name">${esc(s.name)}</div>
+          ${meta}
           <div class="pres-bar-bg"><div class="pres-bar-fill" style="width:${pct}%"></div></div>
         </div>
         ${score}
