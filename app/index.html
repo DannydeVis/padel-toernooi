@@ -851,6 +851,32 @@ body.light header{background:rgba(255,255,255,.82)}
 .share-copy-btn:hover{box-shadow:0 6px 26px rgba(199,255,94,.46);transform:translateY(-1px)}
 .share-copy-btn::after{content:'';position:absolute;top:0;left:-60%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);pointer-events:none}
 @media(prefers-reduced-motion:no-preference){.share-copy-btn::after{animation:lmShine 3.6s ease-in-out infinite}}
+
+/* ─── PREMIUM APP FINISH ─────────────────────────────────
+   Setup-kaarten, knoppen, inputs — afgestemd op de landing
+   ──────────────────────────────────────────────────────── */
+/* setup-cards: ronder, zachte gradient-rand, iets donkerder bg */
+.setup-card{background:#181d22!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:16px!important;padding:18px 18px 20px!important;margin-bottom:10px!important;position:relative;transition:border-color .18s}
+.setup-card:focus-within{border-color:rgba(199,255,94,.28)!important}
+body.light .setup-card{background:#f8f9fa!important;border-color:rgba(0,0,0,.07)!important}
+/* stap-nummers in Syne eyebrow-stijl */
+.setup-card-step{font-family:'Syne',sans-serif!important;font-weight:800!important;font-size:.68rem!important;letter-spacing:.1em!important;color:var(--accent)!important;opacity:.7}
+/* kaart-titel in Barlow Condensed display-stijl */
+.setup-card-title{font-family:'Barlow Condensed',sans-serif!important;font-weight:700!important;font-size:1.1rem!important;letter-spacing:.01em}
+/* rbtn option-knoppen: ronder, hover-lift, lime-glow op actief */
+.rbtn{border-radius:10px!important;padding:9px 15px!important;transition:transform .14s,border-color .14s,box-shadow .14s,background .12s!important}
+.rbtn:hover:not(.active){transform:translateY(-1px);border-color:rgba(199,255,94,.35)!important}
+.rbtn.active{box-shadow:0 3px 14px rgba(199,255,94,.28)!important;border-radius:10px!important}
+/* naam-input & textarea: ronder, zachter focus */
+.tname-input,textarea{border-radius:11px!important;border-color:rgba(255,255,255,.08)!important;background:#0f1317!important}
+.tname-input:focus,textarea:focus{border-color:rgba(199,255,94,.45)!important;box-shadow:0 0 0 3px rgba(199,255,94,.08)!important;outline:none}
+body.light .tname-input,body.light textarea{background:#f0f1f3!important}
+/* tabs: rondere hoeken */
+.tab{border-radius:11px 11px 0 0!important}
+.tab-body{border-radius:0 14px 14px 14px!important;border:1px solid rgba(255,255,255,.06)!important}
+/* deel-knop in header: zelfde glow als primary */
+#btn-share{box-shadow:0 3px 14px rgba(199,255,94,.28)!important}
+#btn-share:hover{box-shadow:0 5px 20px rgba(199,255,94,.42)!important;transform:translateY(-1px)!important}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
@@ -930,7 +956,12 @@ body.light header{background:rgba(255,255,255,.82)}
 <div class="app">
 
 <header>
-  <div class="logo"><img src="../icon.svg" class="logo-icon" alt="" aria-hidden="true">Padel <em>Bracket</em> <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a href="/" aria-label="Terug naar padel-bracket.com" style="display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:rgba(249,250,251,.35);text-decoration:none;letter-spacing:.03em;transition:color .15s;padding:4px 0" onmouseover="this.style.color='rgba(199,255,94,.7)'" onmouseout="this.style.color='rgba(249,250,251,.35)'">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <div class="logo"><img src="../icon.svg" class="logo-icon" alt="" aria-hidden="true">Padel <em>Bracket</em> <span class="logo-version" id="app-version"></span><span class="logo-tname" id="logo-tname"></span></div>
+  </div>
   <div class="hbtns">
     <button class="btn btn-ghost btn-sm" id="btn-pres" style="display:none" onclick="openPresentation()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg> <span class="btn-label" data-i18n="pres_btn">Presentatie</span></button>
     <button class="btn btn-ghost btn-sm" id="btn-cast" style="display:none" onclick="toggleCast()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-cast"></use></svg> <span class="btn-label">Cast</span></button>
@@ -1265,7 +1296,7 @@ body.light header{background:rgba(255,255,255,.82)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.42.0';
+const APP_VERSION = 'v1.43.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
