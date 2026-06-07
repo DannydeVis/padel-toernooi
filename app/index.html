@@ -850,9 +850,12 @@ body.light header{background:rgba(255,255,255,.82)}
 .pres-live-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#ff6b6b;flex-shrink:0}
 @media(prefers-reduced-motion:no-preference){.pres-live-badge::before{animation:presLiveDot 1.6s ease-out infinite}}
 @keyframes presLiveDot{0%{box-shadow:0 0 0 0 rgba(255,107,107,.5)}70%{box-shadow:0 0 0 6px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
-/* eyebrows/labels in Syne */
-.pres-section-lbl,.pres-matches-title,.pres-court-lbl,.pres-timer-lbl{font-family:'Syne',sans-serif!important;
+/* eyebrows/labels in Syne (geen cijfers erin) */
+.pres-section-lbl{font-family:'Syne',sans-serif!important;
   letter-spacing:.1em!important;color:rgba(249,250,251,.42)!important;text-transform:uppercase!important}
+/* labels mét cijfers (Baan N, Ronde N): Inter i.p.v. Syne — duidelijke, leesbare cijfers */
+.pres-matches-title,.pres-court-lbl,.pres-timer-lbl{font-family:'Inter',sans-serif!important;font-weight:700!important;
+  letter-spacing:.06em!important;color:rgba(249,250,251,.42)!important;text-transform:uppercase!important}
 /* rang-nummers: groot zoals landing (62px) */
 .pres-pos{font-family:'Barlow Condensed',sans-serif!important;
   font-size:clamp(2rem,4vw,3.5rem)!important;font-weight:800!important;
@@ -905,7 +908,7 @@ body.light header{background:rgba(255,255,255,.82)}
 .setup-card{background:#181d22!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:16px!important;padding:18px 18px 20px!important;margin-bottom:10px!important;position:relative;transition:border-color .18s}
 .setup-card:focus-within{border-color:rgba(199,255,94,.28)!important}
 body.light .setup-card{background:#f8f9fa!important;border-color:rgba(0,0,0,.07)!important}
-/* stap-nummers in Syne eyebrow-stijl */
+/* stap-nummers in Inter — Syne maakt cijfers onduidelijk */
 .setup-card-step{font-family:'Inter',sans-serif!important;font-weight:800!important;font-size:.68rem!important;letter-spacing:0!important;color:var(--accent)!important;opacity:.7}
 /* kaart-titel in Barlow Condensed display-stijl */
 .setup-card-title{font-family:'Barlow Condensed',sans-serif!important;font-weight:700!important;font-size:1.1rem!important;letter-spacing:.01em}
@@ -1402,7 +1405,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.45.0';
+const APP_VERSION = 'v1.45.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
