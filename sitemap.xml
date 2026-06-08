@@ -231,6 +231,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Alternatives / comparison -->
+  <url>
+    <loc>https://padel-bracket.com/en/alternatives/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Privacy policy -->
   <url>
     <loc>https://padel-bracket.com/privacy/</loc>
