@@ -582,6 +582,10 @@ body.light .team-stats-btn{text-decoration-color:rgba(17,24,39,.2)}
 .comp-sess-rank{color:var(--txt2);width:22px;flex-shrink:0;font-size:.76rem}
 .comp-sess-names{flex:1;color:var(--txt);font-weight:600}
 .comp-sess-pts{color:var(--accent);font-weight:700;font-size:.82rem}
+/* ── Spelersniveaus ── */
+.player-lvl{display:inline-block;font-size:.63rem;font-weight:700;color:var(--accent);background:rgba(199,255,94,.12);border-radius:4px;padding:1px 4px;margin-left:5px;vertical-align:middle;line-height:1.5}
+.team-lvl-avg{font-size:.68rem;color:var(--txt2);margin-left:7px;opacity:.8}
+body.light .player-lvl{background:rgba(74,124,0,.1);color:var(--accent)}
 .comp-back-btn{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:.82rem;font-weight:700;padding:4px 0 14px;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
 .comp-back-btn:hover{color:var(--txt)}
 .comp-select{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;padding:9px 12px;outline:none;appearance:none;-webkit-appearance:none}
@@ -1280,6 +1284,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
       <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
       <p class="setup-card-sub" id="mode-auto-desc" style="margin-top:6px;margin-bottom:0" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
       <div class="nc" id="nc"></div>
+      <p class="setup-card-hint" id="level-hint" style="margin-top:6px;margin-bottom:0;font-size:.72rem;color:var(--txt2)" data-i18n="level_hint"></p>
     </div>
 
     <!-- Card 6: Teams (MANUAL mode) -->
@@ -1490,7 +1495,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.48.1';
+const APP_VERSION = 'v1.49.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1579,6 +1584,7 @@ nl:{
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
   player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',
   comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',
+  level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
@@ -1654,6 +1660,7 @@ en:{
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
 },
 fr:{
+  level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
   savedGroups:'Groupes enregistrés',saveGroup:'Enregistrer le groupe',groupName:'Nom du groupe',loadGroup:'Charger',renameGroup:'Renommer',deleteGroup:'Supprimer',noGroups:'Aucun groupe enregistré',groupSaved:'Groupe enregistré',confirmDeleteGroup:'Supprimer ce groupe ?',overwriteGroup:'Un groupe avec ce nom existe déjà. Remplacer ?',hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'Vue en direct',share_wa_text:'suivez le classement en direct — fait avec padel-bracket.com',share_default_name:'Tournoi de padel',share_whatsapp:'Partager via WhatsApp',share_result_cta:'Partager les résultats',org_cta_txt:'Organiser la prochaine fois ?',org_cta_btn:'Commencer gratuitement',view_wa_txt:'suivez le classement en direct (fait avec padel-bracket.com)',reset_btn:'Recommencer',reset_confirm:'Recommencer ? Tous les scores seront perdus.',
   ob_skip:'Passer',ob_back:'← Retour',ob_next:'Suivant →',ob_start:'Démarrer',
   ob1_title:'Tournoi de Padel',
@@ -1725,6 +1732,7 @@ fr:{
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
 },
 de:{
+  level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
   savedGroups:'Gespeicherte Gruppen',saveGroup:'Gruppe speichern',groupName:'Gruppenname',loadGroup:'Laden',renameGroup:'Umbenennen',deleteGroup:'Löschen',noGroups:'Noch keine Gruppen gespeichert',groupSaved:'Gruppe gespeichert',confirmDeleteGroup:'Diese Gruppe löschen?',overwriteGroup:'Eine Gruppe mit diesem Namen existiert bereits. Überschreiben?',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live-Ergebnisse verfolgen — erstellt mit padel-bracket.com',share_default_name:'Padel-Turnier',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',org_cta_txt:'Nachstes Mal selbst organisieren?',org_cta_btn:'Kostenlos starten',view_wa_txt:'live Ergebnisse verfolgen (erstellt mit padel-bracket.com)',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
   ob_skip:'Überspringen',ob_back:'← Zurück',ob_next:'Weiter →',ob_start:'Starten',
   ob1_title:'Padel Turnier',
@@ -1794,6 +1802,7 @@ de:{
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
   player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',
   comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',
+  level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
@@ -1865,6 +1874,7 @@ es:{
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
   player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',
   comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',
+  level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
@@ -1936,6 +1946,7 @@ sv:{
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
+  level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
 },
 };
 
@@ -1969,7 +1980,15 @@ function renderGroupsUI(){
   wrap.innerHTML=`<div class="grp-hdr"><span class="grp-lbl">${t('savedGroups')}</span><button class="btn btn-ghost btn-sm" style="flex-shrink:0;white-space:nowrap" onclick="saveCurrentGroup()">${t('saveGroup')}</button></div><div class="grp-chips">${chips}</div>`;
 }
 function saveCurrentGroup(){
-  const lines=_activeLines();
+  const manual=$('mode-manual').style.display!=='none';
+  let lines, levels=null;
+  if(manual){
+    lines=_activeLines();
+  } else {
+    const parsed=parseNamesWithLevels($('ta').value);
+    lines=parsed.map(p=>p.name);
+    if(parsed.some(p=>p.level!==null)) levels=parsed.map(p=>p.level);
+  }
   if(!lines.length) return;
   const name=(window.prompt(t('groupName'))||'').trim();
   if(!name) return;
@@ -1977,16 +1996,27 @@ function saveCurrentGroup(){
   const existing=groups.find(g=>g.name===name);
   if(existing){
     if(!window.confirm(t('overwriteGroup'))) return;
-    existing.lines=lines; existing.updatedAt=Date.now();
+    existing.lines=lines;
+    if(levels!==null) existing.levels=levels; else delete existing.levels;
+    existing.updatedAt=Date.now();
   } else {
     const id=typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
-    groups.push({id,name,lines,updatedAt:Date.now()});
+    const entry={id,name,lines,updatedAt:Date.now()};
+    if(levels!==null) entry.levels=levels;
+    groups.push(entry);
   }
   _saveGroups(groups); renderGroupsUI();
 }
 function loadGroup(id){
   const g=_loadGroups().find(g=>g.id===id);
-  if(g) _setActiveTA(g.lines);
+  if(!g) return;
+  const manual=$('mode-manual').style.display!=='none';
+  if(!manual&&g.levels&&g.levels.some(l=>l!=null)){
+    const linesWithLvl=g.lines.map((n,i)=>g.levels[i]!=null?`${n}:${g.levels[i]}`:n);
+    _setActiveTA(linesWithLvl);
+  } else {
+    _setActiveTA(g.lines);
+  }
 }
 function deleteGroup(id){
   if(!window.confirm(t('confirmDeleteGroup'))) return;
@@ -2243,6 +2273,7 @@ let R={gpm:3, matchPts:32, courts:2, timerMins:0};
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
+let _playerLevels={}; // name→level for current tournament
 let TAP=[], TAM=[]; // team americano pairs & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
 let shareCode=localStorage.getItem('padel-share-code')||null;
@@ -2371,7 +2402,16 @@ function updateNC(){
   el.innerHTML = `<b>${nTrios ? t('val_ok_names_trio',{n,nTeams,nDuo,nTrio:nTrios}) : t('val_ok_names_simple',{n,nTeams,nDuo})}</b>`;
 }
 
-function names(){ return $('ta').value.split('\n').map(s=>s.trim()).filter(Boolean); }
+function parseNamesWithLevels(text){
+  return text.split('\n').map(line=>{
+    const s=line.trim(); if(!s) return null;
+    const m=s.match(/^(.+):([1-5])$/);
+    return m?{name:m[1].trim(),level:parseInt(m[2],10)}:{name:s,level:null};
+  }).filter(Boolean);
+}
+function namesWithLevels(){return parseNamesWithLevels($('ta').value);}
+// names() strips level suffixes so all downstream code receives clean names
+function names(){return namesWithLevels().map(p=>p.name);}
 
 // N players → as many duo's as possible, max 1 trio for odd N
 // N=4: 2 duo's. N=5: 1 duo + 1 trio. N=6: 3 duo's. N=17: 8 duo's + 1 trio.
@@ -2400,18 +2440,31 @@ function makeTeams(list){
   }
 }
 
+
+function _teamLvlBadge(teamName){
+  const ns=teamName.split(/\s*[&\/]\s*/);
+  const lvls=ns.map(n=>_playerLevels[n.trim()]).filter(l=>l!=null);
+  if(!lvls.length) return '';
+  const avg=Math.round(lvls.reduce((a,b)=>a+b,0)/lvls.length*10)/10;
+  return `<span class="team-lvl-avg">&#9733;${avg}</span>`;
+}
+
 function doShuffle(){
   const n=names();
   if(n.length<4){alert(t('val_min4'));return;}
   lastShuffle=[...n].sort(()=>Math.random()-.5);
+  const lvls=namesWithLevels(); _playerLevels={};
+  lvls.forEach(p=>{if(p.level!=null) _playerLevels[p.name]=p.level;});
   makeTeams(lastShuffle);
-  $('prev').innerHTML=T.map((t,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${esc(t.name)}</span>${t.trio?'<span class="trio-pill">TRIO</span>':''}</div>`).join('');
+  $('prev').innerHTML=T.map((tm,i)=>`<div class="pchip"><span class="nn">${i+1}</span><span>${esc(tm.name)}</span>${tm.trio?'<span class="trio-pill">TRIO</span>':''}${_teamLvlBadge(tm.name)}</div>`).join('');
 }
 
 function doStart(){
   const n=names();
   if(n.length<4){alert(t('val_min4'));return;}
   if(lastShuffle.length!==n.length){ lastShuffle=[...n].sort(()=>Math.random()-.5); }
+  const lvls=namesWithLevels(); _playerLevels={};
+  lvls.forEach(p=>{if(p.level!=null) _playerLevels[p.name]=p.level;});
   makeTeams(lastShuffle);
   startTournament();
 }
@@ -3470,11 +3523,26 @@ function startMexicano(){
   saveState();
 }
 
+
+// Sort players by level desc (unknowns last) for level-balanced initial order.
+// Returns null when no player has a level set — caller uses random shuffle.
+function _levelOrder(parsed){
+  if(!parsed.some(p=>p.level!==null)) return null;
+  const known=[...parsed.filter(p=>p.level!==null)].sort((a,b)=>b.level-a.level);
+  const unknown=parsed.filter(p=>p.level===null); // no level → append last
+  return [...known,...unknown];
+}
+
 function startAmericano(){
-  const ns=names().filter(Boolean);
-  if(ns.length<4){alert(t('val_min4'));return;}
-  const shuffled=[...ns].sort(()=>Math.random()-.5);
-  AP=shuffled.map((name,id)=>({id,name,pts:0}));
+  const parsed=namesWithLevels().filter(p=>p.name);
+  if(parsed.length<4){alert(t('val_min4'));return;}
+  // Level-based initial order if any levels present; otherwise random shuffle
+  const ordered=_levelOrder(parsed)||[...parsed].sort(()=>Math.random()-.5);
+  _playerLevels={};
+  AP=ordered.map((p,id)=>{
+    if(p.level!=null) _playerLevels[p.name]=p.level;
+    return {id,name:p.name,pts:0,level:p.level??null};
+  });
   AM=buildAmericanoSchedule(AP.map(p=>p.id));
   localStorage.removeItem('padel-round-timer');
   trackStart('americano', AP.length);
@@ -4304,7 +4372,8 @@ function renderAmSt(){
   sorted.forEach((p,i)=>{
     const s=anyDone?getAmPlayerStats(p.id):{w:0,d:0,l:0};
     const pauseBadge=p.paused?` <span class="player-paused-badge">${t('player_paused')}</span>`:'';
-    const nameCell=viewMode?esc(p.name)+pauseBadge:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)} <span class="am-edit-icon">✎</span></button>${pauseBadge}`;
+    const lvlBadge=p.level?`<span class="player-lvl">${p.level}</span>`:'';
+    const nameCell=viewMode?esc(p.name)+lvlBadge+pauseBadge:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)}<span class="am-edit-icon">✎</span></button>${lvlBadge}${pauseBadge}`;
     h+=`<tr${i===0&&!p.paused?' class="qq"':''}${p.paused?' class="am-player-paused"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td></tr>`;
   });
   const bar=anyDone?renderExportBar():'';
