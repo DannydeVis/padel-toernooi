@@ -554,6 +554,42 @@ body.light .team-stats-btn{text-decoration-color:rgba(17,24,39,.2)}
 .org-cta{border-top:1px solid var(--bdr);margin-top:16px;padding-top:14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
 .org-cta-txt{font-size:.85rem;color:var(--txt2)}
 .org-cta-btn{background:var(--accent);color:#0E1114;font-weight:700;font-size:.85rem;border-radius:10px;padding:9px 18px;text-decoration:none;display:inline-block}
+/* ── Competities ── */
+.comp-list-item{display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;border:1px solid var(--bdr);transition:.15s}
+.comp-list-item:hover{border-color:rgba(199,255,94,.25)}
+.comp-item-main{flex:1;min-width:0}
+.comp-item-name{font-weight:700;font-size:.95rem;color:var(--txt)}
+.comp-item-sub{font-size:.76rem;color:var(--txt2);margin-top:2px}
+.comp-item-actions{display:flex;gap:6px;flex-shrink:0}
+.comp-session-count{background:rgba(199,255,94,.1);border:1px solid rgba(199,255,94,.2);border-radius:20px;padding:2px 9px;font-size:.7rem;font-weight:700;color:var(--accent)}
+.comp-standings-tbl{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:16px}
+.comp-standings-tbl th{text-align:left;color:var(--txt2);font-size:.65rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bdr)}
+.comp-standings-tbl td{padding:7px 8px;border-bottom:1px solid var(--surface2);color:var(--txt)}
+.comp-standings-tbl tr.comp-rank-1 td{font-weight:700;color:var(--accent)}
+.comp-td-num{text-align:center;width:36px;color:var(--txt2)}
+.comp-td-pts{text-align:right;font-weight:700;padding-right:14px}
+.comp-td-sess{text-align:right;color:var(--txt2);padding-right:6px}
+.comp-session-row{background:var(--surface2);border-radius:10px;margin-bottom:6px;overflow:hidden}
+.comp-session-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none}
+.comp-session-hdr:hover{background:rgba(255,255,255,.04)}
+.comp-session-date{font-size:.76rem;font-weight:700;color:var(--txt2);flex-shrink:0}
+.comp-session-label{font-size:.84rem;font-weight:600;color:var(--txt);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.comp-session-badge{font-size:.64rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:var(--surface);border-radius:6px;padding:2px 7px;color:var(--txt2);flex-shrink:0}
+.comp-session-body{display:none;padding:0 14px 12px}
+.comp-session-row.expanded .comp-session-body{display:block}
+.comp-session-result-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--surface);font-size:.82rem}
+.comp-session-result-row:last-child{border-bottom:none}
+.comp-sess-rank{color:var(--txt2);width:22px;flex-shrink:0;font-size:.76rem}
+.comp-sess-names{flex:1;color:var(--txt);font-weight:600}
+.comp-sess-pts{color:var(--accent);font-weight:700;font-size:.82rem}
+.comp-back-btn{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:.82rem;font-weight:700;padding:4px 0 14px;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
+.comp-back-btn:hover{color:var(--txt)}
+.comp-select{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;padding:9px 12px;outline:none;appearance:none;-webkit-appearance:none}
+.comp-select:focus{border-color:var(--accent)}
+body.light .comp-select{background:#f3f4f6;color:#111827}
+.add-comp-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;background:var(--surface2);margin-bottom:6px;font-weight:600;font-size:.9rem;color:var(--txt);border:none;width:100%;text-align:left;font-family:'Inter',sans-serif;transition:.15s}
+.add-comp-item:hover{background:rgba(199,255,94,.1);color:var(--accent)}
+.add-comp-item.new-comp{color:var(--accent);background:rgba(199,255,94,.07);border:1px dashed rgba(199,255,94,.25)}
 .phdr{display:none;font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
 /* SVG ICONS */
@@ -757,6 +793,8 @@ body.banner-open .app{padding-bottom:140px}
 /* ── Share modal ──────────────────────────────── */
 #share-modal{position:fixed;bottom:0;left:0;right:0;z-index:1001;padding:0 12px 12px;pointer-events:none;display:flex;justify-content:center}
 #share-modal.hidden{display:none}
+#add-comp-modal{position:fixed;bottom:0;left:0;right:0;z-index:1003;padding:0 12px 12px;display:flex;justify-content:center}
+#add-comp-modal.hidden{display:none}
 .share-card{pointer-events:all;background:var(--surface);border:1px solid rgba(199,255,94,.3);border-radius:20px 20px 16px 16px;box-shadow:0 -4px 32px rgba(0,0,0,.5),0 0 0 1px rgba(199,255,94,.08);padding:16px 18px 14px;max-width:480px;width:100%;animation:slideUp .35s cubic-bezier(.34,1.56,.64,1)}
 body.light .share-card{background:#fff}
 .share-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -1056,6 +1094,8 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
   <symbol id="ic-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></symbol>
   <symbol id="ic-airplay" viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/><polygon points="12 15 17 21 7 21 12 15"/></symbol>
   <symbol id="ic-ios-share" viewBox="0 0 24 24"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
+  <!-- League / competition -->
+  <symbol id="ic-league" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="5" height="9"/><rect x="9.5" y="7" width="5" height="14"/><rect x="16" y="3" width="5" height="18"/><line x1="3" y1="21" x2="21" y2="21"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -1087,6 +1127,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
       <button class="btn btn-ghost btn-sm" onclick="toggleMore()" aria-label="Meer opties"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-more"></use></svg></button>
       <div class="more-menu" id="more-menu">
         <button class="more-item" onclick="toggleTheme();closeMore()"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg> <span data-i18n="hdr_theme">Thema wisselen</span></button>
+        <button class="more-item" onclick="showCompetitions();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg> <span data-i18n="comp_menu">Competities</span></button>
         <div class="more-divider" id="more-divider" style="display:none"></div>
         <button class="more-item" id="btn-back" style="display:none" onclick="goSetup();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="hdr_edit">Aanpassen</span></button>
         <button class="more-item" id="btn-reset" style="display:none" onclick="resetTournament()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-rotate"></use></svg> <span data-i18n="reset_btn">Begin opnieuw</span></button>
@@ -1331,6 +1372,30 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
   <div id="am-rounds-wrap"></div>
 </div>
 
+<!-- COMPETITIES SCREEN -->
+<div id="screen-competitions" style="display:none">
+  <div class="setup-box">
+    <div id="comp-list-view">
+      <div class="setup-intro">
+        <h2 id="comp-screen-h2" data-i18n="comp_screen_title">Competities</h2>
+      </div>
+      <div id="comp-list"></div>
+      <div class="setup-card" style="margin-top:12px">
+        <div class="setup-card-hdr">
+          <svg class="setup-card-icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg>
+          <span class="setup-card-title" data-i18n="comp_new">Nieuwe competitie</span>
+        </div>
+        <p class="setup-card-sub" data-i18n="comp_new_sub">Koppel aan een vaste groep om spelers over sessies te herkennen.</p>
+        <input id="comp-new-name" class="tname-input" type="text" data-i18n-ph="comp_name_ph" placeholder="Competitienaam" maxlength="48" style="margin-bottom:8px">
+        <select id="comp-group-select" class="comp-select" style="margin-bottom:8px"></select>
+        <input id="comp-schema-inp" class="tname-input" type="text" data-i18n-ph="comp_schema_ph" placeholder="bijv. 10,8,6,5,4,3,2,1" style="margin-bottom:10px">
+        <button class="btn btn-green btn-sm" onclick="createComp()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-check"></use></svg> <span data-i18n="comp_new">Nieuwe competitie</span></button>
+      </div>
+    </div>
+    <div id="comp-detail" style="display:none"></div>
+  </div>
+</div>
+
 </div><!-- /app -->
 
 <!-- PLAYER / TEAM DETAIL MODAL -->
@@ -1393,6 +1458,18 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
   </div>
 </div>
 
+<!-- ADD TO COMPETITION MODAL -->
+<div id="add-comp-modal" class="hidden" onclick="if(event.target===this)closeAddToCompModal()">
+  <div class="share-card">
+    <div class="share-top">
+      <svg class="icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg>
+      <span class="share-title" data-i18n="comp_add_title">Aan competitie toevoegen</span>
+      <button class="share-close-btn" onclick="closeAddToCompModal()">&#x2715;</button>
+    </div>
+    <div id="add-comp-list"></div>
+  </div>
+</div>
+
 <!-- INSTALL BANNER -->
 <div id="install-banner" class="hidden">
   <div class="install-card">
@@ -1413,7 +1490,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.47.0';
+const APP_VERSION = 'v1.48.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1501,6 +1578,7 @@ nl:{
   pres_ios_title:'Weergeven op TV',pres_ios_body:'Tik op \'Open presentatie\' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:',pres_ios_s1:'Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)',pres_ios_s2:'Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)',pres_ios_s3:'Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst',pres_ios_open:'Open presentatie',pres_ios_ok:'Sluiten',
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
   player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',
+  comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
@@ -1573,6 +1651,7 @@ en:{
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',
+  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
 },
 fr:{
   savedGroups:'Groupes enregistrés',saveGroup:'Enregistrer le groupe',groupName:'Nom du groupe',loadGroup:'Charger',renameGroup:'Renommer',deleteGroup:'Supprimer',noGroups:'Aucun groupe enregistré',groupSaved:'Groupe enregistré',confirmDeleteGroup:'Supprimer ce groupe ?',overwriteGroup:'Un groupe avec ce nom existe déjà. Remplacer ?',hdr_theme:'Changer le thème',hdr_edit:'Modifier',hdr_print:'Imprimer',feedback_btn:'Feedback',feedback_bug:'Signaler un bug',feedback_feature:'Suggérer une fonction',cookie_txt:'Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent ce site.',cookie_accept:'Accepter',cookie_decline:'Refuser',share_btn:'Partager',share_title:'Partager ce tournoi',share_desc:'Toute personne avec ce lien voit le bracket en direct — lecture seule.',share_copy:'Copier le lien',share_copied:'Copié !',share_close:'Fermer',share_loading:'Chargement…',share_not_found:'Tournoi introuvable.',share_error:'Connexion échouée.',share_nudge:'Faites suivre le tournoi en direct — Partager',view_banner:'Vue en direct',share_wa_text:'suivez le classement en direct — fait avec padel-bracket.com',share_default_name:'Tournoi de padel',share_whatsapp:'Partager via WhatsApp',share_result_cta:'Partager les résultats',org_cta_txt:'Organiser la prochaine fois ?',org_cta_btn:'Commencer gratuitement',view_wa_txt:'suivez le classement en direct (fait avec padel-bracket.com)',reset_btn:'Recommencer',reset_confirm:'Recommencer ? Tous les scores seront perdus.',
@@ -1643,6 +1722,7 @@ fr:{
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
   player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',
+  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
 },
 de:{
   savedGroups:'Gespeicherte Gruppen',saveGroup:'Gruppe speichern',groupName:'Gruppenname',loadGroup:'Laden',renameGroup:'Umbenennen',deleteGroup:'Löschen',noGroups:'Noch keine Gruppen gespeichert',groupSaved:'Gruppe gespeichert',confirmDeleteGroup:'Diese Gruppe löschen?',overwriteGroup:'Eine Gruppe mit diesem Namen existiert bereits. Überschreiben?',hdr_theme:'Thema wechseln',hdr_edit:'Bearbeiten',hdr_print:'Drucken',feedback_btn:'Feedback',feedback_bug:'Fehler melden',feedback_feature:'Funktion vorschlagen',cookie_txt:'Wir nutzen Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.',cookie_accept:'Akzeptieren',cookie_decline:'Ablehnen',share_btn:'Teilen',share_title:'Turnier teilen',share_desc:'Jeder mit diesem Link sieht Bracket und Tabelle live — nur lesen.',share_copy:'Link kopieren',share_copied:'Kopiert!',share_close:'Schließen',share_loading:'Turnier wird geladen…',share_not_found:'Turnier nicht gefunden.',share_error:'Verbindung fehlgeschlagen.',share_nudge:'Lass alle live dabei sein — Teilen',view_banner:'Live ansehen',share_wa_text:'Live-Ergebnisse verfolgen — erstellt mit padel-bracket.com',share_default_name:'Padel-Turnier',share_whatsapp:'Via WhatsApp teilen',share_result_cta:'Ergebnisse teilen',org_cta_txt:'Nachstes Mal selbst organisieren?',org_cta_btn:'Kostenlos starten',view_wa_txt:'live Ergebnisse verfolgen (erstellt mit padel-bracket.com)',reset_btn:'Neu starten',reset_confirm:'Neu starten? Alle Ergebnisse gehen verloren.',
@@ -1713,6 +1793,7 @@ de:{
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
   player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',
+  comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
@@ -1783,6 +1864,7 @@ es:{
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
   player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',
+  comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
@@ -1853,6 +1935,7 @@ sv:{
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
+  comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
 },
 };
 
@@ -1923,6 +2006,226 @@ function renameGroup(id){
   if(tgt){tgt.name=name;tgt.updatedAt=Date.now();}
   _saveGroups(final); renderGroupsUI();
 }
+
+// ── Competities ──────────────────────────────────────────────────
+const DEFAULT_SCHEMA=[10,8,6,5,4,3,2,1];
+
+function _loadComps(){try{return JSON.parse(localStorage.getItem('padel_competitions'))||[];}catch{return[];}}
+function _saveComps(arr){localStorage.setItem('padel_competitions',JSON.stringify(arr));}
+function _genCompId(){return typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);}
+function _compPointsForRank(schema,rank){return rank<=schema.length?schema[rank-1]:schema[schema.length-1];}
+
+function extractSessionResults(groupLines){
+  const results=[];
+  if(mode==='americano'||mode==='mexicano'){
+    [...AP].sort((a,b)=>b.pts-a.pts).forEach((p,i)=>{
+      const idx=groupLines.indexOf(p.name);
+      if(idx>=0) results.push({rank:i+1,playerIds:[idx]});
+    });
+  } else if(mode==='teamamericano'){
+    [...TAP].sort((a,b)=>b.pts-a.pts).forEach((pair,i)=>{
+      const ids=[groupLines.indexOf(pair.n1),groupLines.indexOf(pair.n2)].filter(x=>x>=0);
+      if(ids.length) results.push({rank:i+1,playerIds:ids});
+    });
+  } else {
+    getStandings().forEach((team,i)=>{
+      const names=team.name.split(/\s*[&\/]\s*/);
+      const ids=names.map(n=>groupLines.indexOf(n.trim())).filter(x=>x>=0);
+      if(ids.length) results.push({rank:i+1,playerIds:ids});
+    });
+  }
+  return results;
+}
+
+function _computeCompStandings(comp,group){
+  const schema=comp.pointSchema||DEFAULT_SCHEMA;
+  return group.lines.map((name,idx)=>{
+    let total=0,played=0;
+    const sessionPts=comp.sessions.map(sess=>{
+      const entry=sess.results.find(r=>r.playerIds.includes(idx));
+      if(entry){played++;const pts=_compPointsForRank(schema,entry.rank);total+=pts;return pts;}
+      return 0;
+    });
+    return{idx,name,total,played,sessionPts};
+  }).sort((a,b)=>b.total-a.total||a.idx-b.idx);
+}
+
+let _prevScreen='setup';
+
+function showCompetitions(){
+  if($('screen-setup').style.display!=='none') _prevScreen='setup';
+  else if($('screen-tournament').style.display!=='none') _prevScreen='tournament';
+  else if($('screen-americano').style.display!=='none') _prevScreen='americano';
+  $('screen-setup').style.display='none';
+  $('screen-tournament').style.display='none';
+  $('screen-americano').style.display='none';
+  $('screen-competitions').style.display='block';
+  renderCompetitions();
+}
+
+function backFromComp(){
+  $('screen-competitions').style.display='none';
+  if(_prevScreen==='tournament') $('screen-tournament').style.display='block';
+  else if(_prevScreen==='americano') $('screen-americano').style.display='block';
+  else $('screen-setup').style.display='block';
+}
+
+function renderCompetitions(){
+  const comps=_loadComps();
+  const groups=_loadGroups();
+  const listEl=$('comp-list');
+  if(comps.length===0){
+    listEl.innerHTML=`<p class="comp-empty" style="margin-bottom:12px">${t('comp_empty')}</p>`;
+  } else {
+    listEl.innerHTML=comps.map(c=>{
+      const g=groups.find(x=>x.id===c.groupId);
+      return `<div class="comp-list-item">
+        <button class="comp-item-main" onclick="openCompDetail('${c.id}')">
+          <span class="comp-item-name">${esc(c.name)}</span>
+          <span class="comp-item-sub">${g?esc(g.name):'?'} &middot; <span class="comp-session-count">${c.sessions.length} ${t('comp_sessions_lbl').toLowerCase()}</span></span>
+        </button>
+        <div class="comp-item-actions">
+          <button class="grp-chip-action" onclick="renameComp('${c.id}')" title="&#x270E;">&#x270E;</button>
+          <button class="grp-chip-action" onclick="deleteComp('${c.id}')" title="&#x2715;">&#x2715;</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  // populate group select
+  const sel=$('comp-group-select');
+  sel.innerHTML=groups.length
+    ?groups.map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join('')
+    :`<option disabled>${t('comp_no_groups')}</option>`;
+  $('comp-list-view').style.display='';
+  $('comp-detail').style.display='none';
+  applyI18n();
+}
+
+function openCompDetail(compId){
+  const comp=_loadComps().find(c=>c.id===compId);
+  if(!comp) return;
+  const group=_loadGroups().find(g=>g.id===comp.groupId);
+  const detail=$('comp-detail');
+  if(!group){
+    detail.innerHTML=`<p style="color:var(--txt2);padding:20px">${t('comp_no_group_match')}</p>
+      <button class="comp-back-btn" onclick="showCompListView()">&#8592; ${t('comp_back')}</button>`;
+    $('comp-list-view').style.display='none';
+    detail.style.display='';
+    return;
+  }
+  const standings=_computeCompStandings(comp,group);
+  const stRows=standings.map((p,i)=>`
+    <tr${i===0?' class="qq"':''}>
+      <td>${i+1}</td>
+      <td>${esc(p.name)}</td>
+      <td class="wc">${p.total}</td>
+      <td style="color:var(--txt2)">${p.played}/${comp.sessions.length}</td>
+    </tr>`).join('');
+  const sessHtml=comp.sessions.length===0
+    ?`<p class="comp-empty">${t('comp_no_sessions')}</p>`
+    :comp.sessions.map(s=>`
+      <div class="comp-session-row">
+        <div class="comp-session-hdr" onclick="this.parentNode.classList.toggle('expanded')">
+          <span class="comp-session-date">${new Date(s.date).toLocaleDateString()}</span>
+          <span class="comp-session-label">${esc(s.label)}</span>
+          <span class="comp-session-badge">${s.format}</span>
+          <button class="grp-chip-action" onclick="event.stopPropagation();deleteCompSession('${comp.id}','${s.id}')" title="&#x2715;">&#x2715;</button>
+        </div>
+        <div class="comp-session-body">
+          ${s.results.map(r=>`<div class="comp-session-result-row"><span class="comp-sess-rank">${r.rank}</span><span class="comp-sess-names">${r.playerIds.map(i=>esc(group.lines[i]||'?')).join(' &amp; ')}</span><span class="comp-sess-pts">${_compPointsForRank(comp.pointSchema||DEFAULT_SCHEMA,r.rank)} pts</span></div>`).join('')}
+        </div>
+      </div>`).join('');
+  detail.innerHTML=`
+    <button class="comp-back-btn" onclick="showCompListView()">&#8592; ${t('comp_back')}</button>
+    <h2 class="setup-card-title" style="margin:0 0 4px;font-size:1.05rem">${esc(comp.name)}</h2>
+    <p style="font-size:.8rem;color:var(--txt2);margin-bottom:16px">${t('comp_group_lbl')}: ${esc(group.name)} &middot; ${group.lines.length} ${t('am_col_player').toLowerCase()}s</p>
+    <div class="setup-card" style="margin-bottom:12px">
+      <div class="setup-card-hdr"><span class="setup-card-title">${t('comp_standings_lbl')}</span></div>
+      <table class="comp-standings-tbl">
+        <tr><th>#</th><th>${t('comp_col_player')}</th><th>${t('comp_col_pts')}</th><th>${t('comp_played')}</th></tr>
+        ${stRows}
+      </table>
+    </div>
+    <div class="setup-card">
+      <div class="setup-card-hdr"><span class="setup-card-title">${t('comp_sessions_lbl')} (${comp.sessions.length})</span></div>
+      ${sessHtml}
+    </div>`;
+  $('comp-list-view').style.display='none';
+  detail.style.display='';
+}
+
+function showCompListView(){
+  $('comp-list-view').style.display='';
+  $('comp-detail').style.display='none';
+  renderCompetitions();
+}
+
+function createComp(){
+  const name=($('comp-new-name').value||'').trim();
+  if(!name) return;
+  const groupId=$('comp-group-select').value;
+  if(!groupId) return;
+  const schemaRaw=($('comp-schema-inp').value||'').split(',').map(Number).filter(n=>n>0);
+  const schema=schemaRaw.length?schemaRaw:DEFAULT_SCHEMA;
+  const comp={id:_genCompId(),name,groupId,pointSchema:schema,sessions:[],createdAt:Date.now()};
+  const all=_loadComps(); all.push(comp); _saveComps(all);
+  $('comp-new-name').value='';
+  renderCompetitions();
+}
+
+function deleteComp(id){
+  if(!window.confirm(t('comp_delete_confirm'))) return;
+  _saveComps(_loadComps().filter(c=>c.id!==id));
+  renderCompetitions();
+}
+
+function renameComp(id){
+  const all=_loadComps(); const c=all.find(x=>x.id===id); if(!c) return;
+  const n=(window.prompt(t('comp_name_ph'),c.name)||'').trim(); if(!n||n===c.name) return;
+  c.name=n; _saveComps(all); renderCompetitions();
+}
+
+function deleteCompSession(compId,sessId){
+  if(!window.confirm(t('comp_session_del_confirm'))) return;
+  const all=_loadComps(); const c=all.find(x=>x.id===compId); if(!c) return;
+  c.sessions=c.sessions.filter(s=>s.id!==sessId); _saveComps(all);
+  openCompDetail(compId);
+}
+
+function openAddToCompModal(){
+  if(!isTournamentDone()) return;
+  const comps=_loadComps();
+  const groups=_loadGroups();
+  const listEl=$('add-comp-list');
+  if(comps.length===0){
+    listEl.innerHTML=`<p class="comp-empty" style="padding:8px 0">${t('comp_empty')}</p>`;
+  } else {
+    listEl.innerHTML=comps.map(c=>{
+      const g=groups.find(x=>x.id===c.groupId);
+      return `<button class="add-comp-item" onclick="addSessionToComp('${c.id}')">
+        <span class="comp-item-name">${esc(c.name)}</span>
+        <span class="comp-item-sub">${g?esc(g.name):'?'}</span>
+      </button>`;
+    }).join('');
+  }
+  $('add-comp-modal').classList.remove('hidden');
+}
+
+function closeAddToCompModal(){$('add-comp-modal').classList.add('hidden');}
+
+function addSessionToComp(compId){
+  const all=_loadComps(); const comp=all.find(c=>c.id===compId); if(!comp) return;
+  const group=_loadGroups().find(g=>g.id===comp.groupId); if(!group) return;
+  const results=extractSessionResults(group.lines);
+  const fmtLabel={americano:'Americano',mexicano:'Mexicano',teamamericano:'Team Americano',roundrobin:'Round Robin',team:'Knockout'}[mode]||mode;
+  const sess={id:_genCompId(),date:new Date().toISOString(),label:tournamentName||fmtLabel,format:fmtLabel,results};
+  comp.sessions.push(sess); _saveComps(all);
+  closeAddToCompModal();
+  // feedback on button
+  const btn=$('btn-comp-add');
+  if(btn){btn.textContent='\u2713 '+t('comp_session_added');btn.disabled=true;setTimeout(()=>{btn.textContent=t('comp_add_btn');btn.disabled=false;},3000);}
+}
+
 
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
@@ -2115,6 +2418,7 @@ function doStart(){
 
 function startTournamentUI(){
   $('screen-setup').style.display='none';
+  $('screen-competitions').style.display='none';
   const el=$('screen-tournament');
   el.style.display='block';
   el.classList.remove('screen-enter');
@@ -2168,6 +2472,7 @@ function goSetup(){
   $('screen-setup').style.display='block';
   $('screen-tournament').style.display='none';
   $('screen-americano').style.display='none';
+  $('screen-competitions').style.display='none';
   $('btn-back').style.display='none';
   $('btn-reset').style.display='none';
   $('btn-print').style.display='none';
@@ -3575,6 +3880,7 @@ function _updateAmHeader(){
 function showAmericano(){
   $('screen-setup').style.display='none';
   $('screen-tournament').style.display='none';
+  $('screen-competitions').style.display='none';
   const el=$('screen-americano');
   el.style.display='block';
   el.classList.remove('screen-enter');
@@ -4605,11 +4911,12 @@ async function shareStandingsImage(){
 
 function renderExportBar(){
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
+  const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="openAddToCompModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
   return `<div class="export-bar">
     <span class="export-bar-lbl">Export</span>
     <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
     <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
-    ${imgBtn}${renderShareCTA()}
+    ${compBtn}${imgBtn}${renderShareCTA()}
   </div>`;
 }
 
