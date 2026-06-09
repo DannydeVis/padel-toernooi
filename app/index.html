@@ -1361,7 +1361,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
           <div class="bracket" id="bw"></div>
         </div>
         <div class="bsec">
-          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> <span data-i18n="sec_losers">Verliezersfinale — Plaatsen 5–9</span></div>
+          <div class="bsec-lbl"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-medal"></use></svg> <span data-i18n="sec_losers">Troostfinale, plaats 5 tot 9</span></div>
           <div class="bracket" id="bl"></div>
         </div>
         <div id="champ"></div>
@@ -1495,7 +1495,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.49.2';
+const APP_VERSION = 'v1.49.4';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1551,7 +1551,7 @@ nl:{
   val_am_div4:'Americano werkt met een aantal spelers deelbaar door 4.\n\nJij hebt {n} spelers — voeg nog {add} toe of verwijder {rem}.',
   val_am_even:'Americano vereist een even aantal spelers.\n\nJij hebt {n} spelers — voeg er 1 toe of verwijder er 1.',
   tab_poule:'Pouleronde',tab_bracket:'Bracket',tab_standings:'Tussenstand',
-  sec_poule:'Pouleronde',sec_winners:'Winnaarsbracket — Top 4',sec_losers:'Verliezersfinale — Plaatsen 5–9',
+  sec_poule:'Pouleronde',sec_winners:'Winnaarsbracket — Top 4',sec_losers:'Troostfinale, plaats 5 tot 9',
   rnd_label:'Ronde {r}',rnd_progress:'{done} van {tot} wedstrijden gespeeld',
   rnd_game:'Game {gn} van {total} — wie wint?',rnd_undo:'Herstel',rnd_court:'Baan {n}',
   st_col_team:'Team',st_col_played:'G',st_col_wins:'W',st_col_losses:'V',st_col_games:'GW–GV',
@@ -1625,7 +1625,7 @@ en:{
   val_am_div4:'Americano requires a number of players divisible by 4.\n\nYou have {n} players — add {add} more or remove {rem}.',
   val_am_even:'Americano requires an even number of players.\n\nYou have {n} players — add or remove 1.',
   tab_poule:'Pool round',tab_bracket:'Bracket',tab_standings:'Standings',
-  sec_poule:'Pool round',sec_winners:'Winners bracket — Top 4',sec_losers:'Consolation bracket — Places 5–9',
+  sec_poule:'Pool round',sec_winners:'Winners bracket — Top 4',sec_losers:'Consolation, places 5 to 9',
   rnd_label:'Round {r}',rnd_progress:'{done} of {tot} matches played',
   rnd_game:'Game {gn} of {total} — who wins?',rnd_undo:'Undo',rnd_court:'Court {n}',
   st_col_team:'Team',st_col_played:'P',st_col_wins:'W',st_col_losses:'L',st_col_games:'GW–GL',
@@ -1699,7 +1699,7 @@ fr:{
   val_am_div4:'Americano nécessite un nombre de joueurs divisible par 4.\n\nVous avez {n} joueurs — ajoutez {add} de plus ou supprimez {rem}.',
   val_am_even:'Americano nécessite un nombre pair de joueurs.\n\nVous avez {n} joueurs — ajoutez ou supprimez-en 1.',
   tab_poule:'Poule',tab_bracket:'Bracket',tab_standings:'Classement',
-  sec_poule:'Poule',sec_winners:'Tableau des gagnants — Top 4',sec_losers:'Finale de consolation — Places 5–9',
+  sec_poule:'Poule',sec_winners:'Tableau des gagnants — Top 4',sec_losers:'Consolante, places 5 a 9',
   rnd_label:'Manche {r}',rnd_progress:'{done} sur {tot} matchs joués',
   rnd_game:'Jeu {gn} sur {total} — qui gagne ?',rnd_undo:'Annuler',rnd_court:'Court {n}',
   st_col_team:'Équipe',st_col_played:'J',st_col_wins:'V',st_col_losses:'D',st_col_games:'JG–JP',
@@ -1771,7 +1771,7 @@ de:{
   val_am_div4:'Americano benötigt eine durch 4 teilbare Spielerzahl.\n\nDu hast {n} Spieler — füge {add} hinzu oder entferne {rem}.',
   val_am_even:'Americano benötigt eine gerade Anzahl Spieler.\n\nDu hast {n} Spieler — füge einen hinzu oder entferne einen.',
   tab_poule:'Gruppenphase',tab_bracket:'Bracket',tab_standings:'Tabelle',
-  sec_poule:'Gruppenphase',sec_winners:'Gewinnerbracket — Top 4',sec_losers:'Verliererfinale — Plätze 5–9',
+  sec_poule:'Gruppenphase',sec_winners:'Gewinnerbracket — Top 4',sec_losers:'Trostrunde, Platze 5 bis 9',
   rnd_label:'Runde {r}',rnd_progress:'{done} von {tot} Spielen gespielt',
   rnd_game:'Spiel {gn} von {total} — wer gewinnt?',rnd_undo:'Rückgängig',rnd_court:'Platz {n}',
   st_col_team:'Team',st_col_played:'S',st_col_wins:'G',st_col_losses:'N',st_col_games:'GG–GN',
@@ -1843,7 +1843,7 @@ es:{
   val_am_div4:'Americano requiere un número de jugadores divisible entre 4.\n\nTienes {n} jugadores — añade {add} más o elimina {rem}.',
   val_am_even:'Americano requiere un número par de jugadores.\n\nTienes {n} jugadores — añade o elimina 1.',
   tab_poule:'Fase de grupos',tab_bracket:'Bracket',tab_standings:'Clasificación',
-  sec_poule:'Fase de grupos',sec_winners:'Bracket de ganadores — Top 4',sec_losers:'Final de consolación — Puestos 5–9',
+  sec_poule:'Fase de grupos',sec_winners:'Bracket de ganadores — Top 4',sec_losers:'Consolacion, puestos 5 a 9',
   rnd_label:'Ronda {r}',rnd_progress:'{done} de {tot} partidos jugados',
   rnd_game:'Juego {gn} de {total} — ¿quién gana?',rnd_undo:'Deshacer',rnd_court:'Pista {n}',
   st_col_team:'Equipo',st_col_played:'J',st_col_wins:'G',st_col_losses:'P',st_col_games:'JG–JP',
@@ -1915,7 +1915,7 @@ sv:{
   val_am_div4:'Americano kräver ett antal spelare delbart med 4.\n\nDu har {n} spelare — lägg till {add} till eller ta bort {rem}.',
   val_am_even:'Americano kräver ett jämnt antal spelare.\n\nDu har {n} spelare — lägg till eller ta bort 1.',
   tab_poule:'Poolrunda',tab_bracket:'Bracket',tab_standings:'Tabell',
-  sec_poule:'Poolrunda',sec_winners:'Vinnarbracket — Topp 4',sec_losers:'Tröstfinal — Plats 5–9',
+  sec_poule:'Poolrunda',sec_winners:'Vinnarbracket — Topp 4',sec_losers:'Slutspel, platser 5 till 9',
   rnd_label:'Runda {r}',rnd_progress:'{done} av {tot} matcher spelade',
   rnd_game:'Game {gn} av {total} — vem vinner?',rnd_undo:'Ångra',rnd_court:'Bana {n}',
   st_col_team:'Lag',st_col_played:'S',st_col_wins:'V',st_col_losses:'F',st_col_games:'VG–FG',
