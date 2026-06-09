@@ -1495,7 +1495,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.49.0';
+const APP_VERSION = 'v1.49.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3468,27 +3468,63 @@ function taUndo(matchId){
 }
 
 // ── Americano ─────────────────────────────────
-function buildAmericanoSchedule(playerIds, roundOffset=0){
+function buildAmericanoSchedule(playerIds, roundOffset=0, courtsWanted=0){
   const n=playerIds.length;
   if(n<4) return [];
-  const courts=Math.floor(n/4);
-  let circle=playerIds.slice(1);
+  const maxCourts=Math.floor(n/4);
+  const activeCourts=courtsWanted>0?Math.min(maxCourts,courtsWanted):maxCourts;
+  const playPerRound=activeCourts*4;
+  const b=n-playPerRound;            // aantal byes per ronde
+  const numRounds=n-1;
+
+  // b===0: behoud de bewezen circle-methode (unieke partners)
+  if(b===0){
+    let circle=playerIds.slice(1);
+    const rounds=[];
+    for(let r=0;r<numRounds;r++){
+      const arr=[playerIds[0],...circle];
+      const pairs=[];
+      for(let i=0;i<Math.floor(n/2);i++) pairs.push([arr[i],arr[n-1-i]]);
+      const matches=[];
+      for(let i=0;i<activeCourts;i++){
+        matches.push({id:`am-${roundOffset+r}-${i}`,round:roundOffset+r+1,
+          a1:pairs[i][0],a2:pairs[i][1],
+          b1:pairs[pairs.length-1-i][0],b2:pairs[pairs.length-1-i][1],
+          sa:0,sb:0,done:false,court:i+1});
+      }
+      rounds.push(matches);
+      circle=[circle[circle.length-1],...circle.slice(0,-1)];
+    }
+    return rounds;
+  }
+
+  // b>0: FIFO-bye (eerlijke matchcounts) + greedy least-repeat partners
+  let byeQueue=playerIds.slice();
+  const partnerCount={};
+  const pc=(x,y)=>(partnerCount[x]&&partnerCount[x][y])||0;
+  const addP=(x,y)=>{(partnerCount[x]=partnerCount[x]||{})[y]=pc(x,y)+1;(partnerCount[y]=partnerCount[y]||{})[x]=pc(y,x)+1;};
   const rounds=[];
-  for(let r=0;r<n-1;r++){
-    const arr=[playerIds[0],...circle];
-    const pairs=[];
-    for(let i=0;i<Math.floor(n/2);i++) pairs.push([arr[i],arr[n-1-i]]);
+  for(let r=0;r<numRounds;r++){
+    const byes=byeQueue.slice(0,b);
+    const byeSet=new Set(byes);
+    let pool=playerIds.filter(p=>!byeSet.has(p));   // stabiele volgorde
+    const teams=[];
+    while(pool.length){
+      let bi=0,bj=1,bc=Infinity;
+      for(let i=0;i<pool.length;i++)for(let j=i+1;j<pool.length;j++){
+        const c=pc(pool[i],pool[j]); if(c<bc){bc=c;bi=i;bj=j;}
+      }
+      const x=pool[bi],y=pool[bj]; addP(x,y); teams.push([x,y]);
+      pool=pool.filter((_,k)=>k!==bi&&k!==bj);
+    }
     const matches=[];
-    for(let i=0;i<courts;i++){
-      matches.push({
-        id:`am-${roundOffset+r}-${i}`, round:roundOffset+r+1,
-        a1:pairs[i][0],a2:pairs[i][1],
-        b1:pairs[pairs.length-1-i][0],b2:pairs[pairs.length-1-i][1],
-        sa:0,sb:0,done:false,court:i+1
-      });
+    for(let c=0;c<activeCourts;c++){
+      const tA=teams[2*c],tB=teams[2*c+1];
+      matches.push({id:`am-${roundOffset+r}-${c}`,round:roundOffset+r+1,
+        a1:tA[0],a2:tA[1],b1:tB[0],b2:tB[1],sa:0,sb:0,done:false,court:c+1});
     }
     rounds.push(matches);
-    circle=[circle[circle.length-1],...circle.slice(0,-1)];
+    byeQueue=byeQueue.slice(b).concat(byes);       // rusters gaan achteraan
   }
   return rounds;
 }
@@ -3496,17 +3532,34 @@ function buildAmericanoSchedule(playerIds, roundOffset=0){
 // ── Mexicano ──────────────────────────────────
 // Builds one round of Mexicano: players sorted by pts descending,
 // then paired: rank1+rank2 vs rank3+rank4, rank5+rank6 vs rank7+rank8, etc.
-function buildMexicanoRound(roundNum){
-  const ranked=[...AP].filter(p=>!p.paused).sort((a,b)=>b.pts-a.pts);
-  const courts=Math.floor(AP.length/4);
+function buildMexicanoRound(AP, AM, roundNum, courtsWanted=0){
+  const active=AP.filter(p=>!p.paused);
+  const maxCourts=Math.floor(active.length/4);
+  const activeCourts=courtsWanted>0?Math.min(maxCourts,courtsWanted):maxCourts;
+  const b=active.length-activeCourts*4;
+
+  // byes-tot-nu-toe afleiden uit reeds gegenereerde rondes (undo-veilig)
+  const byesSoFar={},lastBye={};
+  active.forEach(p=>{byesSoFar[p.id]=0;lastBye[p.id]=-1;});
+  AM.forEach((ms,ri)=>{
+    const playing=new Set();
+    ms.forEach(m=>[m.a1,m.a2,m.b1,m.b2].forEach(id=>playing.add(id)));
+    active.forEach(p=>{ if(!playing.has(p.id)){byesSoFar[p.id]++;lastBye[p.id]=ri;} });
+  });
+
+  let byeSet=new Set();
+  if(b>0){
+    const cand=[...active].sort((x,y)=>
+      byesSoFar[x.id]-byesSoFar[y.id] || lastBye[x.id]-lastBye[y.id] || x.id-y.id);
+    cand.slice(0,b).forEach(p=>byeSet.add(p.id));
+  }
+  // spelers die WEL spelen op stand pairen (Mexicano-competitiviteit blijft)
+  const ranked=active.filter(p=>!byeSet.has(p.id)).sort((x,y)=>y.pts-x.pts);
   const matches=[];
-  for(let i=0;i<courts;i++){
-    matches.push({
-      id:`mex-${roundNum}-${i}`, round:roundNum,
-      a1:ranked[i*4].id, a2:ranked[i*4+1].id,
-      b1:ranked[i*4+2].id, b2:ranked[i*4+3].id,
-      sa:0, sb:0, done:false, court:i+1
-    });
+  for(let i=0;i<activeCourts;i++){
+    matches.push({id:`mex-${roundNum}-${i}`,round:roundNum,
+      a1:ranked[i*4].id,a2:ranked[i*4+1].id,b1:ranked[i*4+2].id,b2:ranked[i*4+3].id,
+      sa:0,sb:0,done:false,court:i+1});
   }
   return matches;
 }
@@ -3516,7 +3569,7 @@ function startMexicano(){
   if(ns.length<4){alert(t('val_min4'));return;}
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
-  AM=[buildMexicanoRound(1)]; // Only round 1 — subsequent rounds generated after each round completes
+  AM=[]; AM.push(buildMexicanoRound(AP, AM, 1, R.courts)); // Only round 1 — subsequent rounds generated after each round completes
   localStorage.removeItem('padel-round-timer');
   trackStart('mexicano', AP.length);
   showAmericano();
@@ -3543,7 +3596,7 @@ function startAmericano(){
     if(p.level!=null) _playerLevels[p.name]=p.level;
     return {id,name:p.name,pts:0,level:p.level??null};
   });
-  AM=buildAmericanoSchedule(AP.map(p=>p.id));
+  AM=buildAmericanoSchedule(AP.map(p=>p.id), 0, R.courts);
   localStorage.removeItem('padel-round-timer');
   trackStart('americano', AP.length);
   showAmericano();
@@ -4294,8 +4347,9 @@ function amSave(matchId){
   // Mexicano: auto-generate next round when current round is complete
   if(mode==='mexicano'){
     const ri=m.round-1; // 0-indexed round index
-    if(AM[ri].every(x=>x.done) && AM.length<AP.length-1){
-      AM.push(buildMexicanoRound(AM.length+1));
+    const activeCount=AP.filter(p=>!p.paused).length;
+    if(AM[ri].every(x=>x.done) && AM.length<activeCount-1){
+      AM.push(buildMexicanoRound(AP, AM, AM.length+1, R.courts));
     }
   }
   renderAmericano(); saveState();
@@ -4317,7 +4371,7 @@ function _rebuildFutureAmRounds(){
   if(activeIdx===-1) return;
   const keep=AM.slice(0,activeIdx+1);
   const activeIds=AP.filter(p=>!p.paused).map(p=>p.id);
-  AM=keep.concat(buildAmericanoSchedule(activeIds,activeIdx+1));
+  AM=keep.concat(buildAmericanoSchedule(activeIds, activeIdx+1, R.courts));
 }
 
 function pausePlayer(pid){
