@@ -1495,12 +1495,12 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.49.4';
+const APP_VERSION = 'v1.50.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
 // ── i18n ──────────────────────────────────────
-const SUPPORTED_LANGS=['nl','en','fr','de','es','sv'];
+const SUPPORTED_LANGS=['nl','en','fr','de','es','sv','it'];
 function detectLang(){
   const s=localStorage.getItem('padel-lang');
   if(s&&SUPPORTED_LANGS.includes(s)) return s;
@@ -1947,6 +1947,80 @@ sv:{
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
+},
+it:{
+  savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',
+  ob_skip:'Salta',ob_back:'← Indietro',ob_next:'Avanti →',ob_start:'Inizia',
+  ob1_title:'Torneo di Padel',
+  ob1_body:"Organizza il tuo torneo in pochi tocchi, dall'inserimento dei nomi alla classifica finale. Tutto in un'app, anche offline.",
+  ob2_title:'Torneo a squadre',
+  ob2_body:"<b>Coppie o trii fissi</b> giocano un girone. Poi un bracket decide il vincitore, con finale vincitori e finale di consolazione.",
+  ob3_title:'Americano',
+  ob3_body:'<b>Coppie a rotazione</b> ogni turno. Tutti giocano con tutti. Chi accumula piu punti su tutti i turni vince.',
+  ob4_title:'Pronti a giocare',
+  ob4_body:"Scegli il tipo, inserisci i nomi e tocca <b>Inizia</b>. Durante il torneo vedrai i punteggi in diretta e la classifica.",
+  ob5_title:'Condividi in diretta',ob5_body:"Invia un link, gli amici seguono il bracket in diretta senza accedere.",
+  set_title_team:'Impostazioni squadre',set_title_am:'Impostazioni Americano',
+  set_lbl_name:'Nome',set_ph_name:'Nome del torneo (opzionale)',
+  set_lbl_courts:'Campi',set_lbl_type:'Tipo',
+  set_type_team:'Squadra',set_type_sub_team:'coppia fissa',
+  set_type_am:'Americano',set_type_sub_am:'coppia a rotazione',
+  set_type_mex:'Mexicano',set_type_sub_mex:'coppie per classifica',set_title_mex:'Impostazioni Mexicano',
+  set_desc_auto_mex:"Un nome per riga. Minimo 4 giocatori. Con numero dispari: il giocatore in ultima posizione riposa ogni turno. Coppie in base alla classifica.",
+  set_type_sub_rr:'tutti contro tutti',set_title_rr:"Impostazioni girone all'italiana",
+  set_desc_auto_rr:"Un nome per riga, minimo 4. Tutti giocano contro tutti. La classifica finale determina il vincitore.",
+  set_type_sub_tam:'americano',set_title_tam:'Team Americano',set_desc_auto_tam:'Inserisci una coppia per riga, minimo 3 coppie.',ta_add_pair:'+ Aggiungi coppia',ta_player1:'Giocatore',ta_player2:'Giocatore',ta_standings:'Classifica coppie',ta_col_pair:'Coppia',ta_min3:'Servono almeno 3 coppie.',res_tam:'{label}Team Americano · {n} coppie',
+  set_lbl_format:'Formato partita',set_lbl_pts:'Punti/partita',set_lbl_timer:'Timer/turno',set_timer_off:'Nessuno',
+  set_btn_auto:'Inserisci i nomi dei giocatori',set_btn_manual:'Inserisci le squadre manualmente',
+  set_desc_auto_team:"Un nome per riga, minimo 4. L'app crea automaticamente coppie e trii.",
+  set_desc_auto_am:"Un nome per riga. Minimo 4 giocatori. Con numero dispari (5, 7, 9...): 1 giocatore riposa ogni turno. Le coppie ruotano ogni turno.",
+  set_ph_auto:'Inserisci i nomi...',set_ph_manual:'Inserisci i nomi delle squadre...',
+  set_desc_manual:'Un nome di squadra per riga. Usa <b style="color:var(--accent)">/</b> per un trio, <b style="color:var(--accent)">&</b> per una coppia, o scrivi semplicemente un nome.',
+  set_intro_sub:'Crea e gioca il tuo torneo in pochi passi.',set_sub_courts:'Scegli il numero di campi disponibili.',set_sub_type:'Scegli il formato adatto al tuo gruppo.',set_sub_format:'Scegli la durata delle partite.',set_card_teams:'Componi le squadre',set_sub_teams:"Aggiungi giocatori e crea squadre automaticamente o manualmente.",set_card_players:'Aggiungi giocatori',set_btn_auto_sub:"L'app crea coppie e trii",set_btn_manual_sub:'Configura le squadre manualmente',set_btn_start_sub:'Avvia il torneo',set_btn_shuffle_sub:'Rimescola le squadre',
+  set_btn_start:'Inizia',set_btn_shuffle:'Mescola',set_default:'predefinito',
+  val_min_teams:'{n} squadra, minimo 2 necessarie',val_ok_teams:'✓ {n} squadre pronte',
+  val_need2:'Inserisci almeno 2 squadre.',
+  val_min_names:'{n} nomi, minimo 4 necessari',
+  val_ok_names_simple:'✓ {n} giocatori → {nTeams} squadre ({nDuo} coppie)',
+  val_ok_names_trio:'✓ {n} giocatori → {nTeams} squadre ({nDuo} coppie, {nTrio} trii)',
+  val_min4:'Inserisci almeno 4 nomi.',
+  val_am_div4:"Americano richiede un numero di giocatori divisibile per 4.\n\nHai {n} giocatori, aggiungi {add} o rimuovine {rem}.",
+  val_am_even:"Americano richiede un numero pari di giocatori.\n\nHai {n} giocatori, aggiungi o rimuovine 1.",
+  tab_poule:'Girone',tab_bracket:'Bracket',tab_standings:'Classifica',
+  sec_poule:'Girone',sec_winners:'Bracket vincitori, top 4',sec_losers:'Finale di consolazione, posti 5 a 9',
+  rnd_label:'Turno {r}',rnd_progress:'{done} di {tot} partite giocate',
+  rnd_game:'Game {gn} di {total}, chi vince?',rnd_undo:'Annulla',rnd_court:'Campo {n}',
+  st_col_team:'Squadra',st_col_played:'G',st_col_wins:'V',st_col_losses:'S',st_col_games:'GV-GS',
+  st_losers_div:'finale di consolazione',
+  brk_semifinal:'Semifinale',brk_final:'Finale',brk_consolation:'Finale di consolazione',
+  brk_winner:'VINCITORE',brk_consolation_lbl:'CONSOLAZIONE',
+  am_round:'Turno {n}',am_courts_one:'1 campo',am_courts_other:'{n} campi',
+  am_pts:'{total}/{max} punti',am_save:'Salva',am_undo:'Annulla',
+  am_standings:'Classifica',am_col_player:'Giocatore',am_col_pts:'Punti',am_bye:'Riposo',am_col_w:'V',am_col_d:'P',am_col_l:'S',dm_rank:'Pos.',dm_avg:'Media/partita',dm_partners:'Coppie',dm_opponents:'Avversari',dm_h2h:'Scontri diretti',dm_no_matches:'Nessuna partita giocata',player_pause:'Metti in pausa il giocatore',player_resume:'Riprendi il giocatore',player_paused:'in pausa',player_new_name:'Nuovo nome...',player_save:'Salva',timer_start:'Avvia turno',timer_done:'TEMPO SCADUTO',
+  export_csv:'Scarica CSV',export_print:'Stampa / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partite',export_score:'Punteggio',export_round:'Turno',pres_btn:'Presentazione',pres_live:'live via padel-bracket.com',pres_standings:'Classifica',pres_active:'in corso',pres_meta:'{p} giocate · {s} diff',
+  res_title:'Riprendi torneo',res_continue:'▶ Continua',res_discard:'✕',
+  res_am:'{label}Americano · {n} giocatori',res_mex:'{label}Mexicano · {n} giocatori',res_team:'{label}{teams} squadre · {done}/{tot} partite',
+  res_bracket_done:' · Bracket completato',
+  fin_winner:'Vincitore del torneo!',fin_winner_trio:'Vincitore del torneo (Trio)!',
+  fin_title:'Classifica finale',fin_1st:'Vincitore',fin_2nd:'2° posto',fin_3rd:'3° posto',
+  fin_copy:'Copia risultati',fin_copied:'Copiato!',
+  fin_copy_err:'Copia non disponibile in questo browser.',
+  fin_export_hdr:'{name} — Classifica finale ({date})',fin_export_full:'Classifica completa:',
+  fin_export_gold:'🥇 Vincitore: {name}',fin_export_silver:'🥈 Finalista: {name}',
+  fin_export_bronze:'🥉 3° posto: {name}',
+  fin_export_row:'{pos}. {name} — {w}V {l}S ({gw}–{gl} game)',
+  inst_subtitle_default:'Aggiungi alla schermata iniziale',inst_close:'Chiudi',
+  inst_install:'Installa',inst_skip:'Non ora',
+  inst_ios_title:'Aggiungi alla schermata iniziale via Browser',
+  inst_ios_steps:"1. Tocca l'icona <b>Condividi</b> <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#C7FF5E\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"width:1.2em;height:1.2em;vertical-align:middle;display:inline-block\"><path d=\"M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6\"/><polyline points=\"16 6 12 2 8 6\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"15\"/></svg> in fondo al Browser<br>2. Scorri e tocca <b>Aggiungi a Schermata Home</b><br>3. Tocca <b>Aggiungi</b>, fatto!",
+  inst_ios_ok:'Capito',inst_and_title:"Installa l'app sulla schermata iniziale",
+  inst_and_body:"Usa Padel Torneo come una vera app, <b>accesso rapido</b> dalla schermata iniziale, anche senza internet.",
+  cast_btn:'Trasmetti alla TV',cast_stop:'Interrompi trasmissione',
+  pres_ios_title:'Mostra in TV',pres_ios_body:"Tocca 'Apri presentazione' per aprire il tabellone. Per mostrarlo su una TV via AirPlay:",pres_ios_s1:'Apri il <strong>Centro di Controllo</strong> (scorri verso il basso dall\'angolo in alto a destra)',pres_ios_s2:'Tocca <strong>Duplica schermo</strong> (quadrato con triangolo)',pres_ios_s3:'Scegli la tua <strong>Apple TV</strong> o TV compatibile AirPlay dalla lista',pres_ios_open:'Apri presentazione',pres_ios_ok:'Chiudi',
+  court_links_btn:'Link campo',court_enter_score:'Inserisci punteggio',court_submit:'Invia',court_submitted:"Punteggio inviato, in attesa dell'organizzatore",court_invalid:'Link campo non valido',court_no_match:'Nessuna partita attiva su questo campo',court_accept:'Accetta',court_pending_lbl:'Punteggio inviato dal giocatore',
+  player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',
+  comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',
+  level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
 },
 };
 
@@ -4857,7 +4931,7 @@ function renderImgShareBtn(){
 }
 function buildImageData(){
   const fmtLabel={americano:'Americano',mexicano:'Mexicano',teamamericano:'Team Americano',roundrobin:'Round Robin',team:'Knockout'}[mode]||mode;
-  const locale=LANG==='nl'?'nl-NL':LANG==='de'?'de-DE':LANG==='fr'?'fr-FR':LANG==='es'?'es-ES':LANG==='sv'?'sv-SE':'en-US';
+  const locale=LANG==='nl'?'nl-NL':LANG==='de'?'de-DE':LANG==='fr'?'fr-FR':LANG==='es'?'es-ES':LANG==='sv'?'sv-SE':LANG==='it'?'it-IT':'en-US';
   const date=new Date().toLocaleDateString(locale);
   const name=tournamentName||'';
   if(mode==='americano'||mode==='mexicano'){
