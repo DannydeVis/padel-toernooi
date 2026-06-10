@@ -624,6 +624,7 @@
   .hb-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;padding:10px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.22);border-radius:11px;color:var(--accent);font-size:.85rem;font-weight:700}
   @media(max-width:900px){.hero-split-inner{grid-template-columns:1fr;gap:34px;text-align:center}.hero.split .hero-kicker,.hero.split .hero-note{text-align:center}.hero.split .hero-btns,.hero.split .hero-perks{justify-content:center}.hero.split .hero-sub{margin-left:auto;margin-right:auto}.hero-board{max-width:440px;margin:0 auto;width:100%}}
 
+  .hero-count{font-size:.82rem;color:var(--txt2);margin-top:8px;text-align:left}
   /* ── HERO DEMO ── */
   .hero-demo{margin-top:28px;max-width:440px;padding:18px;border:1px solid var(--bdr);border-radius:14px;background:var(--surface)}
   .hero-demo-lbl{font-size:.85rem;color:var(--txt2);margin:0 0 12px}
@@ -703,6 +704,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
       </div>
       <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
+      <p class="hero-count" id="hero-count" hidden></p>
 
       <div class="hero-demo" id="hero-demo">
         <p class="hero-demo-lbl">Probeer het. Verander de namen en druk op start.</p>
@@ -1325,6 +1327,25 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     out.appendChild(cta);
   });
 })();
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onload="initTournamentCount()"></script>
+<script>
+async function initTournamentCount(){
+  try{
+    var sb=window.supabase.createClient(
+      'https://yaakmxarwdvovvqgtkwb.supabase.co',
+      'sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i'
+    );
+    var {data,error}=await sb.rpc('tournament_count');
+    if(error||data==null) return;
+    var n=Number(data);
+    if(n<250) return;
+    var el=document.getElementById('hero-count');
+    if(!el) return;
+    el.textContent=n.toLocaleString('nl-NL')+' toernooien gestart met PadelBracket';
+    el.hidden=false;
+  }catch(e){}
+}
 </script>
 </body>
 </html>
