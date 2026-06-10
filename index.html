@@ -623,6 +623,22 @@
   .hb-pts{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.65rem}
   .hb-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;padding:10px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.22);border-radius:11px;color:var(--accent);font-size:.85rem;font-weight:700}
   @media(max-width:900px){.hero-split-inner{grid-template-columns:1fr;gap:34px;text-align:center}.hero.split .hero-kicker,.hero.split .hero-note{text-align:center}.hero.split .hero-btns,.hero.split .hero-perks{justify-content:center}.hero.split .hero-sub{margin-left:auto;margin-right:auto}.hero-board{max-width:440px;margin:0 auto;width:100%}}
+
+  /* ── HERO DEMO ── */
+  .hero-demo{margin-top:28px;max-width:440px;padding:18px;border:1px solid var(--bdr);border-radius:14px;background:var(--surface)}
+  .hero-demo-lbl{font-size:.85rem;color:var(--txt2);margin:0 0 12px}
+  .hero-demo-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .hero-demo-name{padding:10px 12px;border:1px solid var(--bdr);border-radius:9px;font-size:.95rem;background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
+  .hero-demo-name:focus{border-color:var(--accent)}
+  .hero-demo-btn{width:100%;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#0E1114;font-weight:700;font-size:1rem;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s}
+  .hero-demo-btn:hover{background:var(--accent2)}
+  .hero-demo-out{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+  .hero-demo-round{opacity:0;transform:translateY(6px);animation:demoIn .35s ease forwards}
+  .hero-demo-round-t{font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+  .hero-demo-match{font-size:.95rem;color:var(--txt)}
+  .hero-demo-cta{margin-top:6px;font-size:.9rem;color:var(--txt2)}
+  .hero-demo-cta a{color:var(--accent);text-decoration:none;font-weight:600}
+  @keyframes demoIn{to{opacity:1;transform:none}}
   </style>
 </head>
 <body>
@@ -687,6 +703,18 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
       </div>
       <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
+
+      <div class="hero-demo" id="hero-demo">
+        <p class="hero-demo-lbl">Probeer het. Verander de namen en druk op start.</p>
+        <div class="hero-demo-inputs">
+          <input class="hero-demo-name" value="Jan" maxlength="14" aria-label="Speler 1">
+          <input class="hero-demo-name" value="Piet" maxlength="14" aria-label="Speler 2">
+          <input class="hero-demo-name" value="Sofie" maxlength="14" aria-label="Speler 3">
+          <input class="hero-demo-name" value="Emma" maxlength="14" aria-label="Speler 4">
+        </div>
+        <button class="hero-demo-btn" id="hero-demo-btn">Maak het schema</button>
+        <div class="hero-demo-out" id="hero-demo-out" aria-live="polite"></div>
+      </div>
     </div>
 
     <a class="hero-board" href="/app/" aria-label="Bekijk de live ranglijst in de app">
@@ -1269,6 +1297,33 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     });
   },{threshold:0.07});
   els.forEach(function(el){io.observe(el)});
+})();
+</script>
+<script>
+(function(){
+  var btn=document.getElementById('hero-demo-btn');
+  if(!btn) return;
+  var ROUNDS=[ [[0,1],[2,3]], [[0,2],[1,3]], [[0,3],[1,2]] ];
+  btn.addEventListener('click',function(){
+    var names=[].slice.call(document.querySelectorAll('.hero-demo-name'))
+      .map(function(el,i){return el.value.trim()||['Speler 1','Speler 2','Speler 3','Speler 4'][i];});
+    var out=document.getElementById('hero-demo-out');
+    out.innerHTML='';
+    ROUNDS.forEach(function(r,ri){
+      var div=document.createElement('div');
+      div.className='hero-demo-round';
+      div.style.animationDelay=(ri*0.12)+'s';
+      div.innerHTML='<div class="hero-demo-round-t">Ronde '+(ri+1)+'</div>'+
+        '<div class="hero-demo-match">'+names[r[0][0]]+' &amp; '+names[r[0][1]]+
+        '  vs  '+names[r[1][0]]+' &amp; '+names[r[1][1]]+'</div>';
+      out.appendChild(div);
+    });
+    var cta=document.createElement('div');
+    cta.className='hero-demo-round hero-demo-cta';
+    cta.style.animationDelay='0.4s';
+    cta.innerHTML='Dit was vier spelers. <a href="/app/">Doe het met jouw hele groep</a>.';
+    out.appendChild(cta);
+  });
 })();
 </script>
 </body>
