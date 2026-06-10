@@ -1207,6 +1207,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
         <button class="rbtn" onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano<span class="rbtn-sub" data-i18n="set_type_sub_mex">stand koppels</span></button>
         <button class="rbtn" onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin<span class="rbtn-sub" data-i18n="set_type_sub_rr">iedereen vs iedereen</span></button>
         <button class="rbtn" onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.<span class="rbtn-sub" data-i18n="set_type_sub_tam">americano</span></button>
+        <button class="rbtn" onclick="setTType('mixicano')" id="rbtn-type-mix">Mixicano<span class="rbtn-sub" data-i18n="set_type_sub_mix">man + vrouw</span></button>
       </div>
     </div>
 
@@ -1285,6 +1286,13 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
       <p class="setup-card-sub" id="mode-auto-desc" style="margin-top:6px;margin-bottom:0" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
       <div class="nc" id="nc"></div>
       <p class="setup-card-hint" id="level-hint" style="margin-top:6px;margin-bottom:0;font-size:.72rem;color:var(--txt2)" data-i18n="level_hint"></p>
+      <div id="mix-section" style="display:none">
+        <label class="setup-row-lbl" data-i18n="mix_lbl_men">Mannen</label>
+        <textarea id="ta-men" data-i18n-ph="mix_ph_men" placeholder="Jan&#10;Piet&#10;Tom&#10;Daan"></textarea>
+        <label class="setup-row-lbl" style="margin-top:10px;display:block" data-i18n="mix_lbl_women">Vrouwen</label>
+        <textarea id="ta-women" data-i18n-ph="mix_ph_women" placeholder="Marie&#10;Sofia&#10;Lisa&#10;Emma"></textarea>
+        <p class="setup-card-sub" id="mix-nc" style="margin-top:6px;margin-bottom:0"></p>
+      </div>
     </div>
 
     <!-- Card 6: Teams (MANUAL mode) -->
@@ -1495,7 +1503,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.50.0';
+const APP_VERSION = 'v1.51.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1585,6 +1593,7 @@ nl:{
   player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',
   comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
+  set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',
@@ -1658,6 +1667,7 @@ en:{
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
+  set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -1730,6 +1740,7 @@ fr:{
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
   player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
+  set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -1803,6 +1814,7 @@ de:{
   player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',
   comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',
   level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
+  set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',
@@ -1875,6 +1887,7 @@ es:{
   player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',
   comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',
   level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
+  set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',
@@ -1947,6 +1960,7 @@ sv:{
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
+  set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',
@@ -2021,6 +2035,7 @@ it:{
   player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',
   comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',
   level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
+  set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
 },
 };
 
@@ -2121,7 +2136,7 @@ function _compPointsForRank(schema,rank){return rank<=schema.length?schema[rank-
 
 function extractSessionResults(groupLines){
   const results=[];
-  if(mode==='americano'||mode==='mexicano'){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     [...AP].sort((a,b)=>b.pts-a.pts).forEach((p,i)=>{
       const idx=groupLines.indexOf(p.name);
       if(idx>=0) results.push({rank:i+1,playerIds:[idx]});
@@ -2375,22 +2390,24 @@ function getSBWrite(){
 function setTType(typ){
   mode=typ;
   document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
-    b.classList.toggle('active',['team','americano','mexicano','roundrobin','teamamericano'][i]===typ);
+    b.classList.toggle('active',['team','americano','mexicano','roundrobin','teamamericano','mixicano'][i]===typ);
   });
-  const isAm=typ==='americano'||typ==='mexicano'||typ==='teamamericano';
+  const isAm=typ==='americano'||typ==='mexicano'||typ==='teamamericano'||typ==='mixicano';
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
   $('rules-timer-row').style.display = isAm ? '' : 'none';
   $('mode-toggle-row').style.display = isAm ? 'none' : '';
-  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':'set_title_team';
+  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':typ==='mixicano'?'set_title_mix':'set_title_team';
   $('setup-box-title').textContent = t(titleKey);
-  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':'set_desc_auto_team';
+  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':typ==='mixicano'?'set_desc_auto_mix':'set_desc_auto_team';
   $('mode-auto-desc').textContent = t(descKey);
   $('btn-shuffle').style.display = isAm ? 'none' : '';
-  // Show/hide pair input vs normal textarea for TAm
+  // Show/hide pair input / mix input vs normal textarea
   const isTAm = typ==='teamamericano';
+  const isMix = typ==='mixicano';
   if($('ta-pairs-section')) $('ta-pairs-section').style.display = isTAm ? '' : 'none';
-  $('ta').style.display = isTAm ? 'none' : '';
+  $('ta').style.display = (isTAm||isMix) ? 'none' : '';
+  if($('mix-section')) $('mix-section').style.display = isMix ? '' : 'none';
   if(isTAm && !document.querySelectorAll('.ta-pair-row').length) _initTAPairs();
   if(isAm) setMode('auto');
 }
@@ -2429,6 +2446,7 @@ function doStartAny(){
   if(mode==='americano') return startAmericano();
   if(mode==='mexicano') return startMexicano();
   if(mode==='teamamericano') return startTeamAmericano();
+  if(mode==='mixicano') return startMixicano();
   return doStart();
 }
 
@@ -2475,6 +2493,18 @@ function updateNC(){
   const nDuo = nTeams - nTrios;
   el.innerHTML = `<b>${nTrios ? t('val_ok_names_trio',{n,nTeams,nDuo,nTrio:nTrios}) : t('val_ok_names_simple',{n,nTeams,nDuo})}</b>`;
 }
+
+function mixLines(id){ return $(id).value.split('\n').map(s=>s.trim()).filter(Boolean); }
+function updateMixNC(){
+  const m=mixLines('ta-men').length, w=mixLines('ta-women').length;
+  const el=$('mix-nc'); if(!el) return;
+  if(m<2||w<2){ el.innerHTML=t('mix_val_min',{m,w}); return; }
+  const courts=Math.min(Math.floor(m/2),Math.floor(w/2));
+  let warn=Math.abs(m-w)>=2?' '+t('mix_val_unequal'):'';
+  el.innerHTML=`<b>${t('mix_val_ok',{m,w,courts})}</b>${warn}`;
+}
+$('ta-men')&&$('ta-men').addEventListener('input',updateMixNC);
+$('ta-women')&&$('ta-women').addEventListener('input',updateMixNC);
 
 function parseNamesWithLevels(text){
   return text.split('\n').map(line=>{
@@ -3603,6 +3633,50 @@ function buildAmericanoSchedule(playerIds, roundOffset=0, courtsWanted=0){
   return rounds;
 }
 
+// ── Mixed Americano (Mixicano) ────────────────
+// Elk team = 1 man + 1 vrouw. Een baan kost 2 mannen + 2 vrouwen.
+// Byes roteren apart per geslacht (FIFO). Partners zo gevarieerd mogelijk.
+function buildMixicanoSchedule(menIds, womenIds, courtsWanted=0, numRounds=0){
+  const nM=menIds.length, nW=womenIds.length;
+  if(nM<2||nW<2) return [];
+  const maxCourtsGender=Math.min(Math.floor(nM/2),Math.floor(nW/2));
+  const activeCourts=courtsWanted>0?Math.min(maxCourtsGender,courtsWanted):maxCourtsGender;
+  const mPer=activeCourts*2, wPer=activeCourts*2;
+  const mBye=nM-mPer, wBye=nW-wPer;
+  const rounds=numRounds>0?numRounds:Math.max(nM,nW)-1;
+
+  let mQ=menIds.slice(), wQ=womenIds.slice();
+  const pc={}; // partnerCount[m][w]
+  const get=(m,w)=>(pc[m]&&pc[m][w])||0;
+  const add=(m,w)=>{(pc[m]=pc[m]||{})[w]=get(m,w)+1;};
+
+  const out=[];
+  for(let r=0;r<rounds;r++){
+    const mByes=new Set(mQ.slice(0,mBye)), wByes=new Set(wQ.slice(0,wBye));
+    let poolM=menIds.filter(x=>!mByes.has(x));
+    let poolW=womenIds.filter(x=>!wByes.has(x));
+    const teams=[];
+    while(poolM.length&&poolW.length){
+      let bm=0,bw=0,bc=Infinity;
+      for(let i=0;i<poolM.length;i++)for(let j=0;j<poolW.length;j++){
+        const c=get(poolM[i],poolW[j]); if(c<bc){bc=c;bm=i;bw=j;}
+      }
+      const m=poolM[bm],w=poolW[bw]; add(m,w); teams.push([m,w]);
+      poolM=poolM.filter((_,k)=>k!==bm); poolW=poolW.filter((_,k)=>k!==bw);
+    }
+    const matches=[];
+    for(let c=0;c<activeCourts;c++){
+      const tA=teams[2*c],tB=teams[2*c+1];
+      matches.push({id:`mix-${r}-${c}`,round:r+1,
+        a1:tA[0],a2:tA[1],b1:tB[0],b2:tB[1],sa:0,sb:0,done:false,court:c+1});
+    }
+    out.push(matches);
+    mQ=mQ.slice(mBye).concat([...mByes]);
+    wQ=wQ.slice(wBye).concat([...wByes]);
+  }
+  return out;
+}
+
 // ── Mexicano ──────────────────────────────────
 // Builds one round of Mexicano: players sorted by pts descending,
 // then paired: rank1+rank2 vs rank3+rank4, rank5+rank6 vs rank7+rank8, etc.
@@ -3673,6 +3747,21 @@ function startAmericano(){
   AM=buildAmericanoSchedule(AP.map(p=>p.id), 0, R.courts);
   localStorage.removeItem('padel-round-timer');
   trackStart('americano', AP.length);
+  showAmericano();
+  saveState();
+}
+
+function startMixicano(){
+  const men=mixLines('ta-men'), women=mixLines('ta-women');
+  if(men.length<2||women.length<2){ alert(t('mix_val_need')); return; }
+  AP=[];
+  men.forEach(name=>AP.push({id:AP.length,name,pts:0,gender:'M'}));
+  women.forEach(name=>AP.push({id:AP.length,name,pts:0,gender:'W'}));
+  const menIds=AP.filter(p=>p.gender==='M').map(p=>p.id);
+  const womenIds=AP.filter(p=>p.gender==='W').map(p=>p.id);
+  AM=buildMixicanoSchedule(menIds,womenIds,R.courts);
+  localStorage.removeItem('padel-round-timer');
+  trackStart('mixicano', AP.length);
   showAmericano();
   saveState();
 }
@@ -3909,7 +3998,7 @@ async function _pollCourtPending(){
     const rp=remote.courtPending||[];
     if(JSON.stringify(rp)!==JSON.stringify(pendingFromCourt)){
       pendingFromCourt=rp;
-      if(mode==='americano'||mode==='mexicano') renderAmericano();
+      if(mode==='americano'||mode==='mexicano'||mode==='mixicano') renderAmericano();
     }
   }catch{}
 }
@@ -4067,7 +4156,7 @@ function _updateAmHeader(){
       hdr.style.display='block'; return;
     }
   }
-  const label=tournamentName||(mode==='mexicano'?'Mexicano':mode==='teamamericano'?'Team Americano':'Americano');
+  const label=tournamentName||(mode==='mexicano'?'Mexicano':mode==='teamamericano'?'Team Americano':mode==='mixicano'?'Mixed Americano':'Americano');
   hdr.innerHTML=`<div class="amh-tname">${esc(label)}</div>`;
   hdr.style.display='block';
 }
@@ -4448,10 +4537,21 @@ function _rebuildFutureAmRounds(){
   AM=keep.concat(buildAmericanoSchedule(activeIds, activeIdx+1, R.courts));
 }
 
+function _rebuildFutureMixRounds(){
+  const activeIdx=AM.findIndex(round=>round.some(m=>!m.done));
+  if(activeIdx===-1) return;
+  const keep=AM.slice(0,activeIdx+1);
+  const menIds=AP.filter(p=>!p.paused&&p.gender==='M').map(p=>p.id);
+  const womenIds=AP.filter(p=>!p.paused&&p.gender==='W').map(p=>p.id);
+  const rest=buildMixicanoSchedule(menIds,womenIds,R.courts);
+  AM=keep.concat(rest.slice(activeIdx+1));
+}
+
 function pausePlayer(pid){
   const p=AP.find(x=>x.id===pid); if(!p) return;
   p.paused=true;
   if(mode==='americano') _rebuildFutureAmRounds();
+  if(mode==='mixicano') _rebuildFutureMixRounds();
   closeDetailModal(); renderAmericano(); saveState();
 }
 
@@ -4459,6 +4559,7 @@ function resumePlayer(pid){
   const p=AP.find(x=>x.id===pid); if(!p) return;
   p.paused=false;
   if(mode==='americano') _rebuildFutureAmRounds();
+  if(mode==='mixicano') _rebuildFutureMixRounds();
   closeDetailModal(); renderAmericano(); saveState();
 }
 
@@ -4516,7 +4617,7 @@ function _getSharePayload(){
   if(mode==='teamamericano'){
     return {mode,TAP,TAM,R,tournamentName};
   }
-  const base=(mode==='americano'||mode==='mexicano')
+  const base=(mode==='americano'||mode==='mexicano'||mode==='mixicano')
     ? {mode,AP,AM,R,tournamentName}
     : {mode,T,PM,PW,PL,pmid,pDone,R,tournamentName};
   if(Object.keys(courtTokens).length) base.courtTokens=courtTokens;
@@ -4681,7 +4782,7 @@ function _applyViewState(s){
         }
       }
     }
-    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano') showAmericano();
+    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano'||mode==='mixicano') showAmericano();
     else startTournamentUI();
     $('view-banner').style.display='flex';
     if(mode==='teamamericano'&&playerScoring&&viewerTAPairIdx>=0){
@@ -4692,7 +4793,7 @@ function _applyViewState(s){
       if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; } }
     }
   } else {
-    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano') renderAmericano();
+    if(mode==='americano'||mode==='mexicano'||mode==='teamamericano'||mode==='mixicano') renderAmericano();
     else{ renderPoule(); renderSt(); if(mode!=='roundrobin') renderBracket(); else if(pDone) renderRRChamp(); }
   }
   if(s.tournamentName){
@@ -4751,7 +4852,7 @@ async function initViewMode(code){
 // ── State opslaan ─────────────────────────────
 function saveState(){
   if(viewMode) return;
-  if(mode==='americano'||mode==='mexicano'){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     if(!AP.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName,playerScoring}));
   } else if(mode==='teamamericano'){
@@ -4770,11 +4871,11 @@ function loadState(){
     const raw=localStorage.getItem('padel-state');
     if(!raw) return;
     const s=JSON.parse(raw);
-    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano'&&s.mode!=='teamamericano') return;
+    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano'&&s.mode!=='teamamericano'&&s.mode!=='mixicano') return;
     savedState=s;
     const label=s.tournamentName?`${s.tournamentName} · `:'';
-    if(s.mode==='americano'||s.mode==='mexicano'){
-      const key=s.mode==='mexicano'?'res_mex':'res_am';
+    if(s.mode==='americano'||s.mode==='mexicano'||s.mode==='mixicano'){
+      const key=s.mode==='mexicano'?'res_mex':s.mode==='mixicano'?'res_mix':'res_am';
       $('resume-info').textContent=t(key,{label,n:s.AP?.length||0});
     } else if(s.mode==='teamamericano'){
       $('resume-info').textContent=t('res_tam',{label,n:s.TAP?.length||0});
@@ -4793,7 +4894,7 @@ function resumeFromBanner(){
   playerScoring=!!savedState.playerScoring;
   const inp=$('inp-tname'); if(inp) inp.value=tournamentName;
   $('resume-banner').classList.add('hidden');
-  if(savedState.mode==='americano'||savedState.mode==='mexicano'){
+  if(savedState.mode==='americano'||savedState.mode==='mexicano'||savedState.mode==='mixicano'){
     mode=savedState.mode;
     ({AP,AM}=savedState);
     savedState=null;
@@ -4922,7 +5023,7 @@ function renderShareCTA(){
 }
 
 function isTournamentDone(){
-  if(mode==='americano'||mode==='mexicano') return AM.length>0&&AM.flat().every(m=>m.done);
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') return AM.length>0&&AM.flat().every(m=>m.done);
   if(mode==='teamamericano'){const a=TAM.flat();return a.length>0&&a.every(m=>m.done);}
   return pDone;
 }
@@ -4930,11 +5031,11 @@ function renderImgShareBtn(){
   return `<button class="btn btn-ghost btn-sm" onclick="shareStandingsImage()">${icon('ic-share')} <span>${t('share_img_btn')}</span></button>`;
 }
 function buildImageData(){
-  const fmtLabel={americano:'Americano',mexicano:'Mexicano',teamamericano:'Team Americano',roundrobin:'Round Robin',team:'Knockout'}[mode]||mode;
+  const fmtLabel={americano:'Americano',mexicano:'Mexicano',teamamericano:'Team Americano',mixicano:'Mixed Americano',roundrobin:'Round Robin',team:'Knockout'}[mode]||mode;
   const locale=LANG==='nl'?'nl-NL':LANG==='de'?'de-DE':LANG==='fr'?'fr-FR':LANG==='es'?'es-ES':LANG==='sv'?'sv-SE':LANG==='it'?'it-IT':'en-US';
   const date=new Date().toLocaleDateString(locale);
   const name=tournamentName||'';
-  if(mode==='americano'||mode==='mexicano'){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     const rows=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>({rank:i+1,name:p.name,value:p.pts,valueLabel:t('am_col_pts')}));
     return{name,fmtLabel,date,rows,scoreLabel:t('am_col_pts')};
   }
@@ -5123,8 +5224,8 @@ function buildExportData(){
   const locale=LANG==='nl'?'nl-NL':LANG;
   const date=new Date().toLocaleDateString(locale);
   const name=tournamentName||'Padel Toernooi';
-  const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',roundrobin:'Round Robin'}[mode]||mode;
-  if(mode==='americano'||mode==='mexicano'){
+  const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',mixicano:'Mixed Americano',roundrobin:'Round Robin'}[mode]||mode;
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     const standings=[...AP].sort((a,b)=>b.pts-a.pts);
     const matches=AM.flat().filter(m=>m.done);
     return{name,date,fmtLabel,standings,matches};
@@ -5143,7 +5244,7 @@ function exportCSV(){
   lines.push(row(t('export_format'),fmtLabel));
   lines.push(row('Datum',date));
   lines.push('');
-  if(mode==='americano'||mode==='mexicano'){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     lines.push(row('#',t('am_col_player'),t('am_col_pts'),t('am_col_w'),t('am_col_d'),t('am_col_l')));
     standings.forEach((p,i)=>{const s=getAmPlayerStats(p.id);lines.push(row(i+1,p.name,p.pts,s.w,s.d,s.l));});
     lines.push('');
@@ -5167,7 +5268,7 @@ function exportCSV(){
 function exportPrint(){
   trackEnd();
   const{name,date,fmtLabel,standings,matches}=buildExportData();
-  const amSt=(mode==='americano'||mode==='mexicano');
+  const amSt=(mode==='americano'||mode==='mexicano'||mode==='mixicano');
   let stRows='',mRows='';
   if(amSt){
     stRows=standings.map((p,i)=>{const s=getAmPlayerStats(p.id);return`<tr${i===0?' class="top"':''}><td class="n">${i+1}</td><td class="nm">${esc(p.name)}</td><td class="pts">${p.pts}</td><td class="n wn">${s.w}</td><td class="n">${s.d}</td><td class="n ls">${s.l}</td></tr>`;}).join('');
@@ -5277,7 +5378,7 @@ async function toggleCast(){
 function updatePresentation(){
   if(!mode) return;
   let standings, rounds=[], bracket=null;
-  if(mode==='americano'||mode==='mexicano'){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     const _doneM=AM.flat().filter(m=>m.done);
     standings=[...AP].sort((a,b)=>b.pts-a.pts).map((p,i)=>{
       let played=0,saldo=0;
