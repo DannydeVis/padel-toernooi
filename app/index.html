@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-title" content="Padel">
 <link rel="apple-touch-icon" href="../thumbnail.png">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root {
@@ -90,10 +90,13 @@
   --b-lose-txt:#4b5563;
   --b-empty-bg:#252B32;
   --b-empty-txt:#6b7280;
+  --field:#12161a;
+  --bdr2:rgba(255,255,255,.06);
+  --txt3:rgba(249,250,251,.32);
 }
 
 /* LICHT THEMA */
-body.light{--bg:#f9fafb;--surface:#ffffff;--surface2:#f3f4f6;--accent:#9fcc18;--accent-d:#82a812;--txt:#111827;--txt2:rgba(17,24,39,.5);--bdr:rgba(0,0,0,.1);--card-bg:#ffffff;--card-bdr:#e5e7eb;--card-txt:#111827;--card-muted:#6b7280;--undo-bg:#f3f4f6;--undo-txt:#374151;--win-bg:#d1fae5;--win-txt:#065f46;--lose-bg:#f9fafb;--lose-txt:#9ca3af;--b-bg:#f9fafb;--b-card:#ffffff;--b-hdr:#f3f4f6;--b-line:#d1d5db;--b-txt:#111827;--b-muted:#6b7280;--b-win-bg:#d1fae5;--b-win-txt:#065f46;--b-lose-bg:#f3f4f6;--b-lose-txt:#9ca3af;--b-empty-bg:#f3f4f6;--b-empty-txt:#9ca3af}
+body.light{--bg:#f9fafb;--surface:#ffffff;--surface2:#f3f4f6;--accent:#9fcc18;--accent-d:#82a812;--txt:#111827;--txt2:rgba(17,24,39,.5);--bdr:rgba(0,0,0,.1);--card-bg:#ffffff;--card-bdr:#e5e7eb;--card-txt:#111827;--card-muted:#6b7280;--undo-bg:#f3f4f6;--undo-txt:#374151;--win-bg:#d1fae5;--win-txt:#065f46;--lose-bg:#f9fafb;--lose-txt:#9ca3af;--b-bg:#f9fafb;--b-card:#ffffff;--b-hdr:#f3f4f6;--b-line:#d1d5db;--b-txt:#111827;--b-muted:#6b7280;--b-win-bg:#d1fae5;--b-win-txt:#065f46;--b-lose-bg:#f3f4f6;--b-lose-txt:#9ca3af;--b-empty-bg:#f3f4f6;--b-empty-txt:#9ca3af;--field:#fafbf8;--bdr2:rgba(0,0,0,.07);--txt3:rgba(17,24,39,.28)}
 body.light .btn-ghost{background:#f3f4f6;border-color:rgba(0,0,0,.15);color:#111827}
 body.light .btn-ghost:hover{background:#e5e7eb}
 body.light .tab{background:rgba(0,0,0,.05);color:rgba(17,24,39,.5)}
@@ -1037,6 +1040,144 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 
 /* voortgangsbalk bovenaan setup — subtiele lime-indicator */
 .setup-progress{display:block!important}
+
+/* ── Setup Redesign ─────────────────────────── */
+#screen-setup{font-family:'Space Grotesk',system-ui,sans-serif}
+.setup-box{padding:0!important;max-width:100%!important;background:none!important;border:none!important;border-radius:0!important}
+.c-hero{padding:28px 22px 2px;max-width:1080px;margin:0 auto}
+.c-hero .sx-display{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.95;letter-spacing:-.01em;font-size:clamp(36px,5.5vw,50px);margin:8px 0 5px}
+.c-hero .c-sub{color:var(--txt2);font-size:14.5px;margin:0}
+.c-hero .sx-eyebrow{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--accent)}
+.c-wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:8px 22px 50px;display:grid;grid-template-columns:1.02fr .98fr;gap:22px;align-items:start}
+.c-left{display:flex;flex-direction:column;gap:12px;min-width:0}
+.c-left .sx-step{background:var(--surface);border:1px solid var(--bdr2);border-radius:20px;padding:18px 20px 20px;position:relative;transition:border-color .2s}
+.c-left .sx-step:focus-within{border-color:rgba(199,255,94,.3)}
+body.light .c-left .sx-step{box-shadow:0 2px 14px rgba(0,0,0,.05)}
+.c-left .sx-stephdr{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.c-left .sx-stepnum{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;border-radius:99px;background:var(--surface2);border:1px solid var(--bdr);color:var(--txt2);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;transition:.25s}
+.c-left .sx-stepnum.done{background:var(--accent);border-color:var(--accent);color:#0E1114}
+body.light .c-left .sx-stepnum.done{color:#fff}
+.c-left .sx-steptitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:21px;letter-spacing:.005em}
+.c-left .sx-stepsub{color:var(--txt2);font-size:12.5px;margin:2px 0 11px;padding-left:42px}
+.c-left .sx-tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.c-left .sx-tcard{text-align:left;background:var(--field);border:1.5px solid var(--bdr2);border-radius:13px;padding:11px 13px 10px;display:flex;flex-direction:row;align-items:center;gap:11px;transition:transform .15s cubic-bezier(.2,.8,.2,1),border-color .15s,box-shadow .2s,background .15s;cursor:pointer;font-family:inherit}
+.c-left .sx-tcard:hover{transform:translateY(-2px);border-color:var(--bdr)}
+.c-left .sx-tcard .tc-ico{font-size:0;width:30px;height:30px;flex-shrink:0;border-radius:9px;background:var(--surface2);display:grid;place-items:center;margin:0;transition:.15s}
+.c-left .sx-tcard .tc-ico svg{width:17px;height:17px;stroke:var(--txt2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:.15s}
+.c-left .sx-tcard.active{border-color:var(--accent);background:rgba(199,255,94,.06);box-shadow:0 6px 24px rgba(199,255,94,.13)}
+body.light .c-left .sx-tcard.active{background:rgba(134,184,0,.07);box-shadow:0 6px 20px rgba(134,184,0,.14)}
+.c-left .sx-tcard.active .tc-ico{background:var(--accent)}
+.c-left .sx-tcard.active .tc-ico svg{stroke:#0E1114}
+body.light .c-left .sx-tcard.active .tc-ico svg{stroke:#fff}
+.c-left .sx-tcard .tc-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.01em;line-height:1}
+.c-left .sx-tcard.active .tc-name{color:var(--accent)}
+.c-left .sx-tcard .tc-sub{font-size:11px;color:var(--txt2);line-height:1.25}
+.c-left .tc-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sx-chipbox{display:flex;flex-wrap:wrap;gap:7px;align-items:center;min-height:58px;background:var(--field);border:1.5px solid var(--bdr2);border-radius:15px;padding:9px 11px;cursor:text;transition:border-color .15s}
+.sx-chipbox:focus-within{border-color:rgba(199,255,94,.45)}
+.sx-chip{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--bdr2);border-radius:99px;padding:7px 7px 7px 13px;font-weight:600;font-size:14.5px;letter-spacing:-.01em;animation:chipIn .22s cubic-bezier(.3,1.4,.5,1)}
+.sx-chip.team{background:rgba(199,255,94,.1);border-color:rgba(199,255,94,.3)}
+.sx-chip .x{width:20px;height:20px;border-radius:99px;display:grid;place-items:center;background:rgba(255,255,255,.06);color:var(--txt2);font-size:11px;line-height:1;transition:.12s;border:none;cursor:pointer;font-family:inherit}
+body.light .sx-chip .x{background:rgba(0,0,0,.07)}
+.sx-chip .x:hover{background:var(--red);color:#fff}
+@keyframes chipIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.sx-chipinp{flex:1;min-width:130px;background:none;border:none;outline:none;color:var(--txt);font-size:15px;padding:7px 4px;font-weight:500;font-family:'Space Grotesk',sans-serif}
+.sx-chipinp::placeholder{color:var(--txt3)}
+.sx-count{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;margin-top:10px;color:var(--txt2)}
+.sx-count .dot{width:8px;height:8px;border-radius:99px;background:var(--txt3);flex-shrink:0;transition:.2s}
+.sx-count.ok{color:var(--accent)}.sx-count.ok .dot{background:var(--accent);box-shadow:0 0 8px rgba(199,255,94,.6)}
+.sx-count.warn{color:var(--gold)}.sx-count.warn .dot{background:var(--gold)}
+.sx-groups{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sx-group{display:inline-flex;align-items:center;gap:8px;border-radius:99px;padding:8px 14px;background:var(--surface2);border:1px solid var(--bdr2);font-size:13px;font-weight:600;transition:.15s;cursor:pointer;font-family:inherit;color:inherit}
+.sx-group:hover{border-color:rgba(199,255,94,.4);color:var(--accent)}
+.sx-group b{color:var(--accent);font-weight:700}
+.sx-stepper{display:flex;align-items:center;gap:18px;margin-top:10px}
+.sx-stepbtn{width:52px;height:52px;border-radius:16px;background:var(--surface2);border:1px solid var(--bdr2);font-size:22px;font-weight:600;color:var(--txt);display:grid;place-items:center;transition:transform .12s,border-color .12s,background .12s;user-select:none;font-family:inherit;cursor:pointer}
+.sx-stepbtn:hover{border-color:var(--bdr);background:var(--surface)}
+.sx-stepbtn:active{transform:scale(.92)}
+.sx-stepbtn:disabled{opacity:.3;cursor:default;transform:none}
+.sx-stepval{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:46px;min-width:54px;text-align:center;color:var(--accent);line-height:1}
+.sx-stepval small{display:block;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt2)}
+.sx-advice{font-size:13px;color:var(--txt2);margin-top:10px}
+.sx-advice b{color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.sx-seg{display:flex;gap:8px;flex-wrap:wrap}
+.sx-segbtn{flex:1;min-width:86px;border:1.5px solid var(--bdr2);background:var(--field);border-radius:13px;padding:11px 10px 10px;text-align:center;transition:.15s;display:flex;flex-direction:column;gap:1px;align-items:center;cursor:pointer;font-family:inherit;color:inherit}
+.sx-segbtn:hover{border-color:var(--bdr)}
+.sx-segbtn .sg-t{font-weight:700;font-size:14.5px;letter-spacing:-.01em}
+.sx-segbtn .sg-s{font-size:11px;color:var(--txt3);font-weight:500}
+.sx-segbtn.active{border-color:var(--accent);background:rgba(199,255,94,.07)}
+.sx-segbtn.active .sg-t{color:var(--accent)}
+body.light .sx-segbtn.active{background:rgba(134,184,0,.08)}
+.sx-seglbl{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--txt3);margin:14px 0 7px}
+.sx-input{width:100%;background:var(--field);border:1.5px solid var(--bdr2);border-radius:14px;color:var(--txt);font-size:15px;font-weight:500;padding:13px 16px;outline:none;transition:border-color .15s;font-family:'Space Grotesk',sans-serif}
+.sx-input:focus{border-color:rgba(199,255,94,.45)}
+.sx-input::placeholder{color:var(--txt3)}
+.sx-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#0E1114;border-radius:15px;padding:16px 28px;font-weight:700;font-size:16.5px;letter-spacing:-.01em;overflow:hidden;box-shadow:0 8px 28px rgba(199,255,94,.35),0 1px 0 rgba(255,255,255,.5) inset;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .2s,filter .2s;font-family:'Space Grotesk',sans-serif;cursor:pointer;border:none}
+body.light .sx-cta{color:#fff;box-shadow:0 8px 24px rgba(134,184,0,.35)}
+.sx-cta:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(199,255,94,.5)}
+.sx-cta:active{transform:scale(.97)}
+.sx-cta:disabled{filter:saturate(.15) brightness(.75);box-shadow:none;cursor:not-allowed;transform:none}
+body.light .sx-cta:disabled{filter:saturate(.1) brightness(1.4)}
+@media (prefers-reduced-motion: no-preference){
+  .sx-cta:not(:disabled)::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:sxShine 3.4s ease-in-out infinite}
+}
+@keyframes sxShine{0%{left:-60%}30%,100%{left:140%}}
+.c-right{position:sticky;top:18px}
+.c-panel{position:relative;background:var(--surface);border:1px solid var(--bdr2);border-radius:22px;padding:20px 20px 18px;box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}
+body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
+.c-panel::before{content:'';position:absolute;inset:0;border-radius:22px;padding:1px;background:linear-gradient(160deg,rgba(199,255,94,.35),transparent 38%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.c-panel-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.c-panel-hdr .pv-title{font-family:'Syne',sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.c-live{display:inline-flex;align-items:center;gap:7px;border-radius:99px;padding:5px 12px;font-size:11px;font-weight:700;background:rgba(199,255,94,.09);border:1px solid rgba(199,255,94,.25);color:var(--accent)}
+.c-live .ld{width:6px;height:6px;border-radius:99px;background:currentColor}
+@media (prefers-reduced-motion: no-preference){.c-live .ld{animation:cPulse 1.6s ease-out infinite}}
+@keyframes cPulse{0%{box-shadow:0 0 0 0 rgba(199,255,94,.5)}70%{box-shadow:0 0 0 6px rgba(199,255,94,0)}100%{box-shadow:0 0 0 0 rgba(199,255,94,0)}}
+.c-courts{display:flex;flex-direction:column;gap:10px}
+.c-court{background:var(--field);border:1px solid var(--bdr2);border-radius:16px;padding:12px 14px;position:relative;transition:.2s}
+.c-court .cc-lbl{font-family:'Syne',sans-serif;font-weight:800;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px}
+.c-court .cc-play{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.c-court .cc-side{display:flex;flex-direction:column;gap:3px;min-width:0}
+.c-court .cc-side.r{align-items:flex-end;text-align:right}
+.c-court .cc-p{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.c-court .cc-p.empty{color:var(--txt3);font-weight:600}
+.c-court .cc-net{width:1px;align-self:stretch;min-height:40px;background:repeating-linear-gradient(to bottom,var(--bdr) 0 5px,transparent 5px 10px)}
+.c-court.ghost{opacity:.45;border-style:dashed}
+.c-empty{padding:26px 10px;text-align:center;color:var(--txt3);font-size:13.5px;line-height:1.6}
+.c-rest{font-size:12px;color:var(--txt2);margin-top:10px}
+.c-rest b{color:var(--gold)}
+.c-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.c-stat{background:var(--field);border:1px solid var(--bdr2);border-radius:13px;padding:10px 8px 8px;text-align:center}
+.c-stat .v{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:27px;color:var(--accent);line-height:1}
+.c-stat .l{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--txt3);margin-top:3px}
+.c-actions{display:flex;gap:9px}
+.c-actions .sx-cta{flex:1;padding:15px 18px}
+.c-shuffle{width:54px;flex-shrink:0;border-radius:15px;background:var(--surface2);border:1px solid var(--bdr2);display:grid;place-items:center;transition:.15s;cursor:pointer;font-family:inherit}
+.c-shuffle:hover{border-color:var(--bdr)}
+.c-shuffle:active{transform:rotate(180deg) scale(.92)}
+.c-shuffle svg{width:20px;height:20px;stroke:var(--txt);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c-shuffle:disabled{opacity:.3}
+.c-bar{display:none}
+.c-bar-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;text-align:left;align-items:flex-start;background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
+.c-bar-info .b1{font-weight:700;font-size:13.5px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.c-bar-info.ok .b1{color:var(--accent)}
+.c-bar-info .b2{font-size:11.5px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.c-bar .sx-cta{flex:0 0 auto;padding:13px 22px;font-size:15px}
+@media(max-width:860px){
+  .c-wrap{grid-template-columns:1fr;padding:8px 14px 120px}
+  .c-right{position:static;order:3}
+  .c-left .sx-tgrid{grid-template-columns:1fr 1fr}
+  .c-left .sx-stepsub{padding-left:0}
+  .c-actions .c-shuffle{width:50px}
+  .c-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:10;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb, var(--surface) 90%, transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--bdr2)}
+}
+@media (prefers-reduced-motion: no-preference){
+  .sx-up{opacity:0;transform:translateY(22px);animation:sxUp .65s cubic-bezier(.2,.8,.2,1) forwards}
+  .sx-d1{animation-delay:.05s}.sx-d2{animation-delay:.12s}.sx-d3{animation-delay:.19s}
+  .sx-d4{animation-delay:.26s}.sx-d5{animation-delay:.33s}.sx-d6{animation-delay:.4s}
+}
+@keyframes sxUp{to{opacity:1;transform:none}}
+.sx-manual-link{font-size:12.5px;color:var(--txt2);margin-top:8px;display:inline-block;cursor:pointer;text-decoration:underline;text-underline-offset:3px;background:none;border:none;font-family:inherit;padding:0}
+.sx-manual-link:hover{color:var(--txt)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
@@ -1167,171 +1308,185 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 <div id="screen-setup">
   <div class="setup-box">
 
-    <!-- Intro -->
-    <div class="setup-intro">
-      <h2 id="setup-box-title" data-i18n="set_title_team">Teams instellen</h2>
-      <p class="setup-intro-sub" data-i18n="set_intro_sub">Maak en speel je toernooi in een paar stappen.</p>
+    <!-- Hero -->
+    <div class="c-hero sx-up sx-d1">
+      <span class="sx-eyebrow" data-i18n="eyebrow">Nieuw toernooi</span>
+      <h1 class="sx-display" data-i18n="title">Stel je toernooi in</h1>
+      <p class="c-sub" data-i18n="sub_c">Je ziet je toernooi ontstaan terwijl je typt.</p>
     </div>
 
-    <!-- Card 1: Toernooinaam -->
-    <div class="setup-card">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-trophy"></use></svg>
-        <span class="setup-card-step">1.</span>
-        <span class="setup-card-title" data-i18n="set_lbl_name">Toernooi</span>
-      </div>
-      <input id="inp-tname" class="tname-input" type="text" data-i18n-ph="set_ph_name" placeholder="Toernooinaam (optioneel)" maxlength="48" oninput="tournamentName=this.value.trim()">
-    </div>
+    <!-- Main 2-column grid -->
+    <div class="c-wrap">
 
-    <!-- Card 2: Banen -->
-    <div class="setup-card" id="rules-courts-row">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-monitor"></use></svg>
-        <span class="setup-card-step">2.</span>
-        <span class="setup-card-title" data-i18n="set_lbl_courts">Banen</span>
-      </div>
-      <p class="setup-card-sub" data-i18n="set_sub_courts">Kies het aantal beschikbare banen.</p>
-      <div class="rules-opts" id="rules-courts">
-        <button class="rbtn" onclick="setCourts(1)">1</button>
-        <button class="rbtn active" onclick="setCourts(2)">2<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-        <button class="rbtn" onclick="setCourts(3)">3</button>
-        <button class="rbtn" onclick="setCourts(4)">4</button>
-      </div>
-    </div>
+      <!-- LEFT: steps -->
+      <div class="c-left">
 
-    <!-- Card 3: Type toernooi -->
-    <div class="setup-card">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg>
-        <span class="setup-card-step">3.</span>
-        <span class="setup-card-title" data-i18n="set_lbl_type">Type toernooi</span>
-      </div>
-      <p class="setup-card-sub" data-i18n="set_sub_type">Kies het speelformat dat bij jullie past.</p>
-      <div class="rules-opts" id="rules-type">
-        <button class="rbtn active" onclick="setTType('team')" id="rbtn-type-team">Team<span class="rbtn-sub" data-i18n="set_type_sub_team">vast koppel</span></button>
-        <button class="rbtn" onclick="setTType('americano')" id="rbtn-type-am">Americano<span class="rbtn-sub" data-i18n="set_type_sub_am">wissel koppel</span></button>
-        <button class="rbtn" onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano<span class="rbtn-sub" data-i18n="set_type_sub_mex">stand koppels</span></button>
-        <button class="rbtn" onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin<span class="rbtn-sub" data-i18n="set_type_sub_rr">iedereen vs iedereen</span></button>
-        <button class="rbtn" onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.<span class="rbtn-sub" data-i18n="set_type_sub_tam">americano</span></button>
-        <button class="rbtn" onclick="setTType('mixicano')" id="rbtn-type-mix">Mixicano<span class="rbtn-sub" data-i18n="set_type_sub_mix">man + vrouw</span></button>
-      </div>
-    </div>
+        <!-- Step 1: Type -->
+        <section class="sx-step sx-up sx-d2">
+          <div class="sx-stephdr">
+            <span class="sx-stepnum done" id="sx-num-1">1</span>
+            <span class="sx-steptitle" data-i18n="step_type">Type toernooi</span>
+          </div>
+          <p class="sx-stepsub" data-i18n="step_type_sub" style="margin-bottom:0">Hoe willen jullie spelen?</p>
+          <div class="sx-tgrid" id="sx-tgrid">
+            <button type="button" class="sx-tcard" data-type="team" onclick="sxSetType('team')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3.2"></circle><circle cx="16" cy="9" r="3.2"></circle><path d="M3.5 19c.7-3 2.5-4.5 4.5-4.5S11.8 16 12 19M12 19c.2-3 2-4.5 4-4.5s3.8 1.5 4.5 4.5"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_team">Team</span><span class="tc-sub" data-i18n="type_team_sub">Vast koppel</span></span>
+            </button>
+            <button type="button" class="sx-tcard active" data-type="americano" onclick="sxSetType('americano')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><path d="M4 7h13M14 3.5L17.5 7 14 10.5M20 17H7M10 13.5L6.5 17l3.5 3.5"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_am">Americano</span><span class="tc-sub" data-i18n="type_am_sub">Wissel koppel</span></span>
+            </button>
+            <button type="button" class="sx-tcard" data-type="mexicano" onclick="sxSetType('mexicano')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><path d="M3.5 17.5l5-5 4 3.5 7-8"></path><path d="M14.5 8h5v5"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_mex">Mexicano</span><span class="tc-sub" data-i18n="type_mex_sub">Stand koppels</span></span>
+            </button>
+            <button type="button" class="sx-tcard" data-type="roundrobin" onclick="sxSetType('roundrobin')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.5-5.8"></path><path d="M20 3v4h-4"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_rr">Round Robin</span><span class="tc-sub" data-i18n="type_rr_sub">Iedereen vs iedereen</span></span>
+            </button>
+            <button type="button" class="sx-tcard" data-type="teamamericano" onclick="sxSetType('teamamericano')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><circle cx="16.5" cy="9.5" r="2.2"></circle><path d="M3.5 19c.6-3.4 2.7-5 5.5-5s4.9 1.6 5.5 5"></path><path d="M16 14.3c2.2.3 3.7 1.7 4.2 4.2"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_tam">Team Am.</span><span class="tc-sub" data-i18n="type_tam_sub">Vast team</span></span>
+            </button>
+            <button type="button" class="sx-tcard" data-type="mixicano" onclick="sxSetType('mixicano')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.8"></circle><circle cx="16" cy="8" r="2.8"></circle><path d="M4 19c.5-2.8 2-4 4-4h1M20 19c-.5-2.8-2-4-4-4h-1M12 17v2"></path></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_mix">Mixicano</span><span class="tc-sub" data-i18n="type_mix_sub">Man &amp; vrouw</span></span>
+            </button>
+          </div>
+        </section>
 
-    <!-- Card 4: Match formaat -->
-    <div class="setup-card">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg>
-        <span class="setup-card-step">4.</span>
-        <span class="setup-card-title" data-i18n="set_lbl_format">Match formaat</span>
+        <!-- Step 2: Players (chips) -->
+        <section class="sx-step sx-up sx-d3">
+          <div class="sx-stephdr">
+            <span class="sx-stepnum" id="sx-num-2">2</span>
+            <span class="sx-steptitle" data-i18n="step_players">Spelers</span>
+          </div>
+          <p class="sx-stepsub" id="sx-players-sub" data-i18n="step_players_sub">Typ een naam en druk op Enter.</p>
+          <div class="sx-chipbox" id="sx-chipbox">
+            <input type="text" class="sx-chipinp" id="sx-chipinp" data-i18n-ph="ph_player" placeholder="Typ een naam…" autocomplete="off" autocorrect="off" spellcheck="false">
+          </div>
+          <div class="sx-count" id="sx-count"><span class="dot"></span><span id="sx-count-txt" data-i18n="cnt_zero">Voeg minstens 4 spelers toe</span></div>
+          <p class="sx-advice" id="sx-tip-team" style="display:none" data-i18n="tip_team">Tip: typ "Jan &amp; Piet" om zelf een vast koppel te maken.</p>
+          <div class="sx-groups" id="sx-groups">
+            <span style="flex-basis:100%;font-size:12px;color:var(--txt3);font-weight:600;display:none" id="sx-groups-lbl" data-i18n="saved_groups">Of begin met een opgeslagen groep:</span>
+          </div>
+          <!-- Manual link -->
+          <button type="button" class="sx-manual-link" id="sx-manual-link" onclick="sxToggleManual()" style="display:none" data-i18n="set_btn_manual">Teams zelf invoeren</button>
+        </section>
+
+        <!-- Step 3: Courts & match format -->
+        <section class="sx-step sx-up sx-d4">
+          <div class="sx-stephdr">
+            <span class="sx-stepnum done" id="sx-num-3">3</span>
+            <span class="sx-steptitle"><span data-i18n="step_courts">Banen</span> &amp; <span data-i18n="step_match">match formaat</span></span>
+          </div>
+          <div class="sx-stepper" style="margin-top:10px">
+            <button type="button" class="sx-stepbtn" id="sx-court-min" onclick="sxChangeCourts(-1)" aria-label="minder">&#8722;</button>
+            <span class="sx-stepval"><span id="sx-court-val">2</span><small data-i18n="courts_word">banen</small></span>
+            <button type="button" class="sx-stepbtn" id="sx-court-plus" onclick="sxChangeCourts(1)" aria-label="meer">+</button>
+          </div>
+          <p class="sx-advice" id="sx-court-advice" style="display:none"></p>
+          <!-- GPM: Team/RR -->
+          <div id="sx-row-gpm" style="display:none">
+            <span class="sx-seglbl" data-i18n="step_match">Match formaat</span>
+            <div class="sx-seg">
+              <button type="button" class="sx-segbtn" onclick="sxSetGpm(1)"><span class="sg-t" data-i18n="gpm1">1 game</span></button>
+              <button type="button" class="sx-segbtn active" onclick="sxSetGpm(3)"><span class="sg-t" data-i18n="gpm3">Best of 3</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetGpm(5)"><span class="sg-t" data-i18n="gpm5">Best of 5</span></button>
+            </div>
+          </div>
+          <!-- PTS: Americano/Mexicano/TAm -->
+          <div id="sx-row-pts">
+            <span class="sx-seglbl" data-i18n="lbl_pts">Punten per match</span>
+            <div class="sx-seg" id="sx-seg-pts">
+              <button type="button" class="sx-segbtn" onclick="sxSetPts(24)"><span class="sg-t">24</span></button>
+              <button type="button" class="sx-segbtn active" onclick="sxSetPts(32)"><span class="sg-t">32</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetPts(40)"><span class="sg-t">40</span></button>
+            </div>
+            <span class="sx-seglbl" data-i18n="lbl_timer">Timer per ronde</span>
+            <div class="sx-seg" id="sx-seg-timer">
+              <button type="button" class="sx-segbtn active" onclick="sxSetTimer(0)"><span class="sg-t" data-i18n="off">Geen</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetTimer(15)"><span class="sg-t">15</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetTimer(20)"><span class="sg-t">20</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetTimer(30)"><span class="sg-t">30</span></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tournament name -->
+        <input type="text" class="sx-input sx-up sx-d5" id="inp-tname" maxlength="48" data-i18n-ph="tname_ph" placeholder="Bijv. Vrijdagavond Cup (optioneel)" oninput="tournamentName=this.value.trim()">
+
       </div>
-      <p class="setup-card-sub" data-i18n="set_sub_format">Kies de lengte van de wedstrijden.</p>
-      <div id="rules-gpm-row">
-        <div class="rules-opts" id="rules-gpm">
-          <button class="rbtn" onclick="setGpm(1)">1 game</button>
-          <button class="rbtn active" onclick="setGpm(3)">Best of 3<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-          <button class="rbtn" onclick="setGpm(5)">Best of 5</button>
+
+      <!-- RIGHT: live preview panel -->
+      <aside class="c-right sx-up sx-d4">
+        <div class="c-panel">
+          <div class="c-panel-hdr">
+            <span class="pv-title" data-i18n="pv_t">Live voorbeeld</span>
+            <span class="c-live"><span class="ld"></span><span id="sx-pv-badge">0 spelers</span></span>
+          </div>
+          <div class="c-courts" id="sx-pv-courts"><div class="c-empty" id="sx-pv-empty" data-i18n="pv_empty">Voeg spelers toe en zie hier het speelschema ontstaan.</div></div>
+          <p class="c-rest" id="sx-pv-rest" style="display:none"></p>
+          <div class="c-stats" id="sx-pv-stats" style="display:none">
+            <div class="c-stat"><div class="v" id="sx-stat-rounds">&#8211;</div><div class="l" data-i18n="pv_rounds">rondes</div></div>
+            <div class="c-stat"><div class="v" id="sx-stat-mpr">&#8211;</div><div class="l" data-i18n="pv_mpr">per ronde</div></div>
+            <div class="c-stat"><div class="v" id="sx-stat-dur">&#8211;</div><div class="l" data-i18n="pv_dur">duur</div></div>
+          </div>
+          <div class="c-actions" style="margin-top:14px">
+            <button type="button" class="c-shuffle" id="sx-shuffle" disabled title="Schudden" onclick="sxShuffle()">
+              <svg viewBox="0 0 24 24"><path d="M3 7h3.5c5 0 6 10 11 10H21M3 17h3.5c1.8 0 3-1.3 4-2.9M21 7h-3.5c-1.8 0-3 1.3-4 2.9"></path><path d="M18.5 4.5L21 7l-2.5 2.5M18.5 14.5L21 17l-2.5 2.5"></path></svg>
+            </button>
+            <button type="button" class="sx-cta" id="sx-btn-start" disabled onclick="doStartCurrent()" data-i18n="btn_start">Start toernooi</button>
+          </div>
         </div>
-      </div>
-      <div id="rules-pts-row" style="display:none">
-        <span class="setup-row-lbl" data-i18n="set_lbl_pts">Punten/match</span>
-        <div class="rules-opts" id="rules-pts">
-          <button class="rbtn" onclick="setMatchPts(24)">24</button>
-          <button class="rbtn active" onclick="setMatchPts(32)">32<span class="rbtn-sub" data-i18n="set_default">standaard</span></button>
-          <button class="rbtn" onclick="setMatchPts(40)">40</button>
-        </div>
-      </div>
-      <div id="rules-timer-row" style="display:none">
-        <span class="setup-row-lbl" data-i18n="set_lbl_timer">Timer/ronde</span>
-        <div class="rules-opts" id="rules-timer">
-          <button class="rbtn active" onclick="setTimerMins(0)" data-i18n="set_timer_off">Geen</button>
-          <button class="rbtn" onclick="setTimerMins(15)">15 min</button>
-          <button class="rbtn" onclick="setTimerMins(20)">20 min</button>
-          <button class="rbtn" onclick="setTimerMins(30)">30 min</button>
-        </div>
-      </div>
-    </div>
+      </aside>
 
-    <!-- Card 5: Teams samenstellen (verborgen voor Americano types) -->
-    <div class="setup-card" id="mode-toggle-row">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg>
-        <span class="setup-card-step">5.</span>
-        <span class="setup-card-title" data-i18n="set_card_teams">Teams samenstellen</span>
-      </div>
-      <p class="setup-card-sub" data-i18n="set_sub_teams">Voeg spelers toe en maak teams automatisch of zelf.</p>
-      <div class="mode-toggle-btns">
-        <button class="btn btn-green" id="mode-auto-btn" onclick="setMode('auto')">
-          <svg class="icon" viewBox="0 0 24 24"><use href="#ic-users"></use></svg>
-          <span class="mode-btn-text">
-            <span data-i18n="set_btn_auto">Spelersnamen invoeren</span>
-            <span class="btn-sub" data-i18n="set_btn_auto_sub">App maakt duo's en trio's</span>
-          </span>
-        </button>
-        <button class="btn btn-ghost" id="mode-manual-btn" onclick="setMode('manual')">
-          <svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg>
-          <span class="mode-btn-text">
-            <span data-i18n="set_btn_manual">Teams zelf invoeren</span>
-            <span class="btn-sub" data-i18n="set_btn_manual_sub">Zelf teams samenstellen</span>
-          </span>
-        </button>
-      </div>
-    </div>
+    </div><!-- /c-wrap -->
 
-    <!-- Card 6: Spelers (AUTO mode) -->
-    <div class="setup-card" id="mode-auto">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-clipboard"></use></svg>
-        <span class="setup-card-step">6.</span>
-        <span class="setup-card-title" data-i18n="set_card_players">Spelers toevoegen</span>
-      </div>
-      <div id="ta-pairs-section" style="display:none">
-        <div id="ta-pairs-wrap"></div>
-        <button class="btn btn-ghost btn-sm" onclick="addTAPairRow()" style="width:100%;margin-bottom:10px" data-i18n="ta_add_pair">+ Koppel toevoegen</button>
-      </div>
-      <textarea id="ta" data-i18n-ph="set_ph_auto" placeholder="Jan&#10;Piet&#10;Marie&#10;Klaas&#10;Sofia&#10;Ahmed&#10;Lisa&#10;Tom&#10;Yasmin&#10;Daan&#10;Emma&#10;Remi&#10;Fay&#10;Jens&#10;Nora&#10;Luis&#10;Hanna"></textarea>
-      <p class="setup-card-sub" id="mode-auto-desc" style="margin-top:6px;margin-bottom:0" data-i18n="set_desc_auto_team">Één naam per regel, minimaal 4. App maakt automatisch duo's en trio's.</p>
-      <div class="nc" id="nc"></div>
-      <p class="setup-card-hint" id="level-hint" style="margin-top:6px;margin-bottom:0;font-size:.72rem;color:var(--txt2)" data-i18n="level_hint"></p>
-      <div id="mix-section" style="display:none">
-        <label class="setup-row-lbl" data-i18n="mix_lbl_men">Mannen</label>
-        <textarea id="ta-men" data-i18n-ph="mix_ph_men" placeholder="Jan&#10;Piet&#10;Tom&#10;Daan"></textarea>
-        <label class="setup-row-lbl" style="margin-top:10px;display:block" data-i18n="mix_lbl_women">Vrouwen</label>
-        <textarea id="ta-women" data-i18n-ph="mix_ph_women" placeholder="Marie&#10;Sofia&#10;Lisa&#10;Emma"></textarea>
-        <p class="setup-card-sub" id="mix-nc" style="margin-top:6px;margin-bottom:0"></p>
-      </div>
-    </div>
-
-    <!-- Card 6: Teams (MANUAL mode) -->
-    <div class="setup-card" id="mode-manual" style="display:none">
-      <div class="setup-card-hdr">
-        <svg class="icon setup-card-icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg>
-        <span class="setup-card-step">6.</span>
-        <span class="setup-card-title" data-i18n="set_card_players">Teams invoeren</span>
-      </div>
-      <textarea id="ta-manual" data-i18n-ph="set_ph_manual" placeholder="Jan & Piet&#10;Marie & Klaas&#10;Sofia & Ahmed&#10;Lisa & Tom&#10;Yasmin & Daan&#10;Emma & Remi&#10;Fay & Jens&#10;Nora & Luis&#10;Hanna / Mees / Bo"></textarea>
-      <p class="setup-card-sub" style="margin-top:6px;margin-bottom:0" data-i18n-html="set_desc_manual">Één teamnaam per regel...</p>
-      <div class="nc" id="nc-manual"></div>
-    </div>
-
-    <!-- Opgeslagen groepen -->
-    <div id="saved-groups-wrap"></div>
-
-    <!-- Actie-knoppen -->
-    <div class="setup-actions">
-      <button class="btn btn-green setup-btn-start" id="btn-start-main" onclick="doStartCurrent()">
-        <svg class="icon" viewBox="0 0 24 24"><use href="#ic-padel"></use></svg>
-        <span class="mode-btn-text">
-          <span data-i18n="set_btn_start">Starten</span>
-          <span class="btn-sub" data-i18n="set_btn_start_sub">Toernooi starten</span>
-        </span>
+    <!-- Mobile sticky bar -->
+    <div class="c-bar" id="sx-cbar">
+      <button type="button" class="c-bar-info" id="sx-cbar-info" onclick="sxScrollToPreview()">
+        <span class="b1" id="sx-cbar-b1" data-i18n="cnt_zero">Voeg minstens 4 spelers toe</span>
+        <span class="b2" id="sx-cbar-b2" style="display:none"></span>
       </button>
-      <button class="btn btn-ghost setup-btn-shuffle" id="btn-shuffle" onclick="doShuffle()">
-        <svg class="icon" viewBox="0 0 24 24"><use href="#ic-shuffle"></use></svg>
-        <span class="mode-btn-text">
-          <span data-i18n="set_btn_shuffle">Schudden</span>
-          <span class="btn-sub" data-i18n="set_btn_shuffle_sub">Teams opnieuw indelen</span>
-        </span>
-      </button>
+      <button type="button" class="sx-cta" id="sx-cbar-start" disabled onclick="doStartCurrent()" data-i18n="btn_start">Start toernooi</button>
+    </div>
+
+    <!-- Hidden legacy form elements (used by existing start logic) -->
+    <div style="display:none">
+      <div id="mode-toggle-row"></div>
+      <div id="mode-auto">
+        <div id="ta-pairs-section"><div id="ta-pairs-wrap"></div></div>
+        <textarea id="ta"></textarea>
+        <div id="nc"></div>
+        <div id="mix-section">
+          <textarea id="ta-men"></textarea>
+          <textarea id="ta-women"></textarea>
+          <p id="mix-nc"></p>
+        </div>
+        <p id="mode-auto-desc"></p>
+        <p id="level-hint"></p>
+      </div>
+      <div id="mode-manual" style="display:none">
+        <textarea id="ta-manual"></textarea>
+        <div id="nc-manual"></div>
+      </div>
+      <div id="saved-groups-wrap"></div>
+      <div id="rules-courts"><button onclick="setCourts(1)">1</button><button class="active" onclick="setCourts(2)">2</button><button onclick="setCourts(3)">3</button><button onclick="setCourts(4)">4</button></div>
+      <div id="rules-type">
+        <button class="active" onclick="setTType('team')" id="rbtn-type-team">Team</button>
+        <button onclick="setTType('americano')" id="rbtn-type-am">Americano</button>
+        <button onclick="setTType('mexicano')" id="rbtn-type-mex">Mexicano</button>
+        <button onclick="setTType('roundrobin')" id="rbtn-type-rr">Round Robin</button>
+        <button onclick="setTType('teamamericano')" id="rbtn-type-tam">Team Am.</button>
+        <button onclick="setTType('mixicano')" id="rbtn-type-mix">Mixicano</button>
+      </div>
+      <div id="rules-gpm-row"><div id="rules-gpm"><button onclick="setGpm(1)">1</button><button class="active" onclick="setGpm(3)">3</button><button onclick="setGpm(5)">5</button></div></div>
+      <div id="rules-pts-row"><div id="rules-pts"><button onclick="setMatchPts(24)">24</button><button class="active" onclick="setMatchPts(32)">32</button><button onclick="setMatchPts(40)">40</button></div></div>
+      <div id="rules-timer-row"><div id="rules-timer"><button class="active" onclick="setTimerMins(0)">0</button><button onclick="setTimerMins(15)">15</button><button onclick="setTimerMins(20)">20</button><button onclick="setTimerMins(30)">30</button></div></div>
+      <button id="btn-start-main" onclick="doStartCurrent()"></button>
+      <button id="btn-shuffle" onclick="doShuffle()"></button>
     </div>
     <div class="pgrid" id="prev"></div>
 
@@ -1509,7 +1664,7 @@ body.light .tname-input,body.light textarea{background:#f0f1f3!important}
 </div>
 
 <script>
-const APP_VERSION = 'v1.52.0';
+const APP_VERSION = 'v1.53.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1600,6 +1755,7 @@ nl:{
   comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
   set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
+  eyebrow:'Nieuw toernooi',title:'Stel je toernooi in',sub_c:'Je ziet je toernooi ontstaan terwijl je typt.',tname_ph:'Bijv. Vrijdagavond Cup (optioneel)',step_type:'Type toernooi',step_type_sub:'Hoe willen jullie spelen?',type_team:'Team',type_team_sub:'Vast koppel',type_am:'Americano',type_am_sub:'Wissel koppel',type_mex:'Mexicano',type_mex_sub:'Stand koppels',type_rr:'Round Robin',type_rr_sub:'Iedereen vs iedereen',type_tam:'Team Am.',type_tam_sub:'Vast team',type_mix:'Mixicano',type_mix_sub:'Man & vrouw',step_players:'Spelers',step_players_sub:'Typ een naam en druk op Enter — of plak een hele lijst.',ph_player:'Typ een naam…',tip_team:'Tip: typ "Jan & Piet" om een vast koppel te maken.',saved_groups:'Of begin met een opgeslagen groep:',cnt_zero:'Voeg minstens 4 spelers toe',cnt_need:'Nog {n} speler(s) nodig',cnt_ok:'{n} spelers · {m} wedstrijd(en) per ronde',cnt_odd:'{n} spelers · 1 speler rust per ronde',cnt_max:'Maximaal 24 spelers',step_courts:'Banen',courts_word:'banen',court:'Baan',courts_advice:'Advies voor {n} spelers: <b data-act="advice">{c} banen</b>',step_match:'Match formaat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punten per match',lbl_timer:'Timer per ronde',off:'Geen',deflt:'standaard',btn_shuffle:'Schudden',players_word:'spelers',pv_t:'Live voorbeeld',pv_rounds:'rondes',pv_mpr:'per ronde',pv_dur:'duur',pv_empty:'Voeg spelers toe en zie hier het speelschema ontstaan.',pv_estimate:'schatting ronde 1',rest_lbl:'Rust deze ronde:',btn_start:'Start toernooi',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',more_support:'Support this project',more_gear:'Padel gear tips',stats_support:'Tournament a success? Support the project!',
@@ -1674,6 +1830,7 @@ en:{
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
   set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
+  eyebrow:'New tournament',title:'Set up your tournament',sub_c:'Watch your tournament take shape as you type.',tname_ph:'E.g. Friday Night Cup (optional)',step_type:'Tournament type',step_type_sub:'How do you want to play?',type_team:'Team',type_team_sub:'Fixed pair',type_am:'Americano',type_am_sub:'Rotating partners',type_mex:'Mexicano',type_mex_sub:'Standings-based',type_rr:'Round Robin',type_rr_sub:'Everyone vs everyone',type_tam:'Team Am.',type_tam_sub:'Fixed team',type_mix:'Mixicano',type_mix_sub:'Man & woman',step_players:'Players',step_players_sub:'Type a name and press Enter — or paste a list.',ph_player:'Type a name…',tip_team:'Tip: type "Jan & Piet" to create a fixed pair.',saved_groups:'Or start with a saved group:',cnt_zero:'Add at least 4 players',cnt_need:'{n} more player(s) needed',cnt_ok:'{n} players · {m} match(es) per round',cnt_odd:'{n} players · 1 player sits out per round',cnt_max:'Maximum 24 players',step_courts:'Courts',courts_word:'courts',court:'Court',courts_advice:'Suggestion for {n} players: <b data-act="advice">{c} courts</b>',step_match:'Match format',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points per match',lbl_timer:'Timer per round',off:'Off',deflt:'default',btn_shuffle:'Shuffle',players_word:'players',pv_t:'Live preview',pv_rounds:'rounds',pv_mpr:'per round',pv_dur:'duration',pv_empty:'Add players to see the schedule take shape.',pv_estimate:'round 1 estimate',rest_lbl:'Sitting out this round:',btn_start:'Start tournament',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -1747,6 +1904,7 @@ fr:{
   player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
   set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
+  eyebrow:'Nouveau tournoi',title:'Configurez votre tournoi',sub_c:'Regardez votre tournoi prendre forme pendant que vous tapez.',tname_ph:'Ex. Coupe Vendredi soir (optionnel)',step_type:'Type de tournoi',step_type_sub:'Comment voulez-vous jouer ?',type_team:'Equipe',type_team_sub:'Paire fixe',type_am:'Americano',type_am_sub:'Partenaires tournants',type_mex:'Mexicano',type_mex_sub:'Selon classement',type_rr:'Round Robin',type_rr_sub:'Tout le monde contre tout le monde',type_tam:'Team Am.',type_tam_sub:'Equipe fixe',type_mix:'Mixicano',type_mix_sub:'Homme & femme',step_players:'Joueurs',step_players_sub:'Tapez un nom et appuyez sur Entree — ou collez une liste.',ph_player:'Tapez un nom…',tip_team:'Conseil : tapez "Jean & Pierre" pour creer une paire fixe.',saved_groups:'Ou commencez avec un groupe enregistre :',cnt_zero:'Ajoutez au moins 4 joueurs',cnt_need:'Encore {n} joueur(s) necessaire(s)',cnt_ok:'{n} joueurs · {m} match(s) par tour',cnt_odd:'{n} joueurs · 1 joueur repose par tour',cnt_max:'Maximum 24 joueurs',step_courts:'Terrains',courts_word:'terrains',court:'Terrain',courts_advice:'Suggestion pour {n} joueurs : <b data-act="advice">{c} terrains</b>',step_match:'Format de match',gpm1:'1 jeu',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points par match',lbl_timer:'Minuterie par tour',off:'Aucun',deflt:'par defaut',btn_shuffle:'Melanger',players_word:'joueurs',pv_t:'Apercu en direct',pv_rounds:'tours',pv_mpr:'par tour',pv_dur:'duree',pv_empty:'Ajoutez des joueurs pour voir le programme se dessiner.',pv_estimate:'estimation tour 1',rest_lbl:'Repos ce tour :',btn_start:'Lancer le tournoi',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -1821,6 +1979,7 @@ de:{
   comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',
   level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
   set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
+  eyebrow:'Neues Turnier',title:'Turnier einrichten',sub_c:'Beobachte, wie dein Turnier beim Tippen entsteht.',tname_ph:'z.B. Freitagnacht-Cup (optional)',step_type:'Turniermodus',step_type_sub:'Wie wollt ihr spielen?',type_team:'Team',type_team_sub:'Festes Paar',type_am:'Americano',type_am_sub:'Wechselnde Partner',type_mex:'Mexicano',type_mex_sub:'Nach Tabelle',type_rr:'Round Robin',type_rr_sub:'Alle gegen alle',type_tam:'Team Am.',type_tam_sub:'Festes Team',type_mix:'Mixicano',type_mix_sub:'Mann & Frau',step_players:'Spieler',step_players_sub:'Namen eingeben und Enter drucken — oder eine Liste einfugen.',ph_player:'Namen eingeben…',tip_team:'Tipp: "Jan & Piet" eingeben um ein festes Paar zu erstellen.',saved_groups:'Oder mit einer gespeicherten Gruppe beginnen:',cnt_zero:'Mindestens 4 Spieler hinzufugen',cnt_need:'Noch {n} Spieler benotigt',cnt_ok:'{n} Spieler · {m} Spiel(e) pro Runde',cnt_odd:'{n} Spieler · 1 Spieler pausiert pro Runde',cnt_max:'Maximal 24 Spieler',step_courts:'Platze',courts_word:'Platze',court:'Platz',courts_advice:'Empfehlung fur {n} Spieler: <b data-act="advice">{c} Platze</b>',step_match:'Matchformat',gpm1:'1 Spiel',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punkte pro Match',lbl_timer:'Timer pro Runde',off:'Kein',deflt:'Standard',btn_shuffle:'Mischen',players_word:'Spieler',pv_t:'Live-Vorschau',pv_rounds:'Runden',pv_mpr:'pro Runde',pv_dur:'Dauer',pv_empty:'Spieler hinzufugen um den Spielplan entstehen zu sehen.',pv_estimate:'Runde 1 Schatzung',rest_lbl:'Pause diese Runde:',btn_start:'Turnier starten',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',more_support:'Apoya este proyecto',more_gear:'Equipación de pádel',stats_support:'¿Torneo con éxito? ¡Apoya el proyecto!',
@@ -1894,6 +2053,7 @@ es:{
   comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',
   level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
   set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
+  eyebrow:'Nuevo torneo',title:'Configura tu torneo',sub_c:'Ve como toma forma tu torneo mientras escribes.',tname_ph:'Ej. Copa Viernes por la noche (opcional)',step_type:'Tipo de torneo',step_type_sub:'Como quieres jugar?',type_team:'Equipo',type_team_sub:'Pareja fija',type_am:'Americano',type_am_sub:'Parejas rotativas',type_mex:'Mexicano',type_mex_sub:'Por clasificacion',type_rr:'Round Robin',type_rr_sub:'Todos contra todos',type_tam:'Team Am.',type_tam_sub:'Equipo fijo',type_mix:'Mixicano',type_mix_sub:'Hombre & mujer',step_players:'Jugadores',step_players_sub:'Escribe un nombre y pulsa Enter — o pega una lista.',ph_player:'Escribe un nombre…',tip_team:'Consejo: escribe "Jan & Piet" para crear una pareja fija.',saved_groups:'O empieza con un grupo guardado:',cnt_zero:'Anade al menos 4 jugadores',cnt_need:'Faltan {n} jugador(es)',cnt_ok:'{n} jugadores · {m} partido(s) por ronda',cnt_odd:'{n} jugadores · 1 jugador descansa por ronda',cnt_max:'Maximo 24 jugadores',step_courts:'Pistas',courts_word:'pistas',court:'Pista',courts_advice:'Sugerencia para {n} jugadores: <b data-act="advice">{c} pistas</b>',step_match:'Formato de partido',gpm1:'1 juego',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Puntos por partido',lbl_timer:'Temporizador por ronda',off:'Sin',deflt:'predeterminado',btn_shuffle:'Mezclar',players_word:'jugadores',pv_t:'Vista previa en directo',pv_rounds:'rondas',pv_mpr:'por ronda',pv_dur:'duracion',pv_empty:'Anade jugadores para ver como se crea el programa.',pv_estimate:'estimacion ronda 1',rest_lbl:'Descansando esta ronda:',btn_start:'Iniciar torneo',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',more_support:'Stöd detta projekt',more_gear:'Padel gear tips',stats_support:'Lyckad turnering? Stöd projektet!',
@@ -1967,6 +2127,7 @@ sv:{
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
   set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
+  eyebrow:'Ny turnering',title:'Stall in din turnering',sub_c:'Se din turnering ta form medan du skriver.',tname_ph:'T.ex. Fredagsnatt-cup (valfritt)',step_type:'Turneringstyp',step_type_sub:'Hur vill ni spela?',type_team:'Lag',type_team_sub:'Fast par',type_am:'Americano',type_am_sub:'Roterande partner',type_mex:'Mexicano',type_mex_sub:'Rankningsbaserat',type_rr:'Round Robin',type_rr_sub:'Alla mot alla',type_tam:'Team Am.',type_tam_sub:'Fast lag',type_mix:'Mixicano',type_mix_sub:'Man & kvinna',step_players:'Spelare',step_players_sub:'Skriv ett namn och tryck Enter — eller klistra in en lista.',ph_player:'Skriv ett namn…',tip_team:'Tips: skriv "Jan & Piet" for att skapa ett fast par.',saved_groups:'Eller borja med en sparad grupp:',cnt_zero:'Lagg till minst 4 spelare',cnt_need:'Behover {n} fler spelare',cnt_ok:'{n} spelare · {m} match(er) per runda',cnt_odd:'{n} spelare · 1 spelare vilar per runda',cnt_max:'Max 24 spelare',step_courts:'Banor',courts_word:'banor',court:'Bana',courts_advice:'Rekommendation for {n} spelare: <b data-act="advice">{c} banor</b>',step_match:'Matchformat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poang per match',lbl_timer:'Timer per runda',off:'Inga',deflt:'standard',btn_shuffle:'Blanda',players_word:'spelare',pv_t:'Live-forhandsvisning',pv_rounds:'rundor',pv_mpr:'per runda',pv_dur:'varaktighet',pv_empty:'Lagg till spelare for att se schemat ta form.',pv_estimate:'uppskattning runda 1',rest_lbl:'Vilar denna runda:',btn_start:'Starta turnering',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',more_support:'Sostieni questo progetto',more_gear:'Consigli attrezzatura padel',stats_support:'Torneo riuscito? Sostieni il progetto!',
@@ -2042,6 +2203,7 @@ it:{
   comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',
   level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
   set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
+  eyebrow:'Nuovo torneo',title:'Configura il tuo torneo',sub_c:'Guarda il tuo torneo prendere forma mentre scrivi.',tname_ph:'Es. Coppa Venerdi sera (opzionale)',step_type:'Tipo di torneo',step_type_sub:'Come volete giocare?',type_team:'Squadra',type_team_sub:'Coppia fissa',type_am:'Americano',type_am_sub:'Coppie rotanti',type_mex:'Mexicano',type_mex_sub:'Per classifica',type_rr:'Round Robin',type_rr_sub:'Tutti contro tutti',type_tam:'Team Am.',type_tam_sub:'Team fisso',type_mix:'Mixicano',type_mix_sub:'Uomo & donna',step_players:'Giocatori',step_players_sub:'Scrivi un nome e premi Invio — o incolla una lista.',ph_player:'Scrivi un nome…',tip_team:'Consiglio: scrivi "Jan & Piet" per creare una coppia fissa.',saved_groups:'O inizia con un gruppo salvato:',cnt_zero:'Aggiungi almeno 4 giocatori',cnt_need:'Ancora {n} giocatore/i necessari',cnt_ok:'{n} giocatori · {m} partita/e per turno',cnt_odd:'{n} giocatori · 1 giocatore riposa per turno',cnt_max:'Massimo 24 giocatori',step_courts:'Campi',courts_word:'campi',court:'Campo',courts_advice:'Suggerimento per {n} giocatori: <b data-act="advice">{c} campi</b>',step_match:'Formato partita',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punti per partita',lbl_timer:'Timer per turno',off:'Nessuno',deflt:'predefinito',btn_shuffle:'Mescola',players_word:'giocatori',pv_t:'Anteprima dal vivo',pv_rounds:'turni',pv_mpr:'per turno',pv_dur:'durata',pv_empty:'Aggiungi giocatori per vedere il programma prendere forma.',pv_estimate:'stima turno 1',rest_lbl:'Riposo questo turno:',btn_start:'Inizia torneo',
 },
 };
 
@@ -2073,6 +2235,7 @@ function renderGroupsUI(){
     ? sorted.map(g=>`<div class="grp-chip"><button class="grp-chip-load" onclick="loadGroup('${g.id}')">${g.name.replace(/</g,'&lt;')}</button><div class="grp-chip-actions"><button class="grp-chip-action" onclick="renameGroup('${g.id}')" title="${t('renameGroup')}">✎</button><button class="grp-chip-action" onclick="deleteGroup('${g.id}')" title="${t('deleteGroup')}">✕</button></div></div>`).join('')
     : `<span class="grp-empty">${t('noGroups')}</span>`;
   wrap.innerHTML=`<div class="grp-hdr"><span class="grp-lbl">${t('savedGroups')}</span><button class="btn btn-ghost btn-sm" style="flex-shrink:0;white-space:nowrap" onclick="saveCurrentGroup()">${t('saveGroup')}</button></div><div class="grp-chips">${chips}</div>`;
+  if(typeof sxRefreshGroups==='function') sxRefreshGroups();
 }
 function saveCurrentGroup(){
   const manual=$('mode-manual').style.display!=='none';
@@ -5732,9 +5895,306 @@ document.addEventListener('touchend',function(e){
   _lastTouchEnd=now;
 },false);
 
+/* ── Setup Redesign Logic ──────────────────────────────────────────────── */
+(function(){
+  'use strict';
+  let _sxState = { type:'americano', courts:2, gpm:3, pts:32, timer:0 };
+  let _sxChips = []; // current player name list
+  let _sxManual = false;
+
+  // helpers: player count (& = 2), matches per round
+  function _sxN(){ return _sxChips.reduce((a,n)=>a+(n.includes('&')?n.split('&').filter(s=>s.trim()).length:1),0); }
+  function _sxMPR(n,c){ return Math.max(0,Math.min(c,Math.floor(n/4))); }
+  function _sxAdviseCourts(n){ return Math.min(4,Math.max(1,Math.floor(n/4))); }
+  function _sxUsesPts(){ return _sxState.type==='americano'||_sxState.type==='mexicano'||_sxState.type==='teamamericano'; }
+
+  // sync chips → hidden #ta
+  function _sxSyncTA(){
+    const ta=$('ta'); if(!ta) return;
+    ta.value = _sxChips.join('\n');
+    ta.dispatchEvent(new Event('input'));
+  }
+
+  // Parse pasted/typed text into names
+  function _sxParse(txt){
+    return txt.split(/[\n,;]+/)
+      .map(s=>s.replace(/^\s*\d+\s*[\.\):‐-]\s*/,'').replace(/^[\s\-–—•*>·]+/,'').replace(/\s+/g,' ').trim())
+      .filter(s=>s.length>0&&s.length<=30);
+  }
+
+  // Chips management
+  function _sxRenderChips(){
+    const box=$('sx-chipbox'); if(!box) return;
+    box.querySelectorAll('.sx-chip').forEach(c=>c.remove());
+    const inp=$('sx-chipinp');
+    _sxChips.forEach((name,i)=>{
+      const chip=document.createElement('span');
+      chip.className='sx-chip'+(name.includes('&')?' team':'');
+      const txt=document.createElement('span'); txt.textContent=name;
+      const x=document.createElement('button'); x.type='button'; x.className='x'; x.textContent='✕'; x.setAttribute('aria-label','remove');
+      x.addEventListener('click',e=>{ e.stopPropagation(); _sxChips.splice(i,1); _sxRenderChips(); _sxSyncTA(); sxUpdate(); });
+      chip.appendChild(txt); chip.appendChild(x);
+      if(inp) box.insertBefore(chip,inp);
+    });
+    sxUpdate();
+  }
+  function _sxAddMany(names){
+    names.forEach(n=>{ if(_sxChips.length<24&&!_sxChips.some(e=>e.toLowerCase()===n.toLowerCase())) _sxChips.push(n); });
+    _sxRenderChips(); _sxSyncTA();
+  }
+  function _sxCommit(){
+    const inp=$('sx-chipinp'); if(!inp) return;
+    const v=inp.value.trim();
+    if(v){ _sxAddMany(_sxParse(v)); }
+    inp.value='';
+  }
+
+  // Count message
+  function _sxCountMsg(n){
+    if(n===0) return {cls:'', html:t('cnt_zero')};
+    if(n<4)   return {cls:'warn', html:t('cnt_need',{n:4-n})};
+    if(n>24)  return {cls:'warn', html:t('cnt_max')};
+    const m=_sxMPR(n,_sxState.courts);
+    if(n%2!==0) return {cls:'ok', html:t('cnt_odd',{n,m})};
+    return {cls:'ok', html:t('cnt_ok',{n,m})};
+  }
+
+  // Estimate (rounds, mpr, duration)
+  function _sxEstimate(n){
+    if(n<4) return null;
+    let rounds;
+    if(_sxUsesPts()) rounds=Math.min(Math.max(n-1,3),11);
+    else { const nt=Math.ceil(n/2); rounds=Math.min(Math.max(nt-1,2),9); }
+    const mpr=_sxMPR(n,_sxState.courts);
+    const perRound=_sxUsesPts()?(_sxState.timer||Math.round((_sxState.pts||32)/2.2)):({1:12,3:28,5:45}[_sxState.gpm||3]);
+    const mins=Math.round(rounds*perRound/5)*5;
+    return {rounds,mpr,mins};
+  }
+
+  // Preview round (stable, not shuffled)
+  function _sxSeqRound(){
+    const list=_sxChips;
+    if(_sxUsesPts()||_sxState.type==='mixicano'){
+      const flat=list.flatMap(p=>p.includes('&')?p.split('&').map(s=>s.trim()).filter(Boolean):[p]);
+      const nC=_sxMPR(flat.length,_sxState.courts);
+      const matches=[]; let i=0;
+      for(let c=0;c<nC;c++) matches.push({court:c+1,a:[flat[i++],flat[i++]],b:[flat[i++],flat[i++]]});
+      return {matches,rest:flat.slice(i)};
+    }
+    const fixed=list.filter(p=>p.includes('&')).map(p=>p.split('&').map(s=>s.trim()).filter(Boolean));
+    const singles=list.filter(p=>!p.includes('&'));
+    const teams=fixed.slice();
+    for(let i=0;i+1<singles.length;i+=2) teams.push([singles[i],singles[i+1]]);
+    if(singles.length%2&&teams.length) teams[teams.length-1]=teams[teams.length-1].concat(singles[singles.length-1]);
+    const matches=[]; let i=0;
+    const nC=Math.min(_sxState.courts,Math.floor(teams.length/2));
+    for(let c=0;c<nC&&i+1<teams.length;c++) matches.push({court:c+1,a:teams[i++],b:teams[i++]});
+    return {matches,rest:teams.slice(i).flat()};
+  }
+
+  // Render the live preview panel
+  function _sxRenderPreview(){
+    const n=_sxN();
+    const pvBadge=$('sx-pv-badge');
+    if(pvBadge) pvBadge.textContent=n+' '+t('players_word');
+    const box=$('sx-pv-courts'); if(!box) return;
+    if(n<4){
+      box.innerHTML='<div class="c-empty" id="sx-pv-empty">'+t('pv_empty')+'</div>';
+      const r=$('sx-pv-rest'); if(r) r.style.display='none';
+      const st=$('sx-pv-stats'); if(st) st.style.display='none';
+      return;
+    }
+    const {matches,rest}=_sxSeqRound();
+    const cells=[];
+    for(let c=0;c<_sxState.courts;c++){
+      const m=matches[c];
+      if(m){
+        cells.push('<div class="c-court"><div class="cc-lbl">'+t('court')+' '+m.court+' · '+t('pv_estimate')+'</div>'+
+          '<div class="cc-play"><span class="cc-side">'+m.a.map(p=>'<span class="cc-p">'+_sxEsc(p)+'</span>').join('')+'</span>'+
+          '<span class="cc-net"></span>'+
+          '<span class="cc-side r">'+m.b.map(p=>'<span class="cc-p">'+_sxEsc(p)+'</span>').join('')+'</span></div></div>');
+      } else {
+        cells.push('<div class="c-court ghost"><div class="cc-lbl">'+t('court')+' '+(c+1)+'</div>'+
+          '<div class="cc-play"><span class="cc-side"><span class="cc-p empty">—</span></span>'+
+          '<span class="cc-net"></span>'+
+          '<span class="cc-side r"><span class="cc-p empty">—</span></span></div></div>');
+      }
+    }
+    box.innerHTML=cells.join('');
+    const restEl=$('sx-pv-rest');
+    if(restEl){
+      if(rest.length){ restEl.style.display=''; restEl.innerHTML=t('rest_lbl')+' <b>'+rest.map(_sxEsc).join(', ')+'</b>'; }
+      else restEl.style.display='none';
+    }
+    const est=_sxEstimate(n);
+    const statsEl=$('sx-pv-stats');
+    if(statsEl&&est){
+      statsEl.style.display='';
+      const sr=$('sx-stat-rounds'); if(sr) sr.textContent=est.rounds;
+      const sm=$('sx-stat-mpr'); if(sm) sm.textContent=est.mpr;
+      const sd=$('sx-stat-dur'); if(sd) sd.textContent='±'+est.mins+"'";
+    } else if(statsEl) statsEl.style.display='none';
+  }
+
+  function _sxEsc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // Main update function (called on every state change)
+  window.sxUpdate = function(){
+    const n=_sxN();
+    const ready=n>=4&&n<=24;
+    // Step 2 number badge
+    const num2=$('sx-num-2');
+    if(num2){ num2.className='sx-stepnum'+(ready?' done':''); num2.textContent=ready?'✓':'2'; }
+    // Count message
+    const msg=_sxCountMsg(n);
+    const countEl=$('sx-count');
+    if(countEl) countEl.className='sx-count '+msg.cls;
+    const countTxt=$('sx-count-txt');
+    if(countTxt) countTxt.innerHTML=msg.html;
+    // Courts advice
+    const advEl=$('sx-court-advice');
+    if(advEl){
+      if(n>=4){
+        const c=_sxAdviseCourts(n);
+        if(c!==_sxState.courts){
+          advEl.style.display='';
+          advEl.innerHTML=t('courts_advice',{n,c});
+          const advBtn=advEl.querySelector('[data-act="advice"]');
+          if(advBtn) advBtn.onclick=()=>{ sxSetCourtsN(c); };
+        } else advEl.style.display='none';
+      } else advEl.style.display='none';
+    }
+    // Court stepper value
+    const cv=$('sx-court-val'); if(cv) cv.textContent=_sxState.courts;
+    const cm=$('sx-court-min'); if(cm) cm.disabled=_sxState.courts<=1;
+    const cp=$('sx-court-plus'); if(cp) cp.disabled=_sxState.courts>=4;
+    // Match format rows
+    const rowGpm=$('sx-row-gpm'),rowPts=$('sx-row-pts');
+    if(rowGpm) rowGpm.style.display=_sxUsesPts()?'none':'';
+    if(rowPts) rowPts.style.display=_sxUsesPts()?'':'none';
+    // Team tip
+    const tipTeam=$('sx-tip-team');
+    if(tipTeam) tipTeam.style.display=(_sxState.type==='team'||_sxState.type==='teamamericano'||_sxState.type==='mixicano')?'':'none';
+    // Manual link for team types
+    const manualLink=$('sx-manual-link');
+    if(manualLink) manualLink.style.display=(_sxState.type==='team'||_sxState.type==='teamamericano'||_sxState.type==='roundrobin'||_sxState.type==='mixicano')?'':'none';
+    // CTA buttons
+    const startBtn=$('sx-btn-start'),shuffleBtn=$('sx-shuffle');
+    if(startBtn) startBtn.disabled=!ready;
+    if(shuffleBtn) shuffleBtn.disabled=!ready;
+    const cbarStart=$('sx-cbar-start'); if(cbarStart) cbarStart.disabled=!ready;
+    // Mobile bar
+    const cbarInfo=$('sx-cbar-info'),cbarB1=$('sx-cbar-b1'),cbarB2=$('sx-cbar-b2');
+    if(cbarInfo) cbarInfo.className='c-bar-info '+(ready?'ok':'');
+    if(cbarB1) cbarB1.innerHTML=msg.html;
+    if(cbarB2){
+      const est=_sxEstimate(n);
+      if(est){ cbarB2.style.display=''; cbarB2.textContent=est.rounds+' '+t('pv_rounds')+' · ±'+est.mins+"' · "+t('pv_t')+' ↓'; }
+      else cbarB2.style.display='none';
+    }
+    _sxRenderPreview();
+  };
+
+  // Public API used by onclick handlers
+  window.sxSetType = function(typ){
+    _sxState.type=typ;
+    document.querySelectorAll('#sx-tgrid .sx-tcard').forEach(c=>c.classList.toggle('active',c.dataset.type===typ));
+    setTType(typ);
+    sxUpdate();
+  };
+  window.sxChangeCourts = function(delta){
+    const next=_sxState.courts+delta;
+    if(next<1||next>4) return;
+    sxSetCourtsN(next);
+  };
+  window.sxSetCourtsN = function(n){
+    _sxState.courts=n;
+    setCourts(n);
+    sxUpdate();
+  };
+  window.sxSetGpm = function(v){
+    _sxState.gpm=v;
+    document.querySelectorAll('#sx-row-gpm .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
+    setGpm(v);
+    sxUpdate();
+  };
+  window.sxSetPts = function(v){
+    _sxState.pts=v;
+    document.querySelectorAll('#sx-seg-pts .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
+    setMatchPts(v);
+    sxUpdate();
+  };
+  window.sxSetTimer = function(v){
+    _sxState.timer=v;
+    document.querySelectorAll('#sx-seg-timer .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
+    setTimerMins(v);
+    sxUpdate();
+  };
+  window.sxShuffle = function(){
+    const shuffled=_sxChips.slice().sort(()=>Math.random()-.5);
+    _sxChips.length=0; shuffled.forEach(n=>_sxChips.push(n));
+    _sxRenderChips(); _sxSyncTA();
+  };
+  window.sxScrollToPreview = function(){
+    const panel=document.querySelector('.c-panel');
+    if(panel){ const y=panel.getBoundingClientRect().top+window.pageYOffset-14; window.scrollTo({top:y,behavior:'smooth'}); }
+  };
+  window.sxToggleManual = function(){
+    _sxManual=!_sxManual;
+    const mManual=$('mode-manual'),mAuto=$('mode-auto');
+    if(mManual) mManual.style.display=_sxManual?'block':'none';
+    if(mAuto) mAuto.style.display=_sxManual?'none':'block';
+    const lnk=$('sx-manual-link'); if(lnk) lnk.textContent=_sxManual?t('set_btn_auto'):t('set_btn_manual');
+  };
+  window.sxLoadGroup = function(players){
+    _sxChips.length=0; players.forEach(n=>{ if(_sxChips.length<24) _sxChips.push(n); });
+    _sxRenderChips(); _sxSyncTA();
+  };
+
+  // Render saved groups as pills
+  function _sxRenderGroups(){
+    const box=$('sx-groups'); if(!box) return;
+    box.querySelectorAll('.sx-group').forEach(g=>g.remove());
+    const lbl=$('sx-groups-lbl');
+    const groups=_loadGroups?_loadGroups():[];
+    if(lbl) lbl.style.display=groups.length?'':'none';
+    groups.slice().sort((a,b)=>b.updatedAt-a.updatedAt).forEach(g=>{
+      const b=document.createElement('button');
+      b.type='button'; b.className='sx-group';
+      b.innerHTML=_sxEsc(g.name)+' <b>'+g.lines.length+'</b>';
+      b.addEventListener('click',()=>sxLoadGroup(g.lines));
+      box.appendChild(b);
+    });
+  }
+
+  // Boot: wire up chip input
+  function _sxBoot(){
+    const box=$('sx-chipbox'), inp=$('sx-chipinp'); if(!box||!inp) return;
+    // Set initial type (americano is default)
+    sxSetType('americano');
+    inp.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===','){ e.preventDefault(); _sxCommit(); }
+      else if(e.key==='Backspace'&&!inp.value&&_sxChips.length){ _sxChips.pop(); _sxRenderChips(); _sxSyncTA(); }
+    });
+    inp.addEventListener('blur',_sxCommit);
+    inp.addEventListener('paste',e=>{
+      e.preventDefault();
+      const txt=(e.clipboardData||window.clipboardData).getData('text');
+      _sxAddMany(_sxParse(txt)); inp.value='';
+    });
+    box.addEventListener('click',()=>inp.focus());
+    _sxRenderGroups();
+    sxUpdate();
+  }
+  window.sxInitSetup = _sxBoot;
+  window.sxRefreshGroups = _sxRenderGroups;
+})();
+/* ── End Setup Redesign Logic ────────────────────────────────────────── */
+
 document.addEventListener('DOMContentLoaded', () => {
   applyI18n();
   renderGroupsUI();
+  if(typeof sxInitSetup==='function') sxInitSetup();
   // Initialize placeholder text in nc elements
   const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
   const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
