@@ -1364,7 +1364,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
           </div>
           <p class="sx-stepsub" id="sx-players-sub" data-i18n="step_players_sub">Typ een naam en druk op Enter.</p>
           <div class="sx-chipbox" id="sx-chipbox">
-            <input type="text" class="sx-chipinp" id="sx-chipinp" data-i18n-ph="ph_player" placeholder="Typ een naam…" autocomplete="off" autocorrect="off" spellcheck="false">
+            <input type="text" class="sx-chipinp" id="sx-chipinp" data-i18n-ph="ph_player" placeholder="Typ een naam…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" inputmode="text">
           </div>
           <div class="sx-count" id="sx-count"><span class="dot"></span><span id="sx-count-txt" data-i18n="cnt_zero">Voeg minstens 4 spelers toe</span></div>
           <p class="sx-advice" id="sx-tip-team" style="display:none" data-i18n="tip_team">Tip: typ "Jan &amp; Piet" om zelf een vast koppel te maken.</p>
@@ -2567,9 +2567,9 @@ function setTType(typ){
   $('rules-timer-row').style.display = isAm ? '' : 'none';
   $('mode-toggle-row').style.display = isAm ? 'none' : '';
   const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':typ==='mixicano'?'set_title_mix':'set_title_team';
-  $('setup-box-title').textContent = t(titleKey);
+  const _stEl=$('setup-box-title'); if(_stEl) _stEl.textContent = t(titleKey);
   const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':typ==='mixicano'?'set_desc_auto_mix':'set_desc_auto_team';
-  $('mode-auto-desc').textContent = t(descKey);
+  const _descEl=$('mode-auto-desc'); if(_descEl) _descEl.textContent = t(descKey);
   $('btn-shuffle').style.display = isAm ? 'none' : '';
   // Show/hide pair input / mix input vs normal textarea
   const isTAm = typ==='teamamericano';
@@ -2621,11 +2621,13 @@ function doStartAny(){
 
 // ── Mode toggle ───────────────────────────────
 function setMode(m){
-  $('mode-auto').style.display = m==='auto' ? '' : 'none';
-  $('mode-manual').style.display = m==='manual' ? '' : 'none';
-  $('mode-auto-btn').className = m==='auto' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
-  $('mode-manual-btn').className = m==='manual' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
-  if(m==='manual') $('mode-auto-btn').style.flex=$('mode-manual-btn').style.flex='1';
+  const _ma=$('mode-auto'),_mm=$('mode-manual');
+  if(_ma) _ma.style.display = m==='auto' ? '' : 'none';
+  if(_mm) _mm.style.display = m==='manual' ? '' : 'none';
+  const _mab=$('mode-auto-btn'),_mmb=$('mode-manual-btn');
+  if(_mab) _mab.className = m==='auto' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
+  if(_mmb) _mmb.className = m==='manual' ? 'btn btn-green btn-sm' : 'btn btn-ghost btn-sm';
+  if(m==='manual'&&_mab&&_mmb) _mab.style.flex=_mmb.style.flex='1';
 }
 
 // ── Manual mode ───────────────────────────────
@@ -6175,6 +6177,15 @@ document.addEventListener('touchend',function(e){
     inp.addEventListener('keydown',e=>{
       if(e.key==='Enter'||e.key===','){ e.preventDefault(); _sxCommit(); }
       else if(e.key==='Backspace'&&!inp.value&&_sxChips.length){ _sxChips.pop(); _sxRenderChips(); _sxSyncTA(); }
+    });
+    // Android virtual keyboards fire 'input' with inputType='insertLineBreak' instead of keydown Enter
+    inp.addEventListener('input',e=>{
+      if(e.inputType==='insertLineBreak'||e.inputType==='insertParagraph'){
+        e.preventDefault(); _sxCommit(); return;
+      }
+      if(inp.value.includes('\n')||inp.value.includes(',')){
+        _sxCommit();
+      }
     });
     inp.addEventListener('blur',_sxCommit);
     inp.addEventListener('paste',e=>{
