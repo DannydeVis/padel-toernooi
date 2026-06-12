@@ -1368,6 +1368,14 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
           <div class="sx-chipbox" id="sx-chipbox">
             <input type="text" class="sx-chipinp" id="sx-chipinp" data-i18n-ph="ph_player" placeholder="Typ een naam…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" inputmode="text">
           </div>
+          <!-- Mixicano: aparte mannen/vrouwen invoer -->
+          <div id="sx-mix-section" style="display:none">
+            <span class="sx-seglbl" data-i18n="mix_lbl_men">Mannen</span>
+            <textarea id="ta-men" class="sx-input" style="min-height:88px;resize:vertical;margin-bottom:8px" data-i18n-ph="mix_ph_men" placeholder="Een naam per regel"></textarea>
+            <span class="sx-seglbl" data-i18n="mix_lbl_women">Vrouwen</span>
+            <textarea id="ta-women" class="sx-input" style="min-height:88px;resize:vertical" data-i18n-ph="mix_ph_women" placeholder="Een naam per regel"></textarea>
+            <div class="sx-count" id="sx-mix-count" style="margin-top:10px"><span class="dot"></span><span id="sx-mix-count-txt" data-i18n="mix_val_need">Voer minimaal 2 mannen en 2 vrouwen in</span></div>
+          </div>
           <div class="sx-count" id="sx-count"><span class="dot"></span><span id="sx-count-txt" data-i18n="cnt_zero">Voeg minstens 4 spelers toe</span></div>
           <p class="sx-advice" id="sx-tip-team" style="display:none" data-i18n="tip_team">Tip: typ "Jan &amp; Piet" om zelf een vast koppel te maken.</p>
           <div class="sx-groups" id="sx-groups">
@@ -1463,8 +1471,6 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
         <textarea id="ta"></textarea>
         <div id="nc"></div>
         <div id="mix-section">
-          <textarea id="ta-men"></textarea>
-          <textarea id="ta-women"></textarea>
           <p id="mix-nc"></p>
         </div>
         <p id="mode-auto-desc"></p>
@@ -1666,7 +1672,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.53.2';
+const APP_VERSION = 'v1.53.3';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -6044,30 +6050,57 @@ document.addEventListener('touchend',function(e){
 
   // Main update function (called on every state change)
   window.sxUpdate = function(){
-    const n=_sxN();
-    const ready=n>=4&&n<=24;
+    const isMix=_sxState.type==='mixicano';
+    // Show/hide chipbox vs mixicano section
+    const chipbox=$('sx-chipbox'); if(chipbox) chipbox.style.display=isMix?'none':'';
+    const grpsEl=$('sx-groups'); if(grpsEl) grpsEl.style.display=isMix?'none':'';
+    const countEl=$('sx-count'); if(countEl) countEl.style.display=isMix?'none':'';
+    const mixSect=$('sx-mix-section'); if(mixSect) mixSect.style.display=isMix?'':'none';
+
+    let ready, msg;
+    if(isMix){
+      // Mixicano: validate men/women counts
+      const taMen=$('ta-men'),taWomen=$('ta-women');
+      const m=taMen?taMen.value.split('\n').map(s=>s.trim()).filter(Boolean).length:0;
+      const w=taWomen?taWomen.value.split('\n').map(s=>s.trim()).filter(Boolean).length:0;
+      ready=m>=2&&w>=2;
+      const mixCountEl=$('sx-mix-count'),mixCountTxt=$('sx-mix-count-txt');
+      if(m<2||w<2){
+        if(mixCountEl) mixCountEl.className='sx-count';
+        if(mixCountTxt) mixCountTxt.innerHTML=t('mix_val_need');
+        msg={cls:'',html:t('mix_val_need')};
+      } else {
+        const courts=Math.min(Math.floor(m/2),Math.floor(w/2));
+        const unequal=Math.abs(m-w)>=2;
+        const okTxt=t('mix_val_ok',{m,w,courts})+(unequal?' '+t('mix_val_unequal'):'');
+        if(mixCountEl) mixCountEl.className='sx-count '+(unequal?'warn':'ok');
+        if(mixCountTxt) mixCountTxt.innerHTML=okTxt;
+        msg={cls:unequal?'warn':'ok',html:okTxt};
+      }
+    } else {
+      const n=_sxN();
+      ready=n>=4&&n<=24;
+      msg=_sxCountMsg(n);
+      if(countEl) countEl.className='sx-count '+msg.cls;
+      const countTxt=$('sx-count-txt');
+      if(countTxt) countTxt.innerHTML=msg.html;
+      // Courts advice
+      const advEl=$('sx-court-advice');
+      if(advEl){
+        if(n>=4){
+          const c=_sxAdviseCourts(n);
+          if(c!==_sxState.courts){
+            advEl.style.display='';
+            advEl.innerHTML=t('courts_advice',{n,c});
+            const advBtn=advEl.querySelector('[data-act="advice"]');
+            if(advBtn) advBtn.onclick=()=>{ sxSetCourtsN(c); };
+          } else advEl.style.display='none';
+        } else advEl.style.display='none';
+      }
+    }
     // Step 2 number badge
     const num2=$('sx-num-2');
     if(num2){ num2.className='sx-stepnum'+(ready?' done':''); num2.textContent=ready?'✓':'2'; }
-    // Count message
-    const msg=_sxCountMsg(n);
-    const countEl=$('sx-count');
-    if(countEl) countEl.className='sx-count '+msg.cls;
-    const countTxt=$('sx-count-txt');
-    if(countTxt) countTxt.innerHTML=msg.html;
-    // Courts advice
-    const advEl=$('sx-court-advice');
-    if(advEl){
-      if(n>=4){
-        const c=_sxAdviseCourts(n);
-        if(c!==_sxState.courts){
-          advEl.style.display='';
-          advEl.innerHTML=t('courts_advice',{n,c});
-          const advBtn=advEl.querySelector('[data-act="advice"]');
-          if(advBtn) advBtn.onclick=()=>{ sxSetCourtsN(c); };
-        } else advEl.style.display='none';
-      } else advEl.style.display='none';
-    }
     // Court stepper value
     const cv=$('sx-court-val'); if(cv) cv.textContent=_sxState.courts;
     const cm=$('sx-court-min'); if(cm) cm.disabled=_sxState.courts<=1;
@@ -6085,16 +6118,18 @@ document.addEventListener('touchend',function(e){
     // CTA buttons
     const startBtn=$('sx-btn-start'),shuffleBtn=$('sx-shuffle');
     if(startBtn) startBtn.disabled=!ready;
-    if(shuffleBtn) shuffleBtn.disabled=!ready;
+    if(shuffleBtn) shuffleBtn.disabled=!isMix&&!ready;
     const cbarStart=$('sx-cbar-start'); if(cbarStart) cbarStart.disabled=!ready;
     // Mobile bar
     const cbarInfo=$('sx-cbar-info'),cbarB1=$('sx-cbar-b1'),cbarB2=$('sx-cbar-b2');
     if(cbarInfo) cbarInfo.className='c-bar-info '+(ready?'ok':'');
     if(cbarB1) cbarB1.innerHTML=msg.html;
     if(cbarB2){
-      const est=_sxEstimate(n);
-      if(est){ cbarB2.style.display=''; cbarB2.textContent=est.rounds+' '+t('pv_rounds')+' · ±'+est.mins+"' · "+t('pv_t')+' ↓'; }
-      else cbarB2.style.display='none';
+      if(!isMix){
+        const est=_sxEstimate(_sxN());
+        if(est){ cbarB2.style.display=''; cbarB2.textContent=est.rounds+' '+t('pv_rounds')+' · ±'+est.mins+"' · "+t('pv_t')+' ↓'; }
+        else cbarB2.style.display='none';
+      } else cbarB2.style.display='none';
     }
     _sxRenderPreview();
   };
@@ -6196,6 +6231,10 @@ document.addEventListener('touchend',function(e){
       _sxAddMany(_sxParse(txt)); inp.value='';
     });
     box.addEventListener('click',()=>inp.focus());
+    // Mixicano: wire men/women textareas
+    const taMen=$('ta-men'),taWomen=$('ta-women');
+    if(taMen) taMen.addEventListener('input',sxUpdate);
+    if(taWomen) taWomen.addEventListener('input',sxUpdate);
     _sxRenderGroups();
     sxUpdate();
   }
