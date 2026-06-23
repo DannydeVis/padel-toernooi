@@ -4039,19 +4039,18 @@ function startKingOfCourt(){
 function _kocShuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function buildKocRound(roundNum){
-  const courts=R.courts;
   const matches=[];
   let groups=[]; // groups[c] = [id,id,id,id] for court c+1
-  let pool=KOCP.filter(p=>p.court===0); // challenger pool
 
   if(roundNum===1){
     const active=_kocShuffle([...KOCP]);
-    const slots=courts*4;
-    for(let c=0;c<courts;c++){
+    // Use only as many courts as we have full groups of 4; rest go to pool
+    const activeCourts=Math.min(R.courts,Math.floor(KOCP.length/4));
+    for(let c=0;c<activeCourts;c++){
       groups[c]=active.slice(c*4,c*4+4).map(p=>p.id);
     }
-    // extras go to pool (court=0)
-    active.slice(slots).forEach(p=>{ p.court=0; });
+    // ALL remaining players (including the partial group) go to pool
+    active.slice(activeCourts*4).forEach(p=>{ p.court=0; });
   } else {
     const prevRound=KOCM[roundNum-2];
     // determine winner/loser per court
@@ -4062,15 +4061,15 @@ function buildKocRound(roundNum){
     });
     // assign courts: winners promote, losers demote
     const nextCourt={}; // id → court number (1-indexed)
-    for(let c=1;c<=courts;c++){
+    for(let c=1;c<=R.courts;c++){
       const r=results[c];
       if(!r) continue;
-      if(c===courts){ // King Court: winner stays, loser → c-1
-        r.winners.forEach(id=>nextCourt[id]=courts);
-        if(courts>1) r.losers.forEach(id=>nextCourt[id]=courts-1);
+      if(c===R.courts){ // King Court: winner stays, loser → c-1
+        r.winners.forEach(id=>nextCourt[id]=R.courts);
+        if(R.courts>1) r.losers.forEach(id=>nextCourt[id]=R.courts-1);
         else r.losers.forEach(id=>nextCourt[id]=0); // only 1 court → loser to pool
       } else if(c===1){ // Court 1: winner → 2, loser → pool
-        r.winners.forEach(id=>nextCourt[id]=courts>1?2:1);
+        r.winners.forEach(id=>nextCourt[id]=R.courts>1?2:1);
         r.losers.forEach(id=>nextCourt[id]=0);
       } else {
         r.winners.forEach(id=>nextCourt[id]=c+1);
@@ -4089,14 +4088,21 @@ function buildKocRound(roundNum){
     const entering=fullPool.slice(0,need);
     entering.forEach(p=>{ p.court=1; p.sitouts=0; });
     fullPool.slice(need).forEach(p=>{ p.sitouts++; });
-    // build groups per court
-    for(let c=1;c<=courts;c++){
+    // build groups per court — send incomplete courts to pool
+    for(let c=1;c<=R.courts;c++){
       const inCourt=_kocShuffle(KOCP.filter(p=>p.court===c).map(p=>p.id));
-      groups[c-1]=inCourt.slice(0,4);
+      if(inCourt.length>=4){
+        groups[c-1]=inCourt.slice(0,4);
+        // any overflow (shouldn't normally happen) also to pool
+        inCourt.slice(4).forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p){p.court=0;p.sitouts++;} });
+      } else {
+        // too few players for this court — send all to pool
+        inCourt.forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p){p.court=0;p.sitouts++;} });
+      }
     }
   }
   // create match objects
-  for(let c=0;c<courts;c++){
+  for(let c=0;c<R.courts;c++){
     const g=groups[c]||[];
     if(g.length<4) continue;
     const shuffled=_kocShuffle(g);
