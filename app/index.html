@@ -1688,7 +1688,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.55.0';
+const APP_VERSION = 'v1.56.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2897,7 +2897,7 @@ function buildPoule(){
   if(mode==='roundrobin'){
     rounds.forEach((matches,idx)=>{
       matches.forEach(([a,b],mi)=>{
-        PM.push({id:pmid++,round:idx+1,a,b,ga:0,gb:0,winner:null,court:(mi%R.courts)+1});
+        PM.push({id:pmid++,round:idx+1,a,b,ga:0,gb:0,sa:0,sb:0,winner:null,court:(mi%R.courts)+1});
       });
     });
     return;
@@ -2978,19 +2978,44 @@ function mrow(m){
   const allPlayed = totalGames >= R.gpm;
 
   const courtBadge=R.courts>1&&m.court?`<div class="court-badge">${t('rnd_court',{n:m.court})}</div>`:'';
+  const pkRR = sport==='pickleball' && mode==='roundrobin';
+
   if(m.winner){
     const wA=m.winner==='A';
+    const scoreDisp = pkRR ? `${m.sa}–${m.sb}` : `${m.ga}–${m.gb}`;
+    const scoreLabel = pkRR ? `${wA?esa:esb} wint (${m.sa}–${m.sb})` : `${wA?esa:esb} wint (${m.ga}–${m.gb})`;
     return `<div class="mcard">
       ${courtBadge}
       <div class="mteams">
         <div class="mteam ${wA?'won':'lost'}">${ena}</div>
-        <div class="mscore-wrap"><div class="mscore">${m.ga}–${m.gb}</div></div>
+        <div class="mscore-wrap"><div class="mscore">${scoreDisp}</div></div>
         <div class="mteam r ${!wA?'won':'lost'}">${enb}</div>
       </div>
       <div class="mresult">
-        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${wA?esa:esb} wint (${m.ga}–${m.gb})</span>
+        <span class="mwinner-label">${icon('ic-check','icon-gold')} ${scoreLabel}</span>
         ${viewMode?'':`<button class="mundo-btn" onclick="undoPM(${m.id})">${icon('ic-undo')} ${t('rnd_undo')}</button>`}
       </div>
+    </div>`;
+  }
+
+  if(pkRR){
+    const tgt=R.matchPts||11;
+    return `<div class="mcard">
+      ${courtBadge}
+      <div class="mteams">
+        <div class="mteam">${ena}</div>
+        <div class="mscore-wrap"><div class="mscore" style="font-size:.85rem;color:var(--b-muted)">vs</div></div>
+        <div class="mteam r">${enb}</div>
+      </div>
+      ${viewMode?'':`<div style="display:flex;gap:8px;align-items:center;justify-content:center;margin-top:8px">
+        <input id="pk-rr-a-${m.id}" type="number" min="0" placeholder="${esa}" style="width:70px;text-align:center;padding:6px;border:1px solid var(--b-border);border-radius:6px;font-size:1rem">
+        <span style="color:var(--b-muted)">–</span>
+        <input id="pk-rr-b-${m.id}" type="number" min="0" placeholder="${esb}" style="width:70px;text-align:center;padding:6px;border:1px solid var(--b-border);border-radius:6px;font-size:1rem">
+      </div>
+      <div style="text-align:center;margin-top:6px;font-size:.75rem;color:var(--b-muted)">Target ${tgt}${R.winBy2?' · win by 2':''}</div>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn btn-primary btn-sm" onclick="pgPkSave(${m.id})">${icon('ic-check')} Save</button>
+      </div>`}
     </div>`;
   }
 
@@ -3033,11 +3058,26 @@ function pg(id,side){
   if(PM.every(x=>x.winner)) checkDone();
 }
 
+function pgPkSave(id){
+  const m=PM.find(x=>x.id===id);
+  if(!m||m.winner) return;
+  const inpA=$('pk-rr-a-'+id), inpB=$('pk-rr-b-'+id);
+  if(!inpA||!inpB) return;
+  const sa=Math.max(0,parseInt(inpA.value)||0);
+  const sb=Math.max(0,parseInt(inpB.value)||0);
+  if(!isMatchComplete(sa,sb)) return;
+  m.sa=sa; m.sb=sb;
+  m.winner=sa>sb?'A':'B';
+  launchConfetti(45,10);
+  renderPoule(); renderSt(); saveState();
+  if(PM.every(x=>x.winner)) checkDone();
+}
+
 function undoPM(id){
   const m=PM.find(x=>x.id===id);
   if(!m) return;
   // Full reset
-  m.ga=0; m.gb=0; m.winner=null;
+  m.ga=0; m.gb=0; m.sa=0; m.sb=0; m.winner=null;
   m.g1=null; m.g2=null; m.g3=null;
   renderPoule(); renderSt(); saveState();
 }
@@ -3058,8 +3098,9 @@ function getStandings(){
   return T.map(t=>{
     const my=PM.filter(m=>m.winner&&(m.a===t.id||m.b===t.id));
     const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
-    return{...t,played:my.length,wins,losses:my.length-wins};
-  }).sort((a,b)=>b.wins-a.wins||a.losses-b.losses||a.id-b.id);
+    const pts=sport==='pickleball'?my.reduce((acc,m2)=>acc+(m2.a===t.id?m2.sa:m2.sb),0):0;
+    return{...t,played:my.length,wins,losses:my.length-wins,pts};
+  }).sort((a,b)=>b.wins-a.wins||b.pts-a.pts||a.losses-b.losses||a.id-b.id);
 }
 
 function renderSt(){
@@ -5442,7 +5483,7 @@ async function shareStandingsImage(){
 function renderExportBar(){
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
   const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="openAddToCompModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
-  const duprBtn=sport==='pickleball'?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
+  const duprBtn=(sport==='pickleball'&&(mode==='americano'||mode==='mexicano'||mode==='roundrobin'))?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
   return `<div class="export-bar">
     <span class="export-bar-lbl">Export</span>
     <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
@@ -5488,6 +5529,14 @@ function exportDUPR(){
   AM.flat().filter(m=>m.done).forEach(m=>{
     lines.push(row(date,_apName(m.a1),_apName(m.a2),_apName(m.b1),_apName(m.b2),m.sa,m.sb));
   });
+  if(mode==='roundrobin'){
+    PM.filter(m=>m.winner).forEach(m=>{
+      const tA=T.find(t=>t.id===m.a), tB=T.find(t=>t.id===m.b);
+      const [p1a,p2a]=(tA.name.split('&').map(s=>s.trim()));
+      const [p1b,p2b]=(tB.name.split('&').map(s=>s.trim()));
+      lines.push(row(date,p1a,p2a||'',p1b,p2b||'',m.sa,m.sb));
+    });
+  }
   const csv='﻿'+lines.join('\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob);
@@ -5986,7 +6035,7 @@ document.addEventListener('touchend',function(e){
   function _sxN(){ return _sxChips.reduce((a,n)=>a+(n.includes('&')?n.split('&').filter(s=>s.trim()).length:1),0); }
   function _sxMPR(n,c){ return Math.max(0,Math.min(c,Math.floor(n/4))); }
   function _sxAdviseCourts(n){ return Math.min(4,Math.max(1,Math.floor(n/4))); }
-  function _sxUsesPts(){ return _sxState.type==='americano'||_sxState.type==='mexicano'||_sxState.type==='teamamericano'; }
+  function _sxUsesPts(){ return _sxState.type==='americano'||_sxState.type==='mexicano'||_sxState.type==='teamamericano'||(_sxState.type==='roundrobin'&&_sxState.sport==='pickleball'); }
 
   // sync chips → hidden #ta
   function _sxSyncTA(){

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pickleball Round Robin Generator | Free, No Signup | PadelBracket</title>
-  <meta name="description" content="Free pickleball round robin generator. Every pair plays every other pair. Target score 11, win by 2. Works for 4 to 16 players. No account, works offline.">
+  <meta name="description" content="Free pickleball round robin generator. Fixed pairs, every team plays every other team. Target score 11, 15 or 21. Win by 2. No account, works offline.">
   <meta name="keywords" content="pickleball round robin generator, pickleball round robin format, pickleball open play, how to run pickleball round robin, pickleball mixer, free pickleball generator no signup">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -16,14 +16,14 @@
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/pickleball/round-robin/">
   <meta property="og:title" content="Pickleball Round Robin Generator | Free, No Signup">
-  <meta property="og:description" content="Free pickleball round robin generator. Every pair plays every other pair. Score 11, win by 2. 4 to 16 players. No account, works offline.">
+  <meta property="og:description" content="Free pickleball round robin generator. Fixed pairs, every team plays every other team. Target score 11, 15 or 21. Win by 2. No account, works offline.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pickleball Round Robin Generator | Free, No Signup">
-  <meta name="twitter:description" content="Generate a pickleball round robin in seconds. Every pair plays every other pair. Target score 11, win by 2. Free, no account.">
+  <meta name="twitter:description" content="Generate a pickleball round robin in seconds. Fixed pairs, every team plays every other team. Free, no account, works offline.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/pickleball/round-robin/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/round-robin/">
@@ -36,11 +36,11 @@
     "alternateName": "Pickleball Round Robin Generator",
     "applicationCategory": "SportsApplication",
     "operatingSystem": "Web, iOS, Android (PWA)",
-    "description": "Free pickleball round robin generator. Every pair plays every other pair. Target score 11, 15 or 21 with win-by-2. Works offline, no account needed.",
+    "description": "Free pickleball round robin generator. Fixed pairs, every team plays every other team. Target score 11, 15 or 21 with win by 2. Works offline, no account needed.",
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["en"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Pickleball round robin generator","Win by 2 scoring","Live leaderboard","Works offline","No account needed","4 to 16 players"]
+    "featureList": ["Pickleball round robin generator","Target score 11, 15 or 21","Win by 2 scoring","Fixed pairs schedule","Live standings","Works offline","No account needed","4 to 16 players","DUPR export"]
   }
   </script>
   <script type="application/ld+json">
@@ -51,12 +51,12 @@
       {
         "@type": "Question",
         "name": "How do I run a pickleball round robin tournament?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Open PadelBracket, select Pickleball and Round Robin, enter the pair names, set your target score (11, 15 or 21) and choose the number of courts. The full schedule is generated automatically. Enter scores after each game and the standings update live. When all games are played, the final rankings are shown with wins, losses and total points." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Open PadelBracket, select Pickleball and Round Robin, enter the pair names and choose the number of courts and target score (11, 15 or 21). The full match schedule is generated automatically. Enter the score after each match and the standings update live. Win by 2 is enabled by default. When all matches are played, the final rankings are shown." }
       },
       {
         "@type": "Question",
         "name": "What is the scoring for pickleball round robin?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket uses rally scoring for pickleball round robin. The default target score is 11 with win by 2 enabled, meaning a pair must lead by at least 2 points when they reach or pass 11. You can change the target to 15 or 21 and toggle win by 2 on or off in the setup wizard." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's pickleball round robin uses point-based rally scoring. You choose a target score of 11, 15 or 21. Win by 2 is enabled by default. Standings are ranked by match wins, then total points scored as a tiebreaker." }
       },
       {
         "@type": "Question",
@@ -184,7 +184,7 @@
   </div>
   <h1>Pickleball Round Robin <em>Generator</em></h1>
   <p class="hero-kicker">Free · No Signup · Win by 2</p>
-  <p class="hero-sub">Every pair plays every other pair. Target score 11, 15 or 21. Win by 2. Works for 4 to 16 players on any number of courts.</p>
+  <p class="hero-sub">Every pair plays every other pair. Target score 11, 15 or 21. Win by 2. Works for 4 to 16 players.</p>
   <div class="hero-btns">
     <a class="btn-primary" href="/app/?sport=pickleball">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -199,6 +199,7 @@
   <div class="stat"><div class="stat-n">30s</div><div class="stat-lbl">Setup time</div></div>
   <div class="stat"><div class="stat-n">16</div><div class="stat-lbl">Max. players</div></div>
   <div class="stat"><div class="stat-n">11/15/21</div><div class="stat-lbl">Target scores</div></div>
+  <div class="stat"><div class="stat-n">Win by 2</div><div class="stat-lbl">Scoring rule</div></div>
   <div class="stat"><div class="stat-n">100%</div><div class="stat-lbl">Free, no account</div></div>
 </div>
 
@@ -214,7 +215,7 @@
     <div class="feature">
       <div class="feature-icon" style="background:rgba(59,130,246,.1)">🏓</div>
       <h3>Pickleball scoring</h3>
-      <p>Target score 11, 15 or 21. Win by 2 enabled by default. Rally scoring throughout. All pickleball rules handled automatically.</p>
+      <p>Target score 11, 15 or 21. Win by 2 enabled by default. Rally scoring throughout. Standings ranked by match wins, then total points scored as a tiebreaker.</p>
     </div>
     <div class="feature">
       <div class="feature-icon" style="background:rgba(251,191,36,.1)">📊</div>
@@ -241,12 +242,12 @@
     <div class="step">
       <div class="step-num">3</div>
       <h4>Set target score</h4>
-      <p>Choose 11, 15 or 21. Win by 2 is on by default. Adjust courts as needed.</p>
+      <p>Choose 11, 15 or 21 as your target score. Win by 2 is on by default. The schedule adjusts to your court count.</p>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <h4>Final standings</h4>
-      <p>Enter scores after each game. Final standings are shown when all games are complete.</p>
+      <p>Enter scores after each match. Final standings appear when all matches are complete.</p>
     </div>
   </div>
 </section>
@@ -256,11 +257,11 @@
   <div class="faq-list">
     <details class="faq-item">
       <summary>How do I run a pickleball round robin tournament?</summary>
-      <p>Open PadelBracket, select Pickleball and Round Robin, enter the pair names and set your target score. The full schedule is generated automatically. Enter scores after each game and the standings update live. When all games are played, the final rankings are shown.</p>
+      <p>Open PadelBracket, select Pickleball and Round Robin, enter the pair names and choose your target score (11, 15 or 21) and number of courts. The full schedule is generated automatically. Enter scores after each match and the standings update live. Win by 2 is enabled by default. Final rankings appear when all matches are complete.</p>
     </details>
     <details class="faq-item">
       <summary>What is the scoring for pickleball round robin?</summary>
-      <p>The default target score is 11 with win by 2 enabled. A pair must lead by at least 2 points when they reach or pass 11. You can change the target to 15 or 21 and toggle win by 2 on or off in the setup wizard. Rally scoring is used throughout.</p>
+      <p>PadelBracket's pickleball round robin uses point-based rally scoring. Choose a target of 11, 15 or 21 points. Win by 2 is enabled by default. Standings are ranked by match wins, with total points scored as the tiebreaker.</p>
     </details>
     <details class="faq-item">
       <summary>How many courts do I need for a pickleball round robin?</summary>
@@ -279,7 +280,7 @@
 
 <section class="cta-wrap">
   <h2>Ready to play?</h2>
-  <p>Open the app, select Pickleball and Round Robin, enter the pair names. Free, no account, works offline.</p>
+  <p>Open the app, select Pickleball and Round Robin, enter the pair names. Target score 11, 15 or 21. Win by 2. Free, no account, works offline.</p>
   <a class="btn-primary" href="/app/?sport=pickleball" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     Start Round Robin for free
