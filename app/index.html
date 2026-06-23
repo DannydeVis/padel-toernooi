@@ -381,6 +381,26 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-sc-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
 .am-sc-prog{font-size:.74rem;color:var(--b-muted)}
 .am-sc-prog.ready{color:var(--accent);font-weight:600}
+/* KOC */
+.koc-king-card{border:1px solid var(--accent)!important;box-shadow:0 0 0 2px rgba(204,244,33,.18)}
+.am-match-card{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--bdr)}
+.am-match-label{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:8px}
+.am-score-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.am-score-row .am-team{flex:1;font-size:.85rem;font-weight:600}
+.am-score-row .am-score{font-family:'Inter',sans-serif;font-weight:800;font-size:1rem;letter-spacing:2px;white-space:nowrap}
+.am-score-row.am-done-row .am-winner{color:var(--accent)}
+.am-adj{display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-weight:700;font-size:1rem}
+.adj-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.adj-btn:active{background:var(--accent);color:#0E1114;border-color:var(--accent)}
+.score-inp{width:46px;text-align:center;background:none;border:none;border-bottom:2px solid var(--bdr);color:var(--card-txt);font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;outline:none}
+.score-inp:focus{border-bottom-color:var(--accent)}
+.am-save-row{text-align:right}
+.koc-gp-wrap{background:rgba(255,200,0,.08);border:1px solid rgba(255,200,0,.3);border-radius:8px;padding:10px;margin-top:4px}
+.koc-gp-lbl{font-size:.8rem;font-weight:600;color:#f5c542;margin:0 0 8px;text-align:center}
+.koc-gp-wrap .btn{width:100%;margin-bottom:4px}
+.koc-pool-wrap{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--bdr)}
+.koc-pool-wrap h4{font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin:0 0 8px}
+.koc-pool-chips{display:flex;flex-wrap:wrap;gap:6px}
 /* Court pending badge (organizer view) */
 .court-pending-badge{display:flex;align-items:center;gap:8px;background:rgba(204,244,33,.07);border:1px solid rgba(204,244,33,.22);border-radius:8px;padding:7px 11px;margin-top:6px;font-size:.8rem}
 .court-pending-info{flex:1;color:var(--txt2)}
@@ -1359,6 +1379,10 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
               <span class="tc-ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.8"></circle><circle cx="16" cy="8" r="2.8"></circle><path d="M4 19c.5-2.8 2-4 4-4h1M20 19c-.5-2.8-2-4-4-4h-1M12 17v2"></path></svg></span>
               <span class="tc-txt"><span class="tc-name" data-i18n="type_mix">Mixicano</span><span class="tc-sub" data-i18n="type_mix_sub">Man &amp; vrouw</span></span>
             </button>
+            <button type="button" class="sx-tcard" data-type="kingofcourt" onclick="sxSetType('kingofcourt')">
+              <span class="tc-ico"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 18l2-8 5 4 4-7 4 11" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="5" r="1.5"></circle></svg></span>
+              <span class="tc-txt"><span class="tc-name" data-i18n="type_koc">King of the Court</span><span class="tc-sub" data-i18n="type_koc_sub">Winnaars promoveren</span></span>
+            </button>
           </div>
         </section>
 
@@ -1428,6 +1452,16 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
               <div class="sx-seg">
                 <button type="button" class="sx-segbtn active" id="sx-wb2-on" onclick="sxSetWinBy2(true)"><span class="sg-t" data-i18n="on_lbl">Aan</span></button>
                 <button type="button" class="sx-segbtn" id="sx-wb2-off" onclick="sxSetWinBy2(false)"><span class="sg-t" data-i18n="off_lbl">Uit</span></button>
+              </div>
+            </div>
+            <!-- KOC rounds -->
+            <div id="sx-row-koc-rounds" style="display:none">
+              <span class="sx-seglbl" data-i18n="koc_rounds_lbl">Rondes</span>
+              <div class="sx-seg">
+                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=6;sxUpdate()"><span class="sg-t">6</span></button>
+                <button type="button" class="sx-segbtn active" onclick="_sxState.kocRounds=10;sxUpdate()"><span class="sg-t">10</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
+                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=15;sxUpdate()"><span class="sg-t">15</span></button>
+                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=20;sxUpdate()"><span class="sg-t">20</span></button>
               </div>
             </div>
             <span class="sx-seglbl" data-i18n="lbl_timer">Timer per ronde</span>
@@ -1688,7 +1722,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.56.0';
+const APP_VERSION = 'v1.57.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1781,6 +1815,7 @@ nl:{
   set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
   eyebrow:'Nieuw toernooi',title:'Stel je toernooi in',sub_c:'Je ziet je toernooi ontstaan terwijl je typt.',tname_ph:'Bijv. Vrijdagavond Cup (optioneel)',step_type:'Type toernooi',step_type_sub:'Hoe willen jullie spelen?',type_team:'Team',type_team_sub:'Vast koppel',type_am:'Americano',type_am_sub:'Wissel koppel',type_mex:'Mexicano',type_mex_sub:'Stand koppels',type_rr:'Round Robin',type_rr_sub:'Iedereen vs iedereen',type_tam:'Team Am.',type_tam_sub:'Vast team',type_mix:'Mixicano',type_mix_sub:'Man & vrouw',step_players:'Spelers',step_players_sub:'Typ een naam en druk op Enter — of plak een hele lijst.',ph_player:'Typ een naam…',tip_team:'Tip: typ "Jan & Piet" om een vast koppel te maken.',saved_groups:'Of begin met een opgeslagen groep:',cnt_zero:'Voeg minstens 4 spelers toe',cnt_need:'Nog {n} speler(s) nodig',cnt_ok:'{n} spelers · {m} wedstrijd(en) per ronde',cnt_odd:'{n} spelers · 1 speler rust per ronde',cnt_max:'Maximaal 24 spelers',step_courts:'Banen',courts_word:'banen',court:'Baan',courts_advice:'Advies voor {n} spelers: <b data-act="advice">{c} banen</b>',step_match:'Match formaat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punten per match',lbl_timer:'Timer per ronde',off:'Geen',deflt:'standaard',btn_shuffle:'Schudden',players_word:'spelers',pv_t:'Live voorbeeld',pv_rounds:'rondes',pv_mpr:'per ronde',pv_dur:'duur',pv_empty:'Voeg spelers toe en zie hier het speelschema ontstaan.',pv_estimate:'schatting ronde 1',rest_lbl:'Rust deze ronde:',btn_start:'Start toernooi',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win met 2',on_lbl:'Aan',off_lbl:'Uit',courts_word_pk:'courts',export_dupr:'Exporteer voor DUPR',
+  type_koc:'King of the Court',type_koc_sub:'Winnaars promoveren',set_title_koc:'King of the Court instellen',set_desc_auto_koc:'Winnaars gaan een baan omhoog, verliezers een baan omlaag. Banen worden elke ronde opnieuw ingedeeld.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Baan {n}',koc_round_n:'Ronde {n} van {total}',koc_pool:'Wachtrij',koc_golden_pt:'Gouden punt — wie wint?',koc_king_lbl:'Koning',koc_standings:'Eindstand',koc_king_rounds:'Keer King',res_koc:'{label}King of the Court · {n} spelers',koc_done:'Toernooi klaar',koc_promotes:'gaat omhoog',koc_demotes:'gaat omlaag',koc_stays:'blijft King',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',more_support:'Support this project',more_gear:'Padel gear tips',stats_support:'Tournament a success? Support the project!',
@@ -1857,6 +1892,7 @@ en:{
   set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
   eyebrow:'New tournament',title:'Set up your tournament',sub_c:'Watch your tournament take shape as you type.',tname_ph:'E.g. Friday Night Cup (optional)',step_type:'Tournament type',step_type_sub:'How do you want to play?',type_team:'Team',type_team_sub:'Fixed pair',type_am:'Americano',type_am_sub:'Rotating partners',type_mex:'Mexicano',type_mex_sub:'Standings-based',type_rr:'Round Robin',type_rr_sub:'Everyone vs everyone',type_tam:'Team Am.',type_tam_sub:'Fixed team',type_mix:'Mixicano',type_mix_sub:'Man & woman',step_players:'Players',step_players_sub:'Type a name and press Enter — or paste a list.',ph_player:'Type a name…',tip_team:'Tip: type "Jan & Piet" to create a fixed pair.',saved_groups:'Or start with a saved group:',cnt_zero:'Add at least 4 players',cnt_need:'{n} more player(s) needed',cnt_ok:'{n} players · {m} match(es) per round',cnt_odd:'{n} players · 1 player sits out per round',cnt_max:'Maximum 24 players',step_courts:'Courts',courts_word:'courts',court:'Court',courts_advice:'Suggestion for {n} players: <b data-act="advice">{c} courts</b>',step_match:'Match format',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points per match',lbl_timer:'Timer per round',off:'Off',deflt:'default',btn_shuffle:'Shuffle',players_word:'players',pv_t:'Live preview',pv_rounds:'rounds',pv_mpr:'per round',pv_dur:'duration',pv_empty:'Add players to see the schedule take shape.',pv_estimate:'round 1 estimate',rest_lbl:'Sitting out this round:',btn_start:'Start tournament',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
+  type_koc:'King of the Court',type_koc_sub:'Winners promote',set_title_koc:'Set up King of the Court',set_desc_auto_koc:'Winners move up a court, losers move down. Partners re-drawn each round.',koc_rounds_lbl:'Rounds',koc_king_court:'King Court',koc_court_n:'Court {n}',koc_round_n:'Round {n} of {total}',koc_pool:'Challenger pool',koc_golden_pt:'Golden point — who wins?',koc_king_lbl:'King',koc_standings:'Final standings',koc_king_rounds:'Times King',res_koc:'{label}King of the Court · {n} players',koc_done:'Tournament complete',koc_promotes:'promotes',koc_demotes:'demotes',koc_stays:'stays King',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -1932,6 +1968,7 @@ fr:{
   set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
   eyebrow:'Nouveau tournoi',title:'Configurez votre tournoi',sub_c:'Regardez votre tournoi prendre forme pendant que vous tapez.',tname_ph:'Ex. Coupe Vendredi soir (optionnel)',step_type:'Type de tournoi',step_type_sub:'Comment voulez-vous jouer ?',type_team:'Equipe',type_team_sub:'Paire fixe',type_am:'Americano',type_am_sub:'Partenaires tournants',type_mex:'Mexicano',type_mex_sub:'Selon classement',type_rr:'Round Robin',type_rr_sub:'Tout le monde contre tout le monde',type_tam:'Team Am.',type_tam_sub:'Equipe fixe',type_mix:'Mixicano',type_mix_sub:'Homme & femme',step_players:'Joueurs',step_players_sub:'Tapez un nom et appuyez sur Entree — ou collez une liste.',ph_player:'Tapez un nom…',tip_team:'Conseil : tapez "Jean & Pierre" pour creer une paire fixe.',saved_groups:'Ou commencez avec un groupe enregistre :',cnt_zero:'Ajoutez au moins 4 joueurs',cnt_need:'Encore {n} joueur(s) necessaire(s)',cnt_ok:'{n} joueurs · {m} match(s) par tour',cnt_odd:'{n} joueurs · 1 joueur repose par tour',cnt_max:'Maximum 24 joueurs',step_courts:'Terrains',courts_word:'terrains',court:'Terrain',courts_advice:'Suggestion pour {n} joueurs : <b data-act="advice">{c} terrains</b>',step_match:'Format de match',gpm1:'1 jeu',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points par match',lbl_timer:'Minuterie par tour',off:'Aucun',deflt:'par defaut',btn_shuffle:'Melanger',players_word:'joueurs',pv_t:'Apercu en direct',pv_rounds:'tours',pv_mpr:'par tour',pv_dur:'duree',pv_empty:'Ajoutez des joueurs pour voir le programme se dessiner.',pv_estimate:'estimation tour 1',rest_lbl:'Repos ce tour :',btn_start:'Lancer le tournoi',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
+  type_koc:'King of the Court',type_koc_sub:'Les gagnants montent',set_title_koc:'Configurer King of the Court',set_desc_auto_koc:'Les gagnants montent d\'un terrain, les perdants descendent.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Terrain {n}',koc_round_n:'Manche {n} sur {total}',koc_pool:'File d\'attente',koc_golden_pt:'Point d\'or — qui gagne?',koc_king_lbl:'Roi',koc_standings:'Classement final',koc_king_rounds:'Fois King',res_koc:'{label}King of the Court · {n} joueurs',koc_done:'Tournoi termine',koc_promotes:'monte',koc_demotes:'descend',koc_stays:'reste King',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -2008,6 +2045,7 @@ de:{
   set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
   eyebrow:'Neues Turnier',title:'Turnier einrichten',sub_c:'Beobachte, wie dein Turnier beim Tippen entsteht.',tname_ph:'z.B. Freitagnacht-Cup (optional)',step_type:'Turniermodus',step_type_sub:'Wie wollt ihr spielen?',type_team:'Team',type_team_sub:'Festes Paar',type_am:'Americano',type_am_sub:'Wechselnde Partner',type_mex:'Mexicano',type_mex_sub:'Nach Tabelle',type_rr:'Round Robin',type_rr_sub:'Alle gegen alle',type_tam:'Team Am.',type_tam_sub:'Festes Team',type_mix:'Mixicano',type_mix_sub:'Mann & Frau',step_players:'Spieler',step_players_sub:'Namen eingeben und Enter drucken — oder eine Liste einfugen.',ph_player:'Namen eingeben…',tip_team:'Tipp: "Jan & Piet" eingeben um ein festes Paar zu erstellen.',saved_groups:'Oder mit einer gespeicherten Gruppe beginnen:',cnt_zero:'Mindestens 4 Spieler hinzufugen',cnt_need:'Noch {n} Spieler benotigt',cnt_ok:'{n} Spieler · {m} Spiel(e) pro Runde',cnt_odd:'{n} Spieler · 1 Spieler pausiert pro Runde',cnt_max:'Maximal 24 Spieler',step_courts:'Platze',courts_word:'Platze',court:'Platz',courts_advice:'Empfehlung fur {n} Spieler: <b data-act="advice">{c} Platze</b>',step_match:'Matchformat',gpm1:'1 Spiel',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punkte pro Match',lbl_timer:'Timer pro Runde',off:'Kein',deflt:'Standard',btn_shuffle:'Mischen',players_word:'Spieler',pv_t:'Live-Vorschau',pv_rounds:'Runden',pv_mpr:'pro Runde',pv_dur:'Dauer',pv_empty:'Spieler hinzufugen um den Spielplan entstehen zu sehen.',pv_estimate:'Runde 1 Schatzung',rest_lbl:'Pause diese Runde:',btn_start:'Turnier starten',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Mit 2 gewinnen',on_lbl:'An',off_lbl:'Aus',courts_word_pk:'Courts',export_dupr:'Fur DUPR exportieren',
+  type_koc:'King of the Court',type_koc_sub:'Gewinner steigen auf',set_title_koc:'King of the Court einrichten',set_desc_auto_koc:'Gewinner steigen ein Feld auf, Verlierer steigen ab.',koc_rounds_lbl:'Runden',koc_king_court:'King Court',koc_court_n:'Feld {n}',koc_round_n:'Runde {n} von {total}',koc_pool:'Warteliste',koc_golden_pt:'Goldener Punkt — wer gewinnt?',koc_king_lbl:'Konig',koc_standings:'Endstand',koc_king_rounds:'Mal King',res_koc:'{label}King of the Court · {n} Spieler',koc_done:'Turnier abgeschlossen',koc_promotes:'steigt auf',koc_demotes:'steigt ab',koc_stays:'bleibt King',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',more_support:'Apoya este proyecto',more_gear:'Equipación de pádel',stats_support:'¿Torneo con éxito? ¡Apoya el proyecto!',
@@ -2083,6 +2121,7 @@ es:{
   set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
   eyebrow:'Nuevo torneo',title:'Configura tu torneo',sub_c:'Ve como toma forma tu torneo mientras escribes.',tname_ph:'Ej. Copa Viernes por la noche (opcional)',step_type:'Tipo de torneo',step_type_sub:'Como quieres jugar?',type_team:'Equipo',type_team_sub:'Pareja fija',type_am:'Americano',type_am_sub:'Parejas rotativas',type_mex:'Mexicano',type_mex_sub:'Por clasificacion',type_rr:'Round Robin',type_rr_sub:'Todos contra todos',type_tam:'Team Am.',type_tam_sub:'Equipo fijo',type_mix:'Mixicano',type_mix_sub:'Hombre & mujer',step_players:'Jugadores',step_players_sub:'Escribe un nombre y pulsa Enter — o pega una lista.',ph_player:'Escribe un nombre…',tip_team:'Consejo: escribe "Jan & Piet" para crear una pareja fija.',saved_groups:'O empieza con un grupo guardado:',cnt_zero:'Anade al menos 4 jugadores',cnt_need:'Faltan {n} jugador(es)',cnt_ok:'{n} jugadores · {m} partido(s) por ronda',cnt_odd:'{n} jugadores · 1 jugador descansa por ronda',cnt_max:'Maximo 24 jugadores',step_courts:'Pistas',courts_word:'pistas',court:'Pista',courts_advice:'Sugerencia para {n} jugadores: <b data-act="advice">{c} pistas</b>',step_match:'Formato de partido',gpm1:'1 juego',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Puntos por partido',lbl_timer:'Temporizador por ronda',off:'Sin',deflt:'predeterminado',btn_shuffle:'Mezclar',players_word:'jugadores',pv_t:'Vista previa en directo',pv_rounds:'rondas',pv_mpr:'por ronda',pv_dur:'duracion',pv_empty:'Anade jugadores para ver como se crea el programa.',pv_estimate:'estimacion ronda 1',rest_lbl:'Descansando esta ronda:',btn_start:'Iniciar torneo',
   set_lbl_sport:'Deporte',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Ganar por 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'pistas',export_dupr:'Exportar para DUPR',
+  type_koc:'King of the Court',type_koc_sub:'Ganadores suben',set_title_koc:'Configurar King of the Court',set_desc_auto_koc:'Los ganadores suben una pista, los perdedores bajan.',koc_rounds_lbl:'Rondas',koc_king_court:'King Court',koc_court_n:'Pista {n}',koc_round_n:'Ronda {n} de {total}',koc_pool:'Lista de espera',koc_golden_pt:'Punto de oro, quien gana?',koc_king_lbl:'Rey',koc_standings:'Clasificacion final',koc_king_rounds:'Veces King',res_koc:'{label}King of the Court · {n} jugadores',koc_done:'Torneo completado',koc_promotes:'sube',koc_demotes:'baja',koc_stays:'sigue King',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',more_support:'Stöd detta projekt',more_gear:'Padel gear tips',stats_support:'Lyckad turnering? Stöd projektet!',
@@ -2158,6 +2197,7 @@ sv:{
   set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
   eyebrow:'Ny turnering',title:'Stall in din turnering',sub_c:'Se din turnering ta form medan du skriver.',tname_ph:'T.ex. Fredagsnatt-cup (valfritt)',step_type:'Turneringstyp',step_type_sub:'Hur vill ni spela?',type_team:'Lag',type_team_sub:'Fast par',type_am:'Americano',type_am_sub:'Roterande partner',type_mex:'Mexicano',type_mex_sub:'Rankningsbaserat',type_rr:'Round Robin',type_rr_sub:'Alla mot alla',type_tam:'Team Am.',type_tam_sub:'Fast lag',type_mix:'Mixicano',type_mix_sub:'Man & kvinna',step_players:'Spelare',step_players_sub:'Skriv ett namn och tryck Enter — eller klistra in en lista.',ph_player:'Skriv ett namn…',tip_team:'Tips: skriv "Jan & Piet" for att skapa ett fast par.',saved_groups:'Eller borja med en sparad grupp:',cnt_zero:'Lagg till minst 4 spelare',cnt_need:'Behover {n} fler spelare',cnt_ok:'{n} spelare · {m} match(er) per runda',cnt_odd:'{n} spelare · 1 spelare vilar per runda',cnt_max:'Max 24 spelare',step_courts:'Banor',courts_word:'banor',court:'Bana',courts_advice:'Rekommendation for {n} spelare: <b data-act="advice">{c} banor</b>',step_match:'Matchformat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poang per match',lbl_timer:'Timer per runda',off:'Inga',deflt:'standard',btn_shuffle:'Blanda',players_word:'spelare',pv_t:'Live-forhandsvisning',pv_rounds:'rundor',pv_mpr:'per runda',pv_dur:'varaktighet',pv_empty:'Lagg till spelare for att se schemat ta form.',pv_estimate:'uppskattning runda 1',rest_lbl:'Vilar denna runda:',btn_start:'Starta turnering',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vinn med 2',on_lbl:'Pa',off_lbl:'Av',courts_word_pk:'courts',export_dupr:'Exportera till DUPR',
+  type_koc:'King of the Court',type_koc_sub:'Vinnare klattrar',set_title_koc:'Installera King of the Court',set_desc_auto_koc:'Vinnare klattrar upp en bana, forlorare klattrar ner.',koc_rounds_lbl:'Omgangar',koc_king_court:'King Court',koc_court_n:'Bana {n}',koc_round_n:'Omgang {n} av {total}',koc_pool:'Vantelista',koc_golden_pt:'Guldpoanng — vem vinner?',koc_king_lbl:'Kung',koc_standings:'Slutresultat',koc_king_rounds:'Ganger King',res_koc:'{label}King of the Court · {n} spelare',koc_done:'Turneringen klar',koc_promotes:'klattrar upp',koc_demotes:'klattrar ner',koc_stays:'forblir King',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',more_support:'Sostieni questo progetto',more_gear:'Consigli attrezzatura padel',stats_support:'Torneo riuscito? Sostieni il progetto!',
@@ -2235,6 +2275,7 @@ it:{
   set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
   eyebrow:'Nuovo torneo',title:'Configura il tuo torneo',sub_c:'Guarda il tuo torneo prendere forma mentre scrivi.',tname_ph:'Es. Coppa Venerdi sera (opzionale)',step_type:'Tipo di torneo',step_type_sub:'Come volete giocare?',type_team:'Squadra',type_team_sub:'Coppia fissa',type_am:'Americano',type_am_sub:'Coppie rotanti',type_mex:'Mexicano',type_mex_sub:'Per classifica',type_rr:'Round Robin',type_rr_sub:'Tutti contro tutti',type_tam:'Team Am.',type_tam_sub:'Team fisso',type_mix:'Mixicano',type_mix_sub:'Uomo & donna',step_players:'Giocatori',step_players_sub:'Scrivi un nome e premi Invio — o incolla una lista.',ph_player:'Scrivi un nome…',tip_team:'Consiglio: scrivi "Jan & Piet" per creare una coppia fissa.',saved_groups:'O inizia con un gruppo salvato:',cnt_zero:'Aggiungi almeno 4 giocatori',cnt_need:'Ancora {n} giocatore/i necessari',cnt_ok:'{n} giocatori · {m} partita/e per turno',cnt_odd:'{n} giocatori · 1 giocatore riposa per turno',cnt_max:'Massimo 24 giocatori',step_courts:'Campi',courts_word:'campi',court:'Campo',courts_advice:'Suggerimento per {n} giocatori: <b data-act="advice">{c} campi</b>',step_match:'Formato partita',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punti per partita',lbl_timer:'Timer per turno',off:'Nessuno',deflt:'predefinito',btn_shuffle:'Mescola',players_word:'giocatori',pv_t:'Anteprima dal vivo',pv_rounds:'turni',pv_mpr:'per turno',pv_dur:'durata',pv_empty:'Aggiungi giocatori per vedere il programma prendere forma.',pv_estimate:'stima turno 1',rest_lbl:'Riposo questo turno:',btn_start:'Inizia torneo',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vincere per 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'campi',export_dupr:'Esporta per DUPR',
+  type_koc:'King of the Court',type_koc_sub:'I vincitori salgono',set_title_koc:'Configura King of the Court',set_desc_auto_koc:'I vincitori salgono di un campo, i perdenti scendono.',koc_rounds_lbl:'Round',koc_king_court:'King Court',koc_court_n:'Campo {n}',koc_round_n:'Round {n} di {total}',koc_pool:'Lista attesa',koc_golden_pt:'Punto d\'oro, chi vince?',koc_king_lbl:'Re',koc_standings:'Classifica finale',koc_king_rounds:'Volte King',res_koc:'{label}King of the Court · {n} giocatori',koc_done:'Torneo completato',koc_promotes:'sale',koc_demotes:'scende',koc_stays:'rimane King',
 },
 };
 
@@ -2563,6 +2604,7 @@ let sport='padel'; // 'padel' | 'pickleball'
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
+let KOCP=[], KOCM=[], kocRound=0; // king of the court
 let _playerLevels={}; // name→level for current tournament
 let TAP=[], TAM=[]; // team americano pairs & rounds
 let savedState=null, statsData=[], statsGold=null, statsSilver=null, statsBronze=null;
@@ -2593,14 +2635,14 @@ function setTType(typ){
   document.querySelectorAll('#rules-type .rbtn').forEach((b,i)=>{
     b.classList.toggle('active',['team','americano','mexicano','roundrobin','teamamericano','mixicano'][i]===typ);
   });
-  const isAm=typ==='americano'||typ==='mexicano'||typ==='teamamericano'||typ==='mixicano';
+  const isAm=typ==='americano'||typ==='mexicano'||typ==='teamamericano'||typ==='mixicano'||typ==='kingofcourt';
   $('rules-gpm-row').style.display = isAm ? 'none' : '';
   $('rules-pts-row').style.display = isAm ? '' : 'none';
   $('rules-timer-row').style.display = isAm ? '' : 'none';
   $('mode-toggle-row').style.display = isAm ? 'none' : '';
-  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':typ==='mixicano'?'set_title_mix':'set_title_team';
+  const titleKey = typ==='americano'?'set_title_am':typ==='mexicano'?'set_title_mex':typ==='roundrobin'?'set_title_rr':typ==='teamamericano'?'set_title_tam':typ==='mixicano'?'set_title_mix':typ==='kingofcourt'?'set_title_koc':'set_title_team';
   const _stEl=$('setup-box-title'); if(_stEl) _stEl.textContent = t(titleKey);
-  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':typ==='mixicano'?'set_desc_auto_mix':'set_desc_auto_team';
+  const descKey = typ==='americano'?'set_desc_auto_am':typ==='mexicano'?'set_desc_auto_mex':typ==='roundrobin'?'set_desc_auto_rr':typ==='teamamericano'?'set_desc_auto_tam':typ==='mixicano'?'set_desc_auto_mix':typ==='kingofcourt'?'set_desc_auto_koc':'set_desc_auto_team';
   const _descEl=$('mode-auto-desc'); if(_descEl) _descEl.textContent = t(descKey);
   $('btn-shuffle').style.display = isAm ? 'none' : '';
   // Show/hide pair input / mix input vs normal textarea
@@ -2648,6 +2690,7 @@ function doStartAny(){
   if(mode==='mexicano') return startMexicano();
   if(mode==='teamamericano') return startTeamAmericano();
   if(mode==='mixicano') return startMixicano();
+  if(mode==='kingofcourt') return startKingOfCourt();
   return doStart();
 }
 
@@ -3979,6 +4022,92 @@ function startMexicano(){
 }
 
 
+function startKingOfCourt(){
+  const ns=names().filter(Boolean);
+  if(ns.length<4){alert(t('val_min4'));return;}
+  KOCP=[...ns].sort(()=>Math.random()-.5).map((name,id)=>({id,name,pts:0,kingRounds:0,sitouts:0,court:null}));
+  KOCM=[];
+  kocRound=1;
+  R.kocRounds=_sxState&&_sxState.kocRounds?_sxState.kocRounds:10;
+  KOCM.push(buildKocRound(1));
+  localStorage.removeItem('padel-round-timer');
+  trackStart('kingofcourt', KOCP.length);
+  showAmericano();
+  saveState();
+}
+
+function _kocShuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function buildKocRound(roundNum){
+  const courts=R.courts;
+  const matches=[];
+  let groups=[]; // groups[c] = [id,id,id,id] for court c+1
+  let pool=KOCP.filter(p=>p.court===0); // challenger pool
+
+  if(roundNum===1){
+    const active=_kocShuffle([...KOCP]);
+    const slots=courts*4;
+    for(let c=0;c<courts;c++){
+      groups[c]=active.slice(c*4,c*4+4).map(p=>p.id);
+    }
+    // extras go to pool (court=0)
+    active.slice(slots).forEach(p=>{ p.court=0; });
+  } else {
+    const prevRound=KOCM[roundNum-2];
+    // determine winner/loser per court
+    const results={}; // court → {winners:[id,id], losers:[id,id]}
+    prevRound.forEach(m=>{
+      const wA=m.gp==='A'?true:m.gp==='B'?false:m.sa>m.sb;
+      results[m.kocCourt]={ winners:wA?[m.a1,m.a2]:[m.b1,m.b2], losers:wA?[m.b1,m.b2]:[m.a1,m.a2] };
+    });
+    // assign courts: winners promote, losers demote
+    const nextCourt={}; // id → court number (1-indexed)
+    for(let c=1;c<=courts;c++){
+      const r=results[c];
+      if(!r) continue;
+      if(c===courts){ // King Court: winner stays, loser → c-1
+        r.winners.forEach(id=>nextCourt[id]=courts);
+        if(courts>1) r.losers.forEach(id=>nextCourt[id]=courts-1);
+        else r.losers.forEach(id=>nextCourt[id]=0); // only 1 court → loser to pool
+      } else if(c===1){ // Court 1: winner → 2, loser → pool
+        r.winners.forEach(id=>nextCourt[id]=courts>1?2:1);
+        r.losers.forEach(id=>nextCourt[id]=0);
+      } else {
+        r.winners.forEach(id=>nextCourt[id]=c+1);
+        r.losers.forEach(id=>nextCourt[id]=c-1);
+      }
+    }
+    // apply next courts
+    KOCP.forEach(p=>{ if(nextCourt[p.id]!=null) p.court=nextCourt[p.id]; });
+    // pool management: court-1 losers join pool, pool members with fewest sitouts enter court 1
+    const court1Losers=(results[1]?.losers||[]);
+    court1Losers.forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p){ p.court=0; } });
+    const fullPool=KOCP.filter(p=>p.court===0).sort((a,b)=>a.sitouts-b.sitouts||a.id-b.id);
+    // bring in enough pool players to fill court 1 (4 players needed)
+    const court1Players=KOCP.filter(p=>p.court===1&&!court1Losers.includes(p.id));
+    const need=4-court1Players.length;
+    const entering=fullPool.slice(0,need);
+    entering.forEach(p=>{ p.court=1; p.sitouts=0; });
+    fullPool.slice(need).forEach(p=>{ p.sitouts++; });
+    // build groups per court
+    for(let c=1;c<=courts;c++){
+      const inCourt=_kocShuffle(KOCP.filter(p=>p.court===c).map(p=>p.id));
+      groups[c-1]=inCourt.slice(0,4);
+    }
+  }
+  // create match objects
+  for(let c=0;c<courts;c++){
+    const g=groups[c]||[];
+    if(g.length<4) continue;
+    const shuffled=_kocShuffle(g);
+    const courtNum=c+1;
+    matches.push({id:`koc-${roundNum}-${courtNum}`,round:roundNum,kocCourt:courtNum,a1:shuffled[0],a2:shuffled[1],b1:shuffled[2],b2:shuffled[3],sa:0,sb:0,done:false,gp:null});
+    // update court on player objects
+    shuffled.forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p) p.court=courtNum; });
+  }
+  return matches;
+}
+
 // Sort players by level desc (unknowns last) for level-balanced initial order.
 // Returns null when no player has a level set — caller uses random shuffle.
 function _levelOrder(parsed){
@@ -4410,7 +4539,7 @@ function _updateAmHeader(){
       hdr.style.display='block'; return;
     }
   }
-  const label=tournamentName||(mode==='mexicano'?'Mexicano':mode==='teamamericano'?'Team Americano':mode==='mixicano'?'Mixed Americano':'Americano');
+  const label=tournamentName||(mode==='mexicano'?'Mexicano':mode==='teamamericano'?'Team Americano':mode==='mixicano'?'Mixed Americano':mode==='kingofcourt'?'King of the Court':'Americano');
   hdr.innerHTML=`<div class="amh-tname">${esc(label)}</div>`;
   hdr.style.display='block';
 }
@@ -4491,6 +4620,7 @@ function startRoundTimer(ri){
 
 function renderAmericano(){
   if(mode==='teamamericano'){ renderTeamAmericano(); return; }
+  if(mode==='kingofcourt'){ renderKoc(); return; }
   let h='';
   let timerData=null;
   try{ timerData=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
@@ -4795,6 +4925,63 @@ function amUndo(matchId){
   renderAmericano(); saveState();
 }
 
+function kocAdj(id,side,delta){
+  const m=KOCM.flat().find(x=>x.id===id);
+  if(!m||m.done) return;
+  const isPk=sport==='pickleball';
+  const cap=isPk?R.matchPts*3:R.matchPts;
+  if(side==='a'){ m.sa=Math.max(0,Math.min(cap,m.sa+delta)); if(!isPk&&m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa; }
+  else { m.sb=Math.max(0,Math.min(cap,m.sb+delta)); if(!isPk&&m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb; }
+  renderKoc(); saveState();
+}
+
+function kocSave(id){
+  const m=KOCM.flat().find(x=>x.id===id);
+  if(!m||m.done) return;
+  if(!isMatchComplete(m.sa,m.sb)) return;
+  if(sport!=='pickleball'&&m.sa===m.sb){ m.gp='pending'; renderKoc(); return; }
+  const wA=m.gp==='A'?true:m.gp==='B'?false:m.sa>m.sb;
+  m.done=true;
+  KOCP.forEach(p=>{
+    if(p.id===m.a1||p.id===m.a2) p.pts+=m.sa;
+    if(p.id===m.b1||p.id===m.b2) p.pts+=m.sb;
+  });
+  if(m.kocCourt===R.courts){
+    const kings=wA?[m.a1,m.a2]:[m.b1,m.b2];
+    kings.forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p) p.kingRounds++; });
+  }
+  const ri=m.round-1;
+  if(KOCM[ri].every(x=>x.done)){
+    if(kocRound<R.kocRounds){ KOCM.push(buildKocRound(KOCM.length+1)); kocRound=KOCM.length; }
+  }
+  launchConfetti(45,10);
+  renderKoc(); saveState();
+}
+
+function kocGoldenPoint(id,side){
+  const m=KOCM.flat().find(x=>x.id===id);
+  if(!m||m.done||m.gp!=='pending') return;
+  m.gp=side; kocSave(id);
+}
+
+function kocUndo(id){
+  const m=KOCM.flat().find(x=>x.id===id);
+  if(!m||!m.done) return;
+  const wA=m.gp==='A'?true:m.gp==='B'?false:m.sa>m.sb;
+  KOCP.forEach(p=>{
+    if(p.id===m.a1||p.id===m.a2) p.pts-=m.sa;
+    if(p.id===m.b1||p.id===m.b2) p.pts-=m.sb;
+  });
+  if(m.kocCourt===R.courts){
+    const kings=wA?[m.a1,m.a2]:[m.b1,m.b2];
+    kings.forEach(id=>{ const p=KOCP.find(x=>x.id===id); if(p) p.kingRounds--; });
+  }
+  m.done=false; m.gp=null; m.sa=0; m.sb=0;
+  KOCM=KOCM.slice(0,m.round);
+  kocRound=m.round;
+  renderKoc(); saveState();
+}
+
 function _rebuildFutureAmRounds(){
   const activeIdx=AM.findIndex(round=>round.some(m=>!m.done));
   if(activeIdx===-1) return;
@@ -4877,11 +5064,86 @@ function renderAmSt(){
   return h+`</table>${bar}${orgCta}</div>`;
 }
 
+function getKocStandings(){
+  return [...KOCP].sort((a,b)=>b.kingRounds-a.kingRounds||b.pts-a.pts||a.id-b.id);
+}
+
+function _kocName(id){ const p=KOCP.find(x=>x.id===id); return p?p.name:'?'; }
+
+function renderKoc(){
+  const wrap=$('am-rounds-wrap'); if(!wrap) return;
+  const isAllDone=KOCM.length>0&&KOCM.flat().every(m=>m.done)&&kocRound>=R.kocRounds;
+  let h='';
+  // Header
+  const roundLabel=isAllDone?t('koc_done'):t('koc_round_n',{n:kocRound,total:R.kocRounds});
+  h+=`<div class="am-round-hdr"><span>${esc(tournamentName||'King of the Court')}</span><span>${roundLabel}</span></div>`;
+  // Current round courts (top = King Court)
+  const curRound=KOCM[kocRound-1]||[];
+  const sortedMatches=[...curRound].sort((a,b)=>b.kocCourt-a.kocCourt);
+  sortedMatches.forEach(m=>{
+    const courtLabel=m.kocCourt===R.courts?t('koc_king_court'):t('koc_court_n',{n:m.kocCourt});
+    const isPk=sport==='pickleball';
+    const n1=_kocName(m.a1),n2=_kocName(m.a2),n3=_kocName(m.b1),n4=_kocName(m.b2);
+    h+=`<div class="am-match-card${m.kocCourt===R.courts?' koc-king-card':''}">`;
+    h+=`<div class="am-match-label">${esc(courtLabel)}</div>`;
+    if(m.done){
+      const wA=m.gp==='A'?true:m.gp==='B'?false:m.sa>m.sb;
+      h+=`<div class="am-score-row am-done-row">`;
+      h+=`<span class="am-team${wA?' am-winner':''}">${esc(n1)} / ${esc(n2)}</span>`;
+      h+=`<span class="am-score">${m.sa} - ${m.sb}</span>`;
+      h+=`<span class="am-team${!wA?' am-winner':''}">${esc(n3)} / ${esc(n4)}</span>`;
+      h+=`</div>`;
+      if(!viewMode) h+=`<button class="btn btn-ghost btn-sm" onclick="kocUndo('${m.id}')">${t('btn_undo')}</button>`;
+    } else if(m.gp==='pending'){
+      h+=`<div class="am-score-row"><span class="am-team">${esc(n1)} / ${esc(n2)}</span><span class="am-score">${m.sa} - ${m.sb}</span><span class="am-team">${esc(n3)} / ${esc(n4)}</span></div>`;
+      h+=`<div class="koc-gp-wrap"><p class="koc-gp-lbl">${t('koc_golden_pt')}</p>`;
+      h+=`<button class="btn btn-primary" onclick="kocGoldenPoint('${m.id}','A')">${esc(n1)} / ${esc(n2)}</button>`;
+      h+=`<button class="btn btn-primary" onclick="kocGoldenPoint('${m.id}','B')">${esc(n3)} / ${esc(n4)}</button></div>`;
+    } else {
+      h+=`<div class="am-score-row"><span class="am-team">${esc(n1)} / ${esc(n2)}</span>`;
+      if(isPk){
+        h+=`<span class="am-adj"><input type="number" min="0" id="koc-a-${m.id}" value="${m.sa}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sa=Math.max(0,parseInt(this.value)||0);saveState();}"> - <input type="number" min="0" id="koc-b-${m.id}" value="${m.sb}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sb=Math.max(0,parseInt(this.value)||0);saveState();}"></span>`;
+      } else {
+        h+=`<span class="am-adj"><button class="adj-btn" onclick="kocAdj('${m.id}','a',-1)">-</button><span id="koc-a-${m.id}">${m.sa}</span><button class="adj-btn" onclick="kocAdj('${m.id}','a',1)">+</button> - <button class="adj-btn" onclick="kocAdj('${m.id}','b',-1)">-</button><span id="koc-b-${m.id}">${m.sb}</span><button class="adj-btn" onclick="kocAdj('${m.id}','b',1)">+</button></span>`;
+      }
+      h+=`<span class="am-team">${esc(n3)} / ${esc(n4)}</span></div>`;
+      h+=`<div class="am-save-row"><button class="btn btn-green" onclick="kocSave('${m.id}')">${t('btn_save')}</button></div>`;
+    }
+    h+=`</div>`;
+  });
+  // Challenger pool
+  const poolPlayers=KOCP.filter(p=>p.court===0);
+  if(poolPlayers.length){
+    h+=`<div class="koc-pool-wrap"><h4>${t('koc_pool')}</h4><div class="koc-pool-chips">`;
+    poolPlayers.forEach(p=>{ h+=`<span class="chip">${esc(p.name)}</span>`; });
+    h+=`</div></div>`;
+  }
+  // Standings
+  const standing=getKocStandings();
+  const anyDone=KOCM.flat().some(m=>m.done);
+  if(anyDone){
+    h+=`<div class="am-st-wrap"><h3>${t('koc_standings')}</h3><table class="st-tbl">`;
+    h+=`<tr><th>#</th><th>${t('am_col_player')}</th><th>${t('koc_king_rounds')}</th><th>${t('am_col_pts')}</th></tr>`;
+    standing.forEach((p,i)=>{
+      const crown=p.kingRounds>0?` <span title="${t('koc_king_lbl')}">&#9813;</span>`:'';
+      h+=`<tr${i===0&&p.kingRounds>0?' class="qq"':''}><td>${i+1}</td><td>${esc(p.name)}${crown}</td><td>${p.kingRounds}</td><td>${p.pts}</td></tr>`;
+    });
+    h+=`</table>`;
+    if(isAllDone) h+=renderOrgCTA();
+    h+=renderExportBar();
+    h+=`</div>`;
+  }
+  wrap.innerHTML=h;
+}
+
 // ── Supabase sharing ──────────────────────────
 
 function _getSharePayload(){
   if(mode==='teamamericano'){
     return {mode,TAP,TAM,R,tournamentName};
+  }
+  if(mode==='kingofcourt'){
+    return {mode,KOCP,KOCM,kocRound,R,tournamentName,sport};
   }
   const base=(mode==='americano'||mode==='mexicano'||mode==='mixicano')
     ? {mode,AP,AM,R,tournamentName}
@@ -5118,7 +5380,10 @@ async function initViewMode(code){
 // ── State opslaan ─────────────────────────────
 function saveState(){
   if(viewMode) return;
-  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
+  if(mode==='kingofcourt'){
+    if(!KOCP.length) return;
+    localStorage.setItem('padel-state', JSON.stringify({mode,KOCP,KOCM,kocRound,R,tournamentName,sport}));
+  } else if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     if(!AP.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName,playerScoring,sport}));
   } else if(mode==='teamamericano'){
@@ -5137,10 +5402,12 @@ function loadState(){
     const raw=localStorage.getItem('padel-state');
     if(!raw) return;
     const s=JSON.parse(raw);
-    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano'&&s.mode!=='teamamericano'&&s.mode!=='mixicano') return;
+    if(!s.T?.length&&s.mode!=='americano'&&s.mode!=='mexicano'&&s.mode!=='teamamericano'&&s.mode!=='mixicano'&&s.mode!=='kingofcourt') return;
     savedState=s;
     const label=s.tournamentName?`${s.tournamentName} · `:'';
-    if(s.mode==='americano'||s.mode==='mexicano'||s.mode==='mixicano'){
+    if(s.mode==='kingofcourt'){
+      $('resume-info').textContent=t('res_koc',{label,n:s.KOCP?.length||0});
+    } else if(s.mode==='americano'||s.mode==='mexicano'||s.mode==='mixicano'){
       const key=s.mode==='mexicano'?'res_mex':s.mode==='mixicano'?'res_mix':'res_am';
       $('resume-info').textContent=t(key,{label,n:s.AP?.length||0});
     } else if(s.mode==='teamamericano'){
@@ -5161,6 +5428,13 @@ function resumeFromBanner(){
   playerScoring=!!savedState.playerScoring;
   const inp=$('inp-tname'); if(inp) inp.value=tournamentName;
   $('resume-banner').classList.add('hidden');
+  if(savedState.mode==='kingofcourt'){
+    mode='kingofcourt';
+    ({KOCP,KOCM}=savedState); kocRound=savedState.kocRound||1;
+    savedState=null;
+    showAmericano();
+    return;
+  }
   if(savedState.mode==='americano'||savedState.mode==='mexicano'||savedState.mode==='mixicano'){
     mode=savedState.mode;
     ({AP,AM}=savedState);
@@ -5483,7 +5757,7 @@ async function shareStandingsImage(){
 function renderExportBar(){
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
   const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="openAddToCompModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
-  const duprBtn=(sport==='pickleball'&&(mode==='americano'||mode==='mexicano'||mode==='roundrobin'))?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
+  const duprBtn=(sport==='pickleball'&&(mode==='americano'||mode==='mexicano'||mode==='roundrobin'||mode==='kingofcourt'))?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
   return `<div class="export-bar">
     <span class="export-bar-lbl">Export</span>
     <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
@@ -5498,7 +5772,12 @@ function buildExportData(){
   const locale=LANG==='nl'?'nl-NL':LANG;
   const date=new Date().toLocaleDateString(locale);
   const name=tournamentName||'Padel Toernooi';
-  const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',mixicano:'Mixed Americano',roundrobin:'Round Robin'}[mode]||mode;
+  const fmtLabel={team:'Knockout',americano:'Americano',mexicano:'Mexicano',mixicano:'Mixed Americano',roundrobin:'Round Robin',kingofcourt:'King of the Court'}[mode]||mode;
+  if(mode==='kingofcourt'){
+    const standings=getKocStandings();
+    const matches=KOCM.flat().filter(m=>m.done);
+    return{name,date,fmtLabel,standings,matches};
+  }
   if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     const standings=[...AP].sort((a,b)=>b.pts-a.pts);
     const matches=AM.flat().filter(m=>m.done);
@@ -5535,6 +5814,11 @@ function exportDUPR(){
       const [p1a,p2a]=(tA.name.split('&').map(s=>s.trim()));
       const [p1b,p2b]=(tB.name.split('&').map(s=>s.trim()));
       lines.push(row(date,p1a,p2a||'',p1b,p2b||'',m.sa,m.sb));
+    });
+  }
+  if(mode==='kingofcourt'){
+    KOCM.flat().filter(m=>m.done).forEach(m=>{
+      lines.push(row(date,_kocName(m.a1),_kocName(m.a2),_kocName(m.b1),_kocName(m.b2),m.sa,m.sb));
     });
   }
   const csv='﻿'+lines.join('\n');
@@ -6035,7 +6319,7 @@ document.addEventListener('touchend',function(e){
   function _sxN(){ return _sxChips.reduce((a,n)=>a+(n.includes('&')?n.split('&').filter(s=>s.trim()).length:1),0); }
   function _sxMPR(n,c){ return Math.max(0,Math.min(c,Math.floor(n/4))); }
   function _sxAdviseCourts(n){ return Math.min(4,Math.max(1,Math.floor(n/4))); }
-  function _sxUsesPts(){ return _sxState.type==='americano'||_sxState.type==='mexicano'||_sxState.type==='teamamericano'||(_sxState.type==='roundrobin'&&_sxState.sport==='pickleball'); }
+  function _sxUsesPts(){ return _sxState.type==='americano'||_sxState.type==='mexicano'||_sxState.type==='teamamericano'||_sxState.type==='kingofcourt'||(_sxState.type==='roundrobin'&&_sxState.sport==='pickleball'); }
 
   // sync chips → hidden #ta
   function _sxSyncTA(){
@@ -6228,6 +6512,8 @@ document.addEventListener('touchend',function(e){
     const rowGpm=$('sx-row-gpm'),rowPts=$('sx-row-pts');
     if(rowGpm) rowGpm.style.display=_sxUsesPts()?'none':'';
     if(rowPts) rowPts.style.display=_sxUsesPts()?'':'none';
+    const rowKocRounds=$('sx-row-koc-rounds');
+    if(rowKocRounds) rowKocRounds.style.display=_sxState.type==='kingofcourt'?'':'none';
     // Sport-specific: propagate to global, show correct preset set
     const _isPk=_sxState.sport==='pickleball';
     sport=_sxState.sport;

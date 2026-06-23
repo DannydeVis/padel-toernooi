@@ -19,6 +19,11 @@ Partners are reassigned after every round based on the live standings — rank 1
 - Players: 4–24
 - Best for: groups that want a clear, competitive winner
 
+### King of the Court
+Courts are ranked top to bottom. Each round, every court plays one match. Winners move up one court, losers drop down. The top court is the King Court. Players who hold the King Court the most rounds win. Partners are randomly re-drawn each round. Extra players wait in a challenger pool and rotate in each round. For padel: a golden point resolves ties. For pickleball: win-by-2 scoring ensures a decisive winner every time.
+- Players: 4 or more
+- Best for: fun, fast-paced sessions where ranking changes every round
+
 ### Knockout
 A group stage followed by a single-elimination bracket (quarter-finals, semi-finals, final), with an automatic consolation bracket so eliminated teams keep playing.
 - Players: 4–24 (2–12 fixed teams of two)

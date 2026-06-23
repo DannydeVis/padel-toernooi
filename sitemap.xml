@@ -378,6 +378,25 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- King of the Court -->
+  <url>
+    <loc>https://padel-bracket.com/king-of-the-court/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/king-of-the-court/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/king-of-the-court/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pickleball/king-of-the-court/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/king-of-the-court/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/king-of-the-court/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Privacy policy -->
   <url>
     <loc>https://padel-bracket.com/privacy/</loc>
