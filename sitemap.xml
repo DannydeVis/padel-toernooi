@@ -341,6 +341,43 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Pickleball pages -->
+  <url>
+    <loc>https://padel-bracket.com/pickleball/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pickleball/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/round-robin/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pickleball/americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/americano/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pickleball/mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/mexicano/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Privacy policy -->
   <url>
     <loc>https://padel-bracket.com/privacy/</loc>
