@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="Gratis padel brackets en Americano. Geen account, werkt offline.">
 <meta name="twitter:image" content="https://padel-bracket.com/og-share.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PadelBracket","alternateName":"Padel Bracket Generator","applicationCategory":"SportsApplication","operatingSystem":"Web, iOS, Android (PWA)","description":"Gratis padel toernooi bracket generator voor recreatieve spelers en clubs.","url":"https://padel-bracket.com","inLanguage":["nl","en","fr","de","es","sv"],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"featureList":["Knockout brackets","Americano format","Round robin","Live scoring","No signup required","Offline support"]}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PadelBracket","alternateName":"Padel and Pickleball Tournament Generator","applicationCategory":"SportsApplication","operatingSystem":"Web, iOS, Android (PWA)","description":"Free tournament generator for padel and pickleball. Americano, Mexicano, Round Robin, Knockout. No signup, works offline. DUPR export for pickleball.","url":"https://padel-bracket.com","inLanguage":["nl","en","fr","de","es","sv"],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"featureList":["Padel tournament generator","Pickleball tournament generator","Americano format","Mexicano format","Knockout brackets","Round robin","Live scoring","DUPR export","No signup required","Offline support"]}
 </script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
@@ -6307,8 +6307,11 @@ document.addEventListener('touchend',function(e){
   // Boot: wire up chip input
   function _sxBoot(){
     const box=$('sx-chipbox'), inp=$('sx-chipinp'); if(!box||!inp) return;
+    // Sync setup state with any pre-selected sport from URL param
+    if(sport==='pickleball'){ _sxState.sport='pickleball'; _sxState.pts=11; _sxState.winBy2=true; }
     // Set initial type (americano is default)
     sxSetType('americano');
+    if(sport==='pickleball') sxSetSport('pickleball');
     inp.addEventListener('keydown',e=>{
       if(e.key==='Enter'||e.key===','){ e.preventDefault(); _sxCommit(); }
       else if(e.key==='Backspace'&&!inp.value&&_sxChips.length){ _sxChips.pop(); _sxRenderChips(); _sxSyncTA(); }
@@ -6357,6 +6360,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if(_pres==='1'){ initPresentation(); return; }
   const _vc=_sp.get('view');
   if(_vc){ initViewMode(_vc.toUpperCase()); return; }
+  // Pre-select sport from URL param: /app/?sport=pickleball
+  const _sprt=_sp.get('sport');
+  if(_sprt==='pickleball'){ sport='pickleball'; R.winBy2=true; R.matchPts=11; }
   loadState();
   if(savedState) resumeFromBanner(); // auto-resume on page refresh
   initCast();
