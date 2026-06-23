@@ -1458,10 +1458,10 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
             <div id="sx-row-koc-rounds" style="display:none">
               <span class="sx-seglbl" data-i18n="koc_rounds_lbl">Rondes</span>
               <div class="sx-seg">
-                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=6;sxUpdate()"><span class="sg-t">6</span></button>
-                <button type="button" class="sx-segbtn active" onclick="_sxState.kocRounds=10;sxUpdate()"><span class="sg-t">10</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
-                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=15;sxUpdate()"><span class="sg-t">15</span></button>
-                <button type="button" class="sx-segbtn" onclick="_sxState.kocRounds=20;sxUpdate()"><span class="sg-t">20</span></button>
+                <button type="button" class="sx-segbtn" onclick="sxSetKocRounds(6)"><span class="sg-t">6</span></button>
+                <button type="button" class="sx-segbtn active" onclick="sxSetKocRounds(10)"><span class="sg-t">10</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
+                <button type="button" class="sx-segbtn" onclick="sxSetKocRounds(15)"><span class="sg-t">15</span></button>
+                <button type="button" class="sx-segbtn" onclick="sxSetKocRounds(20)"><span class="sg-t">20</span></button>
               </div>
             </div>
             <span class="sx-seglbl" data-i18n="lbl_timer">Timer per ronde</span>
@@ -1722,7 +1722,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.57.0';
+const APP_VERSION = 'v1.57.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4028,7 +4028,7 @@ function startKingOfCourt(){
   KOCP=[...ns].sort(()=>Math.random()-.5).map((name,id)=>({id,name,pts:0,kingRounds:0,sitouts:0,court:null}));
   KOCM=[];
   kocRound=1;
-  R.kocRounds=_sxState&&_sxState.kocRounds?_sxState.kocRounds:10;
+  if(!R.kocRounds) R.kocRounds=10;
   KOCM.push(buildKocRound(1));
   localStorage.removeItem('padel-round-timer');
   trackStart('kingofcourt', KOCP.length);
@@ -6520,6 +6520,7 @@ document.addEventListener('touchend',function(e){
     if(rowPts) rowPts.style.display=_sxUsesPts()?'':'none';
     const rowKocRounds=$('sx-row-koc-rounds');
     if(rowKocRounds) rowKocRounds.style.display=_sxState.type==='kingofcourt'?'':'none';
+    R.kocRounds=_sxState.kocRounds||10;
     // Sport-specific: propagate to global, show correct preset set
     const _isPk=_sxState.sport==='pickleball';
     sport=_sxState.sport;
@@ -6590,6 +6591,12 @@ document.addEventListener('touchend',function(e){
     _sxState.timer=v;
     document.querySelectorAll('#sx-seg-timer .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
     setTimerMins(v);
+    sxUpdate();
+  };
+  window.sxSetKocRounds = function(v){
+    _sxState.kocRounds=v;
+    document.querySelectorAll('#sx-row-koc-rounds .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
+    R.kocRounds=v;
     sxUpdate();
   };
   window.sxSetSport = function(s){
