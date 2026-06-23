@@ -1330,6 +1330,10 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
             <span class="sx-steptitle" data-i18n="step_type">Type toernooi</span>
           </div>
           <p class="sx-stepsub" data-i18n="step_type_sub" style="margin-bottom:0">Hoe willen jullie spelen?</p>
+          <div class="sx-seg" id="sx-sport-seg" style="margin:10px 0 4px">
+            <button type="button" class="sx-segbtn active" data-sport="padel" onclick="sxSetSport('padel')"><span class="sg-t" data-i18n="sport_padel">Padel</span></button>
+            <button type="button" class="sx-segbtn" data-sport="pickleball" onclick="sxSetSport('pickleball')"><span class="sg-t" data-i18n="sport_pickleball">Pickleball</span></button>
+          </div>
           <div class="sx-tgrid" id="sx-tgrid">
             <button type="button" class="sx-tcard" data-type="team" onclick="sxSetType('team')">
               <span class="tc-ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3.2"></circle><circle cx="16" cy="9" r="3.2"></circle><path d="M3.5 19c.7-3 2.5-4.5 4.5-4.5S11.8 16 12 19M12 19c.2-3 2-4.5 4-4.5s3.8 1.5 4.5 4.5"></path></svg></span>
@@ -1409,10 +1413,22 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
           <!-- PTS: Americano/Mexicano/TAm -->
           <div id="sx-row-pts">
             <span class="sx-seglbl" data-i18n="lbl_pts">Punten per match</span>
-            <div class="sx-seg" id="sx-seg-pts">
+            <div class="sx-seg" id="sx-seg-pts-padel">
               <button type="button" class="sx-segbtn" onclick="sxSetPts(24)"><span class="sg-t">24</span></button>
               <button type="button" class="sx-segbtn active" onclick="sxSetPts(32)"><span class="sg-t">32</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
               <button type="button" class="sx-segbtn" onclick="sxSetPts(40)"><span class="sg-t">40</span></button>
+            </div>
+            <div class="sx-seg" id="sx-seg-pts-pk" style="display:none">
+              <button type="button" class="sx-segbtn active" onclick="sxSetPts(11)"><span class="sg-t">11</span><span class="sg-s" data-i18n="deflt">standaard</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetPts(15)"><span class="sg-t">15</span></button>
+              <button type="button" class="sx-segbtn" onclick="sxSetPts(21)"><span class="sg-t">21</span></button>
+            </div>
+            <div id="sx-row-winby2" style="display:none">
+              <span class="sx-seglbl" data-i18n="set_lbl_winby2">Win by 2</span>
+              <div class="sx-seg">
+                <button type="button" class="sx-segbtn active" id="sx-wb2-on" onclick="sxSetWinBy2(true)"><span class="sg-t" data-i18n="on_lbl">Aan</span></button>
+                <button type="button" class="sx-segbtn" id="sx-wb2-off" onclick="sxSetWinBy2(false)"><span class="sg-t" data-i18n="off_lbl">Uit</span></button>
+              </div>
             </div>
             <span class="sx-seglbl" data-i18n="lbl_timer">Timer per ronde</span>
             <div class="sx-seg" id="sx-seg-timer">
@@ -1672,7 +1688,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.54.2';
+const APP_VERSION = 'v1.55.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1764,6 +1780,7 @@ nl:{
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
   set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
   eyebrow:'Nieuw toernooi',title:'Stel je toernooi in',sub_c:'Je ziet je toernooi ontstaan terwijl je typt.',tname_ph:'Bijv. Vrijdagavond Cup (optioneel)',step_type:'Type toernooi',step_type_sub:'Hoe willen jullie spelen?',type_team:'Team',type_team_sub:'Vast koppel',type_am:'Americano',type_am_sub:'Wissel koppel',type_mex:'Mexicano',type_mex_sub:'Stand koppels',type_rr:'Round Robin',type_rr_sub:'Iedereen vs iedereen',type_tam:'Team Am.',type_tam_sub:'Vast team',type_mix:'Mixicano',type_mix_sub:'Man & vrouw',step_players:'Spelers',step_players_sub:'Typ een naam en druk op Enter — of plak een hele lijst.',ph_player:'Typ een naam…',tip_team:'Tip: typ "Jan & Piet" om een vast koppel te maken.',saved_groups:'Of begin met een opgeslagen groep:',cnt_zero:'Voeg minstens 4 spelers toe',cnt_need:'Nog {n} speler(s) nodig',cnt_ok:'{n} spelers · {m} wedstrijd(en) per ronde',cnt_odd:'{n} spelers · 1 speler rust per ronde',cnt_max:'Maximaal 24 spelers',step_courts:'Banen',courts_word:'banen',court:'Baan',courts_advice:'Advies voor {n} spelers: <b data-act="advice">{c} banen</b>',step_match:'Match formaat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punten per match',lbl_timer:'Timer per ronde',off:'Geen',deflt:'standaard',btn_shuffle:'Schudden',players_word:'spelers',pv_t:'Live voorbeeld',pv_rounds:'rondes',pv_mpr:'per ronde',pv_dur:'duur',pv_empty:'Voeg spelers toe en zie hier het speelschema ontstaan.',pv_estimate:'schatting ronde 1',rest_lbl:'Rust deze ronde:',btn_start:'Start toernooi',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win met 2',on_lbl:'Aan',off_lbl:'Uit',courts_word_pk:'courts',export_dupr:'Exporteer voor DUPR',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',more_support:'Support this project',more_gear:'Padel gear tips',stats_support:'Tournament a success? Support the project!',
@@ -1839,6 +1856,7 @@ en:{
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
   set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
   eyebrow:'New tournament',title:'Set up your tournament',sub_c:'Watch your tournament take shape as you type.',tname_ph:'E.g. Friday Night Cup (optional)',step_type:'Tournament type',step_type_sub:'How do you want to play?',type_team:'Team',type_team_sub:'Fixed pair',type_am:'Americano',type_am_sub:'Rotating partners',type_mex:'Mexicano',type_mex_sub:'Standings-based',type_rr:'Round Robin',type_rr_sub:'Everyone vs everyone',type_tam:'Team Am.',type_tam_sub:'Fixed team',type_mix:'Mixicano',type_mix_sub:'Man & woman',step_players:'Players',step_players_sub:'Type a name and press Enter — or paste a list.',ph_player:'Type a name…',tip_team:'Tip: type "Jan & Piet" to create a fixed pair.',saved_groups:'Or start with a saved group:',cnt_zero:'Add at least 4 players',cnt_need:'{n} more player(s) needed',cnt_ok:'{n} players · {m} match(es) per round',cnt_odd:'{n} players · 1 player sits out per round',cnt_max:'Maximum 24 players',step_courts:'Courts',courts_word:'courts',court:'Court',courts_advice:'Suggestion for {n} players: <b data-act="advice">{c} courts</b>',step_match:'Match format',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points per match',lbl_timer:'Timer per round',off:'Off',deflt:'default',btn_shuffle:'Shuffle',players_word:'players',pv_t:'Live preview',pv_rounds:'rounds',pv_mpr:'per round',pv_dur:'duration',pv_empty:'Add players to see the schedule take shape.',pv_estimate:'round 1 estimate',rest_lbl:'Sitting out this round:',btn_start:'Start tournament',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -1913,6 +1931,7 @@ fr:{
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
   set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
   eyebrow:'Nouveau tournoi',title:'Configurez votre tournoi',sub_c:'Regardez votre tournoi prendre forme pendant que vous tapez.',tname_ph:'Ex. Coupe Vendredi soir (optionnel)',step_type:'Type de tournoi',step_type_sub:'Comment voulez-vous jouer ?',type_team:'Equipe',type_team_sub:'Paire fixe',type_am:'Americano',type_am_sub:'Partenaires tournants',type_mex:'Mexicano',type_mex_sub:'Selon classement',type_rr:'Round Robin',type_rr_sub:'Tout le monde contre tout le monde',type_tam:'Team Am.',type_tam_sub:'Equipe fixe',type_mix:'Mixicano',type_mix_sub:'Homme & femme',step_players:'Joueurs',step_players_sub:'Tapez un nom et appuyez sur Entree — ou collez une liste.',ph_player:'Tapez un nom…',tip_team:'Conseil : tapez "Jean & Pierre" pour creer une paire fixe.',saved_groups:'Ou commencez avec un groupe enregistre :',cnt_zero:'Ajoutez au moins 4 joueurs',cnt_need:'Encore {n} joueur(s) necessaire(s)',cnt_ok:'{n} joueurs · {m} match(s) par tour',cnt_odd:'{n} joueurs · 1 joueur repose par tour',cnt_max:'Maximum 24 joueurs',step_courts:'Terrains',courts_word:'terrains',court:'Terrain',courts_advice:'Suggestion pour {n} joueurs : <b data-act="advice">{c} terrains</b>',step_match:'Format de match',gpm1:'1 jeu',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points par match',lbl_timer:'Minuterie par tour',off:'Aucun',deflt:'par defaut',btn_shuffle:'Melanger',players_word:'joueurs',pv_t:'Apercu en direct',pv_rounds:'tours',pv_mpr:'par tour',pv_dur:'duree',pv_empty:'Ajoutez des joueurs pour voir le programme se dessiner.',pv_estimate:'estimation tour 1',rest_lbl:'Repos ce tour :',btn_start:'Lancer le tournoi',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -1988,6 +2007,7 @@ de:{
   level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
   set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
   eyebrow:'Neues Turnier',title:'Turnier einrichten',sub_c:'Beobachte, wie dein Turnier beim Tippen entsteht.',tname_ph:'z.B. Freitagnacht-Cup (optional)',step_type:'Turniermodus',step_type_sub:'Wie wollt ihr spielen?',type_team:'Team',type_team_sub:'Festes Paar',type_am:'Americano',type_am_sub:'Wechselnde Partner',type_mex:'Mexicano',type_mex_sub:'Nach Tabelle',type_rr:'Round Robin',type_rr_sub:'Alle gegen alle',type_tam:'Team Am.',type_tam_sub:'Festes Team',type_mix:'Mixicano',type_mix_sub:'Mann & Frau',step_players:'Spieler',step_players_sub:'Namen eingeben und Enter drucken — oder eine Liste einfugen.',ph_player:'Namen eingeben…',tip_team:'Tipp: "Jan & Piet" eingeben um ein festes Paar zu erstellen.',saved_groups:'Oder mit einer gespeicherten Gruppe beginnen:',cnt_zero:'Mindestens 4 Spieler hinzufugen',cnt_need:'Noch {n} Spieler benotigt',cnt_ok:'{n} Spieler · {m} Spiel(e) pro Runde',cnt_odd:'{n} Spieler · 1 Spieler pausiert pro Runde',cnt_max:'Maximal 24 Spieler',step_courts:'Platze',courts_word:'Platze',court:'Platz',courts_advice:'Empfehlung fur {n} Spieler: <b data-act="advice">{c} Platze</b>',step_match:'Matchformat',gpm1:'1 Spiel',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punkte pro Match',lbl_timer:'Timer pro Runde',off:'Kein',deflt:'Standard',btn_shuffle:'Mischen',players_word:'Spieler',pv_t:'Live-Vorschau',pv_rounds:'Runden',pv_mpr:'pro Runde',pv_dur:'Dauer',pv_empty:'Spieler hinzufugen um den Spielplan entstehen zu sehen.',pv_estimate:'Runde 1 Schatzung',rest_lbl:'Pause diese Runde:',btn_start:'Turnier starten',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Mit 2 gewinnen',on_lbl:'An',off_lbl:'Aus',courts_word_pk:'Courts',export_dupr:'Fur DUPR exportieren',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',more_support:'Apoya este proyecto',more_gear:'Equipación de pádel',stats_support:'¿Torneo con éxito? ¡Apoya el proyecto!',
@@ -2062,6 +2082,7 @@ es:{
   level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
   set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
   eyebrow:'Nuevo torneo',title:'Configura tu torneo',sub_c:'Ve como toma forma tu torneo mientras escribes.',tname_ph:'Ej. Copa Viernes por la noche (opcional)',step_type:'Tipo de torneo',step_type_sub:'Como quieres jugar?',type_team:'Equipo',type_team_sub:'Pareja fija',type_am:'Americano',type_am_sub:'Parejas rotativas',type_mex:'Mexicano',type_mex_sub:'Por clasificacion',type_rr:'Round Robin',type_rr_sub:'Todos contra todos',type_tam:'Team Am.',type_tam_sub:'Equipo fijo',type_mix:'Mixicano',type_mix_sub:'Hombre & mujer',step_players:'Jugadores',step_players_sub:'Escribe un nombre y pulsa Enter — o pega una lista.',ph_player:'Escribe un nombre…',tip_team:'Consejo: escribe "Jan & Piet" para crear una pareja fija.',saved_groups:'O empieza con un grupo guardado:',cnt_zero:'Anade al menos 4 jugadores',cnt_need:'Faltan {n} jugador(es)',cnt_ok:'{n} jugadores · {m} partido(s) por ronda',cnt_odd:'{n} jugadores · 1 jugador descansa por ronda',cnt_max:'Maximo 24 jugadores',step_courts:'Pistas',courts_word:'pistas',court:'Pista',courts_advice:'Sugerencia para {n} jugadores: <b data-act="advice">{c} pistas</b>',step_match:'Formato de partido',gpm1:'1 juego',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Puntos por partido',lbl_timer:'Temporizador por ronda',off:'Sin',deflt:'predeterminado',btn_shuffle:'Mezclar',players_word:'jugadores',pv_t:'Vista previa en directo',pv_rounds:'rondas',pv_mpr:'por ronda',pv_dur:'duracion',pv_empty:'Anade jugadores para ver como se crea el programa.',pv_estimate:'estimacion ronda 1',rest_lbl:'Descansando esta ronda:',btn_start:'Iniciar torneo',
+  set_lbl_sport:'Deporte',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Ganar por 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'pistas',export_dupr:'Exportar para DUPR',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',more_support:'Stöd detta projekt',more_gear:'Padel gear tips',stats_support:'Lyckad turnering? Stöd projektet!',
@@ -2136,6 +2157,7 @@ sv:{
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
   set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
   eyebrow:'Ny turnering',title:'Stall in din turnering',sub_c:'Se din turnering ta form medan du skriver.',tname_ph:'T.ex. Fredagsnatt-cup (valfritt)',step_type:'Turneringstyp',step_type_sub:'Hur vill ni spela?',type_team:'Lag',type_team_sub:'Fast par',type_am:'Americano',type_am_sub:'Roterande partner',type_mex:'Mexicano',type_mex_sub:'Rankningsbaserat',type_rr:'Round Robin',type_rr_sub:'Alla mot alla',type_tam:'Team Am.',type_tam_sub:'Fast lag',type_mix:'Mixicano',type_mix_sub:'Man & kvinna',step_players:'Spelare',step_players_sub:'Skriv ett namn och tryck Enter — eller klistra in en lista.',ph_player:'Skriv ett namn…',tip_team:'Tips: skriv "Jan & Piet" for att skapa ett fast par.',saved_groups:'Eller borja med en sparad grupp:',cnt_zero:'Lagg till minst 4 spelare',cnt_need:'Behover {n} fler spelare',cnt_ok:'{n} spelare · {m} match(er) per runda',cnt_odd:'{n} spelare · 1 spelare vilar per runda',cnt_max:'Max 24 spelare',step_courts:'Banor',courts_word:'banor',court:'Bana',courts_advice:'Rekommendation for {n} spelare: <b data-act="advice">{c} banor</b>',step_match:'Matchformat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poang per match',lbl_timer:'Timer per runda',off:'Inga',deflt:'standard',btn_shuffle:'Blanda',players_word:'spelare',pv_t:'Live-forhandsvisning',pv_rounds:'rundor',pv_mpr:'per runda',pv_dur:'varaktighet',pv_empty:'Lagg till spelare for att se schemat ta form.',pv_estimate:'uppskattning runda 1',rest_lbl:'Vilar denna runda:',btn_start:'Starta turnering',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vinn med 2',on_lbl:'Pa',off_lbl:'Av',courts_word_pk:'courts',export_dupr:'Exportera till DUPR',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',more_support:'Sostieni questo progetto',more_gear:'Consigli attrezzatura padel',stats_support:'Torneo riuscito? Sostieni il progetto!',
@@ -2212,6 +2234,7 @@ it:{
   level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
   set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
   eyebrow:'Nuovo torneo',title:'Configura il tuo torneo',sub_c:'Guarda il tuo torneo prendere forma mentre scrivi.',tname_ph:'Es. Coppa Venerdi sera (opzionale)',step_type:'Tipo di torneo',step_type_sub:'Come volete giocare?',type_team:'Squadra',type_team_sub:'Coppia fissa',type_am:'Americano',type_am_sub:'Coppie rotanti',type_mex:'Mexicano',type_mex_sub:'Per classifica',type_rr:'Round Robin',type_rr_sub:'Tutti contro tutti',type_tam:'Team Am.',type_tam_sub:'Team fisso',type_mix:'Mixicano',type_mix_sub:'Uomo & donna',step_players:'Giocatori',step_players_sub:'Scrivi un nome e premi Invio — o incolla una lista.',ph_player:'Scrivi un nome…',tip_team:'Consiglio: scrivi "Jan & Piet" per creare una coppia fissa.',saved_groups:'O inizia con un gruppo salvato:',cnt_zero:'Aggiungi almeno 4 giocatori',cnt_need:'Ancora {n} giocatore/i necessari',cnt_ok:'{n} giocatori · {m} partita/e per turno',cnt_odd:'{n} giocatori · 1 giocatore riposa per turno',cnt_max:'Massimo 24 giocatori',step_courts:'Campi',courts_word:'campi',court:'Campo',courts_advice:'Suggerimento per {n} giocatori: <b data-act="advice">{c} campi</b>',step_match:'Formato partita',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punti per partita',lbl_timer:'Timer per turno',off:'Nessuno',deflt:'predefinito',btn_shuffle:'Mescola',players_word:'giocatori',pv_t:'Anteprima dal vivo',pv_rounds:'turni',pv_mpr:'per turno',pv_dur:'durata',pv_empty:'Aggiungi giocatori per vedere il programma prendere forma.',pv_estimate:'stima turno 1',rest_lbl:'Riposo questo turno:',btn_start:'Inizia torneo',
+  set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vincere per 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'campi',export_dupr:'Esporta per DUPR',
 },
 };
 
@@ -2535,7 +2558,8 @@ const icon = (id,cls='') => `<svg class="icon${cls?' '+cls:''}" aria-hidden="tru
 
 let T=[], PM=[], PW=[], PL=[], pmid=0, pDone=false, lastShuffle=[];
 let _castReq=null, _castConn=null, _castAvail=false;
-let R={gpm:3, matchPts:32, courts:2, timerMins:0};
+let R={gpm:3, matchPts:32, courts:2, timerMins:0, winBy2:true};
+let sport='padel'; // 'padel' | 'pickleball'
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
@@ -3679,7 +3703,8 @@ function renderTAMatch(m,isActive=true){
       <span class="am-team r">${tB}</span>
     </div></div>`;
   }
-  const total=m.sa+m.sb,ready=total===R.matchPts;
+  const total=m.sa+m.sb,ready=isMatchComplete(m.sa,m.sb);
+  const _taProg=sport==='pickleball'?`${m.sa}–${m.sb}`:t('am_pts',{total,max:R.matchPts});
   return `<div class="am-match" id="amm-${m.id}">
     <div class="am-match-teams">
       <span class="am-team">${tA}</span>
@@ -3700,7 +3725,7 @@ function renderTAMatch(m,isActive=true){
       </div>
     </div>
     <div class="am-sc-footer" id="tafoot-${m.id}">
-      <span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>
+      <span class="am-sc-prog${ready?' ready':''}">${_taProg}</span>
       ${ready?`<button class="btn btn-green btn-sm" onclick="taSave('${m.id}')">${t('am_save')}</button>`:''}
     </div>
   </div>`;
@@ -3720,24 +3745,27 @@ function renderTAStandings(){
 function taAdj(matchId,side,delta){
   const m=TAM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
+  const isPk=sport==='pickleball';
+  const cap=isPk?R.matchPts*3:R.matchPts;
   if(side==='a'){
-    m.sa=Math.max(0,Math.min(R.matchPts,m.sa+delta));
-    if(m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
+    m.sa=Math.max(0,Math.min(cap,m.sa+delta));
+    if(!isPk&&m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
   } else {
-    m.sb=Math.max(0,Math.min(R.matchPts,m.sb+delta));
-    if(m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
+    m.sb=Math.max(0,Math.min(cap,m.sb+delta));
+    if(!isPk&&m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
   }
   const saEl=$('tsa-'+matchId),sbEl=$('tsb-'+matchId);
   if(saEl) saEl.textContent=m.sa;
   if(sbEl) sbEl.textContent=m.sb;
-  const total=m.sa+m.sb,ready=total===R.matchPts;
+  const ready=isMatchComplete(m.sa,m.sb);
+  const progTxt=isPk?`${m.sa}–${m.sb}`:t('am_pts',{total:m.sa+m.sb,max:R.matchPts});
   const foot=$('tafoot-'+matchId);
-  if(foot) foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}">${t('am_pts',{total,max:R.matchPts})}</span>${ready?`<button class="btn btn-green btn-sm" onclick="taSave('${matchId}')">${t('am_save')}</button>`:''}`;
+  if(foot) foot.innerHTML=`<span class="am-sc-prog${ready?' ready':''}">${progTxt}</span>${ready?`<button class="btn btn-green btn-sm" onclick="taSave('${matchId}')">${t('am_save')}</button>`:''}`;
 }
 
 function taSave(matchId){
   const m=TAM.flat().find(x=>x.id===matchId);
-  if(!m||m.done||m.sa+m.sb!==R.matchPts) return;
+  if(!m||m.done||!isMatchComplete(m.sa,m.sb)) return;
   m.done=true;
   TAP[m.a].pts+=m.sa;
   TAP[m.b].pts+=m.sb;
@@ -4483,7 +4511,8 @@ function renderAmMatch(m,isActiveRound=true){
       </div>`}
     </div>`;
   }
-  const total=m.sa+m.sb, ready=total===R.matchPts;
+  const total=m.sa+m.sb, ready=isMatchComplete(m.sa,m.sb);
+  const _amProg=sport==='pickleball'?`${m.sa}–${m.sb}`:t('am_pts',{total,max:R.matchPts});
   if(viewMode){
     if(playerScoring&&!m.done){
       const isMyMatch=viewerPlayerId!==null&&[m.a1,m.a2,m.b1,m.b2].includes(viewerPlayerId);
@@ -4588,7 +4617,7 @@ function renderAmMatch(m,isActiveRound=true){
           </div>
         </div>
         <div class="am-sc-footer">
-          <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
+          <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${_amProg}</span>
           ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
         </div>
         ${pendingBadge}
@@ -4616,7 +4645,7 @@ function renderAmMatch(m,isActiveRound=true){
       </div>
     </div>
     <div class="am-sc-footer">
-      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${t('am_pts',{total,max:R.matchPts})}</span>
+      <span class="am-sc-prog${ready?' ready':''}" id="amtot-${m.id}">${_amProg}</span>
       ${ready?`<button class="btn btn-green btn-sm" onclick="amSave('${m.id}')">${t('am_save')}</button>`:''}
     </div>
     ${pendingBadge}
@@ -4652,23 +4681,34 @@ function renderAmViewCourtCard(m, withPicker){
   </div>`;
 }
 
+function isMatchComplete(sa, sb){
+  if(sport!=='pickleball') return sa+sb===R.matchPts;
+  const target=R.matchPts;
+  if(sa<target&&sb<target) return false;
+  if(!R.winBy2) return sa>=target||sb>=target;
+  return Math.abs(sa-sb)>=2&&(sa>=target||sb>=target);
+}
+
 let _adjDebounce=null;
 function amAdj(matchId,side,delta){
   const m=AM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
+  const isPk=sport==='pickleball';
+  const cap=isPk?R.matchPts*3:R.matchPts;
   if(side==='a'){
-    m.sa=Math.max(0,Math.min(R.matchPts,m.sa+delta));
-    if(m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
+    m.sa=Math.max(0,Math.min(cap,m.sa+delta));
+    if(!isPk&&m.sa+m.sb>R.matchPts) m.sb=R.matchPts-m.sa;
   } else {
-    m.sb=Math.max(0,Math.min(R.matchPts,m.sb+delta));
-    if(m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
+    m.sb=Math.max(0,Math.min(cap,m.sb+delta));
+    if(!isPk&&m.sa+m.sb>R.matchPts) m.sa=R.matchPts-m.sb;
   }
   // Targeted DOM update — no full re-render, keeps button focus
   const saEl=$(`amsa-${matchId}`), sbEl=$(`amsb-${matchId}`), totEl=$(`amtot-${matchId}`);
   if(saEl) saEl.textContent=m.sa;
   if(sbEl) sbEl.textContent=m.sb;
-  const total=m.sa+m.sb, ready=total===R.matchPts;
-  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=t('am_pts',{total,max:R.matchPts}); }
+  const ready=isMatchComplete(m.sa,m.sb);
+  const progTxt=isPk?`${m.sa}–${m.sb}`:t('am_pts',{total:m.sa+m.sb,max:R.matchPts});
+  if(totEl){ totEl.className=`am-sc-prog${ready?' ready':''}`;totEl.textContent=progTxt; }
   const foot=document.querySelector(`#amm-${matchId} .am-sc-footer`);
   if(foot){
     const hasBtn=!!foot.querySelector('.btn-green');
@@ -4688,7 +4728,7 @@ function amAdj(matchId,side,delta){
 
 function amSave(matchId){
   const m=AM.flat().find(x=>x.id===matchId);
-  if(!m||m.done||m.sa+m.sb!==R.matchPts) return;
+  if(!m||m.done||!isMatchComplete(m.sa,m.sb)) return;
   m.done=true;
   AP[m.a1].pts+=m.sa; AP[m.a2].pts+=m.sa;
   AP[m.b1].pts+=m.sb; AP[m.b2].pts+=m.sb;
@@ -5039,13 +5079,13 @@ function saveState(){
   if(viewMode) return;
   if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     if(!AP.length) return;
-    localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName,playerScoring}));
+    localStorage.setItem('padel-state', JSON.stringify({mode,AP,AM,R,tournamentName,playerScoring,sport}));
   } else if(mode==='teamamericano'){
     if(!TAP.length) return;
-    localStorage.setItem('padel-state', JSON.stringify({mode,TAP,TAM,R,tournamentName}));
+    localStorage.setItem('padel-state', JSON.stringify({mode,TAP,TAM,R,tournamentName,sport}));
   } else {
     if(!T.length) return;
-    localStorage.setItem('padel-state', JSON.stringify({mode,T,PM,PW,PL,pmid,pDone,R,tournamentName,playerScoring}));
+    localStorage.setItem('padel-state', JSON.stringify({mode,T,PM,PW,PL,pmid,pDone,R,tournamentName,playerScoring,sport}));
   }
   if(shareCode) pushToSupabase();
   updatePresentation();
@@ -5075,6 +5115,7 @@ function loadState(){
 function resumeFromBanner(){
   if(!savedState) return;
   if(savedState.R) R=savedState.R;
+  sport=savedState.sport||'padel';
   tournamentName=savedState.tournamentName||'';
   playerScoring=!!savedState.playerScoring;
   const inp=$('inp-tname'); if(inp) inp.value=tournamentName;
@@ -5401,11 +5442,12 @@ async function shareStandingsImage(){
 function renderExportBar(){
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
   const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="openAddToCompModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
+  const duprBtn=sport==='pickleball'?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
   return `<div class="export-bar">
     <span class="export-bar-lbl">Export</span>
     <button class="btn btn-ghost btn-sm" onclick="exportCSV()">${icon('ic-download')} ${t('export_csv')}</button>
     <button class="btn btn-ghost btn-sm" onclick="exportPrint()">${icon('ic-print')} ${t('export_print')}</button>
-    ${compBtn}${imgBtn}${renderShareCTA()}
+    ${duprBtn}${compBtn}${imgBtn}${renderShareCTA()}
   </div>`;
 }
 
@@ -5424,6 +5466,34 @@ function buildExportData(){
   const standings=getStandings();
   const matches=PM.filter(m=>m.winner);
   return{name,date,fmtLabel,standings,matches};
+}
+
+// DUPR column headers — edit ONLY this object to match DUPR's bulk-upload template
+const DUPR_COLS = {
+  date:     'Match Date',
+  p1_t1:   'Team 1 Player 1',
+  p2_t1:   'Team 1 Player 2',
+  p1_t2:   'Team 2 Player 1',
+  p2_t2:   'Team 2 Player 2',
+  score_t1: 'Team 1 Score',
+  score_t2: 'Team 2 Score',
+};
+
+function exportDUPR(){
+  const{name,date}=buildExportData();
+  const esc=v=>{const s=String(v??'');return(s.includes(',')||s.includes('"')||s.includes('\n'))?'"'+s.replace(/"/g,'""')+'"':s;};
+  const row=(...cols)=>cols.map(esc).join(',');
+  const c=DUPR_COLS;
+  let lines=['sep=,', row(c.date,c.p1_t1,c.p2_t1,c.p1_t2,c.p2_t2,c.score_t1,c.score_t2)];
+  AM.flat().filter(m=>m.done).forEach(m=>{
+    lines.push(row(date,_apName(m.a1),_apName(m.a2),_apName(m.b1),_apName(m.b2),m.sa,m.sb));
+  });
+  const csv='﻿'+lines.join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=(name.replace(/\s+/g,'-').toLowerCase()||'pickleball')+'-dupr.csv';
+  a.click(); URL.revokeObjectURL(url);
 }
 
 function exportCSV(){
@@ -5908,7 +5978,7 @@ document.addEventListener('touchend',function(e){
 /* ── Setup Redesign Logic ──────────────────────────────────────────────── */
 (function(){
   'use strict';
-  let _sxState = { type:'americano', courts:2, gpm:3, pts:32, timer:0 };
+  let _sxState = { type:'americano', courts:2, gpm:3, pts:32, timer:0, sport:'padel', winBy2:true };
   let _sxChips = []; // current player name list
   let _sxManual = false;
 
@@ -6109,6 +6179,17 @@ document.addEventListener('touchend',function(e){
     const rowGpm=$('sx-row-gpm'),rowPts=$('sx-row-pts');
     if(rowGpm) rowGpm.style.display=_sxUsesPts()?'none':'';
     if(rowPts) rowPts.style.display=_sxUsesPts()?'':'none';
+    // Sport-specific: propagate to global, show correct preset set
+    const _isPk=_sxState.sport==='pickleball';
+    sport=_sxState.sport;
+    R.winBy2=_sxState.winBy2!==false;
+    const _segPadel=$('sx-seg-pts-padel'),_segPk=$('sx-seg-pts-pk'),_rowWb2=$('sx-row-winby2');
+    if(_segPadel) _segPadel.style.display=_isPk?'none':'';
+    if(_segPk) _segPk.style.display=_isPk?'':'none';
+    if(_rowWb2) _rowWb2.style.display=_isPk?'':'none';
+    // Court label: "banen"/"courts" vs "courts" (pickleball uses English word universally)
+    const _courtsSmall=document.querySelector('#sx-court-val ~ small');
+    if(_courtsSmall){ const _ck=_isPk?'courts_word_pk':'courts_word'; _courtsSmall.setAttribute('data-i18n',_ck); _courtsSmall.textContent=t(_ck); }
     // Team tip
     const tipTeam=$('sx-tip-team');
     if(tipTeam) tipTeam.style.display=(_sxState.type==='team'||_sxState.type==='teamamericano'||_sxState.type==='mixicano')?'':'none';
@@ -6159,7 +6240,8 @@ document.addEventListener('touchend',function(e){
   };
   window.sxSetPts = function(v){
     _sxState.pts=v;
-    document.querySelectorAll('#sx-seg-pts .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
+    const _sid=_sxState.sport==='pickleball'?'sx-seg-pts-pk':'sx-seg-pts-padel';
+    document.querySelectorAll('#'+_sid+' .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
     setMatchPts(v);
     sxUpdate();
   };
@@ -6167,6 +6249,22 @@ document.addEventListener('touchend',function(e){
     _sxState.timer=v;
     document.querySelectorAll('#sx-seg-timer .sx-segbtn').forEach(b=>b.classList.toggle('active',parseInt(b.getAttribute('onclick').match(/\d+/)[0])===v));
     setTimerMins(v);
+    sxUpdate();
+  };
+  window.sxSetSport = function(s){
+    _sxState.sport=s;
+    sport=s;
+    if(s==='pickleball'&&[24,32,40].includes(_sxState.pts)){ _sxState.pts=11; setMatchPts(11); }
+    else if(s==='padel'&&[11,15,21].includes(_sxState.pts)){ _sxState.pts=32; setMatchPts(32); }
+    _sxState.winBy2=true; R.winBy2=true;
+    document.querySelectorAll('#sx-sport-seg .sx-segbtn').forEach(b=>b.classList.toggle('active',b.dataset.sport===s));
+    sxUpdate();
+  };
+  window.sxSetWinBy2 = function(v){
+    _sxState.winBy2=v; R.winBy2=v;
+    const _on=$('sx-wb2-on'),_off=$('sx-wb2-off');
+    if(_on) _on.classList.toggle('active',v);
+    if(_off) _off.classList.toggle('active',!v);
     sxUpdate();
   };
   window.sxShuffle = function(){
