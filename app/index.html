@@ -384,6 +384,10 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 /* KOC */
 .koc-king-card{border:1px solid var(--accent)!important;box-shadow:0 0 0 2px rgba(204,244,33,.18)}
 .am-match-card{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--bdr)}
+.koc-match-teams{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px}
+.koc-match-teams .am-team{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.koc-match-teams .am-team:last-child{text-align:right}
+.koc-vs{font-size:.75rem;color:var(--b-muted);white-space:nowrap;flex-shrink:0}
 .am-match-label{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:8px}
 .am-score-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 .am-score-row .am-team{flex:1;font-size:.85rem;font-weight:600}
@@ -1722,7 +1726,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.57.1';
+const APP_VERSION = 'v1.57.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -5099,21 +5103,21 @@ function renderKoc(){
       h+=`<span class="am-score">${m.sa} - ${m.sb}</span>`;
       h+=`<span class="am-team${!wA?' am-winner':''}">${esc(n3)} / ${esc(n4)}</span>`;
       h+=`</div>`;
-      if(!viewMode) h+=`<button class="btn btn-ghost btn-sm" onclick="kocUndo('${m.id}')">${t('btn_undo')}</button>`;
+      if(!viewMode) h+=`<button class="btn btn-ghost btn-sm" onclick="kocUndo('${m.id}')">${t('am_undo')}</button>`;
     } else if(m.gp==='pending'){
       h+=`<div class="am-score-row"><span class="am-team">${esc(n1)} / ${esc(n2)}</span><span class="am-score">${m.sa} - ${m.sb}</span><span class="am-team">${esc(n3)} / ${esc(n4)}</span></div>`;
       h+=`<div class="koc-gp-wrap"><p class="koc-gp-lbl">${t('koc_golden_pt')}</p>`;
       h+=`<button class="btn btn-primary" onclick="kocGoldenPoint('${m.id}','A')">${esc(n1)} / ${esc(n2)}</button>`;
       h+=`<button class="btn btn-primary" onclick="kocGoldenPoint('${m.id}','B')">${esc(n3)} / ${esc(n4)}</button></div>`;
     } else {
-      h+=`<div class="am-score-row"><span class="am-team">${esc(n1)} / ${esc(n2)}</span>`;
+      h+=`<div class="koc-match-teams"><span class="am-team">${esc(n1)} / ${esc(n2)}</span><span class="koc-vs">vs</span><span class="am-team">${esc(n3)} / ${esc(n4)}</span></div>`;
+      h+=`<div class="am-score-row" style="justify-content:center">`;
       if(isPk){
         h+=`<span class="am-adj"><input type="number" min="0" id="koc-a-${m.id}" value="${m.sa}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sa=Math.max(0,parseInt(this.value)||0);saveState();}"> - <input type="number" min="0" id="koc-b-${m.id}" value="${m.sb}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sb=Math.max(0,parseInt(this.value)||0);saveState();}"></span>`;
       } else {
         h+=`<span class="am-adj"><button class="adj-btn" onclick="kocAdj('${m.id}','a',-1)">-</button><span id="koc-a-${m.id}">${m.sa}</span><button class="adj-btn" onclick="kocAdj('${m.id}','a',1)">+</button> - <button class="adj-btn" onclick="kocAdj('${m.id}','b',-1)">-</button><span id="koc-b-${m.id}">${m.sb}</span><button class="adj-btn" onclick="kocAdj('${m.id}','b',1)">+</button></span>`;
       }
-      h+=`<span class="am-team">${esc(n3)} / ${esc(n4)}</span></div>`;
-      h+=`<div class="am-save-row"><button class="btn btn-green" onclick="kocSave('${m.id}')">${t('btn_save')}</button></div>`;
+      h+=`<button class="btn btn-green btn-sm" onclick="kocSave('${m.id}')">${t('am_save')}</button></div>`;
     }
     h+=`</div>`;
   });
