@@ -618,6 +618,18 @@ body.light .player-lvl{background:rgba(74,124,0,.1);color:var(--accent)}
 .comp-back-btn:hover{color:var(--txt)}
 .comp-select{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;padding:9px 12px;outline:none;appearance:none;-webkit-appearance:none}
 .comp-select:focus{border-color:var(--accent)}
+.comp-rating-tbl{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:8px}
+.comp-rating-tbl th{text-align:left;color:var(--txt2);font-size:.65rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bdr)}
+.comp-rating-tbl td{padding:7px 8px;border-bottom:1px solid var(--surface2);color:var(--txt)}
+.comp-rating-tbl tr:first-child td{font-weight:700;color:var(--accent)}
+.comp-rating-change{font-size:.75rem;font-weight:600;padding:2px 5px;border-radius:5px}
+.comp-rating-change.up{color:#4ade80;background:rgba(74,222,128,.1)}
+.comp-rating-change.dn{color:#f87171;background:rgba(248,113,113,.1)}
+.comp-rating-change.eq{color:var(--txt2);background:var(--surface2)}
+.comp-spark{display:inline-flex;align-items:flex-end;gap:1px;height:18px;vertical-align:middle}
+.comp-spark span{width:4px;border-radius:1px 1px 0 0;background:var(--accent);opacity:.55;min-height:2px}
+.comp-spark span.hi{opacity:1}
+.comp-rating-note{font-size:.72rem;color:var(--txt2);padding:6px 8px 2px;font-style:italic}
 body.light .comp-select{background:#f3f4f6;color:#111827}
 .add-comp-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;background:var(--surface2);margin-bottom:6px;font-weight:600;font-size:.9rem;color:var(--txt);border:none;width:100%;text-align:left;font-family:'Inter',sans-serif;transition:.15s}
 .add-comp-item:hover{background:rgba(199,255,94,.1);color:var(--accent)}
@@ -1726,7 +1738,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.57.3';
+const APP_VERSION = 'v1.58.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1814,7 +1826,7 @@ nl:{
   pres_ios_title:'Weergeven op TV',pres_ios_body:'Tik op \'Open presentatie\' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:',pres_ios_s1:'Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)',pres_ios_s2:'Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)',pres_ios_s3:'Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst',pres_ios_open:'Open presentatie',pres_ios_ok:'Sluiten',
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
   player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',
-  comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',
+  comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Verandering',comp_rating_wins:'Gewonnen',comp_rating_avg:'Gem. plaats',comp_rating_note:'Rating op basis van onderlinge plaatsingsvergelijkingen (ELO). Wordt opnieuw berekend uit alle sessies.',
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
   set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
   eyebrow:'Nieuw toernooi',title:'Stel je toernooi in',sub_c:'Je ziet je toernooi ontstaan terwijl je typt.',tname_ph:'Bijv. Vrijdagavond Cup (optioneel)',step_type:'Type toernooi',step_type_sub:'Hoe willen jullie spelen?',type_team:'Team',type_team_sub:'Vast koppel',type_am:'Americano',type_am_sub:'Wissel koppel',type_mex:'Mexicano',type_mex_sub:'Stand koppels',type_rr:'Round Robin',type_rr_sub:'Iedereen vs iedereen',type_tam:'Team Am.',type_tam_sub:'Vast team',type_mix:'Mixicano',type_mix_sub:'Man & vrouw',step_players:'Spelers',step_players_sub:'Typ een naam en druk op Enter — of plak een hele lijst.',ph_player:'Typ een naam…',tip_team:'Tip: typ "Jan & Piet" om een vast koppel te maken.',saved_groups:'Of begin met een opgeslagen groep:',cnt_zero:'Voeg minstens 4 spelers toe',cnt_need:'Nog {n} speler(s) nodig',cnt_ok:'{n} spelers · {m} wedstrijd(en) per ronde',cnt_odd:'{n} spelers · 1 speler rust per ronde',cnt_max:'Maximaal 24 spelers',step_courts:'Banen',courts_word:'banen',court:'Baan',courts_advice:'Advies voor {n} spelers: <b data-act="advice">{c} banen</b>',koc_courts_cap:'King of the Court heeft 4 spelers per baan nodig. Maximaal {max} baan/banen voor {n} spelers.',step_match:'Match formaat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punten per match',lbl_timer:'Timer per ronde',off:'Geen',deflt:'standaard',btn_shuffle:'Schudden',players_word:'spelers',pv_t:'Live voorbeeld',pv_rounds:'rondes',pv_mpr:'per ronde',pv_dur:'duur',pv_empty:'Voeg spelers toe en zie hier het speelschema ontstaan.',pv_estimate:'schatting ronde 1',rest_lbl:'Rust deze ronde:',btn_start:'Start toernooi',
@@ -1892,7 +1904,7 @@ en:{
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',
-  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',
+  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Change',comp_rating_wins:'Wins',comp_rating_avg:'Avg. place',comp_rating_note:'Rating based on head-to-head placement comparisons (ELO). Recalculated from all sessions.',
   set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
   eyebrow:'New tournament',title:'Set up your tournament',sub_c:'Watch your tournament take shape as you type.',tname_ph:'E.g. Friday Night Cup (optional)',step_type:'Tournament type',step_type_sub:'How do you want to play?',type_team:'Team',type_team_sub:'Fixed pair',type_am:'Americano',type_am_sub:'Rotating partners',type_mex:'Mexicano',type_mex_sub:'Standings-based',type_rr:'Round Robin',type_rr_sub:'Everyone vs everyone',type_tam:'Team Am.',type_tam_sub:'Fixed team',type_mix:'Mixicano',type_mix_sub:'Man & woman',step_players:'Players',step_players_sub:'Type a name and press Enter — or paste a list.',ph_player:'Type a name…',tip_team:'Tip: type "Jan & Piet" to create a fixed pair.',saved_groups:'Or start with a saved group:',cnt_zero:'Add at least 4 players',cnt_need:'{n} more player(s) needed',cnt_ok:'{n} players · {m} match(es) per round',cnt_odd:'{n} players · 1 player sits out per round',cnt_max:'Maximum 24 players',step_courts:'Courts',courts_word:'courts',court:'Court',courts_advice:'Suggestion for {n} players: <b data-act="advice">{c} courts</b>',koc_courts_cap:'King of the Court needs 4 players per court. Maximum {max} court(s) for {n} players.',step_match:'Match format',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points per match',lbl_timer:'Timer per round',off:'Off',deflt:'default',btn_shuffle:'Shuffle',players_word:'players',pv_t:'Live preview',pv_rounds:'rounds',pv_mpr:'per round',pv_dur:'duration',pv_empty:'Add players to see the schedule take shape.',pv_estimate:'round 1 estimate',rest_lbl:'Sitting out this round:',btn_start:'Start tournament',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
@@ -1968,7 +1980,7 @@ fr:{
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
   player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',
-  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',
+  comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Classement ELO',comp_rating_val:'Rating',comp_rating_chg:'Evolution',comp_rating_wins:'Victoires',comp_rating_avg:'Place moy.',comp_rating_note:'Classement base sur les comparaisons de placement (ELO). Recalcule a chaque fois.',
   set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
   eyebrow:'Nouveau tournoi',title:'Configurez votre tournoi',sub_c:'Regardez votre tournoi prendre forme pendant que vous tapez.',tname_ph:'Ex. Coupe Vendredi soir (optionnel)',step_type:'Type de tournoi',step_type_sub:'Comment voulez-vous jouer ?',type_team:'Equipe',type_team_sub:'Paire fixe',type_am:'Americano',type_am_sub:'Partenaires tournants',type_mex:'Mexicano',type_mex_sub:'Selon classement',type_rr:'Round Robin',type_rr_sub:'Tout le monde contre tout le monde',type_tam:'Team Am.',type_tam_sub:'Equipe fixe',type_mix:'Mixicano',type_mix_sub:'Homme & femme',step_players:'Joueurs',step_players_sub:'Tapez un nom et appuyez sur Entree — ou collez une liste.',ph_player:'Tapez un nom…',tip_team:'Conseil : tapez "Jean & Pierre" pour creer une paire fixe.',saved_groups:'Ou commencez avec un groupe enregistre :',cnt_zero:'Ajoutez au moins 4 joueurs',cnt_need:'Encore {n} joueur(s) necessaire(s)',cnt_ok:'{n} joueurs · {m} match(s) par tour',cnt_odd:'{n} joueurs · 1 joueur repose par tour',cnt_max:'Maximum 24 joueurs',step_courts:'Terrains',courts_word:'terrains',court:'Terrain',courts_advice:'Suggestion pour {n} joueurs : <b data-act="advice">{c} terrains</b>',step_match:'Format de match',gpm1:'1 jeu',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points par match',lbl_timer:'Minuterie par tour',off:'Aucun',deflt:'par defaut',btn_shuffle:'Melanger',players_word:'joueurs',pv_t:'Apercu en direct',pv_rounds:'tours',pv_mpr:'par tour',pv_dur:'duree',pv_empty:'Ajoutez des joueurs pour voir le programme se dessiner.',pv_estimate:'estimation tour 1',rest_lbl:'Repos ce tour :',btn_start:'Lancer le tournoi',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
@@ -2044,7 +2056,7 @@ de:{
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
   player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',
-  comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',
+  comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',comp_rating_lbl:'Wertung',comp_rating_val:'Rating',comp_rating_chg:'Veranderung',comp_rating_wins:'Siege',comp_rating_avg:'Ø Platz',comp_rating_note:'Wertung basierend auf Platzierungsvergleichen (ELO). Wird aus allen Sitzungen neu berechnet.',
   level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
   set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
   eyebrow:'Neues Turnier',title:'Turnier einrichten',sub_c:'Beobachte, wie dein Turnier beim Tippen entsteht.',tname_ph:'z.B. Freitagnacht-Cup (optional)',step_type:'Turniermodus',step_type_sub:'Wie wollt ihr spielen?',type_team:'Team',type_team_sub:'Festes Paar',type_am:'Americano',type_am_sub:'Wechselnde Partner',type_mex:'Mexicano',type_mex_sub:'Nach Tabelle',type_rr:'Round Robin',type_rr_sub:'Alle gegen alle',type_tam:'Team Am.',type_tam_sub:'Festes Team',type_mix:'Mixicano',type_mix_sub:'Mann & Frau',step_players:'Spieler',step_players_sub:'Namen eingeben und Enter drucken — oder eine Liste einfugen.',ph_player:'Namen eingeben…',tip_team:'Tipp: "Jan & Piet" eingeben um ein festes Paar zu erstellen.',saved_groups:'Oder mit einer gespeicherten Gruppe beginnen:',cnt_zero:'Mindestens 4 Spieler hinzufugen',cnt_need:'Noch {n} Spieler benotigt',cnt_ok:'{n} Spieler · {m} Spiel(e) pro Runde',cnt_odd:'{n} Spieler · 1 Spieler pausiert pro Runde',cnt_max:'Maximal 24 Spieler',step_courts:'Platze',courts_word:'Platze',court:'Platz',courts_advice:'Empfehlung fur {n} Spieler: <b data-act="advice">{c} Platze</b>',step_match:'Matchformat',gpm1:'1 Spiel',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punkte pro Match',lbl_timer:'Timer pro Runde',off:'Kein',deflt:'Standard',btn_shuffle:'Mischen',players_word:'Spieler',pv_t:'Live-Vorschau',pv_rounds:'Runden',pv_mpr:'pro Runde',pv_dur:'Dauer',pv_empty:'Spieler hinzufugen um den Spielplan entstehen zu sehen.',pv_estimate:'Runde 1 Schatzung',rest_lbl:'Pause diese Runde:',btn_start:'Turnier starten',
@@ -2120,7 +2132,7 @@ es:{
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
   player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',
-  comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',
+  comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',comp_rating_lbl:'Clasificacion ELO',comp_rating_val:'Rating',comp_rating_chg:'Cambio',comp_rating_wins:'Victorias',comp_rating_avg:'Posicion media',comp_rating_note:'Clasificacion basada en comparaciones de posicion (ELO). Recalculada a partir de todas las sesiones.',
   level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
   set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
   eyebrow:'Nuevo torneo',title:'Configura tu torneo',sub_c:'Ve como toma forma tu torneo mientras escribes.',tname_ph:'Ej. Copa Viernes por la noche (opcional)',step_type:'Tipo de torneo',step_type_sub:'Como quieres jugar?',type_team:'Equipo',type_team_sub:'Pareja fija',type_am:'Americano',type_am_sub:'Parejas rotativas',type_mex:'Mexicano',type_mex_sub:'Por clasificacion',type_rr:'Round Robin',type_rr_sub:'Todos contra todos',type_tam:'Team Am.',type_tam_sub:'Equipo fijo',type_mix:'Mixicano',type_mix_sub:'Hombre & mujer',step_players:'Jugadores',step_players_sub:'Escribe un nombre y pulsa Enter — o pega una lista.',ph_player:'Escribe un nombre…',tip_team:'Consejo: escribe "Jan & Piet" para crear una pareja fija.',saved_groups:'O empieza con un grupo guardado:',cnt_zero:'Anade al menos 4 jugadores',cnt_need:'Faltan {n} jugador(es)',cnt_ok:'{n} jugadores · {m} partido(s) por ronda',cnt_odd:'{n} jugadores · 1 jugador descansa por ronda',cnt_max:'Maximo 24 jugadores',step_courts:'Pistas',courts_word:'pistas',court:'Pista',courts_advice:'Sugerencia para {n} jugadores: <b data-act="advice">{c} pistas</b>',step_match:'Formato de partido',gpm1:'1 juego',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Puntos por partido',lbl_timer:'Temporizador por ronda',off:'Sin',deflt:'predeterminado',btn_shuffle:'Mezclar',players_word:'jugadores',pv_t:'Vista previa en directo',pv_rounds:'rondas',pv_mpr:'por ronda',pv_dur:'duracion',pv_empty:'Anade jugadores para ver como se crea el programa.',pv_estimate:'estimacion ronda 1',rest_lbl:'Descansando esta ronda:',btn_start:'Iniciar torneo',
@@ -2196,7 +2208,7 @@ sv:{
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
-  comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',
+  comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Forandring',comp_rating_wins:'Vinster',comp_rating_avg:'Snittplacering',comp_rating_note:'Rating baserat pa placeringsjanforelser (ELO). Raknast om fran alla sessioner.',
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
   set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
   eyebrow:'Ny turnering',title:'Stall in din turnering',sub_c:'Se din turnering ta form medan du skriver.',tname_ph:'T.ex. Fredagsnatt-cup (valfritt)',step_type:'Turneringstyp',step_type_sub:'Hur vill ni spela?',type_team:'Lag',type_team_sub:'Fast par',type_am:'Americano',type_am_sub:'Roterande partner',type_mex:'Mexicano',type_mex_sub:'Rankningsbaserat',type_rr:'Round Robin',type_rr_sub:'Alla mot alla',type_tam:'Team Am.',type_tam_sub:'Fast lag',type_mix:'Mixicano',type_mix_sub:'Man & kvinna',step_players:'Spelare',step_players_sub:'Skriv ett namn och tryck Enter — eller klistra in en lista.',ph_player:'Skriv ett namn…',tip_team:'Tips: skriv "Jan & Piet" for att skapa ett fast par.',saved_groups:'Eller borja med en sparad grupp:',cnt_zero:'Lagg till minst 4 spelare',cnt_need:'Behover {n} fler spelare',cnt_ok:'{n} spelare · {m} match(er) per runda',cnt_odd:'{n} spelare · 1 spelare vilar per runda',cnt_max:'Max 24 spelare',step_courts:'Banor',courts_word:'banor',court:'Bana',courts_advice:'Rekommendation for {n} spelare: <b data-act="advice">{c} banor</b>',step_match:'Matchformat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poang per match',lbl_timer:'Timer per runda',off:'Inga',deflt:'standard',btn_shuffle:'Blanda',players_word:'spelare',pv_t:'Live-forhandsvisning',pv_rounds:'rundor',pv_mpr:'per runda',pv_dur:'varaktighet',pv_empty:'Lagg till spelare for att se schemat ta form.',pv_estimate:'uppskattning runda 1',rest_lbl:'Vilar denna runda:',btn_start:'Starta turnering',
@@ -2274,7 +2286,7 @@ it:{
   pres_ios_title:'Mostra in TV',pres_ios_body:"Tocca 'Apri presentazione' per aprire il tabellone. Per mostrarlo su una TV via AirPlay:",pres_ios_s1:'Apri il <strong>Centro di Controllo</strong> (scorri verso il basso dall\'angolo in alto a destra)',pres_ios_s2:'Tocca <strong>Duplica schermo</strong> (quadrato con triangolo)',pres_ios_s3:'Scegli la tua <strong>Apple TV</strong> o TV compatibile AirPlay dalla lista',pres_ios_open:'Apri presentazione',pres_ios_ok:'Chiudi',
   court_links_btn:'Link campo',court_enter_score:'Inserisci punteggio',court_submit:'Invia',court_submitted:"Punteggio inviato, in attesa dell'organizzatore",court_invalid:'Link campo non valido',court_no_match:'Nessuna partita attiva su questo campo',court_accept:'Accetta',court_pending_lbl:'Punteggio inviato dal giocatore',
   player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',
-  comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',
+  comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',comp_rating_lbl:'Classifica ELO',comp_rating_val:'Rating',comp_rating_chg:'Variazione',comp_rating_wins:'Vittorie',comp_rating_avg:'Posizione media',comp_rating_note:'Classifica basata su confronti di piazzamento (ELO). Ricalcolata da tutte le sessioni.',
   level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
   set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
   eyebrow:'Nuovo torneo',title:'Configura il tuo torneo',sub_c:'Guarda il tuo torneo prendere forma mentre scrivi.',tname_ph:'Es. Coppa Venerdi sera (opzionale)',step_type:'Tipo di torneo',step_type_sub:'Come volete giocare?',type_team:'Squadra',type_team_sub:'Coppia fissa',type_am:'Americano',type_am_sub:'Coppie rotanti',type_mex:'Mexicano',type_mex_sub:'Per classifica',type_rr:'Round Robin',type_rr_sub:'Tutti contro tutti',type_tam:'Team Am.',type_tam_sub:'Team fisso',type_mix:'Mixicano',type_mix_sub:'Uomo & donna',step_players:'Giocatori',step_players_sub:'Scrivi un nome e premi Invio — o incolla una lista.',ph_player:'Scrivi un nome…',tip_team:'Consiglio: scrivi "Jan & Piet" per creare una coppia fissa.',saved_groups:'O inizia con un gruppo salvato:',cnt_zero:'Aggiungi almeno 4 giocatori',cnt_need:'Ancora {n} giocatore/i necessari',cnt_ok:'{n} giocatori · {m} partita/e per turno',cnt_odd:'{n} giocatori · 1 giocatore riposa per turno',cnt_max:'Massimo 24 giocatori',step_courts:'Campi',courts_word:'campi',court:'Campo',courts_advice:'Suggerimento per {n} giocatori: <b data-act="advice">{c} campi</b>',step_match:'Formato partita',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punti per partita',lbl_timer:'Timer per turno',off:'Nessuno',deflt:'predefinito',btn_shuffle:'Mescola',players_word:'giocatori',pv_t:'Anteprima dal vivo',pv_rounds:'turni',pv_mpr:'per turno',pv_dur:'durata',pv_empty:'Aggiungi giocatori per vedere il programma prendere forma.',pv_estimate:'stima turno 1',rest_lbl:'Riposo questo turno:',btn_start:'Inizia torneo',
@@ -2381,37 +2393,137 @@ function _compPointsForRank(schema,rank){return rank<=schema.length?schema[rank-
 
 function extractSessionResults(groupLines){
   const results=[];
+  const mkEntry=(rank,names,ids)=>{
+    // Store both index and name for identity robustness (Phase 4)
+    const playerNames=names.map(n=>n.trim()).filter(Boolean);
+    return{rank,playerIds:ids,playerNames};
+  };
   if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
     [...AP].sort((a,b)=>b.pts-a.pts).forEach((p,i)=>{
       const idx=groupLines.indexOf(p.name);
-      if(idx>=0) results.push({rank:i+1,playerIds:[idx]});
+      if(idx>=0) results.push(mkEntry(i+1,[p.name],[idx]));
     });
   } else if(mode==='teamamericano'){
     [...TAP].sort((a,b)=>b.pts-a.pts).forEach((pair,i)=>{
       const ids=[groupLines.indexOf(pair.n1),groupLines.indexOf(pair.n2)].filter(x=>x>=0);
-      if(ids.length) results.push({rank:i+1,playerIds:ids});
+      if(ids.length) results.push(mkEntry(i+1,[pair.n1,pair.n2],ids));
     });
   } else {
     getStandings().forEach((team,i)=>{
       const names=team.name.split(/\s*[&\/]\s*/);
       const ids=names.map(n=>groupLines.indexOf(n.trim())).filter(x=>x>=0);
-      if(ids.length) results.push({rank:i+1,playerIds:ids});
+      if(ids.length) results.push(mkEntry(i+1,names,ids));
     });
   }
   return results;
 }
 
+// Resolve names from a session result entry, using stored playerNames when available.
+function _sessEntryNames(entry,group){
+  if(entry.playerNames&&entry.playerNames.length) return entry.playerNames;
+  return entry.playerIds.map(i=>group.lines[i]||'?');
+}
+
 function _computeCompStandings(comp,group){
   const schema=comp.pointSchema||DEFAULT_SCHEMA;
+  // Build name->idx lookup for robustness, but match by name first (Phase 4)
   return group.lines.map((name,idx)=>{
     let total=0,played=0;
-    const sessionPts=comp.sessions.map(sess=>{
-      const entry=sess.results.find(r=>r.playerIds.includes(idx));
-      if(entry){played++;const pts=_compPointsForRank(schema,entry.rank);total+=pts;return pts;}
-      return 0;
+    comp.sessions.forEach(sess=>{
+      // Prefer name match via playerNames, fall back to index
+      const entry=sess.results.find(r=>{
+        if(r.playerNames&&r.playerNames.length) return r.playerNames.includes(name);
+        return r.playerIds.includes(idx);
+      });
+      if(entry){played++;total+=_compPointsForRank(schema,entry.rank);}
     });
-    return{idx,name,total,played,sessionPts};
+    return{idx,name,total,played};
   }).sort((a,b)=>b.total-a.total||a.idx-b.idx);
+}
+
+// ── Competition rating engine (ELO from placement pairs) ──────────
+function _computeCompRatings(comp,group){
+  const BASE=1000;
+  // sessions sorted chronologically
+  const sessions=[...comp.sessions].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  // ratings map: name -> current rating
+  const ratings={};
+  const history={}; // name -> [{after session i, rating}]
+  const stats={};   // name -> {played,wins,ranks[]}
+
+  const ensure=name=>{
+    if(!(name in ratings)){ratings[name]=BASE;history[name]=[];stats[name]={played:0,wins:0,ranks:[]};}
+  };
+
+  sessions.forEach(sess=>{
+    // Collect all names in this session with their rank
+    const groups=[];  // [{rank, names[]}]
+    sess.results.forEach(r=>{
+      const names=_sessEntryNames(r,group);
+      groups.push({rank:r.rank,names});
+      names.forEach(ensure);
+    });
+    if(groups.length<2){
+      // Single group — still record stats, no comparisons
+      groups.forEach(g=>g.names.forEach(n=>{stats[n].played++;if(g.rank===1)stats[n].wins++;stats[n].ranks.push(g.rank);}));
+      groups.forEach(g=>g.names.forEach(n=>history[n].push(ratings[n])));
+      return;
+    }
+
+    // Build all (winner, loser) pairs across groups (same rank = no comparison between them)
+    const pairs=[];
+    for(let i=0;i<groups.length;i++){
+      for(let j=i+1;j<groups.length;j++){
+        const higher=groups[i].rank<groups[j].rank?groups[i]:groups[j];
+        const lower=groups[i].rank<groups[j].rank?groups[j]:groups[i];
+        higher.names.forEach(w=>lower.names.forEach(l=>pairs.push([w,l])));
+      }
+    }
+
+    // Scale K so one session doesn't dominate; floor at 4 to stay meaningful
+    const avgCompsPerPlayer=pairs.length*2/Math.max(1,Object.keys(ratings).length);
+    const K=Math.max(4,32/Math.max(1,avgCompsPerPlayer));
+
+    // ELO update — apply all deltas after computing expected scores (avoid order dependency)
+    const deltas={};
+    const initDelta=n=>{if(!(n in deltas))deltas[n]=0;};
+    pairs.forEach(([w,l])=>{
+      initDelta(w);initDelta(l);
+      const exp=1/(1+Math.pow(10,(ratings[l]-ratings[w])/400));
+      deltas[w]+=K*(1-exp);
+      deltas[l]+=K*(0-(1-exp));
+    });
+    Object.entries(deltas).forEach(([n,d])=>{ratings[n]=Math.round(ratings[n]+d);});
+
+    // Record stats
+    groups.forEach(g=>g.names.forEach(n=>{stats[n].played++;if(g.rank===1)stats[n].wins++;stats[n].ranks.push(g.rank);}));
+    // Snapshot rating after this session
+    groups.forEach(g=>g.names.forEach(n=>history[n].push(ratings[n])));
+    // Players not in this session keep their rating; no history snapshot for them
+  });
+
+  // Build result array
+  return Object.keys(ratings).map(name=>{
+    const hist=history[name]||[];
+    const prev=hist.length>=2?hist[hist.length-2]:null;
+    const cur=ratings[name];
+    const change=prev!==null?cur-prev:null;
+    const st=stats[name]||{played:0,wins:0,ranks:[]};
+    const avgRank=st.ranks.length?Math.round(st.ranks.reduce((a,b)=>a+b,0)/st.ranks.length*10)/10:null;
+    const bestRank=st.ranks.length?Math.min(...st.ranks):null;
+    return{name,rating:cur,change,played:st.played,wins:st.wins,avgRank,bestRank,history:hist};
+  }).sort((a,b)=>b.rating-a.rating||a.name.localeCompare(b.name));
+}
+
+function _sparkHtml(history){
+  if(!history||history.length<2) return '';
+  const min=Math.min(...history),max=Math.max(...history),range=max-min||1;
+  const bars=history.map((v,i)=>{
+    const h=Math.round(((v-min)/range)*14)+2; // 2–16px
+    const isHi=v===max;
+    return `<span style="height:${h}px"${isHi?' class="hi"':''}></span>`;
+  }).join('');
+  return `<span class="comp-spark">${bars}</span>`;
 }
 
 let _prevScreen='setup';
@@ -2485,6 +2597,45 @@ function openCompDetail(compId){
       <td class="wc">${p.total}</td>
       <td style="color:var(--txt2)">${p.played}/${comp.sessions.length}</td>
     </tr>`).join('');
+
+  // Rating card
+  const ratings=_computeCompRatings(comp,group);
+  const hasSessions=comp.sessions.length>0;
+  const ratingCard=!hasSessions?'':`
+    <div class="setup-card" style="margin-bottom:12px">
+      <div class="setup-card-hdr"><span class="setup-card-title">${t('comp_rating_lbl')}</span></div>
+      <table class="comp-rating-tbl">
+        <tr>
+          <th>#</th><th>${t('comp_col_player')}</th>
+          <th style="text-align:right">${t('comp_rating_val')}</th>
+          <th style="text-align:right">${t('comp_rating_chg')}</th>
+          <th style="text-align:right">${t('comp_played')}</th>
+          <th style="text-align:right">${t('comp_rating_wins')}</th>
+          <th style="text-align:right">${t('comp_rating_avg')}</th>
+          <th></th>
+        </tr>
+        ${ratings.map((p,i)=>{
+          let chgHtml='';
+          if(p.change!==null){
+            const cls=p.change>0?'up':p.change<0?'dn':'eq';
+            const sign=p.change>0?'+':'';
+            chgHtml=`<span class="comp-rating-change ${cls}">${sign}${p.change}</span>`;
+          }
+          return `<tr${i===0?' class="comp-rank-1"':''}>
+            <td>${i+1}</td>
+            <td>${esc(p.name)}</td>
+            <td style="text-align:right;font-weight:700">${p.rating}</td>
+            <td style="text-align:right">${chgHtml||'&mdash;'}</td>
+            <td style="text-align:right;color:var(--txt2)">${p.played}</td>
+            <td style="text-align:right;color:var(--txt2)">${p.wins}</td>
+            <td style="text-align:right;color:var(--txt2)">${p.avgRank!==null?p.avgRank:'&mdash;'}</td>
+            <td style="text-align:right">${_sparkHtml(p.history)}</td>
+          </tr>`;
+        }).join('')}
+      </table>
+      <p class="comp-rating-note">${t('comp_rating_note')}</p>
+    </div>`;
+
   const sessHtml=comp.sessions.length===0
     ?`<p class="comp-empty">${t('comp_no_sessions')}</p>`
     :comp.sessions.map(s=>`
@@ -2496,7 +2647,7 @@ function openCompDetail(compId){
           <button class="grp-chip-action" onclick="event.stopPropagation();deleteCompSession('${comp.id}','${s.id}')" title="&#x2715;">&#x2715;</button>
         </div>
         <div class="comp-session-body">
-          ${s.results.map(r=>`<div class="comp-session-result-row"><span class="comp-sess-rank">${r.rank}</span><span class="comp-sess-names">${r.playerIds.map(i=>esc(group.lines[i]||'?')).join(' &amp; ')}</span><span class="comp-sess-pts">${_compPointsForRank(comp.pointSchema||DEFAULT_SCHEMA,r.rank)} pts</span></div>`).join('')}
+          ${s.results.map(r=>`<div class="comp-session-result-row"><span class="comp-sess-rank">${r.rank}</span><span class="comp-sess-names">${_sessEntryNames(r,group).map(esc).join(' &amp; ')}</span><span class="comp-sess-pts">${_compPointsForRank(comp.pointSchema||DEFAULT_SCHEMA,r.rank)} pts</span></div>`).join('')}
         </div>
       </div>`).join('');
   detail.innerHTML=`
@@ -2510,6 +2661,7 @@ function openCompDetail(compId){
         ${stRows}
       </table>
     </div>
+    ${ratingCard}
     <div class="setup-card">
       <div class="setup-card-hdr"><span class="setup-card-title">${t('comp_sessions_lbl')} (${comp.sessions.length})</span></div>
       ${sessHtml}
