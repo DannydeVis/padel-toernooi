@@ -4,9 +4,9 @@
   <script>(function(){var s=localStorage.getItem('padel-lang');if(s)return;var l=(navigator.language||'').slice(0,2).toLowerCase();var m={en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',sv:'/sv/'};if(m[l]){localStorage.setItem('padel-lang',l);location.replace(m[l]);}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gratis Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin | Geen account, Werkt offline</title>
-  <meta name="description" content="Organiseer een padel toernooi in 30 seconden. Knockout, Americano, Mexicano en Round Robin. Presentatiemodus voor groot scherm of tv, deel-link voor toeschouwers, export naar PDF. Gratis, geen account.">
-  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel mexicano generator, padel round robin, tournament bracket maker, padel toernooi maken, padel scorebord, padel presentatiemodus, padel groot scherm, padel tv scorebord">
+  <title>Gratis Padel Toernooi Generator — Americano, Mexicano, King of the Court, Knockout en Round Robin | Geen account, Werkt offline</title>
+  <meta name="description" content="Organiseer een padel toernooi in 30 seconden. Americano, Mexicano, King of the Court, Knockout en Round Robin. Presentatiemodus voor groot scherm of tv, deel-link, export naar PDF. Gratis, geen account.">
+  <meta name="keywords" content="padel toernooi generator, padel bracket maker, padel americano generator, padel mexicano generator, padel king of the court, padel round robin, tournament bracket maker, padel toernooi maken, padel scorebord, padel presentatiemodus, padel groot scherm, padel tv scorebord, pickleball toernooi generator">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -16,8 +16,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/">
-  <meta property="og:title" content="Gratis Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin">
-  <meta property="og:description" content="Organiseer een padel toernooi in 30 seconden. Presentatiemodus voor groot scherm of tv, deel-link, export naar PDF. Gratis, geen account.">
+  <meta property="og:title" content="Gratis Padel Toernooi Generator — Americano, Mexicano, King of the Court en meer">
+  <meta property="og:description" content="Organiseer een padel toernooi in 30 seconden. Americano, Mexicano, King of the Court, Knockout en Round Robin. Presentatiemodus, deel-link, export. Gratis, geen account.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,8 +26,8 @@
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Gratis Padel Bracket Generator — Geen account, Werkt offline">
-  <meta name="twitter:description" content="Knockout, Americano, Mexicano & Round Robin — presentatiemodus voor groot scherm, deel-link, export. Gratis, geen account.">
+  <meta name="twitter:title" content="Gratis Padel Toernooi Generator — Geen account, Werkt offline">
+  <meta name="twitter:description" content="Americano, Mexicano, King of the Court, Knockout en Round Robin. Presentatiemodus, deel-link, export. Gratis, geen account.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/">
@@ -52,11 +52,11 @@
     "alternateName": "Padel Bracket Generator",
     "applicationCategory": "SportsApplication",
     "operatingSystem": "Web, iOS, Android (PWA)",
-    "description": "Gratis padel toernooi bracket generator voor recreatieve spelers en clubs.",
+    "description": "Gratis padel en pickleball toernooi generator voor recreatieve spelers en clubs. Americano, Mexicano, King of the Court, Knockout en Round Robin.",
     "url": "https://padel-bracket.com",
-    "inLanguage": ["nl","en","fr","de","es","sv"],
+    "inLanguage": ["nl","en","fr","de","es","sv","it"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","Live presentatiemodus","Live deel-link","Export naar CSV en PDF","Works offline","No account needed","6 languages"],
+    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","King of the Court generator","Competities met ELO-rating","Pickleball toernooi generator","Live presentatiemodus","Live deel-link","Export naar CSV en PDF","Works offline","No account needed","7 languages"],
     "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://github.com/DannydeVis" },
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".hero-sub", ".faq-item p"] }
   }
@@ -74,7 +74,7 @@
       {
         "@type": "Question",
         "name": "Welke toernooiformats worden ondersteund?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt vier formats: knockout bracket (poule → halve finale → finale), Americano (wisselende koppels, punten per speler), Mexicano (koppels op basis van tussenstand) en Round Robin (iedereen speelt tegen iedereen)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt zeven formats: Americano (wisselende koppels, punten per speler), Mexicano (koppels op basis van tussenstand), King of the Court (baanenladder, winnaars promoveren), Mixicano (gemengde koppels man en vrouw), Team Americano (vaste koppels, punten per koppel), Knockout bracket (poule plus finale) en Round Robin (iedereen speelt tegen iedereen)." }
       },
       {
         "@type": "Question",
@@ -109,7 +109,22 @@
       {
         "@type": "Question",
         "name": "In welke talen is de app beschikbaar?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is beschikbaar in zeven talen: Nederlands, Engels, Frans, Duits, Spaans, Zweeds en Italiaans. De app detecteert automatisch de taal van je apparaat." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat is King of the Court?",
+        "acceptedAnswer": { "@type": "Answer", "text": "King of the Court is een format waarbij banen zijn gerangschikt van laag naar hoog. Na elke ronde promoveren de winnaars een baan omhoog en degraderen de verliezers een baan omlaag. De top-baan heet de King Court. Wie die baan het vaakst wint, is de sterkste speler. Extra spelers wachten in een pool en rouleren mee. PadelBracket genereert de indeling automatisch na elke ronde." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat zijn Competities en wat doet de rating?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Met Competities koppel je meerdere toernooisessies aan een vaste groep spelers. Na elke sessie zie je een ranglijst op basis van plaatsingspunten. Daarnaast berekent de app een ELO-rating die laat zien wie over alle sessies heen het sterkst presteert. De rating wordt afgeleid uit de eindplaatsingen per sessie en elke keer opnieuw berekend, inclusief een trend per sessie." }
+      },
+      {
+        "@type": "Question",
+        "name": "Ondersteunt PadelBracket ook pickleball?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Kies in de app het sport-toggle voor Pickleball. Je kunt dan Americano, Mexicano, Round Robin en King of the Court spelen met doelscores van 11, 15 of 21 en win-by-2. Voltooide sessies zijn te exporteren als CSV voor DUPR's bulk match import." }
       },
       {
         "@type": "Question",
@@ -142,7 +157,7 @@
     "description": "Maak in 4 stappen een volledig padel toernooi met PadelBracket.",
     "step": [
       { "@type": "HowToStep", "position": 1, "name": "Voer de namen in", "text": "Typ de namen van alle deelnemers in, of plak ze vanuit een lijst." },
-      { "@type": "HowToStep", "position": 2, "name": "Kies het format", "text": "Kies tussen Americano, Mexicano, Knockout of Round Robin." },
+      { "@type": "HowToStep", "position": 2, "name": "Kies het format", "text": "Kies uit zeven formats: Americano, Mexicano, King of the Court, Mixicano, Team Americano, Knockout of Round Robin." },
       { "@type": "HowToStep", "position": 3, "name": "Volg de scores", "text": "Voer na elke wedstrijd de score in. De stand wordt automatisch bijgewerkt." },
       { "@type": "HowToStep", "position": 4, "name": "Kampioen bekendmaken", "text": "Aan het einde zie je de eindstand en kun je exporteren als PDF of CSV." }
     ]
@@ -154,8 +169,8 @@
     "@type": "WebSite",
     "name": "PadelBracket",
     "url": "https://padel-bracket.com",
-    "description": "Gratis padel toernooi generator voor Americano, Mexicano, Knockout en Round Robin.",
-    "inLanguage": ["nl","en","fr","de","es","sv"]
+    "description": "Gratis padel en pickleball toernooi generator voor Americano, Mexicano, King of the Court, Knockout en Round Robin.",
+    "inLanguage": ["nl","en","fr","de","es","sv","it"]
   }
   </script>
   <script type="application/ld+json">
@@ -165,10 +180,10 @@
     "name": "PadelBracket",
     "url": "https://padel-bracket.com/",
     "logo": "https://padel-bracket.com/icon.svg",
-    "description": "Gratis padel toernooi generator voor Americano, Mexicano, Knockout en Round Robin.",
+    "description": "Gratis padel en pickleball toernooi generator voor Americano, Mexicano, King of the Court, Knockout en Round Robin.",
     "founder": { "@type": "Person", "name": "Danny de Visser" },
     "sameAs": ["https://github.com/DannydeVis"],
-    "availableLanguage": ["Dutch","English","French","German","Spanish","Swedish"]
+    "availableLanguage": ["Dutch","English","French","German","Spanish","Swedish","Italian"]
   }
   </script>
   <script type="application/ld+json">
@@ -698,7 +713,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       </div>
 
       <h1>Toernooi klaar in <em>30 seconden</em></h1>
-      <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
+      <p class="hero-kicker">Americano · Mexicano · King of the Court · Knockout · Round Robin</p>
       <p class="hero-sub">Voer de spelersnamen in. De app maakt het schema, houdt de stand bij en deelt alles via één link. Gratis, geen account.</p>
 
       <div class="hero-btns">
@@ -719,7 +734,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Spelers vullen scores in</div>
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
       </div>
-      <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 6 talen</p>
+      <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 7 talen</p>
       <p class="hero-count" id="hero-count" hidden></p>
 
       <div class="hero-demo" id="hero-demo">
@@ -1008,8 +1023,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
         <div class="fc-text">
-          <h3>Vier toernooiformats</h3>
-          <p>Knockout bracket (poule + finale), Americano (wisselende koppels), Mexicano (koppels op basis van stand) en Round Robin (iedereen vs. iedereen). Kies wat bij jouw groep past.</p>
+          <h3>Zeven toernooiformats</h3>
+          <p>Americano, Mexicano, King of the Court, Mixicano, Team Americano, Knockout en Round Robin. Kies wat bij jouw groep past.</p>
         </div>
       </div>
       <div class="fc-item">
@@ -1022,8 +1037,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
-          <h3>6 talen, automatisch</h3>
-          <p>Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat, ook voor internationale groepen.</p>
+          <h3>7 talen, automatisch</h3>
+          <p>Nederlands, Engels, Frans, Duits, Spaans, Zweeds en Italiaans. De app detecteert automatisch de taal van je apparaat, ook voor internationale groepen.</p>
         </div>
       </div>
     </div>
@@ -1108,7 +1123,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="step">
       <div class="step-num">2</div>
       <h4>Format kiezen</h4>
-      <p>Americano, Mexicano, Knockout of Round Robin. Kies wat past bij je groep.</p>
+      <p>Americano, Mexicano, King of the Court, Knockout, Round Robin en meer. Kies wat past bij je groep.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
@@ -1125,7 +1140,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
 <!-- FORMATS -->
 <section class="section">
-  <h2 class="section-title">Vier toernooiformats</h2>
+  <h2 class="section-title">Zeven toernooiformats</h2>
   <p class="section-sub">Kies het formaat dat past bij jouw groep.</p>
   <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="format team">
@@ -1172,8 +1187,71 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       </ul>
       <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
     </div>
+    <div class="format am">
+      <h3>King of the Court</h3>
+      <p>Banen zijn gerangschikt van laag naar hoog. Winnaars promoveren een baan omhoog, verliezers degraderen omlaag. Wie de top-baan (de King Court) het vaakst wint, wint het toernooi. Partners worden elke ronde opnieuw geloot.</p>
+      <ul>
+        <li>Winnaars promoveren, verliezers degraderen</li>
+        <li>Challenger pool voor extra spelers</li>
+        <li>Reactief schema, geen vooraf planning nodig</li>
+        <li>Vanaf 4 spelers</li>
+      </ul>
+      <a href="/king-of-the-court/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">King of the Court generator →</a>
+    </div>
   </div>
-  <p style="text-align:center;margin-top:32px;font-size:.9rem;color:rgba(249,250,251,.5)">Ook beschikbaar voor pickleball: <a href="/pickleball/" style="color:var(--accent);font-weight:600;text-decoration:none;">pickleball toernooi generator →</a></p>
+</section>
+
+<!-- PICKLEBALL -->
+<section class="section">
+  <h2 class="section-title">Ook voor pickleball</h2>
+  <p class="section-sub">Dezelfde app ondersteunt ook pickleball toernooien, met eigen scoringsregels.</p>
+  <div class="fc-section" style="padding:0">
+    <div class="fc-inner" style="padding:0">
+      <div class="fc-list">
+        <div class="fc-item">
+          <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 4-4"/><path d="M16 12a4 4 0 0 1-4 4"/></svg></div>
+          <div class="fc-text">
+            <h3>Alle formats beschikbaar</h3>
+            <p>Americano, Mexicano, Round Robin en King of the Court, allemaal te spelen als pickleball. Doelscores 11, 15 of 21 met win-by-2.</p>
+          </div>
+        </div>
+        <div class="fc-item">
+          <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
+          <div class="fc-text">
+            <h3>DUPR-export inbegrepen</h3>
+            <p>Voltooide sessies exporteer je als CSV met datum, spelersnamen en scores, klaar voor DUPR's bulk match import. Het score type en de DUPR-ID koppel je in het importscherm van DUPR.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:24px;text-align:center"><a href="/pickleball/" style="color:var(--accent);font-weight:700;font-size:.95rem;text-decoration:none;">Pickleball toernooi generator →</a></p>
+</section>
+
+<!-- COMPETITIES -->
+<section class="section">
+  <h2 class="section-title">Competities en rating</h2>
+  <p class="section-sub">Meerdere sessies, een vaste groep, een ranglijst die groeit.</p>
+  <div class="fc-section" style="padding:0">
+    <div class="fc-inner" style="padding:0">
+      <div class="fc-list">
+        <div class="fc-item">
+          <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="fc-text">
+            <h3>Vaste groep, meerdere sessies</h3>
+            <p>Koppel sessies aan een vaste spelersgroep. De plaatsingspunten-ranglijst toont wie over alle sessies de meeste punten heeft gescoord.</p>
+          </div>
+        </div>
+        <div class="fc-item">
+          <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div class="fc-text">
+            <h3>ELO-rating per speler</h3>
+            <p>Naast de puntenstand berekent de app een ELO-rating op basis van eindplaatsingen per sessie. De rating laat zien wie over de tijd de sterkste speler is, met een trendlijn per sessie. Wordt elke keer opnieuw berekend uit de volledige sessiehistorie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- FAQ -->
@@ -1186,7 +1264,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Welke toernooiformats worden ondersteund?</summary>
-      <p>PadelBracket ondersteunt vier formats: <strong>knockout bracket</strong> (poule → halve finale → finale), <strong>Americano</strong> (wisselende koppels, punten per speler), <strong>Mexicano</strong> (koppels op basis van tussenstand) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+      <p>PadelBracket ondersteunt zeven formats: <strong>Americano</strong> (wisselende koppels, punten per speler), <strong>Mexicano</strong> (koppels op basis van tussenstand), <strong>Mixicano</strong> (gemengde koppels man/vrouw), <strong>Team Americano</strong> (vaste koppels, Americano-schema), <strong>King of the Court</strong> (winnaars promoveren, verliezers degraderen), <strong>Knockout</strong> (poule gevolgd door een knock-outbracket) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
     </details>
     <details class="faq-item">
       <summary>Wat is het verschil tussen Americano en Mexicano?</summary>
@@ -1210,7 +1288,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Hoeveel spelers kan ik gebruiken?</summary>
-      <p>Voor Americano en Mexicano tot 24 spelers. Voor een team bracket 4 tot 9 teams (8 tot 18 spelers). Bij een oneven aantal spelers (5, 7, 9…) rust er per ronde één speler, roterend.</p>
+      <p>Voor Americano, Mexicano en King of the Court tot 24 spelers. Voor een knockout bracket 4 tot 9 teams (8 tot 18 spelers). Voor Round Robin 4 tot 16 spelers. King of the Court werkt ook met minder spelers, vanaf 4. Bij een oneven verdeling rust er per ronde één speler, roterend.</p>
     </details>
     <details class="faq-item">
       <summary>Werkt de app ook zonder internet?</summary>
@@ -1218,7 +1296,19 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>In welke talen is de app beschikbaar?</summary>
-      <p>PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans en Zweeds. De app detecteert automatisch de taal van je apparaat.</p>
+      <p>PadelBracket is beschikbaar in het Nederlands, Engels, Frans, Duits, Spaans, Zweeds en Italiaans. De app detecteert automatisch de taal van je apparaat.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Wat is King of the Court?</summary>
+      <p>King of the Court is een reactief format waarbij banen zijn gerangschikt van laag naar hoog. Winnaars promoveren elke ronde een baan omhoog, verliezers degraderen omlaag. Partners worden elke ronde opnieuw geloot. Wie de King Court het vaakst wint, wint het toernooi. Extra spelers wachten in een challenger pool en rouleren mee.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Wat zijn Competities in PadelBracket?</summary>
+      <p>Met de Competities-functie koppel je meerdere sessies aan een vaste spelersgroep. De app berekent een cumulatieve ranglijst op basis van plaatsingspunten en een ELO-rating per speler op basis van eindplaatsingen. De rating wordt elke keer opnieuw berekend uit de volledige sessiehistorie. Zo zie je wie over de tijd de sterkste speler is.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Werkt de app ook voor pickleball?</summary>
+      <p>Ja. Kies bij het aanmaken van een toernooi de sport Pickleball. De app ondersteunt dan de formats Americano, Mexicano, Round Robin en King of the Court met doelscores 11, 15 of 21 en win-by-2. Voltooide sessies zijn te exporteren als CSV voor DUPR's bulk match import.</p>
     </details>
     <details class="faq-item">
       <summary>Wat is padel Americano?</summary>
