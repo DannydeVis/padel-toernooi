@@ -1755,7 +1755,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.59.0';
+const APP_VERSION = 'v1.59.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -2825,6 +2825,8 @@ async function submitFeedback(){
       sport, lang:document.documentElement.lang||'nl'
     });
     if(error) throw error;
+    const payload={type:_feedbackType,message:msg,email:email||null,app_version:APP_VERSION,sport,lang:document.documentElement.lang||'nl'};
+    fetch('https://hook.eu1.make.com/nkpadizlg1ntspqd23oi23raq73hqd1a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
     if(status) status.textContent=t('feedback_ok');
     setTimeout(()=>closeFeedback(),1800);
   }catch(e){
