@@ -119,7 +119,7 @@ PadelBracket also supports pickleball tournaments. Select "Pickleball" in the sp
 - Rally scoring
 
 ### DUPR export
-Completed pickleball Americano, Mexicano, Round Robin and King of the Court sessions can be exported as a CSV file formatted for DUPR bulk upload. Column headers match the DUPR template.
+Completed pickleball Americano, Mexicano, Round Robin and King of the Court sessions can be exported as a CSV file with match date, player names and scores, ready to use with DUPR's bulk match import. You select the score type and link players to their DUPR ID in the DUPR import screen.
 
 ### Pickleball URLs
 - https://padel-bracket.com/pickleball/ — Pickleball tournament generator hub
