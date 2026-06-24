@@ -1319,8 +1319,8 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
         <button class="more-item" id="btn-reset" style="display:none" onclick="resetTournament()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-rotate"></use></svg> <span data-i18n="reset_btn">Begin opnieuw</span></button>
         <button class="more-item" id="btn-print" style="display:none" onclick="doPrint();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-print"></use></svg> <span data-i18n="hdr_print">Afdrukken</span></button>
         <div class="more-divider"></div>
-        <button class="more-item" onclick="openFeedback('bug');closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bug"></use></svg> <span data-i18n="feedback_bug">Bug melden</span></button>
-        <button class="more-item" onclick="openFeedback('feature');closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-idea"></use></svg> <span data-i18n="feedback_feature">Idee indienen</span></button>
+        <a class="more-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bug"></use></svg> <span data-i18n="feedback_bug">Bug melden</span></a>
+        <a class="more-item" href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-idea"></use></svg> <span data-i18n="feedback_feature">Idee indienen</span></a>
         <div class="more-divider"></div>
         <a class="more-item" href="https://www.buymeacoffee.com/dannydevis" target="_blank" rel="noopener" style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-heart"></use></svg> <span data-i18n="more_support">Support dit project</span></a>
         <a class="more-item" href="https://www.amazon.com/s?k=padel&tag=padelbracket-20" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-bag"></use></svg> <span data-i18n="more_gear">Padel gear tips</span></a>
@@ -1755,7 +1755,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.59.1';
+const APP_VERSION = 'v1.59.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
