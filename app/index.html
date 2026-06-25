@@ -1651,23 +1651,6 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
   <div class="dm-card" id="dm-card"></div>
 </div>
 
-<!-- FEEDBACK MODAL -->
-<div id="feedback-modal" class="hidden" onclick="if(event.target===this)closeFeedback()">
-  <div class="share-card" style="max-width:420px">
-    <div class="share-top">
-      <svg class="icon" viewBox="0 0 24 24"><use href="#ic-feedback"></use></svg>
-      <span class="share-title" id="feedback-modal-title"></span>
-      <button class="share-close-btn" onclick="closeFeedback()">✕</button>
-    </div>
-    <div style="padding:16px 20px 20px">
-      <textarea id="feedback-msg" rows="4" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:.9rem;resize:vertical;font-family:inherit" data-i18n-ph="feedback_msg_ph"></textarea>
-      <input id="feedback-email" type="email" style="width:100%;box-sizing:border-box;margin-top:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:.9rem;font-family:inherit" data-i18n-ph="feedback_email_ph">
-      <div id="feedback-status" style="min-height:20px;margin-top:10px;font-size:.82rem;color:var(--accent)"></div>
-      <button id="feedback-send-btn" class="sx-start" style="margin-top:4px;width:100%" onclick="submitFeedback()"><span data-i18n="feedback_send">Versturen</span></button>
-    </div>
-  </div>
-</div>
-
 <!-- SHARE MODAL -->
 <div id="share-modal" class="hidden">
   <div class="share-card">
