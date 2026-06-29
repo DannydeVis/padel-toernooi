@@ -514,7 +514,7 @@
     .pres-showcase{background:var(--surface);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:72px 24px}
     .pres-showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
     .pres-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 14px;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#93c5fd;margin-bottom:18px}
-    .pres-showcase h2, .qr-showcase h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.8rem,7vw,4.5rem);font-weight:800;line-height:1.0;letter-spacing:-.01em;margin-bottom:20px}
+    .pres-showcase h2, .qr-showcase h2{font-family:'Inter',sans-serif;font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:900;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px}
     .pres-showcase .pres-sub, .qr-showcase .pres-sub{color:var(--txt2);font-size:.95rem;line-height:1.7;margin-bottom:24px}
     .pres-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
     .pres-feat{display:flex;align-items:flex-start;gap:10px}
@@ -615,7 +615,52 @@
 .reveal .format-card:nth-child(3){transition-delay:.16s}
 .reveal .format-card:nth-child(4){transition-delay:.24s}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-  h1,h2,h3,.section-title,.fc-title,.format-card h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:-.01em}
+  h1,h2,h3,.section-title,.fc-title,.format-card h3{font-family:'Inter',sans-serif;font-weight:800;letter-spacing:-.025em}
+
+  /* ═══ WOW LAYER — page-level additions ═══ */
+  /* aurora in hero */
+  .hero.split{overflow:hidden}
+  .hero-aurora{position:absolute;inset:-20%;z-index:0;pointer-events:none;opacity:.55;
+    background:
+      radial-gradient(ellipse 38% 30% at 22% 18%, rgba(199,255,94,.16), transparent 60%),
+      radial-gradient(ellipse 30% 26% at 78% 12%, rgba(139,92,246,.14), transparent 60%),
+      radial-gradient(ellipse 34% 30% at 60% 85%, rgba(199,255,94,.08), transparent 60%);
+    filter:blur(40px)}
+  @media(prefers-reduced-motion:no-preference){
+    .hero-aurora{animation:aurora 16s ease-in-out infinite alternate}}
+  @keyframes aurora{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(4deg) scale(1.08)}100%{transform:rotate(-3deg) scale(1.04)}}
+
+  /* marquee strip */
+  .marquee{overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
+    background:rgba(255,255,255,.015);padding:14px 0;position:relative}
+  .marquee-track{display:flex;gap:0;width:max-content}
+  @media(prefers-reduced-motion:no-preference){.marquee-track{animation:marq 30s linear infinite}}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .marquee span{display:inline-flex;align-items:center;gap:26px;padding:0 13px;
+    font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(249,250,251,.35);white-space:nowrap}
+  .marquee b{color:var(--accent);font-size:.6rem}
+
+  /* AEO answer-box */
+  .answer-box{max-width:880px;margin:0 auto;padding:56px 24px 8px}
+  .answer-box .ab-q{font-family:'Syne',sans-serif;font-weight:800;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .answer-box p{font-size:clamp(1.15rem,2.2vw,1.45rem);line-height:1.55;color:rgba(249,250,251,.85);font-weight:500}
+  .answer-box p strong{color:var(--accent);font-weight:700}
+
+  /* stats-band */
+  .stats-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:880px;margin:36px auto 0;padding:0 24px}
+  .stat-cell{text-align:center;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:22px 12px}
+  .stat-cell b{display:block;font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(1.8rem,3.2vw,2.4rem);letter-spacing:-.03em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+  .stat-cell span{font-size:.78rem;color:rgba(249,250,251,.45);font-weight:600}
+
+  /* generic scroll-reveal for new .rv elements */
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+  /* hover-lift on cards */
+  .format-card,.fc-item,.faq-item,.step{transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .25s}
+  .format-card:hover,.fc-item:hover{transform:translateY(-4px);border-color:rgba(199,255,94,.3)!important;box-shadow:0 16px 44px rgba(0,0,0,.35)}
 
   /* ── HERO SPLIT (richting B) ── */
   .hero.split{display:block;padding:104px 24px 60px}
@@ -645,12 +690,12 @@
   @media(prefers-reduced-motion:no-preference){.hb-dot{animation:hbPulse 1.6s ease-out infinite}}
   @keyframes hbPulse{0%{box-shadow:0 0 0 0 rgba(255,107,107,.5)}70%{box-shadow:0 0 0 7px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
   .hb-row{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-  .hb-rank{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;width:20px;color:var(--txt2);text-align:center}
+  .hb-rank{font-family:'Inter',sans-serif;font-weight:800;font-size:1.05rem;width:20px;color:var(--txt2);text-align:center}
   .hb-av{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#0E1114;flex-shrink:0}
   .hb-name{flex:1}
   .hb-name b{font-weight:700;font-size:.95rem}
   .hb-meta{font-size:.72rem;color:var(--txt2);margin-top:2px}
-  .hb-pts{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.65rem}
+  .hb-pts{font-family:'Inter',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.02em}
   .hb-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;padding:10px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.22);border-radius:11px;color:var(--accent);font-size:.85rem;font-weight:700}
   @media(max-width:900px){.hero-split-inner{grid-template-columns:1fr;gap:34px;text-align:center}.hero.split .hero-kicker,.hero.split .hero-note{text-align:center}.hero.split .hero-btns,.hero.split .hero-perks{justify-content:center}.hero.split .hero-sub{margin-left:auto;margin-right:auto}.hero-board{max-width:440px;margin:0 auto;width:100%}}
 
@@ -672,6 +717,7 @@
   .hero-demo-cta a{color:var(--accent);text-decoration:none;font-weight:600}
   @keyframes demoIn{to{opacity:1;transform:none}}
   </style>
+  <link rel="stylesheet" href="/wow.css">
 </head>
 <body>
 
@@ -703,6 +749,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <!-- HERO -->
 <section class="hero split">
   <div class="hero-bg"></div>
+  <div class="hero-aurora"></div>
   <div class="hero-grid"></div>
 
   <div class="hero-split-inner">
@@ -750,7 +797,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       </div>
     </div>
 
-    <a class="hero-board" href="/app/" aria-label="Bekijk de live ranglijst in de app">
+    <a class="hero-board" data-tilt href="/app/" aria-label="Bekijk de live ranglijst in de app">
       <div class="hb-head">
         <span class="hb-eyebrow">Zomercup · ranglijst</span>
         <span class="hb-live"><span class="hb-dot"></span>LIVE</span>
@@ -778,6 +825,26 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>7 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
+    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>7 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
+  </div>
+</div>
+
+<!-- ANTWOORD (AEO/GEO) -->
+<section class="answer-box rv" id="wat-is-padel-bracket">
+  <div class="ab-q">Wat is Padel Bracket?</div>
+  <p><strong>Padel Bracket</strong> is een gratis online toernooi-generator voor padel en pickleball. Je maakt in 30 seconden een <strong>Americano, Mexicano, King of the Court, knockout-bracket of round robin</strong>, deelt één link met de groep en iedereen volgt de stand live — zonder account, zonder download, in 7 talen.</p>
+  <div class="stats-band">
+    <div class="stat-cell" data-tilt><b data-count="30" data-suffix="s">0s</b><span>toernooi klaar</span></div>
+    <div class="stat-cell" data-tilt><b data-count="7">0</b><span>toernooiformats</span></div>
+    <div class="stat-cell" data-tilt><b data-count="7">0</b><span>talen</span></div>
+    <div class="stat-cell" data-tilt><b data-count="0" data-prefix="€ ">€ 0</b><span>voor altijd gratis</span></div>
+  </div>
+</section>
+
 <!-- FOUNDER -->
 <section class="founder-block">
   <div class="founder-inner">
@@ -788,8 +855,11 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
-<!-- MOCKUP -->
-<div class="mockup-wrap">
+<!-- ANNOTATED SHOT -->
+<section class="shot-section">
+  <h2 class="section-title wow" style="margin-bottom:6px">Alles wat je nodig hebt — in één scherm</h2>
+  <p class="section-sub wow" style="margin:0 auto 38px">Voer scores in en de ranglijst schuift live mee. Dit zien je spelers gebeuren:</p>
+  <div class="shot wow">
   <div class="mockup">
     <div class="mockup-bar">
       <div class="mockup-dot" style="background:#ef4444"></div>
@@ -885,7 +955,25 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       </div>
     </div>
   </div>
-</div>
+  <!-- numbered pins -->
+  <div class="pin pin--r" style="left:13%;top:21%;--d:.05s">
+    <span class="pin-dot">1</span><span class="pin-line"></span>
+    <span class="pin-flag"><span class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><b>Automatisch schema</b></span>
+  </div>
+  <div class="pin pin--l" style="left:73%;top:13%;--d:.18s">
+    <span class="pin-dot">2</span><span class="pin-line"></span>
+    <span class="pin-flag"><span class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span><b>Deel-link</b></span>
+  </div>
+  <div class="pin pin--r" style="left:45%;top:60%;--d:.31s">
+    <span class="pin-dot">3</span><span class="pin-line"></span>
+    <span class="pin-flag"><span class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg></span><b>Score per tik</b></span>
+  </div>
+  <div class="pin pin--l" style="left:86%;top:42%;--d:.44s">
+    <span class="pin-dot">4</span><span class="pin-line"></span>
+    <span class="pin-flag"><span class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.7V17c0 .6-.5 1-1 1.2M14 14.7V17c0 .6.5 1 1 1.2M18 2H6v7a6 6 0 0 0 12 0Z"/></svg></span><b>Live ranglijst</b></span>
+  </div>
+  </div>
+</section>
 
 <div class="trust-bar">
   <span>Gemaakt door één padelfan in Rotterdam</span>
@@ -1110,30 +1198,100 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="hoe-werkt-het">
-  <h2 class="section-title">Klaar in 4 stappen</h2>
-  <p class="section-sub">In minder dan een minuut heb je een volledig toernooi klaarstaan.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h4>Namen invoeren</h4>
-      <p>Typ de spelersnamen in. De app maakt automatisch koppels en rondes aan.</p>
+<!-- HOW IT WORKS — scrollytelling -->
+<section class="story" id="hoe-werkt-het">
+  <div class="story-grid">
+    <div class="story-steps">
+      <article class="story-step" data-step="0">
+        <span class="ss-num">1</span>
+        <h3 class="ss-h">Namen invoeren</h3>
+        <p class="ss-p">Typ de spelers in of plak een lijst. De app maakt meteen de koppels en alle rondes aan.</p>
+      </article>
+      <article class="story-step" data-step="1">
+        <span class="ss-num">2</span>
+        <h3 class="ss-h">Format kiezen</h3>
+        <p class="ss-p">Americano, Mexicano, King of the Court, Knockout of Round Robin. Eén tik en het schema staat klaar.</p>
+      </article>
+      <article class="story-step" data-step="2">
+        <span class="ss-num">3</span>
+        <h3 class="ss-h">Scores bijhouden</h3>
+        <p class="ss-p">Tik +/− na elke game. De stand werkt live bij — op je telefoon én op de tv.</p>
+      </article>
+      <article class="story-step" data-step="3">
+        <span class="ss-num">4</span>
+        <h3 class="ss-h">Kampioen</h3>
+        <p class="ss-p">Na de laatste ronde rolt de eindstand eruit. Exporteer als PDF of CSV als aandenken.</p>
+      </article>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h4>Format kiezen</h4>
-      <p>Americano, Mexicano, King of the Court, Knockout, Round Robin en meer. Kies wat past bij je groep.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h4>Scores bijhouden</h4>
-      <p>Voer live scores in. De stand wordt direct bijgewerkt op scherm en op de telefoons van deelnemers.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h4>Kampioen</h4>
-      <p>Na de laatste ronde verschijnt de eindstand. Exporteer als PDF of CSV als aandenken.</p>
+
+    <div class="story-stage">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <!-- 0 · namen -->
+          <div class="scr scr-0 active">
+            <div class="app-top"><span class="at-logo">Padel <em>Bracket</em></span><span class="app-chip">NIEUW</span></div>
+            <div class="app-body">
+              <div class="app-h">Spelers · 8</div>
+              <div class="nm-input">Naam toevoegen… <span class="cur"></span></div>
+              <div class="nm-chips">
+                <span class="nm-chip"><span class="av" style="background:var(--gold)">J</span>Joost</span>
+                <span class="nm-chip"><span class="av" style="background:var(--accent)">R</span>Roos</span>
+                <span class="nm-chip"><span class="av" style="background:#b4a0f7">E</span>Eline</span>
+                <span class="nm-chip"><span class="av" style="background:#60a5fa">L</span>Lars</span>
+                <span class="nm-chip"><span class="av" style="background:#f472b6">K</span>Koen</span>
+                <span class="nm-chip"><span class="av" style="background:#34d399">A</span>Anna</span>
+                <span class="nm-chip"><span class="av" style="background:#fb923c">B</span>Bas</span>
+                <span class="nm-chip"><span class="av" style="background:#22d3ee">E</span>Eva</span>
+              </div>
+            </div>
+          </div>
+          <!-- 1 · format -->
+          <div class="scr scr-1">
+            <div class="app-top"><span class="at-logo">Padel <em>Bracket</em></span><span class="app-chip">FORMAT</span></div>
+            <div class="app-body">
+              <div class="app-h">Kies een format</div>
+              <div class="fmt-grid">
+                <div class="fmt-card sel"><span class="fc-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/></svg></span><b>Americano</b><span>Wisselende koppels</span><span class="fc-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1114" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+                <div class="fmt-card"><span class="fc-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#8b93a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M21 7h-6M21 7v6"/></svg></span><b>Mexicano</b><span>Op basis van stand</span></div>
+                <div class="fmt-card"><span class="fc-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#8b93a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M18 2H6v7a6 6 0 0 0 12 0Z"/></svg></span><b>Knockout</b><span>Poule + finale</span></div>
+                <div class="fmt-card"><span class="fc-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#8b93a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><b>Round Robin</b><span>Iedereen vs. iedereen</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- 2 · scoring -->
+          <div class="scr scr-2">
+            <div class="app-top"><span class="at-logo">Padel <em>Bracket</em></span><span class="app-chip">RONDE 2</span></div>
+            <div class="app-body">
+              <div class="app-h">Nu op de baan</div>
+              <div class="sc-match">
+                <div class="sc-court">Baan 1 · ronde 2 van 7</div>
+                <div class="sc-row"><span class="sc-team">Joost &amp; Eline</span><span class="sc-val">9</span></div>
+                <div class="sc-row"><span class="sc-team">Roos &amp; Lars</span><span class="sc-val">7</span></div>
+                <div class="sc-ctrl"><span class="sc-btn">−</span><span class="sc-btn plus">+</span><span class="sc-meta">16 / 32 punten</span><span class="sc-btn">−</span><span class="sc-btn plus">+</span></div>
+              </div>
+              <div class="sc-match" style="opacity:.55">
+                <div class="sc-court">Baan 2</div>
+                <div class="sc-row"><span class="sc-team">Koen &amp; Anna</span><span class="sc-val" style="color:var(--txt2)">11</span></div>
+                <div class="sc-row"><span class="sc-team">Bas &amp; Eva</span><span class="sc-val" style="color:var(--txt2)">8</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- 3 · kampioen -->
+          <div class="scr scr-3 scr-champ">
+            <div class="app-top"><span class="at-logo">Padel <em>Bracket</em></span><span class="app-chip" style="background:rgba(251,191,36,.16);color:var(--gold)">EINDSTAND</span></div>
+            <div class="champ">
+              <div class="confetti"></div>
+              <div class="champ-cup"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2e05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.7V17c0 .6-.5 1-1 1.2M14 14.7V17c0 .6.5 1 1 1.2M18 2H6v7a6 6 0 0 0 12 0Z"/></svg></div>
+              <div class="champ-lbl">Kampioen</div>
+              <div class="champ-name">Joost &amp; Roos</div>
+              <div class="champ-sub">7 gespeeld · +21 saldo</div>
+              <div class="champ-pts"><b>54</b><span>punten</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="story-dots"><i class="on"></i><i></i><i></i><i></i></div>
     </div>
   </div>
 </section>
@@ -1249,6 +1407,43 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
             <p>Naast de puntenstand berekent de app een ELO-rating op basis van eindplaatsingen per sessie. De rating laat zien wie over de tijd de sterkste speler is, met een trendlijn per sessie. Wordt elke keer opnieuw berekend uit de volledige sessiehistorie.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE BRACKET -->
+<section class="bracket-section">
+  <h2 class="section-title wow" style="margin-bottom:6px">Van eerste ronde tot kampioen</h2>
+  <p class="section-sub wow" style="margin:0 auto 46px">Scroll, en kijk hoe de knockout zich invult — precies zoals in de app.</p>
+  <div class="bracket wow" data-fill="0">
+    <svg class="br-svg" viewBox="0 0 1000 440" preserveAspectRatio="none" aria-hidden="true">
+      <path class="c0" d="M250,55 H270 V110 H292 M250,165 H270 V110 M250,275 H270 V330 H292 M250,385 H270 V330"/>
+      <path class="c1" d="M540,110 H565 V220 H592 M540,330 H565 V220"/>
+      <path class="c2" d="M840,220 H882"/>
+    </svg>
+    <div class="br-col">
+      <div class="br-col-lbl">Ronde 1</div>
+      <div class="br-match br-r0"><div class="br-team win"><span class="bt-name">Joost &amp; Roos</span><span class="bt-sc">6</span></div><div class="br-team"><span class="bt-name">Tim &amp; Noa</span><span class="bt-sc">3</span></div></div>
+      <div class="br-match br-r0"><div class="br-team win"><span class="bt-name">Lars &amp; Eline</span><span class="bt-sc">6</span></div><div class="br-team"><span class="bt-name">Sem &amp; Lot</span><span class="bt-sc">4</span></div></div>
+      <div class="br-match br-r0"><div class="br-team"><span class="bt-name">Koen &amp; Anna</span><span class="bt-sc">5</span></div><div class="br-team win"><span class="bt-name">Daan &amp; Fee</span><span class="bt-sc">6</span></div></div>
+      <div class="br-match br-r0"><div class="br-team win"><span class="bt-name">Bas &amp; Eva</span><span class="bt-sc">6</span></div><div class="br-team"><span class="bt-name">Max &amp; Liv</span><span class="bt-sc">2</span></div></div>
+    </div>
+    <div class="br-col">
+      <div class="br-col-lbl">Halve finale</div>
+      <div class="br-match br-r1"><div class="br-team win"><span class="bt-name">Joost &amp; Roos</span><span class="bt-sc">6</span></div><div class="br-team"><span class="bt-name">Lars &amp; Eline</span><span class="bt-sc">4</span></div></div>
+      <div class="br-match br-r1"><div class="br-team"><span class="bt-name">Daan &amp; Fee</span><span class="bt-sc">3</span></div><div class="br-team win"><span class="bt-name">Bas &amp; Eva</span><span class="bt-sc">6</span></div></div>
+    </div>
+    <div class="br-col">
+      <div class="br-col-lbl">Finale</div>
+      <div class="br-match br-r2"><div class="br-team win"><span class="bt-name">Joost &amp; Roos</span><span class="bt-sc">6</span></div><div class="br-team"><span class="bt-name">Bas &amp; Eva</span><span class="bt-sc">5</span></div></div>
+    </div>
+    <div class="br-col">
+      <div class="br-col-lbl">Winnaar</div>
+      <div class="br-champ">
+        <span class="bc-cup"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2e05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.7V17c0 .6-.5 1-1 1.2M14 14.7V17c0 .6.5 1 1 1.2M18 2H6v7a6 6 0 0 0 12 0Z"/></svg></span>
+        <span class="bc-lbl">Kampioen</span>
+        <span class="bc-name">Joost &amp; Roos</span>
       </div>
     </div>
   </div>
@@ -1398,7 +1593,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <script>
 (function(){
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  var sel='.founder-block,.trust-bar,.qr-showcase,.pres-showcase,.fc-section,.screenshots-section,.section,.cta-wrap';
+  var sel='.founder-block,.trust-bar,.qr-showcase,.pres-showcase,.fc-section,.screenshots-section,.section,.cta-wrap,.answer-box';
   var els=document.querySelectorAll(sel);
   els.forEach(function(el){el.classList.add('reveal')});
   var io=new IntersectionObserver(function(entries){
@@ -1436,6 +1631,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   });
 })();
 </script>
+<script src="/wow.js" defer></script>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onload="initTournamentCount()"></script>
 <script>
 async function initTournamentCount(){
