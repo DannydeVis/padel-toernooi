@@ -838,9 +838,9 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <div class="ab-q">Wat is Padel Bracket?</div>
   <p><strong>Padel Bracket</strong> is een gratis online toernooi-generator voor padel en pickleball. Je maakt in 30 seconden een <strong>Americano, Mexicano, King of the Court, knockout-bracket of round robin</strong>, deelt één link met de groep en iedereen volgt de stand live — zonder account, zonder download, in 7 talen.</p>
   <div class="stats-band">
-    <div class="stat-cell" data-tilt><b data-count="30" data-suffix="s">0s</b><span>toernooi klaar</span></div>
-    <div class="stat-cell" data-tilt><b data-count="7">0</b><span>toernooiformats</span></div>
-    <div class="stat-cell" data-tilt><b data-count="7">0</b><span>talen</span></div>
+    <div class="stat-cell" data-tilt><b data-count="30" data-suffix="s">30s</b><span>toernooi klaar</span></div>
+    <div class="stat-cell" data-tilt><b data-count="7">7</b><span>toernooiformats</span></div>
+    <div class="stat-cell" data-tilt><b data-count="7">7</b><span>talen</span></div>
     <div class="stat-cell" data-tilt><b data-count="0" data-prefix="€ ">€ 0</b><span>voor altijd gratis</span></div>
   </div>
 </section>
@@ -1602,6 +1602,36 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     });
   },{threshold:0.07});
   els.forEach(function(el){io.observe(el)});
+})();
+</script>
+<script>
+(function(){
+  var stats=document.querySelectorAll('.stats-band [data-count]');
+  if(!stats.length)return;
+  function animate(el){
+    var target=parseFloat(el.getAttribute('data-count'))||0;
+    var prefix=el.getAttribute('data-prefix')||'';
+    var suffix=el.getAttribute('data-suffix')||'';
+    var dur=900,start=null;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min(1,(ts-start)/dur);
+      var val=Math.round(target*p);
+      el.textContent=prefix+val+suffix;
+      if(p<1)requestAnimationFrame(step);else el.textContent=prefix+target+suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    stats.forEach(function(el){var t=parseFloat(el.getAttribute('data-count'))||0;el.textContent=(el.getAttribute('data-prefix')||'')+t+(el.getAttribute('data-suffix')||'');});
+    return;
+  }
+  var io2=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){animate(e.target);io2.unobserve(e.target);}
+    });
+  },{threshold:0.4});
+  stats.forEach(function(el){io2.observe(el)});
 })();
 </script>
 <script>
