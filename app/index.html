@@ -3424,8 +3424,11 @@ function _autoResolveDroppedTeams(){
   [PW,PL].forEach(list=>list.forEach(m=>{
     if(m.winner||m.skip||m.bye||m.a==null||m.b==null) return;
     const ta=T.find(x=>x.id===m.a), tb=T.find(x=>x.id===m.b);
-    if(ta&&ta.droppedOut&&!(tb&&tb.droppedOut)){ m.winner='B'; m.walkover=true; changed=true; }
-    else if(tb&&tb.droppedOut&&!(ta&&ta.droppedOut)){ m.winner='A'; m.walkover=true; changed=true; }
+    const aOut=!!(ta&&ta.droppedOut), bOut=!!(tb&&tb.droppedOut);
+    if(!aOut&&!bOut) return;
+    // If both teams already dropped out, advance A so the bracket does not stall.
+    m.winner=(aOut&&!bOut)?'B':'A';
+    m.walkover=true; changed=true;
   }));
   if(changed){
     advancePlayoff('w'); advancePlayoff('l');
@@ -3449,14 +3452,7 @@ function dropTeam(tid){
     if(scratch) m.excluded=true;
     else { m.winner=m.a===tid?'B':'A'; m.walkover=true; }
   });
-  if(mode==='team'){
-    [PW,PL].forEach(list=>list.forEach(m=>{
-      if(m.winner||m.skip||m.bye||!(m.a===tid||m.b===tid)) return;
-      m.winner=m.a===tid?'B':'A'; m.walkover=true;
-    }));
-    advancePlayoff('w'); advancePlayoff('l');
-    _autoResolveDroppedTeams();
-  }
+  if(mode==='team') _autoResolveDroppedTeams();
   closeDetailModal();
   renderPoule(); renderSt();
   if(mode==='team') renderBracket();
@@ -3680,6 +3676,7 @@ function ppg(matchId,side,pfx){
     launchConfetti(80,14);
   }
   advancePlayoff(pfx);
+  _autoResolveDroppedTeams();
   renderBracket(); saveState();
 }
 
