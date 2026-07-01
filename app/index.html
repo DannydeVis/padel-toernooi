@@ -718,10 +718,23 @@ body.pres-mode #pres-screen{display:block}
 .pres-timer-lbl{font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px}
 .pres-timer-val{font-size:1.3rem;font-weight:800;color:#C7FF5E;font-variant-numeric:tabular-nums;letter-spacing:1px}
 .pres-timer-val.danger{color:#ef4444!important;animation:timerFlash 1s ease-in-out infinite}
+.pres-timer-big{display:flex;align-items:center;gap:12px;background:#1A1F24;border:1px solid #252B32;border-radius:14px;padding:10px 22px;flex-shrink:0}
+.pres-timer-big-lbl{font-size:.85rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:1px}
+.pres-timer-big-val{font-size:4.2rem;font-weight:900;color:#C7FF5E;font-variant-numeric:tabular-nums;letter-spacing:1px;line-height:1}
+.pres-timer-big-val.danger{color:#ef4444!important;animation:timerFlash 1s ease-in-out infinite}
+.pres-timer-big-val.time-up{animation:timerBigFlash .5s ease-in-out 6}
 @keyframes timerFlash{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes timerBigFlash{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.04)}}
 .am-timer-btn{background:none;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:4px 12px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
 .am-timer-btn:hover{background:rgba(199,255,94,.1)}
 .am-timer-status{font-size:.85rem;font-weight:700;color:var(--txt2);font-variant-numeric:tabular-nums;padding:4px 0}
+.am-timer-banner{display:flex;align-items:center;justify-content:center;gap:8px;margin:2px 0 10px;padding:10px;border-radius:12px;background:var(--surface2);border:1px solid var(--bdr)}
+.am-timer-banner .am-timer-status{font-size:2.4rem;font-weight:800;color:var(--accent);line-height:1;padding:0}
+.am-timer-status.time-up{color:#ef4444!important;animation:timerBigFlash .5s ease-in-out 4}
+.am-add-player-btn,.team-drop-btn{background:none;border:1px dashed var(--bdr);border-radius:8px;color:var(--txt2);font-size:.75rem;font-weight:700;padding:6px 12px;cursor:pointer;font-family:inherit;white-space:nowrap;touch-action:manipulation}
+.am-add-player-btn:hover{border-color:var(--accent);color:var(--accent)}
+.am-st-hdr-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.am-st-hdr-row h3{margin-bottom:0}
 .pres-title{font-size:2.2rem;font-weight:900;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0}
 .pres-badge{display:inline-block;background:#C7FF5E;color:#0E1114;font-size:.9rem;font-weight:700;padding:3px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
 .pres-row{display:flex;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid #1A1F24}
@@ -1738,7 +1751,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.59.4';
+const APP_VERSION = 'v1.60.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1803,7 +1816,7 @@ nl:{
   brk_winner:'WINNAAR',brk_consolation_lbl:'TROOSTFINALE',
   am_round:'Ronde {n}',am_courts_one:'1 baan',am_courts_other:'{n} banen',
   am_pts:'{total}/{max} punten',am_save:'Opslaan',am_undo:'Herstel',
-  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',player_pause:'Pauzeer speler',player_resume:'Hervat speler',player_paused:'pauze',player_new_name:'Nieuwe naam…',player_save:'Opslaan',timer_start:'Start ronde',timer_done:'TIJD OM',
+  am_standings:'Ranglijst',am_col_player:'Speler',am_col_pts:'Punten',am_bye:'Rust',am_col_w:'W',am_col_d:'G',am_col_l:'V',dm_rank:'Rang',dm_avg:'Gem/match',dm_partners:'Partners',dm_opponents:'Tegenstanders',dm_h2h:'Directe duels',dm_no_matches:'Nog geen wedstrijden gespeeld',player_pause:'Pauzeer speler',player_resume:'Hervat speler',player_paused:'pauze',player_new_name:'Nieuwe naam…',player_save:'Opslaan',timer_start:'Start ronde',timer_done:'TIJD OM',latejoin_btn:'Speler',latejoin_name_ph:'Naam van de nieuwe speler',latejoin_pts_confirm:'Startpunten: OK voor gemiddelde ({avg}), Annuleren voor 0.',am_col_rest:'Rust',team_drop_btn:'Team laten uitvallen',team_dropped_badge:'uitgevallen',team_drop_confirm_ko:'Dit team laten uitvallen? Resterende wedstrijden worden walkover voor de tegenstander.',team_drop_confirm_rr1:'Dit team laten uitvallen?',team_drop_confirm_rr2:'OK is walkover (tegenstander wint openstaande wedstrijden). Annuleren is openstaande wedstrijden schrappen uit de klassement.',match_walkover:'W.O.',match_scratched:'Geschrapt',
   export_csv:'CSV downloaden',export_print:'Afdrukken / PDF',export_tournament:'Toernooi',export_format:'Format',export_matches:'Wedstrijden',export_score:'Score',export_round:'Ronde',pres_btn:'Presentatie',pres_live:'live via padel-bracket.com',pres_standings:'Ranglijst',pres_active:'bezig',pres_meta:'{p} gespeeld · {s} saldo',
   res_title:'Toernooi hervat',res_continue:'▶ Doorgaan',res_discard:'✕',
   res_am:'{label}Americano · {n} spelers',res_mex:'{label}Mexicano · {n} spelers',res_team:'{label}{teams} teams · {done}/{tot} wedstrijden',
@@ -1881,7 +1894,7 @@ en:{
   brk_winner:'WINNER',brk_consolation_lbl:'CONSOLATION',
   am_round:'Round {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Save',am_undo:'Undo',
-  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',player_pause:'Pause player',player_resume:'Resume player',player_paused:'paused',player_new_name:'New name…',player_save:'Save',timer_start:'Start round',timer_done:'TIME UP',
+  am_standings:'Rankings',am_col_player:'Player',am_col_pts:'Points',am_bye:'Bye',am_col_w:'W',am_col_d:'D',am_col_l:'L',dm_rank:'Rank',dm_avg:'Avg/match',dm_partners:'Partners',dm_opponents:'Opponents',dm_h2h:'Head to head',dm_no_matches:'No matches played yet',player_pause:'Pause player',player_resume:'Resume player',player_paused:'paused',player_new_name:'New name…',player_save:'Save',timer_start:'Start round',timer_done:'TIME UP',latejoin_btn:'Player',latejoin_name_ph:'Name of the new player',latejoin_pts_confirm:'Starting points: OK for average ({avg}), Cancel for 0.',am_col_rest:'Rest',team_drop_btn:'Mark team as dropped out',team_dropped_badge:'dropped out',team_drop_confirm_ko:'Mark this team as dropped out? Remaining matches become a walkover for the opponent.',team_drop_confirm_rr1:'Mark this team as dropped out?',team_drop_confirm_rr2:'OK is walkover (opponent wins outstanding matches). Cancel is removing outstanding matches from the standings.',match_walkover:'W.O.',match_scratched:'Scratched',
   export_csv:'Download CSV',export_print:'Print / PDF',export_tournament:'Tournament',export_format:'Format',export_matches:'Matches',export_score:'Score',export_round:'Round',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Standings',pres_active:'active',pres_meta:'{p} played · {s} diff',
   res_title:'Resume tournament',res_continue:'▶ Continue',res_discard:'✕',
   res_am:'{label}Americano · {n} players',res_mex:'{label}Mexicano · {n} players',res_team:'{label}{teams} teams · {done}/{tot} matches',
@@ -1959,7 +1972,7 @@ fr:{
   brk_winner:'VAINQUEUR',brk_consolation_lbl:'CONSOLATION',
   am_round:'Manche {n}',am_courts_one:'1 court',am_courts_other:'{n} courts',
   am_pts:'{total}/{max} points',am_save:'Enregistrer',am_undo:'Annuler',
-  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',player_pause:'Mettre en pause',player_resume:'Reprendre',player_paused:'pause',player_new_name:'Nouveau nom…',player_save:'Enregistrer',timer_start:'Lancer le tour',timer_done:'TEMPS ÉCOULÉ',
+  am_standings:'Classement',am_col_player:'Joueur',am_col_pts:'Points',am_bye:'Exempt',am_col_w:'V',am_col_d:'N',am_col_l:'D',dm_rank:'Rang',dm_avg:'Moy/match',dm_partners:'Partenaires',dm_opponents:'Adversaires',dm_h2h:'Face à face',dm_no_matches:'Aucun match joué',player_pause:'Mettre en pause',player_resume:'Reprendre',player_paused:'pause',player_new_name:'Nouveau nom…',player_save:'Enregistrer',timer_start:'Lancer le tour',timer_done:'TEMPS ÉCOULÉ',latejoin_btn:'Joueur',latejoin_name_ph:'Nom du nouveau joueur',latejoin_pts_confirm:'Points de départ : OK pour la moyenne ({avg}), Annuler pour 0.',am_col_rest:'Repos',team_drop_btn:"Marquer l'équipe comme abandonnée",team_dropped_badge:'abandon',team_drop_confirm_ko:"Marquer cette équipe comme abandonnée ? Les matchs restants deviennent forfait pour l'adversaire.",team_drop_confirm_rr1:'Marquer cette équipe comme abandonnée ?',team_drop_confirm_rr2:"OK pour forfait (l'adversaire remporte les matchs en attente). Annuler pour retirer les matchs en attente du classement.",match_walkover:'Forfait',match_scratched:'Retiré',
   export_csv:'Télécharger CSV',export_print:'Imprimer / PDF',export_tournament:'Tournoi',export_format:'Format',export_matches:'Matchs',export_score:'Score',export_round:'Manche',pres_btn:'Présentation',pres_live:'live via padel-bracket.com',pres_standings:'Classement',pres_active:'en cours',pres_meta:'{p} joués · {s} diff',
   res_title:'Reprendre le tournoi',res_continue:'▶ Continuer',res_discard:'✕',
   res_am:'{label}Americano · {n} joueurs',res_mex:'{label}Mexicano · {n} joueurs',res_team:'{label}{teams} équipes · {done}/{tot} matchs',
@@ -2035,7 +2048,7 @@ de:{
   brk_winner:'SIEGER',brk_consolation_lbl:'TROSTFINALE',
   am_round:'Runde {n}',am_courts_one:'1 Platz',am_courts_other:'{n} Plätze',
   am_pts:'{total}/{max} Punkte',am_save:'Speichern',am_undo:'Rückgängig',
-  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',player_pause:'Spieler pausieren',player_resume:'Spieler fortsetzen',player_paused:'pausiert',player_new_name:'Neuer Name…',player_save:'Speichern',timer_start:'Runde starten',timer_done:'ZEIT ABGELAUFEN',
+  am_standings:'Rangliste',am_col_player:'Spieler',am_col_pts:'Punkte',am_bye:'Freilos',am_col_w:'S',am_col_d:'U',am_col_l:'N',dm_rank:'Rang',dm_avg:'Ø/Match',dm_partners:'Partner',dm_opponents:'Gegner',dm_h2h:'Direktvergleich',dm_no_matches:'Noch keine Spiele gespielt',player_pause:'Spieler pausieren',player_resume:'Spieler fortsetzen',player_paused:'pausiert',player_new_name:'Neuer Name…',player_save:'Speichern',timer_start:'Runde starten',timer_done:'ZEIT ABGELAUFEN',latejoin_btn:'Spieler',latejoin_name_ph:'Name des neuen Spielers',latejoin_pts_confirm:'Startpunkte: OK fur Durchschnitt ({avg}), Abbrechen fur 0.',am_col_rest:'Pause',team_drop_btn:'Team als ausgeschieden markieren',team_dropped_badge:'ausgeschieden',team_drop_confirm_ko:'Dieses Team als ausgeschieden markieren? Verbleibende Spiele werden kampflos fur den Gegner gewertet.',team_drop_confirm_rr1:'Dieses Team als ausgeschieden markieren?',team_drop_confirm_rr2:'OK fur kampflos (Gegner gewinnt offene Spiele). Abbrechen fur offene Spiele aus der Tabelle streichen.',match_walkover:'Kampflos',match_scratched:'Gestrichen',
   export_csv:'CSV herunterladen',export_print:'Drucken / PDF',export_tournament:'Turnier',export_format:'Format',export_matches:'Spiele',export_score:'Ergebnis',export_round:'Runde',pres_btn:'Präsentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabelle',pres_active:'aktiv',pres_meta:'{p} gespielt · {s} Diff.',
   res_title:'Turnier fortsetzen',res_continue:'▶ Weiter',res_discard:'✕',
   res_am:'{label}Americano · {n} Spieler',res_mex:'{label}Mexicano · {n} Spieler',res_team:'{label}{teams} Teams · {done}/{tot} Spiele',
@@ -2111,7 +2124,7 @@ es:{
   brk_winner:'GANADOR',brk_consolation_lbl:'CONSOLACIÓN',
   am_round:'Ronda {n}',am_courts_one:'1 pista',am_courts_other:'{n} pistas',
   am_pts:'{total}/{max} puntos',am_save:'Guardar',am_undo:'Deshacer',
-  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',player_pause:'Pausar jugador',player_resume:'Reanudar jugador',player_paused:'pausado',player_new_name:'Nuevo nombre…',player_save:'Guardar',timer_start:'Iniciar ronda',timer_done:'TIEMPO',
+  am_standings:'Clasificación',am_col_player:'Jugador',am_col_pts:'Puntos',am_bye:'Descansa',am_col_w:'V',am_col_d:'E',am_col_l:'D',dm_rank:'Pos.',dm_avg:'Prom/partido',dm_partners:'Parejas',dm_opponents:'Rivales',dm_h2h:'Duelos directos',dm_no_matches:'Aún no hay partidos jugados',player_pause:'Pausar jugador',player_resume:'Reanudar jugador',player_paused:'pausado',player_new_name:'Nuevo nombre…',player_save:'Guardar',timer_start:'Iniciar ronda',timer_done:'TIEMPO',latejoin_btn:'Jugador',latejoin_name_ph:'Nombre del nuevo jugador',latejoin_pts_confirm:'Puntos iniciales: OK para el promedio ({avg}), Cancelar para 0.',am_col_rest:'Descanso',team_drop_btn:'Marcar equipo como retirado',team_dropped_badge:'retirado',team_drop_confirm_ko:'¿Marcar este equipo como retirado? Los partidos restantes se dan como perdidos ante el rival.',team_drop_confirm_rr1:'¿Marcar este equipo como retirado?',team_drop_confirm_rr2:'OK para walkover (el rival gana los partidos pendientes). Cancelar para eliminar los partidos pendientes de la clasificación.',match_walkover:'W.O.',match_scratched:'Anulado',
   export_csv:'Descargar CSV',export_print:'Imprimir / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partidos',export_score:'Resultado',export_round:'Ronda',pres_btn:'Presentación',pres_live:'live via padel-bracket.com',pres_standings:'Clasificación',pres_active:'en curso',pres_meta:'{p} jugados · {s} dif.',
   res_title:'Reanudar torneo',res_continue:'▶ Continuar',res_discard:'✕',
   res_am:'{label}Americano · {n} jugadores',res_mex:'{label}Mexicano · {n} jugadores',res_team:'{label}{teams} equipos · {done}/{tot} partidos',
@@ -2187,7 +2200,7 @@ sv:{
   brk_winner:'VINNARE',brk_consolation_lbl:'TRÖSTFINAL',
   am_round:'Runda {n}',am_courts_one:'1 bana',am_courts_other:'{n} banor',
   am_pts:'{total}/{max} poäng',am_save:'Spara',am_undo:'Ångra',
-  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',player_pause:'Pausa spelare',player_resume:'Återuppta spelare',player_paused:'pausad',player_new_name:'Nytt namn…',player_save:'Spara',timer_start:'Starta rond',timer_done:'SLUTTID',
+  am_standings:'Ranglista',am_col_player:'Spelare',am_col_pts:'Poäng',am_bye:'Vila',am_col_w:'V',am_col_d:'O',am_col_l:'F',dm_rank:'Rank',dm_avg:'Sn/match',dm_partners:'Partner',dm_opponents:'Motståndare',dm_h2h:'Inbördes möten',dm_no_matches:'Inga matcher spelade ännu',player_pause:'Pausa spelare',player_resume:'Återuppta spelare',player_paused:'pausad',player_new_name:'Nytt namn…',player_save:'Spara',timer_start:'Starta rond',timer_done:'SLUTTID',latejoin_btn:'Spelare',latejoin_name_ph:'Namn på den nya spelaren',latejoin_pts_confirm:'Startpoäng: OK för snitt ({avg}), Avbryt för 0.',am_col_rest:'Vila',team_drop_btn:'Markera lag som avhoppat',team_dropped_badge:'avhoppat',team_drop_confirm_ko:'Markera detta lag som avhoppat? Återstående matcher blir walkover för motståndaren.',team_drop_confirm_rr1:'Markera detta lag som avhoppat?',team_drop_confirm_rr2:'OK för walkover (motståndaren vinner återstående matcher). Avbryt för att ta bort återstående matcher från tabellen.',match_walkover:'W.O.',match_scratched:'Struken',
   export_csv:'Ladda ner CSV',export_print:'Skriv ut / PDF',export_tournament:'Turnering',export_format:'Format',export_matches:'Matcher',export_score:'Resultat',export_round:'Runda',pres_btn:'Presentation',pres_live:'live via padel-bracket.com',pres_standings:'Tabell',pres_active:'pågår',pres_meta:'{p} spelade · {s} diff',
   res_title:'Återuppta turnering',res_continue:'▶ Fortsätt',res_discard:'✕',
   res_am:'{label}Americano · {n} spelare',res_mex:'{label}Mexicano · {n} spelare',res_team:'{label}{teams} lag · {done}/{tot} matcher',
@@ -2263,7 +2276,7 @@ it:{
   brk_winner:'VINCITORE',brk_consolation_lbl:'CONSOLAZIONE',
   am_round:'Turno {n}',am_courts_one:'1 campo',am_courts_other:'{n} campi',
   am_pts:'{total}/{max} punti',am_save:'Salva',am_undo:'Annulla',
-  am_standings:'Classifica',am_col_player:'Giocatore',am_col_pts:'Punti',am_bye:'Riposo',am_col_w:'V',am_col_d:'P',am_col_l:'S',dm_rank:'Pos.',dm_avg:'Media/partita',dm_partners:'Coppie',dm_opponents:'Avversari',dm_h2h:'Scontri diretti',dm_no_matches:'Nessuna partita giocata',player_pause:'Metti in pausa il giocatore',player_resume:'Riprendi il giocatore',player_paused:'in pausa',player_new_name:'Nuovo nome...',player_save:'Salva',timer_start:'Avvia turno',timer_done:'TEMPO SCADUTO',
+  am_standings:'Classifica',am_col_player:'Giocatore',am_col_pts:'Punti',am_bye:'Riposo',am_col_w:'V',am_col_d:'P',am_col_l:'S',dm_rank:'Pos.',dm_avg:'Media/partita',dm_partners:'Coppie',dm_opponents:'Avversari',dm_h2h:'Scontri diretti',dm_no_matches:'Nessuna partita giocata',player_pause:'Metti in pausa il giocatore',player_resume:'Riprendi il giocatore',player_paused:'in pausa',player_new_name:'Nuovo nome...',player_save:'Salva',timer_start:'Avvia turno',timer_done:'TEMPO SCADUTO',latejoin_btn:'Giocatore',latejoin_name_ph:'Nome del nuovo giocatore',latejoin_pts_confirm:'Punti di partenza: OK per la media ({avg}), Annulla per 0.',am_col_rest:'Riposo',team_drop_btn:'Segna squadra come ritirata',team_dropped_badge:'ritirata',team_drop_confirm_ko:"Segnare questa squadra come ritirata? Le partite rimanenti diventano a tavolino per l'avversario.",team_drop_confirm_rr1:'Segnare questa squadra come ritirata?',team_drop_confirm_rr2:"OK per a tavolino (l'avversario vince le partite in sospeso). Annulla per rimuovere le partite in sospeso dalla classifica.",match_walkover:'A tavolino',match_scratched:'Rimossa',
   export_csv:'Scarica CSV',export_print:'Stampa / PDF',export_tournament:'Torneo',export_format:'Formato',export_matches:'Partite',export_score:'Punteggio',export_round:'Turno',pres_btn:'Presentazione',pres_live:'live via padel-bracket.com',pres_standings:'Classifica',pres_active:'in corso',pres_meta:'{p} giocate · {s} diff',
   res_title:'Riprendi torneo',res_continue:'▶ Continua',res_discard:'✕',
   res_am:'{label}Americano · {n} giocatori',res_mex:'{label}Mexicano · {n} giocatori',res_team:'{label}{teams} squadre · {done}/{tot} partite',
@@ -3166,13 +3179,14 @@ function renderPoule(){
   for(let r=1;r<=maxR;r++){
     const rm=PM.filter(m=>m.round===r);
     if(!rm.length) continue;
-    const done=rm.every(m=>m.winner);
+    const done=rm.every(m=>m.winner||m.excluded);
     html+=`<div class="rblock"><div class="rlbl">${t('rnd_label',{r})} ${done?icon('ic-check','icon-gold'):''}</div>`;
     for(const m of rm) html+=mrow(m);
     html+='</div>';
   }
   $('pm').innerHTML=html;
-  const done=PM.filter(m=>m.winner).length, tot=PM.length;
+  const scored=PM.filter(m=>!m.excluded);
+  const done=scored.filter(m=>m.winner).length, tot=scored.length;
   $('prog').style.width=tot?`${Math.round(done/tot*100)}%`:'0%';
   $('progtxt').textContent=t('rnd_progress',{done,tot});
   renderPouleInBracket();
@@ -3194,11 +3208,20 @@ function renderPouleInBracket(){
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">`;
     for(const m of rm){
       const na=T[m.a].name, nb=T[m.b].name;
+      if(m.excluded){
+        html+=`<div style="background:var(--b-card);border:1.5px solid var(--b-line);border-radius:6px;display:flex;align-items:center;padding:7px 10px;gap:8px;font-size:.8rem;opacity:.45">
+          <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(na)}</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:.72rem;color:var(--b-muted);flex-shrink:0">${t('match_scratched')}</span>
+          <span style="flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl">${esc(nb)}</span>
+        </div>`;
+        continue;
+      }
       const wA=m.winner==='A', wB=m.winner==='B';
       const scoreColor=m.winner?'var(--accent)':'var(--b-muted)';
+      const scoreTxt=m.winner?(m.walkover?t('match_walkover'):`${m.ga}–${m.gb}`):`${m.ga}–${m.gb}`;
       html+=`<div style="background:var(--b-card);border:1.5px solid var(--b-line);border-radius:6px;display:flex;align-items:center;padding:7px 10px;gap:8px;font-size:.8rem">
         <span style="flex:1;font-weight:${wA?700:400};color:${wA?'var(--b-win-txt)':wB?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(na)}</span>
-        <span style="font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;color:${scoreColor};flex-shrink:0;letter-spacing:1px">${m.ga}–${m.gb}</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;color:${scoreColor};flex-shrink:0;letter-spacing:1px">${scoreTxt}</span>
         <span style="flex:1;text-align:right;font-weight:${wB?700:400};color:${wB?'var(--b-win-txt)':wA?'var(--b-lose-txt)':'var(--b-txt)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl">${esc(nb)}</span>
         ${m.winner&&!viewMode?`<button onclick="undoPM(${m.id})" style="flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;border:1px solid #3a4048;background:#252B32;color:#d1d5db;cursor:pointer;font-family:'Inter',sans-serif;font-weight:700">${icon('ic-undo')}</button>`:''}
       </div>`;
@@ -3218,10 +3241,21 @@ function mrow(m){
   const courtBadge=R.courts>1&&m.court?`<div class="court-badge">${t('rnd_court',{n:m.court})}</div>`:'';
   const pkRR = sport==='pickleball' && mode==='roundrobin';
 
+  if(m.excluded){
+    return `<div class="mcard" style="opacity:.45">
+      ${courtBadge}
+      <div class="mteams">
+        <div class="mteam">${ena}</div>
+        <div class="mscore-wrap"><div class="mscore" style="font-size:.85rem;color:var(--b-muted)">${t('match_scratched')}</div></div>
+        <div class="mteam r">${enb}</div>
+      </div>
+    </div>`;
+  }
+
   if(m.winner){
     const wA=m.winner==='A';
-    const scoreDisp = pkRR ? `${m.sa}–${m.sb}` : `${m.ga}–${m.gb}`;
-    const scoreLabel = pkRR ? `${wA?esa:esb} wint (${m.sa}–${m.sb})` : `${wA?esa:esb} wint (${m.ga}–${m.gb})`;
+    const scoreDisp = m.walkover ? t('match_walkover') : (pkRR ? `${m.sa}–${m.sb}` : `${m.ga}–${m.gb}`);
+    const scoreLabel = m.walkover ? `${wA?esa:esb} wint (${t('match_walkover')})` : (pkRR ? `${wA?esa:esb} wint (${m.sa}–${m.sb})` : `${wA?esa:esb} wint (${m.ga}–${m.gb})`);
     return `<div class="mcard">
       ${courtBadge}
       <div class="mteams">
@@ -3293,7 +3327,7 @@ function pg(id,side){
     launchConfetti(45,10);
   }
   renderPoule(); renderSt(); saveState();
-  if(PM.every(x=>x.winner)) checkDone();
+  if(PM.every(x=>x.winner||x.excluded)) checkDone();
 }
 
 function pgPkSave(id){
@@ -3308,14 +3342,14 @@ function pgPkSave(id){
   m.winner=sa>sb?'A':'B';
   launchConfetti(45,10);
   renderPoule(); renderSt(); saveState();
-  if(PM.every(x=>x.winner)) checkDone();
+  if(PM.every(x=>x.winner||x.excluded)) checkDone();
 }
 
 function undoPM(id){
   const m=PM.find(x=>x.id===id);
   if(!m) return;
   // Full reset
-  m.ga=0; m.gb=0; m.sa=0; m.sb=0; m.winner=null;
+  m.ga=0; m.gb=0; m.sa=0; m.sb=0; m.winner=null; m.walkover=false;
   m.g1=null; m.g2=null; m.g3=null;
   renderPoule(); renderSt(); saveState();
 }
@@ -3323,7 +3357,7 @@ function undoPM(id){
 // ── Standings ─────────────────────────────────
 function getTeamStats(tid){
   const h2h={};
-  PM.filter(m=>m.winner&&(m.a===tid||m.b===tid)).forEach(m=>{
+  PM.filter(m=>m.winner&&!m.excluded&&(m.a===tid||m.b===tid)).forEach(m=>{
     const oId=m.a===tid?m.b:m.a;
     if(!h2h[oId]) h2h[oId]={w:0,l:0};
     const won=(m.a===tid&&m.winner==='A')||(m.b===tid&&m.winner==='B');
@@ -3334,7 +3368,7 @@ function getTeamStats(tid){
 
 function getStandings(){
   return T.map(t=>{
-    const my=PM.filter(m=>m.winner&&(m.a===t.id||m.b===t.id));
+    const my=PM.filter(m=>m.winner&&!m.excluded&&(m.a===t.id||m.b===t.id));
     const wins=my.filter(m=>(m.a===t.id&&m.winner==='A')||(m.b===t.id&&m.winner==='B')).length;
     const pts=sport==='pickleball'?my.reduce((acc,m2)=>acc+(m2.a===t.id?m2.sa:m2.sb),0):0;
     return{...t,played:my.length,wins,losses:my.length-wins,pts};
@@ -3345,7 +3379,7 @@ function renderSt(){
   const st=getStandings();
   const topN=mode==='roundrobin' ? -1 : Math.min(4,Math.ceil(st.length/2));
   const gameMap={};
-  PM.filter(m=>m.winner).forEach(m=>{
+  PM.filter(m=>m.winner&&!m.excluded).forEach(m=>{
     [m.a,m.b].forEach(id=>{
       if(!gameMap[id]) gameMap[id]={gW:0,gL:0};
       gameMap[id].gW+=m.a===id?m.ga:m.gb;
@@ -3357,7 +3391,8 @@ function renderSt(){
     const g=gameMap[tm.id]||{gW:0,gL:0};
     if(topN>=0 && i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
     const tmName=viewMode?esc(tm.name):`<button class="team-stats-btn" onclick="openTeamModal(${tm.id})">${esc(tm.name)}</button>`;
-    h+=`<tr class="${topN>=0 && i<topN?'qq':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
+    const dropBadge=tm.droppedOut?` <span class="player-paused-badge">${t('team_dropped_badge')}</span>`:'';
+    h+=`<tr class="${topN>=0 && i<topN?'qq':''}${tm.droppedOut?' am-player-paused':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${dropBadge}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
   const eb=$('st-export-bar');
@@ -3375,10 +3410,58 @@ function checkDone(){
     return;
   }
   fillPlayoff();
+  _autoResolveDroppedTeams();
   saveState();
   $('tab-bracket').style.color='var(--accent)';
   renderBracket();
   setTimeout(()=>showTab('bracket'),500);
+}
+
+// ── Team dropout (Knockout / Round Robin) ─────
+function _autoResolveDroppedTeams(){
+  if(mode!=='team') return;
+  let changed=false;
+  [PW,PL].forEach(list=>list.forEach(m=>{
+    if(m.winner||m.skip||m.bye||m.a==null||m.b==null) return;
+    const ta=T.find(x=>x.id===m.a), tb=T.find(x=>x.id===m.b);
+    if(ta&&ta.droppedOut&&!(tb&&tb.droppedOut)){ m.winner='B'; m.walkover=true; changed=true; }
+    else if(tb&&tb.droppedOut&&!(ta&&ta.droppedOut)){ m.winner='A'; m.walkover=true; changed=true; }
+  }));
+  if(changed){
+    advancePlayoff('w'); advancePlayoff('l');
+    _autoResolveDroppedTeams();
+  }
+}
+
+function dropTeam(tid){
+  const tm=T.find(x=>x.id===tid);
+  if(!tm||tm.droppedOut) return;
+  let scratch=false;
+  if(mode==='roundrobin'){
+    if(!window.confirm(t('team_drop_confirm_rr1'))) return;
+    scratch=!window.confirm(t('team_drop_confirm_rr2'));
+  } else if(mode==='team'){
+    if(!window.confirm(t('team_drop_confirm_ko'))) return;
+  } else return;
+  tm.droppedOut=true;
+  PM.forEach(m=>{
+    if(m.winner||m.excluded||!(m.a===tid||m.b===tid)) return;
+    if(scratch) m.excluded=true;
+    else { m.winner=m.a===tid?'B':'A'; m.walkover=true; }
+  });
+  if(mode==='team'){
+    [PW,PL].forEach(list=>list.forEach(m=>{
+      if(m.winner||m.skip||m.bye||!(m.a===tid||m.b===tid)) return;
+      m.winner=m.a===tid?'B':'A'; m.walkover=true;
+    }));
+    advancePlayoff('w'); advancePlayoff('l');
+    _autoResolveDroppedTeams();
+  }
+  closeDetailModal();
+  renderPoule(); renderSt();
+  if(mode==='team') renderBracket();
+  if(PM.every(m=>m.winner||m.excluded)) checkDone();
+  saveState();
 }
 
 function renderRRChamp(){
@@ -3559,11 +3642,11 @@ function mcard(m,pfx){
   const wa=m.winner==='A', wb=m.winner==='B';
   const tA=`<div class="bteam ${m.winner?(wa?'won':'lost'):(emA?'empty':'')}">
     <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emA?'— ?—':esc(na)}</span>
-    ${m.winner?`<span class="bsc">${m.ga}</span>`:''}
+    ${m.winner?`<span class="bsc">${m.walkover?(wa?t('match_walkover'):''):m.ga}</span>`:''}
   </div>`;
   const tB=`<div class="bteam ${m.winner?(wb?'won':'lost'):(emB?'empty':'')}">
     <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${emB?'— ?—':esc(nb)}</span>
-    ${m.winner&&!isBye?`<span class="bsc">${m.gb}</span>`:''}
+    ${m.winner&&!isBye?`<span class="bsc">${m.walkover?(wb?t('match_walkover'):''):m.gb}</span>`:''}
   </div>`;
   const totalGames = m.ga + m.gb;
   const canPlay = !m.winner && !emA && !emB && !isBye && totalGames < R.gpm;
@@ -3604,7 +3687,7 @@ function undoPPG(matchId,pfx){
   const list=pfx==='w'?PW:PL;
   const m=list.find(x=>x.id===matchId);
   if(!m) return;
-  m.ga=0; m.gb=0; m.winner=null;
+  m.ga=0; m.gb=0; m.winner=null; m.walkover=false;
   // If this was a semi, clear the final teams too
   if(pfx==='w'){
     const wf=PW.find(x=>x.id==='wf');
@@ -3848,6 +3931,7 @@ function startTeamAmericano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('teamamericano',TAP.length*2);
   showAmericano();
+  _maybeAutoStartTimer(TAM);
   saveState();
 }
 
@@ -3880,22 +3964,25 @@ function renderTeamAmericano(){
     const allDone=matches.every(m=>m.done);
     const byePairs=TAP.filter(p=>!matches.some(m=>m.a===p.id||m.b===p.id));
     const byeHtml=byePairs.length?`<div class="am-bye">${t('am_bye')}: ${byePairs.map(p=>`${esc(p.n1)} &amp; ${esc(p.n2)}`).join(', ')}</div>`:'';
-    let timerEl='';
+    let timerEl='', timerBanner='';
     if(!allDone && !viewMode && R.timerMins>0){
       const myTimer=timerData&&timerData.round===ri;
       if(myTimer){
         const rem=timerData.limit-Math.floor((Date.now()-timerData.start)/1000);
         const mm=Math.floor(Math.max(0,rem)/60), ss=String(Math.max(0,rem)%60).padStart(2,'0');
-        timerEl=`<span class="am-timer-status">${rem<=0?t('timer_done'):`${mm}:${ss}`}</span>`;
+        const doneNow=rem<=0;
+        const val=doneNow?t('timer_done'):`${mm}:${ss}`;
+        timerEl=`<span class="am-timer-status${doneNow?' time-up':''}">${val}</span>`;
+        if(ri===activeIdx) timerBanner=`<div class="am-timer-banner"><span class="am-timer-status${doneNow?' time-up':''}">${val}</span></div>`;
       } else {
         timerEl=`<button class="am-timer-btn" onclick="startRoundTimer(${ri})">${t('timer_start')}</button>`;
       }
     }
-    h+=`<div class="am-round${allDone?' am-round-done':''}">
+    h+=`${timerBanner}<div class="am-round${allDone?' am-round-done':''}">
       <div class="am-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
         <span style="display:flex;align-items:center;gap:4px">
-          ${allDone?'<span style="color:var(--accent);font-size:1rem">✓</span>':timerEl}
+          ${allDone?'<span style="color:var(--accent);font-size:1rem">✓</span>':(timerBanner?'':timerEl)}
         </span>
       </div>
       ${matches.map(m=>renderTAMatch(m,ri===activeIdx)).join('')}${byeHtml}
@@ -4048,6 +4135,7 @@ function taSave(matchId){
   m.done=true;
   TAP[m.a].pts+=m.sa;
   TAP[m.b].pts+=m.sb;
+  _maybeAutoStartTimer(TAM);
   saveState();
   renderTeamAmericano();
 }
@@ -4059,6 +4147,7 @@ function taUndo(matchId){
   TAP[m.a].pts-=m.sa;
   TAP[m.b].pts-=m.sb;
   m.sa=0; m.sb=0;
+  _maybeAutoStartTimer(TAM);
   saveState();
   renderTeamAmericano();
 }
@@ -4184,13 +4273,17 @@ function buildMexicanoRound(AP, AM, roundNum, courtsWanted=0){
   AM.forEach((ms,ri)=>{
     const playing=new Set();
     ms.forEach(m=>[m.a1,m.a2,m.b1,m.b2].forEach(id=>playing.add(id)));
-    active.forEach(p=>{ if(!playing.has(p.id)){byesSoFar[p.id]++;lastBye[p.id]=ri;} });
+    active.forEach(p=>{
+      if(p.joinedRound&&ri+1<p.joinedRound) return; // speler was nog niet aangesloten
+      if(!playing.has(p.id)){byesSoFar[p.id]++;lastBye[p.id]=ri;}
+    });
   });
 
   let byeSet=new Set();
   if(b>0){
+    // Wie het langst geleden rustte (of nog nooit) zit als eerste
     const cand=[...active].sort((x,y)=>
-      byesSoFar[x.id]-byesSoFar[y.id] || lastBye[x.id]-lastBye[y.id] || x.id-y.id);
+      lastBye[x.id]-lastBye[y.id] || byesSoFar[x.id]-byesSoFar[y.id] || x.id-y.id);
     cand.slice(0,b).forEach(p=>byeSet.add(p.id));
   }
   // spelers die WEL spelen op stand pairen (Mexicano-competitiviteit blijft)
@@ -4213,6 +4306,7 @@ function startMexicano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('mexicano', AP.length);
   showAmericano();
+  _maybeAutoStartTimer(AM);
   saveState();
 }
 
@@ -4332,6 +4426,7 @@ function startAmericano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('americano', AP.length);
   showAmericano();
+  _maybeAutoStartTimer(AM);
   saveState();
 }
 
@@ -4347,6 +4442,7 @@ function startMixicano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('mixicano', AP.length);
   showAmericano();
+  _maybeAutoStartTimer(AM);
   saveState();
 }
 
@@ -4799,10 +4895,11 @@ function _playTimerBeep(){
 function _tickAmTimer(){
   let td=null;
   try{ td=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
-  const el=document.querySelector('.am-timer-status');
-  if(!td||!el){ clearInterval(_amTimerTick); _amTimerTick=null; return; }
+  const els=document.querySelectorAll('.am-timer-status');
+  if(!td||!els.length){ clearInterval(_amTimerTick); _amTimerTick=null; return; }
   const rem=td.limit-Math.floor((Date.now()-td.start)/1000);
-  el.textContent=rem<=0?t('timer_done'):`${Math.floor(Math.max(0,rem)/60)}:${String(Math.max(0,rem)%60).padStart(2,'0')}`;
+  const txt=rem<=0?t('timer_done'):`${Math.floor(Math.max(0,rem)/60)}:${String(Math.max(0,rem)%60).padStart(2,'0')}`;
+  els.forEach(el=>{ el.textContent=txt; el.classList.toggle('time-up',rem<=0); });
   if(rem<=0){ clearInterval(_amTimerTick); _amTimerTick=null; if(!_timerBeeped){_timerBeeped=true;_playTimerBeep();} }
 }
 function _startAmTimerTick(){
@@ -4817,6 +4914,17 @@ function startRoundTimer(ri){
   if(_amTimerTick){ clearInterval(_amTimerTick); _amTimerTick=null; }
   renderAmericano();
   _startAmTimerTick();
+  updatePresentation();
+}
+// Start de rondetimer automatisch zodra een nieuwe ronde actief wordt
+function _maybeAutoStartTimer(list){
+  if(viewMode||!R.timerMins) return;
+  const activeIdx=list.findIndex(r=>r.some(m=>!m.done));
+  if(activeIdx===-1) return;
+  let td=null;
+  try{ td=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
+  if(td&&td.round===activeIdx) return;
+  startRoundTimer(activeIdx);
 }
 
 function renderAmericano(){
@@ -4831,21 +4939,24 @@ function renderAmericano(){
     const mexBadge=mode==='mexicano'?`<span style="font-size:.72rem;opacity:.5;font-weight:400;margin-left:8px">★ stand</span>`:'';
     const byes=getByePlayers(matches);
     const byeHtml=byes.length?`<div class="am-bye">${t('am_bye')}: ${byes.map(p=>esc(p.name)).join(' &amp; ')}</div>`:'';
-    let timerEl='';
+    let timerEl='', timerBanner='';
     if(!done && !viewMode && R.timerMins>0){
       const myTimer=timerData&&timerData.round===ri;
       if(myTimer){
         const rem=timerData.limit-Math.floor((Date.now()-timerData.start)/1000);
         const m=Math.floor(Math.max(0,rem)/60), s=String(Math.max(0,rem)%60).padStart(2,'0');
-        timerEl=`<span class="am-timer-status">${rem<=0?t('timer_done'):`${m}:${s}`}</span>`;
+        const doneNow=rem<=0;
+        const val=doneNow?t('timer_done'):`${m}:${s}`;
+        timerEl=`<span class="am-timer-status${doneNow?' time-up':''}">${val}</span>`;
+        if(ri===activeRoundIdx) timerBanner=`<div class="am-timer-banner"><span class="am-timer-status${doneNow?' time-up':''}">${val}</span></div>`;
       } else {
         timerEl=`<button class="am-timer-btn" onclick="startRoundTimer(${ri})">${t('timer_start')}</button>`;
       }
     }
     if(ri===activeRoundIdx){
-      h+=`<div class="am-active-round-hdr">
+      h+=`${timerBanner}<div class="am-active-round-hdr">
         <span class="am-round-lbl">${t('am_round',{n:ri+1})}${mexBadge} <span style="opacity:.5;font-weight:400">— ${t(matches.length===1?'am_courts_one':'am_courts_other',{n:matches.length})}</span></span>
-        <span style="display:flex;align-items:center;gap:4px">${timerEl}</span>
+        <span style="display:flex;align-items:center;gap:4px">${timerBanner?'':timerEl}</span>
       </div>
       ${matches.map(m=>renderAmMatch(m,true)).join('')}${byeHtml}`;
     } else {
@@ -5112,6 +5223,7 @@ function amSave(matchId){
       AM.push(buildMexicanoRound(AP, AM, AM.length+1, R.courts));
     }
   }
+  _maybeAutoStartTimer(AM);
   renderAmericano(); saveState();
 }
 
@@ -5123,6 +5235,7 @@ function amUndo(matchId){
   m.done=false; m.sa=0; m.sb=0;
   // Mexicano: pairings after this round are based on standings — truncate them
   if(mode==='mexicano') AM=AM.slice(0,m.round);
+  _maybeAutoStartTimer(AM);
   renderAmericano(); saveState();
 }
 
@@ -5204,6 +5317,8 @@ function _rebuildFutureMixRounds(){
 function pausePlayer(pid){
   const p=AP.find(x=>x.id===pid); if(!p) return;
   p.paused=true;
+  const activeIdx=AM.findIndex(r=>r.some(m=>!m.done));
+  p.pausedAtRound=activeIdx===-1?AM.length:activeIdx+1;
   if(mode==='americano') _rebuildFutureAmRounds();
   if(mode==='mixicano') _rebuildFutureMixRounds();
   closeDetailModal(); renderAmericano(); saveState();
@@ -5212,9 +5327,41 @@ function pausePlayer(pid){
 function resumePlayer(pid){
   const p=AP.find(x=>x.id===pid); if(!p) return;
   p.paused=false;
+  delete p.pausedAtRound;
   if(mode==='americano') _rebuildFutureAmRounds();
   if(mode==='mixicano') _rebuildFutureMixRounds();
   closeDetailModal(); renderAmericano(); saveState();
+}
+
+// ── Late toetreden (Americano / Mexicano) ─────
+function addLatePlayer(){
+  if(mode!=='americano'&&mode!=='mexicano') return;
+  const name=(window.prompt(t('latejoin_name_ph'))||'').trim();
+  if(!name) return;
+  const activePlayers=AP.filter(p=>!p.paused);
+  const avg=activePlayers.length?Math.round(activePlayers.reduce((a,p)=>a+p.pts,0)/activePlayers.length):0;
+  const useAvg=avg>0?window.confirm(t('latejoin_pts_confirm',{avg})):false;
+  const activeIdx=AM.findIndex(r=>r.some(m=>!m.done));
+  const nextRound=(activeIdx===-1?AM.length:activeIdx+1)+1;
+  const newId=AP.length;
+  AP.push({id:newId,name,pts:useAvg?avg:0,joinedRound:nextRound});
+  if(mode==='americano') _rebuildFutureAmRounds();
+  renderAmericano(); saveState();
+}
+
+// Aantal rondes dat een speler heeft gerust (voor eerlijke rustbeurten-kolom)
+function getRestRounds(p){
+  const activeIdx=AM.findIndex(r=>r.some(m=>!m.done));
+  const reached=activeIdx===-1?AM.length:activeIdx+1;
+  const cap=p.pausedAtRound!=null?Math.min(p.pausedAtRound,reached):reached;
+  const from=p.joinedRound||1;
+  let count=0;
+  for(let i=from-1;i<cap;i++){
+    const round=AM[i]; if(!round) continue;
+    const playing=round.some(m=>m.a1===p.id||m.a2===p.id||m.b1===p.id||m.b2===p.id);
+    if(!playing) count++;
+  }
+  return count;
 }
 
 function renamePlayer(pid,newName){
@@ -5250,14 +5397,16 @@ function getAmPlayerStats(pid){
 function renderAmSt(){
   const sorted=[...AP].sort((a,b)=>b.pts-a.pts);
   const anyDone=AM.flat().some(m=>m.done);
-  let h=`<div class="am-st-wrap"><h3>${t('am_standings')}</h3><table class="st-tbl">
-    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th></tr>`;
+  const canAdd=!viewMode&&(mode==='americano'||mode==='mexicano');
+  const addBtn=canAdd?`<button class="am-add-player-btn" onclick="addLatePlayer()">+ ${t('latejoin_btn')}</button>`:'';
+  let h=`<div class="am-st-wrap"><div class="am-st-hdr-row"><h3>${t('am_standings')}</h3>${addBtn}</div><table class="st-tbl">
+    <tr><th>#</th><th>${t('am_col_player')}</th><th>${t('am_col_pts')}</th><th class="wc">${t('am_col_w')}</th><th style="color:var(--b-muted)">${t('am_col_d')}</th><th class="lc">${t('am_col_l')}</th><th style="color:var(--b-muted)">${t('am_col_rest')}</th></tr>`;
   sorted.forEach((p,i)=>{
     const s=anyDone?getAmPlayerStats(p.id):{w:0,d:0,l:0};
     const pauseBadge=p.paused?` <span class="player-paused-badge">${t('player_paused')}</span>`:'';
     const lvlBadge=p.level?`<span class="player-lvl">${p.level}</span>`:'';
     const nameCell=viewMode?esc(p.name)+lvlBadge+pauseBadge:`<button class="am-player-btn" onclick="openPlayerModal(${p.id})">${esc(p.name)}<span class="am-edit-icon">✎</span></button>${lvlBadge}${pauseBadge}`;
-    h+=`<tr${i===0&&!p.paused?' class="qq"':''}${p.paused?' class="am-player-paused"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td></tr>`;
+    h+=`<tr${i===0&&!p.paused?' class="qq"':''}${p.paused?' class="am-player-paused"':''}><td>${i+1}</td><td>${nameCell}</td><td class="wc">${p.pts}</td><td class="wc">${s.w}</td><td style="color:var(--txt2)">${s.d}</td><td class="lc">${s.l}</td><td style="color:var(--b-muted)">${getRestRounds(p)}</td></tr>`;
   });
   const bar=anyDone?renderExportBar():'';
   const allDone=AM.length&&AM.flat().every(m=>m.done);
@@ -5463,8 +5612,10 @@ function openTeamModal(tid){
   const entries=Object.keys(h2h).map(Number).sort((a,b)=>(h2h[b].w+h2h[b].l)-(h2h[a].w+h2h[a].l));
   let rows='';
   entries.forEach(oid=>{const ot=T.find(x=>x.id===oid);if(!ot)return;const r=h2h[oid];rows+=`<tr><td>${esc(ot.name)}${ot.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}</td><td class="wc">${r.w}</td><td class="lc">${r.l}</td></tr>`;});
+  const canDrop=!viewMode&&!tm.droppedOut&&(mode==='team'||mode==='roundrobin');
   $('dm-card').innerHTML=`
-    <div class="dm-top"><span class="dm-title">${esc(tm.name)}${tm.trio?' <span style="opacity:.5;font-size:.75rem;font-weight:400"> trio</span>':''}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    <div class="dm-top"><span class="dm-title">${esc(tm.name)}${tm.trio?' <span style="opacity:.5;font-size:.75rem;font-weight:400"> trio</span>':''}${tm.droppedOut?` <span class="player-paused-badge">${t('team_dropped_badge')}</span>`:''}</span><button class="dm-close-btn" onclick="closeDetailModal()">✕</button></div>
+    ${canDrop?`<div class="dm-actions"><button class="dm-pause-btn" onclick="dropTeam(${tid})">${t('team_drop_btn')}</button></div>`:''}
     ${rows?`<div class="dm-section"><div class="dm-section-title">${t('dm_h2h')}</div><table class="st-tbl"><tr><th>${t('st_col_team')}</th><th class="wc">${t('st_col_wins')}</th><th class="lc">${t('st_col_losses')}</th></tr>${rows}</table></div>`:`<p style="color:var(--txt2);font-size:.85rem;text-align:center;padding:16px 0">${t('dm_no_matches')}</p>`}
   `;
   $('detail-modal').classList.remove('hidden');
@@ -6217,8 +6368,10 @@ function updatePresentation(){
       };
     }
   }
+  let timer=null;
+  try{ timer=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{}
   localStorage.setItem('padel-presentation',JSON.stringify({
-    mode,name:tournamentName||'',standings,rounds,bracket,ts:Date.now()
+    mode,name:tournamentName||'',standings,rounds,bracket,timer,ts:Date.now()
   }));
   if(_castConn&&_castConn.state==='connected'){
     try{ _castConn.send(localStorage.getItem('padel-presentation')||''); }catch{}
@@ -6257,15 +6410,18 @@ function initPresentation(){
     }).catch(()=>{});
   }
 
+  let _presBeeped=null;
   function _getTimerData(){
+    const presRaw=localStorage.getItem('padel-presentation');
+    if(presRaw){ try{ const d=JSON.parse(presRaw); if(d.timer) return d.timer; }catch{} }
     try{ return JSON.parse(localStorage.getItem('padel-round-timer')||'null'); }catch{ return null; }
   }
   function _countdown(td, activeIdx){
     if(!td||td.round!==activeIdx) return null;
     const rem=td.limit-Math.floor((Date.now()-td.start)/1000);
-    if(rem<=0) return {str:t('timer_done'), danger:true};
+    if(rem<=0) return {str:t('timer_done'), danger:true, timeUp:true};
     const m=Math.floor(rem/60), s=String(rem%60).padStart(2,'0');
-    return {str:`${m}:${s}`, danger:rem<120};
+    return {str:`${m}:${s}`, danger:rem<120, timeUp:false};
   }
   function _clockStr(){
     return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
@@ -6281,6 +6437,16 @@ function initPresentation(){
     if(te){
       te.textContent=ct?ct.str:'';
       if(ct&&ct.danger) te.classList.add('danger'); else te.classList.remove('danger');
+    }
+    const big=$('pres-timer-big-val');
+    if(big){
+      big.textContent=ct?ct.str:'--:--';
+      big.classList.toggle('danger',!!(ct&&ct.danger));
+      big.classList.toggle('time-up',!!(ct&&ct.timeUp));
+    }
+    if(td&&ct&&ct.timeUp&&_presBeeped!==td.start){
+      _presBeeped=td.start;
+      _playTimerBeep();
     }
   }
 
@@ -6317,11 +6483,14 @@ function initPresentation(){
         ${score}
       </div>`;
     }).join('');
-    let matchesHtml='', activeIdx=-1;
+    let matchesHtml='';
+    const activeIdx=d.rounds&&d.rounds.length?d.rounds.findIndex(r=>r.matches.some(m=>!m.done)):-1;
+    const _headerTd=_getTimerData();
+    const headerCt=_countdown(_headerTd,activeIdx);
+    const headerTimerHtml=headerCt?`<div class="pres-timer-big"><span class="pres-timer-big-lbl">${t('rnd_label',{r:(activeIdx+1)})}</span><span class="pres-timer-big-val${headerCt.danger?' danger':''}${headerCt.timeUp?' time-up':''}" id="pres-timer-big-val">${headerCt.str}</span></div>`:'';
     if(amMode&&d.rounds&&d.rounds.length){
-      activeIdx=d.rounds.findIndex(r=>r.matches.some(m=>!m.done));
       const allDone=activeIdx===-1;
-      const td=_getTimerData();
+      const td=_headerTd;
       const sections=d.rounds.map((r,i)=>{
         const isActive=allDone||(i===activeIdx);
         const isCurrent=!allDone&&i===activeIdx;
@@ -6396,6 +6565,7 @@ function initPresentation(){
       <div class="pres-header">
         <div class="pres-header-top">
           <div class="pres-title">${esc(d.name||'Padel Toernooi')}</div>
+          ${headerTimerHtml}
           <div class="pres-clock" id="pres-clock">${_clockStr()}</div>
         </div>
         <div class="pres-header-bot">
