@@ -4124,6 +4124,30 @@ function renderTAMatch(m,isActive=true){
         </div>`;
         const mySide=onA?'a':'b', ownVal=onA?vs.sa:vs.sb, oppVal=onA?vs.sb:vs.sa;
         const ownId=onA?`vsa-${m.id}`:`vsb-${m.id}`, oppId=onA?`vsb-${m.id}`:`vsa-${m.id}`;
+        const _timedView=R.scoringMode==='time';
+        const scoreCtrl=_timedView
+          ?`<div class="am-score-ctrl">
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','a',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="vsa-${m.id}" value="${vs.sa}" oninput="viewTAAdjInput('${m.id}','a',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','a',1)">+</button>
+              </div>
+              <span class="am-sc-sep">—</span>
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','b',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="vsb-${m.id}" value="${vs.sb}" oninput="viewTAAdjInput('${m.id}','b',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','b',1)">+</button>
+              </div>
+            </div>`
+          :`<div class="am-score-ctrl">
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','${mySide}',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewTAAdjInput('${m.id}','${mySide}',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','${mySide}',1)">+</button>
+              </div>
+              <span class="am-sc-sep">—</span>
+              <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
+            </div>`;
         return `<div class="am-match my-match" id="amm-${m.id}">
           <div class="my-match-badge">${t('my_match_lbl')}</div>
           <div class="am-match-teams">
@@ -4131,15 +4155,7 @@ function renderTAMatch(m,isActive=true){
             <span class="am-vs">vs</span>
             <span class="am-team r${!onA?' my-side':''}">${tB}</span>
           </div>
-          <div class="am-score-ctrl">
-            <div class="am-sc-side">
-              <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','${mySide}',-1)">−</button>
-              <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewTAAdjInput('${m.id}','${mySide}',this.value)">
-              <button class="am-sc-btn" onpointerdown="viewTAAdj('${m.id}','${mySide}',1)">+</button>
-            </div>
-            <span class="am-sc-sep">—</span>
-            <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
-          </div>
+          ${scoreCtrl}
           <div class="am-sc-footer" id="vsfoot-${m.id}">
             <button class="viewer-submit-btn" onclick="submitViewerScore('${m.id}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>
           </div>
@@ -4699,14 +4715,16 @@ function viewAdj(matchId,side,delta){
   const m=AM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
   const target=_matchTarget(m);
+  const timed=R.scoringMode==='time';
   if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:target,submitted:false};
   const vs=viewerScores[matchId];
+  const cap=timed?target*3:target;
   if(side==='a'){
-    vs.sa=Math.max(0,Math.min(target,vs.sa+delta));
-    vs.sb=target-vs.sa;
+    vs.sa=Math.max(0,Math.min(cap,vs.sa+delta));
+    if(!timed) vs.sb=target-vs.sa;
   } else {
-    vs.sb=Math.max(0,Math.min(target,vs.sb+delta));
-    vs.sa=target-vs.sb;
+    vs.sb=Math.max(0,Math.min(cap,vs.sb+delta));
+    if(!timed) vs.sa=target-vs.sb;
   }
   _scoreSet('vsa-'+matchId,vs.sa); _scoreSet('vsb-'+matchId,vs.sb);
   const foot=$('vsfoot-'+matchId);
@@ -4717,11 +4735,14 @@ function viewAdjInput(matchId,side,val){
   const m=AM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
   const target=_matchTarget(m);
+  const timed=R.scoringMode==='time';
   if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:target,submitted:false};
   const vs=viewerScores[matchId];
-  const n=Math.max(0,Math.min(target,parseInt(val)||0));
-  if(side==='a'){vs.sa=n;vs.sb=target-n;}else{vs.sb=n;vs.sa=target-n;}
-  _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
+  const cap=timed?target*3:target;
+  const n=Math.max(0,Math.min(cap,parseInt(val)||0));
+  if(timed){ if(side==='a') vs.sa=n; else vs.sb=n; }
+  else if(side==='a'){vs.sa=n;vs.sb=target-n;}else{vs.sb=n;vs.sa=target-n;}
+  if(!timed) _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
   const foot=$('vsfoot-'+matchId);
   if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
 }
@@ -4730,14 +4751,16 @@ function viewTAAdj(matchId,side,delta){
   const m=TAM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
   const target=_matchTarget(m);
+  const timed=R.scoringMode==='time';
   if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:target,submitted:false};
   const vs=viewerScores[matchId];
+  const cap=timed?target*3:target;
   if(side==='a'){
-    vs.sa=Math.max(0,Math.min(target,vs.sa+delta));
-    vs.sb=target-vs.sa;
+    vs.sa=Math.max(0,Math.min(cap,vs.sa+delta));
+    if(!timed) vs.sb=target-vs.sa;
   } else {
-    vs.sb=Math.max(0,Math.min(target,vs.sb+delta));
-    vs.sa=target-vs.sb;
+    vs.sb=Math.max(0,Math.min(cap,vs.sb+delta));
+    if(!timed) vs.sa=target-vs.sb;
   }
   _scoreSet('vsa-'+matchId,vs.sa); _scoreSet('vsb-'+matchId,vs.sb);
   const foot=$('vsfoot-'+matchId);
@@ -4748,11 +4771,14 @@ function viewTAAdjInput(matchId,side,val){
   const m=TAM.flat().find(x=>x.id===matchId);
   if(!m||m.done) return;
   const target=_matchTarget(m);
+  const timed=R.scoringMode==='time';
   if(!viewerScores[matchId]) viewerScores[matchId]={sa:0,sb:target,submitted:false};
   const vs=viewerScores[matchId];
-  const n=Math.max(0,Math.min(target,parseInt(val)||0));
-  if(side==='a'){vs.sa=n;vs.sb=target-n;}else{vs.sb=n;vs.sa=target-n;}
-  _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
+  const cap=timed?target*3:target;
+  const n=Math.max(0,Math.min(cap,parseInt(val)||0));
+  if(timed){ if(side==='a') vs.sa=n; else vs.sb=n; }
+  else if(side==='a'){vs.sa=n;vs.sb=target-n;}else{vs.sb=n;vs.sa=target-n;}
+  if(!timed) _scoreSet(side==='a'?'vsb-'+matchId:'vsa-'+matchId, side==='a'?vs.sb:vs.sa);
   const foot=$('vsfoot-'+matchId);
   if(foot) foot.innerHTML=`<button class="viewer-submit-btn" onclick="submitViewerScore('${matchId}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>`;
 }
@@ -4878,6 +4904,7 @@ async function initCourtMode(code,courtN,tok){
   if(!activeMatch){ $ct('ct-body',`<div class="court-err">${t('court_no_match')}</div>`); return; }
 
   const maxPts=activeMatch.targetPts!=null?activeMatch.targetPts:((state.R&&state.R.matchPts)||32);
+  const timed=!!(state.R&&state.R.scoringMode==='time');
   const aps=state.AP||[];
   const pa=aps[activeMatch.a1], pb=aps[activeMatch.a2], pc=aps[activeMatch.b1], pd=aps[activeMatch.b2];
   const nameA=pa&&pb?`${pa.name}\n${pb.name}`:'Team A';
@@ -4885,7 +4912,7 @@ async function initCourtMode(code,courtN,tok){
 
   let sa=0, sb=0;
   function render(){
-    const total=sa+sb, ready=total===maxPts;
+    const total=sa+sb, ready=timed?true:total===maxPts;
     $ct('ct-body',`
       <div class="court-teams-grid">
         <div class="court-team-block"><div class="court-team-names">${nameA.replace('\n','<br>')}</div></div>
@@ -4906,15 +4933,16 @@ async function initCourtMode(code,courtN,tok){
         </div>
       </div>
       <div class="court-progress${ready?' ready':''}">
-        ${total} / ${maxPts} ${t('am_col_pts')||'punten'}
+        ${timed?`${total} ${t('am_col_pts')||'punten'}`:`${total} / ${maxPts} ${t('am_col_pts')||'punten'}`}
       </div>
       <button class="court-submit-btn" id="cs-submit" onclick="csSubmit()" ${ready?'':'disabled'}>${t('court_submit')}</button>
     `);
   }
 
   window.csAdj=function(side,d){
-    if(side==='a'){ sa=Math.max(0,Math.min(sa+d,maxPts-sb)); }
-    else { sb=Math.max(0,Math.min(sb+d,maxPts-sa)); }
+    const cap=timed?maxPts*3:maxPts;
+    if(side==='a'){ sa=Math.max(0,Math.min(sa+d,timed?cap:maxPts-sb)); }
+    else { sb=Math.max(0,Math.min(sb+d,timed?cap:maxPts-sa)); }
     render();
   };
 
@@ -5159,6 +5187,30 @@ function renderAmMatch(m,isActiveRound=true){
         }
         const mySide=onA?'a':'b', ownVal=onA?vs.sa:vs.sb, oppVal=onA?vs.sb:vs.sa;
         const ownId=onA?`vsa-${m.id}`:`vsb-${m.id}`, oppId=onA?`vsb-${m.id}`:`vsa-${m.id}`;
+        const _timedView=R.scoringMode==='time';
+        const scoreCtrl=_timedView
+          ?`<div class="am-score-ctrl">
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','a',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="vsa-${m.id}" value="${vs.sa}" oninput="viewAdjInput('${m.id}','a',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','a',1)">+</button>
+              </div>
+              <span class="am-sc-sep">—</span>
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','b',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="vsb-${m.id}" value="${vs.sb}" oninput="viewAdjInput('${m.id}','b',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','b',1)">+</button>
+              </div>
+            </div>`
+          :`<div class="am-score-ctrl">
+              <div class="am-sc-side">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','${mySide}',-1)">−</button>
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewAdjInput('${m.id}','${mySide}',this.value)">
+                <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','${mySide}',1)">+</button>
+              </div>
+              <span class="am-sc-sep">—</span>
+              <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
+            </div>`;
         return `<div class="am-match my-match" id="amm-${m.id}">
           <div class="my-match-badge">${t('my_match_lbl')}</div>
           <div class="am-match-teams">
@@ -5166,15 +5218,7 @@ function renderAmMatch(m,isActiveRound=true){
             <span class="am-vs">vs</span>
             <span class="am-team r${!onA?' my-side':''}">${tB}</span>
           </div>
-          <div class="am-score-ctrl">
-            <div class="am-sc-side">
-              <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','${mySide}',-1)">−</button>
-              <input type="tel" inputmode="numeric" pattern="[0-9]*" class="am-sc-val am-sc-input" id="${ownId}" value="${ownVal}" oninput="viewAdjInput('${m.id}','${mySide}',this.value)">
-              <button class="am-sc-btn" onpointerdown="viewAdj('${m.id}','${mySide}',1)">+</button>
-            </div>
-            <span class="am-sc-sep">—</span>
-            <span class="am-sc-val vs-readonly" id="${oppId}">${oppVal}</span>
-          </div>
+          ${scoreCtrl}
           <div class="am-sc-footer" id="vsfoot-${m.id}">
             <button class="viewer-submit-btn" onclick="submitViewerScore('${m.id}',${vs.sa},${vs.sb})">${t('viewer_score_submit')}</button>
           </div>
