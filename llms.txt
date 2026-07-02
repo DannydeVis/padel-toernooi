@@ -62,7 +62,7 @@ Every team plays every other team at least once. Standings are ranked by number 
 - Fullscreen TV / presentation mode — turns any TV, monitor or projector into a live tournament scoreboard via HDMI or screen casting, refreshing automatically every 3 seconds
 - Export final results and standings as a PDF (for printing) or CSV (for Excel or Google Sheets)
 - Works fully offline after the first load, installable as a Progressive Web App on phone, tablet or desktop
-- Available in 7 languages: Dutch, English, French, German, Spanish, Swedish and Italian
+- Available in 8 languages: Dutch, English, French, German, Spanish, Swedish, Italian and Portuguese
 - Light and dark theme
 - No account, no registration, no payment, no ads, no paywall
 
@@ -70,7 +70,7 @@ Every team plays every other team at least once. Standings are ranked by number 
 Free. No subscription, no account, no ads, no paywall — every feature listed above is included at no cost.
 
 ## Languages
-Dutch, English, French, German, Spanish, Swedish, Italian
+Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 
 ## URLs
 
