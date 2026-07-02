@@ -82,6 +82,8 @@ Dutch, English, French, German, Spanish, Swedish, Italian
 ### Format guides and generators
 - https://padel-bracket.com/americano/ — Americano format guide and generator
 - https://padel-bracket.com/mexicano/ — Mexicano format guide and generator
+- https://padel-bracket.com/mixicano/: Mixicano format guide and generator
+- https://padel-bracket.com/team-mexicano/: Team Mexicano format guide and generator
 - https://padel-bracket.com/knockout/ — Knockout bracket generator
 - https://padel-bracket.com/round-robin/ — Round Robin generator
 - https://padel-bracket.com/king-of-the-court/ — King of the Court generator

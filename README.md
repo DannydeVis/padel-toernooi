@@ -83,4 +83,7 @@ npx serve .        # or: python3 -m http.server 8080
 - **Live app** — [padel-bracket.com/app/](https://padel-bracket.com/app/)
 - **Americano guide** — [padel-bracket.com/americano/](https://padel-bracket.com/americano/)
 - **Mexicano guide** — [padel-bracket.com/mexicano/](https://padel-bracket.com/mexicano/)
+- **Mixicano guide**: [padel-bracket.com/mixicano/](https://padel-bracket.com/mixicano/)
+- **Team Mexicano guide**: [padel-bracket.com/team-mexicano/](https://padel-bracket.com/team-mexicano/)
+- **King of the Court guide**: [padel-bracket.com/king-of-the-court/](https://padel-bracket.com/king-of-the-court/)
 - **Printable schedule (8 players)** — [padel-bracket.com/americano/8-players/](https://padel-bracket.com/americano/8-players/)
