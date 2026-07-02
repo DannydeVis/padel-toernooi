@@ -676,6 +676,28 @@ body.light .comp-select{background:#f3f4f6;color:#111827}
 .add-comp-item.new-comp{color:var(--accent);background:rgba(199,255,94,.07);border:1px dashed rgba(199,255,94,.25)}
 .phdr{display:none;font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;text-align:center;padding-bottom:10px;border-bottom:2px solid #d1d5db;margin-bottom:16px;text-transform:uppercase;color:#111}
 
+/* ── Clubcompetitie (Supabase, deelbaar) ── */
+.cc-hdr{margin-bottom:12px}
+.cc-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.cc-lb-row{background:var(--surface2);border-radius:10px;margin-bottom:6px;overflow:hidden}
+.cc-lb-row.cc-lb-top{border:1px solid rgba(199,255,94,.25)}
+.cc-lb-main{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none}
+.cc-lb-main:hover{background:rgba(255,255,255,.04)}
+.cc-lb-rank{width:26px;flex-shrink:0;font-weight:800;color:var(--txt2);text-align:center}
+.cc-lb-top .cc-lb-rank{color:var(--accent)}
+.cc-lb-name{flex:1;min-width:0;font-weight:700;font-size:.92rem;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-lb-pts{font-weight:800;color:var(--accent);font-size:.95rem}
+.cc-lb-sub{font-size:.72rem;color:var(--txt2);padding:0 14px 8px 50px}
+.cc-lb-detail{display:none;padding:0 14px 10px 50px}
+.cc-lb-row.expanded .cc-lb-detail{display:block}
+.cc-lb-ev-row{display:flex;gap:10px;padding:4px 0;border-bottom:1px solid var(--surface);font-size:.78rem;color:var(--txt2)}
+.cc-lb-ev-row:last-child{border-bottom:none}
+.cc-lb-ev-row .wc{margin-left:auto;color:var(--accent);font-weight:700}
+.cc-ladder-row{display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:10px;padding:10px 14px;margin-bottom:6px}
+.cc-challenge-row{background:var(--surface2);border-radius:10px;padding:10px 14px;margin-bottom:6px;font-size:.85rem}
+body.pres-mode .cc-actions,body.pres-mode .comp-back-btn{display:none!important}
+body.light .cc-lb-row,body.light .cc-ladder-row,body.light .cc-challenge-row{background:#f3f4f6}
+
 /* SVG ICONS */
 .icon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;overflow:visible;flex-shrink:0}
 .icon use{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -1368,6 +1390,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
       <div class="more-menu" id="more-menu">
         <button class="more-item" onclick="toggleTheme();closeMore()"><svg class="icon" viewBox="0 0 24 24" id="icon-theme"><use href="#ic-moon"></use></svg> <span data-i18n="hdr_theme">Thema wisselen</span></button>
         <button class="more-item" onclick="showCompetitions();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg> <span data-i18n="comp_menu">Competities</span></button>
+        <button class="more-item" onclick="ccOpenStart();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg> <span data-i18n="cc_menu">Clubcompetitie starten</span></button>
         <div class="more-divider" id="more-divider" style="display:none"></div>
         <button class="more-item" id="btn-back" style="display:none" onclick="goSetup();closeMore()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-pencil"></use></svg> <span data-i18n="hdr_edit">Aanpassen</span></button>
         <button class="more-item" id="btn-reset" style="display:none" onclick="resetTournament()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-rotate"></use></svg> <span data-i18n="reset_btn">Begin opnieuw</span></button>
@@ -1406,6 +1429,14 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
       <h1 class="sx-display" data-i18n="title">Stel je toernooi in</h1>
       <p class="c-sub" data-i18n="sub_c">Je ziet je toernooi ontstaan terwijl je typt.</p>
       <button type="button" class="sx-manual-link" onclick="suOpenSetup()" data-i18n="su_open_cta">Inschrijving openen</button>
+      <button type="button" class="sx-manual-link" onclick="ccTogglePrelink()" data-i18n="cc_prelink_cta">Koppelen aan clubcompetitie</button>
+      <div id="cc-prelink-box" style="display:none;max-width:360px;margin:10px auto 0">
+        <div style="display:flex;gap:8px">
+          <input type="text" id="cc-prelink-inp" class="sx-input" maxlength="6" style="text-transform:uppercase" data-i18n-ph="cc_code_ph" placeholder="Code">
+          <button class="btn btn-ghost btn-sm" onclick="ccApplyPrelink()" data-i18n="cc_link_btn">Koppel</button>
+        </div>
+        <p id="cc-prelink-status" style="font-size:.78rem;color:var(--txt2);margin-top:6px"></p>
+      </div>
     </div>
 
     <!-- Main 2-column grid -->
@@ -1774,6 +1805,67 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
   </div>
 </div>
 
+<!-- CLUBCOMPETITIE: starten -->
+<div id="screen-cc-start" style="display:none">
+  <div class="setup-box">
+    <div class="setup-intro">
+      <h2 data-i18n="cc_start_title">Clubcompetitie starten</h2>
+      <p class="setup-intro-sub" data-i18n="cc_start_sub">Deel een link, verzamel resultaten van meerdere avonden of een ladder.</p>
+    </div>
+    <div class="setup-card">
+      <input type="text" id="cc-start-name" class="sx-input" maxlength="48" data-i18n-ph="cc_name_ph" placeholder="Naam van de competitie" style="margin-bottom:10px">
+      <input type="text" id="cc-start-club" class="sx-input" maxlength="48" data-i18n-ph="cc_club_ph" placeholder="Clubnaam (optioneel)" style="margin-bottom:10px">
+      <select id="cc-start-type" class="comp-select" style="margin-bottom:10px" onchange="ccUpdateStartFields()">
+        <option value="series" data-i18n="cc_type_series">Avondencompetitie</option>
+        <option value="ladder" data-i18n="cc_type_ladder">Ladder</option>
+      </select>
+      <div id="cc-series-fields">
+        <select id="cc-point-model" class="comp-select" style="margin-bottom:10px">
+          <option value="linear" data-i18n="cc_model_linear">Lineair (winnaar = aantal spelers, laatste = 1 punt)</option>
+          <option value="fixed" data-i18n="cc_model_fixed">Vast schema (25,18,15,12,10,8,6,4,2,1)</option>
+        </select>
+        <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--txt2);margin-bottom:8px">
+          <input type="checkbox" id="cc-bestof-enable"> <span data-i18n="cc_bestof_lbl">Alleen beste X avonden tellen</span>
+        </label>
+        <input type="number" id="cc-bestof-n" class="sx-input" min="1" max="52" value="5" style="max-width:110px;margin-bottom:10px">
+      </div>
+      <div id="cc-ladder-fields" style="display:none">
+        <label style="display:block;font-size:.85rem;color:var(--txt2);margin-bottom:6px" data-i18n="cc_range_lbl">Uitdagen tot X plekken hoger</label>
+        <input type="number" id="cc-challenge-range" class="sx-input" min="1" max="5" value="3" style="max-width:110px;margin-bottom:10px">
+      </div>
+      <button class="btn btn-green" style="width:100%;justify-content:center" onclick="ccSubmitStart()" id="cc-start-submit"><span data-i18n="cc_create_btn">Competitie aanmaken</span></button>
+      <button type="button" class="sx-manual-link" onclick="ccBackFromStart()" style="margin-top:12px" data-i18n="su_cancel">Annuleren</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLUBCOMPETITIE: gedeeld na aanmaken -->
+<div id="screen-cc-created" style="display:none">
+  <div class="setup-box">
+    <div class="setup-intro">
+      <h2 data-i18n="cc_created_title">Competitie aangemaakt</h2>
+      <p class="setup-intro-sub" data-i18n="cc_created_sub">Deel deze link of QR-code met de club.</p>
+    </div>
+    <div class="su-qr-wrap">
+      <img id="cc-created-qr" alt="QR">
+      <div style="font-family:monospace;font-size:1.3rem;font-weight:800;letter-spacing:3px" id="cc-created-code"></div>
+      <div class="share-link-row" style="width:100%">
+        <input class="share-link-inp" id="cc-created-link" type="text" readonly>
+        <button class="share-copy-btn" id="cc-created-copy-btn" onclick="ccCopyCreatedLink()"><span data-i18n="share_copy">Kopieer link</span></button>
+      </div>
+    </div>
+    <div class="setup-card">
+      <button class="btn btn-green" style="width:100%;justify-content:center" onclick="ccGoToCreatedView()"><span data-i18n="cc_view_btn">Naar leaderboard</span></button>
+      <button type="button" class="sx-manual-link" onclick="ccBackFromCreated()" style="margin-top:12px" data-i18n="cc_done_btn">Klaar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLUBCOMPETITIE: leaderboard / ladder view (?comp=CODE) -->
+<div id="screen-cc-view" style="display:none">
+  <div class="setup-box" id="cc-view-box"></div>
+</div>
+
 </div><!-- /app -->
 
 <!-- PLAYER / TEAM DETAIL MODAL -->
@@ -1982,6 +2074,7 @@ nl:{
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
   player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',
   comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Verandering',comp_rating_wins:'Gewonnen',comp_rating_avg:'Gem. plaats',comp_rating_note:'Rating op basis van onderlinge plaatsingsvergelijkingen (ELO). Wordt opnieuw berekend uit alle sessies.',
+  cc_menu:'Clubcompetitie starten',cc_prelink_cta:'Koppelen aan clubcompetitie',cc_code_ph:'Code',cc_link_btn:'Koppel',cc_prelink_active:'Gekoppeld aan competitie {code}',cc_err_code:'Vul een geldige 6-tekens code in',cc_start_title:'Clubcompetitie starten',cc_start_sub:'Deel een link, verzamel resultaten van meerdere avonden of een ladder.',cc_name_ph:'Naam van de competitie',cc_club_ph:'Clubnaam (optioneel)',cc_type_series:'Avondencompetitie',cc_type_ladder:'Ladder',cc_model_linear:'Lineair (winnaar = aantal spelers, laatste = 1 punt)',cc_model_fixed:'Vast schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Alleen beste X avonden tellen',cc_range_lbl:'Uitdagen tot X plekken hoger',cc_create_btn:'Competitie aanmaken',cc_created_title:'Competitie aangemaakt',cc_created_sub:'Deel deze link of QR-code met de club.',cc_view_btn:'Naar leaderboard',cc_done_btn:'Klaar',cc_add_title:'Aan competitie toevoegen',cc_add_btn:'Toevoegen',cc_added:'Toegevoegd',cc_err_notfound:'Competitie niet gevonden',cc_adding:'Toevoegen…',cc_add_ok:'Toegevoegd aan de competitie!',cc_loading:'Laden…',cc_not_found:'Competitie niet gevonden.',cc_back:'Terug',cc_share:'Deel',cc_share_png:'Deel als afbeelding',cc_standings_lbl:'Ranglijst',cc_no_events:'Nog geen avonden gespeeld',cc_col_played:'Avonden',cc_col_wins:'Gewonnen',cc_col_avgplace:'Gem. plaats',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Namen samenvoegen',cc_alias_sub:'Twee schrijfwijzen van dezelfde speler? Voeg ze samen.',cc_alias_merge:'Samenvoegen',cc_ladder_range_note:'Uitdagen mag tot {n} plekken hoger op de ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Nog geen spelers op de ladder',cc_ladder_join_lbl:'Meedoen aan de ladder',cc_your_name:'Jouw naam',cc_join:'Meedoen',cc_joining:'Bezig…',cc_join_ok:'Je staat op de ladder!',cc_err_join_limit:'Je hebt al meerdere spelers toegevoegd vanaf dit toestel',cc_remove_confirm:'Deze speler van de ladder halen?',cc_challenge_lbl:'Uitdaging melden',cc_score_ph:'Score (bijv. 6-4, 6-3)',cc_winner_challenger:'Uitdager won',cc_winner_defender:'Verdediger won',cc_challenge_submit:'Uitslag melden',cc_err_same_player:'Kies twee verschillende spelers',cc_err_range:'Je mag alleen iemand tot {n} plekken hoger uitdagen',cc_submitting:'Versturen…',cc_submitted:'Uitslag gemeld, wacht op goedkeuring van de organisator',cc_pending_lbl:'Te goedkeuren',cc_winner_lbl:'Winnaar',cc_approve:'Goedkeuren',cc_reject:'Afwijzen',cc_history_lbl:'Geschiedenis',cc_rejected:'Afgewezen',cc_link_copied:'Link gekopieerd!',cc_copied:'Gekopieerd!',cc_err_generic:'Er ging iets mis. Probeer het opnieuw.',
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
   set_type_sub_mix:'man + vrouw',set_title_mix:'Mixicano instellen',set_desc_auto_mix:'Voer mannen en vrouwen apart in. Elk team is een man en een vrouw.',mix_lbl_men:'Mannen',mix_lbl_women:'Vrouwen',mix_ph_men:'Een naam per regel',mix_ph_women:'Een naam per regel',mix_val_min:'Minimaal 2 mannen en 2 vrouwen (nu {m} en {w}).',mix_val_need:'Voer minimaal 2 mannen en 2 vrouwen in.',mix_val_ok:'{m} mannen, {w} vrouwen, {courts} baan/banen per ronde',mix_val_unequal:'Ongelijke aantallen, sommige spelers rusten vaker.',res_mix:'{label}Mixed Americano · {n} spelers',
   eyebrow:'Nieuw toernooi',title:'Stel je toernooi in',sub_c:'Je ziet je toernooi ontstaan terwijl je typt.',tname_ph:'Bijv. Vrijdagavond Cup (optioneel)',step_type:'Type toernooi',step_type_sub:'Hoe willen jullie spelen?',type_team:'Team',type_team_sub:'Vast koppel',type_am:'Americano',type_am_sub:'Wissel koppel',type_mex:'Mexicano',type_mex_sub:'Stand koppels',type_rr:'Round Robin',type_rr_sub:'Iedereen vs iedereen',type_tam:'Team Am.',type_tam_sub:'Vast team',type_tmex:'Team Mex.',type_tmex_sub:'Vast team, op stand',type_mix:'Mixicano',type_mix_sub:'Man & vrouw',step_players:'Spelers',step_players_sub:'Typ een naam en druk op Enter — of plak een hele lijst.',ph_player:'Typ een naam…',tip_team:'Tip: typ "Jan & Piet" om een vast koppel te maken.',saved_groups:'Of begin met een opgeslagen groep:',cnt_zero:'Voeg minstens 4 spelers toe',cnt_need:'Nog {n} speler(s) nodig',cnt_ok:'{n} spelers · {m} wedstrijd(en) per ronde',cnt_odd:'{n} spelers · 1 speler rust per ronde',cnt_max:'Maximaal {max} spelers',step_courts:'Banen',courts_word:'banen',court:'Baan',courts_advice:'Advies voor {n} spelers: <b data-act="advice">{c} banen</b>',koc_courts_cap:'King of the Court heeft 4 spelers per baan nodig. Maximaal {max} baan/banen voor {n} spelers.',step_match:'Match formaat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punten per match',lbl_timer:'Timer per ronde',off:'Geen',deflt:'standaard',btn_shuffle:'Schudden',players_word:'spelers',pv_t:'Live voorbeeld',pv_rounds:'rondes',pv_mpr:'per ronde',pv_dur:'duur',pv_empty:'Voeg spelers toe en zie hier het speelschema ontstaan.',pv_estimate:'schatting ronde 1',rest_lbl:'Rust deze ronde:',btn_start:'Start toernooi',
@@ -2062,6 +2155,7 @@ en:{
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
   inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Change',comp_rating_wins:'Wins',comp_rating_avg:'Avg. place',comp_rating_note:'Rating based on head-to-head placement comparisons (ELO). Recalculated from all sessions.',
+  cc_menu:'Start club competition',cc_prelink_cta:'Link to club competition',cc_code_ph:'Code',cc_link_btn:'Link',cc_prelink_active:'Linked to competition {code}',cc_err_code:'Enter a valid 6-character code',cc_start_title:'Start a club competition',cc_start_sub:'Share a link, collect results from multiple evenings or a ladder.',cc_name_ph:'Competition name',cc_club_ph:'Club name (optional)',cc_type_series:'Evening competition',cc_type_ladder:'Ladder',cc_model_linear:'Linear (winner = number of players, last place = 1 point)',cc_model_fixed:'Fixed schedule (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Only count best X evenings',cc_range_lbl:'Can challenge up to X spots higher',cc_create_btn:'Create competition',cc_created_title:'Competition created',cc_created_sub:'Share this link or QR code with the club.',cc_view_btn:'Go to leaderboard',cc_done_btn:'Done',cc_add_title:'Add to competition',cc_add_btn:'Add',cc_added:'Added',cc_err_notfound:'Competition not found',cc_adding:'Adding…',cc_add_ok:'Added to the competition!',cc_loading:'Loading…',cc_not_found:'Competition not found.',cc_back:'Back',cc_share:'Share',cc_share_png:'Share as image',cc_standings_lbl:'Standings',cc_no_events:'No evenings played yet',cc_col_played:'Evenings',cc_col_wins:'Wins',cc_col_avgplace:'Avg. place',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Merge names',cc_alias_sub:'Two spellings of the same player? Merge them.',cc_alias_merge:'Merge',cc_ladder_range_note:'Players can challenge up to {n} spots higher on the ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'No players on the ladder yet',cc_ladder_join_lbl:'Join the ladder',cc_your_name:'Your name',cc_join:'Join',cc_joining:'Joining…',cc_join_ok:'You are on the ladder!',cc_err_join_limit:'You already added several players from this device',cc_remove_confirm:'Remove this player from the ladder?',cc_challenge_lbl:'Report a challenge',cc_score_ph:'Score (e.g. 6-4, 6-3)',cc_winner_challenger:'Challenger won',cc_winner_defender:'Defender won',cc_challenge_submit:'Report result',cc_err_same_player:'Choose two different players',cc_err_range:'You can only challenge someone up to {n} spots higher',cc_submitting:'Submitting…',cc_submitted:'Result reported, waiting for organizer approval',cc_pending_lbl:'Pending approval',cc_winner_lbl:'Winner',cc_approve:'Approve',cc_reject:'Reject',cc_history_lbl:'History',cc_rejected:'Rejected',cc_link_copied:'Link copied!',cc_copied:'Copied!',cc_err_generic:'Something went wrong. Please try again.',
   set_type_sub_mix:'man + woman',set_title_mix:'Set up Mixicano',set_desc_auto_mix:'Enter men and women separately. Every team is one man and one woman.',mix_lbl_men:'Men',mix_lbl_women:'Women',mix_ph_men:'One name per line',mix_ph_women:'One name per line',mix_val_min:'At least 2 men and 2 women (now {m} and {w}).',mix_val_need:'Enter at least 2 men and 2 women.',mix_val_ok:'{m} men, {w} women, {courts} court(s) per round',mix_val_unequal:'Unequal numbers, some players rest more often.',res_mix:'{label}Mixed Americano · {n} players',
   eyebrow:'New tournament',title:'Set up your tournament',sub_c:'Watch your tournament take shape as you type.',tname_ph:'E.g. Friday Night Cup (optional)',step_type:'Tournament type',step_type_sub:'How do you want to play?',type_team:'Team',type_team_sub:'Fixed pair',type_am:'Americano',type_am_sub:'Rotating partners',type_mex:'Mexicano',type_mex_sub:'Standings-based',type_rr:'Round Robin',type_rr_sub:'Everyone vs everyone',type_tam:'Team Am.',type_tam_sub:'Fixed team',type_tmex:'Team Mex.',type_tmex_sub:'Fixed team, ranked',type_mix:'Mixicano',type_mix_sub:'Man & woman',step_players:'Players',step_players_sub:'Type a name and press Enter — or paste a list.',ph_player:'Type a name…',tip_team:'Tip: type "Jan & Piet" to create a fixed pair.',saved_groups:'Or start with a saved group:',cnt_zero:'Add at least 4 players',cnt_need:'{n} more player(s) needed',cnt_ok:'{n} players · {m} match(es) per round',cnt_odd:'{n} players · 1 player sits out per round',cnt_max:'Maximum {max} players',step_courts:'Courts',courts_word:'courts',court:'Court',courts_advice:'Suggestion for {n} players: <b data-act="advice">{c} courts</b>',koc_courts_cap:'King of the Court needs 4 players per court. Maximum {max} court(s) for {n} players.',step_match:'Match format',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points per match',lbl_timer:'Timer per round',off:'Off',deflt:'default',btn_shuffle:'Shuffle',players_word:'players',pv_t:'Live preview',pv_rounds:'rounds',pv_mpr:'per round',pv_dur:'duration',pv_empty:'Add players to see the schedule take shape.',pv_estimate:'round 1 estimate',rest_lbl:'Sitting out this round:',btn_start:'Start tournament',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
@@ -2140,6 +2234,7 @@ fr:{
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
   player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Classement ELO',comp_rating_val:'Rating',comp_rating_chg:'Evolution',comp_rating_wins:'Victoires',comp_rating_avg:'Place moy.',comp_rating_note:'Classement base sur les comparaisons de placement (ELO). Recalcule a chaque fois.',
+  cc_menu:'Demarrer une competition de club',cc_prelink_cta:'Lier a une competition de club',cc_code_ph:'Code',cc_link_btn:'Lier',cc_prelink_active:'Lie a la competition {code}',cc_err_code:'Entrez un code valide a 6 caracteres',cc_start_title:'Demarrer une competition de club',cc_start_sub:'Partagez un lien, recoltez les resultats de plusieurs soirees ou d\'une ladder.',cc_name_ph:'Nom de la competition',cc_club_ph:'Nom du club (optionnel)',cc_type_series:'Competition par soirees',cc_type_ladder:'Ladder',cc_model_linear:'Lineaire (le vainqueur = nombre de joueurs, le dernier = 1 point)',cc_model_fixed:'Bareme fixe (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Ne compter que les X meilleures soirees',cc_range_lbl:'Peut defier jusqu\'a X places plus haut',cc_create_btn:'Creer la competition',cc_created_title:'Competition creee',cc_created_sub:'Partagez ce lien ou ce QR code avec le club.',cc_view_btn:'Voir le classement',cc_done_btn:'Termine',cc_add_title:'Ajouter a la competition',cc_add_btn:'Ajouter',cc_added:'Ajoute',cc_err_notfound:'Competition introuvable',cc_adding:'Ajout…',cc_add_ok:'Ajoute a la competition!',cc_loading:'Chargement…',cc_not_found:'Competition introuvable.',cc_back:'Retour',cc_share:'Partager',cc_share_png:'Partager en image',cc_standings_lbl:'Classement',cc_no_events:'Aucune soiree jouee pour le moment',cc_col_played:'Soirees',cc_col_wins:'Victoires',cc_col_avgplace:'Place moy.',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Fusionner des noms',cc_alias_sub:'Deux orthographes pour le meme joueur? Fusionnez-les.',cc_alias_merge:'Fusionner',cc_ladder_range_note:'On peut defier jusqu\'a {n} places plus haut sur la ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Aucun joueur sur la ladder pour le moment',cc_ladder_join_lbl:'Rejoindre la ladder',cc_your_name:'Votre nom',cc_join:'Rejoindre',cc_joining:'Inscription…',cc_join_ok:'Vous etes sur la ladder!',cc_err_join_limit:'Vous avez deja ajoute plusieurs joueurs depuis cet appareil',cc_remove_confirm:'Retirer ce joueur de la ladder?',cc_challenge_lbl:'Signaler un defi',cc_score_ph:'Score (ex. 6-4, 6-3)',cc_winner_challenger:'Le challenger a gagne',cc_winner_defender:'Le defenseur a gagne',cc_challenge_submit:'Signaler le resultat',cc_err_same_player:'Choisissez deux joueurs differents',cc_err_range:'Vous ne pouvez defier que jusqu\'a {n} places plus haut',cc_submitting:'Envoi…',cc_submitted:'Resultat signale, en attente de validation par l\'organisateur',cc_pending_lbl:'A valider',cc_winner_lbl:'Vainqueur',cc_approve:'Valider',cc_reject:'Refuser',cc_history_lbl:'Historique',cc_rejected:'Refuse',cc_link_copied:'Lien copie!',cc_copied:'Copie!',cc_err_generic:'Une erreur est survenue. Reessayez.',
   set_type_sub_mix:'homme + femme',set_title_mix:'Configurer Mixicano',set_desc_auto_mix:'Entrez hommes et femmes separement. Chaque equipe est un homme et une femme.',mix_lbl_men:'Hommes',mix_lbl_women:'Femmes',mix_ph_men:'Un nom par ligne',mix_ph_women:'Un nom par ligne',mix_val_min:'Au moins 2 hommes et 2 femmes (actuellement {m} et {w}).',mix_val_need:'Entrez au moins 2 hommes et 2 femmes.',mix_val_ok:'{m} hommes, {w} femmes, {courts} terrain(s) par tour',mix_val_unequal:'Nombres inegaux, certains joueurs se reposent plus souvent.',res_mix:'{label}Mixed Americano · {n} joueurs',
   eyebrow:'Nouveau tournoi',title:'Configurez votre tournoi',sub_c:'Regardez votre tournoi prendre forme pendant que vous tapez.',tname_ph:'Ex. Coupe Vendredi soir (optionnel)',step_type:'Type de tournoi',step_type_sub:'Comment voulez-vous jouer ?',type_team:'Equipe',type_team_sub:'Paire fixe',type_am:'Americano',type_am_sub:'Partenaires tournants',type_mex:'Mexicano',type_mex_sub:'Selon classement',type_rr:'Round Robin',type_rr_sub:'Tout le monde contre tout le monde',type_tam:'Team Am.',type_tam_sub:'Equipe fixe',type_tmex:'Team Mex.',type_tmex_sub:'Equipe fixe, classement',type_mix:'Mixicano',type_mix_sub:'Homme & femme',step_players:'Joueurs',step_players_sub:'Tapez un nom et appuyez sur Entree — ou collez une liste.',ph_player:'Tapez un nom…',tip_team:'Conseil : tapez "Jean & Pierre" pour creer une paire fixe.',saved_groups:'Ou commencez avec un groupe enregistre :',cnt_zero:'Ajoutez au moins 4 joueurs',cnt_need:'Encore {n} joueur(s) necessaire(s)',cnt_ok:'{n} joueurs · {m} match(s) par tour',cnt_odd:'{n} joueurs · 1 joueur repose par tour',cnt_max:'Maximum {max} joueurs',step_courts:'Terrains',courts_word:'terrains',court:'Terrain',courts_advice:'Suggestion pour {n} joueurs : <b data-act="advice">{c} terrains</b>',step_match:'Format de match',gpm1:'1 jeu',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Points par match',lbl_timer:'Minuterie par tour',off:'Aucun',deflt:'par defaut',btn_shuffle:'Melanger',players_word:'joueurs',pv_t:'Apercu en direct',pv_rounds:'tours',pv_mpr:'par tour',pv_dur:'duree',pv_empty:'Ajoutez des joueurs pour voir le programme se dessiner.',pv_estimate:'estimation tour 1',rest_lbl:'Repos ce tour :',btn_start:'Lancer le tournoi',
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
@@ -2218,6 +2313,7 @@ de:{
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
   player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',
   comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',comp_rating_lbl:'Wertung',comp_rating_val:'Rating',comp_rating_chg:'Veranderung',comp_rating_wins:'Siege',comp_rating_avg:'Ø Platz',comp_rating_note:'Wertung basierend auf Platzierungsvergleichen (ELO). Wird aus allen Sitzungen neu berechnet.',
+  cc_menu:'Vereinswettbewerb starten',cc_prelink_cta:'Mit Vereinswettbewerb verknupfen',cc_code_ph:'Code',cc_link_btn:'Verknupfen',cc_prelink_active:'Verknupft mit Wettbewerb {code}',cc_err_code:'Gib einen gultigen 6-stelligen Code ein',cc_start_title:'Vereinswettbewerb starten',cc_start_sub:'Teile einen Link und sammle Ergebnisse mehrerer Abende oder einer Ladder.',cc_name_ph:'Name des Wettbewerbs',cc_club_ph:'Vereinsname (optional)',cc_type_series:'Abendwettbewerb',cc_type_ladder:'Ladder',cc_model_linear:'Linear (Sieger = Anzahl Spieler, Letzter = 1 Punkt)',cc_model_fixed:'Festes Schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Nur die besten X Abende zahlen',cc_range_lbl:'Herausfordern bis zu X Platze hoher',cc_create_btn:'Wettbewerb erstellen',cc_created_title:'Wettbewerb erstellt',cc_created_sub:'Teile diesen Link oder QR-Code mit dem Verein.',cc_view_btn:'Zur Rangliste',cc_done_btn:'Fertig',cc_add_title:'Zum Wettbewerb hinzufugen',cc_add_btn:'Hinzufugen',cc_added:'Hinzugefugt',cc_err_notfound:'Wettbewerb nicht gefunden',cc_adding:'Wird hinzugefugt…',cc_add_ok:'Zum Wettbewerb hinzugefugt!',cc_loading:'Wird geladen…',cc_not_found:'Wettbewerb nicht gefunden.',cc_back:'Zuruck',cc_share:'Teilen',cc_share_png:'Als Bild teilen',cc_standings_lbl:'Tabelle',cc_no_events:'Noch keine Abende gespielt',cc_col_played:'Abende',cc_col_wins:'Siege',cc_col_avgplace:'Ø Platz',cc_place_short:'#',cc_pts_short:'Pkt',cc_alias_lbl:'Namen zusammenfuhren',cc_alias_sub:'Zwei Schreibweisen desselben Spielers? Fuhre sie zusammen.',cc_alias_merge:'Zusammenfuhren',cc_ladder_range_note:'Herausfordern ist bis zu {n} Platze hoher auf der Ladder erlaubt',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Noch keine Spieler auf der Ladder',cc_ladder_join_lbl:'Der Ladder beitreten',cc_your_name:'Dein Name',cc_join:'Beitreten',cc_joining:'Wird beigetreten…',cc_join_ok:'Du stehst auf der Ladder!',cc_err_join_limit:'Du hast bereits mehrere Spieler von diesem Gerat hinzugefugt',cc_remove_confirm:'Diesen Spieler von der Ladder entfernen?',cc_challenge_lbl:'Herausforderung melden',cc_score_ph:'Ergebnis (z.B. 6-4, 6-3)',cc_winner_challenger:'Herausforderer hat gewonnen',cc_winner_defender:'Verteidiger hat gewonnen',cc_challenge_submit:'Ergebnis melden',cc_err_same_player:'Wahle zwei unterschiedliche Spieler',cc_err_range:'Du kannst nur jemanden bis zu {n} Platze hoher herausfordern',cc_submitting:'Wird gesendet…',cc_submitted:'Ergebnis gemeldet, wartet auf Freigabe durch den Organisator',cc_pending_lbl:'Zu bestatigen',cc_winner_lbl:'Sieger',cc_approve:'Bestatigen',cc_reject:'Ablehnen',cc_history_lbl:'Verlauf',cc_rejected:'Abgelehnt',cc_link_copied:'Link kopiert!',cc_copied:'Kopiert!',cc_err_generic:'Etwas ist schiefgelaufen. Versuch es erneut.',
   level_lbl:'Niveau',level_hint:'Optional: Name:3 fur Niveau eingeben (1-5)',
   set_type_sub_mix:'Mann + Frau',set_title_mix:'Mixicano einrichten',set_desc_auto_mix:'Manner und Frauen getrennt eingeben. Jedes Team besteht aus einem Mann und einer Frau.',mix_lbl_men:'Manner',mix_lbl_women:'Frauen',mix_ph_men:'Ein Name pro Zeile',mix_ph_women:'Ein Name pro Zeile',mix_val_min:'Mindestens 2 Manner und 2 Frauen (aktuell {m} und {w}).',mix_val_need:'Mindestens 2 Manner und 2 Frauen eingeben.',mix_val_ok:'{m} Manner, {w} Frauen, {courts} Court(s) pro Runde',mix_val_unequal:'Ungleiche Anzahl, manche Spieler machen ofter Pause.',res_mix:'{label}Mixed Americano · {n} Spieler',
   eyebrow:'Neues Turnier',title:'Turnier einrichten',sub_c:'Beobachte, wie dein Turnier beim Tippen entsteht.',tname_ph:'z.B. Freitagnacht-Cup (optional)',step_type:'Turniermodus',step_type_sub:'Wie wollt ihr spielen?',type_team:'Team',type_team_sub:'Festes Paar',type_am:'Americano',type_am_sub:'Wechselnde Partner',type_mex:'Mexicano',type_mex_sub:'Nach Tabelle',type_rr:'Round Robin',type_rr_sub:'Alle gegen alle',type_tam:'Team Am.',type_tam_sub:'Festes Team',type_tmex:'Team Mex.',type_tmex_sub:'Festes Team, Rangliste',type_mix:'Mixicano',type_mix_sub:'Mann & Frau',step_players:'Spieler',step_players_sub:'Namen eingeben und Enter drucken — oder eine Liste einfugen.',ph_player:'Namen eingeben…',tip_team:'Tipp: "Jan & Piet" eingeben um ein festes Paar zu erstellen.',saved_groups:'Oder mit einer gespeicherten Gruppe beginnen:',cnt_zero:'Mindestens 4 Spieler hinzufugen',cnt_need:'Noch {n} Spieler benotigt',cnt_ok:'{n} Spieler · {m} Spiel(e) pro Runde',cnt_odd:'{n} Spieler · 1 Spieler pausiert pro Runde',cnt_max:'Maximal {max} Spieler',step_courts:'Platze',courts_word:'Platze',court:'Platz',courts_advice:'Empfehlung fur {n} Spieler: <b data-act="advice">{c} Platze</b>',step_match:'Matchformat',gpm1:'1 Spiel',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punkte pro Match',lbl_timer:'Timer pro Runde',off:'Kein',deflt:'Standard',btn_shuffle:'Mischen',players_word:'Spieler',pv_t:'Live-Vorschau',pv_rounds:'Runden',pv_mpr:'pro Runde',pv_dur:'Dauer',pv_empty:'Spieler hinzufugen um den Spielplan entstehen zu sehen.',pv_estimate:'Runde 1 Schatzung',rest_lbl:'Pause diese Runde:',btn_start:'Turnier starten',
@@ -2296,6 +2392,7 @@ es:{
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
   player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',
   comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',comp_rating_lbl:'Clasificacion ELO',comp_rating_val:'Rating',comp_rating_chg:'Cambio',comp_rating_wins:'Victorias',comp_rating_avg:'Posicion media',comp_rating_note:'Clasificacion basada en comparaciones de posicion (ELO). Recalculada a partir de todas las sesiones.',
+  cc_menu:'Iniciar competicion de club',cc_prelink_cta:'Vincular a competicion de club',cc_code_ph:'Codigo',cc_link_btn:'Vincular',cc_prelink_active:'Vinculado a la competicion {code}',cc_err_code:'Introduce un codigo valido de 6 caracteres',cc_start_title:'Iniciar una competicion de club',cc_start_sub:'Comparte un enlace y recopila resultados de varias noches o de una ladder.',cc_name_ph:'Nombre de la competicion',cc_club_ph:'Nombre del club (opcional)',cc_type_series:'Competicion por noches',cc_type_ladder:'Ladder',cc_model_linear:'Lineal (ganador = numero de jugadores, ultimo = 1 punto)',cc_model_fixed:'Baremo fijo (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Contar solo las mejores X noches',cc_range_lbl:'Puede retar hasta X posiciones por encima',cc_create_btn:'Crear competicion',cc_created_title:'Competicion creada',cc_created_sub:'Comparte este enlace o codigo QR con el club.',cc_view_btn:'Ir a la clasificacion',cc_done_btn:'Listo',cc_add_title:'Anadir a la competicion',cc_add_btn:'Anadir',cc_added:'Anadido',cc_err_notfound:'Competicion no encontrada',cc_adding:'Anadiendo…',cc_add_ok:'Anadido a la competicion!',cc_loading:'Cargando…',cc_not_found:'Competicion no encontrada.',cc_back:'Volver',cc_share:'Compartir',cc_share_png:'Compartir como imagen',cc_standings_lbl:'Clasificacion',cc_no_events:'Aun no se ha jugado ninguna noche',cc_col_played:'Noches',cc_col_wins:'Victorias',cc_col_avgplace:'Posicion media',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Fusionar nombres',cc_alias_sub:'Dos formas de escribir el mismo jugador? Fusionalas.',cc_alias_merge:'Fusionar',cc_ladder_range_note:'Se puede retar hasta {n} posiciones por encima en la ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Aun no hay jugadores en la ladder',cc_ladder_join_lbl:'Unirse a la ladder',cc_your_name:'Tu nombre',cc_join:'Unirse',cc_joining:'Uniendose…',cc_join_ok:'Ya estas en la ladder!',cc_err_join_limit:'Ya has anadido varios jugadores desde este dispositivo',cc_remove_confirm:'Quitar a este jugador de la ladder?',cc_challenge_lbl:'Notificar un reto',cc_score_ph:'Resultado (ej. 6-4, 6-3)',cc_winner_challenger:'Gano el retador',cc_winner_defender:'Gano el defensor',cc_challenge_submit:'Notificar resultado',cc_err_same_player:'Elige dos jugadores diferentes',cc_err_range:'Solo puedes retar a alguien hasta {n} posiciones por encima',cc_submitting:'Enviando…',cc_submitted:'Resultado notificado, esperando la aprobacion del organizador',cc_pending_lbl:'Por aprobar',cc_winner_lbl:'Ganador',cc_approve:'Aprobar',cc_reject:'Rechazar',cc_history_lbl:'Historial',cc_rejected:'Rechazado',cc_link_copied:'Enlace copiado!',cc_copied:'Copiado!',cc_err_generic:'Algo salio mal. Intentalo de nuevo.',
   level_lbl:'Nivel',level_hint:'Opcional: escribe Nombre:3 para el nivel (1-5)',
   set_type_sub_mix:'hombre + mujer',set_title_mix:'Configurar Mixicano',set_desc_auto_mix:'Introduce hombres y mujeres por separado. Cada equipo es un hombre y una mujer.',mix_lbl_men:'Hombres',mix_lbl_women:'Mujeres',mix_ph_men:'Un nombre por linea',mix_ph_women:'Un nombre por linea',mix_val_min:'Al menos 2 hombres y 2 mujeres (ahora {m} y {w}).',mix_val_need:'Introduce al menos 2 hombres y 2 mujeres.',mix_val_ok:'{m} hombres, {w} mujeres, {courts} pista(s) por ronda',mix_val_unequal:'Numeros desiguales, algunos jugadores descansan mas.',res_mix:'{label}Mixed Americano · {n} jugadores',
   eyebrow:'Nuevo torneo',title:'Configura tu torneo',sub_c:'Ve como toma forma tu torneo mientras escribes.',tname_ph:'Ej. Copa Viernes por la noche (opcional)',step_type:'Tipo de torneo',step_type_sub:'Como quieres jugar?',type_team:'Equipo',type_team_sub:'Pareja fija',type_am:'Americano',type_am_sub:'Parejas rotativas',type_mex:'Mexicano',type_mex_sub:'Por clasificacion',type_rr:'Round Robin',type_rr_sub:'Todos contra todos',type_tam:'Team Am.',type_tam_sub:'Equipo fijo',type_tmex:'Team Mex.',type_tmex_sub:'Equipo fijo, clasificacion',type_mix:'Mixicano',type_mix_sub:'Hombre & mujer',step_players:'Jugadores',step_players_sub:'Escribe un nombre y pulsa Enter — o pega una lista.',ph_player:'Escribe un nombre…',tip_team:'Consejo: escribe "Jan & Piet" para crear una pareja fija.',saved_groups:'O empieza con un grupo guardado:',cnt_zero:'Anade al menos 4 jugadores',cnt_need:'Faltan {n} jugador(es)',cnt_ok:'{n} jugadores · {m} partido(s) por ronda',cnt_odd:'{n} jugadores · 1 jugador descansa por ronda',cnt_max:'Maximo {max} jugadores',step_courts:'Pistas',courts_word:'pistas',court:'Pista',courts_advice:'Sugerencia para {n} jugadores: <b data-act="advice">{c} pistas</b>',step_match:'Formato de partido',gpm1:'1 juego',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Puntos por partido',lbl_timer:'Temporizador por ronda',off:'Sin',deflt:'predeterminado',btn_shuffle:'Mezclar',players_word:'jugadores',pv_t:'Vista previa en directo',pv_rounds:'rondas',pv_mpr:'por ronda',pv_dur:'duracion',pv_empty:'Anade jugadores para ver como se crea el programa.',pv_estimate:'estimacion ronda 1',rest_lbl:'Descansando esta ronda:',btn_start:'Iniciar torneo',
@@ -2374,6 +2471,7 @@ sv:{
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
   player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Forandring',comp_rating_wins:'Vinster',comp_rating_avg:'Snittplacering',comp_rating_note:'Rating baserat pa placeringsjanforelser (ELO). Raknast om fran alla sessioner.',
+  cc_menu:'Starta klubbtavling',cc_prelink_cta:'Koppla till klubbtavling',cc_code_ph:'Kod',cc_link_btn:'Koppla',cc_prelink_active:'Kopplad till tavling {code}',cc_err_code:'Ange en giltig 6-teckenskod',cc_start_title:'Starta en klubbtavling',cc_start_sub:'Dela en lank och samla resultat fran flera kvallar eller en stege.',cc_name_ph:'Tavlingens namn',cc_club_ph:'Klubbnamn (valfritt)',cc_type_series:'Kvallstavling',cc_type_ladder:'Stege',cc_model_linear:'Linjar (vinnare = antal spelare, sist = 1 poang)',cc_model_fixed:'Fast schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Rakna bara de basta X kvallarna',cc_range_lbl:'Kan utmana upp till X platser hogre',cc_create_btn:'Skapa tavling',cc_created_title:'Tavling skapad',cc_created_sub:'Dela denna lank eller QR-kod med klubben.',cc_view_btn:'Till topplistan',cc_done_btn:'Klar',cc_add_title:'Lagg till i tavling',cc_add_btn:'Lagg till',cc_added:'Tillagd',cc_err_notfound:'Tavling hittades inte',cc_adding:'Lagger till…',cc_add_ok:'Tillagd i tavlingen!',cc_loading:'Laddar…',cc_not_found:'Tavling hittades inte.',cc_back:'Tillbaka',cc_share:'Dela',cc_share_png:'Dela som bild',cc_standings_lbl:'Topplista',cc_no_events:'Inga kvallar spelade an',cc_col_played:'Kvallar',cc_col_wins:'Vinster',cc_col_avgplace:'Snittplacering',cc_place_short:'#',cc_pts_short:'p',cc_alias_lbl:'Sla ihop namn',cc_alias_sub:'Tva stavningar av samma spelare? Sla ihop dem.',cc_alias_merge:'Sla ihop',cc_ladder_range_note:'Man far utmana upp till {n} platser hogre pa stegen',cc_ladder_lbl:'Stege',cc_ladder_empty:'Inga spelare pa stegen an',cc_ladder_join_lbl:'Ga med i stegen',cc_your_name:'Ditt namn',cc_join:'Ga med',cc_joining:'Gar med…',cc_join_ok:'Du star pa stegen!',cc_err_join_limit:'Du har redan lagt till flera spelare fran den har enheten',cc_remove_confirm:'Ta bort denna spelare fran stegen?',cc_challenge_lbl:'Rapportera en utmaning',cc_score_ph:'Resultat (t.ex. 6-4, 6-3)',cc_winner_challenger:'Utmanaren vann',cc_winner_defender:'Forsvararen vann',cc_challenge_submit:'Rapportera resultat',cc_err_same_player:'Valj tva olika spelare',cc_err_range:'Du kan bara utmana nagon upp till {n} platser hogre',cc_submitting:'Skickar…',cc_submitted:'Resultat rapporterat, vantar pa godkannande fran arrangoren',cc_pending_lbl:'Vantar pa godkannande',cc_winner_lbl:'Vinnare',cc_approve:'Godkann',cc_reject:'Avvisa',cc_history_lbl:'Historik',cc_rejected:'Avvisad',cc_link_copied:'Lank kopierad!',cc_copied:'Kopierad!',cc_err_generic:'Nagot gick fel. Forsok igen.',
   level_lbl:'Niva',level_hint:'Valfritt: skriv Namn:3 for niva (1-5)',
   set_type_sub_mix:'man + kvinna',set_title_mix:'Konfigurera Mixicano',set_desc_auto_mix:'Ange man och kvinnor separat. Varje lag bestar av en man och en kvinna.',mix_lbl_men:'Man',mix_lbl_women:'Kvinnor',mix_ph_men:'Ett namn per rad',mix_ph_women:'Ett namn per rad',mix_val_min:'Minst 2 man och 2 kvinnor (nu {m} och {w}).',mix_val_need:'Ange minst 2 man och 2 kvinnor.',mix_val_ok:'{m} man, {w} kvinnor, {courts} bana/banor per omgang',mix_val_unequal:'Ojamna antal, vissa spelare vilar mer.',res_mix:'{label}Mixed Americano · {n} spelare',
   eyebrow:'Ny turnering',title:'Stall in din turnering',sub_c:'Se din turnering ta form medan du skriver.',tname_ph:'T.ex. Fredagsnatt-cup (valfritt)',step_type:'Turneringstyp',step_type_sub:'Hur vill ni spela?',type_team:'Lag',type_team_sub:'Fast par',type_am:'Americano',type_am_sub:'Roterande partner',type_mex:'Mexicano',type_mex_sub:'Rankningsbaserat',type_rr:'Round Robin',type_rr_sub:'Alla mot alla',type_tam:'Team Am.',type_tam_sub:'Fast lag',type_tmex:'Team Mex.',type_tmex_sub:'Fast lag, rankning',type_mix:'Mixicano',type_mix_sub:'Man & kvinna',step_players:'Spelare',step_players_sub:'Skriv ett namn och tryck Enter — eller klistra in en lista.',ph_player:'Skriv ett namn…',tip_team:'Tips: skriv "Jan & Piet" for att skapa ett fast par.',saved_groups:'Eller borja med en sparad grupp:',cnt_zero:'Lagg till minst 4 spelare',cnt_need:'Behover {n} fler spelare',cnt_ok:'{n} spelare · {m} match(er) per runda',cnt_odd:'{n} spelare · 1 spelare vilar per runda',cnt_max:'Max {max} spelare',step_courts:'Banor',courts_word:'banor',court:'Bana',courts_advice:'Rekommendation for {n} spelare: <b data-act="advice">{c} banor</b>',step_match:'Matchformat',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poang per match',lbl_timer:'Timer per runda',off:'Inga',deflt:'standard',btn_shuffle:'Blanda',players_word:'spelare',pv_t:'Live-forhandsvisning',pv_rounds:'rundor',pv_mpr:'per runda',pv_dur:'varaktighet',pv_empty:'Lagg till spelare for att se schemat ta form.',pv_estimate:'uppskattning runda 1',rest_lbl:'Vilar denna runda:',btn_start:'Starta turnering',
@@ -2454,6 +2552,7 @@ it:{
   court_links_btn:'Link campo',court_enter_score:'Inserisci punteggio',court_submit:'Invia',court_submitted:"Punteggio inviato, in attesa dell'organizzatore",court_invalid:'Link campo non valido',court_no_match:'Nessuna partita attiva su questo campo',court_accept:'Accetta',court_pending_lbl:'Punteggio inviato dal giocatore',
   player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',
   comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',comp_rating_lbl:'Classifica ELO',comp_rating_val:'Rating',comp_rating_chg:'Variazione',comp_rating_wins:'Vittorie',comp_rating_avg:'Posizione media',comp_rating_note:'Classifica basata su confronti di piazzamento (ELO). Ricalcolata da tutte le sessioni.',
+  cc_menu:'Avvia competizione del club',cc_prelink_cta:'Collega a competizione del club',cc_code_ph:'Codice',cc_link_btn:'Collega',cc_prelink_active:'Collegato alla competizione {code}',cc_err_code:'Inserisci un codice valido di 6 caratteri',cc_start_title:'Avvia una competizione del club',cc_start_sub:'Condividi un link e raccogli i risultati di piu serate o di una ladder.',cc_name_ph:'Nome della competizione',cc_club_ph:'Nome del club (opzionale)',cc_type_series:'Competizione a serate',cc_type_ladder:'Ladder',cc_model_linear:'Lineare (vincitore = numero di giocatori, ultimo = 1 punto)',cc_model_fixed:'Schema fisso (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Conta solo le migliori X serate',cc_range_lbl:'Puo sfidare fino a X posizioni piu in alto',cc_create_btn:'Crea competizione',cc_created_title:'Competizione creata',cc_created_sub:'Condividi questo link o codice QR con il club.',cc_view_btn:'Vai alla classifica',cc_done_btn:'Fatto',cc_add_title:'Aggiungi alla competizione',cc_add_btn:'Aggiungi',cc_added:'Aggiunto',cc_err_notfound:'Competizione non trovata',cc_adding:'Aggiunta in corso…',cc_add_ok:'Aggiunto alla competizione!',cc_loading:'Caricamento…',cc_not_found:'Competizione non trovata.',cc_back:'Indietro',cc_share:'Condividi',cc_share_png:'Condividi come immagine',cc_standings_lbl:'Classifica',cc_no_events:'Nessuna serata giocata ancora',cc_col_played:'Serate',cc_col_wins:'Vittorie',cc_col_avgplace:'Posizione media',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Unisci nomi',cc_alias_sub:'Due modi di scrivere lo stesso giocatore? Uniscili.',cc_alias_merge:'Unisci',cc_ladder_range_note:'Si puo sfidare fino a {n} posizioni piu in alto sulla ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Nessun giocatore sulla ladder ancora',cc_ladder_join_lbl:'Unisciti alla ladder',cc_your_name:'Il tuo nome',cc_join:'Unisciti',cc_joining:'Iscrizione…',cc_join_ok:'Sei sulla ladder!',cc_err_join_limit:'Hai gia aggiunto piu giocatori da questo dispositivo',cc_remove_confirm:'Rimuovere questo giocatore dalla ladder?',cc_challenge_lbl:'Segnala una sfida',cc_score_ph:'Punteggio (es. 6-4, 6-3)',cc_winner_challenger:'Ha vinto lo sfidante',cc_winner_defender:'Ha vinto il difensore',cc_challenge_submit:'Segnala risultato',cc_err_same_player:'Scegli due giocatori diversi',cc_err_range:'Puoi sfidare solo qualcuno fino a {n} posizioni piu in alto',cc_submitting:'Invio…',cc_submitted:'Risultato segnalato, in attesa di approvazione dell\'organizzatore',cc_pending_lbl:'Da approvare',cc_winner_lbl:'Vincitore',cc_approve:'Approva',cc_reject:'Rifiuta',cc_history_lbl:'Cronologia',cc_rejected:'Rifiutato',cc_link_copied:'Link copiato!',cc_copied:'Copiato!',cc_err_generic:'Qualcosa e andato storto. Riprova.',
   level_lbl:'Livello',level_hint:'Opzionale: scrivi Nome:3 per il livello (1-5)',
   set_type_sub_mix:'uomo + donna',set_title_mix:'Configura Mixicano',set_desc_auto_mix:'Inserisci uomini e donne separatamente. Ogni team e composto da un uomo e una donna.',mix_lbl_men:'Uomini',mix_lbl_women:'Donne',mix_ph_men:'Un nome per riga',mix_ph_women:'Un nome per riga',mix_val_min:'Almeno 2 uomini e 2 donne (ora {m} e {w}).',mix_val_need:'Inserisci almeno 2 uomini e 2 donne.',mix_val_ok:'{m} uomini, {w} donne, {courts} campo/campi per turno',mix_val_unequal:'Numeri diversi, alcuni giocatori riposano piu spesso.',res_mix:'{label}Mixed Americano · {n} giocatori',
   eyebrow:'Nuovo torneo',title:'Configura il tuo torneo',sub_c:'Guarda il tuo torneo prendere forma mentre scrivi.',tname_ph:'Es. Coppa Venerdi sera (opzionale)',step_type:'Tipo di torneo',step_type_sub:'Come volete giocare?',type_team:'Squadra',type_team_sub:'Coppia fissa',type_am:'Americano',type_am_sub:'Coppie rotanti',type_mex:'Mexicano',type_mex_sub:'Per classifica',type_rr:'Round Robin',type_rr_sub:'Tutti contro tutti',type_tam:'Team Am.',type_tam_sub:'Team fisso',type_tmex:'Team Mex.',type_tmex_sub:'Team fisso, classifica',type_mix:'Mixicano',type_mix_sub:'Uomo & donna',step_players:'Giocatori',step_players_sub:'Scrivi un nome e premi Invio — o incolla una lista.',ph_player:'Scrivi un nome…',tip_team:'Consiglio: scrivi "Jan & Piet" per creare una coppia fissa.',saved_groups:'O inizia con un gruppo salvato:',cnt_zero:'Aggiungi almeno 4 giocatori',cnt_need:'Ancora {n} giocatore/i necessari',cnt_ok:'{n} giocatori · {m} partita/e per turno',cnt_odd:'{n} giocatori · 1 giocatore riposa per turno',cnt_max:'Massimo {max} giocatori',step_courts:'Campi',courts_word:'campi',court:'Campo',courts_advice:'Suggerimento per {n} giocatori: <b data-act="advice">{c} campi</b>',step_match:'Formato partita',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Punti per partita',lbl_timer:'Timer per turno',off:'Nessuno',deflt:'predefinito',btn_shuffle:'Mescola',players_word:'giocatori',pv_t:'Anteprima dal vivo',pv_rounds:'turni',pv_mpr:'per turno',pv_dur:'durata',pv_empty:'Aggiungi giocatori per vedere il programma prendere forma.',pv_estimate:'stima turno 1',rest_lbl:'Riposo questo turno:',btn_start:'Inizia torneo',
@@ -7048,6 +7147,10 @@ function _pushMaybeNotify(){
       _pushFinishSent=true;
       _callPushRoundFunction('finish',_pushLastRoundNum||0);
     }
+    if(isTournamentDone()&&_ccPrelinkCode&&!_ccAutoAddSent){
+      _ccAutoAddSent=true;
+      ccAddCurrentResultToCompetition(_ccPrelinkCode,true);
+    }
   }catch(e){}
 }
 
@@ -7446,7 +7549,7 @@ async function shareStandingsImage(){
 
 function renderExportBar(){
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
-  const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="openAddToCompModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
+  const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="ccOpenAddModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
   const duprBtn=(sport==='pickleball'&&(mode==='americano'||mode==='mexicano'||mode==='roundrobin'||mode==='kingofcourt'))?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
   return `<div class="export-bar">
     <span class="export-bar-lbl">Export</span>
@@ -8490,6 +8593,631 @@ document.addEventListener('touchend',function(e){
 })();
 /* ── End Setup Redesign Logic ────────────────────────────────────────── */
 
+// ════════════════════════════════════════════════════════════════
+// ── Clubcompetitie: avondencompetitie (serie) + ladder ─────────────
+// Gedeeld via Supabase met een 6-tekens code, net als toernooien.
+// ════════════════════════════════════════════════════════════════
+const CC_FIXED_SCHEDULE=[25,18,15,12,10,8,6,4,2,1];
+const CC_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+let ccComp=null, ccEvents=[], ccLadderPlayers=[], ccLadderChallenges=[];
+let ccPollInterval=null, ccIsOwner=false, ccPresMode=false, ccViewCode=null;
+let ccSessionToken=localStorage.getItem('padel-cc-token')||null;
+let _ccWrite=null, _ccAutoAddSent=false;
+let _ccPrelinkCode=(localStorage.getItem('padel-cc-prelink')||'').trim().toUpperCase()||null;
+
+function ccGenCode(){ return Array.from({length:6},()=>CC_CHARS[Math.floor(Math.random()*CC_CHARS.length)]).join(''); }
+function ccEnsureToken(){
+  if(!ccSessionToken){
+    ccSessionToken=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
+    localStorage.setItem('padel-cc-token',ccSessionToken);
+  }
+  return ccSessionToken;
+}
+function ccGetWrite(){
+  ccEnsureToken();
+  if(_ccWrite&&_ccWrite._tok!==ccSessionToken) _ccWrite=null;
+  if(!_ccWrite&&window.supabase){
+    _ccWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':ccSessionToken}}});
+    _ccWrite._tok=ccSessionToken;
+  }
+  return _ccWrite||getSB();
+}
+function ccPublicClient(){ return window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null; }
+
+// ── Naamnormalisatie & aliassen (Deel A) ──
+function ccNormName(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function ccResolveName(comp,rawName){
+  const norm=ccNormName(rawName);
+  const aliases=(comp&&comp.aliases)||{};
+  return aliases[norm]||(rawName||'').trim();
+}
+
+// ── Puntenmodellen (Deel A) ──
+function ccPointsLinear(place,n){ return Math.max(1,(n||place)-place+1); }
+function ccPointsFixed(place){ return place<=CC_FIXED_SCHEDULE.length?CC_FIXED_SCHEDULE[place-1]:1; }
+function ccPointsForPlace(comp,place,n){
+  const model=(comp.settings&&comp.settings.pointModel)||'linear';
+  return model==='fixed'?ccPointsFixed(place):ccPointsLinear(place,n);
+}
+
+// ── Leaderboard berekening: punten, best-X-van-Y, tiebreakers (Deel A) ──
+function ccComputeLeaderboard(comp,events){
+  const byPlayer={};
+  events.forEach(ev=>{
+    const n=(ev.results||[]).length;
+    (ev.results||[]).forEach(r=>{
+      const canon=ccResolveName(comp,r.name);
+      if(!byPlayer[canon]) byPlayer[canon]={name:canon,evenings:[],wins:0};
+      const pts=ccPointsForPlace(comp,r.place,n);
+      byPlayer[canon].evenings.push({eventId:ev.id,points:pts,place:r.place,playedAt:ev.played_at,format:ev.format});
+      if(r.place===1) byPlayer[canon].wins++;
+    });
+  });
+  const bestOf=comp.settings&&comp.settings.bestOf;
+  const rows=Object.values(byPlayer).map(p=>{
+    const evenings=[...p.evenings].sort((a,b)=>new Date(b.playedAt)-new Date(a.playedAt));
+    let counted=evenings;
+    if(bestOf&&bestOf.enabled&&bestOf.count>0&&evenings.length>bestOf.count){
+      counted=[...evenings].sort((a,b)=>b.points-a.points).slice(0,bestOf.count);
+    }
+    const totalPoints=counted.reduce((s,e)=>s+e.points,0);
+    const avgPlace=evenings.length?Math.round(evenings.reduce((s,e)=>s+e.place,0)/evenings.length*10)/10:0;
+    return{name:p.name,totalPoints,played:evenings.length,wins:p.wins,avgPlace,evenings};
+  });
+  rows.sort((a,b)=>b.totalPoints-a.totalPoints||b.wins-a.wins||a.avgPlace-b.avgPlace);
+  rows.forEach((r,i)=>r.rank=i+1);
+  return rows;
+}
+
+// ── Ladder: toegestaan uitdaag-bereik (Deel B) ──
+function ccChallengeAllowed(challengerPos,defenderPos,range){
+  return defenderPos<challengerPos && (challengerPos-defenderPos)<=range;
+}
+
+// ── Supabase CRUD: competitions ──
+async function ccCreateCompetition({name,clubName,type,settings}){
+  const sb=ccGetWrite(); if(!sb) return null;
+  for(let i=0;i<5;i++){
+    const code=ccGenCode();
+    const {data,error}=await sb.from('competitions').insert({code,session_token:ccSessionToken,name,club_name:clubName||null,type,settings:settings||{},aliases:{}}).select().single();
+    if(!error) return data;
+    if(error.code!=='23505') return null;
+  }
+  return null;
+}
+async function ccFetchCompetition(code){
+  const sb=getSB(); if(!sb) return null;
+  const {data,error}=await sb.from('competitions').select('*').eq('code',code).maybeSingle();
+  if(error) return null;
+  return data;
+}
+async function ccUpdateSettings(code,patch){
+  const sb=ccGetWrite(); if(!sb) return false;
+  const {error}=await sb.from('competitions').update(patch).eq('code',code);
+  return !error;
+}
+async function ccSetAlias(aliasRaw,canonicalRaw){
+  if(!ccComp) return false;
+  const aliases={...(ccComp.aliases||{})};
+  aliases[ccNormName(aliasRaw)]=canonicalRaw.trim();
+  const ok=await ccUpdateSettings(ccComp.code,{aliases});
+  if(ok) ccComp.aliases=aliases;
+  return ok;
+}
+
+// ── Supabase CRUD: competition_events ──
+async function ccFetchEvents(code){
+  const sb=getSB(); if(!sb) return [];
+  const {data,error}=await sb.from('competition_events').select('*').eq('competition_code',code).order('played_at',{ascending:false});
+  if(error) return [];
+  return data||[];
+}
+async function ccInsertEvent(code,{tournamentCode,format,results}){
+  const sb=ccPublicClient(); if(!sb) return false;
+  const {error}=await sb.from('competition_events').insert({competition_code:code,tournament_code:tournamentCode||null,format,results});
+  return !error;
+}
+
+// ── Supabase CRUD: ladder (Deel B) ──
+async function ccFetchLadderPlayers(code){
+  const sb=getSB(); if(!sb) return [];
+  const {data,error}=await sb.from('ladder_players').select('*').eq('competition_code',code).order('position',{ascending:true});
+  if(error) return [];
+  return data||[];
+}
+async function ccJoinLadder(code,name){
+  const sb=ccPublicClient(); if(!sb) return{ok:false};
+  const players=await ccFetchLadderPlayers(code);
+  const nextPos=players.length?Math.max(...players.map(p=>p.position))+1:1;
+  const {error}=await sb.from('ladder_players').insert({competition_code:code,name:name.trim(),position:nextPos});
+  return{ok:!error};
+}
+async function ccRemoveLadderPlayer(id){
+  const sb=ccGetWrite(); if(!sb) return false;
+  const {error}=await sb.from('ladder_players').delete().eq('id',id);
+  return !error;
+}
+async function ccFetchChallenges(code){
+  const sb=getSB(); if(!sb) return [];
+  const {data,error}=await sb.from('ladder_challenges').select('*').eq('competition_code',code).order('created_at',{ascending:false});
+  if(error) return [];
+  return data||[];
+}
+async function ccSubmitChallenge(code,{challenger,defender,score,winner}){
+  const sb=ccPublicClient(); if(!sb) return{ok:false};
+  const {error}=await sb.from('ladder_challenges').insert({competition_code:code,challenger_name:challenger,defender_name:defender,score:score||null,reported_winner:winner});
+  return{ok:!error,error};
+}
+async function ccApproveChallenge(challenge){
+  const sb=ccGetWrite(); if(!sb) return false;
+  const players=await ccFetchLadderPlayers(ccComp.code);
+  const challengerP=players.find(p=>p.name===challenge.challenger_name);
+  const defenderP=players.find(p=>p.name===challenge.defender_name);
+  if(challengerP&&defenderP&&challenge.reported_winner===challenge.challenger_name&&challengerP.position>defenderP.position){
+    // Lager gerangschikte speler wint: neemt de plek van de verdediger in,
+    // iedereen daartussen schuift een plek naar beneden.
+    const oldChP=challengerP.position, oldDefP=defenderP.position;
+    const between=players.filter(p=>p.position>=oldDefP&&p.position<oldChP&&p.id!==challengerP.id);
+    for(const p of between){ await sb.from('ladder_players').update({position:p.position+1}).eq('id',p.id); }
+    await sb.from('ladder_players').update({position:oldDefP}).eq('id',challengerP.id);
+  }
+  const {error}=await sb.from('ladder_challenges').update({status:'approved',approved_at:new Date().toISOString()}).eq('id',challenge.id);
+  return !error;
+}
+async function ccRejectChallenge(id){
+  const sb=ccGetWrite(); if(!sb) return false;
+  const {error}=await sb.from('ladder_challenges').update({status:'rejected'}).eq('id',id);
+  return !error;
+}
+
+// ── Huidig toernooi koppelen aan een avondencompetitie (winnersscherm) ──
+function ccBuildResultsSnapshot(){
+  const state=_currentStateForStatus();
+  const roster=_viRoster();
+  return roster.map(r=>{
+    const stats=getPlayerPersonalStats(state,r.id);
+    if(!stats||!stats.position) return null;
+    return {name:r.name,place:stats.position,points:stats.points,wins:stats.wins,losses:stats.losses};
+  }).filter(Boolean);
+}
+const CC_FMT_LABEL={team:'Knockout',americano:'Americano',mexicano:'Mexicano',mixicano:'Mixicano',teamamericano:'Team Americano',teammexicano:'Team Mexicano',roundrobin:'Round Robin',kingofcourt:'King of the Court'};
+async function ccAddCurrentResultToCompetition(code,silent){
+  if(!code) return false;
+  const results=ccBuildResultsSnapshot();
+  if(!results.length) return false;
+  const ok=await ccInsertEvent(code,{tournamentCode:shareCode||null,format:CC_FMT_LABEL[mode]||mode,results});
+  if(ok){
+    localStorage.setItem('padel-cc-last-code',code);
+    if(!silent){
+      const btn=$('btn-comp-add');
+      if(btn){ btn.innerHTML='✓ '+t('cc_added'); btn.disabled=true; }
+    }
+  }
+  return ok;
+}
+
+// ── UI: setup-scherm, koppelen aan bestaande competitie ──
+function ccTogglePrelink(){
+  const box=$('cc-prelink-box'); if(!box) return;
+  box.style.display=box.style.display==='none'?'':'none';
+  const inp=$('cc-prelink-inp'); if(inp&&_ccPrelinkCode) inp.value=_ccPrelinkCode;
+}
+function ccApplyPrelink(){
+  const inp=$('cc-prelink-inp');
+  const code=(inp.value||'').trim().toUpperCase();
+  if(code.length!==6){ $('cc-prelink-status').textContent=t('cc_err_code'); return; }
+  _ccPrelinkCode=code;
+  localStorage.setItem('padel-cc-prelink',code);
+  $('cc-prelink-status').textContent=t('cc_prelink_active',{code});
+}
+
+// ── UI: start-scherm "Competitie starten" ──
+function ccOpenStart(){
+  $('screen-setup').style.display='none';
+  $('screen-cc-start').style.display='block';
+  $('cc-start-type').value='series';
+  ccUpdateStartFields();
+}
+function ccBackFromStart(){
+  $('screen-cc-start').style.display='none';
+  $('screen-setup').style.display='block';
+}
+function ccUpdateStartFields(){
+  const type=$('cc-start-type').value;
+  $('cc-series-fields').style.display=type==='series'?'':'none';
+  $('cc-ladder-fields').style.display=type==='ladder'?'':'none';
+}
+async function ccSubmitStart(){
+  const name=($('cc-start-name').value||'').trim();
+  if(!name) return;
+  const clubName=($('cc-start-club').value||'').trim();
+  const type=$('cc-start-type').value;
+  const settings={};
+  if(type==='series'){
+    settings.pointModel=$('cc-point-model').value;
+    const bestN=parseInt($('cc-bestof-n').value,10);
+    settings.bestOf={enabled:$('cc-bestof-enable').checked,count:bestN>0?bestN:0};
+  } else {
+    let range=parseInt($('cc-challenge-range').value,10);
+    if(!range||range<1) range=3; if(range>5) range=5;
+    settings.challengeRange=range;
+  }
+  const btn=$('cc-start-submit'); if(btn) btn.disabled=true;
+  const comp=await ccCreateCompetition({name,clubName,type,settings});
+  if(btn) btn.disabled=false;
+  if(!comp){ alert(t('cc_err_generic')); return; }
+  ccComp=comp;
+  localStorage.setItem('padel-cc-last-code',comp.code);
+  ccShowCreated(comp);
+}
+function ccShowCreated(comp){
+  $('screen-cc-start').style.display='none';
+  $('screen-cc-created').style.display='block';
+  const url=`${location.origin}${location.pathname}?comp=${comp.code}`;
+  $('cc-created-link').value=url;
+  $('cc-created-qr').src=`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(url)}`;
+  $('cc-created-code').textContent=comp.code;
+  if(comp.type==='series'){
+    _ccPrelinkCode=comp.code;
+    localStorage.setItem('padel-cc-prelink',comp.code);
+  }
+}
+function ccCopyCreatedLink(){
+  const inp=$('cc-created-link'); inp.select(); document.execCommand('copy');
+  const btn=$('cc-created-copy-btn'); if(btn){ const old=btn.textContent; btn.textContent=t('cc_copied'); setTimeout(()=>btn.textContent=old,1500); }
+}
+function ccGoToCreatedView(){ location.href=`${location.pathname}?comp=${ccComp.code}`; }
+function ccBackFromCreated(){
+  $('screen-cc-created').style.display='none';
+  $('screen-setup').style.display='block';
+}
+
+// ── UI: winnersscherm "Toevoegen aan competitie" ──
+function ccOpenAddModal(){
+  if(!isTournamentDone()) return;
+  const last=_ccPrelinkCode||localStorage.getItem('padel-cc-last-code')||'';
+  let modal=$('cc-add-modal');
+  if(!modal){
+    modal=document.createElement('div');
+    modal.id='cc-add-modal';
+    modal.className='hidden';
+    modal.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:1003;padding:0 12px 12px;display:flex;justify-content:center';
+    modal.onclick=e=>{ if(e.target===modal) ccCloseAddModal(); };
+    document.body.appendChild(modal);
+  }
+  modal.innerHTML=`<div class="share-card">
+    <div class="share-top">
+      <svg class="icon" viewBox="0 0 24 24"><use href="#ic-league"></use></svg>
+      <span class="share-title">${t('cc_add_title')}</span>
+      <button class="share-close-btn" onclick="ccCloseAddModal()">&#x2715;</button>
+    </div>
+    <input id="cc-add-code" class="share-link-inp" style="width:100%;text-transform:uppercase;margin-bottom:10px" maxlength="6" placeholder="${t('cc_code_ph')}" value="${esc(last)}">
+    <button class="btn btn-green" style="width:100%;justify-content:center" onclick="ccSubmitAddModal()">${t('cc_add_btn')}</button>
+    <p id="cc-add-status" style="font-size:.8rem;color:var(--txt2);margin-top:8px"></p>
+  </div>`;
+  modal.classList.remove('hidden');
+}
+function ccCloseAddModal(){ const m=$('cc-add-modal'); if(m) m.classList.add('hidden'); }
+async function ccSubmitAddModal(){
+  const inp=$('cc-add-code'); const code=(inp.value||'').trim().toUpperCase();
+  const status=$('cc-add-status');
+  if(code.length!==6){ status.textContent=t('cc_err_code'); return; }
+  status.textContent=t('cc_adding');
+  const comp=await ccFetchCompetition(code);
+  if(!comp||comp.type!=='series'){ status.textContent=t('cc_err_notfound'); return; }
+  const ok=await ccAddCurrentResultToCompetition(code,false);
+  status.textContent=ok?t('cc_add_ok'):t('cc_err_generic');
+  if(ok) setTimeout(ccCloseAddModal,1200);
+}
+
+// ── UI: leaderboard / ladder view (?comp=CODE) ──
+async function initCCView(code){
+  ccViewCode=code;
+  ccPresMode=(new URLSearchParams(location.search)).get('pres')==='1';
+  $('screen-setup').style.display='none';
+  $('screen-cc-view').style.display='block';
+  if(ccPresMode) document.body.classList.add('pres-mode');
+  $('cc-view-box').innerHTML=`<p class="comp-empty" style="padding:40px 0;text-align:center">${t('cc_loading')}</p>`;
+  await ccRefreshView();
+  if(ccPollInterval) clearInterval(ccPollInterval);
+  ccPollInterval=setInterval(ccRefreshView,ccPresMode?3000:5000);
+}
+async function ccRefreshView(){
+  const comp=await ccFetchCompetition(ccViewCode);
+  if(!comp){
+    $('cc-view-box').innerHTML=`<p class="comp-empty" style="padding:40px 0;text-align:center">${t('cc_not_found')}</p>`;
+    if(ccPollInterval){ clearInterval(ccPollInterval); ccPollInterval=null; }
+    return;
+  }
+  ccComp=comp;
+  ccIsOwner=!!(ccSessionToken&&comp.session_token===ccSessionToken);
+  if(comp.type==='ladder'){
+    const [players,challenges]=await Promise.all([ccFetchLadderPlayers(ccViewCode),ccFetchChallenges(ccViewCode)]);
+    ccLadderPlayers=players; ccLadderChallenges=challenges;
+    ccRenderLadderView();
+  } else {
+    ccEvents=await ccFetchEvents(ccViewCode);
+    ccRenderSeriesView();
+  }
+}
+function ccLeaveView(){
+  if(ccPollInterval){ clearInterval(ccPollInterval); ccPollInterval=null; }
+  location.href=location.pathname;
+}
+function ccShareCurrentView(){
+  const url=`${location.origin}${location.pathname}?comp=${ccViewCode}`;
+  if(navigator.share){ navigator.share({url,title:ccComp?ccComp.name:'PadelBracket'}).catch(()=>{}); return; }
+  navigator.clipboard?.writeText(url);
+  alert(t('cc_link_copied'));
+}
+
+function ccRenderSeriesView(){
+  const rows=ccComputeLeaderboard(ccComp,ccEvents);
+  const backBtn=ccPresMode?'':`<button class="comp-back-btn" onclick="ccLeaveView()">&#8592; ${t('cc_back')}</button>`;
+  const club=ccComp.club_name?`<p style="font-size:.85rem;color:var(--txt2)">${esc(ccComp.club_name)}</p>`:'';
+  const rowsHtml=rows.map(r=>`
+    <div class="cc-lb-row${r.rank<=3?' cc-lb-top':''}">
+      <div class="cc-lb-main" onclick="this.parentNode.classList.toggle('expanded')">
+        <span class="cc-lb-rank">${r.rank}</span>
+        <span class="cc-lb-name">${esc(r.name)}</span>
+        <span class="cc-lb-pts">${r.totalPoints}</span>
+      </div>
+      <div class="cc-lb-sub">${t('cc_col_played')}: ${r.played} &middot; ${t('cc_col_wins')}: ${r.wins} &middot; ${t('cc_col_avgplace')}: ${r.avgPlace}</div>
+      <div class="cc-lb-detail">
+        ${r.evenings.map(e=>`<div class="cc-lb-ev-row"><span>${new Date(e.playedAt).toLocaleDateString()}</span><span>${esc(e.format||'')}</span><span>${t('cc_place_short')}${e.place}</span><span class="wc">${e.points} ${t('cc_pts_short')}</span></div>`).join('')}
+      </div>
+    </div>`).join('');
+  const ownerTools=ccIsOwner&&!ccPresMode?ccRenderAliasTool():'';
+  $('cc-view-box').innerHTML=`
+    ${backBtn}
+    <div class="cc-hdr">
+      <h2 class="setup-card-title" style="font-size:1.3rem">${esc(ccComp.name)}</h2>
+      ${club}
+    </div>
+    <div class="cc-actions">
+      <button class="btn btn-ghost btn-sm" onclick="ccShareCurrentView()">${icon('ic-share')} ${t('cc_share')}</button>
+      <button class="btn btn-ghost btn-sm" onclick="ccSharePng()">${icon('ic-share')} ${t('cc_share_png')}</button>
+    </div>
+    <div class="setup-card">
+      <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_standings_lbl')}</span></div>
+      ${rows.length?rowsHtml:`<p class="comp-empty">${t('cc_no_events')}</p>`}
+    </div>
+    ${ownerTools}
+  `;
+  applyI18n();
+}
+function ccRenderAliasTool(){
+  const names=[...new Set(ccEvents.flatMap(ev=>(ev.results||[]).map(r=>r.name)))].sort();
+  if(names.length<2) return '';
+  const opts=names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');
+  return `<div class="setup-card">
+    <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_alias_lbl')}</span></div>
+    <p class="setup-card-sub">${t('cc_alias_sub')}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <select id="cc-alias-from" class="comp-select" style="width:auto">${opts}</select>
+      <span>&rarr;</span>
+      <select id="cc-alias-to" class="comp-select" style="width:auto">${opts}</select>
+      <button class="btn btn-primary btn-sm" onclick="ccMergeAliasSubmit()">${t('cc_alias_merge')}</button>
+    </div>
+  </div>`;
+}
+async function ccMergeAliasSubmit(){
+  const from=$('cc-alias-from').value, to=$('cc-alias-to').value;
+  if(!from||!to||from===to) return;
+  const ok=await ccSetAlias(from,to);
+  if(ok) ccRefreshView();
+}
+
+function ccRenderLadderView(){
+  const backBtn=ccPresMode?'':`<button class="comp-back-btn" onclick="ccLeaveView()">&#8592; ${t('cc_back')}</button>`;
+  const club=ccComp.club_name?`<p style="font-size:.85rem;color:var(--txt2)">${esc(ccComp.club_name)}</p>`:'';
+  const range=(ccComp.settings&&ccComp.settings.challengeRange)||3;
+  const rowsHtml=ccLadderPlayers.map(p=>`
+    <div class="cc-ladder-row">
+      <span class="cc-lb-rank">${p.position}</span>
+      <span class="cc-lb-name">${esc(p.name)}</span>
+      ${ccIsOwner&&!ccPresMode?`<button class="grp-chip-action" onclick="ccRemovePlayerConfirm(${p.id})" title="&#x2715;">&#x2715;</button>`:''}
+    </div>`).join('');
+  const joinForm=ccPresMode?'':`<div class="setup-card">
+    <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_ladder_join_lbl')}</span></div>
+    <div style="display:flex;gap:8px">
+      <input id="cc-ladder-join-name" class="comp-select" style="flex:1" placeholder="${t('cc_your_name')}">
+      <input id="cc-ladder-hp" type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true">
+      <button class="btn btn-primary btn-sm" onclick="ccLadderJoinSubmit()">${t('cc_join')}</button>
+    </div>
+    <p id="cc-ladder-join-status" style="font-size:.8rem;color:var(--txt2);margin-top:6px"></p>
+  </div>`;
+  const challengeForm=(ccPresMode||ccLadderPlayers.length<2)?'':ccRenderChallengeForm();
+  const pendingHtml=ccIsOwner&&!ccPresMode?ccRenderPendingChallenges():'';
+  const historyHtml=ccPresMode?'':ccRenderChallengeHistory();
+  $('cc-view-box').innerHTML=`
+    ${backBtn}
+    <div class="cc-hdr">
+      <h2 class="setup-card-title" style="font-size:1.3rem">${esc(ccComp.name)}</h2>
+      ${club}
+      <p style="font-size:.75rem;color:var(--txt2)">${t('cc_ladder_range_note',{n:range})}</p>
+    </div>
+    <div class="cc-actions">
+      <button class="btn btn-ghost btn-sm" onclick="ccShareCurrentView()">${icon('ic-share')} ${t('cc_share')}</button>
+    </div>
+    <div class="setup-card">
+      <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_ladder_lbl')}</span></div>
+      ${rowsHtml||`<p class="comp-empty">${t('cc_ladder_empty')}</p>`}
+    </div>
+    ${joinForm}
+    ${challengeForm}
+    ${pendingHtml}
+    ${historyHtml}
+  `;
+  applyI18n();
+}
+function ccRenderChallengeForm(){
+  const opts=ccLadderPlayers.map(p=>`<option value="${esc(p.name)}">${p.position}. ${esc(p.name)}</option>`).join('');
+  return `<div class="setup-card">
+    <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_challenge_lbl')}</span></div>
+    <select id="cc-ch-challenger" class="comp-select" style="margin-bottom:6px">${opts}</select>
+    <select id="cc-ch-defender" class="comp-select" style="margin-bottom:6px">${opts}</select>
+    <input id="cc-ch-score" class="comp-select" placeholder="${t('cc_score_ph')}" style="margin-bottom:6px">
+    <select id="cc-ch-winner" class="comp-select" style="margin-bottom:6px">
+      <option value="challenger">${t('cc_winner_challenger')}</option>
+      <option value="defender">${t('cc_winner_defender')}</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="ccChallengeSubmit()">${t('cc_challenge_submit')}</button>
+    <p id="cc-ch-status" style="font-size:.8rem;color:var(--txt2);margin-top:6px"></p>
+  </div>`;
+}
+function ccRenderPendingChallenges(){
+  const pend=ccLadderChallenges.filter(c=>c.status==='pending');
+  if(!pend.length) return '';
+  return `<div class="setup-card">
+    <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_pending_lbl')} (${pend.length})</span></div>
+    ${pend.map(c=>`<div class="cc-challenge-row">
+      <div>${esc(c.challenger_name)} vs ${esc(c.defender_name)}</div>
+      <div style="color:var(--txt2)">${esc(c.score||'')} &middot; ${t('cc_winner_lbl')}: ${esc(c.reported_winner)}</div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <button class="btn btn-primary btn-sm" onclick="ccApproveChallengeClick(${c.id})">${t('cc_approve')}</button>
+        <button class="btn btn-ghost btn-sm" onclick="ccRejectChallengeClick(${c.id})">${t('cc_reject')}</button>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+function ccRenderChallengeHistory(){
+  const done=ccLadderChallenges.filter(c=>c.status!=='pending');
+  if(!done.length) return '';
+  return `<div class="setup-card">
+    <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_history_lbl')}</span></div>
+    ${done.map(c=>`<div class="cc-challenge-row">
+      <div>${esc(c.challenger_name)} vs ${esc(c.defender_name)}</div>
+      <div style="color:var(--txt2)">${esc(c.score||'')} &middot; ${c.status==='approved'?'✓ '+esc(c.reported_winner):t('cc_rejected')}</div>
+    </div>`).join('')}
+  </div>`;
+}
+async function ccLadderJoinSubmit(){
+  const inp=$('cc-ladder-join-name');
+  const hp=$('cc-ladder-hp');
+  const status=$('cc-ladder-join-status');
+  if(hp&&hp.value) return; // honeypot
+  const name=(inp.value||'').trim();
+  if(!name) return;
+  const key=`padel-cc-joined-${ccViewCode}`;
+  const joined=JSON.parse(localStorage.getItem(key)||'[]');
+  if(joined.length>=3){ status.textContent=t('cc_err_join_limit'); return; }
+  status.textContent=t('cc_joining');
+  const {ok}=await ccJoinLadder(ccViewCode,name);
+  if(ok){
+    joined.push(name); localStorage.setItem(key,JSON.stringify(joined));
+    inp.value=''; status.textContent=t('cc_join_ok');
+    ccRefreshView();
+  } else status.textContent=t('cc_err_generic');
+}
+async function ccRemovePlayerConfirm(id){
+  if(!window.confirm(t('cc_remove_confirm'))) return;
+  await ccRemoveLadderPlayer(id);
+  ccRefreshView();
+}
+async function ccChallengeSubmit(){
+  const challenger=$('cc-ch-challenger').value, defender=$('cc-ch-defender').value;
+  const status=$('cc-ch-status');
+  if(challenger===defender){ status.textContent=t('cc_err_same_player'); return; }
+  const cp=ccLadderPlayers.find(p=>p.name===challenger), dp=ccLadderPlayers.find(p=>p.name===defender);
+  const range=(ccComp.settings&&ccComp.settings.challengeRange)||3;
+  if(!cp||!dp||!ccChallengeAllowed(cp.position,dp.position,range)){ status.textContent=t('cc_err_range',{n:range}); return; }
+  const score=($('cc-ch-score').value||'').trim();
+  const winnerSel=$('cc-ch-winner').value;
+  const winner=winnerSel==='challenger'?challenger:defender;
+  status.textContent=t('cc_submitting');
+  const {ok}=await ccSubmitChallenge(ccViewCode,{challenger,defender,score,winner});
+  status.textContent=ok?t('cc_submitted'):t('cc_err_generic');
+  if(ok) ccRefreshView();
+}
+async function ccApproveChallengeClick(id){
+  const c=ccLadderChallenges.find(x=>x.id===id); if(!c) return;
+  await ccApproveChallenge(c);
+  ccRefreshView();
+}
+async function ccRejectChallengeClick(id){
+  await ccRejectChallenge(id);
+  ccRefreshView();
+}
+
+// ── Deelbare PNG standings-kaart (canvas, podium + top 10 + QR) ──
+async function ccSharePng(){
+  const rows=ccComputeLeaderboard(ccComp,ccEvents);
+  const W=1080,H=1350;
+  const cvs=document.createElement('canvas'); cvs.width=W; cvs.height=H;
+  const ctx=cvs.getContext('2d');
+  await Promise.allSettled([document.fonts.load('800 46px Inter'),document.fonts.load('700 24px Inter'),document.fonts.load('500 20px Inter')]);
+  const C={bg:'#0E1114',surface:'#1A1F24',accent:'#C7FF5E',txt:'#f9fafb',txt2:'rgba(249,250,251,0.5)',txt3:'rgba(249,250,251,0.28)',bdr:'rgba(255,255,255,0.07)',gold:'#fbbf24',silver:'#9ca3af',bronze:'#cd7f32'};
+  function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+  function trunc(s,font,maxW){ctx.font=font;if(ctx.measureText(s).width<=maxW)return s;while(s.length>1&&ctx.measureText(s+'…').width>maxW)s=s.slice(0,-1);return s+'…';}
+  ctx.fillStyle=C.bg; ctx.fillRect(0,0,W,H);
+  const ag=ctx.createLinearGradient(0,0,W,0); ag.addColorStop(0,'#C7FF5E'); ag.addColorStop(1,'#A3D44C');
+  ctx.fillStyle=ag; ctx.fillRect(0,0,W,8);
+  const MX=60,CW=W-2*MX; let y=60;
+  const nameFont='800 46px Inter, sans-serif';
+  ctx.font=nameFont; ctx.fillStyle=C.txt; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+  ctx.fillText(trunc(ccComp.name||'',nameFont,CW-40),W/2,y+46); y+=46+8;
+  if(ccComp.club_name){ ctx.font='500 22px Inter, sans-serif'; ctx.fillStyle=C.txt2; ctx.fillText(ccComp.club_name,W/2,y+22); y+=22+30; } else y+=20;
+  const top3=rows.slice(0,3);
+  if(top3.length){
+    const cH=30+top3.length*58+10;
+    ctx.fillStyle=C.surface; rr(MX,y,CW,cH,18); ctx.fill();
+    ctx.fillStyle=C.accent; rr(MX,y,5,cH,3); ctx.fill();
+    const medalColors=[C.gold,C.silver,C.bronze];
+    top3.forEach((r,i)=>{
+      const ry=y+34+i*58;
+      ctx.font='700 15px Inter, sans-serif'; ctx.fillStyle=medalColors[i]; ctx.textAlign='left'; ctx.textBaseline='middle';
+      ctx.fillText(String(i+1),MX+28,ry);
+      const pf=i===0?'800 30px Inter, sans-serif':'700 24px Inter, sans-serif';
+      ctx.font=pf; ctx.fillStyle=C.txt;
+      ctx.fillText(trunc(r.name,pf,CW-260),MX+56,ry);
+      ctx.font='600 20px Inter, sans-serif'; ctx.fillStyle=C.accent; ctx.textAlign='right';
+      ctx.fillText(r.totalPoints+' '+t('cc_pts_short'),W-MX-28,ry);
+      ctx.textAlign='left';
+    });
+    y+=cH+30;
+  }
+  ctx.font='600 13px Inter, sans-serif'; ctx.fillStyle=C.txt3; ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  ctx.fillText(t('cc_standings_lbl').toUpperCase(),MX,y+13);
+  ctx.strokeStyle=C.bdr; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(MX,y+22); ctx.lineTo(W-MX,y+22); ctx.stroke();
+  y+=30;
+  const ROW_H=42;
+  rows.slice(0,10).forEach((r,i)=>{
+    const ry=y+i*ROW_H;
+    if(i%2===0){ ctx.fillStyle='rgba(255,255,255,0.025)'; rr(MX,ry+2,CW,ROW_H-4,8); ctx.fill(); }
+    ctx.font='600 18px Inter, sans-serif'; ctx.fillStyle=i<3?C.accent:C.txt2; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(String(r.rank),MX+36,ry+ROW_H/2);
+    const rf='500 18px Inter, sans-serif';
+    ctx.font=rf; ctx.fillStyle=C.txt; ctx.textAlign='left';
+    ctx.fillText(trunc(r.name,rf,CW-140),MX+48,ry+ROW_H/2);
+    ctx.font='600 18px Inter, sans-serif'; ctx.fillStyle=C.txt2; ctx.textAlign='right';
+    ctx.fillText(String(r.totalPoints),W-MX,ry+ROW_H/2);
+  });
+  y+=Math.min(rows.length,10)*ROW_H+24;
+  const qrSize=130;
+  const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(location.origin+location.pathname+'?comp='+ccViewCode)}`;
+  try{
+    const qrImg=await new Promise((res,rej)=>{const im=new Image();im.crossOrigin='anonymous';im.onload=()=>res(im);im.onerror=rej;im.src=qrUrl;});
+    ctx.fillStyle='#fff'; rr(W/2-qrSize/2-8,H-qrSize-100,qrSize+16,qrSize+16,12); ctx.fill();
+    ctx.drawImage(qrImg,W/2-qrSize/2,H-qrSize-92,qrSize,qrSize);
+  }catch(e){}
+  ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(MX,H-40); ctx.lineTo(W-MX,H-40); ctx.stroke();
+  ctx.font='500 20px Inter, sans-serif'; ctx.fillStyle='rgba(249,250,251,0.28)';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('padel-bracket.com',W/2,H-20);
+  cvs.toBlob(async blob=>{
+    const safe=(ccComp.name||'competitie').replace(/[^a-zA-Z0-9]/g,'_').slice(0,40);
+    const file=new File([blob],safe+'_stand.png',{type:'image/png'});
+    if(navigator.share&&typeof navigator.canShare==='function'&&navigator.canShare({files:[file]})){
+      try{await navigator.share({files:[file],title:ccComp.name});return;}catch(e){if(e.name==='AbortError')return;}
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=safe+'_stand.png'; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),100);
+  },'image/png');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   applyI18n();
   renderGroupsUI();
@@ -8515,6 +9243,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if(_vc){ initViewMode(_vc.toUpperCase()); return; }
   const _jc=_sp.get('join');
   if(_jc){ initJoinMode(_jc.toUpperCase()); return; }
+  const _cc=_sp.get('comp');
+  if(_cc){ initCCView(_cc.toUpperCase()); return; }
   if(suCode) suShowWaitlistBtn();
   loadState();
   if(savedState) resumeFromBanner(); // auto-resume on page refresh

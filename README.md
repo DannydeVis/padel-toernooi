@@ -21,14 +21,16 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Mixican
 
 - **8 tournament formats** — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout bracket, Round Robin
 - **Live standings** — scores update in real time on every phone via a share link
+- **Club competition (season leaderboard)**: link results from multiple tournament evenings into one shareable, realtime leaderboard, with configurable point models, best-X-of-Y evening counting and a downloadable/shareable PNG standings card
+- **Ladder competition**: players self-add to a shareable ladder, challenge opponents within a configurable range, and the organizer approves results before positions shift
 - **Self-signup with waitlist**: share a link before the tournament, players add their own name, full lists overflow automatically to a waitlist
 - **Personal player view**: every player picks their own name once on the share link and always sees their court, partner, opponents and personal stats
 - **Push notifications**: players get a real system notification for every new round and the final result, even when the app is closed
-- **Fullscreen TV scoreboard** — present the tournament on any screen via `?pres=1`
+- **Fullscreen TV scoreboard** — present the tournament, leaderboard or ladder on any screen via `?pres=1`
 - **Player score entry** — share a link so players enter their own scores on court
 - **No account needed** — open and start, nothing to install or sign up for
 - **Works offline** — installable as a PWA; the app works without internet after the first load
-- **6 languages** — Dutch, English, French, German, Spanish, Swedish
+- **8 languages** — Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 - **Export** — copy standings as text, export CSV, or print/PDF results
 - **Printable schedules** — pre-computed rotation tables for 4, 6, 8, 10, 12 and 16 players
 
