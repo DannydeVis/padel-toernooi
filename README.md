@@ -22,6 +22,7 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Mixican
 - **8 tournament formats** — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout bracket, Round Robin
 - **Live standings** — scores update in real time on every phone via a share link
 - **Self-signup with waitlist**: share a link before the tournament, players add their own name, full lists overflow automatically to a waitlist
+- **Personal player view**: every player picks their own name once on the share link and always sees their court, partner, opponents and personal stats, with a notification when a new round is ready
 - **Fullscreen TV scoreboard** — present the tournament on any screen via `?pres=1`
 - **Player score entry** — share a link so players enter their own scores on court
 - **No account needed** — open and start, nothing to install or sign up for

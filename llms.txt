@@ -53,6 +53,7 @@ Every team plays every other team at least once. Standings are ranked by number 
 - Instant setup — type in the player or team names, pick a format, and the full schedule is generated automatically
 - Automatic schedule, pairing and standings calculation for all eight formats (Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout, Round Robin)
 - Self-signup with waitlist: the organiser opens a signup link before the tournament, players add their own name (no account needed), full lists overflow automatically to a waitlist, and the organiser starts the tournament directly from that list
+- Personal player view: on the shared live link, each player picks their own name once and always sees where they play, with whom, against whom, or whether they are resting, plus their own points and stats, with a notification when the next round is ready
 - Live score entry by the organiser, with points and rankings updated instantly after every match
 - Players can submit their own match scores via the shared link; the organiser reviews and approves each one with a single tap before it's saved
 - Live share link for spectators — anyone opens it on their phone and sees standings and scores update in real time, with no account or app install needed

@@ -554,6 +554,25 @@ body.light .su-card{background:#fff;box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 .su-item-rm:hover{color:var(--red)}
 .su-empty{color:var(--b-muted);font-size:.85rem;padding:8px 0}
 .su-actions{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+/* ── Persoonlijke speler-kaart ── */
+#player-status-card{background:var(--surface);border:1px solid var(--bdr2);border-radius:16px;padding:14px 16px;margin:0 16px 12px;max-width:900px}
+@media(min-width:640px){#player-status-card{margin-left:auto;margin-right:auto}}
+.pcard-name{font-weight:800;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:6px}
+.pcard-status{font-size:1.05rem;font-weight:700;color:var(--txt)}
+.pcard-playing{color:var(--accent)}
+.pcard-resting{color:var(--txt2)}
+.pcard-waiting{color:var(--txt2)}
+.pcard-dropped{color:var(--txt2)}
+.pcard-done{color:var(--txt)}
+.pcard-timer{margin-top:6px;display:inline-block;font-weight:800;font-size:1.3rem;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pcard-timer.time-up{color:var(--red)}
+.pcard-score-btn{display:block;width:100%;margin-top:12px;background:var(--accent);color:#0E1114;border:none;border-radius:12px;padding:12px 16px;font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;touch-action:manipulation}
+.pcard-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--bdr)}
+.pcard-stat{text-align:center}
+.pcard-stat .v{font-weight:800;font-size:1rem;color:var(--txt)}
+.pcard-stat .l{font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--b-muted);margin-top:2px}
+.pcard-ios-hint{margin-top:10px;font-size:.72rem;color:var(--txt2);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface2);border-radius:8px;padding:6px 10px}
+.pcard-ios-hint button{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:.85rem;flex-shrink:0;touch-action:manipulation}
 
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -1622,6 +1641,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 <div id="screen-tournament">
   <div id="view-banner"><span class="view-pulse"></span><span data-i18n="view_banner">👁 Live meekijken — alleen lezen</span><span id="viewer-player-chip" style="display:none" class="view-player-chip" onclick="resetViewerPlayer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span id="viewer-player-name"></span></span><a href="https://padel-bracket.com" target="_blank" rel="noopener" class="view-brand-link">padel-bracket.com</a><a id="view-wa-btn" href="#" target="_blank" rel="noopener" class="view-wa-btn" aria-label="Deel via WhatsApp"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.054 23.447a.5.5 0 0 0 .612.612l5.516-1.467A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.443l-.374-.222-3.878 1.031 1.05-3.793-.243-.389A9.954 9.954 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a></div>
   <div id="share-nudge" role="button" onclick="shareTournament()"><span data-i18n="share_nudge">Laat iedereen live meekijken — tik op Deel</span><button class="nudge-close" onclick="event.stopPropagation();dismissShareNudge()" aria-label="Sluiten">&#x2715;</button></div>
+  <div id="player-status-card" style="display:none"></div>
   <div class="phdr" id="phdr-el">Padel Toernooi — Bracket</div>
   <div id="tm-tourn-hdr" class="am-tourn-hdr" style="display:none"></div>
   <div class="tabs">
@@ -1871,7 +1891,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.64.0';
+const APP_VERSION = 'v1.65.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1966,6 +1986,7 @@ nl:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win met 2',on_lbl:'Aan',off_lbl:'Uit',courts_word_pk:'courts',export_dupr:'Exporteer voor DUPR',
   type_koc:'King of the Court',type_koc_sub:'Winnaars promoveren',set_title_koc:'King of the Court instellen',set_desc_auto_koc:'Winnaars gaan een baan omhoog, verliezers een baan omlaag. Banen worden elke ronde opnieuw ingedeeld.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Baan {n}',koc_round_n:'Ronde {n} van {total}',koc_pool:'Wachtrij',koc_golden_pt:'Gouden punt — wie wint?',koc_king_lbl:'Koning',koc_standings:'Eindstand',koc_king_rounds:'Keer King',res_koc:'{label}King of the Court · {n} spelers',koc_done:'Toernooi klaar',koc_promotes:'gaat omhoog',koc_demotes:'gaat omlaag',koc_stays:'blijft King',val_min8:'Voer minimaal 8 namen in.',koc_cnt_ok:'{n} spelers, {c} banen',koc_col_trend:'Trend',koc_arrow_up:'Omhoog',koc_arrow_down:'Omlaag',koc_arrow_same:'Gelijk',
   su_open_cta:'Inschrijving openen',su_waitlist_btn:'Wachtlijst',su_setup_title:'Inschrijving openen',su_setup_sub:'Deel een link, spelers melden zichzelf aan.',su_event_name_ph:'Naam van het evenement',su_max_ph:'Max',su_location_ph:'Locatie (optioneel)',su_generate_btn:'Genereer link',su_cancel:'Annuleren',su_err_max:'Vul een maximum aantal spelers in (minimaal 4).',su_err_generic:'Er ging iets mis. Probeer het opnieuw.',su_err_empty:'Er zijn nog geen bevestigde aanmeldingen.',su_live_title:'Inschrijving',su_counter:'{n} van {max}',su_confirmed_title:'Bevestigd',su_waitlist_title:'Wachtlijst',su_none_yet:'Nog niemand aangemeld.',su_waitlist_empty:'Wachtlijst is leeg.',su_close_start_btn:'Sluit inschrijving en start',su_join_title:'Aanmelden',su_join_name_ph:'Jouw naam',gender_m:'Man',gender_f:'Vrouw',su_join_confirm_btn:'Bevestig aanmelding',su_join_confirm_dup_btn:'Toch aanmelden',su_join_dup_warn:'Deze naam bestaat al. Ga je door als "{name}"?',su_join_default_name:'Padel toernooi',su_join_closed:'Inschrijving is gesloten.',su_join_spots:'Nog {n} van {max} plekken vrij',su_join_full:'Vol, {n} op de wachtlijst',su_join_not_found:'Inschrijving niet gevonden.',su_join_offline:'Aanmelden vereist internet. Controleer je verbinding.',su_join_err_name:'Vul je naam in.',su_join_err_gender:'Kies man of vrouw.',su_join_limit:'Maximaal aantal aanmeldingen vanaf dit toestel bereikt.',su_join_success:'Bedankt {name}, je bent aangemeld!',su_join_waitlisted:'{name}, je staat op de wachtlijst (positie {pos}).',su_join_err_generic:'Aanmelden mislukt. Probeer het opnieuw.',
+  pcard_and:'en',pcard_playing:'Baan {court}, samen met {partner}, tegen {opponents}',pcard_playing_noPartner:'Baan {court}, tegen {opponents}',pcard_resting:'Jij rust deze ronde (al {n}x gerust)',pcard_waiting:'Wacht op de volgende ronde...',pcard_dropped:'Je doet niet meer mee aan dit toernooi',pcard_done:'Toernooi klaar voor jou',pcard_score_btn:'Score invoeren',pcard_stat_pos:'Positie',pcard_stat_pts:'Punten',pcard_stat_wl:'W-V',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rust',pcard_ios_hint:'Installeer deze app op je beginscherm voor betrouwbare meldingen.',notif_title:'Nieuwe ronde',notif_body_playing:'Baan {court}, samen met {partner}, tegen {opponents}',notif_body_playing_noPartner:'Baan {court}, tegen {opponents}',notif_body_resting:'Jij rust deze ronde',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',feedback_msg_ph:'Describe the problem or idea...',feedback_email_ph:'Email address (optional)',feedback_send:'Send',feedback_sending:'Sending...',feedback_ok:'Thanks! Your message has been received.',feedback_err:'Something went wrong. Please try again.',feedback_empty:'Please enter a message.',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',more_support:'Support this project',more_gear:'Padel gear tips',stats_support:'Tournament a success? Support the project!',
@@ -2044,6 +2065,7 @@ en:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
   type_koc:'King of the Court',type_koc_sub:'Winners promote',set_title_koc:'Set up King of the Court',set_desc_auto_koc:'Winners move up a court, losers move down. Partners re-drawn each round.',koc_rounds_lbl:'Rounds',koc_king_court:'King Court',koc_court_n:'Court {n}',koc_round_n:'Round {n} of {total}',koc_pool:'Challenger pool',koc_golden_pt:'Golden point — who wins?',koc_king_lbl:'King',koc_standings:'Final standings',koc_king_rounds:'Times King',res_koc:'{label}King of the Court · {n} players',koc_done:'Tournament complete',koc_promotes:'promotes',koc_demotes:'demotes',koc_stays:'stays King',val_min8:'Enter at least 8 names.',koc_cnt_ok:'{n} players, {c} courts',koc_col_trend:'Trend',koc_arrow_up:'Up',koc_arrow_down:'Down',koc_arrow_same:'Same',
   su_open_cta:'Open signup',su_waitlist_btn:'Waitlist',su_setup_title:'Open signup',su_setup_sub:'Share a link, players add themselves to the list.',su_event_name_ph:'Event name',su_max_ph:'Max',su_location_ph:'Location (optional)',su_generate_btn:'Generate link',su_cancel:'Cancel',su_err_max:'Enter a maximum number of players (at least 4).',su_err_generic:'Something went wrong. Please try again.',su_err_empty:'There are no confirmed signups yet.',su_live_title:'Signup',su_counter:'{n} of {max}',su_confirmed_title:'Confirmed',su_waitlist_title:'Waitlist',su_none_yet:'No signups yet.',su_waitlist_empty:'Waitlist is empty.',su_close_start_btn:'Close signup and start',su_join_title:'Sign up',su_join_name_ph:'Your name',gender_m:'Man',gender_f:'Woman',su_join_confirm_btn:'Confirm signup',su_join_confirm_dup_btn:'Sign up anyway',su_join_dup_warn:'This name already exists. Continue as "{name}"?',su_join_default_name:'Padel tournament',su_join_closed:'Signup is closed.',su_join_spots:'{n} of {max} spots left',su_join_full:'Full, {n} on the waitlist',su_join_not_found:'Signup not found.',su_join_offline:'Signing up requires internet. Check your connection.',su_join_err_name:'Enter your name.',su_join_err_gender:'Choose man or woman.',su_join_limit:'Maximum number of signups from this device reached.',su_join_success:'Thanks {name}, you are signed up!',su_join_waitlisted:'{name}, you are on the waitlist (position {pos}).',su_join_err_generic:'Signup failed. Please try again.',
+  pcard_and:'and',pcard_playing:'Court {court}, with {partner}, against {opponents}',pcard_playing_noPartner:'Court {court}, against {opponents}',pcard_resting:'You are resting this round (rested {n}x so far)',pcard_waiting:'Waiting for the next round...',pcard_dropped:'You are no longer part of this tournament',pcard_done:'Tournament finished for you',pcard_score_btn:'Enter score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'W-L',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rest',pcard_ios_hint:'Install this app on your home screen for more reliable notifications.',notif_title:'New round',notif_body_playing:'Court {court}, with {partner}, against {opponents}',notif_body_playing_noPartner:'Court {court}, against {opponents}',notif_body_resting:'You are resting this round',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -2121,6 +2143,7 @@ fr:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
   koc_courts_cap:'King of the Court necessite 4 joueurs par terrain. Maximum {max} terrain(s) pour {n} joueurs.',type_koc:'King of the Court',type_koc_sub:'Les gagnants montent',set_title_koc:'Configurer King of the Court',set_desc_auto_koc:'Les gagnants montent d\'un terrain, les perdants descendent.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Terrain {n}',koc_round_n:'Manche {n} sur {total}',koc_pool:'File d\'attente',koc_golden_pt:'Point d\'or — qui gagne?',koc_king_lbl:'Roi',koc_standings:'Classement final',koc_king_rounds:'Fois King',res_koc:'{label}King of the Court · {n} joueurs',koc_done:'Tournoi termine',koc_promotes:'monte',koc_demotes:'descend',koc_stays:'reste King',val_min8:'Saisissez au moins 8 noms.',koc_cnt_ok:'{n} joueurs, {c} terrains',koc_col_trend:'Tendance',koc_arrow_up:'Monte',koc_arrow_down:'Descend',koc_arrow_same:'Egal',
   su_open_cta:'Ouvrir les inscriptions',su_waitlist_btn:'Liste d\'attente',su_setup_title:'Ouvrir les inscriptions',su_setup_sub:'Partagez un lien, les joueurs s\'inscrivent eux-memes.',su_event_name_ph:'Nom de l\'evenement',su_max_ph:'Max',su_location_ph:'Lieu (optionnel)',su_generate_btn:'Generer le lien',su_cancel:'Annuler',su_err_max:'Indiquez un nombre maximum de joueurs (au moins 4).',su_err_generic:'Une erreur est survenue. Reessayez.',su_err_empty:'Aucune inscription confirmee pour le moment.',su_live_title:'Inscriptions',su_counter:'{n} sur {max}',su_confirmed_title:'Confirmes',su_waitlist_title:'Liste d\'attente',su_none_yet:'Personne inscrit pour le moment.',su_waitlist_empty:'Liste d\'attente vide.',su_close_start_btn:'Fermer les inscriptions et demarrer',su_join_title:'S\'inscrire',su_join_name_ph:'Votre nom',gender_m:'Homme',gender_f:'Femme',su_join_confirm_btn:'Confirmer l\'inscription',su_join_confirm_dup_btn:'S\'inscrire quand meme',su_join_dup_warn:'Ce nom existe deja. Continuer en tant que "{name}" ?',su_join_default_name:'Tournoi de padel',su_join_closed:'Les inscriptions sont fermees.',su_join_spots:'{n} places sur {max} disponibles',su_join_full:'Complet, {n} sur liste d\'attente',su_join_not_found:'Inscription introuvable.',su_join_offline:'L\'inscription necessite une connexion internet. Verifiez votre connexion.',su_join_err_name:'Indiquez votre nom.',su_join_err_gender:'Choisissez homme ou femme.',su_join_limit:'Nombre maximum d\'inscriptions atteint pour cet appareil.',su_join_success:'Merci {name}, vous etes inscrit !',su_join_waitlisted:'{name}, vous etes sur liste d\'attente (position {pos}).',su_join_err_generic:'L\'inscription a echoue. Reessayez.',
+  pcard_and:'et',pcard_playing:'Terrain {court}, avec {partner}, contre {opponents}',pcard_playing_noPartner:'Terrain {court}, contre {opponents}',pcard_resting:'Vous vous reposez ce tour (deja repose {n} fois)',pcard_waiting:'En attente du tour suivant...',pcard_dropped:'Vous ne participez plus a ce tournoi',pcard_done:'Tournoi termine pour vous',pcard_score_btn:'Saisir le score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'V-D',pcard_stat_saldo:'Solde',pcard_stat_rest:'Repos',pcard_ios_hint:'Installez cette app sur votre ecran d\'accueil pour des notifications plus fiables.',notif_title:'Nouveau tour',notif_body_playing:'Terrain {court}, avec {partner}, contre {opponents}',notif_body_playing_noPartner:'Terrain {court}, contre {opponents}',notif_body_resting:'Vous vous reposez ce tour',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -2199,6 +2222,7 @@ de:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Mit 2 gewinnen',on_lbl:'An',off_lbl:'Aus',courts_word_pk:'Courts',export_dupr:'Fur DUPR exportieren',
   koc_courts_cap:'King of the Court benotigt 4 Spieler pro Feld. Maximal {max} Feld(er) fur {n} Spieler.',type_koc:'King of the Court',type_koc_sub:'Gewinner steigen auf',set_title_koc:'King of the Court einrichten',set_desc_auto_koc:'Gewinner steigen ein Feld auf, Verlierer steigen ab.',koc_rounds_lbl:'Runden',koc_king_court:'King Court',koc_court_n:'Feld {n}',koc_round_n:'Runde {n} von {total}',koc_pool:'Warteliste',koc_golden_pt:'Goldener Punkt — wer gewinnt?',koc_king_lbl:'Konig',koc_standings:'Endstand',koc_king_rounds:'Mal King',res_koc:'{label}King of the Court · {n} Spieler',koc_done:'Turnier abgeschlossen',koc_promotes:'steigt auf',koc_demotes:'steigt ab',koc_stays:'bleibt King',val_min8:'Mindestens 8 Namen eingeben.',koc_cnt_ok:'{n} Spieler, {c} Felder',koc_col_trend:'Trend',koc_arrow_up:'Aufwarts',koc_arrow_down:'Abwarts',koc_arrow_same:'Gleich',
   su_open_cta:'Anmeldung offnen',su_waitlist_btn:'Warteliste',su_setup_title:'Anmeldung offnen',su_setup_sub:'Teile einen Link, Spieler tragen sich selbst ein.',su_event_name_ph:'Name der Veranstaltung',su_max_ph:'Max',su_location_ph:'Ort (optional)',su_generate_btn:'Link erstellen',su_cancel:'Abbrechen',su_err_max:'Gib eine maximale Spieleranzahl ein (mindestens 4).',su_err_generic:'Etwas ist schiefgelaufen. Bitte versuche es erneut.',su_err_empty:'Es gibt noch keine bestatigten Anmeldungen.',su_live_title:'Anmeldung',su_counter:'{n} von {max}',su_confirmed_title:'Bestatigt',su_waitlist_title:'Warteliste',su_none_yet:'Noch niemand angemeldet.',su_waitlist_empty:'Warteliste ist leer.',su_close_start_btn:'Anmeldung schliessen und starten',su_join_title:'Anmelden',su_join_name_ph:'Dein Name',gender_m:'Mann',gender_f:'Frau',su_join_confirm_btn:'Anmeldung bestatigen',su_join_confirm_dup_btn:'Trotzdem anmelden',su_join_dup_warn:'Dieser Name existiert bereits. Weiter als "{name}"?',su_join_default_name:'Padel-Turnier',su_join_closed:'Die Anmeldung ist geschlossen.',su_join_spots:'Noch {n} von {max} Platzen frei',su_join_full:'Voll, {n} auf der Warteliste',su_join_not_found:'Anmeldung nicht gefunden.',su_join_offline:'Fur die Anmeldung ist Internet erforderlich. Prufe deine Verbindung.',su_join_err_name:'Gib deinen Namen ein.',su_join_err_gender:'Wahle Mann oder Frau.',su_join_limit:'Maximale Anzahl Anmeldungen von diesem Gerat erreicht.',su_join_success:'Danke {name}, du bist angemeldet!',su_join_waitlisted:'{name}, du stehst auf der Warteliste (Position {pos}).',su_join_err_generic:'Anmeldung fehlgeschlagen. Bitte versuche es erneut.',
+  pcard_and:'und',pcard_playing:'Platz {court}, mit {partner}, gegen {opponents}',pcard_playing_noPartner:'Platz {court}, gegen {opponents}',pcard_resting:'Du pausierst diese Runde (bereits {n}x pausiert)',pcard_waiting:'Warten auf die nachste Runde...',pcard_dropped:'Du nimmst nicht mehr an diesem Turnier teil',pcard_done:'Turnier fur dich beendet',pcard_score_btn:'Ergebnis eingeben',pcard_stat_pos:'Position',pcard_stat_pts:'Punkte',pcard_stat_wl:'S-N',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Pause',pcard_ios_hint:'Installiere diese App auf deinem Startbildschirm fur zuverlassigere Benachrichtigungen.',notif_title:'Neue Runde',notif_body_playing:'Platz {court}, mit {partner}, gegen {opponents}',notif_body_playing_noPartner:'Platz {court}, gegen {opponents}',notif_body_resting:'Du pausierst diese Runde',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',feedback_msg_ph:'Describe el problema o la idea...',feedback_email_ph:'Correo electrónico (opcional)',feedback_send:'Enviar',feedback_sending:'Enviando...',feedback_ok:'Gracias. Tu mensaje ha sido recibido.',feedback_err:'Algo salió mal. Por favor, inténtalo de nuevo.',feedback_empty:'Por favor, escribe un mensaje.',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',more_support:'Apoya este proyecto',more_gear:'Equipación de pádel',stats_support:'¿Torneo con éxito? ¡Apoya el proyecto!',
@@ -2276,6 +2300,7 @@ es:{
   set_lbl_sport:'Deporte',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Ganar por 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'pistas',export_dupr:'Exportar para DUPR',
   koc_courts_cap:'King of the Court necesita 4 jugadores por pista. Maximo {max} pista(s) para {n} jugadores.',type_koc:'King of the Court',type_koc_sub:'Ganadores suben',set_title_koc:'Configurar King of the Court',set_desc_auto_koc:'Los ganadores suben una pista, los perdedores bajan.',koc_rounds_lbl:'Rondas',koc_king_court:'King Court',koc_court_n:'Pista {n}',koc_round_n:'Ronda {n} de {total}',koc_pool:'Lista de espera',koc_golden_pt:'Punto de oro, quien gana?',koc_king_lbl:'Rey',koc_standings:'Clasificacion final',koc_king_rounds:'Veces King',res_koc:'{label}King of the Court · {n} jugadores',koc_done:'Torneo completado',koc_promotes:'sube',koc_demotes:'baja',koc_stays:'sigue King',val_min8:'Introduce al menos 8 nombres.',koc_cnt_ok:'{n} jugadores, {c} pistas',koc_col_trend:'Tendencia',koc_arrow_up:'Sube',koc_arrow_down:'Baja',koc_arrow_same:'Igual',
   su_open_cta:'Abrir inscripcion',su_waitlist_btn:'Lista de espera',su_setup_title:'Abrir inscripcion',su_setup_sub:'Comparte un enlace, los jugadores se apuntan ellos mismos.',su_event_name_ph:'Nombre del evento',su_max_ph:'Max',su_location_ph:'Ubicacion (opcional)',su_generate_btn:'Generar enlace',su_cancel:'Cancelar',su_err_max:'Introduce un numero maximo de jugadores (minimo 4).',su_err_generic:'Algo salio mal. Intentalo de nuevo.',su_err_empty:'Todavia no hay inscripciones confirmadas.',su_live_title:'Inscripcion',su_counter:'{n} de {max}',su_confirmed_title:'Confirmados',su_waitlist_title:'Lista de espera',su_none_yet:'Nadie inscrito todavia.',su_waitlist_empty:'La lista de espera esta vacia.',su_close_start_btn:'Cerrar inscripcion e iniciar',su_join_title:'Inscribirse',su_join_name_ph:'Tu nombre',gender_m:'Hombre',gender_f:'Mujer',su_join_confirm_btn:'Confirmar inscripcion',su_join_confirm_dup_btn:'Inscribirme igualmente',su_join_dup_warn:'Este nombre ya existe. Continuar como "{name}"?',su_join_default_name:'Torneo de padel',su_join_closed:'La inscripcion esta cerrada.',su_join_spots:'Quedan {n} de {max} plazas',su_join_full:'Completo, {n} en lista de espera',su_join_not_found:'Inscripcion no encontrada.',su_join_offline:'Inscribirse requiere conexion a internet. Comprueba tu conexion.',su_join_err_name:'Introduce tu nombre.',su_join_err_gender:'Elige hombre o mujer.',su_join_limit:'Numero maximo de inscripciones desde este dispositivo alcanzado.',su_join_success:'Gracias {name}, te has inscrito!',su_join_waitlisted:'{name}, estas en la lista de espera (posicion {pos}).',su_join_err_generic:'La inscripcion fallo. Intentalo de nuevo.',
+  pcard_and:'y',pcard_playing:'Pista {court}, con {partner}, contra {opponents}',pcard_playing_noPartner:'Pista {court}, contra {opponents}',pcard_resting:'Descansas esta ronda (ya has descansado {n}x)',pcard_waiting:'Esperando la siguiente ronda...',pcard_dropped:'Ya no participas en este torneo',pcard_done:'Torneo terminado para ti',pcard_score_btn:'Introducir resultado',pcard_stat_pos:'Posicion',pcard_stat_pts:'Puntos',pcard_stat_wl:'G-P',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Descanso',pcard_ios_hint:'Instala esta app en tu pantalla de inicio para notificaciones mas fiables.',notif_title:'Nueva ronda',notif_body_playing:'Pista {court}, con {partner}, contra {opponents}',notif_body_playing_noPartner:'Pista {court}, contra {opponents}',notif_body_resting:'Descansas esta ronda',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',feedback_msg_ph:'Beskriv problemet eller idén...',feedback_email_ph:'E-postadress (valfritt)',feedback_send:'Skicka',feedback_sending:'Skickar...',feedback_ok:'Tack! Ditt meddelande har tagits emot.',feedback_err:'Något gick fel. Försök igen.',feedback_empty:'Ange ett meddelande.',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',more_support:'Stöd detta projekt',more_gear:'Padel gear tips',stats_support:'Lyckad turnering? Stöd projektet!',
@@ -2353,6 +2378,7 @@ sv:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vinn med 2',on_lbl:'Pa',off_lbl:'Av',courts_word_pk:'courts',export_dupr:'Exportera till DUPR',
   koc_courts_cap:'King of the Court behoever 4 spelare per bana. Max {max} bana/banor for {n} spelare.',type_koc:'King of the Court',type_koc_sub:'Vinnare klattrar',set_title_koc:'Installera King of the Court',set_desc_auto_koc:'Vinnare klattrar upp en bana, forlorare klattrar ner.',koc_rounds_lbl:'Omgangar',koc_king_court:'King Court',koc_court_n:'Bana {n}',koc_round_n:'Omgang {n} av {total}',koc_pool:'Vantelista',koc_golden_pt:'Guldpoanng — vem vinner?',koc_king_lbl:'Kung',koc_standings:'Slutresultat',koc_king_rounds:'Ganger King',res_koc:'{label}King of the Court · {n} spelare',koc_done:'Turneringen klar',koc_promotes:'klattrar upp',koc_demotes:'klattrar ner',koc_stays:'forblir King',val_min8:'Ange minst 8 namn.',koc_cnt_ok:'{n} spelare, {c} banor',koc_col_trend:'Trend',koc_arrow_up:'Upp',koc_arrow_down:'Ner',koc_arrow_same:'Oforandrad',
   su_open_cta:'Oppna anmalan',su_waitlist_btn:'Vantelista',su_setup_title:'Oppna anmalan',su_setup_sub:'Dela en lank, spelare anmaler sig sjalva.',su_event_name_ph:'Namn pa evenemanget',su_max_ph:'Max',su_location_ph:'Plats (valfritt)',su_generate_btn:'Skapa lank',su_cancel:'Avbryt',su_err_max:'Ange ett max antal spelare (minst 4).',su_err_generic:'Nagot gick fel. Forsok igen.',su_err_empty:'Det finns annu inga bekraftade anmalningar.',su_live_title:'Anmalan',su_counter:'{n} av {max}',su_confirmed_title:'Bekraftade',su_waitlist_title:'Vantelista',su_none_yet:'Ingen anmald an.',su_waitlist_empty:'Vantelistan ar tom.',su_close_start_btn:'Stang anmalan och starta',su_join_title:'Anmal dig',su_join_name_ph:'Ditt namn',gender_m:'Man',gender_f:'Kvinna',su_join_confirm_btn:'Bekrafta anmalan',su_join_confirm_dup_btn:'Anmal anda',su_join_dup_warn:'Namnet finns redan. Fortsatt som "{name}"?',su_join_default_name:'Padelturnering',su_join_closed:'Anmalan ar stangd.',su_join_spots:'{n} av {max} platser kvar',su_join_full:'Fullt, {n} pa vantelistan',su_join_not_found:'Anmalan hittades inte.',su_join_offline:'Anmalan kraver internet. Kontrollera din anslutning.',su_join_err_name:'Ange ditt namn.',su_join_err_gender:'Valj man eller kvinna.',su_join_limit:'Max antal anmalningar fran den har enheten uppnatt.',su_join_success:'Tack {name}, du ar anmald!',su_join_waitlisted:'{name}, du star pa vantelistan (position {pos}).',su_join_err_generic:'Anmalan misslyckades. Forsok igen.',
+  pcard_and:'och',pcard_playing:'Bana {court}, med {partner}, mot {opponents}',pcard_playing_noPartner:'Bana {court}, mot {opponents}',pcard_resting:'Du vilar denna runda (vilat {n}x hittills)',pcard_waiting:'Vantar pa nasta runda...',pcard_dropped:'Du deltar inte langre i denna turnering',pcard_done:'Turneringen klar for dig',pcard_score_btn:'Ange resultat',pcard_stat_pos:'Position',pcard_stat_pts:'Poang',pcard_stat_wl:'V-F',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Vila',pcard_ios_hint:'Installera denna app pa din hemskarm for mer palitliga aviseringar.',notif_title:'Ny runda',notif_body_playing:'Bana {court}, med {partner}, mot {opponents}',notif_body_playing_noPartner:'Bana {court}, mot {opponents}',notif_body_resting:'Du vilar denna runda',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',feedback_msg_ph:'Descrivi il problema o l\'idea...',feedback_email_ph:'Indirizzo e-mail (facoltativo)',feedback_send:'Invia',feedback_sending:'Invio in corso...',feedback_ok:'Grazie! Il tuo messaggio è stato ricevuto.',feedback_err:'Qualcosa è andato storto. Riprova.',feedback_empty:'Inserisci un messaggio.',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',more_support:'Sostieni questo progetto',more_gear:'Consigli attrezzatura padel',stats_support:'Torneo riuscito? Sostieni il progetto!',
@@ -2910,10 +2936,15 @@ let sessionToken=localStorage.getItem('padel-session-token')||null;
 let viewMode=false, viewPollInterval=null, _viewInitialized=false;
 let courtTokens={}, pendingFromCourt=[], _courtPollInterval=null;
 let playerScoring=false;
-let viewerPlayerId=null; // pid of identified viewer in playerScoring mode
-let viewerTAPairIdx=null; // pair index (TAP[i]) of identified viewer in TA playerScoring mode
+let viewerPlayerId=null; // pid of identified viewer (AP-based formats: americano/mexicano/mixicano)
+let viewerTAPairIdx=null; // pair index (TAP/TMP[i]) of identified viewer (teamamericano/teammexicano)
+let viewerTASlot=0; // which individual within the pair (0=n1, 1=n2)
+let viewerKocId=null; // pid of identified viewer (kingofcourt, KOCP-based)
+let viewerTeamId=null; // team id of identified viewer (team/roundrobin)
 let viewerScores={}; // draft scores for viewer's own match (matchId→{sa,sb,submitted})
 let _viewCode=null; // share code in view mode
+let _viNotifRoundKey=null; // last round signature a new-round notification was fired for
+let roundTimerRemote=null; // {round,start,limit} round timer synced from the organizer, viewer-side only
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
 let _sb=null, _sbWrite=null, _startId=null, _startTs=null;
@@ -5074,70 +5105,98 @@ function startMixicano(){
   saveState();
 }
 
-// ── Player Scoring (view link) ────────────────
+// ── Player Scoring + persoonlijke speler-identiteit (view link) ──
+// Eén picker/opslag-systeem voor alle formats. AP-based formats gebruiken
+// viewerPlayerId rechtstreeks als playerId voor getPlayerStatus; teamamericano/
+// teammexicano coderen een individu als pairIndex*2+slot; kingofcourt en
+// team/roundrobin hebben elk hun eigen id-ruimte (KOCP resp. T).
+function _viRoster(){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') return [...AP].sort((a,b)=>a.name.localeCompare(b.name)).map(p=>({id:p.id,name:p.name}));
+  if(mode==='kingofcourt') return [...KOCP].sort((a,b)=>a.name.localeCompare(b.name)).map(p=>({id:p.id,name:p.name}));
+  if(mode==='teamamericano'||mode==='teammexicano'){
+    const list=[];
+    _curTeamP().forEach((p,idx)=>{ list.push({id:idx*2,name:p.n1}); list.push({id:idx*2+1,name:p.n2}); });
+    return list.sort((a,b)=>a.name.localeCompare(b.name));
+  }
+  if(mode==='team'||mode==='roundrobin') return [...T].sort((a,b)=>a.name.localeCompare(b.name)).map(tm=>({id:tm.id,name:tm.name}));
+  return [];
+}
+function _viDisplayName(id){ const r=_viRoster().find(x=>x.id===id); return r?r.name:'?'; }
+
 function showPlayerPicker(){
   if(document.getElementById('player-picker-modal')) return;
-  const players=[...AP].sort((a,b)=>a.name.localeCompare(b.name));
-  const btns=players.map(p=>`<button class="ppick-btn" onclick="selectViewerPlayer(${p.id})">${esc(p.name)}</button>`).join('');
+  const roster=_viRoster();
+  const btns=roster.map(p=>`<button class="ppick-btn" onclick="selectViewerIdentity(${p.id})">${esc(p.name)}</button>`).join('');
   const modal=document.createElement('div');
   modal.id='player-picker-modal';
   modal.innerHTML=`<div class="ppick-card">
     <div class="ppick-hdr"><div class="ppick-title">${t('ppick_title')}</div></div>
     <div class="ppick-sub">${t('ppick_sub')}</div>
     <div class="ppick-grid">${btns}</div>
-    <button class="ppick-skip" onclick="selectViewerPlayer(null)">${t('ppick_skip')}</button>
+    <button class="ppick-skip" onclick="selectViewerIdentity(null)">${t('ppick_skip')}</button>
   </div>`;
   document.body.appendChild(modal);
 }
 
 function _vpKey(){ return _viewCode?`padel-vpid-${_viewCode}`:null; }
+function _vkidKey(){ return _viewCode?`padel-vkid-${_viewCode}`:null; }
+function _vtpiKey(){ return _viewCode?`padel-vtpi-${_viewCode}`:null; }
+function _vtslKey(){ return _viewCode?`padel-vtsl-${_viewCode}`:null; }
+function _vtidKey(){ return _viewCode?`padel-vteam-${_viewCode}`:null; }
+function _viWatchKey(){ return _viewCode?`padel-viwatch-${_viewCode}`:null; }
 
-function selectViewerPlayer(pid){
+function _viRerenderAll(){
+  if(mode==='americano'||mode==='mexicano'||mode==='teamamericano'||mode==='teammexicano'||mode==='mixicano'||mode==='kingofcourt') renderAmericano();
+  else{ renderPoule(); renderSt(); if(mode!=='roundrobin') renderBracket(); else if(pDone) renderRRChamp(); }
+  renderPlayerCard();
+}
+
+function selectViewerIdentity(id){
   const modal=document.getElementById('player-picker-modal');
   if(modal) modal.remove();
-  viewerPlayerId = pid; // null means "just watching"
-  const key=_vpKey();
-  if(pid!==null){
-    if(key) localStorage.setItem(key,String(pid));
-    const p=AP.find(x=>x.id===pid);
-    if(p){
-      const chip=$('viewer-player-chip'), nm=$('viewer-player-name');
-      if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; }
-    }
-  } else {
-    if(key) localStorage.removeItem(key);
-    const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
-  }
-  _updateAmHeader();
-  renderAmericano();
-}
-
-function resetViewerPlayer(){
-  if(mode==='teamamericano'||mode==='teammexicano'){
-    viewerTAPairIdx=null;
-    const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
+  const chip=$('viewer-player-chip'), nm=$('viewer-player-name');
+  if(id===null||id===undefined){
+    const wk=_viWatchKey(); if(wk) localStorage.setItem(wk,'1');
+    viewerPlayerId=null; viewerTAPairIdx=null; viewerKocId=null; viewerTeamId=null;
+    if(chip) chip.style.display='none';
     _updateAmHeader();
-    renderAmericano();
+    _viRerenderAll();
     return;
   }
-  viewerPlayerId=null;
-  const key=_vpKey(); if(key) localStorage.removeItem(key);
-  const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
+  const wk=_viWatchKey(); if(wk) localStorage.removeItem(wk);
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
+    viewerPlayerId=id;
+    const key=_vpKey(); if(key) localStorage.setItem(key,String(id));
+  } else if(mode==='kingofcourt'){
+    viewerKocId=id;
+    const key=_vkidKey(); if(key) localStorage.setItem(key,String(id));
+  } else if(mode==='teamamericano'||mode==='teammexicano'){
+    const pairIdx=Math.floor(id/2), slot=id%2;
+    viewerTAPairIdx=pairIdx; viewerTASlot=slot;
+    const pkey=_vtpiKey(); if(pkey) localStorage.setItem(pkey,String(pairIdx));
+    const skey=_vtslKey(); if(skey) localStorage.setItem(skey,String(slot));
+  } else if(mode==='team'||mode==='roundrobin'){
+    viewerTeamId=id;
+    const key=_vtidKey(); if(key) localStorage.setItem(key,String(id));
+  }
+  if(chip&&nm){ nm.textContent=_viDisplayName(id); chip.style.display='inline-flex'; }
+  _maybeAskNotificationPermission();
   _updateAmHeader();
-  if(playerScoring) showPlayerPicker();
-  else renderAmericano();
+  _viRerenderAll();
 }
 
-function selectViewerTAPair(idx){
-  viewerTAPairIdx=idx; // -1 = "just watching"
-  const key=_viewCode?`padel-vtpi-${_viewCode}`:null;
-  if(key) localStorage.setItem(key,String(idx));
-  const p=idx>=0?_curTeamP()[idx]:null;
-  const chip=$('viewer-player-chip'),nm=$('viewer-player-name');
-  if(p&&chip&&nm){ nm.textContent=`${p.n1} & ${p.n2}`; chip.style.display='inline-flex'; }
-  else if(chip) chip.style.display='none';
+// Legacy aliases (bestaande inline tap-op-naam code roept deze nog aan)
+function selectViewerPlayer(pid){ selectViewerIdentity(pid); }
+function selectViewerTAPair(idx){ selectViewerIdentity(idx===null||idx<0?null:idx*2+(viewerTASlot||0)); }
+
+function resetViewerPlayer(){
+  const chip=$('viewer-player-chip'); if(chip) chip.style.display='none';
+  viewerPlayerId=null; viewerTAPairIdx=null; viewerKocId=null; viewerTeamId=null;
+  const wk=_viWatchKey(); if(wk) localStorage.removeItem(wk);
+  [_vpKey(),_vkidKey(),_vtpiKey(),_vtslKey(),_vtidKey()].forEach(k=>{ if(k) localStorage.removeItem(k); });
   _updateAmHeader();
-  renderAmericano();
+  renderPlayerCard();
+  showPlayerPicker();
 }
 
 function setShareMode(isPlayers){
@@ -5559,6 +5618,7 @@ function startRoundTimer(ri){
   renderAmericano();
   _startAmTimerTick();
   updatePresentation();
+  saveState();
 }
 // Start de rondetimer automatisch zodra een nieuwe ronde actief wordt
 function _maybeAutoStartTimer(list){
@@ -6075,6 +6135,232 @@ function getAmPlayerStats(pid){
   return stats;
 }
 
+// ── Personal player status (persoonlijke speler-view) ────────
+// Pure function: reads a plain tournament state object, no DOM/globals/i18n.
+// Used by both the viewer UI and the Node test simulations.
+// state shape matches the saved/shared payload: {mode, AP, AM, TAP, TAM,
+// TMP, TMM, KOCP, KOCM, kocRound, T, PM, PW, PL, R}.
+// playerId space per mode:
+//  - americano/mexicano/mixicano: AP player id
+//  - kingofcourt: KOCP player id
+//  - teamamericano/teammexicano: encoded individual id = pairIndex*2 + slot
+//    (slot 0 = n1, slot 1 = n2), since match data only tracks pairs
+//  - team/roundrobin: T team id (identity is the whole team, rosters are
+//    free-text names so individual members cannot be split out reliably)
+// Return shape: {status, round, court, partner, opponents, matchId, nextRound}
+// status: 'playing' | 'resting' | 'waiting' | 'dropped' | 'done'
+function getPlayerStatus(state, playerId){
+  const mode=state.mode;
+  const empty={status:'done',round:null,court:null,partner:null,opponents:[],matchId:null,nextRound:null};
+  if(playerId===null||playerId===undefined) return empty;
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') return _gpsIndividual(state.AP||[],state.AM||[],playerId,empty);
+  if(mode==='kingofcourt') return _gpsKoc(state.KOCP||[],state.KOCM||[],playerId,empty);
+  if(mode==='teamamericano') return _gpsPair(state.TAP||[],state.TAM||[],playerId,empty);
+  if(mode==='teammexicano') return _gpsPair(state.TMP||[],state.TMM||[],playerId,empty);
+  if(mode==='team'||mode==='roundrobin') return _gpsTeam(state,playerId,empty);
+  return empty;
+}
+
+function _gpsName(list,id){ const p=list.find(x=>x.id===id); return p?p.name:'?'; }
+
+function _gpsSideInfo(list,m,pid){
+  const onA=m.a1===pid||m.a2===pid;
+  const partnerId=onA?(m.a1===pid?m.a2:m.a1):(m.b1===pid?m.b2:m.b1);
+  const oppIds=onA?[m.b1,m.b2]:[m.a1,m.a2];
+  return {partner:_gpsName(list,partnerId),opponents:oppIds.map(id=>_gpsName(list,id))};
+}
+
+function _gpsIndividual(AP,AM,pid,empty){
+  const player=AP.find(p=>p.id===pid);
+  if(!player) return empty;
+  if(player.paused) return {...empty,status:'dropped'};
+  const activeIdx=AM.findIndex(r=>r.some(m=>!m.done));
+  if(activeIdx===-1) return {...empty,round:AM.length||null};
+  const roundNum=activeIdx+1;
+  const nextRound=_gpsIndividualRoundInfo(AP,AM[activeIdx+1],pid,roundNum+1);
+  if(player.joinedRound&&roundNum<player.joinedRound) return {...empty,status:'waiting',round:roundNum,nextRound};
+  const round=AM[activeIdx];
+  const m=round.find(x=>x.a1===pid||x.a2===pid||x.b1===pid||x.b2===pid);
+  if(!m) return {...empty,status:'resting',round:roundNum,nextRound};
+  const side=_gpsSideInfo(AP,m,pid);
+  return {status:m.done?'waiting':'playing',round:roundNum,court:m.court!=null?m.court:null,partner:side.partner,opponents:side.opponents,matchId:m.id,nextRound};
+}
+function _gpsIndividualRoundInfo(AP,round,pid,roundNum){
+  if(!round) return null;
+  const m=round.find(x=>x.a1===pid||x.a2===pid||x.b1===pid||x.b2===pid);
+  if(!m) return {round:roundNum,court:null,partner:null,opponents:[]};
+  const side=_gpsSideInfo(AP,m,pid);
+  return {round:roundNum,court:m.court!=null?m.court:null,partner:side.partner,opponents:side.opponents};
+}
+
+function _gpsKoc(KOCP,KOCM,pid,empty){
+  const player=KOCP.find(p=>p.id===pid);
+  if(!player) return empty;
+  const activeIdx=KOCM.findIndex(r=>r.some(m=>!m.done));
+  if(activeIdx===-1) return {...empty,round:KOCM.length||null};
+  const roundNum=activeIdx+1;
+  const nextRound=_gpsKocRoundInfo(KOCP,KOCM[activeIdx+1],pid,roundNum+1);
+  const round=KOCM[activeIdx];
+  const m=round.find(x=>x.a1===pid||x.a2===pid||x.b1===pid||x.b2===pid);
+  if(!m) return {...empty,status:'resting',round:roundNum,nextRound};
+  const side=_gpsSideInfo(KOCP,m,pid);
+  return {status:m.done?'waiting':'playing',round:roundNum,court:m.kocCourt!=null?m.kocCourt:null,partner:side.partner,opponents:side.opponents,matchId:m.id,nextRound};
+}
+function _gpsKocRoundInfo(KOCP,round,pid,roundNum){
+  if(!round) return null;
+  const m=round.find(x=>x.a1===pid||x.a2===pid||x.b1===pid||x.b2===pid);
+  if(!m) return {round:roundNum,court:null,partner:null,opponents:[]};
+  const side=_gpsSideInfo(KOCP,m,pid);
+  return {round:roundNum,court:m.kocCourt!=null?m.kocCourt:null,partner:side.partner,opponents:side.opponents};
+}
+
+function _gpsPair(P,M,individualId,empty){
+  const pairIdx=Math.floor(individualId/2), slot=individualId%2;
+  const pair=P[pairIdx];
+  if(!pair) return empty;
+  const partnerName=slot===0?pair.n2:pair.n1;
+  const activeIdx=M.findIndex(r=>r.some(m=>!m.done));
+  if(activeIdx===-1) return {...empty,round:M.length||null,partner:partnerName};
+  const roundNum=activeIdx+1;
+  const nextRound=_gpsPairRoundInfo(P,M[activeIdx+1],pairIdx,partnerName,roundNum+1);
+  const round=M[activeIdx];
+  const m=round.find(x=>x.a===pairIdx||x.b===pairIdx);
+  if(!m) return {...empty,status:'resting',round:roundNum,partner:partnerName,nextRound};
+  const onA=m.a===pairIdx;
+  const oppPair=P[onA?m.b:m.a];
+  const opponents=oppPair?[oppPair.n1,oppPair.n2]:[];
+  return {status:m.done?'waiting':'playing',round:roundNum,court:m.court!=null?m.court:null,partner:partnerName,opponents,matchId:m.id,nextRound};
+}
+function _gpsPairRoundInfo(P,round,pairIdx,partnerName,roundNum){
+  if(!round) return null;
+  const m=round.find(x=>x.a===pairIdx||x.b===pairIdx);
+  if(!m) return {round:roundNum,court:null,partner:partnerName,opponents:[]};
+  const onA=m.a===pairIdx;
+  const oppPair=P[onA?m.b:m.a];
+  return {round:roundNum,court:m.court!=null?m.court:null,partner:partnerName,opponents:oppPair?[oppPair.n1,oppPair.n2]:[]};
+}
+
+function _gpsTeam(state,teamId,empty){
+  const T=state.T||[],PM=state.PM||[],PW=state.PW||[],PL=state.PL||[];
+  const team=T.find(x=>x.id===teamId);
+  if(!team) return empty;
+  if(team.droppedOut) return {...empty,status:'dropped'};
+  const teamName=id=>{ const x=T.find(t2=>t2.id===id); return x?x.name:'?'; };
+  if(PM.length){
+    const undone=PM.filter(m=>m.winner===null);
+    if(undone.length){
+      const roundNum=Math.min(...undone.map(m=>m.round));
+      const roundMatches=PM.filter(m=>m.round===roundNum);
+      const nextRound=_gpsTeamPoRoundInfo(PM.filter(m=>m.round===roundNum+1),teamId,teamName,roundNum+1);
+      const m=roundMatches.find(x=>x.a===teamId||x.b===teamId);
+      if(!m) return {...empty,status:'resting',round:roundNum,nextRound};
+      const oppId=m.a===teamId?m.b:m.a;
+      return {status:m.winner===null?'playing':'waiting',round:roundNum,court:m.court!=null?m.court:null,partner:null,opponents:[teamName(oppId)],matchId:m.id,nextRound};
+    }
+  }
+  const bracket=[...PW,...PL].filter(m=>!m.skip);
+  const myMatch=bracket.find(m=>(m.a===teamId||m.b===teamId)&&m.winner===null);
+  if(myMatch){
+    const oppId=myMatch.a===teamId?myMatch.b:myMatch.a;
+    const opponents=oppId!=null?[teamName(oppId)]:[];
+    const knownOpp=myMatch.a!=null&&myMatch.b!=null;
+    return {status:knownOpp?'playing':'waiting',round:null,court:myMatch.court!=null?myMatch.court:null,partner:null,opponents,matchId:myMatch.id,nextRound:null};
+  }
+  return empty;
+}
+function _gpsTeamPoRoundInfo(roundMatches,teamId,teamName,roundNum){
+  if(!roundMatches.length) return null;
+  const m=roundMatches.find(x=>x.a===teamId||x.b===teamId);
+  if(!m) return {round:roundNum,court:null,partner:null,opponents:[]};
+  return {round:roundNum,court:m.court!=null?m.court:null,partner:null,opponents:[teamName(m.a===teamId?m.b:m.a)]};
+}
+
+// ── Personal stats block (position, points, W/L, saldo, rest turns) ──
+// Also a pure function on a plain state object, same playerId space as getPlayerStatus.
+function getPlayerPersonalStats(state,playerId){
+  const mode=state.mode;
+  if(playerId===null||playerId===undefined) return null;
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') return _gpStatsIndividual(state.AP||[],state.AM||[],playerId);
+  if(mode==='kingofcourt') return _gpStatsIndividual(state.KOCP||[],state.KOCM||[],playerId);
+  if(mode==='teamamericano') return _gpStatsPair(state.TAP||[],state.TAM||[],Math.floor(playerId/2));
+  if(mode==='teammexicano') return _gpStatsPair(state.TMP||[],state.TMM||[],Math.floor(playerId/2));
+  if(mode==='team'||mode==='roundrobin') return _gpStatsTeam(state,playerId);
+  return null;
+}
+
+function _gpStatsIndividual(list,roundsArr,pid){
+  const player=list.find(p=>p.id===pid);
+  if(!player) return null;
+  let w=0,l=0,d=0,ptsFor=0,ptsAgainst=0,restTurns=0,played=0;
+  const activeIdx=roundsArr.findIndex(r=>r.some(m=>!m.done));
+  const reached=activeIdx===-1?roundsArr.length:activeIdx+1;
+  const cap=player.pausedAtRound!=null?Math.min(player.pausedAtRound,reached):reached;
+  const from=player.joinedRound||1;
+  for(let i=from-1;i<cap;i++){
+    const round=roundsArr[i]; if(!round) continue;
+    const m=round.find(x=>x.a1===pid||x.a2===pid||x.b1===pid||x.b2===pid);
+    if(!m){ restTurns++; continue; }
+    if(!m.done) continue;
+    played++;
+    const onA=m.a1===pid||m.a2===pid;
+    const myPts=onA?m.sa:m.sb, theirPts=onA?m.sb:m.sa;
+    ptsFor+=myPts; ptsAgainst+=theirPts;
+    if(myPts>theirPts) w++; else if(myPts<theirPts) l++; else d++;
+  }
+  const sorted=[...list].sort((a,b)=>(b.pts||0)-(a.pts||0));
+  const position=sorted.findIndex(p=>p.id===pid)+1;
+  return {position,points:player.pts||0,wins:w,losses:l,draws:d,saldo:ptsFor-ptsAgainst,restTurns,played};
+}
+
+function _gpStatsPair(P,M,pairIdx){
+  const pair=P[pairIdx]; if(!pair) return null;
+  let w=0,l=0,d=0,ptsFor=0,ptsAgainst=0,restTurns=0,played=0;
+  const activeIdx=M.findIndex(r=>r.some(m=>!m.done));
+  const reached=activeIdx===-1?M.length:activeIdx+1;
+  for(let i=0;i<reached;i++){
+    const round=M[i]; if(!round) continue;
+    const m=round.find(x=>x.a===pairIdx||x.b===pairIdx);
+    if(!m){ restTurns++; continue; }
+    if(!m.done) continue;
+    played++;
+    const onA=m.a===pairIdx;
+    const myPts=onA?m.sa:m.sb, theirPts=onA?m.sb:m.sa;
+    ptsFor+=myPts; ptsAgainst+=theirPts;
+    if(myPts>theirPts) w++; else if(myPts<theirPts) l++; else d++;
+  }
+  const sorted=[...P].sort((a,b)=>(b.pts||0)-(a.pts||0));
+  const position=sorted.findIndex(p=>p.id===pairIdx)+1;
+  return {position,points:pair.pts||0,wins:w,losses:l,draws:d,saldo:ptsFor-ptsAgainst,restTurns,played};
+}
+
+function _gpStatsTeam(state,teamId){
+  const T=state.T||[], PM=state.PM||[];
+  const team=T.find(x=>x.id===teamId); if(!team) return null;
+  const statsFor=id=>{
+    let tw=0,tl=0,tgw=0,tgl=0,tplayed=0;
+    PM.forEach(m=>{
+      if(m.a!==id&&m.b!==id) return;
+      if(m.winner===null) return;
+      tplayed++;
+      const onA=m.a===id;
+      const myG=onA?m.ga:m.gb, theirG=onA?m.gb:m.ga;
+      tgw+=myG||0; tgl+=theirG||0;
+      if((onA&&m.winner==='A')||(!onA&&m.winner==='B')) tw++; else tl++;
+    });
+    return {wins:tw,losses:tl,saldo:tgw-tgl,played:tplayed};
+  };
+  const mine=statsFor(teamId);
+  const table=T.map(tm=>({id:tm.id,...statsFor(tm.id)})).sort((a,b)=>b.wins-a.wins||b.saldo-a.saldo);
+  const position=table.findIndex(x=>x.id===teamId)+1;
+  const rounds=[...new Set(PM.map(m=>m.round))].sort((a,b)=>a-b);
+  const undone=PM.filter(m=>m.winner===null);
+  const activeRound=undone.length?Math.min(...undone.map(m=>m.round)):null;
+  const reachedRound=activeRound!==null?activeRound:(rounds.length?rounds[rounds.length-1]:0);
+  let restTurns=0;
+  rounds.forEach(r=>{ if(r>reachedRound) return; if(!PM.some(m=>m.round===r&&(m.a===teamId||m.b===teamId))) restTurns++; });
+  return {position,points:mine.wins,wins:mine.wins,losses:mine.losses,draws:0,saldo:mine.saldo,restTurns,played:mine.played};
+}
+
 function _matchPtsEditBtnHtml(){
   if(viewMode||R.scoringMode==='time') return '';
   return `<button class="am-add-player-btn" onclick="editMatchPtsLive()">${t('matchpts_edit_btn',{n:R.matchPts})}</button>`;
@@ -6199,6 +6485,9 @@ function _getSharePayload(){
   if(Object.keys(courtTokens).length) base.courtTokens=courtTokens;
   if(pendingFromCourt.length) base.courtPending=pendingFromCourt;
   if(playerScoring) base.playerScoring=true;
+  if(R.timerMins>0){
+    try{ const td=JSON.parse(localStorage.getItem('padel-round-timer')||'null'); if(td) base.roundTimer=td; }catch{}
+  }
   return base;
 }
 
@@ -6337,46 +6626,223 @@ function _loadStateObj(s){
   else if(s.mode==='kingofcourt'){ mode='kingofcourt'; KOCP=s.KOCP||[]; KOCM=s.KOCM||[]; kocRound=s.kocRound||0; if(s.sport) sport=s.sport; }
   else{ mode=s.mode||'team'; T=s.T||[]; PM=s.PM||[]; PW=s.PW||[]; PL=s.PL||[]; pmid=s.pmid||0; pDone=s.pDone||false; }
   if(!viewMode && s.playerScoring!==undefined) playerScoring=!!s.playerScoring;
+  if(viewMode) roundTimerRemote=s.roundTimer||null;
+}
+
+// ── Persoonlijke speler-identiteit: opslag, herstel, deep link ──
+function _currentViewerIdentityId(){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') return viewerPlayerId;
+  if(mode==='kingofcourt') return viewerKocId;
+  if(mode==='teamamericano'||mode==='teammexicano') return (viewerTAPairIdx!==null&&viewerTAPairIdx>=0)?viewerTAPairIdx*2+(viewerTASlot||0):null;
+  if(mode==='team'||mode==='roundrobin') return viewerTeamId;
+  return null;
+}
+function _viHasIdentity(){ const id=_currentViewerIdentityId(); return id!==null&&id!==undefined; }
+function _viIsWatching(){ const wk=_viWatchKey(); return wk?localStorage.getItem(wk)==='1':false; }
+function _currentStateForStatus(){ return {mode,AP,AM,TAP,TAM,TMP,TMM,KOCP,KOCM,kocRound,T,PM,PW,PL,R}; }
+
+function _viSetIdentity(id){
+  if(id===null||id===undefined){
+    const wk=_viWatchKey(); if(wk) localStorage.setItem(wk,'1');
+    viewerPlayerId=null; viewerTAPairIdx=null; viewerKocId=null; viewerTeamId=null;
+    return;
+  }
+  const wk=_viWatchKey(); if(wk) localStorage.removeItem(wk);
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
+    viewerPlayerId=id;
+    const key=_vpKey(); if(key) localStorage.setItem(key,String(id));
+  } else if(mode==='kingofcourt'){
+    viewerKocId=id;
+    const key=_vkidKey(); if(key) localStorage.setItem(key,String(id));
+  } else if(mode==='teamamericano'||mode==='teammexicano'){
+    const pairIdx=Math.floor(id/2), slot=id%2;
+    viewerTAPairIdx=pairIdx; viewerTASlot=slot;
+    const pkey=_vtpiKey(); if(pkey) localStorage.setItem(pkey,String(pairIdx));
+    const skey=_vtslKey(); if(skey) localStorage.setItem(skey,String(slot));
+  } else if(mode==='team'||mode==='roundrobin'){
+    viewerTeamId=id;
+    const key=_vtidKey(); if(key) localStorage.setItem(key,String(id));
+  }
+}
+
+function _viRestoreIdentity(){
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano'){
+    const k=_vpKey(), stored=k?localStorage.getItem(k):null;
+    if(stored!==null){ const pid=parseInt(stored,10); if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid; }
+  } else if(mode==='kingofcourt'){
+    const k=_vkidKey(), stored=k?localStorage.getItem(k):null;
+    if(stored!==null){ const pid=parseInt(stored,10); if(!isNaN(pid)&&KOCP.find(x=>x.id===pid)) viewerKocId=pid; }
+  } else if(mode==='teamamericano'||mode==='teammexicano'){
+    const k=_vtpiKey(), stored=k?localStorage.getItem(k):null;
+    if(stored!==null){
+      const pidx=parseInt(stored,10);
+      if(!isNaN(pidx)&&pidx>=0&&_curTeamP()[pidx]){
+        viewerTAPairIdx=pidx;
+        const sk=_vtslKey(), sStored=sk?localStorage.getItem(sk):null;
+        viewerTASlot=sStored==='1'?1:0;
+      }
+    }
+  } else if(mode==='team'||mode==='roundrobin'){
+    const k=_vtidKey(), stored=k?localStorage.getItem(k):null;
+    if(stored!==null){ const tid=parseInt(stored,10); if(!isNaN(tid)&&T.find(x=>x.id===tid)) viewerTeamId=tid; }
+  }
+}
+
+function _viUpdateChip(){
+  const chip=$('viewer-player-chip'), nm=$('viewer-player-name');
+  const id=_currentViewerIdentityId();
+  if(_viHasIdentity()&&chip&&nm){ nm.textContent=_viDisplayName(id); chip.style.display='inline-flex'; }
+  else if(chip) chip.style.display='none';
+}
+
+function _viStatusSignature(){
+  const id=_currentViewerIdentityId();
+  if(id===null||id===undefined) return null;
+  const ps=getPlayerStatus(_currentStateForStatus(),id);
+  return JSON.stringify({round:ps.round,status:ps.status,matchId:ps.matchId,court:ps.court});
+}
+
+// ── Persoonlijke speler-kaart (bovenaan de viewer) ──
+function _pcardOppStr(opponents){
+  if(!opponents||!opponents.length) return '';
+  if(opponents.length===1) return esc(opponents[0]);
+  return opponents.map(esc).join(' '+t('pcard_and')+' ');
+}
+function _pcardTimerHtml(ps){
+  if(!roundTimerRemote||!ps.round||roundTimerRemote.round!==ps.round-1) return '';
+  const rem=roundTimerRemote.limit-Math.floor((Date.now()-roundTimerRemote.start)/1000);
+  const m=Math.floor(Math.max(0,rem)/60), s=String(Math.max(0,rem)%60).padStart(2,'0');
+  const doneNow=rem<=0;
+  const val=doneNow?t('timer_done'):`${m}:${s}`;
+  return `<div class="pcard-timer${doneNow?' time-up':''}">${val}</div>`;
+}
+function _pcardScrollToMatch(matchId){
+  const el=document.getElementById('amm-'+matchId)||document.getElementById('koc-'+matchId);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function renderPlayerCard(){
+  const container=$('player-status-card');
+  if(!container) return;
+  if(!viewMode||!_viHasIdentity()){ container.style.display='none'; container.innerHTML=''; return; }
+  const id=_currentViewerIdentityId();
+  const state=_currentStateForStatus();
+  const ps=getPlayerStatus(state,id);
+  const stats=getPlayerPersonalStats(state,id);
+  const restN=stats?stats.restTurns:0;
+  let bodyHtml='';
+  if(ps.status==='playing'){
+    const oppStr=_pcardOppStr(ps.opponents);
+    const line=ps.partner
+      ?t('pcard_playing',{court:ps.court!=null?ps.court:'?',partner:esc(ps.partner),opponents:oppStr})
+      :t('pcard_playing_noPartner',{court:ps.court!=null?ps.court:'?',opponents:oppStr});
+    bodyHtml=`<div class="pcard-status pcard-playing">${line}</div>${_pcardTimerHtml(ps)}`;
+    if(playerScoring&&ps.matchId!=null) bodyHtml+=`<button class="pcard-score-btn" onclick="_pcardScrollToMatch('${ps.matchId}')">${t('pcard_score_btn')}</button>`;
+  } else if(ps.status==='resting'){
+    bodyHtml=`<div class="pcard-status pcard-resting">${t('pcard_resting',{n:restN})}</div>`;
+  } else if(ps.status==='waiting'){
+    bodyHtml=`<div class="pcard-status pcard-waiting">${t('pcard_waiting')}</div>`;
+  } else if(ps.status==='dropped'){
+    bodyHtml=`<div class="pcard-status pcard-dropped">${t('pcard_dropped')}</div>`;
+  } else {
+    bodyHtml=`<div class="pcard-status pcard-done">${t('pcard_done')}</div>`;
+  }
+  let statsHtml='';
+  if(stats){
+    statsHtml=`<div class="pcard-stats">
+      <div class="pcard-stat"><div class="v">${stats.position||'-'}</div><div class="l">${t('pcard_stat_pos')}</div></div>
+      <div class="pcard-stat"><div class="v">${stats.points}</div><div class="l">${t('pcard_stat_pts')}</div></div>
+      <div class="pcard-stat"><div class="v">${stats.wins}-${stats.losses}</div><div class="l">${t('pcard_stat_wl')}</div></div>
+      <div class="pcard-stat"><div class="v">${stats.saldo>0?'+':''}${stats.saldo}</div><div class="l">${t('pcard_stat_saldo')}</div></div>
+      <div class="pcard-stat"><div class="v">${stats.restTurns}</div><div class="l">${t('pcard_stat_rest')}</div></div>
+    </div>`;
+  }
+  let iosHint='';
+  if(_viIsIosSafariNotInstalled()&&!localStorage.getItem('padel-ios-notif-hint-dismissed')){
+    iosHint=`<div class="pcard-ios-hint"><span>${t('pcard_ios_hint')}</span><button onclick="_dismissIosNotifHint()" aria-label="Sluiten">&#x2715;</button></div>`;
+  }
+  container.innerHTML=`<div class="pcard-name">${esc(_viDisplayName(id))}</div>${bodyHtml}${statsHtml}${iosHint}`;
+  container.style.display='block';
+}
+
+// ── Meldingen bij nieuwe ronde (Notification API, geen push-server) ──
+function _viIsIosSafariNotInstalled(){
+  const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone=window.navigator.standalone===true||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
+  return isIos&&!isStandalone;
+}
+function _dismissIosNotifHint(){ localStorage.setItem('padel-ios-notif-hint-dismissed','1'); renderPlayerCard(); }
+
+function _maybeAskNotificationPermission(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission!=='default') return;
+  const key=_viewCode?`padel-notif-asked-${_viewCode}`:null;
+  if(key){ if(localStorage.getItem(key)) return; localStorage.setItem(key,'1'); }
+  if(_viIsIosSafariNotInstalled()) return; // subtiele hint in de kaart, geen prompt (onbetrouwbaar op iOS Safari)
+  setTimeout(()=>{ try{ Notification.requestPermission(); }catch{} },500);
+}
+
+function _playNotifSound(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sine'; o.frequency.value=880;
+    g.gain.setValueAtTime(0.0001,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.3,ctx.currentTime+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.4);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime+0.42);
+  }catch{}
+}
+
+function _viMaybeNotifyNewRound(){
+  const id=_currentViewerIdentityId();
+  if(id===null||id===undefined) return;
+  const ps=getPlayerStatus(_currentStateForStatus(),id);
+  if(ps.status!=='playing'&&ps.status!=='resting') return;
+  let body;
+  if(ps.status==='playing'){
+    const oppStr=_pcardOppStr(ps.opponents);
+    body=ps.partner
+      ?t('notif_body_playing',{court:ps.court!=null?ps.court:'?',partner:ps.partner,opponents:oppStr})
+      :t('notif_body_playing_noPartner',{court:ps.court!=null?ps.court:'?',opponents:oppStr});
+  } else {
+    body=t('notif_body_resting');
+  }
+  try{ if(navigator.vibrate) navigator.vibrate([200,100,200]); }catch{}
+  _playNotifSound();
+  if('Notification' in window&&Notification.permission==='granted'){
+    try{ new Notification(t('notif_title'),{body,icon:'../icon.svg',tag:'padel-round'}); }catch{}
+  }
 }
 
 function _applyViewState(s){
+  const prevSig=_viewInitialized?_viStatusSignature():null;
   _loadStateObj(s);
   if(s.playerScoring!==undefined) playerScoring=!!s.playerScoring;
   if(s.courtPending) pendingFromCourt=s.courtPending;
   if(!_viewInitialized){
     _viewInitialized=true;
-    if(playerScoring){
-      if(mode==='teamamericano'||mode==='teammexicano'){
-        const key=_viewCode?`padel-vtpi-${_viewCode}`:null;
-        const stored=key?localStorage.getItem(key):null;
-        if(stored!==null){
-          const pidx=parseInt(stored,10);
-          if(!isNaN(pidx)&&pidx>=0&&_curTeamP()[pidx]) viewerTAPairIdx=pidx;
-          else if(!isNaN(pidx)&&pidx===-1) viewerTAPairIdx=-1;
-        }
-      } else {
-        const key=_vpKey();
-        const stored=key?localStorage.getItem(key):null;
-        if(stored){
-          const pid=parseInt(stored,10);
-          if(!isNaN(pid)&&AP.find(x=>x.id===pid)) viewerPlayerId=pid;
-        }
-      }
+    _viRestoreIdentity();
+    const dlName=(new URLSearchParams(location.search)).get('player');
+    if(dlName){
+      const roster=_viRoster();
+      const found=roster.find(r=>r.name.toLowerCase()===dlName.toLowerCase())||roster.find(r=>r.name.toLowerCase().includes(dlName.toLowerCase()));
+      if(found) _viSetIdentity(found.id);
     }
     if(mode==='americano'||mode==='mexicano'||mode==='teamamericano'||mode==='teammexicano'||mode==='mixicano'||mode==='kingofcourt') showAmericano();
     else startTournamentUI();
     $('view-banner').style.display='flex';
-    if((mode==='teamamericano'||mode==='teammexicano')&&playerScoring&&viewerTAPairIdx>=0){
-      const p=_curTeamP()[viewerTAPairIdx];
-      if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=`${p.n1} & ${p.n2}`; chip.style.display='inline-flex'; } }
-    } else if(playerScoring&&viewerPlayerId!==null){
-      const p=AP.find(x=>x.id===viewerPlayerId);
-      if(p){ const chip=$('viewer-player-chip'),nm=$('viewer-player-name'); if(chip&&nm){ nm.textContent=p.name; chip.style.display='inline-flex'; } }
-    }
+    _viUpdateChip();
+    if(_viHasIdentity()) _maybeAskNotificationPermission();
+    else if(!_viIsWatching()&&_viRoster().length) showPlayerPicker();
   } else {
     if(mode==='americano'||mode==='mexicano'||mode==='teamamericano'||mode==='teammexicano'||mode==='mixicano'||mode==='kingofcourt') renderAmericano();
     else{ renderPoule(); renderSt(); if(mode!=='roundrobin') renderBracket(); else if(pDone) renderRRChamp(); }
+    const newSig=_viStatusSignature();
+    if(prevSig!==null&&newSig!==null&&newSig!==prevSig) _viMaybeNotifyNewRound();
   }
+  renderPlayerCard();
   if(s.tournamentName){
     document.title=`${s.tournamentName} — live score | PadelBracket`;
     const ogT=document.querySelector('meta[property="og:title"]');
