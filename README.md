@@ -2,7 +2,7 @@
 
 **Live site: [padel-bracket.com](https://padel-bracket.com)**
 
-Generate a complete padel tournament in seconds — Americano, Mexicano, Knockout bracket or Round Robin. No account, no installation, works offline. Free.
+Generate a complete padel tournament in seconds — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout bracket or Round Robin. No account, no installation, works offline. Free.
 
 ---
 
@@ -19,7 +19,7 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Knockou
 
 ## Features
 
-- **4 tournament formats** — Americano, Mexicano, Knockout bracket, Round Robin
+- **8 tournament formats** — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout bracket, Round Robin
 - **Live standings** — scores update in real time on every phone via a share link
 - **Fullscreen TV scoreboard** — present the tournament on any screen via `?pres=1`
 - **Player score entry** — share a link so players enter their own scores on court
@@ -37,7 +37,10 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Knockou
 |--------|----------|----------|
 | **Americano** | Any group, classic rotation | Fixed rotation schedule |
 | **Mexicano** | Competitive groups | Based on live standings |
+| **Mixicano** | Mixed-gender groups | Rotating mixed (M/W) pairs, based on standings |
 | **Team Americano** | Established pairs | Fixed pairs, rotating opponents |
+| **Team Mexicano** | Established pairs, competitive | Fixed pairs, opponents based on live standings |
+| **King of the Court** | Competitive ladder play | Rotating partners, promotion/relegation by court |
 | **Knockout** | Elimination tournaments | Fixed teams |
 | **Round Robin** | Everyone vs everyone | Fixed teams |
 

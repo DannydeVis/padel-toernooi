@@ -1,5 +1,5 @@
 # PadelBracket
-> Free padel and pickleball tournament generator — Americano, Mexicano, King of the Court, Knockout, Round Robin. No account needed, works offline.
+> Free padel and pickleball tournament generator — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout, Round Robin. No account needed, works offline.
 
 ## What is PadelBracket?
 PadelBracket (padel-bracket.com) is a free, web-based padel and pickleball tournament management app. It lets anyone create and run a tournament — generating the schedule, tracking scores and calculating standings — directly in the browser, in under a minute. No account, registration or payment is required, and it works fully offline after the first load as an installable Progressive Web App (PWA).
@@ -11,27 +11,32 @@ PadelBracket is built and maintained by Danny de Visser, a padel player from Rot
 
 ### Americano
 Partners rotate on a fixed schedule each round. Everyone plays with and against everyone, and points are tracked per individual player — there are no fixed teams.
-- Players: 4–24
+- Players: 4–32
 - Best for: social groups, club days, mixed-level play
 
 ### Mexicano
 Partners are reassigned after every round based on the live standings — rank 1 and 2 always play together against rank 3 and 4, and so on — so each round becomes more competitive than the last.
-- Players: 4–24
+- Players: 4–32
 - Best for: groups that want a clear, competitive winner
 
 ### Mixicano
-A mixed-gender variant of Americano where every team is one man and one woman. Men and women are entered separately; the app pairs them each round.
-- Players: 4–24 (equal numbers of men and women)
+A mixed-gender variant of Mexicano where every team is one man and one woman. Men and women are entered separately; round 1 is random, then men and women are each ranked by points and paired by rank (top man plus top woman versus second man plus second woman, and so on) each round, exactly like Mexicano.
+- Players: 4–24 (equal numbers of men and women recommended; uneven counts rotate rest turns fairly)
 - Best for: social sessions where mixed teams are required
 
 ### Team Americano
-Like Americano but with fixed pairs. Partners stay together throughout. Points are tracked per pair, not per individual.
+Like Americano but with fixed pairs. Partners stay together throughout, playing a full round-robin against every other pair. Points are tracked per pair, not per individual.
 - Players: 4–24 (2–12 fixed pairs)
 - Best for: clubs where players want to keep their partner
 
+### Team Mexicano
+Like Team Americano but with standings-based opponents instead of a fixed round-robin schedule. Fixed pairs are entered the same way; round 1 is random, then each round pairs teams by rank (team 1 versus team 2, team 3 versus team 4, and so on), avoiding an immediate rematch of the previous round's opponent where possible.
+- Players: 4–24 (2–12 fixed pairs)
+- Best for: clubs that want to keep partners together but still have a competitive, standings-driven draw
+
 ### King of the Court
-Courts are ranked top to bottom. Each round, every court plays one match. Winners move up one court, losers drop down. The top court is the King Court. Players who hold the King Court the most rounds win. Partners are randomly re-drawn each round. Extra players wait in a challenger pool and rotate in each round. For padel: a golden point resolves ties. For pickleball: target scores 11, 15 or 21 with win-by-2 ensure a decisive winner every time.
-- Players: 4 or more
+Courts are ranked top to bottom, with court 1 as the King's Court. Each round, every court plays one match. Winners move up one court (winners on the King's Court stay), losers drop down one court (losers on the bottom court stay). Players arriving at a court from different sides always split up and partner with someone already there. Extra players rotate through a challenger pool on a fair rota. For padel: a golden point resolves ties. For pickleball: target scores 11, 15 or 21 with win-by-2 ensure a decisive winner every time.
+- Players: 8 or more (courts = players ÷ 4)
 - Best for: fun, fast-paced sessions where ranking changes every round, also known as winner-stays-on or ladder format
 
 ### Knockout
@@ -46,7 +51,7 @@ Every team plays every other team at least once. Standings are ranked by number 
 
 ## Key features
 - Instant setup — type in the player or team names, pick a format, and the full schedule is generated automatically
-- Automatic schedule, pairing and standings calculation for all seven formats (Americano, Mexicano, Mixicano, Team Americano, King of the Court, Knockout, Round Robin)
+- Automatic schedule, pairing and standings calculation for all eight formats (Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout, Round Robin)
 - Live score entry by the organiser, with points and rankings updated instantly after every match
 - Players can submit their own match scores via the shared link; the organiser reviews and approves each one with a single tap before it's saved
 - Live share link for spectators — anyone opens it on their phone and sees standings and scores update in real time, with no account or app install needed
