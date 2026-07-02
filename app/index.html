@@ -573,6 +573,8 @@ body.light .su-card{background:#fff;box-shadow:0 -8px 40px rgba(0,0,0,.15)}
 .pcard-stat .l{font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--b-muted);margin-top:2px}
 .pcard-ios-hint{margin-top:10px;font-size:.72rem;color:var(--txt2);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface2);border-radius:8px;padding:6px 10px}
 .pcard-ios-hint button{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:.85rem;flex-shrink:0;touch-action:manipulation}
+.pcard-push-toggle{display:block;width:100%;margin-top:10px;background:var(--surface2);border:1px solid var(--bdr);border-radius:10px;color:var(--txt2);padding:9px 14px;font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.3px;cursor:pointer;touch-action:manipulation;transition:.15s}
+.pcard-push-toggle.active{border-color:rgba(199,255,94,.5);color:var(--accent)}
 
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -1891,7 +1893,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v1.65.0';
+const APP_VERSION = 'v1.66.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -1986,7 +1988,7 @@ nl:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win met 2',on_lbl:'Aan',off_lbl:'Uit',courts_word_pk:'courts',export_dupr:'Exporteer voor DUPR',
   type_koc:'King of the Court',type_koc_sub:'Winnaars promoveren',set_title_koc:'King of the Court instellen',set_desc_auto_koc:'Winnaars gaan een baan omhoog, verliezers een baan omlaag. Banen worden elke ronde opnieuw ingedeeld.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Baan {n}',koc_round_n:'Ronde {n} van {total}',koc_pool:'Wachtrij',koc_golden_pt:'Gouden punt — wie wint?',koc_king_lbl:'Koning',koc_standings:'Eindstand',koc_king_rounds:'Keer King',res_koc:'{label}King of the Court · {n} spelers',koc_done:'Toernooi klaar',koc_promotes:'gaat omhoog',koc_demotes:'gaat omlaag',koc_stays:'blijft King',val_min8:'Voer minimaal 8 namen in.',koc_cnt_ok:'{n} spelers, {c} banen',koc_col_trend:'Trend',koc_arrow_up:'Omhoog',koc_arrow_down:'Omlaag',koc_arrow_same:'Gelijk',
   su_open_cta:'Inschrijving openen',su_waitlist_btn:'Wachtlijst',su_setup_title:'Inschrijving openen',su_setup_sub:'Deel een link, spelers melden zichzelf aan.',su_event_name_ph:'Naam van het evenement',su_max_ph:'Max',su_location_ph:'Locatie (optioneel)',su_generate_btn:'Genereer link',su_cancel:'Annuleren',su_err_max:'Vul een maximum aantal spelers in (minimaal 4).',su_err_generic:'Er ging iets mis. Probeer het opnieuw.',su_err_empty:'Er zijn nog geen bevestigde aanmeldingen.',su_live_title:'Inschrijving',su_counter:'{n} van {max}',su_confirmed_title:'Bevestigd',su_waitlist_title:'Wachtlijst',su_none_yet:'Nog niemand aangemeld.',su_waitlist_empty:'Wachtlijst is leeg.',su_close_start_btn:'Sluit inschrijving en start',su_join_title:'Aanmelden',su_join_name_ph:'Jouw naam',gender_m:'Man',gender_f:'Vrouw',su_join_confirm_btn:'Bevestig aanmelding',su_join_confirm_dup_btn:'Toch aanmelden',su_join_dup_warn:'Deze naam bestaat al. Ga je door als "{name}"?',su_join_default_name:'Padel toernooi',su_join_closed:'Inschrijving is gesloten.',su_join_spots:'Nog {n} van {max} plekken vrij',su_join_full:'Vol, {n} op de wachtlijst',su_join_not_found:'Inschrijving niet gevonden.',su_join_offline:'Aanmelden vereist internet. Controleer je verbinding.',su_join_err_name:'Vul je naam in.',su_join_err_gender:'Kies man of vrouw.',su_join_limit:'Maximaal aantal aanmeldingen vanaf dit toestel bereikt.',su_join_success:'Bedankt {name}, je bent aangemeld!',su_join_waitlisted:'{name}, je staat op de wachtlijst (positie {pos}).',su_join_err_generic:'Aanmelden mislukt. Probeer het opnieuw.',
-  pcard_and:'en',pcard_playing:'Baan {court}, samen met {partner}, tegen {opponents}',pcard_playing_noPartner:'Baan {court}, tegen {opponents}',pcard_resting:'Jij rust deze ronde (al {n}x gerust)',pcard_waiting:'Wacht op de volgende ronde...',pcard_dropped:'Je doet niet meer mee aan dit toernooi',pcard_done:'Toernooi klaar voor jou',pcard_score_btn:'Score invoeren',pcard_stat_pos:'Positie',pcard_stat_pts:'Punten',pcard_stat_wl:'W-V',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rust',pcard_ios_hint:'Installeer deze app op je beginscherm voor betrouwbare meldingen.',notif_title:'Nieuwe ronde',notif_body_playing:'Baan {court}, samen met {partner}, tegen {opponents}',notif_body_playing_noPartner:'Baan {court}, tegen {opponents}',notif_body_resting:'Jij rust deze ronde',
+  pcard_and:'en',pcard_playing:'Baan {court}, samen met {partner}, tegen {opponents}',pcard_playing_noPartner:'Baan {court}, tegen {opponents}',pcard_resting:'Jij rust deze ronde (al {n}x gerust)',pcard_waiting:'Wacht op de volgende ronde...',pcard_dropped:'Je doet niet meer mee aan dit toernooi',pcard_done:'Toernooi klaar voor jou',pcard_score_btn:'Score invoeren',pcard_stat_pos:'Positie',pcard_stat_pts:'Punten',pcard_stat_wl:'W-V',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rust',pcard_ios_hint:'Installeer deze app op je beginscherm voor betrouwbare meldingen.',notif_title:'Nieuwe ronde',notif_body_playing:'Baan {court}, samen met {partner}, tegen {opponents}',notif_body_playing_noPartner:'Baan {court}, tegen {opponents}',notif_body_resting:'Jij rust deze ronde',push_tpl_playing:'Baan {court}, samen met {partner}, tegen {opp1} en {opp2}',push_tpl_playing_noPartner:'Baan {court}, tegen {opp1}',push_tpl_resting:'Jij rust in ronde {round}',push_tpl_done:'Toernooi afgelopen. Jouw eindplaats: {rank}',push_toggle_on:'Meldingen aan',push_toggle_off:'Meldingen aan zetten',
 },
 en:{
   savedGroups:'Saved groups',saveGroup:'Save group',groupName:'Group name',loadGroup:'Load',renameGroup:'Rename',deleteGroup:'Delete',noGroups:'No saved groups yet',groupSaved:'Group saved',confirmDeleteGroup:'Delete this group?',overwriteGroup:'A group with this name already exists. Overwrite?',hdr_theme:'Toggle theme',hdr_edit:'Edit',hdr_print:'Print',feedback_btn:'Feedback',feedback_bug:'Bug report',feedback_feature:'Feature request',feedback_msg_ph:'Describe the problem or idea...',feedback_email_ph:'Email address (optional)',feedback_send:'Send',feedback_sending:'Sending...',feedback_ok:'Thanks! Your message has been received.',feedback_err:'Something went wrong. Please try again.',feedback_empty:'Please enter a message.',cookie_txt:'We use analytics to understand how visitors use this site. No ads, no personal data sold.',cookie_accept:'Accept',cookie_privacy:'Privacy policy',cookie_decline:'Decline',share_btn:'Share',share_title:'Share this tournament',share_desc:'Anyone with this link can follow the bracket and standings live — read only.',share_copy:'Copy link',share_copied:'Copied!',share_close:'Close',share_loading:'Loading tournament…',share_not_found:'Tournament not found.',share_error:'Connection failed.',share_nudge:'Let everyone follow live — tap Share',view_banner:'Watching live',share_wa_text:'follow the live standings — made with padel-bracket.com',share_default_name:'Padel tournament',share_whatsapp:'Share via WhatsApp',share_result_cta:'Share results',org_cta_txt:'Want to organise next time?',org_cta_btn:'Start free',view_wa_txt:'follow the live standings (made with padel-bracket.com)',reset_btn:'Start over',reset_confirm:'Are you sure you want to start over? All scores will be lost.',more_support:'Support this project',more_gear:'Padel gear tips',stats_support:'Tournament a success? Support the project!',
@@ -2065,7 +2067,7 @@ en:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Win by 2',on_lbl:'On',off_lbl:'Off',courts_word_pk:'courts',export_dupr:'Export for DUPR',
   type_koc:'King of the Court',type_koc_sub:'Winners promote',set_title_koc:'Set up King of the Court',set_desc_auto_koc:'Winners move up a court, losers move down. Partners re-drawn each round.',koc_rounds_lbl:'Rounds',koc_king_court:'King Court',koc_court_n:'Court {n}',koc_round_n:'Round {n} of {total}',koc_pool:'Challenger pool',koc_golden_pt:'Golden point — who wins?',koc_king_lbl:'King',koc_standings:'Final standings',koc_king_rounds:'Times King',res_koc:'{label}King of the Court · {n} players',koc_done:'Tournament complete',koc_promotes:'promotes',koc_demotes:'demotes',koc_stays:'stays King',val_min8:'Enter at least 8 names.',koc_cnt_ok:'{n} players, {c} courts',koc_col_trend:'Trend',koc_arrow_up:'Up',koc_arrow_down:'Down',koc_arrow_same:'Same',
   su_open_cta:'Open signup',su_waitlist_btn:'Waitlist',su_setup_title:'Open signup',su_setup_sub:'Share a link, players add themselves to the list.',su_event_name_ph:'Event name',su_max_ph:'Max',su_location_ph:'Location (optional)',su_generate_btn:'Generate link',su_cancel:'Cancel',su_err_max:'Enter a maximum number of players (at least 4).',su_err_generic:'Something went wrong. Please try again.',su_err_empty:'There are no confirmed signups yet.',su_live_title:'Signup',su_counter:'{n} of {max}',su_confirmed_title:'Confirmed',su_waitlist_title:'Waitlist',su_none_yet:'No signups yet.',su_waitlist_empty:'Waitlist is empty.',su_close_start_btn:'Close signup and start',su_join_title:'Sign up',su_join_name_ph:'Your name',gender_m:'Man',gender_f:'Woman',su_join_confirm_btn:'Confirm signup',su_join_confirm_dup_btn:'Sign up anyway',su_join_dup_warn:'This name already exists. Continue as "{name}"?',su_join_default_name:'Padel tournament',su_join_closed:'Signup is closed.',su_join_spots:'{n} of {max} spots left',su_join_full:'Full, {n} on the waitlist',su_join_not_found:'Signup not found.',su_join_offline:'Signing up requires internet. Check your connection.',su_join_err_name:'Enter your name.',su_join_err_gender:'Choose man or woman.',su_join_limit:'Maximum number of signups from this device reached.',su_join_success:'Thanks {name}, you are signed up!',su_join_waitlisted:'{name}, you are on the waitlist (position {pos}).',su_join_err_generic:'Signup failed. Please try again.',
-  pcard_and:'and',pcard_playing:'Court {court}, with {partner}, against {opponents}',pcard_playing_noPartner:'Court {court}, against {opponents}',pcard_resting:'You are resting this round (rested {n}x so far)',pcard_waiting:'Waiting for the next round...',pcard_dropped:'You are no longer part of this tournament',pcard_done:'Tournament finished for you',pcard_score_btn:'Enter score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'W-L',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rest',pcard_ios_hint:'Install this app on your home screen for more reliable notifications.',notif_title:'New round',notif_body_playing:'Court {court}, with {partner}, against {opponents}',notif_body_playing_noPartner:'Court {court}, against {opponents}',notif_body_resting:'You are resting this round',
+  pcard_and:'and',pcard_playing:'Court {court}, with {partner}, against {opponents}',pcard_playing_noPartner:'Court {court}, against {opponents}',pcard_resting:'You are resting this round (rested {n}x so far)',pcard_waiting:'Waiting for the next round...',pcard_dropped:'You are no longer part of this tournament',pcard_done:'Tournament finished for you',pcard_score_btn:'Enter score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'W-L',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Rest',pcard_ios_hint:'Install this app on your home screen for more reliable notifications.',notif_title:'New round',notif_body_playing:'Court {court}, with {partner}, against {opponents}',notif_body_playing_noPartner:'Court {court}, against {opponents}',notif_body_resting:'You are resting this round',push_tpl_playing:'Court {court}, with {partner}, against {opp1} and {opp2}',push_tpl_playing_noPartner:'Court {court}, against {opp1}',push_tpl_resting:'You are resting in round {round}',push_tpl_done:'Tournament finished. Your final position: {rank}',push_toggle_on:'Notifications on',push_toggle_off:'Turn on notifications',
 },
 fr:{
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -2143,7 +2145,7 @@ fr:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Gagner par 2',on_lbl:'Oui',off_lbl:'Non',courts_word_pk:'courts',export_dupr:'Exporter pour DUPR',
   koc_courts_cap:'King of the Court necessite 4 joueurs par terrain. Maximum {max} terrain(s) pour {n} joueurs.',type_koc:'King of the Court',type_koc_sub:'Les gagnants montent',set_title_koc:'Configurer King of the Court',set_desc_auto_koc:'Les gagnants montent d\'un terrain, les perdants descendent.',koc_rounds_lbl:'Rondes',koc_king_court:'King Court',koc_court_n:'Terrain {n}',koc_round_n:'Manche {n} sur {total}',koc_pool:'File d\'attente',koc_golden_pt:'Point d\'or — qui gagne?',koc_king_lbl:'Roi',koc_standings:'Classement final',koc_king_rounds:'Fois King',res_koc:'{label}King of the Court · {n} joueurs',koc_done:'Tournoi termine',koc_promotes:'monte',koc_demotes:'descend',koc_stays:'reste King',val_min8:'Saisissez au moins 8 noms.',koc_cnt_ok:'{n} joueurs, {c} terrains',koc_col_trend:'Tendance',koc_arrow_up:'Monte',koc_arrow_down:'Descend',koc_arrow_same:'Egal',
   su_open_cta:'Ouvrir les inscriptions',su_waitlist_btn:'Liste d\'attente',su_setup_title:'Ouvrir les inscriptions',su_setup_sub:'Partagez un lien, les joueurs s\'inscrivent eux-memes.',su_event_name_ph:'Nom de l\'evenement',su_max_ph:'Max',su_location_ph:'Lieu (optionnel)',su_generate_btn:'Generer le lien',su_cancel:'Annuler',su_err_max:'Indiquez un nombre maximum de joueurs (au moins 4).',su_err_generic:'Une erreur est survenue. Reessayez.',su_err_empty:'Aucune inscription confirmee pour le moment.',su_live_title:'Inscriptions',su_counter:'{n} sur {max}',su_confirmed_title:'Confirmes',su_waitlist_title:'Liste d\'attente',su_none_yet:'Personne inscrit pour le moment.',su_waitlist_empty:'Liste d\'attente vide.',su_close_start_btn:'Fermer les inscriptions et demarrer',su_join_title:'S\'inscrire',su_join_name_ph:'Votre nom',gender_m:'Homme',gender_f:'Femme',su_join_confirm_btn:'Confirmer l\'inscription',su_join_confirm_dup_btn:'S\'inscrire quand meme',su_join_dup_warn:'Ce nom existe deja. Continuer en tant que "{name}" ?',su_join_default_name:'Tournoi de padel',su_join_closed:'Les inscriptions sont fermees.',su_join_spots:'{n} places sur {max} disponibles',su_join_full:'Complet, {n} sur liste d\'attente',su_join_not_found:'Inscription introuvable.',su_join_offline:'L\'inscription necessite une connexion internet. Verifiez votre connexion.',su_join_err_name:'Indiquez votre nom.',su_join_err_gender:'Choisissez homme ou femme.',su_join_limit:'Nombre maximum d\'inscriptions atteint pour cet appareil.',su_join_success:'Merci {name}, vous etes inscrit !',su_join_waitlisted:'{name}, vous etes sur liste d\'attente (position {pos}).',su_join_err_generic:'L\'inscription a echoue. Reessayez.',
-  pcard_and:'et',pcard_playing:'Terrain {court}, avec {partner}, contre {opponents}',pcard_playing_noPartner:'Terrain {court}, contre {opponents}',pcard_resting:'Vous vous reposez ce tour (deja repose {n} fois)',pcard_waiting:'En attente du tour suivant...',pcard_dropped:'Vous ne participez plus a ce tournoi',pcard_done:'Tournoi termine pour vous',pcard_score_btn:'Saisir le score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'V-D',pcard_stat_saldo:'Solde',pcard_stat_rest:'Repos',pcard_ios_hint:'Installez cette app sur votre ecran d\'accueil pour des notifications plus fiables.',notif_title:'Nouveau tour',notif_body_playing:'Terrain {court}, avec {partner}, contre {opponents}',notif_body_playing_noPartner:'Terrain {court}, contre {opponents}',notif_body_resting:'Vous vous reposez ce tour',
+  pcard_and:'et',pcard_playing:'Terrain {court}, avec {partner}, contre {opponents}',pcard_playing_noPartner:'Terrain {court}, contre {opponents}',pcard_resting:'Vous vous reposez ce tour (deja repose {n} fois)',pcard_waiting:'En attente du tour suivant...',pcard_dropped:'Vous ne participez plus a ce tournoi',pcard_done:'Tournoi termine pour vous',pcard_score_btn:'Saisir le score',pcard_stat_pos:'Position',pcard_stat_pts:'Points',pcard_stat_wl:'V-D',pcard_stat_saldo:'Solde',pcard_stat_rest:'Repos',pcard_ios_hint:'Installez cette app sur votre ecran d\'accueil pour des notifications plus fiables.',notif_title:'Nouveau tour',notif_body_playing:'Terrain {court}, avec {partner}, contre {opponents}',notif_body_playing_noPartner:'Terrain {court}, contre {opponents}',notif_body_resting:'Vous vous reposez ce tour',push_tpl_playing:'Terrain {court}, avec {partner}, contre {opp1} et {opp2}',push_tpl_playing_noPartner:'Terrain {court}, contre {opp1}',push_tpl_resting:'Vous vous reposez ronde {round}',push_tpl_done:'Tournoi termine. Votre place finale : {rank}',push_toggle_on:'Notifications actives',push_toggle_off:'Activer les notifications',
 },
 de:{
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -2222,7 +2224,7 @@ de:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Mit 2 gewinnen',on_lbl:'An',off_lbl:'Aus',courts_word_pk:'Courts',export_dupr:'Fur DUPR exportieren',
   koc_courts_cap:'King of the Court benotigt 4 Spieler pro Feld. Maximal {max} Feld(er) fur {n} Spieler.',type_koc:'King of the Court',type_koc_sub:'Gewinner steigen auf',set_title_koc:'King of the Court einrichten',set_desc_auto_koc:'Gewinner steigen ein Feld auf, Verlierer steigen ab.',koc_rounds_lbl:'Runden',koc_king_court:'King Court',koc_court_n:'Feld {n}',koc_round_n:'Runde {n} von {total}',koc_pool:'Warteliste',koc_golden_pt:'Goldener Punkt — wer gewinnt?',koc_king_lbl:'Konig',koc_standings:'Endstand',koc_king_rounds:'Mal King',res_koc:'{label}King of the Court · {n} Spieler',koc_done:'Turnier abgeschlossen',koc_promotes:'steigt auf',koc_demotes:'steigt ab',koc_stays:'bleibt King',val_min8:'Mindestens 8 Namen eingeben.',koc_cnt_ok:'{n} Spieler, {c} Felder',koc_col_trend:'Trend',koc_arrow_up:'Aufwarts',koc_arrow_down:'Abwarts',koc_arrow_same:'Gleich',
   su_open_cta:'Anmeldung offnen',su_waitlist_btn:'Warteliste',su_setup_title:'Anmeldung offnen',su_setup_sub:'Teile einen Link, Spieler tragen sich selbst ein.',su_event_name_ph:'Name der Veranstaltung',su_max_ph:'Max',su_location_ph:'Ort (optional)',su_generate_btn:'Link erstellen',su_cancel:'Abbrechen',su_err_max:'Gib eine maximale Spieleranzahl ein (mindestens 4).',su_err_generic:'Etwas ist schiefgelaufen. Bitte versuche es erneut.',su_err_empty:'Es gibt noch keine bestatigten Anmeldungen.',su_live_title:'Anmeldung',su_counter:'{n} von {max}',su_confirmed_title:'Bestatigt',su_waitlist_title:'Warteliste',su_none_yet:'Noch niemand angemeldet.',su_waitlist_empty:'Warteliste ist leer.',su_close_start_btn:'Anmeldung schliessen und starten',su_join_title:'Anmelden',su_join_name_ph:'Dein Name',gender_m:'Mann',gender_f:'Frau',su_join_confirm_btn:'Anmeldung bestatigen',su_join_confirm_dup_btn:'Trotzdem anmelden',su_join_dup_warn:'Dieser Name existiert bereits. Weiter als "{name}"?',su_join_default_name:'Padel-Turnier',su_join_closed:'Die Anmeldung ist geschlossen.',su_join_spots:'Noch {n} von {max} Platzen frei',su_join_full:'Voll, {n} auf der Warteliste',su_join_not_found:'Anmeldung nicht gefunden.',su_join_offline:'Fur die Anmeldung ist Internet erforderlich. Prufe deine Verbindung.',su_join_err_name:'Gib deinen Namen ein.',su_join_err_gender:'Wahle Mann oder Frau.',su_join_limit:'Maximale Anzahl Anmeldungen von diesem Gerat erreicht.',su_join_success:'Danke {name}, du bist angemeldet!',su_join_waitlisted:'{name}, du stehst auf der Warteliste (Position {pos}).',su_join_err_generic:'Anmeldung fehlgeschlagen. Bitte versuche es erneut.',
-  pcard_and:'und',pcard_playing:'Platz {court}, mit {partner}, gegen {opponents}',pcard_playing_noPartner:'Platz {court}, gegen {opponents}',pcard_resting:'Du pausierst diese Runde (bereits {n}x pausiert)',pcard_waiting:'Warten auf die nachste Runde...',pcard_dropped:'Du nimmst nicht mehr an diesem Turnier teil',pcard_done:'Turnier fur dich beendet',pcard_score_btn:'Ergebnis eingeben',pcard_stat_pos:'Position',pcard_stat_pts:'Punkte',pcard_stat_wl:'S-N',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Pause',pcard_ios_hint:'Installiere diese App auf deinem Startbildschirm fur zuverlassigere Benachrichtigungen.',notif_title:'Neue Runde',notif_body_playing:'Platz {court}, mit {partner}, gegen {opponents}',notif_body_playing_noPartner:'Platz {court}, gegen {opponents}',notif_body_resting:'Du pausierst diese Runde',
+  pcard_and:'und',pcard_playing:'Platz {court}, mit {partner}, gegen {opponents}',pcard_playing_noPartner:'Platz {court}, gegen {opponents}',pcard_resting:'Du pausierst diese Runde (bereits {n}x pausiert)',pcard_waiting:'Warten auf die nachste Runde...',pcard_dropped:'Du nimmst nicht mehr an diesem Turnier teil',pcard_done:'Turnier fur dich beendet',pcard_score_btn:'Ergebnis eingeben',pcard_stat_pos:'Position',pcard_stat_pts:'Punkte',pcard_stat_wl:'S-N',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Pause',pcard_ios_hint:'Installiere diese App auf deinem Startbildschirm fur zuverlassigere Benachrichtigungen.',notif_title:'Neue Runde',notif_body_playing:'Platz {court}, mit {partner}, gegen {opponents}',notif_body_playing_noPartner:'Platz {court}, gegen {opponents}',notif_body_resting:'Du pausierst diese Runde',push_tpl_playing:'Platz {court}, mit {partner}, gegen {opp1} und {opp2}',push_tpl_playing_noPartner:'Platz {court}, gegen {opp1}',push_tpl_resting:'Du pausierst in Runde {round}',push_tpl_done:'Turnier beendet. Deine Endplatzierung: {rank}',push_toggle_on:'Benachrichtigungen an',push_toggle_off:'Benachrichtigungen aktivieren',
 },
 es:{
   savedGroups:'Grupos guardados',saveGroup:'Guardar grupo',groupName:'Nombre del grupo',loadGroup:'Cargar',renameGroup:'Renombrar',deleteGroup:'Eliminar',noGroups:'Aún no hay grupos guardados',groupSaved:'Grupo guardado',confirmDeleteGroup:'¿Eliminar este grupo?',overwriteGroup:'Ya existe un grupo con este nombre. ¿Sobrescribir?',hdr_theme:'Cambiar tema',hdr_edit:'Editar',hdr_print:'Imprimir',feedback_btn:'Feedback',feedback_bug:'Reportar error',feedback_feature:'Sugerir función',feedback_msg_ph:'Describe el problema o la idea...',feedback_email_ph:'Correo electrónico (opcional)',feedback_send:'Enviar',feedback_sending:'Enviando...',feedback_ok:'Gracias. Tu mensaje ha sido recibido.',feedback_err:'Algo salió mal. Por favor, inténtalo de nuevo.',feedback_empty:'Por favor, escribe un mensaje.',cookie_txt:'Usamos análisis para entender cómo los visitantes usan el sitio. Sin anuncios.',cookie_accept:'Aceptar',cookie_privacy:'Politica de privacidad',cookie_decline:'Rechazar',share_btn:'Compartir',share_title:'Compartir torneo',share_desc:'Cualquiera con este enlace ve el bracket en vivo — solo lectura.',share_copy:'Copiar enlace',share_copied:'¡Copiado!',share_close:'Cerrar',share_loading:'Cargando torneo…',share_not_found:'Torneo no encontrado.',share_error:'Conexión fallida.',share_nudge:'Que todos sigan en vivo — Compartir',view_banner:'Ver en vivo',share_wa_text:'sigue la clasificacion en directo — hecho con padel-bracket.com',share_default_name:'Torneo de pádel',share_whatsapp:'Compartir por WhatsApp',share_result_cta:'Compartir resultados',org_cta_txt:'Organizar la proxima vez?',org_cta_btn:'Empezar gratis',view_wa_txt:'sigue la clasificacion en directo (hecho con padel-bracket.com)',reset_btn:'Empezar de nuevo',reset_confirm:'¿Empezar de nuevo? Se perderán todos los resultados.',more_support:'Apoya este proyecto',more_gear:'Equipación de pádel',stats_support:'¿Torneo con éxito? ¡Apoya el proyecto!',
@@ -2300,7 +2302,7 @@ es:{
   set_lbl_sport:'Deporte',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Ganar por 2',on_lbl:'Si',off_lbl:'No',courts_word_pk:'pistas',export_dupr:'Exportar para DUPR',
   koc_courts_cap:'King of the Court necesita 4 jugadores por pista. Maximo {max} pista(s) para {n} jugadores.',type_koc:'King of the Court',type_koc_sub:'Ganadores suben',set_title_koc:'Configurar King of the Court',set_desc_auto_koc:'Los ganadores suben una pista, los perdedores bajan.',koc_rounds_lbl:'Rondas',koc_king_court:'King Court',koc_court_n:'Pista {n}',koc_round_n:'Ronda {n} de {total}',koc_pool:'Lista de espera',koc_golden_pt:'Punto de oro, quien gana?',koc_king_lbl:'Rey',koc_standings:'Clasificacion final',koc_king_rounds:'Veces King',res_koc:'{label}King of the Court · {n} jugadores',koc_done:'Torneo completado',koc_promotes:'sube',koc_demotes:'baja',koc_stays:'sigue King',val_min8:'Introduce al menos 8 nombres.',koc_cnt_ok:'{n} jugadores, {c} pistas',koc_col_trend:'Tendencia',koc_arrow_up:'Sube',koc_arrow_down:'Baja',koc_arrow_same:'Igual',
   su_open_cta:'Abrir inscripcion',su_waitlist_btn:'Lista de espera',su_setup_title:'Abrir inscripcion',su_setup_sub:'Comparte un enlace, los jugadores se apuntan ellos mismos.',su_event_name_ph:'Nombre del evento',su_max_ph:'Max',su_location_ph:'Ubicacion (opcional)',su_generate_btn:'Generar enlace',su_cancel:'Cancelar',su_err_max:'Introduce un numero maximo de jugadores (minimo 4).',su_err_generic:'Algo salio mal. Intentalo de nuevo.',su_err_empty:'Todavia no hay inscripciones confirmadas.',su_live_title:'Inscripcion',su_counter:'{n} de {max}',su_confirmed_title:'Confirmados',su_waitlist_title:'Lista de espera',su_none_yet:'Nadie inscrito todavia.',su_waitlist_empty:'La lista de espera esta vacia.',su_close_start_btn:'Cerrar inscripcion e iniciar',su_join_title:'Inscribirse',su_join_name_ph:'Tu nombre',gender_m:'Hombre',gender_f:'Mujer',su_join_confirm_btn:'Confirmar inscripcion',su_join_confirm_dup_btn:'Inscribirme igualmente',su_join_dup_warn:'Este nombre ya existe. Continuar como "{name}"?',su_join_default_name:'Torneo de padel',su_join_closed:'La inscripcion esta cerrada.',su_join_spots:'Quedan {n} de {max} plazas',su_join_full:'Completo, {n} en lista de espera',su_join_not_found:'Inscripcion no encontrada.',su_join_offline:'Inscribirse requiere conexion a internet. Comprueba tu conexion.',su_join_err_name:'Introduce tu nombre.',su_join_err_gender:'Elige hombre o mujer.',su_join_limit:'Numero maximo de inscripciones desde este dispositivo alcanzado.',su_join_success:'Gracias {name}, te has inscrito!',su_join_waitlisted:'{name}, estas en la lista de espera (posicion {pos}).',su_join_err_generic:'La inscripcion fallo. Intentalo de nuevo.',
-  pcard_and:'y',pcard_playing:'Pista {court}, con {partner}, contra {opponents}',pcard_playing_noPartner:'Pista {court}, contra {opponents}',pcard_resting:'Descansas esta ronda (ya has descansado {n}x)',pcard_waiting:'Esperando la siguiente ronda...',pcard_dropped:'Ya no participas en este torneo',pcard_done:'Torneo terminado para ti',pcard_score_btn:'Introducir resultado',pcard_stat_pos:'Posicion',pcard_stat_pts:'Puntos',pcard_stat_wl:'G-P',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Descanso',pcard_ios_hint:'Instala esta app en tu pantalla de inicio para notificaciones mas fiables.',notif_title:'Nueva ronda',notif_body_playing:'Pista {court}, con {partner}, contra {opponents}',notif_body_playing_noPartner:'Pista {court}, contra {opponents}',notif_body_resting:'Descansas esta ronda',
+  pcard_and:'y',pcard_playing:'Pista {court}, con {partner}, contra {opponents}',pcard_playing_noPartner:'Pista {court}, contra {opponents}',pcard_resting:'Descansas esta ronda (ya has descansado {n}x)',pcard_waiting:'Esperando la siguiente ronda...',pcard_dropped:'Ya no participas en este torneo',pcard_done:'Torneo terminado para ti',pcard_score_btn:'Introducir resultado',pcard_stat_pos:'Posicion',pcard_stat_pts:'Puntos',pcard_stat_wl:'G-P',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Descanso',pcard_ios_hint:'Instala esta app en tu pantalla de inicio para notificaciones mas fiables.',notif_title:'Nueva ronda',notif_body_playing:'Pista {court}, con {partner}, contra {opponents}',notif_body_playing_noPartner:'Pista {court}, contra {opponents}',notif_body_resting:'Descansas esta ronda',push_tpl_playing:'Pista {court}, con {partner}, contra {opp1} y {opp2}',push_tpl_playing_noPartner:'Pista {court}, contra {opp1}',push_tpl_resting:'Descansas en la ronda {round}',push_tpl_done:'Torneo terminado. Tu posicion final: {rank}',push_toggle_on:'Notificaciones activas',push_toggle_off:'Activar notificaciones',
 },
 sv:{
   savedGroups:'Sparade grupper',saveGroup:'Spara grupp',groupName:'Gruppnamn',loadGroup:'Ladda',renameGroup:'Byt namn',deleteGroup:'Ta bort',noGroups:'Inga sparade grupper än',groupSaved:'Grupp sparad',confirmDeleteGroup:'Ta bort denna grupp?',overwriteGroup:'En grupp med detta namn finns redan. Skriva över?',hdr_theme:'Byt tema',hdr_edit:'Redigera',hdr_print:'Skriv ut',feedback_btn:'Feedback',feedback_bug:'Rapportera fel',feedback_feature:'Föreslå funktion',feedback_msg_ph:'Beskriv problemet eller idén...',feedback_email_ph:'E-postadress (valfritt)',feedback_send:'Skicka',feedback_sending:'Skickar...',feedback_ok:'Tack! Ditt meddelande har tagits emot.',feedback_err:'Något gick fel. Försök igen.',feedback_empty:'Ange ett meddelande.',cookie_txt:'Vi använder analys för att förstå hur besökare använder webbplatsen.',cookie_accept:'Acceptera',cookie_privacy:'Integritetspolicy',cookie_decline:'Avvisa',share_btn:'Dela',share_title:'Dela turnering',share_desc:'Alla med den här länken ser bracket och tabell live — skrivskyddat.',share_copy:'Kopiera länk',share_copied:'Kopierad!',share_close:'Stäng',share_loading:'Laddar turnering…',share_not_found:'Turnering hittades inte.',share_error:'Anslutning misslyckades.',share_nudge:'Låt alla följa live — Dela',view_banner:'Livevisning',share_wa_text:'folj stallningen live — skapad med padel-bracket.com',share_default_name:'Padelturneringen',share_whatsapp:'Dela via WhatsApp',share_result_cta:'Dela resultaten',org_cta_txt:'Organisera sjalv nasta gang?',org_cta_btn:'Starta gratis',view_wa_txt:'folj stallningen live (skapad med padel-bracket.com)',reset_btn:'Börja om',reset_confirm:'Börja om? Alla poäng går förlorade.',more_support:'Stöd detta projekt',more_gear:'Padel gear tips',stats_support:'Lyckad turnering? Stöd projektet!',
@@ -2378,7 +2380,7 @@ sv:{
   set_lbl_sport:'Sport',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Vinn med 2',on_lbl:'Pa',off_lbl:'Av',courts_word_pk:'courts',export_dupr:'Exportera till DUPR',
   koc_courts_cap:'King of the Court behoever 4 spelare per bana. Max {max} bana/banor for {n} spelare.',type_koc:'King of the Court',type_koc_sub:'Vinnare klattrar',set_title_koc:'Installera King of the Court',set_desc_auto_koc:'Vinnare klattrar upp en bana, forlorare klattrar ner.',koc_rounds_lbl:'Omgangar',koc_king_court:'King Court',koc_court_n:'Bana {n}',koc_round_n:'Omgang {n} av {total}',koc_pool:'Vantelista',koc_golden_pt:'Guldpoanng — vem vinner?',koc_king_lbl:'Kung',koc_standings:'Slutresultat',koc_king_rounds:'Ganger King',res_koc:'{label}King of the Court · {n} spelare',koc_done:'Turneringen klar',koc_promotes:'klattrar upp',koc_demotes:'klattrar ner',koc_stays:'forblir King',val_min8:'Ange minst 8 namn.',koc_cnt_ok:'{n} spelare, {c} banor',koc_col_trend:'Trend',koc_arrow_up:'Upp',koc_arrow_down:'Ner',koc_arrow_same:'Oforandrad',
   su_open_cta:'Oppna anmalan',su_waitlist_btn:'Vantelista',su_setup_title:'Oppna anmalan',su_setup_sub:'Dela en lank, spelare anmaler sig sjalva.',su_event_name_ph:'Namn pa evenemanget',su_max_ph:'Max',su_location_ph:'Plats (valfritt)',su_generate_btn:'Skapa lank',su_cancel:'Avbryt',su_err_max:'Ange ett max antal spelare (minst 4).',su_err_generic:'Nagot gick fel. Forsok igen.',su_err_empty:'Det finns annu inga bekraftade anmalningar.',su_live_title:'Anmalan',su_counter:'{n} av {max}',su_confirmed_title:'Bekraftade',su_waitlist_title:'Vantelista',su_none_yet:'Ingen anmald an.',su_waitlist_empty:'Vantelistan ar tom.',su_close_start_btn:'Stang anmalan och starta',su_join_title:'Anmal dig',su_join_name_ph:'Ditt namn',gender_m:'Man',gender_f:'Kvinna',su_join_confirm_btn:'Bekrafta anmalan',su_join_confirm_dup_btn:'Anmal anda',su_join_dup_warn:'Namnet finns redan. Fortsatt som "{name}"?',su_join_default_name:'Padelturnering',su_join_closed:'Anmalan ar stangd.',su_join_spots:'{n} av {max} platser kvar',su_join_full:'Fullt, {n} pa vantelistan',su_join_not_found:'Anmalan hittades inte.',su_join_offline:'Anmalan kraver internet. Kontrollera din anslutning.',su_join_err_name:'Ange ditt namn.',su_join_err_gender:'Valj man eller kvinna.',su_join_limit:'Max antal anmalningar fran den har enheten uppnatt.',su_join_success:'Tack {name}, du ar anmald!',su_join_waitlisted:'{name}, du star pa vantelistan (position {pos}).',su_join_err_generic:'Anmalan misslyckades. Forsok igen.',
-  pcard_and:'och',pcard_playing:'Bana {court}, med {partner}, mot {opponents}',pcard_playing_noPartner:'Bana {court}, mot {opponents}',pcard_resting:'Du vilar denna runda (vilat {n}x hittills)',pcard_waiting:'Vantar pa nasta runda...',pcard_dropped:'Du deltar inte langre i denna turnering',pcard_done:'Turneringen klar for dig',pcard_score_btn:'Ange resultat',pcard_stat_pos:'Position',pcard_stat_pts:'Poang',pcard_stat_wl:'V-F',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Vila',pcard_ios_hint:'Installera denna app pa din hemskarm for mer palitliga aviseringar.',notif_title:'Ny runda',notif_body_playing:'Bana {court}, med {partner}, mot {opponents}',notif_body_playing_noPartner:'Bana {court}, mot {opponents}',notif_body_resting:'Du vilar denna runda',
+  pcard_and:'och',pcard_playing:'Bana {court}, med {partner}, mot {opponents}',pcard_playing_noPartner:'Bana {court}, mot {opponents}',pcard_resting:'Du vilar denna runda (vilat {n}x hittills)',pcard_waiting:'Vantar pa nasta runda...',pcard_dropped:'Du deltar inte langre i denna turnering',pcard_done:'Turneringen klar for dig',pcard_score_btn:'Ange resultat',pcard_stat_pos:'Position',pcard_stat_pts:'Poang',pcard_stat_wl:'V-F',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Vila',pcard_ios_hint:'Installera denna app pa din hemskarm for mer palitliga aviseringar.',notif_title:'Ny runda',notif_body_playing:'Bana {court}, med {partner}, mot {opponents}',notif_body_playing_noPartner:'Bana {court}, mot {opponents}',notif_body_resting:'Du vilar denna runda',push_tpl_playing:'Bana {court}, med {partner}, mot {opp1} och {opp2}',push_tpl_playing_noPartner:'Bana {court}, mot {opp1}',push_tpl_resting:'Du vilar i runda {round}',push_tpl_done:'Turneringen klar. Din slutplacering: {rank}',push_toggle_on:'Aviseringar pa',push_toggle_off:'Sla pa aviseringar',
 },
 it:{
   savedGroups:'Gruppi salvati',saveGroup:'Salva gruppo',groupName:'Nome del gruppo',loadGroup:'Carica',renameGroup:'Rinomina',deleteGroup:'Elimina',noGroups:'Nessun gruppo salvato',groupSaved:'Gruppo salvato',confirmDeleteGroup:'Eliminare questo gruppo?',overwriteGroup:'Esiste gia un gruppo con questo nome. Sovrascrivere?',hdr_theme:'Cambia tema',hdr_edit:'Modifica',hdr_print:'Stampa',feedback_btn:'Feedback',feedback_bug:'Segnala un bug',feedback_feature:'Suggerisci una funzione',feedback_msg_ph:'Descrivi il problema o l\'idea...',feedback_email_ph:'Indirizzo e-mail (facoltativo)',feedback_send:'Invia',feedback_sending:'Invio in corso...',feedback_ok:'Grazie! Il tuo messaggio è stato ricevuto.',feedback_err:'Qualcosa è andato storto. Riprova.',feedback_empty:'Inserisci un messaggio.',cookie_txt:'Usiamo analytics per capire come i visitatori usano questo sito. Nessuna pubblicita, nessuna vendita di dati personali.',cookie_accept:'Accetta',cookie_privacy:'Informativa sulla privacy',cookie_decline:'Rifiuta',share_btn:'Condividi',share_title:'Condividi questo torneo',share_desc:'Chiunque con questo link vede il bracket e la classifica in diretta, solo lettura.',share_copy:'Copia link',share_copied:'Copiato!',share_close:'Chiudi',share_loading:'Caricamento torneo...',share_not_found:'Torneo non trovato.',share_error:'Connessione fallita.',share_nudge:'Fai seguire tutti in diretta, tocca Condividi',view_banner:'Visione in diretta',share_wa_text:'segui la classifica in diretta, creato con padel-bracket.com',share_default_name:'Torneo di padel',share_whatsapp:'Condividi via WhatsApp',share_result_cta:'Condividi risultati',org_cta_txt:'Vuoi organizzare la prossima volta?',org_cta_btn:'Inizia gratis',view_wa_txt:'segui la classifica in diretta (creato con padel-bracket.com)',reset_btn:'Ricomincia',reset_confirm:'Sei sicuro di voler ricominciare? Tutti i punteggi andranno persi.',more_support:'Sostieni questo progetto',more_gear:'Consigli attrezzatura padel',stats_support:'Torneo riuscito? Sostieni il progetto!',
@@ -2947,6 +2949,7 @@ let _viNotifRoundKey=null; // last round signature a new-round notification was 
 let roundTimerRemote=null; // {round,start,limit} round timer synced from the organizer, viewer-side only
 const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
+const VAPID_PUBLIC_KEY='BKUTev1e5F-CG_OJgziNFTOrOIXqUqtktZw5n8I1i0RFiasIh-WVtdDjbXiOuZq3MJ-DYagY6leURbwqrGVK8kM';
 let _sb=null, _sbWrite=null, _startId=null, _startTs=null;
 function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
 function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; _startId=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)); _startTs=Date.now(); sb.from('tournament_starts').insert({mode:m,player_count:n,client_id:_startId}).then(()=>{}); }catch{} }
@@ -6758,28 +6761,123 @@ function renderPlayerCard(){
     </div>`;
   }
   let iosHint='';
-  if(_viIsIosSafariNotInstalled()&&!localStorage.getItem('padel-ios-notif-hint-dismissed')){
+  if(_pushIosHintNeeded()&&!localStorage.getItem('padel-ios-notif-hint-dismissed')){
     iosHint=`<div class="pcard-ios-hint"><span>${t('pcard_ios_hint')}</span><button onclick="_dismissIosNotifHint()" aria-label="Sluiten">&#x2715;</button></div>`;
   }
-  container.innerHTML=`<div class="pcard-name">${esc(_viDisplayName(id))}</div>${bodyHtml}${statsHtml}${iosHint}`;
+  let pushToggle='';
+  if('Notification' in window&&Notification.permission!=='denied'){
+    const active=_pushIsActive();
+    pushToggle=`<button class="pcard-push-toggle${active?' active':''}" onclick="_pushToggle()">${active?t('push_toggle_on'):t('push_toggle_off')}</button>`;
+  }
+  container.innerHTML=`<div class="pcard-name">${esc(_viDisplayName(id))}</div>${bodyHtml}${statsHtml}${pushToggle}${iosHint}`;
   container.style.display='block';
 }
 
-// ── Meldingen bij nieuwe ronde (Notification API, geen push-server) ──
+// ── Meldingen bij nieuwe ronde (Notification API + echte web push) ──
 function _viIsIosSafariNotInstalled(){
   const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
   const isStandalone=window.navigator.standalone===true||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
   return isIos&&!isStandalone;
 }
+// Toon de installatiehint specifiek als toestemming al is verleend maar er geen
+// PushManager beschikbaar is (typisch iOS Safari buiten een geinstalleerde PWA).
+function _pushIosHintNeeded(){
+  return 'Notification' in window && Notification.permission==='granted' && !('PushManager' in window) && /iphone|ipad|ipod/i.test(navigator.userAgent);
+}
 function _dismissIosNotifHint(){ localStorage.setItem('padel-ios-notif-hint-dismissed','1'); renderPlayerCard(); }
+
+// ── Echte web push (RFC 8291/8292 via Supabase Edge Function), blijft werken
+// als de app dicht is. Eén subscription per device/browser (endpoint is uniek);
+// wisselen van speler of toernooi werkt dezelfde rij bij via upsert op endpoint.
+function _pushKey(){ return _viewCode?`padel-push-active-${_viewCode}`:null; }
+function _pushIsActive(){ const k=_pushKey(); return k?localStorage.getItem(k)==='1':false; }
+
+function _urlBase64ToUint8Array(base64String){
+  const padding='='.repeat((4-base64String.length%4)%4);
+  const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
+  const raw=atob(base64);
+  const arr=new Uint8Array(raw.length);
+  for(let i=0;i<raw.length;i++) arr[i]=raw.charCodeAt(i);
+  return arr;
+}
+
+function _pushBuildTemplates(){
+  const hasPartner=!(mode==='team'||mode==='roundrobin');
+  return {
+    playing: hasPartner?t('push_tpl_playing'):t('push_tpl_playing_noPartner'),
+    resting: t('push_tpl_resting'),
+    done: t('push_tpl_done')
+  };
+}
+
+async function _pushSubscribe(){
+  try{
+    if(!_viewCode) return false;
+    if(!('serviceWorker' in navigator)||!('PushManager' in window)) return false;
+    const id=_currentViewerIdentityId();
+    if(id===null||id===undefined) return false;
+    const reg=await navigator.serviceWorker.ready;
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub) sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:_urlBase64ToUint8Array(VAPID_PUBLIC_KEY)});
+    const subJson=sub.toJSON();
+    const sb=getSB(); if(!sb) return false;
+    const {error}=await sb.from('push_subscriptions').upsert({
+      tournament_code:_viewCode,
+      player_id:id,
+      endpoint:subJson.endpoint,
+      p256dh:subJson.keys.p256dh,
+      auth:subJson.keys.auth,
+      lang:LANG,
+      msg_templates:_pushBuildTemplates()
+    },{onConflict:'endpoint'});
+    if(error) throw error;
+    const k=_pushKey(); if(k) localStorage.setItem(k,'1');
+    return true;
+  }catch(e){ console.warn('push subscribe failed',e); return false; }
+}
+
+async function _pushUnsubscribe(){
+  try{
+    const k=_pushKey(); if(k) localStorage.removeItem(k);
+    if(!('serviceWorker' in navigator)) return;
+    const reg=await navigator.serviceWorker.ready;
+    const sub=await reg.pushManager.getSubscription();
+    if(!sub) return;
+    const endpoint=sub.endpoint;
+    await sub.unsubscribe();
+    const sb=getSB(); if(sb) await sb.from('push_subscriptions').delete().eq('endpoint',endpoint);
+  }catch(e){ console.warn('push unsubscribe failed',e); }
+}
+
+async function _pushToggle(){
+  if(_pushIsActive()) await _pushUnsubscribe();
+  else{
+    if(!('Notification' in window)) return;
+    if(Notification.permission==='default'){ try{ await Notification.requestPermission(); }catch{} }
+    if(Notification.permission==='granted') await _pushSubscribe();
+  }
+  renderPlayerCard();
+}
 
 function _maybeAskNotificationPermission(){
   if(!('Notification' in window)) return;
-  if(Notification.permission!=='default') return;
+  if(Notification.permission==='granted'){
+    // Al eerder toegestaan (in deze of een andere sessie): zorg dat de push-rij
+    // klopt voor de huidige code/speler, upsert is idempotent.
+    _pushSubscribe().then(ok=>{ if(ok) renderPlayerCard(); });
+    return;
+  }
+  if(Notification.permission!=='default') return; // 'denied'
   const key=_viewCode?`padel-notif-asked-${_viewCode}`:null;
   if(key){ if(localStorage.getItem(key)) return; localStorage.setItem(key,'1'); }
   if(_viIsIosSafariNotInstalled()) return; // subtiele hint in de kaart, geen prompt (onbetrouwbaar op iOS Safari)
-  setTimeout(()=>{ try{ Notification.requestPermission(); }catch{} },500);
+  setTimeout(()=>{
+    try{
+      Notification.requestPermission().then(perm=>{
+        if(perm==='granted') _pushSubscribe().then(()=>renderPlayerCard());
+      });
+    }catch{}
+  },500);
 }
 
 function _playNotifSound(){
@@ -6796,6 +6894,7 @@ function _playNotifSound(){
 }
 
 function _viMaybeNotifyNewRound(){
+  if(_pushIsActive()) return; // een echte push-melding komt al binnen, nooit dubbel
   const id=_currentViewerIdentityId();
   if(id===null||id===undefined) return;
   const ps=getPlayerStatus(_currentStateForStatus(),id);
@@ -6897,6 +6996,61 @@ async function initViewMode(code){
 }
 
 // ── State opslaan ─────────────────────────────
+// ── Organisator: roept de push-round Edge Function aan na een geslaagde sync ──
+// Best effort only: nooit awaiten in een UI-pad, nooit de app laten blokkeren.
+let _pushLastRoundKey=null, _pushLastRoundNum=0, _pushFinishSent=false;
+
+function _orgCurrentRoundKey(){
+  let list;
+  if(mode==='americano'||mode==='mexicano'||mode==='mixicano') list=AM;
+  else if(mode==='kingofcourt') list=KOCM;
+  else if(mode==='teamamericano') list=TAM;
+  else if(mode==='teammexicano') list=TMM;
+  else return null; // team/roundrobin: alleen de finish-melding wordt gestuurd
+  const activeIdx=list.findIndex(r=>r.some(m=>!m.done));
+  if(activeIdx===-1) return list.length?'done':null;
+  return String(activeIdx+1);
+}
+
+function _pushStatusesPayload(){
+  const state=_currentStateForStatus();
+  const roster=_viRoster();
+  const out={};
+  roster.forEach(r=>{
+    const ps=getPlayerStatus(state,r.id);
+    const stats=getPlayerPersonalStats(state,r.id);
+    out[String(r.id)]={name:r.name,status:ps.status,round:ps.round,court:ps.court,partner:ps.partner,opponents:ps.opponents,rank:stats?stats.position:null};
+  });
+  return out;
+}
+
+async function _callPushRoundFunction(kind,round){
+  try{
+    const statuses=_pushStatusesPayload();
+    await fetch(`${SUPABASE_URL}/functions/v1/push-round`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`},
+      body:JSON.stringify({tournament_code:shareCode,round:round||0,kind,statuses})
+    });
+  }catch(e){ /* stil doorgaan, de app mag hier nooit op blokkeren */ }
+}
+
+function _pushMaybeNotify(){
+  try{
+    if(!shareCode) return;
+    const rk=_orgCurrentRoundKey();
+    if(rk!==null&&rk!=='done'){
+      const n=parseInt(rk,10);
+      _pushLastRoundNum=n;
+      if(rk!==_pushLastRoundKey){ _pushLastRoundKey=rk; _callPushRoundFunction('round',n); }
+    }
+    if(isTournamentDone()&&!_pushFinishSent){
+      _pushFinishSent=true;
+      _callPushRoundFunction('finish',_pushLastRoundNum||0);
+    }
+  }catch(e){}
+}
+
 function saveState(){
   if(viewMode) return;
   if(mode==='kingofcourt'){
@@ -6915,7 +7069,7 @@ function saveState(){
     if(!T.length) return;
     localStorage.setItem('padel-state', JSON.stringify({mode,T,PM,PW,PL,pmid,pDone,R,tournamentName,playerScoring,sport}));
   }
-  if(shareCode) pushToSupabase();
+  if(shareCode) pushToSupabase().then(ok=>{ if(ok) _pushMaybeNotify(); });
   updatePresentation();
 }
 
