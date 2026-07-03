@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin | No Signup, Works Offline</title>
-  <meta name="description" content="Make free padel tournaments in seconds. Knockout, Americano, Mexicano and Round Robin. Live scoreboard for TV &amp; big screen, share link for spectators, export to PDF. Free, no account.">
+  <title>Padel Tournament Generator: Knockout, Americano, Mexicano, Round Robin | Free, No Signup</title>
+  <meta name="description" content="Set up a padel tournament in 30 seconds: Knockout, Americano, Mexicano or Round Robin. Live scoreboard for TV, share link for spectators, export to PDF. Free, no signup, works offline.">
   <meta name="keywords" content="padel tournament generator, padel bracket maker, padel americano generator, padel mexicano generator, padel round robin, tournament bracket maker, free padel app, padel scoreboard, padel live scoreboard TV, padel presentation screen, padel big screen display">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://padel-bracket.com/en/">
@@ -15,8 +15,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/en/">
-  <meta property="og:title" content="Free Padel Bracket Generator — Knockout, Americano, Mexicano &amp; Round Robin">
-  <meta property="og:description" content="Set up a padel tournament in 30 seconds. Live scoreboard for TV &amp; big screen, share link, export to PDF. Free, no account.">
+  <meta property="og:title" content="Padel Tournament Generator: Knockout, Americano, Mexicano, Round Robin">
+  <meta property="og:description" content="Set up a padel tournament in 30 seconds. Live scoreboard for TV, share link, export to PDF. Free, no signup.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -25,8 +25,8 @@
   <meta property="og:locale:alternate" content="nl_NL">
   <meta property="og:locale:alternate" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Padel Bracket Generator — No Signup, Works Offline">
-  <meta name="twitter:description" content="Knockout, Americano, Mexicano &amp; Round Robin — live scoreboard for TV &amp; big screen, share link, export. Free, no account.">
+  <meta name="twitter:title" content="Padel Tournament Generator | Free, No Signup, Works Offline">
+  <meta name="twitter:description" content="Knockout, Americano, Mexicano, Round Robin. Live scoreboard for TV, share link, export. Free, no signup.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="nl" href="https://padel-bracket.com/">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/en/">
@@ -37,7 +37,7 @@
   <link rel="alternate" hreflang="pt" href="https://padel-bracket.com/pt/">
   <link rel="alternate" hreflang="sv" href="https://padel-bracket.com/sv/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/">
-  <meta name="theme-color" content="#0E1114">
+  <meta name="theme-color" content="#0B1E3D">
   <script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
   <link rel="manifest" href="/manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
@@ -207,885 +207,415 @@
     "sameAs": ["https://github.com/DannydeVis"]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:#0E1114;
-      --surface:#1A1F24;
-      --surface2:#252B32;
-      --accent:#C7FF5E;
-      --accent2:#a8d94e;
-      --gold:    #fbbf24;
-      --txt:     #f9fafb;
-      --txt2:rgba(249,250,251,.5);
-      --bdr:rgba(255,255,255,.1);
-      --nav-bg:rgba(14,17,20,.92);
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --court-blue:#0B1E3D;
+      --court-blue2:#122A52;
+      --sand:#E8C77E;
+      --sand-deep:#C89B3C;
+      --line:#F5F3EC;
+      --ink:#0B1E3D;
+      --paper:#FBFAF6;
+      --paper2:#F1EEE3;
+      --muted:#5B6B85;
+      --muted-dark:rgba(245,243,236,.68);
+      --bdr-dark:rgba(245,243,236,.16);
+      --bdr-light:rgba(11,30,61,.12);
+      --font-display:-apple-system,"SF Pro Display","Segoe UI Variable Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      --font-body:-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     }
+    html{scroll-behavior:smooth}
+    body{background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-0.02em;line-height:1.05}
+    .container{max-width:1180px;margin:0 auto;padding:0 24px}
+    .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--txt); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
-    h1, h2, h3, .section-title, .fc-title, .founder-eyebrow, .nav-logo { font-family: 'Syne', 'Inter', sans-serif; }
-    h1 { font-weight: 800; line-height: 1.1; }
-    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; line-height: 1.2; }
-    h3 { font-size: 1.25rem; font-weight: 700; }
-    h4 { font-size: 1.05rem; font-weight: 700; }
-
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 24px; display: flex; align-items: center; justify-content: space-between;
-      height: 60px; background: var(--nav-bg); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--bdr);
-    }
-    .nav-logo { font-family:'Inter',sans-serif; font-weight:900; font-size:1.3rem; letter-spacing:1px; color:var(--txt); text-decoration:none; }
-    .nav-logo em { color:var(--accent); font-style:normal; }
-    .nav-cta { background:var(--accent); color:#0E1114; border:none; border-radius:999px; padding:8px 20px; font-family:'Inter',sans-serif; font-weight:700; font-size:.88rem; cursor:pointer; text-decoration:none; white-space:nowrap; transition:background .15s,transform .1s; }
-    .nav-cta:hover { background:var(--accent2); }
-    .nav-cta:active { transform:scale(.96); }
-    .nav-cta .full { display:inline; }
-    .nav-cta .short { display:none; }
-    @media(max-width:480px){ .nav-cta{padding:7px 14px;font-size:.82rem} .nav-cta .full{display:none} .nav-cta .short{display:inline} .nav-lang{display:none} }
-    .nav-lang select { appearance:none; -webkit-appearance:none; background:var(--card); color:var(--txt); border:1px solid var(--bdr); border-radius:8px; padding:6px 28px 6px 10px; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 8px center; transition:border-color .15s; }
-    .nav-lang select:hover { border-color:var(--accent); }
-    .nav-lang select:focus { outline:none; border-color:var(--accent); }
-
-    .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 24px 60px; position:relative; overflow:hidden; }
-    .hero-bg { position:absolute; inset:0; z-index:0; background: radial-gradient(ellipse 80% 60% at 50% 0%,rgba(199,255,94,.13) 0%,transparent 70%), radial-gradient(ellipse 50% 40% at 80% 80%,rgba(139,92,246,.08) 0%,transparent 60%); }
-    .hero-grid { position:absolute; inset:0; z-index:0; opacity:.04; background-image:linear-gradient(var(--bdr) 1px,transparent 1px),linear-gradient(90deg,var(--bdr) 1px,transparent 1px); background-size:40px 40px; }
-    .hero > * { position:relative; z-index:1; }
-    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(199,255,94,.12); border:1px solid rgba(199,255,94,.3); color:var(--accent); border-radius:99px; padding:6px 16px; font-size:.82rem; font-weight:600; letter-spacing:.5px; margin-bottom:28px; }
-    .hero-badge svg { width:14px; height:14px; }
-    h1 { font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2rem,6vw,3.2rem); line-height:1.1; letter-spacing:-1px; margin-bottom:10px; }
-    h1 em { color:var(--accent); font-style:normal; display:block; }
-    .hero-kicker { font-family:'Inter',sans-serif; font-weight:700; font-size:1rem; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
-    .hero-sub { font-size:clamp(1.05rem,2.5vw,1.3rem); color:var(--txt2); max-width:560px; margin:20px auto 44px; }
-    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-    .btn-primary { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#0E1114; text-decoration:none; border-radius:10px; padding:12px 24px; font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; letter-spacing:.5px; transition:background .15s,transform .1s,box-shadow .15s; box-shadow:0 4px 24px rgba(199,255,94,.3); }
-    .btn-primary:hover { background:var(--accent2); box-shadow:0 6px 32px rgba(199,255,94,.45); }
-    .btn-primary:active { transform:scale(.97); }
-    .btn-secondary { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--txt2); text-decoration:none; border:1px solid var(--bdr); border-radius:10px; padding:12px 24px; font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; transition:border-color .15s,color .15s; }
-    .btn-secondary:hover { border-color:rgba(255,255,255,.25); color:var(--txt); }
-    .hero-note { margin-top:20px; font-size:.82rem; color:var(--txt2); }
-
-    .mockup-wrap { max-width:960px; margin:0 auto; padding:0 24px 72px; display:flex; justify-content:center; }
-    .mockup { background:var(--surface); border:1px solid var(--bdr); border-radius:20px; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04); width:100%; max-width:760px; }
-    .mockup-bar { background:var(--surface2); padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--bdr); }
-    .mockup-dot { width:11px; height:11px; border-radius:50%; }
-    .mockup-screen { padding:20px; display:flex; flex-direction:column; gap:12px; }
-    .mock-header { display:flex; justify-content:space-between; align-items:center; padding:0 4px 12px; border-bottom:1px solid var(--bdr); }
-    .mock-logo { font-family:'Inter',sans-serif; font-weight:900; font-size:1.1rem; }
-    .mock-logo em { color:var(--accent); font-style:normal; }
-    .mock-actions { display:flex; gap:6px; }
-    .mock-action-btn { padding:5px 12px; border-radius:7px; font-size:.72rem; font-weight:700; display:flex; align-items:center; gap:5px; }
-    .mock-action-btn.pres { background:var(--surface2); color:var(--txt2); border:1px solid var(--bdr); }
-    .mock-action-btn.share { background:var(--accent); color:#0E1114; }
-    .mock-body { display:flex; gap:16px; }
-    .mock-rounds { display:flex; flex-direction:column; gap:10px; flex:1; }
-    .mock-round-lbl { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:6px; }
-    .mock-match { background:var(--surface2); border-radius:10px; padding:12px 14px; border:1px solid var(--bdr); }
-    .mock-match-row { display:flex; align-items:center; justify-content:space-between; padding:3px 0; }
-    .mock-team-name { font-size:.8rem; font-weight:600; }
-    .mock-score-num { font-family:'Inter',sans-serif; font-weight:900; font-size:1.3rem; color:var(--accent); }
-    .mock-score-num.done { color:var(--txt2); }
-    .mock-controls { display:flex; align-items:center; gap:6px; margin-top:8px; }
-    .mock-adj { width:26px; height:26px; border-radius:6px; background:var(--surface); border:1px solid var(--bdr); display:flex; align-items:center; justify-content:center; font-size:.9rem; color:var(--txt2); }
-    .mock-pts-bar { flex:1; text-align:center; font-size:.68rem; color:var(--txt2); }
-    .mock-sidebar { width:160px; flex-shrink:0; }
-    .mock-sidebar-title { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt2); margin-bottom:8px; }
-    .mock-rank-row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid var(--bdr); }
-    .mock-rank-row:last-child { border-bottom:none; }
-    .mock-rank-pos { font-size:.75rem; font-weight:800; width:18px; color:var(--txt2); }
-    .mock-rank-name { font-size:.82rem; font-weight:600; flex:1; }
-    .mock-rank-pts { font-size:.82rem; font-weight:800; color:var(--accent); }
-
-    .section { max-width:1100px; margin:0 auto; padding:72px 24px; }
-    .section-title { font-family:'Syne','Inter',sans-serif; font-weight:800; font-size:clamp(1.6rem,3vw,2.2rem); line-height:1.2; text-align:center; margin-bottom:12px; }
-    .section-sub { text-align:center; color:var(--txt2); font-size:.95rem; line-height:1.6; max-width:480px; margin:0 auto 40px; }
-
-    /* Founder */
-    .founder-block{padding:72px 24px;border-bottom:1px solid var(--bdr)}
-    .founder-inner{max-width:860px;margin:0 auto}
-    .founder-eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-    .founder-body{color:var(--txt2);font-size:1rem;line-height:1.7;margin:0}
-
-    /* Feature columns */
-    .fc-section{padding:72px 24px;border-bottom:1px solid var(--bdr)}
-    .fc-inner{max-width:1000px;margin:0 auto}
-    .fc-title{font-family:'Syne','Inter',sans-serif;font-size:clamp(1.35rem,2.5vw,1.7rem);font-weight:800;color:var(--txt);line-height:1.2;margin-bottom:28px}
-    .fc-list{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px}
-    .fc-item{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
-    .fc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
-    .fc-icon svg{width:20px;height:20px}
-    .fc-text h3{font-size:.95rem;font-weight:700;margin-bottom:6px;color:var(--txt)}
-    .fc-text p{font-size:.83rem;color:var(--txt2);line-height:1.6;margin:0}
-    @media(max-width:760px){.fc-list{grid-template-columns:1fr;gap:24px}}
-
-    .screenshots-section { max-width:1200px; margin:0 auto; padding:72px 24px; }
-    .screens-grid { display:flex; justify-content:center; align-items:flex-end; gap:24px; margin-top:40px; overflow-x:auto; padding:0 32px 16px; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; scrollbar-width:none; }
-    .screens-grid::-webkit-scrollbar { display:none; }
-    .screen-item { display:flex; flex-direction:column; align-items:center; gap:16px; flex-shrink:0; scroll-snap-align:center; }
-    .phone-frame { background:#1a1a2e; border-radius:40px; padding:10px; box-shadow:0 0 0 2px #2d2d44,0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.05); width:185px; }
-    .phone-frame img { width:100%; border-radius:32px; display:block; }
-    .screen-label { font-family:'Inter',sans-serif; font-weight:800; font-size:1rem; letter-spacing:.3px; text-align:center; }
-    .screen-desc { font-size:.82rem; color:var(--txt2); text-align:center; max-width:175px; line-height:1.45; }
-    .screen-item.featured .phone-frame { width:215px; box-shadow:0 0 0 2px #2d2d44,0 32px 64px rgba(199,255,94,.12),0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.05); }
-
-    .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; }
-    .step { padding:32px 24px; text-align:center; position:relative; }
-    .step:not(:last-child)::after { content:'→'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color:var(--txt2); font-size:1.2rem; }
-    .step-num { width:44px; height:44px; border-radius:50%; border:2px solid var(--accent); color:var(--accent); font-family:'Inter',sans-serif; font-weight:800; font-size:1.2rem; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
-    .step h4 { font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:6px; }
-    .step p { font-size:.85rem; color:var(--txt2); }
-
-    .formats { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-    .format { background:var(--surface); border:1px solid var(--bdr); border-radius:16px; padding:32px; overflow:hidden; position:relative; }
-    .format::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
-    .format.team::before { background:linear-gradient(90deg,#3b82f6,#8b5cf6); }
-    .format.am::before { background:linear-gradient(90deg,var(--accent),var(--gold)); }
-    .format h3 { font-family:'Inter',sans-serif; font-weight:900; font-size:1.5rem; margin-bottom:10px; }
-    .format p { color:var(--txt2); font-size:.92rem; line-height:1.6; margin-bottom:20px; }
-    .format ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
-    .format ul li { font-size:.88rem; display:flex; align-items:flex-start; gap:8px; }
-    .format ul li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; }
-
-    .cta-wrap { text-align:center; padding:72px 24px; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(199,255,94,.08) 0%,transparent 70%); }
-    .cta-wrap h2 { font-family:'Syne','Inter',sans-serif; font-weight:800; font-size:clamp(1.6rem,3vw,2.2rem); line-height:1.2; margin-bottom:16px; }
-    .cta-wrap p { color:var(--txt2); font-size:1rem; line-height:1.6; max-width:420px; margin:0 auto 40px; }
-
-    .faq-list { max-width:680px; margin:0 auto; display:flex; flex-direction:column; gap:8px; }
-    .faq-item { background:var(--surface); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; }
-    .faq-item summary { list-style:none; cursor:pointer; padding:18px 20px; font-weight:600; font-size:1rem; display:flex; justify-content:space-between; align-items:center; user-select:none; }
-    .faq-item summary::-webkit-details-marker { display:none; }
-    .faq-item summary::after { content:'+'; font-size:1.4rem; color:var(--accent); transition:transform .2s; flex-shrink:0; margin-left:12px; }
-    .faq-item[open] summary::after { transform:rotate(45deg); }
-    .faq-item p { padding:0 20px 18px; color:var(--txt2); line-height:1.65; }
-
-    footer { border-top:1px solid var(--bdr); padding:40px 24px; text-align:center; color:var(--txt2); font-size:.82rem; }
-    footer a { color:var(--accent); text-decoration:none; }
-    footer > p:first-child { line-height: 1.8; max-width: 720px; margin: 0 auto; }
-    .footer-maker { margin-top: 14px; color: var(--txt2); font-size: .82rem; }
-    .footer-tagline { margin-top: 4px; color: var(--txt2); font-size: .78rem; opacity: .55; font-style: italic; }
-
-    /* ── PRESENTATION SHOWCASE ── */
-    .pres-showcase{background:var(--surface);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:72px 24px}
-    .pres-showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-    .pres-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 14px;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#93c5fd;margin-bottom:18px}
-    .pres-showcase h2, .qr-showcase h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.8rem,7vw,4.5rem);font-weight:800;line-height:1.0;letter-spacing:-.01em;margin-bottom:20px}
-    .pres-showcase .pres-sub, .qr-showcase .pres-sub{color:var(--txt2);font-size:.95rem;line-height:1.7;margin-bottom:24px}
-    .pres-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
-    .pres-feat{display:flex;align-items:flex-start;gap:10px}
-    .pres-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
-    .pres-feat span{color:var(--txt2);font-size:.88rem;line-height:1.5}
-    .pres-feat strong{color:var(--txt);font-weight:700}
-    .pres-cta-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:10px;padding:12px 24px;font-weight:700;font-size:.95rem;text-decoration:none;transition:.15s}
-    .pres-cta-btn:hover{background:rgba(199,255,94,.08)}
-    /* ── QR JOIN ── */
-    .qr-showcase{padding:72px 24px;border-bottom:1px solid var(--bdr)}
-    .qr-showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-    .phone-col{display:flex;justify-content:center}
-    .phone-frame-lg{width:220px;background:#111;border-radius:32px;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 32px 80px rgba(0,0,0,.6)}
-    .phone-frame-lg img{width:100%;border-radius:22px;display:block}
-    @media(max-width:900px){.qr-showcase-inner{grid-template-columns:1fr;gap:36px}.phone-col{order:2}}
-    .tv-outer{background:#0a0a0a;border-radius:14px;padding:10px 10px 0;box-shadow:0 0 0 2px rgba(255,255,255,.07),0 32px 80px rgba(0,0,0,.7)}
-    .tv-stand{width:50px;height:8px;background:#111;margin:0 auto;border-radius:0 0 8px 8px}
-    .tv-screen{background:var(--bg);border-radius:6px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column}
-    .tv-hdr{background:var(--surface);border-bottom:1px solid var(--bdr);padding:7px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-    .tv-hdr-title{font-size:.6rem;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:5px}
-    .tv-hdr-badge{font-size:.48rem;font-weight:700;padding:2px 5px;border-radius:3px}
-    .tv-hdr-clock{font-size:.58rem;font-weight:700;color:var(--txt2);font-variant-numeric:tabular-nums}
-    .tv-body{display:grid;grid-template-columns:1fr 1.15fr;gap:5px;padding:5px;flex:1;overflow:hidden;min-height:0}
-    .tv-standings{background:var(--surface);border-radius:5px;padding:5px 7px;overflow:hidden}
-    .tv-section-lbl{font-size:.42rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:4px}
-    .tv-row{display:flex;align-items:center;gap:4px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-    .tv-row:last-child{border-bottom:none}
-    .tv-pos{font-size:.48rem;width:13px;text-align:center;flex-shrink:0}
-    .tv-bar-wrap{flex:1;min-width:0}
-    .tv-name{font-size:.48rem;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-    .tv-bar-bg{height:2px;background:var(--surface2);border-radius:2px}
-    .tv-bar-fill{height:2px;border-radius:2px;background:var(--accent)}
-    .tv-pts{font-size:.48rem;font-weight:800;color:var(--accent)}
-    .tv-matches-col{display:flex;flex-direction:column;gap:4px}
-    .tv-round-lbl{font-size:.42rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
-    .tv-match{background:var(--surface);border-radius:5px;padding:4px 6px;border:1px solid var(--bdr)}
-    .tv-court{font-size:.4rem;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
-    .tv-match-row{display:flex;align-items:center;justify-content:space-between;padding:1px 0}
-    .tv-team{font-size:.48rem;font-weight:600;color:var(--txt)}
-    .tv-score{font-size:.56rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
-    .tv-timer-row{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.18);border-radius:4px;padding:3px 7px;margin-top:2px}
-    .tv-timer-lbl{font-size:.4rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
-    .tv-timer-val{font-size:.58rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
-
-    @media (max-width: 640px) {
-      .formats { grid-template-columns:1fr; }
-      .mock-sidebar { display:none; }
-      .steps { grid-template-columns:1fr 1fr; }
-      .step:not(:last-child)::after { display:none; }
-      .pres-showcase-inner { grid-template-columns:1fr; gap:36px; }
-      .founder-block,
-      .fc-section,
-      .pres-showcase,
-      .qr-showcase,
-      .screenshots-section,
-      .section,
-      .cta-wrap { padding: 48px 20px; }
-      .mockup-wrap { padding: 0 20px 48px; }
-    }
-    @media (max-width: 900px) {
-      .pres-showcase-inner { grid-template-columns:1fr; gap:40px; }
-    }
-    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:var(--surface);border-top:1px solid var(--bdr);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    #cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:999;background:var(--court-blue);color:var(--line);border:1px solid var(--bdr-dark);border-radius:14px;padding:16px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;max-width:640px;margin:0 auto;box-shadow:0 12px 32px rgba(11,30,61,.35)}
     #cookie-banner.hidden{display:none}
-    #cookie-banner p{flex:1;font-size:.82rem;color:var(--txt2);margin:0;min-width:200px}
-    .cookie-accept{background:var(--accent);color:#0E1114;border:none;border-radius:8px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer}
-    .cookie-decline{background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:.82rem;cursor:pointer}
-    .cookie-decline:hover{background:var(--surface2)}
-    .hero-perks{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-    .hero-perk{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--txt2)}
-    .hero-perk svg{flex-shrink:0;opacity:.7}
-    .trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:18px 24px;font-size:.82rem;color:var(--txt2);border-bottom:1px solid var(--bdr)}
-    .trust-sep{color:var(--bdr);font-size:1rem}
-    @media(max-width:480px){.hero-perks{gap:10px}.hero-perk{font-size:.77rem;padding:6px 11px}}
-    @media(max-width:640px){.trust-sep{display:none}.trust-bar{gap:8px 16px}}
+    #cookie-banner p{font-size:.85rem;color:var(--muted-dark);flex:1 1 260px}
+    #cookie-banner a{color:var(--sand)}
+    .cookie-accept,.cookie-decline{border:none;border-radius:8px;padding:9px 16px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:var(--font-body)}
+    .cookie-accept{background:var(--sand);color:var(--court-blue)}
+    .cookie-decline{background:transparent;color:var(--muted-dark);border:1px solid var(--bdr-dark)}
 
-/* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:none}
-.reveal .fc-item:nth-child(2){transition-delay:.08s}
-.reveal .fc-item:nth-child(3){transition-delay:.16s}
-.reveal .step:nth-child(2){transition-delay:.08s}
-.reveal .step:nth-child(3){transition-delay:.16s}
-.reveal .step:nth-child(4){transition-delay:.24s}
-.reveal .format-card:nth-child(2){transition-delay:.08s}
-.reveal .format-card:nth-child(3){transition-delay:.16s}
-.reveal .format-card:nth-child(4){transition-delay:.24s}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-  h1,h2,h3,.section-title,.fc-title,.format-card h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:-.01em}
-  
-  /* ── HERO SPLIT (richting B) ── */
-  .hero.split{display:block;padding:104px 24px 60px}
-  .hero-split-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;text-align:left;position:relative;z-index:1}
-  .hero.split .hero-badge{margin-bottom:22px}
-  .hero.split h1{font-size:clamp(2.2rem,5vw,3.5rem)}
-  .hero.split .hero-kicker{text-align:left}
-  .hero.split .hero-sub{margin:18px 0 0;max-width:480px}
-  .hero.split .hero-btns{justify-content:flex-start;margin-top:30px}
-  .hero.split .hero-perks{justify-content:flex-start}
-  .hero.split .hero-note{text-align:left}
-  /* primary CTA: shine + pulse (clickbait energie) */
-  .btn-primary.hero-main{position:relative;overflow:hidden}
-  .btn-primary.hero-main::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);pointer-events:none}
-  @media(prefers-reduced-motion:no-preference){.btn-primary.hero-main::after{animation:hbShine 3.4s ease-in-out infinite}.btn-primary.hero-main{animation:hbCta 2.6s ease-in-out infinite}}
-  @keyframes hbShine{0%{left:-60%}28%,100%{left:140%}}
-  @keyframes hbCta{0%,100%{box-shadow:0 4px 24px rgba(199,255,94,.3)}50%{box-shadow:0 7px 34px rgba(199,255,94,.55)}}
-  /* live ranglijst paneel */
-  .hero-board{position:relative;background:var(--surface);border:1px solid var(--bdr);border-radius:18px;padding:20px 22px 14px;box-shadow:0 40px 100px rgba(0,0,0,.55);text-decoration:none;color:inherit;display:block;transition:transform .2s}
-  .hero-board:hover{transform:translateY(-3px)}
-  .hero-board::before{content:'';position:absolute;inset:-1px;border-radius:18px;padding:1px;background:linear-gradient(160deg,rgba(199,255,94,.5),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-  .hb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-  .hb-eyebrow{font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--txt2)}
-  .hb-live{display:inline-flex;align-items:center;gap:7px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#ff6b6b;border-radius:99px;padding:5px 11px;font-size:.72rem;font-weight:700}
-  .hb-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-  @media(prefers-reduced-motion:no-preference){.hb-dot{animation:hbPulse 1.6s ease-out infinite}}
-  @keyframes hbPulse{0%{box-shadow:0 0 0 0 rgba(255,107,107,.5)}70%{box-shadow:0 0 0 7px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
-  .hb-row{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-  .hb-rank{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;width:20px;color:var(--txt2);text-align:center}
-  .hb-av{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#0E1114;flex-shrink:0}
-  .hb-name{flex:1}
-  .hb-name b{font-weight:700;font-size:.95rem}
-  .hb-meta{font-size:.72rem;color:var(--txt2);margin-top:2px}
-  .hb-pts{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.65rem}
-  .hb-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;padding:10px;background:rgba(199,255,94,.08);border:1px solid rgba(199,255,94,.22);border-radius:11px;color:var(--accent);font-size:.85rem;font-weight:700}
-  @media(max-width:900px){.hero-split-inner{grid-template-columns:1fr;gap:34px;text-align:center}.hero.split .hero-kicker,.hero.split .hero-note{text-align:center}.hero.split .hero-btns,.hero.split .hero-perks{justify-content:center}.hero.split .hero-sub{margin-left:auto;margin-right:auto}.hero-board{max-width:440px;margin:0 auto;width:100%}}
-</style>
+    nav{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1180px;margin:0 auto;color:var(--line)}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:1.15rem;text-decoration:none;color:var(--line)}
+    .nav-logo em{font-style:normal;color:var(--sand)}
+    .nav-logo-icon{border-radius:6px}
+    .nav-lang select{background:rgba(245,243,236,.08);color:var(--line);border:1px solid var(--bdr-dark);border-radius:8px;padding:7px 10px;font-size:.85rem;font-family:var(--font-body);cursor:pointer}
+    .nav-cta{background:var(--sand);color:var(--court-blue);font-weight:700;padding:9px 16px;border-radius:9px;text-decoration:none;font-size:.9rem;white-space:nowrap}
+    .nav-cta .short{display:none}
+    @media(max-width:520px){.nav-cta .full{display:none}.nav-cta .short{display:inline}}
+
+    .hero{position:relative;background:var(--court-blue);color:var(--line);overflow:hidden;padding-bottom:64px}
+    .hero-lines{position:absolute;inset:0;opacity:.14;pointer-events:none}
+    .hero-inner{position:relative;max-width:820px;margin:0 auto;padding:28px 24px 0;text-align:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,243,236,.08);border:1px solid var(--bdr-dark);border-radius:999px;padding:7px 16px;font-size:.82rem;color:var(--muted-dark);margin-bottom:22px}
+    .hero h1{font-size:clamp(2.2rem,6vw,3.6rem);color:var(--line)}
+    .hero h1 em{font-style:normal;color:var(--sand)}
+    .hero-sub{font-size:clamp(1.02rem,2.4vw,1.2rem);color:var(--muted-dark);max-width:600px;margin:20px auto 0}
+    .hero-cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px}
+    .btn-primary{display:inline-flex;align-items:center;gap:9px;background:var(--sand);color:var(--court-blue);font-weight:700;font-size:1rem;padding:14px 24px;border-radius:11px;text-decoration:none;border:none;cursor:pointer;font-family:var(--font-body);transition:transform .15s,background .15s}
+    .btn-primary:hover{background:var(--sand-deep);transform:translateY(-1px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;color:var(--line);font-weight:600;font-size:.95rem;padding:14px 8px;text-decoration:none;border-bottom:1px solid var(--bdr-dark)}
+
+    .hero-demo{position:relative;max-width:640px;margin:44px auto 0;background:var(--court-blue2);border:1px solid var(--bdr-dark);border-radius:18px;padding:24px;text-align:left}
+    .demo-label{display:block;font-size:.82rem;font-weight:700;color:var(--muted-dark);margin-bottom:8px}
+    .demo-input{width:100%;background:rgba(245,243,236,.06);border:1px solid var(--bdr-dark);border-radius:10px;padding:12px 14px;color:var(--line);font-family:var(--font-body);font-size:.95rem;resize:vertical;min-height:88px}
+    .demo-input::placeholder{color:rgba(245,243,236,.35)}
+    .demo-example-btn{margin-top:10px;background:transparent;border:1px dashed var(--bdr-dark);color:var(--muted-dark);font-size:.85rem;padding:8px 14px;border-radius:8px;cursor:pointer;font-family:var(--font-body)}
+    .demo-example-btn:hover{color:var(--line);border-color:var(--sand)}
+    .demo-error{margin-top:12px;font-size:.85rem;color:var(--sand)}
+    .demo-courts{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+    .demo-placeholder{grid-column:1/-1;color:var(--muted-dark);font-size:.88rem;padding:8px 2px}
+    .demo-court{background:var(--court-blue);border:1px solid var(--bdr-dark);border-radius:11px;padding:14px}
+    .demo-court-label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sand);margin-bottom:8px}
+    .demo-team{font-size:.92rem;font-weight:600;color:var(--line)}
+    .demo-vs{font-size:.72rem;color:var(--muted-dark);margin:3px 0;text-transform:uppercase;letter-spacing:.05em}
+    .demo-bye{grid-column:1/-1;font-size:.82rem;color:var(--muted-dark);margin-top:2px}
+    .demo-cta{margin-top:18px;width:100%;justify-content:center}
+
+    .section{padding:76px 24px}
+    .section-inner{max-width:1180px;margin:0 auto}
+    .section-title{font-size:clamp(1.7rem,4vw,2.4rem);text-align:center;color:var(--ink)}
+    .section-lead{text-align:center;color:var(--muted);max-width:560px;margin:14px auto 0;font-size:1.02rem}
+
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .step{background:var(--paper2);border-radius:16px;padding:28px 24px;text-align:left}
+    .step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--court-blue);color:var(--sand);font-family:var(--font-display);font-weight:800;font-size:.95rem;margin-bottom:16px}
+    .step h3{font-size:1.15rem;margin-bottom:8px;color:var(--ink)}
+    .step p{color:var(--muted);font-size:.92rem}
+    .step-visual{margin-top:16px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--court-blue),var(--court-blue2));position:relative;overflow:hidden}
+
+    .audience{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .aud-card{border:1px solid var(--bdr-light);border-radius:16px;padding:28px 24px;background:#fff}
+    .aud-card h3{font-size:1.2rem;margin-bottom:14px;color:var(--ink)}
+    .aud-card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .aud-card li{font-size:.92rem;color:var(--muted);padding-left:22px;position:relative}
+    .aud-card li::before{content:'';position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:50%;background:var(--sand)}
+
+    .format-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+    .format-tile{display:flex;flex-direction:column;gap:6px;border:1px solid var(--bdr-light);border-radius:14px;padding:20px 18px;text-decoration:none;color:var(--ink);background:#fff;transition:border-color .15s,transform .15s}
+    .format-tile:hover{border-color:var(--sand-deep);transform:translateY(-2px)}
+    .format-tile strong{font-family:var(--font-display);font-size:1.02rem}
+    .format-tile span{font-size:.82rem;color:var(--muted)}
+
+    .compare-wrap{overflow-x:auto;margin-top:48px}
+    table.compare{width:100%;border-collapse:collapse;min-width:520px}
+    table.compare th,table.compare td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--bdr-light);font-size:.92rem}
+    table.compare th{font-family:var(--font-display);font-weight:800;color:var(--ink)}
+    table.compare td:not(:first-child),table.compare th:not(:first-child){text-align:center}
+    table.compare td:first-child{color:var(--muted)}
+    .cmp-yes{color:#1a7a4c;font-weight:700}
+    .cmp-no{color:var(--muted)}
+    table.compare thead th:nth-child(2){color:var(--court-blue)}
+
+    .numbers{background:var(--court-blue);color:var(--line)}
+    .numbers .section-title{color:var(--line)}
+    .numbers .section-lead{color:var(--muted-dark)}
+    .numbers-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:48px;text-align:center}
+    .numbers-grid .num{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--sand)}
+    .numbers-grid .lbl{font-size:.82rem;color:var(--muted-dark);margin-top:4px}
+    .numbers-grid a{text-decoration:none}
+
+    .faq-list{max-width:700px;margin:48px auto 0;display:flex;flex-direction:column;gap:10px}
+    .faq-item{background:#fff;border:1px solid var(--bdr-light);border-radius:12px;overflow:hidden}
+    .faq-item summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:700;font-size:.98rem;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-size:1.4rem;color:var(--sand-deep);transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{transform:rotate(45deg)}
+    .faq-item p{padding:0 20px 18px;color:var(--muted);line-height:1.65;font-size:.92rem}
+
+    .cta-wrap{background:var(--court-blue);color:var(--line);text-align:center;padding:88px 24px}
+    .cta-wrap h2{font-size:clamp(1.8rem,4.5vw,2.6rem);color:var(--line)}
+    .cta-wrap p{color:var(--muted-dark);margin-top:14px;font-size:1.02rem}
+    .cta-wrap .btn-primary{margin-top:28px}
+
+    footer{background:var(--paper2);padding:36px 24px;text-align:center}
+    footer p{font-size:.85rem;color:var(--muted);max-width:820px;margin:0 auto;line-height:1.9}
+    footer a{color:var(--court-blue);text-decoration:none;font-weight:600}
+    footer a:hover{text-decoration:underline}
+    .footer-maker{margin-top:12px;font-weight:600;color:var(--ink)}
+    .footer-tagline{margin-top:4px;font-size:.8rem;color:var(--muted)}
+
+    @media(max-width:900px){
+      .steps,.audience{grid-template-columns:1fr}
+      .format-grid{grid-template-columns:repeat(2,1fr)}
+      .numbers-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:520px){
+      .section{padding:56px 20px}
+      .hero-inner{padding-top:20px}
+      .hero-demo{padding:18px}
+      .format-grid{grid-template-columns:1fr 1fr}
+      .numbers-grid{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
 </head>
 <body>
 
 <div id="cookie-banner" class="hidden">
-  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="/privacy/" style="color:var(--accent)">Privacy policy</a></p>
+  <p>We use analytics to understand how visitors use this site. No ads, no personal data sold. <a href="/privacy/">Privacy policy</a></p>
   <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
   <button class="cookie-decline" onclick="declineCookies()">Decline</button>
 </div>
 
-<nav>
-  <a class="nav-logo" href="/en/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
-  <div class="nav-lang">
-    <select onchange="switchLang(this.value)" aria-label="Choose language">
-      <option value="nl">NL</option>
-      <option value="en" selected>EN</option>
-      <option value="fr">FR</option>
-      <option value="de">DE</option>
-      <option value="es">ES</option>
-      <option value="it">IT</option>
-      <option value="pt">PT</option>
-      <option value="sv">SV</option>
-    </select>
-  </div>
-  <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
-</nav>
-<script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';}
-</script>
+<section class="hero">
+  <svg class="hero-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+    <rect x="60" y="40" width="1080" height="620" fill="none" stroke="#F5F3EC" stroke-width="2"/>
+    <line x1="600" y1="40" x2="600" y2="660" stroke="#F5F3EC" stroke-width="2"/>
+    <line x1="60" y1="240" x2="1140" y2="240" stroke="#F5F3EC" stroke-width="2"/>
+    <line x1="60" y1="460" x2="1140" y2="460" stroke="#F5F3EC" stroke-width="2"/>
+    <circle cx="600" cy="350" r="90" fill="none" stroke="#F5F3EC" stroke-width="2"/>
+  </svg>
 
-<!-- HERO -->
-<section class="hero split">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <div class="hero-split-inner">
-    <div class="hero-copy">
-      <div class="hero-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        Free · No account · Works offline too
-      </div>
-
-      <h1>Tournament ready in <em>30 seconds</em></h1>
-      <p class="hero-kicker">Bracket · Americano · Mexicano · Round Robin</p>
-      <p class="hero-sub">Enter the player names. The app handles the schedule, tracks standings and shares everything via one link. Free, no account needed.</p>
-
-      <div class="hero-btns">
-        <a class="btn-primary hero-main" href="/app/">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Start tournament
-        </a>
-        <button class="btn-secondary btn-install" id="installBtn" style="display:none" onclick="installApp()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13M7 11l5 5 5-5"/><path d="M3 19h18"/></svg>
-          Install app
-        </button>
-        <a class="btn-secondary" href="#how-it-works" id="howBtn">How does it work?</a>
-      </div>
-      <div class="hero-perks">
-        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Live TV scoreboard</div>
-        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Players submit scores</div>
-        <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> 30-second setup</div>
-      </div>
-      <p class="hero-note">Works on phone, tablet and desktop · Installable as app · 6 languages</p>
+  <nav>
+    <a class="nav-logo" href="/en/"><img src="/icon.svg" width="28" height="28" alt="" class="nav-logo-icon">Padel <em>Bracket</em></a>
+    <div class="nav-lang">
+      <select onchange="switchLang(this.value)" aria-label="Choose language">
+        <option value="nl">NL</option>
+        <option value="en" selected>EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+        <option value="pt">PT</option>
+        <option value="sv">SV</option>
+      </select>
     </div>
+    <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
+  </nav>
 
-    <a class="hero-board" href="/app/" aria-label="View the live standings in the app">
-      <div class="hb-head">
-        <span class="hb-eyebrow">Summer Cup · standings</span>
-        <span class="hb-live"><span class="hb-dot"></span>LIVE</span>
-      </div>
-      <div class="hb-row">
-        <span class="hb-rank" style="color:var(--gold)">1</span>
-        <span class="hb-av" style="background:var(--gold)">J</span>
-        <span class="hb-name"><b>Joost &amp; Roos</b><div class="hb-meta">7 played · +21 balance</div></span>
-        <span class="hb-pts" style="color:var(--gold)">54</span>
-      </div>
-      <div class="hb-row">
-        <span class="hb-rank">2</span>
-        <span class="hb-av" style="background:var(--accent)">L</span>
-        <span class="hb-name"><b>Lars &amp; Eline</b><div class="hb-meta">7 played · +14 balance</div></span>
-        <span class="hb-pts" style="color:var(--accent)">47</span>
-      </div>
-      <div class="hb-row">
-        <span class="hb-rank">3</span>
-        <span class="hb-av" style="background:#b4a0f7">M</span>
-        <span class="hb-name"><b>Mees &amp; Sara</b><div class="hb-meta">7 played · +6 balance</div></span>
-        <span class="hb-pts">39</span>
-      </div>
-      <div class="hb-foot">View live standings →</div>
-    </a>
-  </div>
-</section>
-
-<!-- FOUNDER -->
-<section class="founder-block">
-  <div class="founder-inner">
-    <div class="founder-text-col">
-      <span class="founder-eyebrow">The person behind PadelBracket</span>
-      <p class="founder-body">I'm Danny, a padel fan from Rotterdam. I was done with the hassle: sorting players on a notepad, tracking scores in the group chat, and always someone losing track of the standings. Tools that solved this were expensive or packed with accounts and ads. So I built it myself, free, no account. One link, done.</p>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Free · No account · Works offline too
     </div>
-  </div>
-</section>
+    <h1>Your tournament's ready <em>before your coffee gets cold</em></h1>
+    <p class="hero-sub">8 formats, 8 languages, 0 accounts, 100% free. Type the names, we do the rest.</p>
 
-<!-- MOCKUP -->
-<div class="mockup-wrap">
-  <div class="mockup">
-    <div class="mockup-bar">
-      <div class="mockup-dot" style="background:#ef4444"></div>
-      <div class="mockup-dot" style="background:#fbbf24"></div>
-      <div class="mockup-dot" style="background:#a8d94e"></div>
-    </div>
-    <div class="mockup-screen">
-      <div class="mock-header">
-        <div class="mock-logo">Padel <em>Bracket</em> <span style="font-size:.65rem;background:rgba(199,255,94,.15);color:var(--accent);padding:2px 7px;border-radius:5px;font-family:'Inter',sans-serif;font-weight:700;margin-left:6px">AMERICANO</span></div>
-        <div class="mock-actions">
-          <div class="mock-action-btn pres">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            Presentation
-          </div>
-          <div class="mock-action-btn share">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
-            Share
-          </div>
-        </div>
-      </div>
-      <div class="mock-body">
-        <div class="mock-rounds">
-          <div>
-            <div class="mock-round-lbl">Round 1 ✓</div>
-            <div class="mock-match" style="opacity:.5">
-              <div class="mock-match-row"><span class="mock-team-name">Joost &amp; Roos</span><span class="mock-score-num done">18</span></div>
-              <div class="mock-match-row"><span class="mock-team-name">Eline &amp; Lars</span><span class="mock-score-num done">14</span></div>
-            </div>
-          </div>
-          <div>
-            <div class="mock-round-lbl">Round 2, in progress</div>
-            <div class="mock-match">
-              <div class="mock-match-row"><span class="mock-team-name">Joost &amp; Eline</span><span class="mock-score-num">9</span></div>
-              <div class="mock-match-row"><span class="mock-team-name">Roos &amp; Lars</span><span class="mock-score-num">7</span></div>
-              <div class="mock-controls">
-                <div class="mock-adj">−</div><div class="mock-adj">+</div>
-                <div class="mock-pts-bar">16/32 points</div>
-                <div class="mock-adj">−</div><div class="mock-adj">+</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="mock-round-lbl">Round 3</div>
-            <div class="mock-match" style="opacity:.4">
-              <div class="mock-match-row"><span class="mock-team-name">Joost &amp; Lars</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div>
-              <div class="mock-match-row"><span class="mock-team-name">Roos &amp; Eline</span><span class="mock-score-num" style="color:var(--txt2)">0</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="mock-sidebar">
-          <div class="mock-sidebar-title">Standings</div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="color:var(--gold)">1</div><div class="mock-rank-name">Joost</div><div class="mock-rank-pts">27</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">2</div><div class="mock-rank-name">Roos</div><div class="mock-rank-pts">25</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos">3</div><div class="mock-rank-name">Eline</div><div class="mock-rank-pts">21</div></div>
-          <div class="mock-rank-row"><div class="mock-rank-pos" style="font-size:.75rem;font-weight:800">4</div><div class="mock-rank-name">Lars</div><div class="mock-rank-pts">19</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="trust-bar">
-  <span>Built by one padel fan in Rotterdam</span>
-  <span class="trust-sep">·</span>
-  <span>No tracker, no ads</span>
-  <span class="trust-sep">·</span>
-  <span>Works on any device, even offline</span>
-</div>
-
-<!-- QR JOIN -->
-<section class="qr-showcase">
-  <div class="qr-showcase-inner">
-    <div class="phone-col">
-      <div class="phone-frame-lg">
-        <img src="/screenshot-americano.png" alt="Live standings on phone" loading="lazy">
-      </div>
-    </div>
-    <div>
-      <div class="pres-badge" style="background:rgba(139,92,246,.12);color:#a78bfa;border-color:rgba(139,92,246,.25)">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        QR share link
-      </div>
-      <h2>Everyone follows live on their own phone</h2>
-      <p class="pres-sub">Share one link in the group chat. Players pick their name and submit their own score. The organiser approves it with one tap. No download, no account.</p>
-      <div class="pres-feats">
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>One link for everyone.</strong> Share via WhatsApp, iMessage or any chat app</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Players submit scores.</strong> Pick your name via the link and enter your result</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>No account needed.</strong> Just open the link, nothing to install</span></div>
-      </div>
-      <a class="pres-cta-btn" href="/app/">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Try it now
+    <div class="hero-demo" data-padel-demo
+         data-example-names="Anna,Ben,Chloe,Dylan,Ella,Finn,Grace,Harry"
+         data-error-min="Add at least 4 names to see round 1."
+         data-placeholder="Type 4 or more names above. Round 1 of your Americano schedule appears here live."
+         data-bye-label="Resting this round:"
+         data-vs-label="vs"
+         data-court-label="Court"
+         data-cta-url="/app/">
+      <label class="demo-label" for="demo-input">Names of your players (one per line, or comma-separated)</label>
+      <textarea id="demo-input" class="demo-input" data-demo-input rows="4" placeholder="Anna&#10;Ben&#10;Chloe&#10;Dylan"></textarea>
+      <button type="button" class="demo-example-btn" data-demo-example>Try with example names</button>
+      <p class="demo-error" data-demo-error hidden></p>
+      <div class="demo-courts" data-demo-courts></div>
+      <a class="btn-primary demo-cta" data-demo-cta href="/app/?format=americano">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Continue in the app
       </a>
     </div>
-  </div>
-</section>
 
-<!-- PRESENTATION SHOWCASE -->
-<section class="pres-showcase">
-  <div class="pres-showcase-inner">
-    <div>
-      <div class="pres-badge">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        Live Club Screen
-      </div>
-      <h2>Live scoreboard on the TV</h2>
-      <p class="pres-sub">Turn any TV into a live tournament scoreboard. Connect via HDMI or cast from Chrome. Scores update automatically every 3 seconds, no extra app needed.</p>
-      <div class="pres-feats">
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Fullscreen TV mode.</strong> Display on big screen via HDMI or cast from Chrome to Chromecast</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Live updates every 3 seconds.</strong> Scores appear on screen as soon as you enter them on your phone</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Countdown timer per round.</strong> Set a round time limit and start counting down with one tap</span></div>
-        <div class="pres-feat"><div class="pres-feat-dot"></div><span><strong>Leaderboard and active matches.</strong> Everyone sees their position and the ongoing matches at once</span></div>
-      </div>
-      <a class="pres-cta-btn" href="/app/">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Try presentation mode
-      </a>
-    </div>
-    <!-- TV frame mockup -->
-    <div>
-      <div class="tv-outer">
-        <div class="tv-screen">
-          <div class="tv-hdr">
-            <div class="tv-hdr-title">
-              Padel <span style="color:var(--accent)">Bracket</span>
-              <span class="tv-hdr-badge" style="background:rgba(199,255,94,.15);color:var(--accent)">AMERICANO</span>
-              <span class="tv-hdr-badge" style="background:rgba(239,68,68,.15);color:#ef4444">● LIVE</span>
-            </div>
-            <div class="tv-hdr-clock">14:32</div>
-          </div>
-          <div class="tv-body">
-            <div class="tv-standings">
-              <div class="tv-section-lbl">Standings</div>
-              <div class="tv-row">
-                <div class="tv-pos" style="color:var(--gold)">1</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Joost</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:90%"></div></div></div>
-                <div class="tv-pts">54</div>
-              </div>
-              <div class="tv-row">
-                <div class="tv-pos">2</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Roos</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:78%"></div></div></div>
-                <div class="tv-pts">47</div>
-              </div>
-              <div class="tv-row">
-                <div class="tv-pos">3</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Eline</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:65%"></div></div></div>
-                <div class="tv-pts">39</div>
-              </div>
-              <div class="tv-row">
-                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">4</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Lars</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:55%"></div></div></div>
-                <div class="tv-pts">33</div>
-              </div>
-              <div class="tv-row">
-                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">5</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Koen</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:45%"></div></div></div>
-                <div class="tv-pts">27</div>
-              </div>
-              <div class="tv-row">
-                <div class="tv-pos" style="font-size:.42rem;font-weight:800;color:var(--txt2)">6</div>
-                <div class="tv-bar-wrap"><div class="tv-name">Anna</div><div class="tv-bar-bg"><div class="tv-bar-fill" style="width:36%"></div></div></div>
-                <div class="tv-pts">21</div>
-              </div>
-            </div>
-            <div class="tv-matches-col">
-              <div class="tv-round-lbl">Round 3, in progress</div>
-              <div class="tv-match">
-                <div class="tv-court">Court 1</div>
-                <div class="tv-match-row"><span class="tv-team">Joost &amp; Eline</span><span class="tv-score">12</span></div>
-                <div class="tv-match-row"><span class="tv-team">Roos &amp; Koen</span><span class="tv-score">9</span></div>
-              </div>
-              <div class="tv-match">
-                <div class="tv-court">Court 2</div>
-                <div class="tv-match-row"><span class="tv-team">Lars &amp; Anna</span><span class="tv-score">8</span></div>
-                <div class="tv-match-row"><span class="tv-team">Bas &amp; Eva</span><span class="tv-score">11</span></div>
-              </div>
-              <div class="tv-timer-row">
-                <span class="tv-timer-lbl">Timer</span>
-                <span class="tv-timer-val">12:34</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tv-stand"></div>
+    <div class="hero-cta-row">
+      <a class="btn-ghost" href="#formats">See all formats</a>
     </div>
   </div>
 </section>
 
-<!-- FEATURES-A -->
-<section class="fc-section">
-  <div class="fc-inner">
-    <h2 class="fc-title">Formats and offline use</h2>
-    <div class="fc-list">
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
-        <div class="fc-text">
-          <h3>Four tournament formats</h3>
-          <p>Knockout bracket (groups + final), Americano (rotating partners), Mexicano (partners based on standings) and Round Robin (everyone vs. everyone). Choose what suits your group.</p>
-        </div>
-      </div>
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
-        <div class="fc-text">
-          <h3>Installable, works offline</h3>
-          <p>Add the app to your home screen. Works without internet after that. No App Store, no account, no password.</p>
-        </div>
-      </div>
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
-        <div class="fc-text">
-          <h3>6 languages, automatic</h3>
-          <p>Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language, great for international groups.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- FEATURES-B -->
-<section class="fc-section">
-  <div class="fc-inner">
-    <h2 class="fc-title">Presentation, scores and export</h2>
-    <div class="fc-list">
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(239,68,68,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="fc-text">
-          <h3>Presentation mode</h3>
-          <p>Fullscreen scoreboard on TV or projector, showing standings, active matches and countdown timer, updated live. No extra app needed.</p>
-        </div>
-      </div>
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(34,197,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></div>
-        <div class="fc-text">
-          <h3>Players submit scores via the link</h3>
-          <p>Players open the share link, pick their name and submit their own score. The organiser approves with one tap. Spectators follow live, no account needed.</p>
-        </div>
-      </div>
-      <div class="fc-item">
-        <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
-        <div class="fc-text">
-          <h3>Export to CSV &amp; PDF</h3>
-          <p>Download final standings and all match results as CSV for Excel, or print as PDF. Handy as a keepsake or for club administration.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCREENSHOTS -->
-<section class="screenshots-section">
-  <h2 class="section-title">See the app in action</h2>
-  <p class="section-sub">Clean, fast and works on every screen.</p>
-  <div class="screens-grid">
-    <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame">
-        <img src="/screenshot-team-poule.png" alt="Knockout group stage with completed matches per round" loading="lazy">
-      </div>
-      <div class="screen-label">Knockout pool stage</div>
-      <div class="screen-desc">Matches per round, enter scores, automatically advances to next round.</div>
-    </div>
-    <div class="screen-item featured">
-      <div class="phone-frame">
-        <img src="/screenshot-americano-scoring.png" alt="Americano score entry with plus and minus buttons per court" loading="lazy">
-      </div>
-      <div class="screen-label">Americano scoring</div>
-      <div class="screen-desc">Track scores per pair with +/- buttons, live points per round.</div>
-    </div>
-    <div class="screen-item featured">
-      <div class="phone-frame">
-        <img src="/screenshot-americano.png" alt="Player view showing own match highlighted with score submit button" loading="lazy">
-      </div>
-      <div class="screen-label">Player view</div>
-      <div class="screen-desc">Each player sees their own match highlighted and can submit their own score.</div>
-    </div>
-    <div class="screen-item" style="transform:translateY(24px)">
-      <div class="phone-frame">
-        <img src="/screenshot-winner.png" alt="Bracket final standings with winner and consolation final" loading="lazy">
-      </div>
-      <div class="screen-label">Final standings</div>
-      <div class="screen-desc">Winners bracket, consolation final and full rankings in one view.</div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
 <section class="section" id="how-it-works">
-  <h2 class="section-title">Ready in 4 steps</h2>
-  <p class="section-sub">In less than a minute you have a complete tournament ready to go.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><h4>Enter names</h4><p>Type the player names. The app automatically creates pairs and rounds.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Choose format</h4><p>Americano, Mexicano, Knockout or Round Robin. Pick what fits your group.</p></div>
-    <div class="step"><div class="step-num">3</div><h4>Track scores</h4><p>Enter live scores. Standings update instantly on screen and on participants' phones.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Champion</h4><p>After the last round the final standings appear. Export as PDF or CSV as a keepsake.</p></div>
+  <div class="section-inner">
+    <h2 class="section-title">How it works, in 3 steps</h2>
+    <p class="section-lead">No install, no account, no instructions needed.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-visual" aria-hidden="true"></div>
+        <div class="step-num">1</div>
+        <h3>Type the names</h3>
+        <p>Paste or type your player names. Four is enough to start, more is always fine.</p>
+      </div>
+      <div class="step">
+        <div class="step-visual" aria-hidden="true"></div>
+        <div class="step-num">2</div>
+        <h3>Choose the format</h3>
+        <p>Americano, Mexicano, King of the Court and more. The app builds the schedule automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-visual" aria-hidden="true"></div>
+        <div class="step-num">3</div>
+        <h3>Play and share</h3>
+        <p>Enter scores, share the live standings via a link, and wrap up with a PDF export.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FORMATS -->
-<section class="section">
-  <h2 class="section-title">Seven tournament formats</h2>
-  <p class="section-sub">Choose the format that fits your group.</p>
-  <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="format team">
-      <h3>Team tournament</h3>
-      <p>Fixed pairs play groups, then the top 4 advance to the finals bracket. The rest play a consolation bracket.</p>
-      <ul>
-        <li>Fixed pairs all day</li>
-        <li>Group stage + winners bracket</li>
-        <li>Consolation final for places 5 to 9</li>
-        <li>2 or more teams (4 or more players)</li>
-      </ul>
-      <a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout generator →</a>
-    </div>
-    <div class="format am">
-      <h3>Americano</h3>
-      <p>New partners every round via a fixed rotation. Everyone plays with and against everyone. Ideal for a fun social session.</p>
-      <ul>
-        <li>Partners rotate each round</li>
-        <li>Points tracked per player</li>
-        <li>Live standings &amp; presentation mode</li>
-        <li>4 or more players</li>
-      </ul>
-      <a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano generator →</a>
-    </div>
-    <div class="format am">
-      <h3>Mexicano</h3>
-      <p>Like Americano, but pairs are reassigned after each round based on current standings. Gets more competitive as it goes.</p>
-      <ul>
-        <li>Partners based on standings</li>
-        <li>Points tracked per player</li>
-        <li>More competitive each round</li>
-        <li>4 or more players</li>
-      </ul>
-      <a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano generator →</a>
-    </div>
-    <div class="format team">
-      <h3>Round Robin</h3>
-      <p>Every team plays every other team. Fair, clear and suited for competitive club tournaments.</p>
-      <ul>
-        <li>Everyone plays everyone</li>
-        <li>Automatic standings</li>
-        <li>Export to PDF &amp; CSV</li>
-        <li>4 to 16 players</li>
-      </ul>
-      <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
-    </div>
-    <div class="format am">
-      <h3>King of the Court</h3>
-      <p>Court 1 is the King's Court. Winners promote up a court, losers drop down. Whoever holds the King's Court longest wins. Arrivals on a court always split up.</p>
-      <ul>
-        <li>Winners promote, losers drop down</li>
-        <li>Fair rest rotation via challenger pool</li>
-        <li>Fixed points or play by time</li>
-        <li>8 or more players</li>
-      </ul>
-      <a href="/king-of-the-court/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">King of the Court generator →</a>
-    </div>
-    <div class="format am">
-      <h3>Mixicano</h3>
-      <p>Like Mexicano, but every team is always one man and one woman. Round 1 is random, then men and women are ranked separately by points and paired by rank.</p>
-      <ul>
-        <li>Always mixed teams</li>
-        <li>Pairing based on standings</li>
-        <li>Fair rest rotation for uneven counts</li>
-        <li>4 or more players</li>
-      </ul>
-      <a href="/mixicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mixicano generator →</a>
-    </div>
-    <div class="format team">
-      <h3>Team Mexicano</h3>
-      <p>Fixed pairs like Team Americano, but opponents are assigned by live standings each round instead of a fixed schedule. A swap avoids an immediate rematch of the previous round.</p>
-      <ul>
-        <li>Fixed pairs, standings-based opponents</li>
-        <li>Opponent assigned by rank</li>
-        <li>Points then head-to-head tiebreak</li>
-        <li>3 or more pairs</li>
-      </ul>
-      <a href="/team-mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Team Mexicano generator →</a>
+<section class="section" style="background:var(--paper2)">
+  <div class="section-inner">
+    <h2 class="section-title">Built for everyone on the court</h2>
+    <div class="audience">
+      <div class="aud-card">
+        <h3>Organizer</h3>
+        <ul>
+          <li>Built-in match timer per round</li>
+          <li>Swap out no-shows and late arrivals easily</li>
+          <li>TV mode for a big screen in the clubhouse</li>
+          <li>Everything saved locally, even without wifi</li>
+        </ul>
+      </div>
+      <div class="aud-card">
+        <h3>Player</h3>
+        <ul>
+          <li>Your own match view on your phone</li>
+          <li>Submit your own score, organizer approves</li>
+          <li>Live standings, no account or install</li>
+        </ul>
+      </div>
+      <div class="aud-card">
+        <h3>Club</h3>
+        <ul>
+          <li>Signup links so players register themselves</li>
+          <li>ELO-rated competitions across multiple sessions</li>
+          <li>Ladder standings that update automatically</li>
+        </ul>
+      </div>
     </div>
   </div>
-  <p style="text-align:center;margin-top:32px;font-size:.9rem;color:rgba(249,250,251,.5)">Also available for pickleball: <a href="/pickleball/" style="color:var(--accent);font-weight:600;text-decoration:none;">pickleball tournament generator →</a></p>
 </section>
 
-<!-- FAQ -->
+<section class="section" id="formats">
+  <div class="section-inner">
+    <h2 class="section-title">Seven padel formats, plus pickleball</h2>
+    <p class="section-lead">Pick a format for the full rules, guide and a demo.</p>
+    <div class="format-grid">
+      <a class="format-tile" href="/americano/"><strong>Americano</strong><span>Rotating partners, points per player</span></a>
+      <a class="format-tile" href="/mexicano/"><strong>Mexicano</strong><span>Partners based on live standings</span></a>
+      <a class="format-tile" href="/mixicano/"><strong>Mixicano</strong><span>Mixed-gender partners</span></a>
+      <a class="format-tile" href="/team-mexicano/"><strong>Team Mexicano</strong><span>Fixed pairs, Mexicano schedule</span></a>
+      <a class="format-tile" href="/king-of-the-court/"><strong>King of the Court</strong><span>Winners move up, losers move down</span></a>
+      <a class="format-tile" href="/knockout/"><strong>Knockout</strong><span>Groups followed by a bracket</span></a>
+      <a class="format-tile" href="/round-robin/"><strong>Round Robin</strong><span>Everyone plays everyone</span></a>
+      <a class="format-tile" href="/pickleball/"><strong>Pickleball</strong><span>All formats, for pickleball too</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--paper2)">
+  <div class="section-inner">
+    <h2 class="section-title">PadelBracket vs other apps</h2>
+    <p class="section-lead">Compared honestly, no fine print.</p>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>&nbsp;</th><th>PadelBracket</th><th>Other apps</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Price</td><td class="cmp-yes">Free</td><td class="cmp-no">Often premium</td></tr>
+          <tr><td>Account required</td><td class="cmp-yes">No</td><td class="cmp-no">Usually required</td></tr>
+          <tr><td>Number of players</td><td class="cmp-yes">Unlimited</td><td class="cmp-no">Often capped at 24</td></tr>
+          <tr><td>Works offline</td><td class="cmp-yes">Yes</td><td class="cmp-no">Usually not</td></tr>
+          <tr><td>Editable mid-tournament</td><td class="cmp-yes">Yes</td><td class="cmp-no">Usually not</td></tr>
+          <tr><td>Open source</td><td class="cmp-yes">Yes</td><td class="cmp-no">No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section numbers">
+  <div class="section-inner">
+    <h2 class="section-title">Numbers that check out</h2>
+    <div class="numbers-grid">
+      <div><div class="num">8</div><div class="lbl">formats</div></div>
+      <div><div class="num">8</div><div class="lbl">languages</div></div>
+      <div><div class="num">30s</div><div class="lbl">setup</div></div>
+      <div><div class="num">€0</div><div class="lbl">always</div></div>
+      <div><a href="https://github.com/DannydeVis/padel-toernooi" target="_blank" rel="noopener"><div class="num">GitHub</div><div class="lbl">open source</div></a></div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="faq">
-  <h2 class="section-title">Frequently asked questions</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary>Is PadelBracket free?</summary>
-      <p>Yes, PadelBracket is completely free. No subscription, no account, no paywall. All features are available immediately.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Which tournament formats are supported?</summary>
-      <p>PadelBracket supports four formats: <strong>knockout bracket</strong> (groups → semi-finals → final), <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners based on standings) and <strong>Round Robin</strong> (everyone plays everyone).</p>
-    </details>
-    <details class="faq-item">
-      <summary>What is the difference between Americano and Mexicano?</summary>
-      <p>In <strong>Americano</strong>, partners are determined in advance via a fixed rotation. Everyone plays exactly once together. In <strong>Mexicano</strong>, partners are reassigned after each round based on current standings: rank 1 and 2 play together against rank 3 and 4. Mexicano gets more competitive as the tournament progresses.</p>
-    </details>
-    <details class="faq-item">
-      <summary>What does presentation mode do?</summary>
-      <p>Presentation mode opens a fullscreen scoreboard, ideal for a TV or projector in the clubhouse. You see the live standings and all active matches with live scores. The screen refreshes automatically every 3 seconds.</p>
-    </details>
-    <details class="faq-item">
-      <summary>How can participants watch live?</summary>
-      <p>Use the <strong>Share</strong> button in the app to generate a unique link. Participants open it on their phone and see the live standings, no account, no installation. Scores update as you enter them.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Can players submit their own scores?</summary>
-      <p>Yes. Enable <strong>Players enter scores</strong> mode via the Share button. Players open the shared link, tap their name to identify themselves, and enter the score using +/− controls. The organiser sees the submitted score as a pending badge and approves it with one tap. Only then is it saved.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Can I export the results?</summary>
-      <p>Yes. After the tournament you can export the final standings and all match results as <strong>CSV</strong> (for Excel or Google Sheets) or print as <strong>PDF</strong>. The export button appears as soon as the first match is played.</p>
-    </details>
-    <details class="faq-item">
-      <summary>How many players can I use?</summary>
-      <p>For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Does the app work without internet?</summary>
-      <p>Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Which languages is the app available in?</summary>
-      <p>PadelBracket is available in Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language.</p>
-    </details>
-    <details class="faq-item">
-      <summary>What is padel Americano?</summary>
-      <p>Padel Americano is a tournament format where partners rotate on a fixed schedule each round. Everyone plays with and against everyone else. It works for 4 or more players and is the most popular social padel format. No fixed teams needed.</p>
-    </details>
-    <details class="faq-item">
-      <summary>What is padel Mexicano?</summary>
-      <p>Padel Mexicano is a format where partners are determined by the live standings after each round. Rank 1 and 2 always play against rank 3 and 4, making the tournament progressively more competitive. PadelBracket handles the pairings automatically.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Which padel tournament format is best for a group of friends?</summary>
-      <p>Americano is ideal for social groups. Partners rotate so everyone plays with everyone, and no fixed team is needed. For a more competitive experience where standings matter, try Mexicano. Both formats are supported in PadelBracket.</p>
-    </details>
-    <details class="faq-item">
-      <summary>How long does a padel Americano tournament take?</summary>
-      <p>A padel Americano tournament typically takes between 1.5 and 3 hours depending on the number of players and match duration. With 8 players and 10-minute matches, expect around 90 minutes total.</p>
-    </details>
+  <div class="section-inner">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Is PadelBracket free?</summary>
+        <p>Yes, PadelBracket is completely free. No subscription, no account, no paywall. All features are available immediately.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which tournament formats are supported?</summary>
+        <p>PadelBracket supports four formats: <strong>knockout bracket</strong> (groups → semi-finals → final), <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners based on standings) and <strong>Round Robin</strong> (everyone plays everyone).</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is the difference between Americano and Mexicano?</summary>
+        <p>In <strong>Americano</strong>, partners are determined in advance via a fixed rotation. Everyone plays exactly once together. In <strong>Mexicano</strong>, partners are reassigned after each round based on current standings: rank 1 and 2 play together against rank 3 and 4. Mexicano gets more competitive as the tournament progresses.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does presentation mode do?</summary>
+        <p>Presentation mode opens a fullscreen scoreboard, ideal for a TV or projector in the clubhouse. You see the live standings and all active matches with live scores. The screen refreshes automatically every 3 seconds.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can participants watch live?</summary>
+        <p>Use the <strong>Share</strong> button in the app to generate a unique link. Participants open it on their phone and see the live standings, no account, no installation. Scores update as you enter them.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can players submit their own scores?</summary>
+        <p>Yes. Enable <strong>Players enter scores</strong> mode via the Share button. Players open the shared link, tap their name to identify themselves, and enter the score using +/− controls. The organiser sees the submitted score as a pending badge and approves it with one tap. Only then is it saved.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I export the results?</summary>
+        <p>Yes. After the tournament you can export the final standings and all match results as <strong>CSV</strong> (for Excel or Google Sheets) or print as <strong>PDF</strong>. The export button appears as soon as the first match is played.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How many players can I use?</summary>
+        <p>For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the app work without internet?</summary>
+        <p>Yes. After the first load, PadelBracket works fully offline. The tournament is saved locally on your device, even if you close the browser.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which languages is the app available in?</summary>
+        <p>PadelBracket is available in Dutch, English, French, German, Spanish and Swedish. The app automatically detects your device language.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is padel Americano?</summary>
+        <p>Padel Americano is a tournament format where partners rotate on a fixed schedule each round. Everyone plays with and against everyone else. It works for 4 or more players and is the most popular social padel format. No fixed teams needed.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is padel Mexicano?</summary>
+        <p>Padel Mexicano is a format where partners are determined by the live standings after each round. Rank 1 and 2 always play against rank 3 and 4, making the tournament progressively more competitive. PadelBracket handles the pairings automatically.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which padel tournament format is best for a group of friends?</summary>
+        <p>Americano is ideal for social groups. Partners rotate so everyone plays with everyone, and no fixed team is needed. For a more competitive experience where standings matter, try Mexicano. Both formats are supported in PadelBracket.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long does a padel Americano tournament take?</summary>
+        <p>A padel Americano tournament typically takes between 1.5 and 3 hours depending on the number of players and match duration. With 8 players and 10-minute matches, expect around 90 minutes total.</p>
+      </details>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-wrap">
   <h2>Ready to play?</h2>
   <p>Open the app, enter the names and start your tournament. Free and always available.</p>
-  <a class="btn-primary" href="/app/" style="display:inline-flex;font-size:1.2rem;padding:18px 40px">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+  <a class="btn-primary" href="/app/">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     Start for free
   </a>
 </section>
 
 <footer>
-  <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/king-of-the-court/">King of the Court</a> &nbsp;·&nbsp; <a href="/mixicano/">Mixicano</a> &nbsp;·&nbsp; <a href="/team-mexicano/">Team Mexicano</a> &nbsp;·&nbsp; <a href="/pickleball/">Pickleball</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/king-of-the-court/">King of the Court</a> &nbsp;·&nbsp; <a href="/mixicano/">Mixicano</a> &nbsp;·&nbsp; <a href="/team-mexicano/">Team Mexicano</a> &nbsp;·&nbsp; <a href="/pickleball/">Pickleball</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi" target="_blank" rel="noopener">GitHub</a></p>
   <p class="footer-maker">Built by Danny de Visser.</p>
   <p class="footer-tagline">No investors. No team. Just a padel fan with a laptop.</p>
 </footer>
 
 <script>
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault(); deferredPrompt = e;
-    document.getElementById('installBtn').style.display = 'inline-flex';
-    document.getElementById('howBtn').style.display = 'none';
-  });
-  async function installApp() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    if (outcome === 'accepted') {
-      document.getElementById('installBtn').style.display = 'none';
-      document.getElementById('howBtn').style.display = 'inline-flex';
-    }
-  }
-  window.addEventListener('appinstalled', () => {
-    document.getElementById('installBtn').style.display = 'none';
-    document.getElementById('howBtn').style.display = 'inline-flex';
-  });
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';
+}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>
 <script>
@@ -1094,24 +624,24 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   gtag('consent','default',{analytics_storage:'denied'});
   gtag('js',new Date());
   gtag('config','G-M5L2R20XXD',{anonymize_ip:true});
-  if(localStorage.getItem('padel-consent')==='granted'){gtag('consent','update',{analytics_storage:'granted'});}
-  (function(){if(!localStorage.getItem('padel-consent')){document.getElementById('cookie-banner').classList.remove('hidden');}})();
-  function acceptCookies(){localStorage.setItem('padel-consent','granted');gtag('consent','update',{analytics_storage:'granted'});document.getElementById('cookie-banner').classList.add('hidden');}
-  function declineCookies(){localStorage.setItem('padel-consent','denied');document.getElementById('cookie-banner').classList.add('hidden');}
+  if(localStorage.getItem('padel-consent')==='granted'){
+    gtag('consent','update',{analytics_storage:'granted'});
+  }
+  (function(){
+    if(!localStorage.getItem('padel-consent')){
+      document.getElementById('cookie-banner').classList.remove('hidden');
+    }
+  })();
+  function acceptCookies(){
+    localStorage.setItem('padel-consent','granted');
+    gtag('consent','update',{analytics_storage:'granted'});
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+  function declineCookies(){
+    localStorage.setItem('padel-consent','denied');
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
 </script>
-<script>
-(function(){
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  var sel='.founder-block,.trust-bar,.qr-showcase,.pres-showcase,.fc-section,.screenshots-section,.section,.cta-wrap';
-  var els=document.querySelectorAll(sel);
-  els.forEach(function(el){el.classList.add('reveal')});
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
-    });
-  },{threshold:0.07});
-  els.forEach(function(el){io.observe(el)});
-})();
-</script>
+<script src="/padel-demo.js" defer></script>
 </body>
 </html>

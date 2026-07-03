@@ -10,7 +10,7 @@ import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..', '..');
 const screenshotDir = path.join(__dirname, 'screenshots');
-const PORT = 8123;
+const PORT = 8200 + Math.floor(Math.random() * 500);
 
 const LOCALE_PATHS = { nl: '/', en: '/en/', de: '/de/', es: '/es/', fr: '/fr/', it: '/it/', pt: '/pt/', sv: '/sv/' };
 
