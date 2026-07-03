@@ -11,27 +11,27 @@ PadelBracket is built and maintained by Danny de Visser, a padel player from Rot
 
 ### Americano
 Partners rotate on a fixed schedule each round. Everyone plays with and against everyone, and points are tracked per individual player — there are no fixed teams.
-- Players: 4–32
+- Players: 4 or more, even or odd (odd counts rotate a fair bye)
 - Best for: social groups, club days, mixed-level play
 
 ### Mexicano
 Partners are reassigned after every round based on the live standings — rank 1 and 2 always play together against rank 3 and 4, and so on — so each round becomes more competitive than the last.
-- Players: 4–32
+- Players: 4 or more, even or odd (odd counts rotate a fair bye)
 - Best for: groups that want a clear, competitive winner
 
 ### Mixicano
 A mixed-gender variant of Mexicano where every team is one man and one woman. Men and women are entered separately; round 1 is random, then men and women are each ranked by points and paired by rank (top man plus top woman versus second man plus second woman, and so on) each round, exactly like Mexicano.
-- Players: 4–24 (equal numbers of men and women recommended; uneven counts rotate rest turns fairly)
+- Players: at least 2 men and 2 women, no upper limit (equal numbers recommended; uneven counts rotate rest turns fairly)
 - Best for: social sessions where mixed teams are required
 
 ### Team Americano
 Like Americano but with fixed pairs. Partners stay together throughout, playing a full round-robin against every other pair. Points are tracked per pair, not per individual.
-- Players: 4–24 (2–12 fixed pairs)
+- Players: 6 or more (3 or more fixed pairs)
 - Best for: clubs where players want to keep their partner
 
 ### Team Mexicano
 Like Team Americano but with standings-based opponents instead of a fixed round-robin schedule. Fixed pairs are entered the same way; round 1 is random, then each round pairs teams by rank (team 1 versus team 2, team 3 versus team 4, and so on), avoiding an immediate rematch of the previous round's opponent where possible.
-- Players: 4–24 (2–12 fixed pairs)
+- Players: 6 or more (3 or more fixed pairs)
 - Best for: clubs that want to keep partners together but still have a competitive, standings-driven draw
 
 ### King of the Court
@@ -41,12 +41,12 @@ Courts are ranked top to bottom, with court 1 as the King's Court. Each round, e
 
 ### Knockout
 A group stage followed by a single-elimination bracket (quarter-finals, semi-finals, final), with an automatic consolation bracket so eliminated teams keep playing.
-- Players: 4–24 (2–12 fixed teams of two)
+- Players: 4 or more (2 or more fixed teams of two)
 - Best for: structured club tournaments and competitions with a clear champion
 
 ### Round Robin
 Every team plays every other team at least once. Standings are ranked by number of wins, then total games won, then head-to-head result between tied teams.
-- Players: 4–16 (2–8 fixed teams of two)
+- Players: 4 or more (2 or more fixed teams of two)
 - Best for: league-style play and determining a fair final ranking for everyone
 
 ## Key features
@@ -55,6 +55,12 @@ Every team plays every other team at least once. Standings are ranked by number 
 - Self-signup with waitlist: the organiser opens a signup link before the tournament, players add their own name (no account needed), full lists overflow automatically to a waitlist, and the organiser starts the tournament directly from that list
 - Personal player view: on the shared live link, each player picks their own name once and always sees where they play, with whom, against whom, or whether they are resting, plus their own points and stats
 - Push notifications: players who turn them on get a real system notification for every new round and the final result, even when the app is closed
+- Club competition (season leaderboard): link results from multiple tournament evenings into one shareable, realtime leaderboard with configurable point models and best-X-of-Y evening counting
+- Ladder competition: players self-add to a shareable ladder, challenge opponents within a configurable range, and the organiser approves results before positions shift
+- Local competitions with ELO rating: link sessions to a fixed group and track a per-player rating, recalculated from head-to-head placement comparisons across all sessions
+- Round timer: optional per-round countdown with sound, synced to viewers on the share link
+- Two scoring modes: play to a fixed number of points (with sum validation) or play on time (any score is valid)
+- Mid-tournament management: pause or drop players and teams, add latecomers, change points per match without touching rounds already played, all with fair rest rotation
 - Live score entry by the organiser, with points and rankings updated instantly after every match
 - Players can submit their own match scores via the shared link; the organiser reviews and approves each one with a single tap before it's saved
 - Live share link for spectators — anyone opens it on their phone and sees standings and scores update in real time, with no account or app install needed
@@ -77,7 +83,14 @@ Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 ### Main pages
 - https://padel-bracket.com/ — Dutch homepage
 - https://padel-bracket.com/en/ — English homepage
+- https://padel-bracket.com/fr/ : French homepage
+- https://padel-bracket.com/de/ : German homepage
+- https://padel-bracket.com/es/ : Spanish homepage
+- https://padel-bracket.com/it/ : Italian homepage
+- https://padel-bracket.com/pt/ : Portuguese homepage
+- https://padel-bracket.com/sv/ : Swedish homepage
 - https://padel-bracket.com/en/about/ — About PadelBracket: who built it and why it's free
+- https://padel-bracket.com/en/alternatives/ : PadelBracket compared to alternatives
 - https://padel-bracket.com/app/ — The tournament app (create and run tournaments)
 - https://padel-bracket.com/blog/ — Padel tournament blog (guides and tips)
 - https://padel-bracket.com/privacy/ — Privacy policy
@@ -90,6 +103,7 @@ Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 - https://padel-bracket.com/knockout/ — Knockout bracket generator
 - https://padel-bracket.com/round-robin/ — Round Robin generator
 - https://padel-bracket.com/king-of-the-court/ — King of the Court generator
+- Spanish, Italian and Portuguese versions of the Americano, Mexicano, Mixicano, Knockout and Round Robin guides live under /es/, /it/ and /pt/ (for example https://padel-bracket.com/es/americano/)
 
 ### Americano by player count
 - https://padel-bracket.com/americano/4-players/

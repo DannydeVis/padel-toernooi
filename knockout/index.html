@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Padel Knockout Bracket Generator — Free Tournament Draw | PadelBracket</title>
-  <meta name="description" content="Free padel knockout bracket generator. Create a single elimination draw in seconds. No account needed, works offline. 4 to 24 players.">
+  <meta name="description" content="Free padel knockout bracket generator. Create a single elimination draw in seconds. No account needed, works offline. 4 or more players.">
   <meta name="keywords" content="padel knockout bracket generator, padel bracket generator, padel knockout tournament, padel draw maker, padel single elimination, free padel bracket">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -16,7 +16,7 @@
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/knockout/">
   <meta property="og:title" content="Padel Knockout Bracket Generator — Free Tournament Draw">
-  <meta property="og:description" content="Free padel knockout bracket generator. Groups, semi-finals and final. No account needed, works offline. 4 to 24 players.">
+  <meta property="og:description" content="Free padel knockout bracket generator. Groups, semi-finals and final. No account needed, works offline. 4 or more players.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -45,7 +45,7 @@
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Padel knockout bracket generator","Group stage + knockout rounds","Consolation bracket","Works offline","No account needed","4 to 24 players"]
+    "featureList": ["Padel knockout bracket generator","Group stage + knockout rounds","Consolation bracket","Works offline","No account needed","4 or more players"]
   }
   </script>
   <script type="application/ld+json">
@@ -66,7 +66,7 @@
       {
         "@type": "Question",
         "name": "How many players does knockout work for?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's knockout format works for 4 to 24 players (2 to 12 teams). The app automatically creates groups, quarter-finals, semi-finals and a final." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's knockout format works for 4 or more players (2 or more teams). The app automatically creates groups, quarter-finals, semi-finals and a final." }
       },
       {
         "@type": "Question",
@@ -91,7 +91,7 @@
       {
         "@type": "Question",
         "name": "How many teams do you need for a padel knockout tournament?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's knockout format works with 4 to 24 players, or 2 to 12 teams. The app automatically structures the right number of groups and knockout rounds based on how many teams you enter, so any club or group size is supported." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket's knockout format works with 4 or more players, or 2 or more teams. The app automatically structures the right number of groups and knockout rounds based on how many teams you enter, so any club or group size is supported." }
       },
       {
         "@type": "Question",
@@ -389,13 +389,14 @@
       <option value="de">🇩🇪 DE</option>
       <option value="es">🇪🇸 ES</option>
       <option value="it">🇮🇹 IT</option>
+      <option value="pt">🇵🇹 PT</option>
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/?format=knockout">Start Knockout →</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/knockout/',it:'/it/knockout/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/knockout/',it:'/it/knockout/',pt:'/pt/knockout/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->
@@ -498,7 +499,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>How many players does knockout work for?</summary>
-      <p>PadelBracket's knockout format works for <strong>4 to 24 players</strong> (2 to 12 teams). The app automatically creates groups, semi-finals and a final based on the number of players.</p>
+      <p>PadelBracket's knockout format works for <strong>4 or more players</strong> (2 or more teams). The app automatically creates groups, semi-finals and a final based on the number of players.</p>
     </details>
     <details class="faq-item">
       <summary>How does the group stage work?</summary>
@@ -518,7 +519,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>How many teams do you need for a padel knockout tournament?</summary>
-      <p>PadelBracket's knockout format works with 4 to 24 players, or 2 to 12 teams. The app automatically structures the right number of groups and knockout rounds based on how many teams you enter, so any club or group size is supported.</p>
+      <p>PadelBracket's knockout format works with 4 or more players, or 2 or more teams. The app automatically structures the right number of groups and knockout rounds based on how many teams you enter, so any club or group size is supported.</p>
     </details>
     <details class="faq-item">
       <summary>Is there a free padel bracket maker without sign-up?</summary>
@@ -557,7 +558,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </div>
 
 <footer>
-  <p>Padel Bracket — Free knockout bracket generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket — Free knockout bracket generator &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="/king-of-the-court/">King of the Court</a> &nbsp;·&nbsp; <a href="/mixicano/">Mixicano</a> &nbsp;·&nbsp; <a href="/team-mexicano/">Team Mexicano</a> &nbsp;·&nbsp; <a href="/pickleball/">Pickleball</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
 </footer>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L2R20XXD"></script>

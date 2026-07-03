@@ -22,12 +22,16 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Mixican
 - **8 tournament formats** — Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Court, Knockout bracket, Round Robin
 - **Live standings** — scores update in real time on every phone via a share link
 - **Club competition (season leaderboard)**: link results from multiple tournament evenings into one shareable, realtime leaderboard, with configurable point models, best-X-of-Y evening counting and a downloadable/shareable PNG standings card
+- **Local competitions with ELO rating**: link sessions to a fixed group and track a rating per player, recalculated from head-to-head placement comparisons across all sessions
 - **Ladder competition**: players self-add to a shareable ladder, challenge opponents within a configurable range, and the organizer approves results before positions shift
 - **Self-signup with waitlist**: share a link before the tournament, players add their own name, full lists overflow automatically to a waitlist
 - **Personal player view**: every player picks their own name once on the share link and always sees their court, partner, opponents and personal stats
 - **Push notifications**: players get a real system notification for every new round and the final result, even when the app is closed
 - **Fullscreen TV scoreboard** — present the tournament, leaderboard or ladder on any screen via `?pres=1`
 - **Player score entry** — share a link so players enter their own scores on court
+- **Pickleball support with DUPR export**: run pickleball Americano, Mexicano, Round Robin or King of the Court and export a CSV ready for DUPR bulk match import
+- **Round timer**: optional per-round countdown with sound, synced to viewers
+- **Two scoring modes**: play to a fixed number of points (with sum validation) or play on time (any score is valid)
 - **No account needed** — open and start, nothing to install or sign up for
 - **Works offline** — installable as a PWA; the app works without internet after the first load
 - **8 languages** — Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
@@ -63,7 +67,7 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Mixican
 
 ## Stack
 
-- **Single-file PWA** — `app/index.html` (~4700 lines, no build step, no framework)
+- **Single-file PWA** — `app/index.html` (~9400 lines, no build step, no framework)
 - **Hosting** — GitHub Pages, deployed automatically via `.github/workflows/deploy.yml`
 - **Live sharing backend** — Supabase (PostgreSQL + realtime), stores tournament state by 6-char share code
 - **Offline** — Service worker caches the app shell after first load
@@ -91,4 +95,7 @@ npx serve .        # or: python3 -m http.server 8080
 - **Mixicano guide**: [padel-bracket.com/mixicano/](https://padel-bracket.com/mixicano/)
 - **Team Mexicano guide**: [padel-bracket.com/team-mexicano/](https://padel-bracket.com/team-mexicano/)
 - **King of the Court guide**: [padel-bracket.com/king-of-the-court/](https://padel-bracket.com/king-of-the-court/)
+- **Knockout guide**: [padel-bracket.com/knockout/](https://padel-bracket.com/knockout/)
+- **Round Robin guide**: [padel-bracket.com/round-robin/](https://padel-bracket.com/round-robin/)
+- **Pickleball hub**: [padel-bracket.com/pickleball/](https://padel-bracket.com/pickleball/)
 - **Printable schedule (8 players)** — [padel-bracket.com/americano/8-players/](https://padel-bracket.com/americano/8-players/)

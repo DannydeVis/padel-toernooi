@@ -45,7 +45,7 @@
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Generatore Mixicano padel","Team misti: 1 uomo e 1 donna","Abbinamento per classifica dopo il turno 1","Classifica live","Funziona offline","Senza account","4 a 24 giocatori"]
+    "featureList": ["Generatore Mixicano padel","Team misti: 1 uomo e 1 donna","Abbinamento per classifica dopo il turno 1","Classifica live","Funziona offline","Senza account","4 o più giocatori"]
   }
   </script>
   <script type="application/ld+json">
@@ -374,13 +374,14 @@
       <option value="de">🇩🇪 DE</option>
       <option value="es">🇪🇸 ES</option>
       <option value="it" selected>🇮🇹 IT</option>
+      <option value="pt">🇵🇹 PT</option>
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/?format=mixicano">Inizia Mixicano</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mixicano/',fr:'/fr/',de:'/de/',es:'/es/mixicano/',it:'/it/mixicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mixicano/',fr:'/fr/',de:'/de/',es:'/es/mixicano/',it:'/it/mixicano/',pt:'/pt/mixicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->
@@ -395,7 +396,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
   <h1>Generatore Mixicano <em>Padel</em></h1>
   <p class="hero-kicker">MISTO E COMPETITIVO · 1 UOMO + 1 DONNA · GRATIS</p>
-  <p class="hero-sub">Ogni team e sempre composto da un uomo e una donna. Il primo turno e casuale, poi i team vengono abbinati per classifica ogni turno, come nel Mexicano. Per 4 a 24 giocatori.</p>
+  <p class="hero-sub">Ogni team e sempre composto da un uomo e una donna. Il primo turno e casuale, poi i team vengono abbinati per classifica ogni turno, come nel Mexicano. Per 4 o più giocatori.</p>
 
   <div class="hero-btns">
     <a class="btn-primary" href="/app/?format=mixicano">

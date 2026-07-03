@@ -105,7 +105,7 @@
       {
         "@type": "Question",
         "name": "How many players can I use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For Americano and Mexicano up to 24 players. For a team bracket 4 to 9 teams (8–18 players). With an odd number of players (5, 7, 9…) one player rotates on a bye each round." }
+        "acceptedAnswer": { "@type": "Answer", "text": "For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye each round." }
       },
       {
         "@type": "Question",
@@ -120,7 +120,7 @@
       {
         "@type": "Question",
         "name": "What is padel Americano?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Padel Americano is a tournament format where partners rotate after every round following a fixed schedule. Every player plays with and against every other player. Points are tracked individually, not per team. It's the most popular social padel format for groups of 4–24 players." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Padel Americano is a tournament format where partners rotate after every round following a fixed schedule. Every player plays with and against every other player. Points are tracked individually, not per team. It's the most popular social padel format for groups of 4 or more players." }
       },
       {
         "@type": "Question",
@@ -145,7 +145,7 @@
       {
         "@type": "Question",
         "name": "What is the best free padel Americano generator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is a free Americano generator that works on any device, supports 4 to 24 players, and requires no account." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket is a free Americano generator that works on any device, supports 4 or more players, and requires no account." }
       },
       {
         "@type": "Question",
@@ -518,13 +518,15 @@
       <option value="fr">FR</option>
       <option value="de">DE</option>
       <option value="es">ES</option>
+      <option value="it">IT</option>
+      <option value="pt">PT</option>
       <option value="sv">SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';}
 </script>
 
 <!-- HERO -->
@@ -910,7 +912,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Fixed pairs all day</li>
         <li>Group stage + winners bracket</li>
         <li>Consolation final for places 5 to 9</li>
-        <li>4 to 9 teams (8 to 18 players)</li>
+        <li>2 or more teams (4 or more players)</li>
       </ul>
       <a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout generator →</a>
     </div>
@@ -921,7 +923,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Partners rotate each round</li>
         <li>Points tracked per player</li>
         <li>Live standings &amp; presentation mode</li>
-        <li>4 to 24 players</li>
+        <li>4 or more players</li>
       </ul>
       <a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano generator →</a>
     </div>
@@ -932,7 +934,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Partners based on standings</li>
         <li>Points tracked per player</li>
         <li>More competitive each round</li>
-        <li>4 to 24 players</li>
+        <li>4 or more players</li>
       </ul>
       <a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano generator →</a>
     </div>
@@ -965,7 +967,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Always mixed teams</li>
         <li>Pairing based on standings</li>
         <li>Fair rest rotation for uneven counts</li>
-        <li>4 to 24 players</li>
+        <li>4 or more players</li>
       </ul>
       <a href="/mixicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mixicano generator →</a>
     </div>
@@ -976,7 +978,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Fixed pairs, standings-based opponents</li>
         <li>Opponent assigned by rank</li>
         <li>Points then head-to-head tiebreak</li>
-        <li>3 to 12 pairs</li>
+        <li>3 or more pairs</li>
       </ul>
       <a href="/team-mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Team Mexicano generator →</a>
     </div>
@@ -1018,7 +1020,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>How many players can I use?</summary>
-      <p>For Americano and Mexicano up to 24 players. For a team bracket 4 to 9 teams (8 to 18 players). With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
+      <p>For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
     </details>
     <details class="faq-item">
       <summary>Does the app work without internet?</summary>
@@ -1030,7 +1032,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>What is padel Americano?</summary>
-      <p>Padel Americano is a tournament format where partners rotate on a fixed schedule each round. Everyone plays with and against everyone else. It works for 4 to 24 players and is the most popular social padel format. No fixed teams needed.</p>
+      <p>Padel Americano is a tournament format where partners rotate on a fixed schedule each round. Everyone plays with and against everyone else. It works for 4 or more players and is the most popular social padel format. No fixed teams needed.</p>
     </details>
     <details class="faq-item">
       <summary>What is padel Mexicano?</summary>
@@ -1058,7 +1060,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </section>
 
 <footer>
-  <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket. Free tournament app &nbsp;·&nbsp; <a href="/app/">Open app</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug report</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Feature request</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/king-of-the-court/">King of the Court</a> &nbsp;·&nbsp; <a href="/mixicano/">Mixicano</a> &nbsp;·&nbsp; <a href="/team-mexicano/">Team Mexicano</a> &nbsp;·&nbsp; <a href="/pickleball/">Pickleball</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
   <p class="footer-maker">Built by Danny de Visser.</p>
   <p class="footer-tagline">No investors. No team. Just a padel fan with a laptop.</p>
 </footer>

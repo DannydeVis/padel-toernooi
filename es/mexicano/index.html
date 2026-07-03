@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador de Mexicano de Padel Gratis | Sin registro | PadelBracket</title>
-  <meta name="description" content="Generador gratuito de Mexicano de padel. Parejas segun la clasificacion, el torneo se vuelve mas competitivo cada ronda. Para 4 a 24 jugadores. Sin cuenta, funciona sin conexion.">
+  <meta name="description" content="Generador gratuito de Mexicano de padel. Parejas segun la clasificacion, el torneo se vuelve mas competitivo cada ronda. Para 4 o más jugadores. Sin cuenta, funciona sin conexion.">
   <meta name="keywords" content="generador mexicano padel, app mexicano padel gratis, mexicano padel sin registro, torneo mexicano padel, mexicano padel online">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -16,7 +16,7 @@
   <meta property="og:site_name" content="PadelBracket">
   <meta property="og:url" content="https://padel-bracket.com/es/mexicano/">
   <meta property="og:title" content="Generador de Mexicano de Padel Gratis | Sin registro">
-  <meta property="og:description" content="Generador gratuito de Mexicano de padel. Parejas segun la clasificacion. Para 4 a 24 jugadores. Sin cuenta, funciona sin conexion.">
+  <meta property="og:description" content="Generador gratuito de Mexicano de padel. Parejas segun la clasificacion. Para 4 o más jugadores. Sin cuenta, funciona sin conexion.">
   <meta property="og:image" content="https://padel-bracket.com/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
   <meta property="og:locale:alternate" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Generador de Mexicano de Padel Gratis | Sin registro">
-  <meta name="twitter:description" content="Crea un torneo Mexicano de padel en segundos. Parejas segun clasificacion, sin cuenta, funciona sin conexion. 4 a 24 jugadores.">
+  <meta name="twitter:description" content="Crea un torneo Mexicano de padel en segundos. Parejas segun clasificacion, sin cuenta, funciona sin conexion. 4 o más jugadores.">
   <meta name="twitter:image" content="https://padel-bracket.com/og-preview.png">
   <link rel="alternate" hreflang="en" href="https://padel-bracket.com/mexicano/">
   <link rel="alternate" hreflang="es" href="https://padel-bracket.com/es/mexicano/">
@@ -45,7 +45,7 @@
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["es","en","nl","fr","de","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Generador Mexicano padel","Parejas segun clasificacion","Clasificacion en directo","Funciona sin conexion","Sin cuenta necesaria","4 a 24 jugadores"]
+    "featureList": ["Generador Mexicano padel","Parejas segun clasificacion","Clasificacion en directo","Funciona sin conexion","Sin cuenta necesaria","4 o más jugadores"]
   }
   </script>
   <script type="application/ld+json">
@@ -66,7 +66,7 @@
       {
         "@type": "Question",
         "name": "Cuantos jugadores pueden jugar al Mexicano?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket soporta Mexicano para 4 a 24 jugadores. Con multiplos de 4 todos juegan cada ronda. Con otros numeros, uno o dos jugadores descansan por ronda de forma automatica." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket soporta Mexicano para 4 o más jugadores. Con multiplos de 4 todos juegan cada ronda. Con otros numeros, uno o dos jugadores descansan por ronda de forma automatica." }
       },
       {
         "@type": "Question",
@@ -103,7 +103,7 @@
     "name": "Como crear un torneo Mexicano de padel",
     "description": "Crea un torneo Mexicano de padel completo en 4 pasos con PadelBracket.",
     "step": [
-      { "@type": "HowToStep", "position": 1, "name": "Introduce los nombres", "text": "Escribe los nombres de todos los participantes (4 a 24 jugadores)." },
+      { "@type": "HowToStep", "position": 1, "name": "Introduce los nombres", "text": "Escribe los nombres de todos los participantes (4 o más jugadores)." },
       { "@type": "HowToStep", "position": 2, "name": "Empieza la ronda 1", "text": "La primera ronda usa una rotacion fija. Introduce los resultados tras cada partido." },
       { "@type": "HowToStep", "position": 3, "name": "Emparejamiento automatico", "text": "Tras cada ronda, PadelBracket empareja a los jugadores segun la clasificacion actual." },
       { "@type": "HowToStep", "position": 4, "name": "Corona al campeon", "text": "El jugador con mas puntos totales gana el torneo." }
@@ -223,13 +223,14 @@
       <option value="de">🇩🇪 DE</option>
       <option value="es" selected>🇪🇸 ES</option>
       <option value="it">🇮🇹 IT</option>
+      <option value="pt">🇵🇹 PT</option>
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/">Iniciar Mexicano</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mexicano/',fr:'/fr/',de:'/de/',es:'/es/mexicano/',it:'/it/mexicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mexicano/',fr:'/fr/',de:'/de/',es:'/es/mexicano/',it:'/it/mexicano/',pt:'/pt/mexicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->
@@ -332,7 +333,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Cuantos jugadores pueden jugar al Mexicano?</summary>
-      <p>PadelBracket soporta Mexicano para <strong>4 a 24 jugadores</strong>. Con multiplos de 4 (4, 8, 12...) todos juegan cada ronda. Con otros numeros, uno o dos jugadores descansan por ronda de forma automatica.</p>
+      <p>PadelBracket soporta Mexicano para <strong>4 o más jugadores</strong>. Con multiplos de 4 (4, 8, 12...) todos juegan cada ronda. Con otros numeros, uno o dos jugadores descansan por ronda de forma automatica.</p>
     </details>
     <details class="faq-item">
       <summary>Necesito una cuenta?</summary>

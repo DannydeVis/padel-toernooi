@@ -1,4 +1,4 @@
-const CACHE = 'padel-bracket-v2.0.0';
+const CACHE = 'padel-bracket-v2.0.1';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {

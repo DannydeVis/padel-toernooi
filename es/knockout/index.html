@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador de Cuadro Eliminatorio de Padel Gratis | PadelBracket</title>
-  <meta name="description" content="Generador gratuito de cuadro eliminatorio de padel. Fase de grupos, semifinales y final en segundos. Para 4 a 24 jugadores. Sin cuenta, funciona sin conexion.">
+  <meta name="description" content="Generador gratuito de cuadro eliminatorio de padel. Fase de grupos, semifinales y final en segundos. Para 4 o más jugadores. Sin cuenta, funciona sin conexion.">
   <meta name="keywords" content="generador cuadro padel, torneo eliminatorio padel, bracket padel gratis, knockout padel sin registro, torneo padel eliminacion">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -45,7 +45,7 @@
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["es","en","nl","fr","de","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Generador cuadro eliminatorio padel","Fase de grupos y rondas eliminatorias","Cuadro de consolacion","Funciona sin conexion","Sin cuenta necesaria","4 a 24 jugadores"]
+    "featureList": ["Generador cuadro eliminatorio padel","Fase de grupos y rondas eliminatorias","Cuadro de consolacion","Funciona sin conexion","Sin cuenta necesaria","4 o más jugadores"]
   }
   </script>
   <script type="application/ld+json">
@@ -66,7 +66,7 @@
       {
         "@type": "Question",
         "name": "Para cuantos jugadores funciona el eliminatorio?",
-        "acceptedAnswer": { "@type": "Answer", "text": "El formato knockout de PadelBracket funciona para 4 a 24 jugadores (2 a 12 parejas). La app crea automaticamente los grupos, las semifinales y la final segun el numero de participantes." }
+        "acceptedAnswer": { "@type": "Answer", "text": "El formato knockout de PadelBracket funciona para 4 o más jugadores (2 o más parejas). La app crea automaticamente los grupos, las semifinales y la final segun el numero de participantes." }
       },
       {
         "@type": "Question",
@@ -218,13 +218,14 @@
       <option value="de">🇩🇪 DE</option>
       <option value="es" selected>🇪🇸 ES</option>
       <option value="it">🇮🇹 IT</option>
+      <option value="pt">🇵🇹 PT</option>
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/">Crear cuadro</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/knockout/',it:'/it/knockout/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/knockout/',fr:'/fr/',de:'/de/',es:'/es/knockout/',it:'/it/knockout/',pt:'/pt/knockout/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->
@@ -327,7 +328,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Para cuantos jugadores funciona el eliminatorio?</summary>
-      <p>El formato knockout de PadelBracket funciona para <strong>4 a 24 jugadores</strong> (2 a 12 parejas). La app crea automaticamente los grupos, las semifinales y la final.</p>
+      <p>El formato knockout de PadelBracket funciona para <strong>4 o más jugadores</strong> (2 o más parejas). La app crea automaticamente los grupos, las semifinales y la final.</p>
     </details>
     <details class="faq-item">
       <summary>Como funciona la fase de grupos?</summary>

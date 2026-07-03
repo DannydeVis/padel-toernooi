@@ -100,7 +100,7 @@
       {
         "@type": "Question",
         "name": "Hoeveel spelers kan ik gebruiken?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Voor Americano en Mexicano tot 24 spelers. Voor team bracket 4 tot 9 teams (8–18 spelers). Bij een oneven aantal spelers rust er per ronde één speler (roterend)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Voor Americano en Mexicano vanaf 4 spelers, zonder maximum. Voor een team bracket vanaf 2 teams. Bij een oneven aantal spelers rust er per ronde één speler (roterend)." }
       },
       {
         "@type": "Question",
@@ -130,7 +130,7 @@
       {
         "@type": "Question",
         "name": "Wat is padel Americano?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Padel Americano is een toernooiformat waarbij koppels elke ronde rouleren volgens een vast schema. Iedereen speelt met en tegen iedereen. Werkt voor 4 tot 24 spelers en is het populairste sociale padelformat — geen vaste teams nodig." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Padel Americano is een toernooiformat waarbij koppels elke ronde rouleren volgens een vast schema. Iedereen speelt met en tegen iedereen. Werkt voor 4 of meer spelers en is het populairste sociale padelformat — geen vaste teams nodig." }
       },
       {
         "@type": "Question",
@@ -737,13 +737,15 @@
       <option value="fr">FR</option>
       <option value="de">DE</option>
       <option value="es">ES</option>
+      <option value="it">IT</option>
+      <option value="pt">PT</option>
       <option value="sv">SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',sv:'/sv/'};location.href=p[l]||'/';
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';
 }
 </script>
 
@@ -1309,7 +1311,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Vaste koppels de hele dag</li>
         <li>Pouleronde + winnaarsbracket</li>
         <li>Troostfinale voor plaatsen 5 tot en met 9</li>
-        <li>4 tot 9 teams (8 tot 18 spelers)</li>
+        <li>Vanaf 2 teams (4 of meer spelers)</li>
       </ul>
       <a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout generator →</a>
     </div>
@@ -1375,7 +1377,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Vaste koppels, wisselende tegenstanders</li>
         <li>Tegenstander op basis van tussenstand</li>
         <li>Eindstand op punten, dan onderling duel</li>
-        <li>3 tot 12 koppels</li>
+        <li>3 of meer koppels</li>
       </ul>
       <a href="/team-mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Team Mexicano generator →</a>
     </div>
@@ -1506,7 +1508,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Hoeveel spelers kan ik gebruiken?</summary>
-      <p>Voor Americano, Mexicano en King of the Court tot 24 spelers. Voor een knockout bracket 4 tot 9 teams (8 tot 18 spelers). Voor Round Robin 4 tot 16 spelers. King of the Court werkt ook met minder spelers, vanaf 4. Bij een oneven verdeling rust er per ronde één speler, roterend.</p>
+      <p>Voor Americano en Mexicano vanaf 4 spelers en voor King of the Court vanaf 8 spelers, allemaal zonder maximum. Voor een knockout bracket of Round Robin vanaf 2 teams. Bij een oneven verdeling rust er per ronde één speler, roterend.</p>
     </details>
     <details class="faq-item">
       <summary>Werkt de app ook zonder internet?</summary>
@@ -1530,7 +1532,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Wat is padel Americano?</summary>
-      <p>Padel Americano is een toernooiformat waarbij koppels elke ronde rouleren volgens een vast schema. Iedereen speelt met en tegen iedereen. Werkt voor 4 tot 24 spelers en is het populairste sociale padelformat. Geen vaste teams nodig.</p>
+      <p>Padel Americano is een toernooiformat waarbij koppels elke ronde rouleren volgens een vast schema. Iedereen speelt met en tegen iedereen. Werkt voor 4 of meer spelers en is het populairste sociale padelformat. Geen vaste teams nodig.</p>
     </details>
     <details class="faq-item">
       <summary>Wat is padel Mexicano?</summary>
@@ -1559,7 +1561,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </section>
 
 <footer>
-  <p>Padel Bracket. Gratis toernooi-app &nbsp;·&nbsp; <a href="/app/">App openen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug melden</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Idee insturen</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
+  <p>Padel Bracket. Gratis toernooi-app &nbsp;·&nbsp; <a href="/app/">App openen</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=bug_report.md" target="_blank" rel="noopener">Bug melden</a> &nbsp;·&nbsp; <a href="https://github.com/DannydeVis/padel-toernooi/issues/new?template=feature_request.md" target="_blank" rel="noopener">Idee insturen</a> &nbsp;·&nbsp; <a href="/americano/">Americano</a> &nbsp;·&nbsp; <a href="/mexicano/">Mexicano</a> &nbsp;·&nbsp; <a href="/knockout/">Knockout</a> &nbsp;·&nbsp; <a href="/round-robin/">Round Robin</a> &nbsp;·&nbsp; <a href="/king-of-the-court/">King of the Court</a> &nbsp;·&nbsp; <a href="/mixicano/">Mixicano</a> &nbsp;·&nbsp; <a href="/team-mexicano/">Team Mexicano</a> &nbsp;·&nbsp; <a href="/pickleball/">Pickleball</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></p>
   <p class="footer-maker">Gemaakt door Danny de Visser.</p>
   <p class="footer-tagline">Geen investor. Geen team. Gewoon een padelfan met een laptop.</p>
 </footer>

@@ -45,7 +45,7 @@
     "url": "https://padel-bracket.com/app/",
     "inLanguage": ["nl","en","fr","de","es","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Generador Mixicano padel","Equipos mixtos: 1 hombre y 1 mujer","Emparejamiento por clasificacion tras la ronda 1","Clasificacion en directo","Funciona sin conexion","Sin cuenta","4 a 24 jugadores"]
+    "featureList": ["Generador Mixicano padel","Equipos mixtos: 1 hombre y 1 mujer","Emparejamiento por clasificacion tras la ronda 1","Clasificacion en directo","Funciona sin conexion","Sin cuenta","4 o más jugadores"]
   }
   </script>
   <script type="application/ld+json">
@@ -374,13 +374,14 @@
       <option value="de">🇩🇪 DE</option>
       <option value="es" selected>🇪🇸 ES</option>
       <option value="it">🇮🇹 IT</option>
+      <option value="pt">🇵🇹 PT</option>
       <option value="sv">🇸🇪 SV</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/?format=mixicano">Iniciar Mixicano</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mixicano/',fr:'/fr/',de:'/de/',es:'/es/mixicano/',it:'/it/mixicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/mixicano/',fr:'/fr/',de:'/de/',es:'/es/mixicano/',it:'/it/mixicano/',pt:'/pt/mixicano/',sv:'/sv/'};location.href=p[l]||'/en/';}
 </script>
 
 <!-- HERO -->
@@ -395,7 +396,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 
   <h1>Generador Mixicano <em>Padel</em></h1>
   <p class="hero-kicker">MIXTO Y COMPETITIVO · 1 HOMBRE + 1 MUJER · GRATIS</p>
-  <p class="hero-sub">Cada equipo es siempre un hombre y una mujer. La primera ronda es al azar y despues los equipos se emparejan por clasificacion cada ronda, igual que el Mexicano. Para 4 a 24 jugadores.</p>
+  <p class="hero-sub">Cada equipo es siempre un hombre y una mujer. La primera ronda es al azar y despues los equipos se emparejan por clasificacion cada ronda, igual que el Mexicano. Para 4 o más jugadores.</p>
 
   <div class="hero-btns">
     <a class="btn-primary" href="/app/?format=mixicano">

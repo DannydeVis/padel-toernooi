@@ -11,6 +11,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -27,6 +28,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -43,6 +45,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -59,6 +62,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -75,6 +79,41 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Italian -->
+  <url>
+    <loc>https://padel-bracket.com/it/</loc>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Portuguese -->
+  <url>
+    <loc>https://padel-bracket.com/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -91,6 +130,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
     <lastmod>2026-07-02</lastmod>
@@ -106,35 +146,252 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Tournament landing pages -->
+  <!-- Format guide: americano -->
   <url>
     <loc>https://padel-bracket.com/americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/americano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/americano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/americano/"/>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://padel-bracket.com/es/americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/americano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/americano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/americano/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/americano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/americano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/americano/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/americano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/americano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/americano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Format guide: mexicano -->
   <url>
     <loc>https://padel-bracket.com/mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mexicano/"/>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://padel-bracket.com/es/mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mexicano/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mexicano/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mexicano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Format guide: knockout -->
   <url>
     <loc>https://padel-bracket.com/knockout/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/knockout/"/>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://padel-bracket.com/round-robin/</loc>
+    <loc>https://padel-bracket.com/es/knockout/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/knockout/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/knockout/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/knockout/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/knockout/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/knockout/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/knockout/"/>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Format guide: round-robin -->
+  <url>
+    <loc>https://padel-bracket.com/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/round-robin/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/es/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/round-robin/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/round-robin/"/>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/round-robin/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Format guide: mixicano -->
+  <url>
+    <loc>https://padel-bracket.com/mixicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mixicano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/es/mixicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mixicano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/mixicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mixicano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/mixicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/mixicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/mixicano/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Format guide: team-mexicano -->
   <url>
     <loc>https://padel-bracket.com/team-mexicano/</loc>
     <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/team-mexicano/"/>
@@ -144,8 +401,16 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Format guide: king-of-the-court -->
+  <url>
+    <loc>https://padel-bracket.com/king-of-the-court/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/king-of-the-court/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/king-of-the-court/"/>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- Americano player-count pages -->
   <url>
     <loc>https://padel-bracket.com/americano/4-players/</loc>
     <lastmod>2026-06-04</lastmod>
@@ -202,7 +467,6 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Mexicano player-count pages -->
   <url>
     <loc>https://padel-bracket.com/mexicano/8-players/</loc>
     <lastmod>2026-05-27</lastmod>
@@ -238,186 +502,11 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- About -->
-  <url>
-    <loc>https://padel-bracket.com/en/about/</loc>
-    <lastmod>2026-06-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Alternatives / comparison -->
-  <url>
-    <loc>https://padel-bracket.com/en/alternatives/</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Italian homepage -->
-  <url>
-    <loc>https://padel-bracket.com/it/</loc>
-    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/"/>
-    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/en/"/>
-    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
-    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
-    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Portuguese homepage -->
-  <url>
-    <loc>https://padel-bracket.com/pt/</loc>
-    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/"/>
-    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/en/"/>
-    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/"/>
-    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/"/>
-    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/sv/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/"/>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Spanish format pages -->
-  <url>
-    <loc>https://padel-bracket.com/es/americano/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/es/mexicano/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/es/knockout/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/es/round-robin/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Italian format pages -->
-  <url>
-    <loc>https://padel-bracket.com/it/americano/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/it/mexicano/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/it/knockout/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/it/round-robin/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Portuguese format pages -->
-  <url>
-    <loc>https://padel-bracket.com/pt/americano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/pt/mexicano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/pt/knockout/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/pt/round-robin/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Mixicano format pages -->
-  <url>
-    <loc>https://padel-bracket.com/mixicano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/es/mixicano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/it/mixicano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/pt/mixicano/</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Pickleball pages -->
+  <!-- Pickleball -->
   <url>
     <loc>https://padel-bracket.com/pickleball/</loc>
     <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/"/>
-    <lastmod>2026-06-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://padel-bracket.com/pickleball/round-robin/</loc>
-    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/round-robin/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/round-robin/"/>
     <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -441,12 +530,11 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- King of the Court -->
   <url>
-    <loc>https://padel-bracket.com/king-of-the-court/</loc>
-    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/king-of-the-court/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/king-of-the-court/"/>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://padel-bracket.com/pickleball/round-robin/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/pickleball/round-robin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/pickleball/round-robin/"/>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -458,6 +546,443 @@
     <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://padel-bracket.com/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/sv/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/what-is-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/nl/wat-is-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/de/was-ist-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/es/que-es-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/sv/vad-ar-padel-americano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/wat-is-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/was-ist-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/que-es-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/qu-est-ce-que-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/vad-ar-padel-americano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/what-is-padel-americano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/padel-americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/nl/americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/de/americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/es/americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/fr/americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/sv/americano-vs-mexicano/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-vs-mexicano/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-vs-mexicano/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/padel-americano-how-many-players/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/de/americano-wie-viele-spieler/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/es/americano-cuantos-jugadores/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/americano-hoeveel-spelers/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/americano-wie-viele-spieler/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/americano-cuantos-jugadores/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/americano-combien-de-joueurs/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/americano-hur-manga-spelare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/padel-americano-how-many-players/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/how-to-organise-padel-tournament/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/de/padel-turnier-organisieren/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/es/como-organizar-torneo-padel/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/fr/organiser-tournoi-padel/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/blog/sv/organisera-padel-turnering/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <xhtml:link rel="alternate" hreflang="nl"        href="https://padel-bracket.com/blog/nl/padel-toernooi-organiseren/"/>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://padel-bracket.com/blog/de/padel-turnier-organisieren/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/blog/es/como-organizar-torneo-padel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://padel-bracket.com/blog/fr/organiser-tournoi-padel/"/>
+    <xhtml:link rel="alternate" hreflang="sv"        href="https://padel-bracket.com/blog/sv/organisera-padel-turnering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/blog/how-to-organise-padel-tournament/"/>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://padel-bracket.com/en/about/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Alternatives / comparison -->
+  <url>
+    <loc>https://padel-bracket.com/en/alternatives/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <!-- Privacy policy -->
