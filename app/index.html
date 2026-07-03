@@ -1985,7 +1985,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.0.1';
+const APP_VERSION = 'v2.1.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3111,6 +3111,7 @@ let _castReq=null, _castConn=null, _castAvail=false;
 let R={gpm:3, matchPts:32, courts:2, timerMins:0, winBy2:true, scoringMode:'points'};
 let sport='padel'; // 'padel' | 'pickleball'
 let _urlFormat=null; // format preselected via ?format= URL param, mapped to internal mode string
+let _urlNames=null; // player names preselected via ?names= URL param (comma-joined, percent-encoded)
 let tournamentName='';
 let mode='team'; // 'team' | 'americano'
 let AP=[], AM=[]; // americano players & rounds
@@ -9316,7 +9317,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const _fmt=_sp.get('format');
   const _fmtMap={americano:'americano',mexicano:'mexicano','team-americano':'teamamericano',knockout:'team','round-robin':'roundrobin',kotc:'kingofcourt',mixicano:'mixicano','team-mexicano':'teammexicano'};
   if(_fmt&&_fmtMap[_fmt]) _urlFormat=_fmtMap[_fmt];
+  // Pre-fill players from URL param: /app/?names=Anna,Bob,Carla,Dries (each name percent-encoded, comma-joined)
+  const _nm=_sp.get('names');
+  if(_nm){ _urlNames=_nm.split(',').map(s=>decodeURIComponent(s.trim())).filter(Boolean); }
   if(typeof sxInitSetup==='function') sxInitSetup();
+  if(_urlNames&&_urlNames.length&&typeof window.sxLoadGroup==='function') window.sxLoadGroup(_urlNames);
   // Initialize placeholder text in nc elements
   const nc=$('nc'); if(nc&&!nc.textContent) nc.textContent=t('set_ph_auto');
   const ncm=$('nc-manual'); if(ncm&&!ncm.textContent) ncm.textContent=t('set_ph_manual');
