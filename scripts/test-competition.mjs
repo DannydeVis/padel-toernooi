@@ -117,7 +117,12 @@ async function cleanupEvents(code, token) {
   await req('DELETE', `competition_events?competition_code=eq.${code}`, { token });
 }
 async function joinLadder(code, name) {
-  return req('POST', 'ladder_players', { body: { competition_code: code, name }, prefer: 'return=representation' });
+  // Mirrors ccJoinLadder() in app/index.html exactly: position is computed
+  // client-side and sent along, the ladder_players.position column has no
+  // default and is NOT NULL.
+  const players = await fetchLadderPlayers(code);
+  const nextPos = players.length ? Math.max(...players.map(p => p.position)) + 1 : 1;
+  return req('POST', 'ladder_players', { body: { competition_code: code, name, position: nextPos }, prefer: 'return=representation' });
 }
 async function fetchLadderPlayers(code) {
   const r = await req('GET', `ladder_players?competition_code=eq.${code}&order=position.asc`);

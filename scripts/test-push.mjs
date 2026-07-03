@@ -81,62 +81,94 @@ async function callPushFunction(body) {
   return { ok: res.ok, status: res.status, data };
 }
 
+// push_subscriptions has no SELECT policy at all (endpoints are sensitive
+// capability URLs, see push_migration.sql), so its rows can never be read
+// back, not even via Prefer: return=representation or Prefer: count=exact
+// (Postgres re-checks SELECT visibility for RETURNING/counts and always
+// comes up empty). The real app matches this: it inserts with the
+// supabase-js default of Prefer: return=minimal, never return=representation,
+// and never reads the table. This test file does the same, and where it
+// needs to confirm a row was actually removed, it probes the endpoint's
+// UNIQUE constraint instead (insert the same endpoint again: 201 means the
+// row was gone, a conflict means it is still there), immediately undoing
+// its own probe insert either way.
+async function endpointRowExists(code, endpoint) {
+  const probe = await req('POST', 'push_subscriptions', {
+    body: { tournament_code: code, player_id: 999, endpoint, p256dh: 'AAA', auth: 'BBB', lang: 'en', msg_templates: {} },
+    prefer: 'return=minimal'
+  });
+  if (probe.status === 201) {
+    await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(endpoint)}`, { prefer: 'return=minimal' });
+    return false;
+  }
+  return true;
+}
+
 async function main() {
   console.log('Running push-round tests against', SUPABASE_URL);
   const code = await createTestTournament();
   console.log('  test tournament code:', code);
 
   const brokenEndpoint = 'https://example.com/definitely-not-a-real-push-endpoint-' + Date.now();
+  const freshEndpoint = 'https://example.com/fresh-test-endpoint-' + Date.now();
   const keys = genFakeSubscriptionKeys();
 
-  // Test 1: insert a subscription with an unreachable endpoint, call the function.
-  const insertRes = await req('POST', 'push_subscriptions', {
-    body: {
-      tournament_code: code, player_id: 1, endpoint: brokenEndpoint,
-      p256dh: keys.p256dh, auth: keys.auth, lang: 'en',
-      msg_templates: { playing: 'Court {court}, with {partner}, against {opp1} and {opp2}', resting: 'Resting round {round}', done: 'Finished, rank {rank}' }
-    },
-    prefer: 'return=representation'
-  });
-  assert(insertRes.ok, 'insert subscription with unreachable endpoint');
+  try {
+    // Test 1: insert a subscription with an unreachable endpoint, call the function.
+    const insertRes = await req('POST', 'push_subscriptions', {
+      body: {
+        tournament_code: code, player_id: 1, endpoint: brokenEndpoint,
+        p256dh: keys.p256dh, auth: keys.auth, lang: 'en',
+        msg_templates: { playing: 'Court {court}, with {partner}, against {opp1} and {opp2}', resting: 'Resting round {round}', done: 'Finished, rank {rank}' }
+      },
+      prefer: 'return=minimal'
+    });
+    assert(insertRes.status === 201, 'insert subscription with unreachable endpoint');
 
-  const callRes = await callPushFunction({
-    tournament_code: code, round: 1, kind: 'round',
-    statuses: { '1': { name: 'Test Player', status: 'playing', round: 1, court: 1, partner: 'Partner', opponents: ['Opp1', 'Opp2'], rank: null } }
-  });
-  assert(callRes.ok, 'push-round function call returns ok');
+    const callRes = await callPushFunction({
+      tournament_code: code, round: 1, kind: 'round',
+      statuses: { '1': { name: 'Test Player', status: 'playing', round: 1, court: 1, partner: 'Partner', opponents: ['Opp1', 'Opp2'], rank: null } }
+    });
+    assert(callRes.ok, 'push-round function call returns ok');
 
-  // Test 2: the broken row should have been removed by the function (404 from example.com).
-  const delBroken = await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(brokenEndpoint)}`, { prefer: 'return=representation' });
-  assert(delBroken.ok && Array.isArray(delBroken.data) && delBroken.data.length === 0, 'broken subscription row was already removed by the function');
+    // Test 2: the broken row should have been removed by the function (404 from example.com).
+    const brokenStillThere = await endpointRowExists(code, brokenEndpoint);
+    assert(!brokenStillThere, 'broken subscription row was already removed by the function');
 
-  // Test 3 + 4: push_log is filled (indirectly, RLS blocks reading it directly) and a
-  // second call for the same (code, round, kind) is skipped as a duplicate.
-  const callAgain = await callPushFunction({
-    tournament_code: code, round: 1, kind: 'round',
-    statuses: { '1': { name: 'Test Player', status: 'playing', round: 1, court: 1, partner: 'Partner', opponents: ['Opp1', 'Opp2'], rank: null } }
-  });
-  assert(callAgain.ok && callAgain.data && callAgain.data.skipped === 'duplicate', 'second call for the same round is skipped (push_log dedupe)');
+    // Test 3 + 4: push_log is filled (indirectly, RLS blocks reading it directly) and a
+    // second call for the same (code, round, kind) is skipped as a duplicate.
+    const callAgain = await callPushFunction({
+      tournament_code: code, round: 1, kind: 'round',
+      statuses: { '1': { name: 'Test Player', status: 'playing', round: 1, court: 1, partner: 'Partner', opponents: ['Opp1', 'Opp2'], rank: null } }
+    });
+    assert(callAgain.ok && callAgain.data && callAgain.data.skipped === 'duplicate', 'second call for the same round is skipped (push_log dedupe)');
 
-  // Test 5: anon can never select push_subscriptions, even for a row that exists.
-  const freshEndpoint = 'https://example.com/fresh-test-endpoint-' + Date.now();
-  const freshKeys = genFakeSubscriptionKeys();
-  const insertFresh = await req('POST', 'push_subscriptions', {
-    body: {
-      tournament_code: code, player_id: 2, endpoint: freshEndpoint,
-      p256dh: freshKeys.p256dh, auth: freshKeys.auth, lang: 'nl',
-      msg_templates: { playing: 'test', resting: 'test', done: 'test' }
-    },
-    prefer: 'return=representation'
-  });
-  assert(insertFresh.ok, 'insert a fresh subscription for the select/delete checks');
+    // Test 5: anon can never select push_subscriptions, even for a row that exists.
+    const freshKeys = genFakeSubscriptionKeys();
+    const insertFresh = await req('POST', 'push_subscriptions', {
+      body: {
+        tournament_code: code, player_id: 2, endpoint: freshEndpoint,
+        p256dh: freshKeys.p256dh, auth: freshKeys.auth, lang: 'nl',
+        msg_templates: { playing: 'test', resting: 'test', done: 'test' }
+      },
+      prefer: 'return=minimal'
+    });
+    assert(insertFresh.status === 201, 'insert a fresh subscription for the select/delete checks');
 
-  const selectAttempt = await req('GET', `push_subscriptions?endpoint=eq.${encodeURIComponent(freshEndpoint)}&select=id`);
-  assert(selectAttempt.ok && Array.isArray(selectAttempt.data) && selectAttempt.data.length === 0, 'anon select returns nothing, even for a row that exists (RLS blocks it)');
+    const selectAttempt = await req('GET', `push_subscriptions?endpoint=eq.${encodeURIComponent(freshEndpoint)}&select=id`);
+    assert(selectAttempt.ok && Array.isArray(selectAttempt.data) && selectAttempt.data.length === 0, 'anon select returns nothing, even for a row that exists (RLS blocks it)');
 
-  // Test 6: deleting your own endpoint (exact match) works.
-  const delFresh = await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(freshEndpoint)}`, { prefer: 'return=representation' });
-  assert(delFresh.ok && Array.isArray(delFresh.data) && delFresh.data.length === 1, 'delete by exact own endpoint succeeds and removes the row');
+    // Test 6: deleting your own endpoint (exact match) works.
+    const delFresh = await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(freshEndpoint)}`, { prefer: 'return=minimal' });
+    assert(delFresh.ok, 'delete call for own endpoint succeeds');
+    const freshStillThere = await endpointRowExists(code, freshEndpoint);
+    assert(!freshStillThere, 'delete by exact own endpoint actually removed the row');
+  } finally {
+    // Belt and braces: make sure no push_subscriptions row created by this
+    // run is left behind, even on a failed/crashed run.
+    await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(brokenEndpoint)}`, { prefer: 'return=minimal' });
+    await req('DELETE', `push_subscriptions?endpoint=eq.${encodeURIComponent(freshEndpoint)}`, { prefer: 'return=minimal' });
+  }
 
   console.log(`\n${passed} passed, ${failed} failed`);
   console.log('Note: the test tournaments row and the push_log rows created above have no');
