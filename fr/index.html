@@ -55,9 +55,9 @@
     "operatingSystem": "Web, iOS, Android (PWA)",
     "description": "Générateur de tournoi de padel gratuit pour les joueurs et clubs de loisirs.",
     "url": "https://padel-bracket.com",
-    "inLanguage": ["nl","en","fr","de","es","sv"],
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Bracket knockout","Americano padel","Mexicano padel","Round Robin","Mode présentation live","Lien de partage live","Export CSV et PDF","Fonctionne hors ligne","Sans compte","6 langues"],
+    "featureList": ["Bracket knockout","Americano padel","Mexicano padel","King of the Court","Mixicano","Round Robin","Pickleball avec export DUPR","Compétitions de club avec classement ELO et échelle","Auto-inscription avec liste d'attente","Mode présentation live","Lien de partage live avec QR code","Export CSV et PDF","Fonctionne hors ligne","Sans compte","8 langues"],
     "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://github.com/DannydeVis" }
   }
   </script>
@@ -67,7 +67,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "PadelBracket est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de compte, pas de mur payant. Toutes les fonctionnalités sont disponibles immédiatement." } },
-      { "@type": "Question", "name": "Quels formats de tournoi sont supportés ?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket supporte quatre formats : bracket knockout (groupes → demi-finales → finale), Americano (partenaires tournants, points par joueur), Mexicano (partenaires selon le classement) et Round Robin (tout le monde joue contre tout le monde)." } },
+      { "@type": "Question", "name": "Quels formats de tournoi sont supportés ?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket supporte sept formats : Americano (partenaires tournants, points par joueur), Mexicano (partenaires selon le classement), King of the Court (terrains classés du plus bas au plus haut, les gagnants montent), Mixicano (paires mixtes), Team Americano (paires fixes, points par paire), bracket knockout (groupes plus finale) et Round Robin (tout le monde joue contre tout le monde)." } },
       { "@type": "Question", "name": "Quelle est la différence entre Americano et Mexicano ?", "acceptedAnswer": { "@type": "Answer", "text": "En Americano, les partenaires sont déterminés à l'avance par une rotation fixe. En Mexicano, les partenaires sont réattribués après chaque tour selon le classement actuel : rang 1 et 2 jouent contre rang 3 et 4. Le Mexicano devient de plus en plus compétitif." } },
       { "@type": "Question", "name": "Que fait le mode présentation ?", "acceptedAnswer": { "@type": "Answer", "text": "Le mode présentation ouvre un tableau de score plein écran, idéal pour une TV ou un projecteur. Vous voyez le classement en direct et tous les matchs actifs. L'écran se rafraîchit automatiquement toutes les 3 secondes." } },
       { "@type": "Question", "name": "Comment les participants peuvent-ils suivre en direct ?", "acceptedAnswer": { "@type": "Answer", "text": "Utilisez le bouton Partager pour générer un lien unique. Les participants l'ouvrent sur leur téléphone et voient le classement en direct — sans compte, sans installation." } },
@@ -96,7 +96,7 @@
     "name": "PadelBracket",
     "url": "https://padel-bracket.com",
     "description": "Générateur de tournoi de padel gratuit pour Americano, Mexicano, Knockout et Round Robin.",
-    "inLanguage": ["nl","en","fr","de","es","sv"]
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"]
   }
   </script>
   <script type="application/ld+json">
@@ -368,7 +368,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Joueurs soumettent scores</div>
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Prêt en 30 secondes</div>
       </div>
-      <p class="hero-note">Fonctionne sur téléphone, tablette et PC · Installable · 6 langues</p>
+      <p class="hero-note">Fonctionne sur téléphone, tablette et PC · Installable · 8 langues</p>
     </div>
 
     <a class="hero-board" href="/app/" aria-label="Voir le classement live dans l'app">
@@ -437,7 +437,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <div class="founder-inner">
     <div class="founder-text-col">
       <span class="founder-eyebrow">La personne derriere PadelBracket</span>
-      <p class="founder-body">Je suis Danny, un fan de padel de Rotterdam. J'en avais assez des complications: repartir les joueurs dans un carnet, noter les scores dans le chat de groupe, et toujours quelqu'un qui perdait le fil. Les outils qui reglaient ca etaient chers ou pleins de comptes et de publicites. Alors je l'ai construit moi-meme, gratuit, sans compte. Un lien, c'est tout.</p>
+      <p class="founder-body">Je suis Danny, un fan de padel de Rotterdam. J'en avais assez des complications: repartir les joueurs dans un carnet, noter les scores dans le chat de groupe, et toujours quelqu'un qui perdait le fil. Les outils qui reglaient ca etaient chers ou pleins de comptes et de publicites. Alors je l'ai construit moi-meme, gratuit, sans compte. Un lien, c'est tout. Le code source complet est disponible sur <a href="https://github.com/DannydeVis/padel-toernooi" target="_blank" rel="noopener" style="color:var(--accent)">GitHub</a>.</p>
     </div>
   </div>
 </section>
@@ -450,8 +450,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
         <div class="fc-text">
-          <h3>Quatre formats de tournoi</h3>
-          <p>Bracket knockout (groupes + finale), Americano (partenaires tournants), Mexicano (partenaires selon le classement) et Round Robin (tous contre tous). Choisissez selon votre groupe.</p>
+          <h3>Huit formats de tournoi</h3>
+          <p>Americano, Mexicano, King of the Court, Mixicano, Team Americano, Knockout, Round Robin et Pickleball. Choisissez selon votre groupe.</p>
         </div>
       </div>
       <div class="fc-item">
@@ -464,8 +464,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
-          <h3>6 langues, automatique</h3>
-          <p>Neerlandais, Anglais, Francais, Allemand, Espagnol et Suedois. L'app detecte automatiquement la langue de votre appareil, ideal pour les groupes internationaux.</p>
+          <h3>8 langues, automatique</h3>
+          <p>Neerlandais, Anglais, Francais, Allemand, Espagnol, Italien, Portugais et Suedois. L'app detecte automatiquement la langue de votre appareil, ideal pour les groupes internationaux.</p>
         </div>
       </div>
     </div>
@@ -495,6 +495,93 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="fc-text">
           <h3>Export CSV &amp; PDF</h3>
           <p>Telechargez le classement final et tous les resultats en CSV pour Excel, ou imprimez en PDF. Pratique comme souvenir ou pour l'administration du club.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FEATURES-C: JOUR DU TOURNOI -->
+<section class="fc-section">
+  <div class="fc-inner">
+    <h2 class="fc-title">Le jour du tournoi</h2>
+    <div class="fc-list">
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(199,255,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="fc-text">
+          <h3>Points ou temps, a vous de choisir</h3>
+          <p>Reglez le nombre de points par match vous-meme, ou jouez au temps avec un minuteur automatique par manche.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
+        <div class="fc-text">
+          <h3>Nombres impairs, pas de probleme</h3>
+          <p>Jusqu'a 32 joueurs par tournoi, avec des tours de repos equitables qui tournent quand le nombre ne tombe pas juste.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="8"/></svg></div>
+        <div class="fc-text">
+          <h3>Forfaits et retardataires</h3>
+          <p>Mettez un joueur en pause, ajoutez un retardataire ou marquez une equipe comme forfait, sans refaire le calendrier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FEATURES-D: POUR LES JOUEURS -->
+<section class="fc-section">
+  <div class="fc-inner">
+    <h2 class="fc-title">Pour les joueurs</h2>
+    <div class="fc-list">
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(34,197,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div class="fc-text">
+          <h3>Auto-inscription avec liste d'attente</h3>
+          <p>Partagez un lien d'inscription. Les joueurs s'ajoutent eux-memes a la liste, et une fois complete, le reste passe automatiquement en liste d'attente.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="fc-text">
+          <h3>Vue joueur personnelle</h3>
+          <p>Chaque joueur voit son propre terrain, partenaire et adversaire directement sur son telephone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FEATURES-E: COMPETITIONS DE CLUB -->
+<section class="fc-section">
+  <div class="fc-inner">
+    <h2 class="fc-title">Competitions de club et classement ELO</h2>
+    <div class="fc-list">
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="fc-text">
+          <h3>Un groupe fixe, plusieurs soirees</h3>
+          <p>Reliez des sessions a un groupe de joueurs fixe. Le classement montre qui a cumule le plus de points de classement sur toutes les sessions.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(251,191,36,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="fc-text">
+          <h3>Classement ELO par joueur</h3>
+          <p>En plus des points, l'app calcule un classement ELO a partir des positions finales de chaque session, toujours recalcule sur l'historique complet.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(239,68,68,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div>
+        <div class="fc-text">
+          <h3>Echelle avec defis</h3>
+          <p>Les joueurs se defient dans une plage configurable et grimpent l'echelle en cas de victoire.</p>
+        </div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(34,197,94,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
+        <div class="fc-text">
+          <h3>Carte de classement a partager</h3>
+          <p>Exportez le classement final en image avec podium, top 10 et lien QR, prete a partager dans le chat de groupe.</p>
         </div>
       </div>
     </div>
@@ -540,8 +627,8 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 </section>
 
 <section class="section">
-  <h2 class="section-title">Sept formats de tournoi</h2>
-  <p class="section-sub">Choisissez le format adapté à votre groupe.</p>
+  <h2 class="section-title">Huit formats de tournoi</h2>
+  <p class="section-sub">Choisissez le format adapté à votre groupe, aussi pour le pickleball.</p>
   <div class="formats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="format team"><h3>Tournoi par équipes</h3><p>Les paires fixes jouent des groupes, puis les 4 meilleurs accèdent au tableau final. Les autres jouent une finale de consolation.</p><ul><li>Paires fixes toute la journée</li><li>Phase de groupes + tableau des vainqueurs</li><li>Finale de consolation places 5 a 9</li><li>4 a 9 equipes (8 a 18 joueurs)</li></ul><a href="/knockout/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Knockout →</a></div>
     <div class="format am"><h3>Americano</h3><p>Nouveaux partenaires à chaque tour par rotation fixe. Tout le monde joue avec et contre tout le monde. Idéal pour une session conviviale.</p><ul><li>Partenaires tournants</li><li>Points comptabilisés par joueur</li><li>Classement en direct &amp; mode présentation</li><li>4 joueurs ou plus</li></ul><a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano →</a></div>
@@ -550,6 +637,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     <div class="format am"><h3>King of the Court</h3><p>Le terrain 1 est le terrain du roi. Les gagnants montent d'un terrain, les perdants descendent. Celui qui garde le terrain du roi le plus longtemps gagne.</p><ul><li>Gagnants montent, perdants descendent</li><li>Rotation équitable des repos</li><li>Points fixes ou au temps</li><li>A partir de 8 joueurs</li></ul><a href="/king-of-the-court/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">King of the Court →</a></div>
     <div class="format am"><h3>Mixicano</h3><p>Comme le Mexicano, mais chaque équipe est toujours un homme et une femme. Le tour 1 est aléatoire, puis chacun est classé séparément et apparié par rang.</p><ul><li>Équipes toujours mixtes</li><li>Appariement selon le classement</li><li>Rotation équitable si nombres inégaux</li><li>4 joueurs ou plus</li></ul><a href="/mixicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mixicano →</a></div>
     <div class="format team"><h3>Team Mexicano</h3><p>Paires fixes comme Team Americano, mais les adversaires sont attribués chaque tour selon le classement en direct au lieu d'un calendrier fixe.</p><ul><li>Paires fixes, adversaires selon classement</li><li>Adversaire attribué par rang</li><li>Points puis face à face</li><li>3 paires ou plus</li></ul><a href="/team-mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Team Mexicano →</a></div>
+    <div class="format am"><h3>Pickleball</h3><p>La meme app, avec le score du pickleball. Jouez Americano, Mexicano, Round Robin ou King of the Court avec des scores cibles de 11, 15 ou 21.</p><ul><li>Les quatre formats disponibles</li><li>Scores cibles 11, 15 ou 21, win-by-2</li><li>Export CSV pret pour DUPR</li><li>Meme app, bascule de sport separee</li></ul><a href="/pickleball/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Pickleball →</a></div>
   </div>
 </section>
 
@@ -557,14 +645,14 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <h2 class="section-title">Questions fréquentes</h2>
   <div class="faq-list">
     <details class="faq-item"><summary>PadelBracket est-il gratuit ?</summary><p>Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de compte, pas de mur payant. Toutes les fonctionnalités sont disponibles immédiatement.</p></details>
-    <details class="faq-item"><summary>Quels formats de tournoi sont supportés ?</summary><p>PadelBracket supporte quatre formats : <strong>bracket knockout</strong> (groupes → demi-finales → finale), <strong>Americano</strong> (partenaires tournants, points par joueur), <strong>Mexicano</strong> (partenaires selon le classement) et <strong>Round Robin</strong> (tout le monde joue contre tout le monde).</p></details>
+    <details class="faq-item"><summary>Quels formats de tournoi sont supportés ?</summary><p>PadelBracket supporte sept formats : <strong>Americano</strong> (partenaires tournants, points par joueur), <strong>Mexicano</strong> (partenaires selon le classement), <strong>King of the Court</strong> (terrains classés du plus bas au plus haut, les gagnants montent), <strong>Mixicano</strong> (paires mixtes), <strong>Team Americano</strong> (paires fixes, points par paire), <strong>bracket knockout</strong> (groupes plus finale) et <strong>Round Robin</strong> (tout le monde joue contre tout le monde).</p></details>
     <details class="faq-item"><summary>Quelle est la différence entre Americano et Mexicano ?</summary><p>En <strong>Americano</strong>, les partenaires sont déterminés à l'avance par une rotation fixe. Tout le monde joue exactement une fois ensemble. En <strong>Mexicano</strong>, les partenaires sont réattribués après chaque tour selon le classement actuel : rang 1 et 2 jouent contre rang 3 et 4. Le Mexicano devient de plus en plus compétitif au fil du tournoi.</p></details>
     <details class="faq-item"><summary>Que fait le mode présentation ?</summary><p>Le mode présentation ouvre un tableau de score plein écran, idéal pour une TV ou un projecteur au club. Vous voyez le classement en direct et tous les matchs actifs avec les scores. L'écran se rafraîchit automatiquement toutes les 3 secondes.</p></details>
     <details class="faq-item"><summary>Comment les participants peuvent-ils suivre en direct ?</summary><p>Utilisez le bouton <strong>Partager</strong> dans l'app pour générer un lien unique. Les participants l'ouvrent sur leur téléphone et voient le classement en direct, sans compte, sans installation. Les scores se mettent à jour au fur et à mesure de la saisie.</p></details>
     <details class="faq-item"><summary>Puis-je exporter les résultats ?</summary><p>Oui. Après le tournoi, vous pouvez exporter le classement final et tous les résultats en <strong>CSV</strong> (pour Excel ou Google Sheets) ou imprimer en <strong>PDF</strong>. Le bouton d'export apparaît dès le premier match joué.</p></details>
     <details class="faq-item"><summary>Combien de joueurs puis-je utiliser ?</summary><p>Pour Americano et Mexicano à partir de 4 joueurs, sans maximum. Pour un bracket par équipes à partir de 2 équipes. Avec un nombre impair de joueurs (5, 7, 9…) un joueur est exempté à chaque tour.</p></details>
     <details class="faq-item"><summary>L'app fonctionne-t-elle sans internet ?</summary><p>Oui. Après le premier chargement, PadelBracket fonctionne entièrement hors ligne. Le tournoi est sauvegardé localement sur votre appareil, même si vous fermez le navigateur.</p></details>
-    <details class="faq-item"><summary>Dans quelles langues l'app est-elle disponible ?</summary><p>PadelBracket est disponible en néerlandais, anglais, français, allemand, espagnol et suédois. L'app détecte automatiquement la langue de votre appareil.</p></details>
+    <details class="faq-item"><summary>Dans quelles langues l'app est-elle disponible ?</summary><p>PadelBracket est disponible en huit langues : néerlandais, anglais, français, allemand, espagnol, italien, portugais et suédois. L'app détecte automatiquement la langue de votre appareil.</p></details>
   </div>
 </section>
 
