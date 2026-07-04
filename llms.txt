@@ -105,6 +105,12 @@ Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 - https://padel-bracket.com/king-of-the-court/ — King of the Court generator
 - Spanish, Italian and Portuguese versions of the Americano, Mexicano, Mixicano, Knockout and Round Robin guides live under /es/, /it/ and /pt/ (for example https://padel-bracket.com/es/americano/)
 
+### Feature guides
+- https://padel-bracket.com/signup/ — Tournament signup link with automatic waitlist
+- https://padel-bracket.com/club-competition/ — Club competition: points standings across evenings, ELO rating, ladder with challenges, shareable standings card
+- https://padel-bracket.com/player-experience/ — Personal player view, self score entry, live spectator link, TV presentation mode
+- Spanish, Italian and Portuguese versions of the three feature guides above live under /es/, /it/ and /pt/ (for example https://padel-bracket.com/es/signup/)
+
 ### Americano by player count
 - https://padel-bracket.com/americano/4-players/
 - https://padel-bracket.com/americano/6-players/

@@ -985,6 +985,153 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Feature guide: tournament signup -->
+  <url>
+    <loc>https://padel-bracket.com/signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/signup/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/signup/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/signup/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/es/signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/signup/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/signup/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/signup/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/signup/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/signup/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/signup/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/signup/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/signup/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/signup/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Feature guide: club competition -->
+  <url>
+    <loc>https://padel-bracket.com/club-competition/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/club-competition/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/es/club-competition/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/club-competition/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/club-competition/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/club-competition/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/club-competition/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/club-competition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/club-competition/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Feature guide: player experience -->
+  <url>
+    <loc>https://padel-bracket.com/player-experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/player-experience/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/es/player-experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/player-experience/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/it/player-experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/player-experience/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://padel-bracket.com/pt/player-experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://padel-bracket.com/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://padel-bracket.com/es/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://padel-bracket.com/it/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://padel-bracket.com/pt/player-experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/player-experience/"/>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Privacy policy -->
   <url>
     <loc>https://padel-bracket.com/privacy/</loc>
