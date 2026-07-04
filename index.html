@@ -75,7 +75,7 @@
       {
         "@type": "Question",
         "name": "Welke toernooiformats worden ondersteund?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt zeven formats: Americano (wisselende koppels, punten per speler), Mexicano (koppels op basis van tussenstand), King of the Court (baanenladder, winnaars promoveren), Mixicano (gemengde koppels man en vrouw), Team Americano (vaste koppels, punten per koppel), Knockout bracket (poule plus finale) en Round Robin (iedereen speelt tegen iedereen)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket ondersteunt acht formats: Americano (wisselende koppels, punten per speler), Mexicano (koppels op basis van tussenstand), King of the Court (baanenladder, winnaars promoveren), Mixicano (gemengde koppels man en vrouw), Team Americano (vaste koppels, punten per koppel), Knockout bracket (poule plus finale), Round Robin (iedereen speelt tegen iedereen) en Pickleball (dezelfde formats, aangepaste puntentelling)." }
       },
       {
         "@type": "Question",
@@ -100,7 +100,7 @@
       {
         "@type": "Question",
         "name": "Hoeveel spelers kan ik gebruiken?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Voor Americano en Mexicano vanaf 4 spelers, zonder maximum. Voor een team bracket vanaf 2 teams. Bij een oneven aantal spelers rust er per ronde één speler (roterend)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Voor Americano en Mexicano vanaf 4 spelers, tot 32 spelers. Voor een team bracket vanaf 2 teams, tot 12 teams (24 spelers). Bij een oneven aantal spelers rust er per ronde één speler (roterend)." }
       },
       {
         "@type": "Question",
@@ -1182,7 +1182,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
         <div class="fc-text">
           <h3>Ook bij oneven aantallen</h3>
-          <p>Tot 32 spelers per toernooi, met eerlijke rustbeurten die roteren als het aantal niet precies uitkomt.</p>
+          <p>Tot 32 spelers bij Americano, Mexicano en King of the Court, tot 24 bij de teamformats, met eerlijke rustbeurten die roteren als het aantal niet precies uitkomt.</p>
         </div>
       </div>
       <div class="fc-item">
@@ -1377,7 +1377,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Partners wisselen elke ronde</li>
         <li>Puntentelling per speler</li>
         <li>Live ranglijst &amp; presentatiemodus</li>
-        <li>4 t/m 24 spelers</li>
+        <li>4 t/m 32 spelers</li>
       </ul>
       <a href="/americano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Americano generator →</a>
     </div>
@@ -1388,7 +1388,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Koppels op basis van ranglijst</li>
         <li>Puntentelling per speler</li>
         <li>Competitiever per ronde</li>
-        <li>4 t/m 24 spelers</li>
+        <li>4 t/m 32 spelers</li>
       </ul>
       <a href="/mexicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mexicano generator →</a>
     </div>
@@ -1399,7 +1399,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Iedereen speelt tegen iedereen</li>
         <li>Automatische standen</li>
         <li>Exporteerbaar naar PDF &amp; CSV</li>
-        <li>4 tot 16 spelers</li>
+        <li>4 tot 24 spelers</li>
       </ul>
       <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
     </div>
@@ -1421,7 +1421,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Altijd gemengde koppels</li>
         <li>Koppels op basis van ranglijst</li>
         <li>Eerlijke rustbeurten bij ongelijke aantallen</li>
-        <li>4 t/m 24 spelers</li>
+        <li>Vanaf 2 mannen en 2 vrouwen</li>
       </ul>
       <a href="/mixicano/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Mixicano generator →</a>
     </div>
@@ -1565,7 +1565,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Welke toernooiformats worden ondersteund?</summary>
-      <p>PadelBracket ondersteunt zeven formats: <strong>Americano</strong> (wisselende koppels, punten per speler), <strong>Mexicano</strong> (koppels op basis van tussenstand), <strong>Mixicano</strong> (gemengde koppels man/vrouw), <strong>Team Americano</strong> (vaste koppels, Americano-schema), <strong>King of the Court</strong> (winnaars promoveren, verliezers degraderen), <strong>Knockout</strong> (poule gevolgd door een knock-outbracket) en <strong>Round Robin</strong> (iedereen speelt tegen iedereen).</p>
+      <p>PadelBracket ondersteunt acht formats: <strong>Americano</strong> (wisselende koppels, punten per speler), <strong>Mexicano</strong> (koppels op basis van tussenstand), <strong>Mixicano</strong> (gemengde koppels man/vrouw), <strong>Team Americano</strong> (vaste koppels, Americano-schema), <strong>King of the Court</strong> (winnaars promoveren, verliezers degraderen), <strong>Knockout</strong> (poule gevolgd door een knock-outbracket), <strong>Round Robin</strong> (iedereen speelt tegen iedereen) en <strong>Pickleball</strong> (dezelfde formats, aangepaste puntentelling).</p>
     </details>
     <details class="faq-item">
       <summary>Wat is het verschil tussen Americano en Mexicano?</summary>
@@ -1589,7 +1589,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Hoeveel spelers kan ik gebruiken?</summary>
-      <p>Voor Americano en Mexicano vanaf 4 spelers en voor King of the Court vanaf 8 spelers, allemaal zonder maximum. Voor een knockout bracket of Round Robin vanaf 2 teams. Bij een oneven verdeling rust er per ronde één speler, roterend.</p>
+      <p>Voor Americano en Mexicano vanaf 4 spelers en voor King of the Court vanaf 8 spelers, allemaal tot 32 spelers. Voor een knockout bracket of Round Robin vanaf 2 teams, tot 12 teams (24 spelers). Bij een oneven verdeling rust er per ronde één speler, roterend.</p>
     </details>
     <details class="faq-item">
       <summary>Werkt de app ook zonder internet?</summary>

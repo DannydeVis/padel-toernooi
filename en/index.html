@@ -75,7 +75,7 @@
       {
         "@type": "Question",
         "name": "Which tournament formats are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket supports seven formats: Americano (rotating partners, points per player), Mexicano (partners based on standings), King of the Court (courts ranked low to high, winners promote), Mixicano (mixed male/female pairs), Team Americano (fixed pairs, points per pair), knockout bracket (groups plus final) and Round Robin (everyone plays everyone)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket supports eight formats: Americano (rotating partners, points per player), Mexicano (partners based on standings), King of the Court (courts ranked low to high, winners promote), Mixicano (mixed male/female pairs), Team Americano (fixed pairs, points per pair), knockout bracket (groups plus final), Round Robin (everyone plays everyone) and Pickleball (the same formats, adapted scoring)." }
       },
       {
         "@type": "Question",
@@ -105,7 +105,7 @@
       {
         "@type": "Question",
         "name": "How many players can I use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye each round." }
+        "acceptedAnswer": { "@type": "Answer", "text": "For Americano and Mexicano any group of 4 to 32 players. For a team bracket 2 to 12 teams (up to 24 players). With an odd number of players (5, 7, 9…) one player rotates on a bye each round." }
       },
       {
         "@type": "Question",
@@ -869,7 +869,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="fc-icon" style="background:rgba(59,130,246,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
         <div class="fc-text">
           <h3>Uneven numbers, no problem</h3>
-          <p>Up to 32 players per tournament, with fair rest turns that rotate when the count does not divide evenly.</p>
+          <p>Up to 32 players for Americano, Mexicano and King of the Court, up to 24 for the team formats, with fair rest turns that rotate when the count does not divide evenly.</p>
         </div>
       </div>
       <div class="fc-item">
@@ -1037,7 +1037,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <li>Everyone plays everyone</li>
         <li>Automatic standings</li>
         <li>Export to PDF &amp; CSV</li>
-        <li>4 to 16 players</li>
+        <li>4 to 24 players</li>
       </ul>
       <a href="/round-robin/" style="display:inline-block;margin-top:16px;font-size:.85rem;color:var(--accent);font-weight:600;text-decoration:none;">Round Robin generator →</a>
     </div>
@@ -1098,7 +1098,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>Which tournament formats are supported?</summary>
-      <p>PadelBracket supports seven formats: <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners based on standings), <strong>King of the Court</strong> (courts ranked low to high, winners promote), <strong>Mixicano</strong> (mixed male/female pairs), <strong>Team Americano</strong> (fixed pairs, points per pair), <strong>knockout bracket</strong> (groups plus final) and <strong>Round Robin</strong> (everyone plays everyone).</p>
+      <p>PadelBracket supports eight formats: <strong>Americano</strong> (rotating partners, points per player), <strong>Mexicano</strong> (partners based on standings), <strong>King of the Court</strong> (courts ranked low to high, winners promote), <strong>Mixicano</strong> (mixed male/female pairs), <strong>Team Americano</strong> (fixed pairs, points per pair), <strong>knockout bracket</strong> (groups plus final), <strong>Round Robin</strong> (everyone plays everyone) and <strong>Pickleball</strong> (the same formats, adapted scoring).</p>
     </details>
     <details class="faq-item">
       <summary>What is the difference between Americano and Mexicano?</summary>
@@ -1122,7 +1122,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
     </details>
     <details class="faq-item">
       <summary>How many players can I use?</summary>
-      <p>For Americano and Mexicano any group of 4 or more players, with no upper limit. For a team bracket 2 or more teams. With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
+      <p>For Americano and Mexicano any group of 4 to 32 players. For a team bracket 2 to 12 teams (up to 24 players). With an odd number of players (5, 7, 9…) one player rotates on a bye per round.</p>
     </details>
     <details class="faq-item">
       <summary>Does the app work without internet?</summary>
