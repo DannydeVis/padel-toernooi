@@ -1985,7 +1985,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.1.1';
+const APP_VERSION = 'v2.1.2';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4616,7 +4616,6 @@ function startTeamAmericano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('teamamericano',TAP.length*2);
   showAmericano();
-  _maybeAutoStartTimer(TAM);
   saveState();
 }
 
@@ -4702,7 +4701,6 @@ function startTeamMexicano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('teammexicano',TMP.length*2);
   showAmericano();
-  _maybeAutoStartTimer(TMM);
   saveState();
 }
 
@@ -5129,11 +5127,10 @@ function startMexicano(){
   if(ns.length<4){alert(t('val_min4'));return;}
   const shuffled=[...ns].sort(()=>Math.random()-.5);
   AP=shuffled.map((name,id)=>({id,name,pts:0}));
-  AM=[]; AM.push(buildMexicanoRound(AP, AM, 1, R.courts)); // Only round 1 — subsequent rounds generated after each round completes
+  AM=[]; AM.push(buildMexicanoRound(AP, AM, 1, R.courts)); // Only round 1, subsequent rounds generated after each round completes
   localStorage.removeItem('padel-round-timer');
   trackStart('mexicano', AP.length);
   showAmericano();
-  _maybeAutoStartTimer(AM);
   saveState();
 }
 
@@ -5277,7 +5274,6 @@ function startAmericano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('americano', AP.length);
   showAmericano();
-  _maybeAutoStartTimer(AM);
   saveState();
 }
 
@@ -5291,7 +5287,6 @@ function startMixicano(){
   localStorage.removeItem('padel-round-timer');
   trackStart('mixicano', AP.length);
   showAmericano();
-  _maybeAutoStartTimer(AM);
   saveState();
 }
 
