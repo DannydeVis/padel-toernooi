@@ -59,7 +59,8 @@
       + ".padel-cta--spectator .padel-cta__btn{flex:0 0 auto;white-space:nowrap;text-decoration:none;background:#C7FF5E;color:#0E1114;font-weight:800;font-size:13px;letter-spacing:.5px;text-transform:uppercase;padding:11px 18px;border-radius:12px;box-shadow:0 4px 12px rgba(199,255,94,.3);transition:transform .12s ease,box-shadow .12s ease}"
       + ".padel-cta--spectator .padel-cta__btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(199,255,94,.45)}"
       + ".padel-cta--spectator .padel-cta__btn:active{transform:translateY(0)}"
-      + ".padel-cta--presentation{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 32px;background:linear-gradient(180deg,#1A1F24 0%,#0E1114 100%);border-top:3px solid #C7FF5E;box-shadow:0 -4px 24px rgba(0,0,0,.4)}"
+      + ".padel-cta--presentation{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 32px;background:linear-gradient(180deg,#1A1F24 0%,#0E1114 100%);border-top:3px solid #C7FF5E;box-shadow:0 -4px 24px rgba(0,0,0,.4);transform:translateY(100%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}"
+      + ".padel-cta--presentation.padel-cta--visible{transform:translateY(0)}"
       + ".padel-cta--presentation .padel-cta__qr{flex:0 0 auto;width:104px;height:104px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 2px 8px rgba(0,0,0,.3)}"
       + ".padel-cta--presentation .padel-cta__qr img{width:100%;height:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges}"
       + ".padel-cta--presentation .padel-cta__col{display:flex;flex-direction:column;gap:4px;text-align:left}"
@@ -112,6 +113,16 @@
     }
 
     (opts.container ? document.querySelector(opts.container) : document.body || document.documentElement).appendChild(el);
+
+    if (mode === "presentation") {
+      var SHOW_MS = 10000, CYCLE_MS = 5 * 60 * 1000;
+      var cycle = function () {
+        el.classList.add("padel-cta--visible");
+        setTimeout(function () { el.classList.remove("padel-cta--visible"); }, SHOW_MS);
+      };
+      setTimeout(cycle, 1500);
+      setInterval(cycle, CYCLE_MS);
+    }
   }
 
   function autoMount() {
