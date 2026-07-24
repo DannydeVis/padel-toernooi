@@ -44,7 +44,7 @@
     /* Mode breakdown */
     .mode-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--bdr); }
     .mode-row:last-child { border-bottom: none; }
-    .mode-label { width: 100px; font-size: .85rem; font-weight: 600; flex-shrink: 0; }
+    .mode-label { width: 122px; font-size: .85rem; font-weight: 600; flex-shrink: 0; }
     .mode-bar-bg { flex: 1; height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; min-width: 0; }
     .mode-bar-fill { height: 6px; border-radius: 6px; background: var(--accent); transition: width .6s ease; }
     .mode-count { width: 40px; text-align: right; font-size: .85rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
@@ -54,6 +54,21 @@
     .chart-bar-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .chart-bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--accent); min-height: 2px; transition: height .4s ease; }
     .chart-lbl { font-size: .55rem; color: var(--txt2); white-space: nowrap; overflow: hidden; max-width: 100%; text-align: center; }
+
+    /* Recent tournaments */
+    .rt-filters { display: flex; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
+    .rt-tab { background: none; border: 1px solid var(--bdr); border-radius: 8px; padding: 5px 12px; color: var(--txt2); font-size: .74rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .rt-tab:hover { color: var(--txt); }
+    .rt-tab-on { background: var(--accent); border-color: var(--accent); color: #0E1114; }
+    .rt-row { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--bdr); }
+    .rt-row:last-child { border-bottom: none; }
+    .rt-main { flex: 1; min-width: 0; }
+    .rt-fmt { font-size: .85rem; font-weight: 700; }
+    .rt-meta { font-size: .72rem; color: var(--txt2); margin-top: 2px; }
+    .rt-right { text-align: right; flex-shrink: 0; }
+    .rt-dur { font-size: .85rem; font-weight: 700; color: var(--accent); }
+    .rt-badge { display: inline-block; margin-top: 3px; font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 2px 6px; border-radius: 5px; background: rgba(255,255,255,.08); color: var(--txt2); }
+    .rt-badge-open { background: rgba(251,191,36,.15); color: var(--gold); }
 
     .loading { color: var(--txt2); font-size: .85rem; padding: 16px 0; }
   </style>
@@ -89,6 +104,16 @@
   </div>
 
   <div class="card">
+    <div class="section-title">Laatste toernooien</div>
+    <div class="rt-filters">
+      <button class="rt-tab rt-tab-on" id="rt-f-all" onclick="setRecentFilter('all')">Alles</button>
+      <button class="rt-tab" id="rt-f-real" onclick="setRecentFilter('real')">Echt</button>
+      <button class="rt-tab" id="rt-f-test" onclick="setRecentFilter('test')">Test</button>
+    </div>
+    <div id="recent-list"><div class="loading">Laden...</div></div>
+  </div>
+
+  <div class="card">
     <div class="section-title">Per format</div>
     <div id="mode-breakdown"><div class="loading">Laden...</div></div>
   </div>
@@ -114,10 +139,21 @@
 const SUPABASE_URL = 'https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SESSION_KEY = 'padel-admin-key';
 
-const MODE_LABELS = { americano: 'Americano', mexicano: 'Mexicano', team: 'Team', roundrobin: 'Round Robin' };
-const MODE_ORDER = ['americano', 'mexicano', 'team', 'roundrobin'];
+// Alle mode-waarden die de app wegschrijft via trackStart() in app/index.html
+const MODE_LABELS = {
+  americano: 'Americano', mexicano: 'Mexicano', team: 'Team', roundrobin: 'Round Robin',
+  kingofcourt: 'King of the Court', mixicano: 'Mixicano',
+  teamamericano: 'Team Americano', teammexicano: 'Team Mexicano'
+};
+const MODE_ORDER = ['americano', 'mexicano', 'team', 'roundrobin', 'kingofcourt', 'mixicano', 'teamamericano', 'teammexicano'];
+
+// Onder deze speelduur zien we een toernooi als test (zelfde grens als de stat-kaart)
+const TEST_MAX_MIN = 5;
 
 function $(id){ return document.getElementById(id); }
+
+// mode komt uit de database en is via de anon key vrij te inserten, dus nooit rauw in de DOM
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
 function getKey(){ return localStorage.getItem(SESSION_KEY); }
 
@@ -150,7 +186,7 @@ async function showDashboard(sb){
 }
 
 async function loadAll(sb){
-  await Promise.all([ loadStats(sb), loadModes(sb), loadDaily(sb), loadPlayerDist(sb), loadModeAvg(sb) ]);
+  await Promise.all([ loadStats(sb), loadRecent(sb), loadModes(sb), loadDaily(sb), loadPlayerDist(sb), loadModeAvg(sb) ]);
 }
 
 async function refreshDashboard(){
@@ -183,12 +219,93 @@ async function loadStats(sb){
 
   const durData = durRes.data || [];
   const all = durData.map(r => r.duration_seconds / 60).filter(m => m >= 0 && m < 600);
-  const real = all.filter(m => m >= 5);
-  const tests = all.filter(m => m < 5);
+  const real = all.filter(m => m >= TEST_MAX_MIN);
+  const tests = all.filter(m => m < TEST_MAX_MIN);
   const avg = real.length ? Math.round(real.reduce((a,b)=>a+b,0)/real.length) : null;
   $('stat-duration').textContent = avg != null ? avg : '—';
   const lbl = $('stat-duration').parentElement.querySelector('.stat-card-lbl');
-  lbl.innerHTML = `Gem. speelduur (min)<br><span style="font-size:.65rem;color:var(--txt2);font-weight:400">${real.length} echt · ${tests.length} test (&lt;5 min)</span>`;
+  lbl.innerHTML = `Gem. speelduur (min)<br><span style="font-size:.65rem;color:var(--txt2);font-weight:400">${real.length} echt · ${tests.length} test (&lt;${TEST_MAX_MIN} min)</span>`;
+}
+
+// ── Laatste toernooien ──────────────────────────
+const RECENT_LIMIT = 50;
+let recentRows = [];
+let recentFilter = 'all';
+
+async function loadRecent(sb){
+  const { data: starts, error } = await sb.from('tournament_starts')
+    .select('mode,player_count,created_at,client_id')
+    .order('created_at', { ascending: false })
+    .limit(RECENT_LIMIT);
+
+  if(error || !starts || !starts.length){
+    recentRows = [];
+    $('recent-list').innerHTML = '<div class="loading">Geen data</div>';
+    return;
+  }
+
+  // De speelduur staat in een aparte tabel, gekoppeld op client_id (zie trackEnd() in de app)
+  const ids = starts.map(s => s.client_id).filter(Boolean);
+  const durMap = {};
+  if(ids.length){
+    const { data: durs } = await sb.from('tournament_durations')
+      .select('client_id,duration_seconds')
+      .in('client_id', ids);
+    (durs || []).forEach(d => { durMap[d.client_id] = d.duration_seconds; });
+  }
+
+  recentRows = starts.map(s => {
+    const sec = s.client_id ? durMap[s.client_id] : undefined;
+    const has = sec != null;
+    return {
+      mode: s.mode,
+      players: s.player_count,
+      when: s.created_at,
+      seconds: has ? sec : null,
+      isTest: has && sec / 60 < TEST_MAX_MIN
+    };
+  });
+  renderRecent();
+}
+
+function setRecentFilter(f){
+  recentFilter = f;
+  ['all','real','test'].forEach(k => { $('rt-f-'+k).className = 'rt-tab' + (k === f ? ' rt-tab-on' : ''); });
+  renderRecent();
+}
+
+function renderRecent(){
+  const rows = recentRows.filter(r => {
+    if(recentFilter === 'real') return r.seconds != null && !r.isTest;
+    if(recentFilter === 'test') return r.isTest;
+    return true;
+  });
+  if(!rows.length){ $('recent-list').innerHTML = '<div class="loading">Geen toernooien in deze selectie</div>'; return; }
+  $('recent-list').innerHTML = rows.map(r => `<div class="rt-row">
+    <div class="rt-main">
+      <div class="rt-fmt">${MODE_LABELS[r.mode] || esc(r.mode || '—')}</div>
+      <div class="rt-meta">${fmtWhen(r.when)} · ${r.players != null ? r.players + ' spelers' : 'spelers onbekend'}</div>
+    </div>
+    <div class="rt-right">
+      <div class="rt-dur">${fmtDur(r.seconds)}</div>
+      ${r.seconds == null
+        ? '<span class="rt-badge rt-badge-open">Niet afgerond</span>'
+        : (r.isTest ? '<span class="rt-badge">Test</span>' : '')}
+    </div>
+  </div>`).join('');
+}
+
+function fmtDur(sec){
+  if(sec == null) return '—';
+  const m = Math.round(sec / 60);
+  if(m < 60) return m + ' min';
+  return Math.floor(m / 60) + 'u ' + String(m % 60).padStart(2,'0') + 'm';
+}
+
+function fmtWhen(iso){
+  const d = new Date(iso);
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getDate()}/${d.getMonth()+1} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
 async function loadModes(sb){
