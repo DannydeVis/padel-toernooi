@@ -1,4 +1,8 @@
-const CACHE = 'padel-bracket-v2.2.0';
+// APP_VERSION in app/index.html is de enige bron van waarheid. De registratie geeft
+// die mee als ?v=, zodat de cachenaam nooit los kan drijven van de app.
+const PREFIX = 'padel-bracket-';
+const VERSION = new URL(self.location).searchParams.get('v') || 'dev';
+const CACHE = PREFIX + VERSION;
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -7,8 +11,9 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('activate', e => {
+  // Ruim elke oude cache van deze app op, ongeacht hoe die heette
   e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE).map(k => caches.delete(k)))
   ));
   self.clients.claim();
 });
