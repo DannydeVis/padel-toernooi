@@ -2026,7 +2026,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.6.0';
+const APP_VERSION = 'v2.6.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -6558,6 +6558,19 @@ function _amFrozenCount(){
 }
 function _amRegenCount(){ return Math.max(0,AM.length-_amFrozenCount()); }
 
+// Mexicano en Mixicano maken de volgende ronde zodra de huidige af is. Wijzigt de
+// spelerslijst daarna, dan staat die ronde er nog met de oude bezetting in. Gooi hem
+// weg zolang er geen score in staat en maak hem opnieuw met de huidige lijst.
+function _rebuildFutureMexRounds(){
+  const frozen=_amFrozenCount();
+  if(AM.length<=frozen) return false;   // er staat geen ongespeelde ronde klaar
+  if(AP.filter(p=>!p.paused).length<4) return false;
+  AM=AM.slice(0,frozen);
+  const builder=mode==='mixicano'?buildMixicanoRound:buildMexicanoRound;
+  const next=builder(AP,AM,AM.length+1,R.courts);
+  if(next&&next.length) AM.push(next);
+  return true;
+}
 // Rondes met ook maar een ingevoerde score blijven bevroren, de rest wordt
 // opnieuw ingedeeld met de huidige spelerslijst en de historie als input.
 function _rebuildFutureAmRounds(){
@@ -6583,6 +6596,7 @@ function pausePlayer(pid){
   const activeIdx=AM.findIndex(r=>r.some(m=>!m.done));
   p.pausedAtRound=activeIdx===-1?AM.length:activeIdx+1;
   if(mode==='americano') _rebuildFutureAmRounds();
+  else if(mode==='mexicano'||mode==='mixicano') _rebuildFutureMexRounds();
   closeDetailModal(); renderAmericano(); saveState();
   if(shareCode&&!viewMode) pushToSupabase();
 }
@@ -6593,6 +6607,7 @@ function resumePlayer(pid){
   p.paused=false;
   delete p.pausedAtRound;
   if(mode==='americano') _rebuildFutureAmRounds();
+  else if(mode==='mexicano'||mode==='mixicano') _rebuildFutureMexRounds();
   closeDetailModal(); renderAmericano(); saveState();
   if(shareCode&&!viewMode) pushToSupabase();
 }
@@ -6628,6 +6643,7 @@ function addLatePlayer(){
       else entry.pts=pick||0;
       AP.push(entry);
       if(mode==='americano') _rebuildFutureAmRounds();
+  else if(mode==='mexicano'||mode==='mixicano') _rebuildFutureMexRounds();
       renderAmericano(); saveState();
       if(shareCode&&!viewMode) pushToSupabase();
     }
