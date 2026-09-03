@@ -385,8 +385,18 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .am-score-row .am-score{font-family:'Inter',sans-serif;font-weight:800;font-size:1rem;letter-spacing:2px;white-space:nowrap}
 .am-score-row.am-done-row .am-winner{color:var(--accent)}
 .am-adj{display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-weight:700;font-size:1rem}
-.adj-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
-.adj-btn:active{background:var(--accent);color:#0E1114;border-color:var(--accent)}
+.adj-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt);font-size:1.2rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;font-family:inherit}
+.adj-btn:active{background:var(--accent);color:#0E1114;border-color:var(--accent);transform:scale(.9)}
+.koc-name{white-space:nowrap}
+.koc-pause{margin-left:7px;width:26px;height:26px;flex-shrink:0;border-radius:50%;border:1px solid var(--bdr);background:var(--surface2);color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;vertical-align:-7px;padding:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:.15s}
+.koc-pause .icon{width:12px;height:12px}
+.koc-pause:hover{color:var(--txt);border-color:var(--txt2)}
+.koc-pause.on{color:var(--accent);border-color:rgba(199,255,94,.45)}
+.koc-pause:active{transform:scale(.9)}
+.koc-crown{display:inline-block;color:var(--gold);vertical-align:-2px}
+.koc-crown .icon{width:13px;height:13px}
+.grp-chip-action .icon{width:13px;height:13px;display:block}
+.koc-arrow-up .icon,.koc-arrow-down .icon,.koc-arrow-same .icon{width:14px;height:14px;vertical-align:-3px}
 .score-inp{width:46px;text-align:center;background:none;border:none;border-bottom:2px solid var(--bdr);color:var(--card-txt);font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;outline:none}
 .score-inp:focus{border-bottom-color:var(--accent)}
 .am-save-row{text-align:right}
@@ -1392,6 +1402,13 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
   <symbol id="ic-league" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="5" height="9"/><rect x="9.5" y="7" width="5" height="14"/><rect x="16" y="3" width="5" height="18"/><line x1="3" y1="21" x2="21" y2="21"/></symbol>
   <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
   <symbol id="ic-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="ic-pause" viewBox="0 0 24 24"><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></symbol>
+  <symbol id="ic-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+  <symbol id="ic-crown" viewBox="0 0 24 24"><path d="M3 7l4 4 5-7 5 7 4-4v10H3z"/><line x1="3" y1="20" x2="21" y2="20"/></symbol>
+  <symbol id="ic-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="6"/><polyline points="6 12 12 6 18 12"/></symbol>
+  <symbol id="ic-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="18"/><polyline points="18 12 12 18 6 12"/></symbol>
+  <symbol id="ic-equal" viewBox="0 0 24 24"><line x1="6" y1="10" x2="18" y2="10"/><line x1="6" y1="15" x2="18" y2="15"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></symbol>
 </svg>
 
 <!-- ONBOARDING -->
@@ -2026,7 +2043,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.7.0';
+const APP_VERSION = 'v2.7.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3157,8 +3174,8 @@ function renderCompetitions(){
           <span class="comp-item-sub">${g?esc(g.name):'?'} &middot; <span class="comp-session-count">${c.sessions.length} ${t('comp_sessions_lbl').toLowerCase()}</span></span>
         </button>
         <div class="comp-item-actions">
-          <button class="grp-chip-action" onclick="renameComp('${c.id}')" title="&#x270E;">&#x270E;</button>
-          <button class="grp-chip-action" onclick="deleteComp('${c.id}')" title="&#x2715;">&#x2715;</button>
+          <button class="grp-chip-action" onclick="renameComp('${c.id}')" title="&#x270E;">${icon('ic-pencil')}</button>
+          <button class="grp-chip-action" onclick="deleteComp('${c.id}')" title="&#x2715;">${icon('ic-x')}</button>
         </div>
       </div>`;
     }).join('');
@@ -3240,7 +3257,7 @@ function openCompDetail(compId){
           <span class="comp-session-date">${new Date(s.date).toLocaleDateString()}</span>
           <span class="comp-session-label">${esc(s.label)}</span>
           <span class="comp-session-badge">${s.format}</span>
-          <button class="grp-chip-action" onclick="event.stopPropagation();deleteCompSession('${comp.id}','${s.id}')" title="&#x2715;">&#x2715;</button>
+          <button class="grp-chip-action" onclick="event.stopPropagation();deleteCompSession('${comp.id}','${s.id}')" title="&#x2715;">${icon('ic-x')}</button>
         </div>
         <div class="comp-session-body">
           ${s.results.map(r=>`<div class="comp-session-result-row"><span class="comp-sess-rank">${r.rank}</span><span class="comp-sess-names">${_sessEntryNames(r,group).map(esc).join(' &amp; ')}</span><span class="comp-sess-pts">${_compPointsForRank(comp.pointSchema||DEFAULT_SCHEMA,r.rank)} pts</span></div>`).join('')}
@@ -7107,7 +7124,7 @@ function _kocName(id){ const p=KOCP.find(x=>x.id===id); return p?p.name:'?'; }
 
 function _kocArrowHtml(arrow){
   if(!arrow) return '';
-  const glyph=arrow==='up'?'&#9650;':arrow==='down'?'&#9660;':'&#61;';
+  const glyph=icon(arrow==='up'?'ic-arrow-up':arrow==='down'?'ic-arrow-down':'ic-equal');
   const cls=arrow==='up'?'koc-arrow-up':arrow==='down'?'koc-arrow-down':'koc-arrow-same';
   const label=arrow==='up'?t('koc_arrow_up'):arrow==='down'?t('koc_arrow_down'):t('koc_arrow_same');
   return `<span class="${cls}" title="${label}" aria-label="${label}">${glyph}</span>`;
@@ -7148,7 +7165,7 @@ function renderKoc(){
       if(isPk||R.scoringMode==='time'){
         h+=`<span class="am-adj"><input type="number" min="0" id="koc-a-${m.id}" value="${m.sa}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sa=Math.max(0,parseInt(this.value)||0);saveState();}"> - <input type="number" min="0" id="koc-b-${m.id}" value="${m.sb}" class="score-inp" oninput="const mm=KOCM.flat().find(x=>x.id==='${m.id}');if(mm&&!mm.done){mm.sb=Math.max(0,parseInt(this.value)||0);saveState();}"></span>`;
       } else {
-        h+=`<span class="am-adj"><button class="adj-btn" onclick="kocAdj('${m.id}','a',-1)">-</button><span id="koc-a-${m.id}">${m.sa}</span><button class="adj-btn" onclick="kocAdj('${m.id}','a',1)">+</button> - <button class="adj-btn" onclick="kocAdj('${m.id}','b',-1)">-</button><span id="koc-b-${m.id}">${m.sb}</span><button class="adj-btn" onclick="kocAdj('${m.id}','b',1)">+</button></span>`;
+        h+=`<span class="am-adj"><button class="adj-btn" onpointerdown="kocAdj('${m.id}','a',-1)">-</button><span id="koc-a-${m.id}">${m.sa}</span><button class="adj-btn" onpointerdown="kocAdj('${m.id}','a',1)">+</button> - <button class="adj-btn" onpointerdown="kocAdj('${m.id}','b',-1)">-</button><span id="koc-b-${m.id}">${m.sb}</span><button class="adj-btn" onpointerdown="kocAdj('${m.id}','b',1)">+</button></span>`;
       }
       h+=`<button class="btn btn-green btn-sm" onclick="kocSave('${m.id}')">${t('am_save')}</button></div>`;
     }
@@ -7169,10 +7186,10 @@ function renderKoc(){
     h+=`<div class="am-st-wrap"><div class="am-st-hdr-row"><h3>${t('koc_standings')}</h3>${kocAdd}</div><div id="lj-host"></div><table class="st-tbl">`;
     h+=`<tr><th>#</th><th>${t('am_col_player')}</th><th>${t('koc_col_trend')}</th><th>${t('koc_king_rounds')}</th><th>${t('am_col_pts')}</th></tr>`;
     standing.forEach((p,i)=>{
-      const crown=p.kingRounds>0?` <span title="${t('koc_king_lbl')}">&#9813;</span>`:'';
+      const crown=p.kingRounds>0?` <span class="koc-crown" title="${t('koc_king_lbl')}">${icon('ic-crown')}</span>`:'';
       const kocBadge=p.paused?` <span class="player-paused-badge">${t('player_paused')}</span>`:'';
-      const kocBtn=viewMode?'':` <button class="grp-chip-action" title="${p.paused?t('player_resume'):t('player_pause')}" onclick="${p.paused?`kocResumePlayer(${p.id})`:`kocPausePlayer(${p.id})`}">${p.paused?'&#9654;':'&#9208;'}</button>`;
-      h+=`<tr class="${i===0&&p.kingRounds>0&&!p.paused?'qq':''}${p.paused?' am-player-paused':''}"><td>${i+1}</td><td>${esc(p.name)}${crown}${kocBadge}${kocBtn}</td><td>${_kocArrowHtml(p.arrow)}</td><td>${p.kingRounds}</td><td>${p.pts}</td></tr>`;
+      const kocBtn=viewMode?'':`<button class="koc-pause${p.paused?' on':''}" title="${p.paused?t('player_resume'):t('player_pause')}" aria-label="${p.paused?t('player_resume'):t('player_pause')}" onclick="${p.paused?`kocResumePlayer(${p.id})`:`kocPausePlayer(${p.id})`}">${icon(p.paused?'ic-play':'ic-pause')}</button>`;
+      h+=`<tr class="${i===0&&p.kingRounds>0&&!p.paused?'qq':''}${p.paused?' am-player-paused':''}"><td>${i+1}</td><td class="koc-name">${esc(p.name)}${crown}${kocBadge}${kocBtn}</td><td>${_kocArrowHtml(p.arrow)}</td><td>${p.kingRounds}</td><td>${p.pts}</td></tr>`;
     });
     h+=`</table>`;
     if(isAllDone) h+=renderOrgCTA()+renderAgainBlock();
@@ -9803,7 +9820,7 @@ function ccRenderLadderView(){
     <div class="cc-ladder-row">
       <span class="cc-lb-rank">${p.position}</span>
       <span class="cc-lb-name">${esc(p.name)}</span>
-      ${ccIsOwner&&!ccPresMode?`<button class="grp-chip-action" onclick="ccRemovePlayerConfirm(${p.id})" title="&#x2715;">&#x2715;</button>`:''}
+      ${ccIsOwner&&!ccPresMode?`<button class="grp-chip-action" onclick="ccRemovePlayerConfirm(${p.id})" title="&#x2715;">${icon('ic-x')}</button>`:''}
     </div>`).join('');
   const joinForm=ccPresMode?'':`<div class="setup-card">
     <div class="setup-card-hdr"><span class="setup-card-title">${t('cc_ladder_join_lbl')}</span></div>
