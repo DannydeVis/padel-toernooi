@@ -131,7 +131,7 @@ body.light .st-wrap{border-top-color:#e5e7eb}
 body.light .champ-wrap{background:#fff;border-top-color:#e5e7eb}
 
 /* TEAM EDIT */
-.team-edit-btn{background:none;border:none;cursor:pointer;opacity:.35;font-size:.72rem;padding:0 3px;transition:.15s;vertical-align:middle}
+.team-edit-btn{background:none;border:none;cursor:pointer;opacity:.35;font-size:.72rem;padding:4px 6px;transition:.15s;vertical-align:middle}
 .team-edit-btn:hover{opacity:1}
 .team-name-input{background:var(--surface2);border:1px solid var(--accent);border-radius:6px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.84rem;padding:3px 8px;width:calc(100% - 8px);outline:none}
 
@@ -2047,7 +2047,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.7.2';
+const APP_VERSION = 'v2.7.3';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4315,7 +4315,7 @@ function renderSt(){
     if(topN>=0 && i===topN) h+=`<tr class="divr"><td colspan="6">${t('st_losers_div')}</td></tr>`;
     const tmName=viewMode?esc(tm.name):`<button class="team-stats-btn" onclick="openTeamModal(${tm.id})">${esc(tm.name)}</button>`;
     const dropBadge=tm.droppedOut?` <span class="player-paused-badge">${t('team_dropped_badge')}</span>`:'';
-    h+=`<tr class="${topN>=0 && i<topN?'qq':''}${tm.droppedOut?' am-player-paused':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${dropBadge}${viewMode?'':` <button class="team-edit-btn" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
+    h+=`<tr class="${topN>=0 && i<topN?'qq':''}${tm.droppedOut?' am-player-paused':''}"><td>${i+1}</td><td data-team-id="${tm.id}">${tmName}${tm.trio?' <span style="opacity:.5;font-size:.65rem">trio</span>':''}${dropBadge}${viewMode?'':` <button class="team-edit-btn" title="${t('hdr_edit')}" aria-label="${t('hdr_edit')}" onclick="editTeam(${tm.id})">${icon('ic-pencil')}</button>`}</td><td>${tm.played}</td><td class="wc">${tm.wins}</td><td class="lc">${tm.losses}</td><td style="color:var(--txt2);font-size:.75rem">${g.gW}–${g.gL}</td></tr>`;
   });
   $('sttbl').innerHTML=h;
   const eb=$('st-export-bar');
