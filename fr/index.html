@@ -35,6 +35,7 @@
   <link rel="alternate" hreflang="it" href="https://padel-bracket.com/it/">
   <link rel="alternate" hreflang="pt" href="https://padel-bracket.com/pt/">
   <link rel="alternate" hreflang="sv" href="https://padel-bracket.com/sv/">
+  <link rel="alternate" hreflang="id" href="https://padel-bracket.com/id/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/">
   <meta name="theme-color" content="#0E1114">
   <script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
@@ -55,9 +56,9 @@
     "operatingSystem": "Web, iOS, Android (PWA)",
     "description": "Générateur de tournoi de padel gratuit pour les joueurs et clubs de loisirs.",
     "url": "https://padel-bracket.com",
-    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"],
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv","id"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Bracket knockout","Americano padel","Mexicano padel","King of the Court","Mixicano","Round Robin","Pickleball avec export DUPR","Compétitions de club avec classement ELO et échelle","Auto-inscription avec liste d'attente","Mode présentation live","Lien de partage live avec QR code","Export CSV et PDF","Fonctionne hors ligne","Sans compte","8 langues"],
+    "featureList": ["Bracket knockout","Americano padel","Mexicano padel","King of the Court","Mixicano","Round Robin","Pickleball avec export DUPR","Compétitions de club avec classement ELO et échelle","Auto-inscription avec liste d'attente","Mode présentation live","Lien de partage live avec QR code","Export CSV et PDF","Fonctionne hors ligne","Sans compte","9 langues"],
     "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://github.com/DannydeVis" }
   }
   </script>
@@ -95,8 +96,8 @@
     "@type": "WebSite",
     "name": "PadelBracket",
     "url": "https://padel-bracket.com",
-    "description": "Générateur gratuit de tournois de padel et pickleball avec 8 formats, dont Americano, Mexicano, King of the Court et Knockout. Aucun compte requis, fonctionne hors ligne, disponible en 8 langues.",
-    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"]
+    "description": "Générateur gratuit de tournois de padel et pickleball avec 8 formats, dont Americano, Mexicano, King of the Court et Knockout. Aucun compte requis, fonctionne hors ligne, disponible en 9 langues.",
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv","id"]
   }
   </script>
   <script type="application/ld+json">
@@ -328,12 +329,13 @@
       <option value="it">IT</option>
       <option value="pt">PT</option>
       <option value="sv">SV</option>
+      <option value="id">ID</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/">Ouvrir l'app →</a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';}
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/',id:'/id/'};location.href=p[l]||'/';}
 </script>
 
 <!-- HERO -->
@@ -368,7 +370,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Joueurs soumettent scores</div>
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Prêt en 30 secondes</div>
       </div>
-      <p class="hero-note">Fonctionne sur téléphone, tablette et PC · Installable · 8 langues</p>
+      <p class="hero-note">Fonctionne sur téléphone, tablette et PC · Installable · 9 langues</p>
     </div>
 
     <a class="hero-board" href="/app/" aria-label="Voir le classement live dans l'app">
@@ -464,7 +466,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
-          <h3>8 langues, automatique</h3>
+          <h3>9 langues, automatique</h3>
           <p>Neerlandais, Anglais, Francais, Allemand, Espagnol, Italien, Portugais et Suedois. L'app detecte automatiquement la langue de votre appareil, ideal pour les groupes internationaux.</p>
         </div>
       </div>

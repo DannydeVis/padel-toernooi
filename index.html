@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <script>(function(){var s=localStorage.getItem('padel-lang');if(s)return;var l=(navigator.language||'').slice(0,2).toLowerCase();var m={en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',sv:'/sv/'};if(m[l]){localStorage.setItem('padel-lang',l);location.replace(m[l]);}})();</script>
+  <script>(function(){var s=localStorage.getItem('padel-lang');if(s)return;var l=(navigator.language||'').slice(0,2).toLowerCase();var m={en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',sv:'/sv/',id:'/id/'};if(m[l]){localStorage.setItem('padel-lang',l);location.replace(m[l]);}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gratis Padel Toernooi Generator — Americano, Mexicano, King of the Court, Knockout en Round Robin | Geen account, Werkt offline</title>
@@ -37,6 +37,7 @@
   <link rel="alternate" hreflang="it" href="https://padel-bracket.com/it/">
   <link rel="alternate" hreflang="pt" href="https://padel-bracket.com/pt/">
   <link rel="alternate" hreflang="sv" href="https://padel-bracket.com/sv/">
+  <link rel="alternate" hreflang="id" href="https://padel-bracket.com/id/">
   <link rel="alternate" hreflang="x-default" href="https://padel-bracket.com/en/">
   <meta name="theme-color" content="#0E1114">
   <script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
@@ -55,9 +56,9 @@
     "operatingSystem": "Web, iOS, Android (PWA)",
     "description": "Gratis padel en pickleball toernooi generator voor recreatieve spelers en clubs. Americano, Mexicano, King of the Court, Knockout en Round Robin.",
     "url": "https://padel-bracket.com",
-    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"],
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv","id"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","King of the Court generator","Competities met ELO-rating en ladder","Pickleball toernooi generator met DUPR-export","Zelf-inschrijving met wachtlijst","Live presentatiemodus","Live deel-link met QR-code","Export naar CSV en PDF","Works offline","No account needed","8 languages"],
+    "featureList": ["Knockout bracket generator","Padel Americano generator","Padel Mexicano generator","Round Robin generator","King of the Court generator","Competities met ELO-rating en ladder","Pickleball toernooi generator met DUPR-export","Zelf-inschrijving met wachtlijst","Live presentatiemodus","Live deel-link met QR-code","Export naar CSV en PDF","Works offline","No account needed","9 languages"],
     "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://github.com/DannydeVis" },
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".hero-sub", ".faq-item p"] }
   }
@@ -170,8 +171,8 @@
     "@type": "WebSite",
     "name": "PadelBracket",
     "url": "https://padel-bracket.com",
-    "description": "Gratis padel en pickleball toernooi generator met 8 formats, waaronder Americano, Mexicano, King of the Court en Knockout. Geen account nodig, werkt offline, beschikbaar in 8 talen.",
-    "inLanguage": ["nl","en","fr","de","es","it","pt","sv"]
+    "description": "Gratis padel en pickleball toernooi generator met 8 formats, waaronder Americano, Mexicano, King of the Court en Knockout. Geen account nodig, werkt offline, beschikbaar in 9 talen.",
+    "inLanguage": ["nl","en","fr","de","es","it","pt","sv","id"]
   }
   </script>
   <script type="application/ld+json">
@@ -181,10 +182,10 @@
     "name": "PadelBracket",
     "url": "https://padel-bracket.com/",
     "logo": "https://padel-bracket.com/icon.svg",
-    "description": "Gratis padel en pickleball toernooi generator met 8 formats, waaronder Americano, Mexicano, King of the Court en Knockout. Geen account nodig, werkt offline, beschikbaar in 8 talen.",
+    "description": "Gratis padel en pickleball toernooi generator met 8 formats, waaronder Americano, Mexicano, King of the Court en Knockout. Geen account nodig, werkt offline, beschikbaar in 9 talen.",
     "founder": { "@type": "Person", "name": "Danny de Visser" },
     "sameAs": ["https://github.com/DannydeVis"],
-    "availableLanguage": ["Dutch","English","French","German","Spanish","Italian","Portuguese","Swedish"]
+    "availableLanguage": ["Dutch","English","French","German","Spanish","Italian","Portuguese","Swedish","Indonesian"]
   }
   </script>
   <script type="application/ld+json">
@@ -740,12 +741,13 @@
       <option value="it">IT</option>
       <option value="pt">PT</option>
       <option value="sv">SV</option>
+      <option value="id">ID</option>
     </select>
   </div>
   <a class="nav-cta" href="/app/"><span class="full">Open app →</span><span class="short">App →</span></a>
 </nav>
 <script>
-function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/'};location.href=p[l]||'/';
+function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'/en/',fr:'/fr/',de:'/de/',es:'/es/',it:'/it/',pt:'/pt/',sv:'/sv/',id:'/id/'};location.href=p[l]||'/';
 }
 </script>
 
@@ -784,7 +786,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg> Spelers vullen scores in</div>
         <div class="hero-perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Klaar in 30 seconden</div>
       </div>
-      <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 8 talen</p>
+      <p class="hero-note">Werkt op telefoon, tablet en desktop · Installeerbaar als app · 9 talen</p>
       <p class="hero-count" id="hero-count" hidden></p>
 
       <div class="hero-demo" id="hero-demo">
@@ -831,15 +833,15 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>8 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
-    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>8 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
+    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>9 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
+    <span>Americano <b>●</b></span><span>Mexicano <b>●</b></span><span>King of the Court <b>●</b></span><span>Knockout Bracket <b>●</b></span><span>Round Robin <b>●</b></span><span>Live scorebord <b>●</b></span><span>Gratis <b>●</b></span><span>Geen account <b>●</b></span><span>9 talen <b>●</b></span><span>Werkt offline <b>●</b></span>
   </div>
 </div>
 
 <!-- ANTWOORD (AEO/GEO) -->
 <section class="answer-box rv" id="wat-is-padel-bracket">
   <div class="ab-q">Wat is Padel Bracket?</div>
-  <p><strong>Padel Bracket</strong> is een gratis online toernooi-generator voor padel en pickleball. Je maakt in 30 seconden een <strong>Americano, Mexicano, King of the Court, knockout-bracket of round robin</strong>, deelt één link met de groep en iedereen volgt de stand live, zonder account, zonder download, in 8 talen.</p>
+  <p><strong>Padel Bracket</strong> is een gratis online toernooi-generator voor padel en pickleball. Je maakt in 30 seconden een <strong>Americano, Mexicano, King of the Court, knockout-bracket of round robin</strong>, deelt één link met de groep en iedereen volgt de stand live, zonder account, zonder download, in 9 talen.</p>
   <div class="stats-band">
     <div class="stat-cell" data-tilt><b data-count="30" data-suffix="s">30s</b><span>toernooi klaar</span></div>
     <div class="stat-cell" data-tilt><b data-count="8">8</b><span>toernooiformats</span></div>
@@ -1130,7 +1132,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
       <div class="fc-item">
         <div class="fc-icon" style="background:rgba(168,85,247,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <div class="fc-text">
-          <h3>8 talen, automatisch</h3>
+          <h3>9 talen, automatisch</h3>
           <p>Nederlands, Engels, Frans, Duits, Spaans, Italiaans, Portugees en Zweeds. De app detecteert automatisch de taal van je apparaat, ook voor internationale groepen.</p>
         </div>
       </div>
