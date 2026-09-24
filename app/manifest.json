@@ -1,25 +1,54 @@
 {
+  "id": "./",
   "name": "PadelBracket — Padel Toernooi Generator",
   "short_name": "PadelBracket",
   "description": "Gratis padel toernooien: brackets, Americano en Round Robin. Offline, geen account.",
   "lang": "nl",
   "start_url": "./?utm_source=pwa",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#111827",
   "theme_color": "#10b981",
   "orientation": "portrait-primary",
+  "categories": ["sports", "utilities"],
   "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "../icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "../icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
     {
-      "src": "../icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "name": "Americano",
+      "short_name": "Americano",
+      "url": "./?format=americano&utm_source=pwa_shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
-      "src": "../icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
+      "name": "Mexicano",
+      "short_name": "Mexicano",
+      "url": "./?format=mexicano&utm_source=pwa_shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Knockout",
+      "short_name": "Knockout",
+      "url": "./?format=knockout&utm_source=pwa_shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "King of the Court",
+      "short_name": "King of the Court",
+      "url": "./?format=kotc&utm_source=pwa_shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
+  ],
+  "screenshots": [
+    { "src": "../screenshot-americano.png", "sizes": "1320x2868", "type": "image/png", "form_factor": "narrow", "label": "Americano: rondes en scores" },
+    { "src": "../screenshot-americano-scoring.png", "sizes": "1320x2868", "type": "image/png", "form_factor": "narrow", "label": "Score invoeren per baan" },
+    { "src": "../screenshot-winner.png", "sizes": "1320x2868", "type": "image/png", "form_factor": "narrow", "label": "Winnaar en eindstand" },
+    { "src": "../screenshot-player-view.webp", "sizes": "390x844", "type": "image/webp", "form_factor": "narrow", "label": "Spelers kijken live mee" },
+    { "src": "../screenshot-presentation-mode.webp", "sizes": "1280x800", "type": "image/webp", "form_factor": "wide", "label": "Presentatiemodus voor de tv" }
   ]
 }

@@ -36,18 +36,21 @@ self.addEventListener('push', e => {
   const body = data.body || '';
   const tag = data.tag || 'padel-round';
   const url = data.url || './';
-  e.waitUntil(self.registration.showNotification(title, {
+  // App Badging: stip op het app-icoon tot de app weer geopend wordt
+  const badge = self.navigator.setAppBadge ? self.navigator.setAppBadge().catch(() => {}) : null;
+  e.waitUntil(Promise.all([badge, self.registration.showNotification(title, {
     body,
     tag,
     data: { url },
     icon: '../icon.svg',
     badge: '../icon.svg',
     vibrate: [200, 100, 200]
-  }));
+  })]));
 });
 
 self.addEventListener('notificationclick', e => {
   e.notification.close();
+  if (self.navigator.clearAppBadge) self.navigator.clearAppBadge().catch(() => {});
   const url = (e.notification.data && e.notification.data.url) || './';
   e.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
