@@ -37,13 +37,14 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://padel-bracket.com/en/about/#danny",
     "name": "Danny de Visser",
     "url": "https://padel-bracket.com/en/about/",
     "jobTitle": "Creator of PadelBracket",
     "description": "Padel player from Rotterdam, Netherlands, and the sole creator and maintainer of PadelBracket, a free padel tournament generator.",
     "address": { "@type": "PostalAddress", "addressLocality": "Rotterdam", "addressCountry": "NL" },
     "knowsAbout": ["Padel", "Software development", "Tournament organisation"],
-    "sameAs": ["https://padel-bracket.com", "https://padel-bracket.com/en/"]
+    "sameAs": ["https://github.com/DannydeVis", "https://predicttherace.com/en/about/"]
   }
   </script>
   <script type="application/ld+json">
@@ -54,8 +55,8 @@
     "applicationCategory": "SportsApplication",
     "operatingSystem": "Web",
     "url": "https://padel-bracket.com/app/",
-    "author": { "@type": "Person", "name": "Danny de Visser", "url": "https://padel-bracket.com/en/about/" },
-    "creator": { "@type": "Person", "name": "Danny de Visser", "url": "https://padel-bracket.com/en/about/" },
+    "author": { "@type": "Person", "@id": "https://padel-bracket.com/en/about/#danny", "name": "Danny de Visser" },
+    "creator": { "@type": "Person", "@id": "https://padel-bracket.com/en/about/#danny", "name": "Danny de Visser" },
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
     "description": "Free padel tournament generator for Knockout, Americano, Mexicano and Round Robin formats. Works offline, no account needed, no ads.",
     "inLanguage": ["nl","en","fr","de","es","sv"]
@@ -169,6 +170,7 @@
     .about-prose { color: var(--txt2); font-size: .98rem; line-height: 1.8; max-width: 720px; }
     .about-prose + .about-prose { margin-top: 16px; }
     .about-prose strong { color: var(--txt); }
+    .about-prose a { color: var(--accent); }
 
     .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
     .about-item { display: flex; gap: 14px; align-items: flex-start; }
@@ -302,6 +304,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
   <h2 class="section-title">Hi, I'm Danny.</h2>
   <p class="about-prose">I'm <strong>Danny de Visser</strong>, a padel player from Rotterdam, Netherlands. I built PadelBracket because every time I helped organise a tournament with friends or at the club, the existing tools were either expensive, locked behind subscriptions and accounts, or just too clunky to use standing on the side of the court with sweaty hands.</p>
   <p class="about-prose">So I built my own. There are <strong>no investors, no team, and no roadmap meetings</strong> — just one person who plays padel and writes code, fixing the things that bothered him about every other tournament app out there. PadelBracket is the tool I wished existed when I was scribbling pairings on a notepad and tracking scores in a group chat.</p>
+  <p class="about-prose">Danny also makes <a href="https://predicttherace.com/en/">Predict the Race</a>, a free F1 prediction game for friends.</p>
 </section>
 
 <!-- WHY IT'S FREE -->

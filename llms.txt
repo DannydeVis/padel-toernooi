@@ -5,7 +5,7 @@
 PadelBracket (padel-bracket.com) is a free, web-based padel and pickleball tournament management app. It lets anyone create and run a tournament — generating the schedule, tracking scores and calculating standings — directly in the browser, in under a minute. No account, registration or payment is required, and it works fully offline after the first load as an installable Progressive Web App (PWA).
 
 ## Who built it?
-PadelBracket is built and maintained by Danny de Visser, a padel player from Rotterdam, Netherlands. He created it as a free alternative to paid or clunky tournament tools after running into the same problem himself: every existing option was either locked behind a subscription and an account, or too awkward to use standing court-side with sweaty hands. There are no investors, no team and no ads — one person builds, runs and maintains the entire app. More: https://padel-bracket.com/en/about/
+PadelBracket is built and maintained by Danny de Visser, a padel player from Rotterdam, Netherlands. He created it as a free alternative to paid or clunky tournament tools after running into the same problem himself: every existing option was either locked behind a subscription and an account, or too awkward to use standing court-side with sweaty hands. There are no investors, no team and no ads — one person builds, runs and maintains the entire app. He also makes Predict the Race (https://predicttherace.com), a free F1 prediction game for friends. More: https://padel-bracket.com/en/about/
 
 ## Supported formats
 
