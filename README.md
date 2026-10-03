@@ -33,6 +33,7 @@ Generate a complete padel tournament in seconds — Americano, Mexicano, Mixican
 - **Round timer**: optional per-round countdown with sound, synced to viewers
 - **Two scoring modes**: play to a fixed number of points (with sum validation) or play on time (any score is valid)
 - **No account needed** — open and start, nothing to install or sign up for
+- **Optional account** — log in with Google or an email code (no password) to keep your groups, competitions, running tournament and organizer rights on all your devices
 - **Works offline** — installable as a PWA; the app works without internet after the first load
 - **8 languages** — Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese
 - **Export** — copy standings as text, export CSV, or print/PDF results

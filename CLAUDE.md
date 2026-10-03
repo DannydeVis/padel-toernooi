@@ -21,3 +21,18 @@
 - Hosting: GitHub Pages (automatisch via `.github/workflows/deploy.yml`)
 - Backend: Supabase (live sharing via tabel `tournaments`)
 - Service worker: `app/sw.js`, cachenaam wordt afgeleid van `APP_VERSION`
+
+## Account (optioneel)
+- Inloggen met Google of een mailcode; synchroniseert groepen, competities,
+  beheersleutels en het lopende toernooi. Achtergrond en dashboardstappen:
+  `supabase/ACCOUNT.md`.
+- Staat achter `ACCOUNT_LIVE` in `app/index.html` (te bekijken met
+  `?account=preview`). Pas op `true` zetten als de stappen uit ACCOUNT.md
+  gedaan zijn.
+- Nieuwe Supabase-clients altijd via `_sbClient()`, nooit rechtstreeks
+  `createClient`: alleen `acctSB()` mag een sessie hebben en de `?code=` van
+  een inloglink lezen.
+- Lokaal iets nieuws bewaren dat mee moet naar andere toestellen? Voeg het toe
+  aan `_acctLocalItems()`/`_acctApply()` en roep na het opslaan `acctSchedule()` aan.
+- Tests: `node scripts/test-account.mjs` (browser, nagebootste Supabase) en
+  `supabase/tests/run.sh` (SQL tegen PostgreSQL 16).

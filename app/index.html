@@ -509,6 +509,40 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .view-player-chip svg{width:12px;height:12px;flex-shrink:0}
 .am-st-wrap{background:var(--surface);border-radius:14px;padding:16px 18px;margin-top:4px;border:1px solid var(--bdr)}
 .am-st-wrap h3{font-family:'Inter',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--b-muted);margin-bottom:10px}
+/* ── Account ── */
+#acct-modal{position:fixed;inset:0;z-index:1010;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+#acct-modal.hidden{display:none}
+.acct-card{padding-bottom:max(28px,env(safe-area-inset-bottom))}
+.acct-sub{color:var(--txt2);font-size:.9rem;line-height:1.5;margin:0 0 16px}
+.acct-msg{background:rgba(199,255,94,.1);border:1px solid rgba(199,255,94,.3);color:var(--txt);border-radius:10px;padding:10px 12px;font-size:.88rem;margin:0 0 14px}
+.acct-err{color:var(--red);font-size:.85rem;margin:8px 0 0;min-height:0;flex:none}
+.acct-err:empty{display:none}
+.acct-fine{color:var(--b-muted);font-size:.78rem;line-height:1.5;margin:6px 0 10px}
+.acct-foot{margin-top:18px;text-align:center}
+.acct-wide{width:100%;justify-content:center;min-height:46px}
+.acct-google{display:flex;align-items:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;border-radius:10px;font:500 .95rem/1 'Inter',sans-serif;text-transform:none;letter-spacing:normal;cursor:pointer;touch-action:manipulation}
+.acct-google:hover{background:#f7f8f8}
+.acct-or{display:flex;align-items:center;gap:10px;color:var(--b-muted);font-size:.75rem;margin:16px 0 12px}
+.acct-or::before,.acct-or::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.acct-form{display:flex;flex-direction:column;gap:10px}
+.acct-input{width:100%;font-size:1rem;padding:12px}
+.acct-code{letter-spacing:.3em;text-align:center;font-weight:700;font-size:1.2rem}
+.acct-row{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+.acct-link{background:none;border:none;color:var(--accent);font:600 .82rem 'Inter',sans-serif;cursor:pointer;padding:6px 0;text-decoration:none;touch-action:manipulation}
+.acct-notnow{margin-top:12px}
+.acct-who{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.acct-who-mail{font-weight:700;color:var(--txt);word-break:break-all}
+.acct-who-via{font-size:.8rem;color:var(--txt2)}
+.acct-avatar{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#0E1114;font-weight:800;font-size:.8rem;line-height:1}
+.acct-avatar-lg{width:40px;height:40px;font-size:1.1rem;flex-shrink:0}
+#btn-acct.acct-in{padding:4px 6px}
+.acct-check{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;color:var(--txt2);margin:4px 0 10px;cursor:pointer}
+.acct-check input{margin-top:3px;accent-color:var(--accent)}
+.acct-danger{color:var(--red);border-color:rgba(239,68,68,.35)}
+.acct-live-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(199,255,94,.35);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.acct-live-banner .resume-text{flex:1;min-width:180px;display:flex;flex-direction:column;gap:2px;font-size:.88rem}
+.acct-live-banner .resume-text span{color:var(--txt2)}
+.acct-live-banner .resume-btns{display:flex;gap:8px}
 /* ── Detail modal (speler / team stats) ── */
 #detail-modal{position:fixed;inset:0;z-index:1002;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
 #detail-modal.hidden{display:none}
@@ -1419,6 +1453,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
   <symbol id="ic-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
   <symbol id="ic-pause" viewBox="0 0 24 24"><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></symbol>
   <symbol id="ic-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+  <symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="ic-speaker" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
   <symbol id="ic-fullscreen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol>
   <symbol id="ic-crown" viewBox="0 0 24 24"><path d="M3 7l4 4 5-7 5 7 4-4v10H3z"/><line x1="3" y1="20" x2="21" y2="20"/></symbol>
@@ -1454,6 +1489,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
     <button class="btn btn-ghost btn-sm" id="btn-cast" style="display:none" onclick="toggleCast()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-cast"></use></svg> <span class="btn-label">Cast</span></button>
     <button class="btn btn-ghost btn-sm" id="btn-waitlist" style="display:none" onclick="suOpenLiveModal()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="su_waitlist_btn">Wachtlijst</span></button>
     <button class="btn btn-green btn-sm" id="btn-share" style="display:none" onclick="shareTournament()"><span class="share-badge" id="share-badge" style="display:none"></span><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg> <span class="btn-label" data-i18n="share_btn">Deel</span></button>
+    <button class="btn btn-ghost btn-sm" id="btn-acct" style="display:none" onclick="acctOpen()"></button>
     <div class="more-wrap" id="more-wrap">
       <button class="btn btn-ghost btn-sm" onclick="toggleMore()" aria-label="Meer opties"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-more"></use></svg></button>
       <div class="more-menu" id="more-menu">
@@ -1945,6 +1981,11 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div><!-- /app -->
 
 <!-- PLAYER / TEAM DETAIL MODAL -->
+<!-- ACCOUNT -->
+<div id="acct-modal" class="hidden" onclick="if(event.target===this)acctClose()" role="dialog" aria-modal="true">
+  <div class="dm-card acct-card" id="acct-card"></div>
+</div>
+
 <div id="detail-modal" class="hidden" onclick="if(event.target===this)closeDetailModal()">
   <div class="dm-card" id="dm-card"></div>
 </div>
@@ -2061,9 +2102,28 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.10.0';
+const APP_VERSION = 'v2.11.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+
+// Komen we net terug van Google of een inloglink uit de mail? Dat moet hier
+// vastgelegd worden, vóór er ook maar één Supabase-client bestaat: supabase-js
+// wisselt de ?code= in en ruimt hem op zodra de client er is. Daarna is niet
+// meer te zien dat iemand net bewust inlogde. De app gebruikt zelf geen
+// ?code=, dus een lange code is altijd van Supabase.
+// Een fout (bijvoorbeeld een verlopen link) komt terug als ?error= of #error=.
+const ACCT_RETURN=(()=>{
+  try{
+    const q=new URLSearchParams(location.search);
+    const h=new URLSearchParams(String(location.hash).replace(/^#/,''));
+    const code=q.get('code')||'';
+    const err=h.get('error_code')||q.get('error_code')||h.get('error')||q.get('error');
+    return {
+      code:code.length>=20||h.has('access_token'),
+      error:err?{code:err,message:h.get('error_description')||q.get('error_description')||''}:null
+    };
+  }catch{ return {code:false,error:null}; }
+})();
 
 // ── i18n ──────────────────────────────────────
 const SUPPORTED_LANGS=['nl','en','fr','de','es','sv','it','pt','id'];
@@ -2165,7 +2225,7 @@ nl:{
   cast_btn:'Cast naar tv',cast_stop:'Stop casten',
   pres_ios_title:'Weergeven op TV',pres_ios_body:'Tik op \'Open presentatie\' om het scorebord te openen. Om het daarna op een TV te tonen via AirPlay:',pres_ios_s1:'Open het <strong>Controlecentrum</strong> (veeg omlaag vanuit de rechterbovenhoek)',pres_ios_s2:'Tik op <strong>Schermspiegelen</strong> (vierkant met driehoek)',pres_ios_s3:'Kies je <strong>Apple TV</strong> of AirPlay-tv uit de lijst',pres_ios_open:'Open presentatie',pres_ios_ok:'Sluiten',
   court_links_btn:'Baan-links',court_enter_score:'Score invullen',court_submit:'Indienen',court_submitted:'Score ingediend — wacht op organisator',court_invalid:'Ongeldige baan-link',court_no_match:'Geen actieve wedstrijd op deze baan',court_accept:'Accepteren',court_pending_lbl:'Score ingediend door speler',
-  player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',speak_btn:'Omroepen',speak_and:'en',speak_vs:'tegen',fs_enter:'Volledig scherm',fs_exit:'Scherm verlaten',
+  player_scoring_toggle:'Spelers voeren scores in',player_scoring_sub:'Spelers kiezen hun naam en vullen hun score in via de link',ppick_title:'Wie ben jij?',ppick_sub:'Tik op je naam. Je kunt daarna de score voor jouw wedstrijd invoeren.',ppick_skip:'Alleen meekijken',my_match_lbl:'Jouw wedstrijd',viewer_score_submit:'Score indienen',viewer_score_done:'Ingediend ✓',viewer_score_own:'Jouw score',viewer_score_opp:'Tegenstander',viewer_confirm_zero:'Score {sa}–{sb} indienen?',viewer_score_err_blocked:'Indienen mislukt — probeer opnieuw',viewer_change_player:'(andere speler)',share_mode_who:'Wie vult de scores in?',share_mode_self:'Ikzelf',share_mode_self_sub:'Organisator vult in',share_mode_players:'Spelers',share_mode_players_sub:'Via de link',am_pick_hint:'Tik op jouw naam',am_waiting_players:'Wacht op score van spelers…',share_img_btn:'Deel eindstand',share_img_winner:'Winnaar',share_img_standings:'Eindstand',share_img_more:'en {n} anderen',acct_login:'Inloggen',acct_title:'Je account',acct_close:'Sluiten',acct_sub:'Optioneel. Bewaar je groepen, competities en lopende toernooien, en ga verder op een ander toestel.',acct_google:'Doorgaan met Google',acct_or_mail:'of met je mailadres',acct_mail_ph:'jij@voorbeeld.nl',acct_send:'Stuur inlogcode',acct_sending:'Versturen…',acct_sent:'We hebben een mail gestuurd naar {mail}. Typ de code uit de mail, of tik op de link erin.',acct_resent:'Nieuwe mail verstuurd.',acct_code_ph:'Code uit de mail',acct_verify:'Inloggen',acct_checking:'Controleren…',acct_other_mail:'Ander mailadres',acct_resend:'Opnieuw sturen',acct_nopass:'Geen wachtwoord. Je kunt je account altijd weer verwijderen.',acct_privacy:'Privacy',acct_in_as:'Ingelogd als {mail}',acct_via_google:'via Google',acct_via_mail:'via je mailadres',acct_saved_lbl:'In je account',acct_saved_groups:'{n} groepen',acct_saved_comps:'{n} competities',acct_saved_group1:'1 groep',acct_saved_comp1:'1 competitie',acct_saved_cc:'beheer van je clubcompetities',acct_saved_su:'inschrijving',acct_saved_live:'lopend toernooi',acct_saved_none:'Nog niets opgeslagen',acct_synced_at:'Bijgewerkt om {time}',acct_sync_now:'Nu bijwerken',acct_syncing:'Bijwerken…',acct_logout:'Uitloggen',acct_logout_wipe:'Haal mijn gegevens ook van dit toestel (gedeeld toestel)',acct_sure:'Zeker weten? Tik nogmaals',acct_delete:'Account verwijderen',acct_delete_sub:'Je account en wat erin bewaard is gaan weg. Wat op dit toestel staat blijft staan, en gedeelde links blijven werken.',acct_deleted:'Je account is verwijderd. Wat op dit toestel staat, staat er nog.',acct_logged_out:'Je bent uitgelogd. Wat op dit toestel staat, staat er nog.',acct_not_now:'Nu niet',acct_ask_done:'Bewaar je groepen en toernooien',acct_ask_done_sub:'Log in, dan staan je groepen, competities en lopende toernooien ook op je andere toestellen. Optioneel, en zonder wachtwoord.',acct_ask_cc:'Bewaar het beheer van je competitie',acct_ask_cc_sub:'Alleen dit toestel kan je competitie nu beheren. Log in, dan kan dat ook op je andere toestellen, en raak je het niet kwijt als je browser gewist wordt.',acct_ask_su:'Bewaar het beheer van je inschrijving',acct_ask_su_sub:'Alleen dit toestel kan je inschrijving nu beheren. Log in, dan kan dat ook op je andere toestellen, en raak je het niet kwijt als je browser gewist wordt.',acct_live_title:'Van je andere toestel',acct_live_offer:'Verder met “{name}”?',acct_live_take:'Ophalen',acct_live_skip:'Nee',acct_live_unnamed:'je toernooi',acct_welcome:'Je bent ingelogd. Alles van dit toestel staat nu ook in je account.',acct_err_mail:'Vul een geldig mailadres in.',acct_err_code:'Vul de code uit de mail in.',acct_err_badcode:'Die code klopt niet of is verlopen. Vraag een nieuwe aan.',acct_err_rate:'Er zijn net te veel mails verstuurd. Probeer het over een paar minuten opnieuw.',acct_err_setup:'Inloggen staat nog niet helemaal aan. Dat ligt niet aan jou.',acct_err_link:'Deze link werkt alleen in de browser waarin je hem aanvroeg. Typ de code uit de mail in de app, of vraag een nieuwe aan.',acct_err_offline:'Geen verbinding. Probeer het zo opnieuw.',acct_err_generic:'Er ging iets mis ({code}). Probeer het opnieuw.',acct_err_wipe:'Niet alles kon in je account worden opgeslagen, dus je gegevens blijven op dit toestel staan.',speak_btn:'Omroepen',speak_and:'en',speak_vs:'tegen',fs_enter:'Volledig scherm',fs_exit:'Scherm verlaten',
   comp_menu:'Competities',comp_screen_title:'Competities',comp_new:'Nieuwe competitie',comp_new_sub:'Koppel aan een vaste groep om spelers over sessies te herkennen.',comp_empty:'Nog geen competities',comp_name_ph:'Competitienaam',comp_group_lbl:'Vaste groep',comp_group_pick:'Groep kiezen',comp_no_groups:'Sla eerst een vaste groep op',comp_schema_ph:'bijv. 10,8,6,5,4,3,2,1',comp_add_btn:'Toevoegen aan competitie',comp_add_title:'Aan competitie toevoegen',comp_create_and_add:'Aanmaken en toevoegen',comp_session_added:'Sessie toegevoegd',comp_standings_lbl:'Ranglijst',comp_sessions_lbl:'Sessies',comp_played:'Gespeeld',comp_back:'Terug',comp_delete_confirm:'Competitie verwijderen?',comp_session_del_confirm:'Sessie verwijderen?',comp_no_group_match:'Gekoppelde groep niet gevonden',comp_no_sessions:'Nog geen sessies',comp_col_player:'Speler',comp_col_pts:'Punten',comp_col_sessions:'Sessies',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Verandering',comp_rating_wins:'Gewonnen',comp_rating_avg:'Gem. plaats',comp_rating_note:'Rating op basis van onderlinge plaatsingsvergelijkingen (ELO). Wordt opnieuw berekend uit alle sessies.',
   cc_menu:'Clubcompetitie starten',cc_prelink_cta:'Koppelen aan clubcompetitie',cc_code_ph:'Code',cc_link_btn:'Koppel',cc_prelink_active:'Gekoppeld aan competitie {code}',cc_err_code:'Vul een geldige 6-tekens code in',cc_start_title:'Clubcompetitie starten',cc_start_sub:'Deel een link, verzamel resultaten van meerdere avonden of een ladder.',cc_name_ph:'Naam van de competitie',cc_club_ph:'Clubnaam (optioneel)',cc_type_series:'Avondencompetitie',cc_type_ladder:'Ladder',cc_model_linear:'Lineair (winnaar = aantal spelers, laatste = 1 punt)',cc_model_fixed:'Vast schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Alleen beste X avonden tellen',cc_range_lbl:'Uitdagen tot X plekken hoger',cc_create_btn:'Competitie aanmaken',cc_created_title:'Competitie aangemaakt',cc_created_sub:'Deel deze link of QR-code met de club.',cc_view_btn:'Naar leaderboard',cc_done_btn:'Klaar',cc_add_title:'Aan competitie toevoegen',cc_add_btn:'Toevoegen',cc_added:'Toegevoegd',cc_err_notfound:'Competitie niet gevonden',cc_adding:'Toevoegen…',cc_add_ok:'Toegevoegd aan de competitie!',cc_loading:'Laden…',cc_not_found:'Competitie niet gevonden.',cc_back:'Terug',cc_share:'Deel',cc_share_png:'Deel als afbeelding',cc_standings_lbl:'Ranglijst',cc_no_events:'Nog geen avonden gespeeld',cc_col_played:'Avonden',cc_col_wins:'Gewonnen',cc_col_avgplace:'Gem. plaats',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Namen samenvoegen',cc_alias_sub:'Twee schrijfwijzen van dezelfde speler? Voeg ze samen.',cc_alias_merge:'Samenvoegen',cc_ladder_range_note:'Uitdagen mag tot {n} plekken hoger op de ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Nog geen spelers op de ladder',cc_ladder_join_lbl:'Meedoen aan de ladder',cc_your_name:'Jouw naam',cc_join:'Meedoen',cc_joining:'Bezig…',cc_join_ok:'Je staat op de ladder!',cc_err_join_limit:'Je hebt al meerdere spelers toegevoegd vanaf dit toestel',cc_remove_confirm:'Deze speler van de ladder halen?',cc_challenge_lbl:'Uitdaging melden',cc_score_ph:'Score (bijv. 6-4, 6-3)',cc_winner_challenger:'Uitdager won',cc_winner_defender:'Verdediger won',cc_challenge_submit:'Uitslag melden',cc_err_same_player:'Kies twee verschillende spelers',cc_err_range:'Je mag alleen iemand tot {n} plekken hoger uitdagen',cc_submitting:'Versturen…',cc_submitted:'Uitslag gemeld, wacht op goedkeuring van de organisator',cc_pending_lbl:'Te goedkeuren',cc_winner_lbl:'Winnaar',cc_approve:'Goedkeuren',cc_reject:'Afwijzen',cc_history_lbl:'Geschiedenis',cc_rejected:'Afgewezen',cc_link_copied:'Link gekopieerd!',cc_copied:'Gekopieerd!',cc_err_generic:'Er ging iets mis. Probeer het opnieuw.',
   level_lbl:'Niveau',level_hint:'Optioneel: typ Naam:3 voor niveau (1-5)',
@@ -2246,7 +2306,7 @@ en:{
   inst_ios_title:'Add to home screen via Browser',
   inst_ios_steps:'1. Tap the <b>Share</b> icon <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> at the bottom of Browser<br>2. Scroll and tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> — done!',
   inst_ios_ok:'Got it',inst_and_title:'Install the app on your home screen',
-  inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',speak_btn:'Announce',speak_and:'and',speak_vs:'versus',fs_enter:'Full screen',fs_exit:'Exit full screen',
+  inst_and_body:'Use Padel Tournament as a real app — <b>quick access</b> from your home screen, even without internet.',share_img_btn:'Share standings',share_img_winner:'Winner',share_img_standings:'Final standings',share_img_more:'and {n} more',acct_login:'Log in',acct_title:'Your account',acct_close:'Close',acct_sub:'Optional. Keep your groups, competitions and running tournaments, and carry on on another device.',acct_google:'Continue with Google',acct_or_mail:'or with your email address',acct_mail_ph:'you@example.com',acct_send:'Send login code',acct_sending:'Sending…',acct_sent:'We sent an email to {mail}. Type the code from the email, or tap the link in it.',acct_resent:'New email sent.',acct_code_ph:'Code from the email',acct_verify:'Log in',acct_checking:'Checking…',acct_other_mail:'Different email',acct_resend:'Send again',acct_nopass:'No password. You can always delete your account again.',acct_privacy:'Privacy',acct_in_as:'Logged in as {mail}',acct_via_google:'with Google',acct_via_mail:'with your email address',acct_saved_lbl:'In your account',acct_saved_groups:'{n} groups',acct_saved_comps:'{n} competitions',acct_saved_group1:'1 group',acct_saved_comp1:'1 competition',acct_saved_cc:'management of your club competitions',acct_saved_su:'signup',acct_saved_live:'running tournament',acct_saved_none:'Nothing saved yet',acct_synced_at:'Updated at {time}',acct_sync_now:'Update now',acct_syncing:'Updating…',acct_logout:'Log out',acct_logout_wipe:'Also remove my data from this device (shared device)',acct_sure:'Are you sure? Tap again',acct_delete:'Delete account',acct_delete_sub:'Your account and what is stored in it will be removed. What is on this device stays, and shared links keep working.',acct_deleted:'Your account has been deleted. What is on this device is still here.',acct_logged_out:'You are logged out. What is on this device is still here.',acct_not_now:'Not now',acct_ask_done:'Keep your groups and tournaments',acct_ask_done_sub:'Log in and your groups, competitions and running tournaments are on your other devices too. Optional, and no password.',acct_ask_cc:'Keep managing your competition',acct_ask_cc_sub:'Right now only this device can manage your competition. Log in and you can manage it from your other devices too, and you won\'t lose it if your browser data is cleared.',acct_ask_su:'Keep managing your signup',acct_ask_su_sub:'Right now only this device can manage your signup. Log in and you can manage it from your other devices too, and you won\'t lose it if your browser data is cleared.',acct_live_title:'From your other device',acct_live_offer:'Continue with “{name}”?',acct_live_take:'Get it',acct_live_skip:'No',acct_live_unnamed:'your tournament',acct_welcome:'You\'re logged in. Everything from this device is now in your account too.',acct_err_mail:'Enter a valid email address.',acct_err_code:'Enter the code from the email.',acct_err_badcode:'That code is wrong or has expired. Request a new one.',acct_err_rate:'Too many emails were sent just now. Try again in a few minutes.',acct_err_setup:'Logging in isn\'t fully switched on yet. That\'s not your fault.',acct_err_link:'This link only works in the browser where you requested it. Type the code from the email in the app, or request a new one.',acct_err_offline:'No connection. Try again in a moment.',acct_err_generic:'Something went wrong ({code}). Please try again.',acct_err_wipe:'Not everything could be saved to your account, so your data stays on this device.',speak_btn:'Announce',speak_and:'and',speak_vs:'versus',fs_enter:'Full screen',fs_exit:'Exit full screen',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'New competition',comp_new_sub:'Link to a fixed group to identify players across sessions.',comp_empty:'No competitions yet',comp_name_ph:'Competition name',comp_group_lbl:'Fixed group',comp_group_pick:'Choose group',comp_no_groups:'Save a fixed group first',comp_schema_ph:'e.g. 10,8,6,5,4,3,2,1',comp_add_btn:'Add to competition',comp_add_title:'Add to competition',comp_create_and_add:'Create and add',comp_session_added:'Session added',comp_standings_lbl:'Standings',comp_sessions_lbl:'Sessions',comp_played:'Played',comp_back:'Back',comp_delete_confirm:'Delete competition?',comp_session_del_confirm:'Delete session?',comp_no_group_match:'Linked group not found',comp_no_sessions:'No sessions yet',comp_col_player:'Player',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Change',comp_rating_wins:'Wins',comp_rating_avg:'Avg. place',comp_rating_note:'Rating based on head-to-head placement comparisons (ELO). Recalculated from all sessions.',
   cc_menu:'Start club competition',cc_prelink_cta:'Link to club competition',cc_code_ph:'Code',cc_link_btn:'Link',cc_prelink_active:'Linked to competition {code}',cc_err_code:'Enter a valid 6-character code',cc_start_title:'Start a club competition',cc_start_sub:'Share a link, collect results from multiple evenings or a ladder.',cc_name_ph:'Competition name',cc_club_ph:'Club name (optional)',cc_type_series:'Evening competition',cc_type_ladder:'Ladder',cc_model_linear:'Linear (winner = number of players, last place = 1 point)',cc_model_fixed:'Fixed schedule (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Only count best X evenings',cc_range_lbl:'Can challenge up to X spots higher',cc_create_btn:'Create competition',cc_created_title:'Competition created',cc_created_sub:'Share this link or QR code with the club.',cc_view_btn:'Go to leaderboard',cc_done_btn:'Done',cc_add_title:'Add to competition',cc_add_btn:'Add',cc_added:'Added',cc_err_notfound:'Competition not found',cc_adding:'Adding…',cc_add_ok:'Added to the competition!',cc_loading:'Loading…',cc_not_found:'Competition not found.',cc_back:'Back',cc_share:'Share',cc_share_png:'Share as image',cc_standings_lbl:'Standings',cc_no_events:'No evenings played yet',cc_col_played:'Evenings',cc_col_wins:'Wins',cc_col_avgplace:'Avg. place',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Merge names',cc_alias_sub:'Two spellings of the same player? Merge them.',cc_alias_merge:'Merge',cc_ladder_range_note:'Players can challenge up to {n} spots higher on the ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'No players on the ladder yet',cc_ladder_join_lbl:'Join the ladder',cc_your_name:'Your name',cc_join:'Join',cc_joining:'Joining…',cc_join_ok:'You are on the ladder!',cc_err_join_limit:'You already added several players from this device',cc_remove_confirm:'Remove this player from the ladder?',cc_challenge_lbl:'Report a challenge',cc_score_ph:'Score (e.g. 6-4, 6-3)',cc_winner_challenger:'Challenger won',cc_winner_defender:'Defender won',cc_challenge_submit:'Report result',cc_err_same_player:'Choose two different players',cc_err_range:'You can only challenge someone up to {n} spots higher',cc_submitting:'Submitting…',cc_submitted:'Result reported, waiting for organizer approval',cc_pending_lbl:'Pending approval',cc_winner_lbl:'Winner',cc_approve:'Approve',cc_reject:'Reject',cc_history_lbl:'History',cc_rejected:'Rejected',cc_link_copied:'Link copied!',cc_copied:'Copied!',cc_err_generic:'Something went wrong. Please try again.',
   level_lbl:'Level',level_hint:'Optional: type Name:3 for level (1-5)',
@@ -2325,7 +2385,7 @@ fr:{
   inst_ios_ok:'Compris',inst_and_title:"Installez l'appli sur votre écran d'accueil",
   inst_and_body:"Utilisez Padel Tournoi comme une vraie appli — <b>accès rapide</b> depuis votre écran d'accueil, même sans internet.",
   court_links_btn:'Liens terrain',court_enter_score:'Entrer le score',court_submit:'Valider',court_submitted:'Score soumis — en attente de l\'organisateur',court_invalid:'Lien de terrain invalide',court_no_match:'Aucun match actif sur ce terrain',court_accept:'Accepter',court_pending_lbl:'Score soumis par le joueur',
-  player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',speak_btn:'Annoncer',speak_and:'et',speak_vs:'contre',fs_enter:'Plein écran',fs_exit:'Quitter le plein écran',
+  player_scoring_toggle:'Les joueurs saisissent les scores',player_scoring_sub:'Les joueurs choisissent leur nom et saisissent leur score via le lien',ppick_title:'Qui êtes-vous ?',ppick_sub:'Tapez votre nom pour saisir le score de votre match.',ppick_skip:'Juste regarder',my_match_lbl:'Votre match',viewer_score_submit:'Valider le score',viewer_score_done:'Soumis ✓',viewer_score_own:'Votre score',viewer_score_opp:'Adversaire',viewer_confirm_zero:'Envoyer le score {sa}–{sb} ?',viewer_score_err_blocked:'Échec de l\'envoi — réessayez',viewer_change_player:'(changer)',share_mode_who:'Qui saisit les scores ?',share_mode_self:'Moi-même',share_mode_self_sub:'L\'organisateur saisit',share_mode_players:'Joueurs',share_mode_players_sub:'Via le lien',am_pick_hint:'Touchez votre nom',am_waiting_players:'En attente de la soumission des joueurs…',share_img_btn:'Partager classement',share_img_winner:'Vainqueur',share_img_standings:'Classement final',share_img_more:'et {n} autres',acct_login:'Connexion',acct_title:'Votre compte',acct_close:'Fermer',acct_sub:'Facultatif. Gardez vos groupes, compétitions et tournois en cours, et continuez sur un autre appareil.',acct_google:'Continuer avec Google',acct_or_mail:'ou avec votre adresse e-mail',acct_mail_ph:'vous@exemple.fr',acct_send:'Envoyer le code',acct_sending:'Envoi…',acct_sent:'Nous avons envoyé un e-mail à {mail}. Saisissez le code de l\'e-mail, ou touchez le lien qu\'il contient.',acct_resent:'Nouvel e-mail envoyé.',acct_code_ph:'Code de l\'e-mail',acct_verify:'Se connecter',acct_checking:'Vérification…',acct_other_mail:'Autre adresse',acct_resend:'Renvoyer',acct_nopass:'Pas de mot de passe. Vous pouvez toujours supprimer votre compte.',acct_privacy:'Confidentialité',acct_in_as:'Connecté en tant que {mail}',acct_via_google:'avec Google',acct_via_mail:'avec votre adresse e-mail',acct_saved_lbl:'Dans votre compte',acct_saved_groups:'{n} groupes',acct_saved_comps:'{n} compétitions',acct_saved_group1:'1 groupe',acct_saved_comp1:'1 compétition',acct_saved_cc:'gestion de vos compétitions de club',acct_saved_su:'inscription',acct_saved_live:'tournoi en cours',acct_saved_none:'Rien d\'enregistré pour l\'instant',acct_synced_at:'Mis à jour à {time}',acct_sync_now:'Mettre à jour',acct_syncing:'Mise à jour…',acct_logout:'Se déconnecter',acct_logout_wipe:'Supprimer aussi mes données de cet appareil (appareil partagé)',acct_sure:'Vous êtes sûr ? Touchez à nouveau',acct_delete:'Supprimer le compte',acct_delete_sub:'Votre compte et ce qu\'il contient seront supprimés. Ce qui est sur cet appareil reste, et les liens partagés continuent de fonctionner.',acct_deleted:'Votre compte a été supprimé. Ce qui est sur cet appareil est toujours là.',acct_logged_out:'Vous êtes déconnecté. Ce qui est sur cet appareil est toujours là.',acct_not_now:'Pas maintenant',acct_ask_done:'Gardez vos groupes et tournois',acct_ask_done_sub:'Connectez-vous et vos groupes, compétitions et tournois en cours seront aussi sur vos autres appareils. Facultatif, et sans mot de passe.',acct_ask_cc:'Gardez la gestion de votre compétition',acct_ask_cc_sub:'Pour l\'instant, seul cet appareil peut gérer votre compétition. Connectez-vous pour la gérer aussi depuis vos autres appareils, sans la perdre si les données du navigateur sont effacées.',acct_ask_su:'Gardez la gestion de votre inscription',acct_ask_su_sub:'Pour l\'instant, seul cet appareil peut gérer votre inscription. Connectez-vous pour la gérer aussi depuis vos autres appareils, sans la perdre si les données du navigateur sont effacées.',acct_live_title:'De votre autre appareil',acct_live_offer:'Continuer « {name} » ?',acct_live_take:'Récupérer',acct_live_skip:'Non',acct_live_unnamed:'votre tournoi',acct_welcome:'Vous êtes connecté. Tout ce qui est sur cet appareil est maintenant aussi dans votre compte.',acct_err_mail:'Saisissez une adresse e-mail valide.',acct_err_code:'Saisissez le code de l\'e-mail.',acct_err_badcode:'Ce code est incorrect ou a expiré. Demandez-en un nouveau.',acct_err_rate:'Trop d\'e-mails viennent d\'être envoyés. Réessayez dans quelques minutes.',acct_err_setup:'La connexion n\'est pas encore tout à fait activée. Ce n\'est pas de votre faute.',acct_err_link:'Ce lien ne fonctionne que dans le navigateur où vous l\'avez demandé. Saisissez le code de l\'e-mail dans l\'app, ou demandez-en un nouveau.',acct_err_offline:'Pas de connexion. Réessayez dans un instant.',acct_err_generic:'Une erreur s\'est produite ({code}). Réessayez.',acct_err_wipe:'Tout n\'a pas pu être enregistré dans votre compte, vos données restent donc sur cet appareil.',speak_btn:'Annoncer',speak_and:'et',speak_vs:'contre',fs_enter:'Plein écran',fs_exit:'Quitter le plein écran',
   comp_menu:'Competitions',comp_screen_title:'Competitions',comp_new:'Nouvelle competition',comp_new_sub:'Liez a un groupe fixe pour identifier les joueurs entre sessions.',comp_empty:'Aucune competition',comp_name_ph:'Nom de la competition',comp_group_lbl:'Groupe fixe',comp_group_pick:'Choisir un groupe',comp_no_groups:'Enregistrez d\'abord un groupe',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Ajouter a la competition',comp_add_title:'Ajouter a la competition',comp_create_and_add:'Creer et ajouter',comp_session_added:'Session ajoutee',comp_standings_lbl:'Classement',comp_sessions_lbl:'Sessions',comp_played:'Joue',comp_back:'Retour',comp_delete_confirm:'Supprimer la competition?',comp_session_del_confirm:'Supprimer la session?',comp_no_group_match:'Groupe lie introuvable',comp_no_sessions:'Aucune session',comp_col_player:'Joueur',comp_col_pts:'Points',comp_col_sessions:'Sessions',comp_rating_lbl:'Classement ELO',comp_rating_val:'Rating',comp_rating_chg:'Evolution',comp_rating_wins:'Victoires',comp_rating_avg:'Place moy.',comp_rating_note:'Classement base sur les comparaisons de placement (ELO). Recalcule a chaque fois.',
   cc_menu:'Demarrer une competition de club',cc_prelink_cta:'Lier a une competition de club',cc_code_ph:'Code',cc_link_btn:'Lier',cc_prelink_active:'Lie a la competition {code}',cc_err_code:'Entrez un code valide a 6 caracteres',cc_start_title:'Demarrer une competition de club',cc_start_sub:'Partagez un lien, recoltez les resultats de plusieurs soirees ou d\'une ladder.',cc_name_ph:'Nom de la competition',cc_club_ph:'Nom du club (optionnel)',cc_type_series:'Competition par soirees',cc_type_ladder:'Ladder',cc_model_linear:'Lineaire (le vainqueur = nombre de joueurs, le dernier = 1 point)',cc_model_fixed:'Bareme fixe (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Ne compter que les X meilleures soirees',cc_range_lbl:'Peut defier jusqu\'a X places plus haut',cc_create_btn:'Creer la competition',cc_created_title:'Competition creee',cc_created_sub:'Partagez ce lien ou ce QR code avec le club.',cc_view_btn:'Voir le classement',cc_done_btn:'Termine',cc_add_title:'Ajouter a la competition',cc_add_btn:'Ajouter',cc_added:'Ajoute',cc_err_notfound:'Competition introuvable',cc_adding:'Ajout…',cc_add_ok:'Ajoute a la competition!',cc_loading:'Chargement…',cc_not_found:'Competition introuvable.',cc_back:'Retour',cc_share:'Partager',cc_share_png:'Partager en image',cc_standings_lbl:'Classement',cc_no_events:'Aucune soiree jouee pour le moment',cc_col_played:'Soirees',cc_col_wins:'Victoires',cc_col_avgplace:'Place moy.',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Fusionner des noms',cc_alias_sub:'Deux orthographes pour le meme joueur? Fusionnez-les.',cc_alias_merge:'Fusionner',cc_ladder_range_note:'On peut defier jusqu\'a {n} places plus haut sur la ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Aucun joueur sur la ladder pour le moment',cc_ladder_join_lbl:'Rejoindre la ladder',cc_your_name:'Votre nom',cc_join:'Rejoindre',cc_joining:'Inscription…',cc_join_ok:'Vous etes sur la ladder!',cc_err_join_limit:'Vous avez deja ajoute plusieurs joueurs depuis cet appareil',cc_remove_confirm:'Retirer ce joueur de la ladder?',cc_challenge_lbl:'Signaler un defi',cc_score_ph:'Score (ex. 6-4, 6-3)',cc_winner_challenger:'Le challenger a gagne',cc_winner_defender:'Le defenseur a gagne',cc_challenge_submit:'Signaler le resultat',cc_err_same_player:'Choisissez deux joueurs differents',cc_err_range:'Vous ne pouvez defier que jusqu\'a {n} places plus haut',cc_submitting:'Envoi…',cc_submitted:'Resultat signale, en attente de validation par l\'organisateur',cc_pending_lbl:'A valider',cc_winner_lbl:'Vainqueur',cc_approve:'Valider',cc_reject:'Refuser',cc_history_lbl:'Historique',cc_rejected:'Refuse',cc_link_copied:'Lien copie!',cc_copied:'Copie!',cc_err_generic:'Une erreur est survenue. Reessayez.',
   level_lbl:'Niveau',level_hint:'Optionnel : tapez Nom:3 pour le niveau (1-5)',
@@ -2406,7 +2466,7 @@ de:{
   inst_ios_ok:'Verstanden',inst_and_title:'App auf dem Startbildschirm installieren',
   inst_and_body:'Nutze Padel Turnier als echte App — <b>schneller Zugriff</b> vom Startbildschirm, auch ohne Internet.',
   court_links_btn:'Court-Links',court_enter_score:'Ergebnis eingeben',court_submit:'Absenden',court_submitted:'Ergebnis eingereicht — warte auf Organisator',court_invalid:'Ungültiger Court-Link',court_no_match:'Kein aktives Spiel auf diesem Court',court_accept:'Akzeptieren',court_pending_lbl:'Ergebnis von Spieler eingereicht',
-  player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',speak_btn:'Ansagen',speak_and:'und',speak_vs:'gegen',fs_enter:'Vollbild',fs_exit:'Vollbild beenden',
+  player_scoring_toggle:'Spieler tragen Ergebnisse ein',player_scoring_sub:'Spieler wählen ihren Namen und tragen ihr Ergebnis über den Link ein',ppick_title:'Wer bist du?',ppick_sub:'Tippe deinen Namen, um das Ergebnis deines Spiels einzutragen.',ppick_skip:'Nur zuschauen',my_match_lbl:'Dein Spiel',viewer_score_submit:'Ergebnis absenden',viewer_score_done:'Eingereicht ✓',viewer_score_own:'Dein Ergebnis',viewer_score_opp:'Gegner',viewer_confirm_zero:'Ergebnis {sa}–{sb} absenden?',viewer_score_err_blocked:'Senden fehlgeschlagen — erneut versuchen',viewer_change_player:'(wechseln)',share_mode_who:'Wer trägt die Ergebnisse ein?',share_mode_self:'Ich selbst',share_mode_self_sub:'Organisator trägt ein',share_mode_players:'Spieler',share_mode_players_sub:'Über den Link',am_pick_hint:'Tippe auf deinen Namen',am_waiting_players:'Warte auf Spielereingabe…',share_img_btn:'Tabelle teilen',share_img_winner:'Sieger',share_img_standings:'Endstand',share_img_more:'und {n} weitere',acct_login:'Anmelden',acct_title:'Dein Konto',acct_close:'Schließen',acct_sub:'Optional. Behalte deine Gruppen, Wettbewerbe und laufenden Turniere und mach auf einem anderen Gerät weiter.',acct_google:'Weiter mit Google',acct_or_mail:'oder mit deiner E-Mail-Adresse',acct_mail_ph:'du@beispiel.de',acct_send:'Anmeldecode senden',acct_sending:'Wird gesendet…',acct_sent:'Wir haben eine E-Mail an {mail} geschickt. Gib den Code aus der E-Mail ein oder tippe auf den Link darin.',acct_resent:'Neue E-Mail gesendet.',acct_code_ph:'Code aus der E-Mail',acct_verify:'Anmelden',acct_checking:'Wird geprüft…',acct_other_mail:'Andere E-Mail-Adresse',acct_resend:'Erneut senden',acct_nopass:'Kein Passwort. Du kannst dein Konto jederzeit wieder löschen.',acct_privacy:'Datenschutz',acct_in_as:'Angemeldet als {mail}',acct_via_google:'mit Google',acct_via_mail:'mit deiner E-Mail-Adresse',acct_saved_lbl:'In deinem Konto',acct_saved_groups:'{n} Gruppen',acct_saved_comps:'{n} Wettbewerbe',acct_saved_group1:'1 Gruppe',acct_saved_comp1:'1 Wettbewerb',acct_saved_cc:'Verwaltung deiner Vereinswettbewerbe',acct_saved_su:'Anmeldeliste',acct_saved_live:'laufendes Turnier',acct_saved_none:'Noch nichts gespeichert',acct_synced_at:'Aktualisiert um {time}',acct_sync_now:'Jetzt aktualisieren',acct_syncing:'Wird aktualisiert…',acct_logout:'Abmelden',acct_logout_wipe:'Meine Daten auch von diesem Gerät entfernen (gemeinsames Gerät)',acct_sure:'Sicher? Tippe noch einmal',acct_delete:'Konto löschen',acct_delete_sub:'Dein Konto und was darin gespeichert ist, werden gelöscht. Was auf diesem Gerät ist, bleibt, und geteilte Links funktionieren weiter.',acct_deleted:'Dein Konto wurde gelöscht. Was auf diesem Gerät ist, ist noch da.',acct_logged_out:'Du bist abgemeldet. Was auf diesem Gerät ist, ist noch da.',acct_not_now:'Nicht jetzt',acct_ask_done:'Behalte deine Gruppen und Turniere',acct_ask_done_sub:'Melde dich an, dann sind deine Gruppen, Wettbewerbe und laufenden Turniere auch auf deinen anderen Geräten. Optional und ohne Passwort.',acct_ask_cc:'Behalte die Verwaltung deines Wettbewerbs',acct_ask_cc_sub:'Im Moment kann nur dieses Gerät deinen Wettbewerb verwalten. Melde dich an, dann geht das auch auf deinen anderen Geräten, und du verlierst ihn nicht, wenn Browserdaten gelöscht werden.',acct_ask_su:'Behalte die Verwaltung deiner Anmeldeliste',acct_ask_su_sub:'Im Moment kann nur dieses Gerät deine Anmeldeliste verwalten. Melde dich an, dann geht das auch auf deinen anderen Geräten, und du verlierst sie nicht, wenn Browserdaten gelöscht werden.',acct_live_title:'Von deinem anderen Gerät',acct_live_offer:'Mit „{name}“ weitermachen?',acct_live_take:'Holen',acct_live_skip:'Nein',acct_live_unnamed:'dein Turnier',acct_welcome:'Du bist angemeldet. Alles von diesem Gerät ist jetzt auch in deinem Konto.',acct_err_mail:'Gib eine gültige E-Mail-Adresse ein.',acct_err_code:'Gib den Code aus der E-Mail ein.',acct_err_badcode:'Dieser Code stimmt nicht oder ist abgelaufen. Fordere einen neuen an.',acct_err_rate:'Gerade wurden zu viele E-Mails verschickt. Versuche es in ein paar Minuten noch einmal.',acct_err_setup:'Die Anmeldung ist noch nicht ganz eingerichtet. Das liegt nicht an dir.',acct_err_link:'Dieser Link funktioniert nur in dem Browser, in dem du ihn angefordert hast. Gib den Code aus der E-Mail in der App ein oder fordere einen neuen an.',acct_err_offline:'Keine Verbindung. Versuche es gleich noch einmal.',acct_err_generic:'Etwas ist schiefgelaufen ({code}). Bitte versuche es erneut.',acct_err_wipe:'Nicht alles konnte in deinem Konto gespeichert werden, deshalb bleiben deine Daten auf diesem Gerät.',speak_btn:'Ansagen',speak_and:'und',speak_vs:'gegen',fs_enter:'Vollbild',fs_exit:'Vollbild beenden',
   comp_menu:'Wettbewerbe',comp_screen_title:'Wettbewerbe',comp_new:'Neuer Wettbewerb',comp_new_sub:'Mit einer festen Gruppe verknupfen um Spieler sitzungsubergreifend zu erkennen.',comp_empty:'Noch keine Wettbewerbe',comp_name_ph:'Wettbewerbsname',comp_group_lbl:'Feste Gruppe',comp_group_pick:'Gruppe wahlen',comp_no_groups:'Zuerst eine Gruppe speichern',comp_schema_ph:'z.B. 10,8,6,5,4,3,2,1',comp_add_btn:'Zum Wettbewerb hinzufugen',comp_add_title:'Zum Wettbewerb hinzufugen',comp_create_and_add:'Erstellen und hinzufugen',comp_session_added:'Sitzung hinzugefugt',comp_standings_lbl:'Tabelle',comp_sessions_lbl:'Sitzungen',comp_played:'Gespielt',comp_back:'Zuruck',comp_delete_confirm:'Wettbewerb loschen?',comp_session_del_confirm:'Sitzung loschen?',comp_no_group_match:'Verknupfte Gruppe nicht gefunden',comp_no_sessions:'Noch keine Sitzungen',comp_col_player:'Spieler',comp_col_pts:'Punkte',comp_col_sessions:'Sitzungen',comp_rating_lbl:'Wertung',comp_rating_val:'Rating',comp_rating_chg:'Veranderung',comp_rating_wins:'Siege',comp_rating_avg:'Ø Platz',comp_rating_note:'Wertung basierend auf Platzierungsvergleichen (ELO). Wird aus allen Sitzungen neu berechnet.',
   cc_menu:'Vereinswettbewerb starten',cc_prelink_cta:'Mit Vereinswettbewerb verknupfen',cc_code_ph:'Code',cc_link_btn:'Verknupfen',cc_prelink_active:'Verknupft mit Wettbewerb {code}',cc_err_code:'Gib einen gultigen 6-stelligen Code ein',cc_start_title:'Vereinswettbewerb starten',cc_start_sub:'Teile einen Link und sammle Ergebnisse mehrerer Abende oder einer Ladder.',cc_name_ph:'Name des Wettbewerbs',cc_club_ph:'Vereinsname (optional)',cc_type_series:'Abendwettbewerb',cc_type_ladder:'Ladder',cc_model_linear:'Linear (Sieger = Anzahl Spieler, Letzter = 1 Punkt)',cc_model_fixed:'Festes Schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Nur die besten X Abende zahlen',cc_range_lbl:'Herausfordern bis zu X Platze hoher',cc_create_btn:'Wettbewerb erstellen',cc_created_title:'Wettbewerb erstellt',cc_created_sub:'Teile diesen Link oder QR-Code mit dem Verein.',cc_view_btn:'Zur Rangliste',cc_done_btn:'Fertig',cc_add_title:'Zum Wettbewerb hinzufugen',cc_add_btn:'Hinzufugen',cc_added:'Hinzugefugt',cc_err_notfound:'Wettbewerb nicht gefunden',cc_adding:'Wird hinzugefugt…',cc_add_ok:'Zum Wettbewerb hinzugefugt!',cc_loading:'Wird geladen…',cc_not_found:'Wettbewerb nicht gefunden.',cc_back:'Zuruck',cc_share:'Teilen',cc_share_png:'Als Bild teilen',cc_standings_lbl:'Tabelle',cc_no_events:'Noch keine Abende gespielt',cc_col_played:'Abende',cc_col_wins:'Siege',cc_col_avgplace:'Ø Platz',cc_place_short:'#',cc_pts_short:'Pkt',cc_alias_lbl:'Namen zusammenfuhren',cc_alias_sub:'Zwei Schreibweisen desselben Spielers? Fuhre sie zusammen.',cc_alias_merge:'Zusammenfuhren',cc_ladder_range_note:'Herausfordern ist bis zu {n} Platze hoher auf der Ladder erlaubt',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Noch keine Spieler auf der Ladder',cc_ladder_join_lbl:'Der Ladder beitreten',cc_your_name:'Dein Name',cc_join:'Beitreten',cc_joining:'Wird beigetreten…',cc_join_ok:'Du stehst auf der Ladder!',cc_err_join_limit:'Du hast bereits mehrere Spieler von diesem Gerat hinzugefugt',cc_remove_confirm:'Diesen Spieler von der Ladder entfernen?',cc_challenge_lbl:'Herausforderung melden',cc_score_ph:'Ergebnis (z.B. 6-4, 6-3)',cc_winner_challenger:'Herausforderer hat gewonnen',cc_winner_defender:'Verteidiger hat gewonnen',cc_challenge_submit:'Ergebnis melden',cc_err_same_player:'Wahle zwei unterschiedliche Spieler',cc_err_range:'Du kannst nur jemanden bis zu {n} Platze hoher herausfordern',cc_submitting:'Wird gesendet…',cc_submitted:'Ergebnis gemeldet, wartet auf Freigabe durch den Organisator',cc_pending_lbl:'Zu bestatigen',cc_winner_lbl:'Sieger',cc_approve:'Bestatigen',cc_reject:'Ablehnen',cc_history_lbl:'Verlauf',cc_rejected:'Abgelehnt',cc_link_copied:'Link kopiert!',cc_copied:'Kopiert!',cc_err_generic:'Etwas ist schiefgelaufen. Versuch es erneut.',
   cast_btn:'Auf TV casten',cast_stop:'Casting stoppen',pres_ios_title:'Auf TV anzeigen',pres_ios_body:'Tippe auf \'Prasentation offnen\', um die Anzeigetafel zu offnen. Um sie per AirPlay auf einem TV zu zeigen:',pres_ios_s1:'Offne das <strong>Kontrollzentrum</strong> (von der oberen rechten Ecke nach unten wischen)',pres_ios_s2:'Tippe auf <strong>Bildschirmspiegelung</strong> (Symbol mit Quadrat und Dreieck)',pres_ios_s3:'Wahle dein <strong>Apple TV</strong> oder AirPlay-fahiges TV aus der Liste',pres_ios_open:'Prasentation offnen',pres_ios_ok:'Schliessen',
@@ -2486,7 +2546,7 @@ es:{
   inst_ios_ok:'Entendido',inst_and_title:'Instala la app en tu pantalla de inicio',
   inst_and_body:'Usa Pádel Torneo como una app real — <b>acceso rápido</b> desde tu pantalla de inicio, incluso sin internet.',
   court_links_btn:'Enlaces cancha',court_enter_score:'Introducir marcador',court_submit:'Enviar',court_submitted:'Marcador enviado — esperando al organizador',court_invalid:'Enlace de cancha inválido',court_no_match:'Sin partido activo en esta cancha',court_accept:'Aceptar',court_pending_lbl:'Marcador enviado por jugador',
-  player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',speak_btn:'Anunciar',speak_and:'y',speak_vs:'contra',fs_enter:'Pantalla completa',fs_exit:'Salir de pantalla completa',
+  player_scoring_toggle:'Los jugadores introducen marcadores',player_scoring_sub:'Los jugadores eligen su nombre e introducen su marcador a través del enlace',ppick_title:'¿Quién eres?',ppick_sub:'Toca tu nombre para introducir el marcador de tu partido.',ppick_skip:'Solo ver',my_match_lbl:'Tu partido',viewer_score_submit:'Enviar marcador',viewer_score_done:'Enviado ✓',viewer_score_own:'Tu marcador',viewer_score_opp:'Rival',viewer_confirm_zero:'¿Enviar marcador {sa}–{sb}?',viewer_score_err_blocked:'Error al enviar — inténtalo de nuevo',viewer_change_player:'(cambiar)',share_mode_who:'¿Quién introduce los marcadores?',share_mode_self:'Yo mismo',share_mode_self_sub:'El organizador introduce',share_mode_players:'Jugadores',share_mode_players_sub:'A través del enlace',am_pick_hint:'Toca tu nombre',am_waiting_players:'Esperando envío de jugadores…',share_img_btn:'Compartir clasificacion',share_img_winner:'Ganador',share_img_standings:'Clasificacion final',share_img_more:'y {n} mas',acct_login:'Iniciar sesión',acct_title:'Tu cuenta',acct_close:'Cerrar',acct_sub:'Opcional. Guarda tus grupos, competiciones y torneos en curso, y sigue en otro dispositivo.',acct_google:'Continuar con Google',acct_or_mail:'o con tu correo electrónico',acct_mail_ph:'tu@ejemplo.es',acct_send:'Enviar código',acct_sending:'Enviando…',acct_sent:'Hemos enviado un correo a {mail}. Escribe el código del correo o toca el enlace que contiene.',acct_resent:'Correo nuevo enviado.',acct_code_ph:'Código del correo',acct_verify:'Iniciar sesión',acct_checking:'Comprobando…',acct_other_mail:'Otro correo',acct_resend:'Enviar de nuevo',acct_nopass:'Sin contraseña. Siempre puedes eliminar tu cuenta.',acct_privacy:'Privacidad',acct_in_as:'Sesión iniciada como {mail}',acct_via_google:'con Google',acct_via_mail:'con tu correo electrónico',acct_saved_lbl:'En tu cuenta',acct_saved_groups:'{n} grupos',acct_saved_comps:'{n} competiciones',acct_saved_group1:'1 grupo',acct_saved_comp1:'1 competición',acct_saved_cc:'gestión de tus competiciones de club',acct_saved_su:'inscripción',acct_saved_live:'torneo en curso',acct_saved_none:'Aún no hay nada guardado',acct_synced_at:'Actualizado a las {time}',acct_sync_now:'Actualizar ahora',acct_syncing:'Actualizando…',acct_logout:'Cerrar sesión',acct_logout_wipe:'Quitar también mis datos de este dispositivo (dispositivo compartido)',acct_sure:'¿Seguro? Toca de nuevo',acct_delete:'Eliminar cuenta',acct_delete_sub:'Se eliminarán tu cuenta y lo que contiene. Lo que hay en este dispositivo se queda, y los enlaces compartidos siguen funcionando.',acct_deleted:'Tu cuenta se ha eliminado. Lo que hay en este dispositivo sigue aquí.',acct_logged_out:'Has cerrado sesión. Lo que hay en este dispositivo sigue aquí.',acct_not_now:'Ahora no',acct_ask_done:'Guarda tus grupos y torneos',acct_ask_done_sub:'Inicia sesión y tus grupos, competiciones y torneos en curso estarán también en tus otros dispositivos. Opcional y sin contraseña.',acct_ask_cc:'Conserva la gestión de tu competición',acct_ask_cc_sub:'Ahora solo este dispositivo puede gestionar tu competición. Inicia sesión para gestionarla también desde tus otros dispositivos, sin perderla si se borran los datos del navegador.',acct_ask_su:'Conserva la gestión de tu inscripción',acct_ask_su_sub:'Ahora solo este dispositivo puede gestionar tu inscripción. Inicia sesión para gestionarla también desde tus otros dispositivos, sin perderla si se borran los datos del navegador.',acct_live_title:'De tu otro dispositivo',acct_live_offer:'¿Seguir con «{name}»?',acct_live_take:'Traer',acct_live_skip:'No',acct_live_unnamed:'tu torneo',acct_welcome:'Has iniciado sesión. Todo lo de este dispositivo está ahora también en tu cuenta.',acct_err_mail:'Escribe un correo electrónico válido.',acct_err_code:'Escribe el código del correo.',acct_err_badcode:'Ese código no es correcto o ha caducado. Pide uno nuevo.',acct_err_rate:'Se acaban de enviar demasiados correos. Inténtalo de nuevo en unos minutos.',acct_err_setup:'El inicio de sesión aún no está del todo activado. No es culpa tuya.',acct_err_link:'Este enlace solo funciona en el navegador donde lo pediste. Escribe el código del correo en la app o pide uno nuevo.',acct_err_offline:'Sin conexión. Inténtalo de nuevo en un momento.',acct_err_generic:'Algo salió mal ({code}). Inténtalo de nuevo.',acct_err_wipe:'No se pudo guardar todo en tu cuenta, así que tus datos se quedan en este dispositivo.',speak_btn:'Anunciar',speak_and:'y',speak_vs:'contra',fs_enter:'Pantalla completa',fs_exit:'Salir de pantalla completa',
   comp_menu:'Competiciones',comp_screen_title:'Competiciones',comp_new:'Nueva competicion',comp_new_sub:'Vincula a un grupo fijo para identificar jugadores entre sesiones.',comp_empty:'Sin competiciones',comp_name_ph:'Nombre de la competicion',comp_group_lbl:'Grupo fijo',comp_group_pick:'Elegir grupo',comp_no_groups:'Guarda primero un grupo',comp_schema_ph:'ej. 10,8,6,5,4,3,2,1',comp_add_btn:'Anadir a competicion',comp_add_title:'Anadir a competicion',comp_create_and_add:'Crear y anadir',comp_session_added:'Sesion anadida',comp_standings_lbl:'Clasificacion',comp_sessions_lbl:'Sesiones',comp_played:'Jugados',comp_back:'Volver',comp_delete_confirm:'Eliminar competicion?',comp_session_del_confirm:'Eliminar sesion?',comp_no_group_match:'Grupo vinculado no encontrado',comp_no_sessions:'Sin sesiones',comp_col_player:'Jugador',comp_col_pts:'Puntos',comp_col_sessions:'Sesiones',comp_rating_lbl:'Clasificacion ELO',comp_rating_val:'Rating',comp_rating_chg:'Cambio',comp_rating_wins:'Victorias',comp_rating_avg:'Posicion media',comp_rating_note:'Clasificacion basada en comparaciones de posicion (ELO). Recalculada a partir de todas las sesiones.',
   cc_menu:'Iniciar competicion de club',cc_prelink_cta:'Vincular a competicion de club',cc_code_ph:'Codigo',cc_link_btn:'Vincular',cc_prelink_active:'Vinculado a la competicion {code}',cc_err_code:'Introduce un codigo valido de 6 caracteres',cc_start_title:'Iniciar una competicion de club',cc_start_sub:'Comparte un enlace y recopila resultados de varias noches o de una ladder.',cc_name_ph:'Nombre de la competicion',cc_club_ph:'Nombre del club (opcional)',cc_type_series:'Competicion por noches',cc_type_ladder:'Ladder',cc_model_linear:'Lineal (ganador = numero de jugadores, ultimo = 1 punto)',cc_model_fixed:'Baremo fijo (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Contar solo las mejores X noches',cc_range_lbl:'Puede retar hasta X posiciones por encima',cc_create_btn:'Crear competicion',cc_created_title:'Competicion creada',cc_created_sub:'Comparte este enlace o codigo QR con el club.',cc_view_btn:'Ir a la clasificacion',cc_done_btn:'Listo',cc_add_title:'Anadir a la competicion',cc_add_btn:'Anadir',cc_added:'Anadido',cc_err_notfound:'Competicion no encontrada',cc_adding:'Anadiendo…',cc_add_ok:'Anadido a la competicion!',cc_loading:'Cargando…',cc_not_found:'Competicion no encontrada.',cc_back:'Volver',cc_share:'Compartir',cc_share_png:'Compartir como imagen',cc_standings_lbl:'Clasificacion',cc_no_events:'Aun no se ha jugado ninguna noche',cc_col_played:'Noches',cc_col_wins:'Victorias',cc_col_avgplace:'Posicion media',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Fusionar nombres',cc_alias_sub:'Dos formas de escribir el mismo jugador? Fusionalas.',cc_alias_merge:'Fusionar',cc_ladder_range_note:'Se puede retar hasta {n} posiciones por encima en la ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Aun no hay jugadores en la ladder',cc_ladder_join_lbl:'Unirse a la ladder',cc_your_name:'Tu nombre',cc_join:'Unirse',cc_joining:'Uniendose…',cc_join_ok:'Ya estas en la ladder!',cc_err_join_limit:'Ya has anadido varios jugadores desde este dispositivo',cc_remove_confirm:'Quitar a este jugador de la ladder?',cc_challenge_lbl:'Notificar un reto',cc_score_ph:'Resultado (ej. 6-4, 6-3)',cc_winner_challenger:'Gano el retador',cc_winner_defender:'Gano el defensor',cc_challenge_submit:'Notificar resultado',cc_err_same_player:'Elige dos jugadores diferentes',cc_err_range:'Solo puedes retar a alguien hasta {n} posiciones por encima',cc_submitting:'Enviando…',cc_submitted:'Resultado notificado, esperando la aprobacion del organizador',cc_pending_lbl:'Por aprobar',cc_winner_lbl:'Ganador',cc_approve:'Aprobar',cc_reject:'Rechazar',cc_history_lbl:'Historial',cc_rejected:'Rechazado',cc_link_copied:'Enlace copiado!',cc_copied:'Copiado!',cc_err_generic:'Algo salio mal. Intentalo de nuevo.',
   cast_btn:'Enviar a TV',cast_stop:'Detener envio',pres_ios_title:'Mostrar en TV',pres_ios_body:'Toca \'Abrir presentacion\' para abrir el marcador. Para mostrarlo en una TV via AirPlay:',pres_ios_s1:'Abre el <strong>Centro de control</strong> (desliza hacia abajo desde la esquina superior derecha)',pres_ios_s2:'Toca <strong>Duplicar pantalla</strong> (icono de cuadrado con triangulo)',pres_ios_s3:'Elige tu <strong>Apple TV</strong> o TV compatible con AirPlay de la lista',pres_ios_open:'Abrir presentacion',pres_ios_ok:'Cerrar',
@@ -2566,7 +2626,7 @@ sv:{
   inst_ios_ok:'Förstått',inst_and_title:'Installera appen på hemskärmen',
   inst_and_body:'Använd Padelturnering som en riktig app — <b>snabb åtkomst</b> från hemskärmen, även utan internet.',
   court_links_btn:'Court-länkar',court_enter_score:'Ange poäng',court_submit:'Skicka',court_submitted:'Poäng skickad — väntar på arrangören',court_invalid:'Ogiltig court-länk',court_no_match:'Inget aktivt match på denna court',court_accept:'Acceptera',court_pending_lbl:'Poäng inskickad av spelare',
-  player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',speak_btn:'Ropa ut',speak_and:'och',speak_vs:'mot',fs_enter:'Helskärm',fs_exit:'Avsluta helskärm',
+  player_scoring_toggle:'Spelare anger poäng',player_scoring_sub:'Spelare väljer sitt namn och anger poäng via länken',ppick_title:'Vem är du?',ppick_sub:'Tryck på ditt namn för att ange poäng för din match.',ppick_skip:'Bara titta',my_match_lbl:'Din match',viewer_score_submit:'Skicka poäng',viewer_score_done:'Skickat ✓',viewer_score_own:'Din poäng',viewer_score_opp:'Motståndare',viewer_confirm_zero:'Skicka poäng {sa}–{sb}?',viewer_score_err_blocked:'Sändning misslyckades — försök igen',viewer_change_player:'(byt)',share_mode_who:'Vem anger poängen?',share_mode_self:'Jag själv',share_mode_self_sub:'Arrangören anger',share_mode_players:'Spelare',share_mode_players_sub:'Via länken',am_pick_hint:'Tryck på ditt namn',am_waiting_players:'Väntar på spelarnas inlämning…',share_img_btn:'Dela resultat',share_img_winner:'Vinnare',share_img_standings:'Slutresultat',share_img_more:'och {n} till',acct_login:'Logga in',acct_title:'Ditt konto',acct_close:'Stäng',acct_sub:'Valfritt. Spara dina grupper, tävlingar och pågående turneringar, och fortsätt på en annan enhet.',acct_google:'Fortsätt med Google',acct_or_mail:'eller med din e-postadress',acct_mail_ph:'du@exempel.se',acct_send:'Skicka inloggningskod',acct_sending:'Skickar…',acct_sent:'Vi har skickat ett mejl till {mail}. Skriv koden från mejlet eller tryck på länken i det.',acct_resent:'Nytt mejl skickat.',acct_code_ph:'Kod från mejlet',acct_verify:'Logga in',acct_checking:'Kontrollerar…',acct_other_mail:'Annan e-postadress',acct_resend:'Skicka igen',acct_nopass:'Inget lösenord. Du kan alltid ta bort ditt konto igen.',acct_privacy:'Integritet',acct_in_as:'Inloggad som {mail}',acct_via_google:'med Google',acct_via_mail:'med din e-postadress',acct_saved_lbl:'I ditt konto',acct_saved_groups:'{n} grupper',acct_saved_comps:'{n} tävlingar',acct_saved_group1:'1 grupp',acct_saved_comp1:'1 tävling',acct_saved_cc:'hantering av dina klubbtävlingar',acct_saved_su:'anmälan',acct_saved_live:'pågående turnering',acct_saved_none:'Inget sparat ännu',acct_synced_at:'Uppdaterat {time}',acct_sync_now:'Uppdatera nu',acct_syncing:'Uppdaterar…',acct_logout:'Logga ut',acct_logout_wipe:'Ta även bort mina uppgifter från den här enheten (delad enhet)',acct_sure:'Säker? Tryck igen',acct_delete:'Ta bort konto',acct_delete_sub:'Ditt konto och det som sparats i det tas bort. Det som finns på den här enheten finns kvar, och delade länkar fortsätter att fungera.',acct_deleted:'Ditt konto har tagits bort. Det som finns på den här enheten finns kvar.',acct_logged_out:'Du är utloggad. Det som finns på den här enheten finns kvar.',acct_not_now:'Inte nu',acct_ask_done:'Spara dina grupper och turneringar',acct_ask_done_sub:'Logga in så finns dina grupper, tävlingar och pågående turneringar även på dina andra enheter. Valfritt, och utan lösenord.',acct_ask_cc:'Behåll hanteringen av din tävling',acct_ask_cc_sub:'Just nu kan bara den här enheten hantera din tävling. Logga in så kan du hantera den från dina andra enheter också, och du tappar den inte om webbläsarens data rensas.',acct_ask_su:'Behåll hanteringen av din anmälan',acct_ask_su_sub:'Just nu kan bara den här enheten hantera din anmälan. Logga in så kan du hantera den från dina andra enheter också, och du tappar den inte om webbläsarens data rensas.',acct_live_title:'Från din andra enhet',acct_live_offer:'Fortsätta med ”{name}”?',acct_live_take:'Hämta',acct_live_skip:'Nej',acct_live_unnamed:'din turnering',acct_welcome:'Du är inloggad. Allt från den här enheten finns nu även i ditt konto.',acct_err_mail:'Ange en giltig e-postadress.',acct_err_code:'Ange koden från mejlet.',acct_err_badcode:'Koden stämmer inte eller har gått ut. Begär en ny.',acct_err_rate:'För många mejl skickades nyss. Försök igen om några minuter.',acct_err_setup:'Inloggningen är inte helt påslagen än. Det är inte ditt fel.',acct_err_link:'Länken fungerar bara i webbläsaren där du begärde den. Skriv koden från mejlet i appen, eller begär en ny.',acct_err_offline:'Ingen anslutning. Försök igen om en stund.',acct_err_generic:'Något gick fel ({code}). Försök igen.',acct_err_wipe:'Allt kunde inte sparas i ditt konto, så dina uppgifter stannar på den här enheten.',speak_btn:'Ropa ut',speak_and:'och',speak_vs:'mot',fs_enter:'Helskärm',fs_exit:'Avsluta helskärm',
   comp_menu:'Tavlingar',comp_screen_title:'Tavlingar',comp_new:'Ny tavling',comp_new_sub:'Lankas till en fast grupp for att identifiera spelare over sessioner.',comp_empty:'Inga tavlingar',comp_name_ph:'Tavlingsnamn',comp_group_lbl:'Fast grupp',comp_group_pick:'Valj grupp',comp_no_groups:'Spara en grupp forst',comp_schema_ph:'t.ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Lagg till i tavling',comp_add_title:'Lagg till i tavling',comp_create_and_add:'Skapa och lagg till',comp_session_added:'Session tillagd',comp_standings_lbl:'Tabell',comp_sessions_lbl:'Sessioner',comp_played:'Spelat',comp_back:'Tillbaka',comp_delete_confirm:'Ta bort tavlingen?',comp_session_del_confirm:'Ta bort session?',comp_no_group_match:'Kopplad grupp hittades inte',comp_no_sessions:'Inga sessioner',comp_col_player:'Spelare',comp_col_pts:'Poang',comp_col_sessions:'Sessioner',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Forandring',comp_rating_wins:'Vinster',comp_rating_avg:'Snittplacering',comp_rating_note:'Rating baserat pa placeringsjanforelser (ELO). Raknast om fran alla sessioner.',
   cc_menu:'Starta klubbtavling',cc_prelink_cta:'Koppla till klubbtavling',cc_code_ph:'Kod',cc_link_btn:'Koppla',cc_prelink_active:'Kopplad till tavling {code}',cc_err_code:'Ange en giltig 6-teckenskod',cc_start_title:'Starta en klubbtavling',cc_start_sub:'Dela en lank och samla resultat fran flera kvallar eller en stege.',cc_name_ph:'Tavlingens namn',cc_club_ph:'Klubbnamn (valfritt)',cc_type_series:'Kvallstavling',cc_type_ladder:'Stege',cc_model_linear:'Linjar (vinnare = antal spelare, sist = 1 poang)',cc_model_fixed:'Fast schema (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Rakna bara de basta X kvallarna',cc_range_lbl:'Kan utmana upp till X platser hogre',cc_create_btn:'Skapa tavling',cc_created_title:'Tavling skapad',cc_created_sub:'Dela denna lank eller QR-kod med klubben.',cc_view_btn:'Till topplistan',cc_done_btn:'Klar',cc_add_title:'Lagg till i tavling',cc_add_btn:'Lagg till',cc_added:'Tillagd',cc_err_notfound:'Tavling hittades inte',cc_adding:'Lagger till…',cc_add_ok:'Tillagd i tavlingen!',cc_loading:'Laddar…',cc_not_found:'Tavling hittades inte.',cc_back:'Tillbaka',cc_share:'Dela',cc_share_png:'Dela som bild',cc_standings_lbl:'Topplista',cc_no_events:'Inga kvallar spelade an',cc_col_played:'Kvallar',cc_col_wins:'Vinster',cc_col_avgplace:'Snittplacering',cc_place_short:'#',cc_pts_short:'p',cc_alias_lbl:'Sla ihop namn',cc_alias_sub:'Tva stavningar av samma spelare? Sla ihop dem.',cc_alias_merge:'Sla ihop',cc_ladder_range_note:'Man far utmana upp till {n} platser hogre pa stegen',cc_ladder_lbl:'Stege',cc_ladder_empty:'Inga spelare pa stegen an',cc_ladder_join_lbl:'Ga med i stegen',cc_your_name:'Ditt namn',cc_join:'Ga med',cc_joining:'Gar med…',cc_join_ok:'Du star pa stegen!',cc_err_join_limit:'Du har redan lagt till flera spelare fran den har enheten',cc_remove_confirm:'Ta bort denna spelare fran stegen?',cc_challenge_lbl:'Rapportera en utmaning',cc_score_ph:'Resultat (t.ex. 6-4, 6-3)',cc_winner_challenger:'Utmanaren vann',cc_winner_defender:'Forsvararen vann',cc_challenge_submit:'Rapportera resultat',cc_err_same_player:'Valj tva olika spelare',cc_err_range:'Du kan bara utmana nagon upp till {n} platser hogre',cc_submitting:'Skickar…',cc_submitted:'Resultat rapporterat, vantar pa godkannande fran arrangoren',cc_pending_lbl:'Vantar pa godkannande',cc_winner_lbl:'Vinnare',cc_approve:'Godkann',cc_reject:'Avvisa',cc_history_lbl:'Historik',cc_rejected:'Avvisad',cc_link_copied:'Lank kopierad!',cc_copied:'Kopierad!',cc_err_generic:'Nagot gick fel. Forsok igen.',
   cast_btn:'Casta till TV',cast_stop:'Stoppa castning',pres_ios_title:'Visa pa TV',pres_ios_body:'Tryck pa \'Oppna presentation\' for att oppna resultattavlan. For att visa den pa en TV via AirPlay:',pres_ios_s1:'Oppna <strong>Kontrollcenter</strong> (svep nedat fran ovre hogra hornet)',pres_ios_s2:'Tryck pa <strong>Skarmspegling</strong> (ikon med fyrkant och triangel)',pres_ios_s3:'Valj din <strong>Apple TV</strong> eller AirPlay-kompatibla TV fran listan',pres_ios_open:'Oppna presentation',pres_ios_ok:'Stang',
@@ -2648,7 +2708,7 @@ it:{
   cast_btn:'Trasmetti alla TV',cast_stop:'Interrompi trasmissione',
   pres_ios_title:'Mostra in TV',pres_ios_body:"Tocca 'Apri presentazione' per aprire il tabellone. Per mostrarlo su una TV via AirPlay:",pres_ios_s1:'Apri il <strong>Centro di Controllo</strong> (scorri verso il basso dall\'angolo in alto a destra)',pres_ios_s2:'Tocca <strong>Duplica schermo</strong> (quadrato con triangolo)',pres_ios_s3:'Scegli la tua <strong>Apple TV</strong> o TV compatibile AirPlay dalla lista',pres_ios_open:'Apri presentazione',pres_ios_ok:'Chiudi',
   court_links_btn:'Link campo',court_enter_score:'Inserisci punteggio',court_submit:'Invia',court_submitted:"Punteggio inviato, in attesa dell'organizzatore",court_invalid:'Link campo non valido',court_no_match:'Nessuna partita attiva su questo campo',court_accept:'Accetta',court_pending_lbl:'Punteggio inviato dal giocatore',
-  player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',speak_btn:'Annuncia',speak_and:'e',speak_vs:'contro',fs_enter:'Schermo intero',fs_exit:'Esci da schermo intero',
+  player_scoring_toggle:'I giocatori inseriscono i punteggi',player_scoring_sub:'I giocatori scelgono il loro nome e inseriscono il punteggio via link',ppick_title:'Chi sei?',ppick_sub:'Tocca il tuo nome per inserire il punteggio della tua partita.',ppick_skip:'Solo guardare',my_match_lbl:'La tua partita',viewer_score_submit:'Invia punteggio',viewer_score_done:'Inviato ✓',viewer_score_own:'Il tuo punteggio',viewer_score_opp:'Avversario',viewer_confirm_zero:'Inviare il punteggio {sa}–{sb}?',viewer_score_err_blocked:'Invio fallito, riprova',viewer_change_player:'(cambia giocatore)',share_mode_who:'Chi inserisce i punteggi?',share_mode_self:'Io stesso',share_mode_self_sub:"L'organizzatore inserisce",share_mode_players:'Giocatori',share_mode_players_sub:'Via link',am_pick_hint:'Tocca il tuo nome',am_waiting_players:"In attesa dell'invio dei giocatori...",share_img_btn:'Condividi classifica',share_img_winner:'Vincitore',share_img_standings:'Classifica finale',share_img_more:'e altri {n}',acct_login:'Accedi',acct_title:'Il tuo account',acct_close:'Chiudi',acct_sub:'Facoltativo. Conserva i tuoi gruppi, le competizioni e i tornei in corso, e continua su un altro dispositivo.',acct_google:'Continua con Google',acct_or_mail:'oppure con il tuo indirizzo email',acct_mail_ph:'tu@esempio.it',acct_send:'Invia codice di accesso',acct_sending:'Invio…',acct_sent:'Abbiamo inviato un\'email a {mail}. Inserisci il codice dell\'email o tocca il link al suo interno.',acct_resent:'Nuova email inviata.',acct_code_ph:'Codice dall\'email',acct_verify:'Accedi',acct_checking:'Verifica…',acct_other_mail:'Altro indirizzo',acct_resend:'Invia di nuovo',acct_nopass:'Nessuna password. Puoi sempre eliminare il tuo account.',acct_privacy:'Privacy',acct_in_as:'Accesso effettuato come {mail}',acct_via_google:'con Google',acct_via_mail:'con il tuo indirizzo email',acct_saved_lbl:'Nel tuo account',acct_saved_groups:'{n} gruppi',acct_saved_comps:'{n} competizioni',acct_saved_group1:'1 gruppo',acct_saved_comp1:'1 competizione',acct_saved_cc:'gestione delle tue competizioni di club',acct_saved_su:'iscrizione',acct_saved_live:'torneo in corso',acct_saved_none:'Ancora niente di salvato',acct_synced_at:'Aggiornato alle {time}',acct_sync_now:'Aggiorna ora',acct_syncing:'Aggiornamento…',acct_logout:'Esci',acct_logout_wipe:'Rimuovi i miei dati anche da questo dispositivo (dispositivo condiviso)',acct_sure:'Sicuro? Tocca di nuovo',acct_delete:'Elimina account',acct_delete_sub:'Il tuo account e ciò che contiene verranno eliminati. Ciò che è su questo dispositivo resta, e i link condivisi continuano a funzionare.',acct_deleted:'Il tuo account è stato eliminato. Ciò che è su questo dispositivo è ancora qui.',acct_logged_out:'Sei uscito. Ciò che è su questo dispositivo è ancora qui.',acct_not_now:'Non ora',acct_ask_done:'Conserva i tuoi gruppi e tornei',acct_ask_done_sub:'Accedi e i tuoi gruppi, le competizioni e i tornei in corso saranno anche sugli altri dispositivi. Facoltativo e senza password.',acct_ask_cc:'Conserva la gestione della tua competizione',acct_ask_cc_sub:'Al momento solo questo dispositivo può gestire la tua competizione. Accedi per gestirla anche dagli altri dispositivi, senza perderla se i dati del browser vengono cancellati.',acct_ask_su:'Conserva la gestione della tua iscrizione',acct_ask_su_sub:'Al momento solo questo dispositivo può gestire la tua iscrizione. Accedi per gestirla anche dagli altri dispositivi, senza perderla se i dati del browser vengono cancellati.',acct_live_title:'Dal tuo altro dispositivo',acct_live_offer:'Continuare con «{name}»?',acct_live_take:'Recupera',acct_live_skip:'No',acct_live_unnamed:'il tuo torneo',acct_welcome:'Hai effettuato l\'accesso. Tutto ciò che è su questo dispositivo è ora anche nel tuo account.',acct_err_mail:'Inserisci un indirizzo email valido.',acct_err_code:'Inserisci il codice dell\'email.',acct_err_badcode:'Il codice non è corretto o è scaduto. Richiedine uno nuovo.',acct_err_rate:'Sono state appena inviate troppe email. Riprova tra qualche minuto.',acct_err_setup:'L\'accesso non è ancora del tutto attivo. Non dipende da te.',acct_err_link:'Questo link funziona solo nel browser in cui l\'hai richiesto. Inserisci il codice dell\'email nell\'app o richiedine uno nuovo.',acct_err_offline:'Nessuna connessione. Riprova tra un momento.',acct_err_generic:'Qualcosa è andato storto ({code}). Riprova.',acct_err_wipe:'Non è stato possibile salvare tutto nel tuo account, quindi i tuoi dati restano su questo dispositivo.',speak_btn:'Annuncia',speak_and:'e',speak_vs:'contro',fs_enter:'Schermo intero',fs_exit:'Esci da schermo intero',
   comp_menu:'Competizioni',comp_screen_title:'Competizioni',comp_new:'Nuova competizione',comp_new_sub:'Collega a un gruppo fisso per riconoscere i giocatori nelle sessioni.',comp_empty:'Nessuna competizione',comp_name_ph:'Nome della competizione',comp_group_lbl:'Gruppo fisso',comp_group_pick:'Scegli gruppo',comp_no_groups:'Salva prima un gruppo fisso',comp_schema_ph:'es. 10,8,6,5,4,3,2,1',comp_add_btn:'Aggiungi alla competizione',comp_add_title:'Aggiungi alla competizione',comp_create_and_add:'Crea e aggiungi',comp_session_added:'Sessione aggiunta',comp_standings_lbl:'Classifica',comp_sessions_lbl:'Sessioni',comp_played:'Giocate',comp_back:'Indietro',comp_delete_confirm:'Eliminare la competizione?',comp_session_del_confirm:'Eliminare la sessione?',comp_no_group_match:'Gruppo collegato non trovato',comp_no_sessions:'Nessuna sessione',comp_col_player:'Giocatore',comp_col_pts:'Punti',comp_col_sessions:'Sessioni',comp_rating_lbl:'Classifica ELO',comp_rating_val:'Rating',comp_rating_chg:'Variazione',comp_rating_wins:'Vittorie',comp_rating_avg:'Posizione media',comp_rating_note:'Classifica basata su confronti di piazzamento (ELO). Ricalcolata da tutte le sessioni.',
   cc_menu:'Avvia competizione del club',cc_prelink_cta:'Collega a competizione del club',cc_code_ph:'Codice',cc_link_btn:'Collega',cc_prelink_active:'Collegato alla competizione {code}',cc_err_code:'Inserisci un codice valido di 6 caratteri',cc_start_title:'Avvia una competizione del club',cc_start_sub:'Condividi un link e raccogli i risultati di piu serate o di una ladder.',cc_name_ph:'Nome della competizione',cc_club_ph:'Nome del club (opzionale)',cc_type_series:'Competizione a serate',cc_type_ladder:'Ladder',cc_model_linear:'Lineare (vincitore = numero di giocatori, ultimo = 1 punto)',cc_model_fixed:'Schema fisso (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Conta solo le migliori X serate',cc_range_lbl:'Puo sfidare fino a X posizioni piu in alto',cc_create_btn:'Crea competizione',cc_created_title:'Competizione creata',cc_created_sub:'Condividi questo link o codice QR con il club.',cc_view_btn:'Vai alla classifica',cc_done_btn:'Fatto',cc_add_title:'Aggiungi alla competizione',cc_add_btn:'Aggiungi',cc_added:'Aggiunto',cc_err_notfound:'Competizione non trovata',cc_adding:'Aggiunta in corso…',cc_add_ok:'Aggiunto alla competizione!',cc_loading:'Caricamento…',cc_not_found:'Competizione non trovata.',cc_back:'Indietro',cc_share:'Condividi',cc_share_png:'Condividi come immagine',cc_standings_lbl:'Classifica',cc_no_events:'Nessuna serata giocata ancora',cc_col_played:'Serate',cc_col_wins:'Vittorie',cc_col_avgplace:'Posizione media',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Unisci nomi',cc_alias_sub:'Due modi di scrivere lo stesso giocatore? Uniscili.',cc_alias_merge:'Unisci',cc_ladder_range_note:'Si puo sfidare fino a {n} posizioni piu in alto sulla ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Nessun giocatore sulla ladder ancora',cc_ladder_join_lbl:'Unisciti alla ladder',cc_your_name:'Il tuo nome',cc_join:'Unisciti',cc_joining:'Iscrizione…',cc_join_ok:'Sei sulla ladder!',cc_err_join_limit:'Hai gia aggiunto piu giocatori da questo dispositivo',cc_remove_confirm:'Rimuovere questo giocatore dalla ladder?',cc_challenge_lbl:'Segnala una sfida',cc_score_ph:'Punteggio (es. 6-4, 6-3)',cc_winner_challenger:'Ha vinto lo sfidante',cc_winner_defender:'Ha vinto il difensore',cc_challenge_submit:'Segnala risultato',cc_err_same_player:'Scegli due giocatori diversi',cc_err_range:'Puoi sfidare solo qualcuno fino a {n} posizioni piu in alto',cc_submitting:'Invio…',cc_submitted:'Risultato segnalato, in attesa di approvazione dell\'organizzatore',cc_pending_lbl:'Da approvare',cc_winner_lbl:'Vincitore',cc_approve:'Approva',cc_reject:'Rifiuta',cc_history_lbl:'Cronologia',cc_rejected:'Rifiutato',cc_link_copied:'Link copiato!',cc_copied:'Copiato!',cc_err_generic:'Qualcosa e andato storto. Riprova.',
   su_open_cta:'Apri iscrizione',su_waitlist_btn:'Lista d\'attesa',su_setup_title:'Apri iscrizione',su_setup_sub:'Condividi un link, i giocatori si aggiungono da soli alla lista.',su_event_name_ph:'Nome evento',su_max_ph:'Max',su_location_ph:'Luogo (opzionale)',su_generate_btn:'Genera link',su_cancel:'Annulla',su_err_max:'Inserisci un numero massimo di giocatori (almeno 4).',su_err_generic:'Qualcosa e andato storto. Riprova.',su_err_empty:'Non ci sono ancora iscrizioni confermate.',su_live_title:'Iscrizione',su_counter:'{n} di {max}',su_confirmed_title:'Confermati',su_waitlist_title:'Lista d\'attesa',su_none_yet:'Ancora nessuna iscrizione.',su_waitlist_empty:'La lista d\'attesa e vuota.',su_close_start_btn:'Chiudi iscrizione e inizia',su_join_title:'Iscriviti',su_join_name_ph:'Il tuo nome',gender_m:'Uomo',gender_f:'Donna',su_join_confirm_btn:'Conferma iscrizione',su_join_confirm_dup_btn:'Iscriviti comunque',su_join_dup_warn:'Questo nome esiste gia. Continuare come "{name}"?',su_join_default_name:'Torneo di padel',su_join_closed:'Le iscrizioni sono chiuse.',su_join_spots:'{n} di {max} posti rimasti',su_join_full:'Completo, {n} in lista d\'attesa',su_join_not_found:'Iscrizione non trovata.',su_join_offline:'Per iscriverti serve internet. Controlla la connessione.',su_join_err_name:'Inserisci il tuo nome.',su_join_err_gender:'Scegli uomo o donna.',su_join_limit:'Numero massimo di iscrizioni da questo dispositivo raggiunto.',su_join_success:'Grazie {name}, sei iscritto!',su_join_waitlisted:'{name}, sei in lista d\'attesa (posizione {pos}).',su_join_err_generic:'Iscrizione non riuscita. Riprova.',pcard_and:'e',pcard_playing:'Campo {court}, con {partner}, contro {opponents}',pcard_playing_noPartner:'Campo {court}, contro {opponents}',pcard_resting:'Riposi in questo turno (riposato {n}x finora)',pcard_waiting:'In attesa del prossimo turno...',pcard_dropped:'Non fai piu parte di questo torneo',pcard_done:'Torneo terminato per te',pcard_score_btn:'Inserisci punteggio',pcard_stat_pos:'Posizione',pcard_stat_pts:'Punti',pcard_stat_wl:'V-S',pcard_stat_saldo:'Saldo',pcard_stat_rest:'Riposo',pcard_ios_hint:'Installa questa app sulla schermata home per notifiche piu affidabili.',notif_title:'Nuovo turno',notif_body_playing:'Campo {court}, con {partner}, contro {opponents}',notif_body_playing_noPartner:'Campo {court}, contro {opponents}',notif_body_resting:'Riposi in questo turno',push_tpl_playing:'Campo {court}, con {partner}, contro {opp1} e {opp2}',push_tpl_playing_noPartner:'Campo {court}, contro {opp1}',push_tpl_resting:'Riposi nel turno {round}',push_tpl_done:'Torneo terminato. La tua posizione finale: {rank}',push_toggle_on:'Notifiche attive',push_toggle_off:'Attiva notifiche',
@@ -2728,7 +2788,7 @@ pt:{
   cast_btn:'Transmitir para a TV',cast_stop:'Parar transmissao',
   pres_ios_title:'Mostrar na TV',pres_ios_body:"Toca em 'Abrir apresentacao' para abrir o placar. Para o mostrar numa TV via AirPlay:",pres_ios_s1:'Abre a <strong>Central de Controlo</strong> (desliza para baixo a partir do canto superior direito)',pres_ios_s2:'Toca em <strong>Espelhamento de Ecra</strong> (icone de quadrado com triangulo)',pres_ios_s3:'Escolhe a tua <strong>Apple TV</strong> ou TV compativel com AirPlay na lista',pres_ios_open:'Abrir apresentacao',pres_ios_ok:'Fechar',
   court_links_btn:'Link do campo',court_enter_score:'Introduzir pontuacao',court_submit:'Enviar',court_submitted:'Pontuacao enviada, a aguardar o organizador',court_invalid:'Link do campo invalido',court_no_match:'Nenhum jogo ativo neste campo',court_accept:'Aceitar',court_pending_lbl:'Pontuacao enviada pelo jogador',
-  player_scoring_toggle:'Os jogadores introduzem as pontuacoes',player_scoring_sub:'Os jogadores escolhem o seu nome e enviam a pontuacao pelo link',ppick_title:'Quem es tu?',ppick_sub:'Toca no teu nome. Depois podes introduzir a pontuacao do teu jogo.',ppick_skip:'So a ver',my_match_lbl:'O teu jogo',viewer_score_submit:'Enviar pontuacao',viewer_score_done:'Enviado ✓',viewer_score_own:'A tua pontuacao',viewer_score_opp:'Adversario',viewer_confirm_zero:'Enviar a pontuacao {sa}-{sb}?',viewer_score_err_blocked:'Envio falhou, tenta novamente',viewer_change_player:'(mudar jogador)',share_mode_who:'Quem introduz as pontuacoes?',share_mode_self:'Eu proprio',share_mode_self_sub:'O organizador introduz',share_mode_players:'Jogadores',share_mode_players_sub:'Pelo link',am_pick_hint:'Toca no teu nome',am_waiting_players:'A aguardar que os jogadores enviem…',share_img_btn:'Partilhar classificacao',share_img_winner:'Vencedor',share_img_standings:'Classificacao final',share_img_more:'e mais {n}',speak_btn:'Anunciar',speak_and:'e',speak_vs:'contra',fs_enter:'Ecrã inteiro',fs_exit:'Sair do ecrã inteiro',
+  player_scoring_toggle:'Os jogadores introduzem as pontuacoes',player_scoring_sub:'Os jogadores escolhem o seu nome e enviam a pontuacao pelo link',ppick_title:'Quem es tu?',ppick_sub:'Toca no teu nome. Depois podes introduzir a pontuacao do teu jogo.',ppick_skip:'So a ver',my_match_lbl:'O teu jogo',viewer_score_submit:'Enviar pontuacao',viewer_score_done:'Enviado ✓',viewer_score_own:'A tua pontuacao',viewer_score_opp:'Adversario',viewer_confirm_zero:'Enviar a pontuacao {sa}-{sb}?',viewer_score_err_blocked:'Envio falhou, tenta novamente',viewer_change_player:'(mudar jogador)',share_mode_who:'Quem introduz as pontuacoes?',share_mode_self:'Eu proprio',share_mode_self_sub:'O organizador introduz',share_mode_players:'Jogadores',share_mode_players_sub:'Pelo link',am_pick_hint:'Toca no teu nome',am_waiting_players:'A aguardar que os jogadores enviem…',share_img_btn:'Partilhar classificacao',share_img_winner:'Vencedor',share_img_standings:'Classificacao final',share_img_more:'e mais {n}',acct_login:'Entrar',acct_title:'A tua conta',acct_close:'Fechar',acct_sub:'Opcional. Guarda os teus grupos, competições e torneios em curso, e continua noutro dispositivo.',acct_google:'Continuar com o Google',acct_or_mail:'ou com o teu email',acct_mail_ph:'tu@exemplo.pt',acct_send:'Enviar código',acct_sending:'A enviar…',acct_sent:'Enviámos um email para {mail}. Escreve o código do email ou toca na ligação que ele contém.',acct_resent:'Novo email enviado.',acct_code_ph:'Código do email',acct_verify:'Entrar',acct_checking:'A verificar…',acct_other_mail:'Outro email',acct_resend:'Enviar de novo',acct_nopass:'Sem palavra-passe. Podes sempre apagar a tua conta.',acct_privacy:'Privacidade',acct_in_as:'Sessão iniciada como {mail}',acct_via_google:'com o Google',acct_via_mail:'com o teu email',acct_saved_lbl:'Na tua conta',acct_saved_groups:'{n} grupos',acct_saved_comps:'{n} competições',acct_saved_group1:'1 grupo',acct_saved_comp1:'1 competição',acct_saved_cc:'gestão das tuas competições de clube',acct_saved_su:'inscrição',acct_saved_live:'torneio em curso',acct_saved_none:'Ainda nada guardado',acct_synced_at:'Atualizado às {time}',acct_sync_now:'Atualizar agora',acct_syncing:'A atualizar…',acct_logout:'Terminar sessão',acct_logout_wipe:'Remover também os meus dados deste dispositivo (dispositivo partilhado)',acct_sure:'Tens a certeza? Toca outra vez',acct_delete:'Apagar conta',acct_delete_sub:'A tua conta e o que está guardado nela serão apagados. O que está neste dispositivo fica, e as ligações partilhadas continuam a funcionar.',acct_deleted:'A tua conta foi apagada. O que está neste dispositivo continua aqui.',acct_logged_out:'Terminaste a sessão. O que está neste dispositivo continua aqui.',acct_not_now:'Agora não',acct_ask_done:'Guarda os teus grupos e torneios',acct_ask_done_sub:'Inicia sessão e os teus grupos, competições e torneios em curso ficam também nos teus outros dispositivos. Opcional e sem palavra-passe.',acct_ask_cc:'Mantém a gestão da tua competição',acct_ask_cc_sub:'Neste momento só este dispositivo pode gerir a tua competição. Inicia sessão para a gerir também nos teus outros dispositivos, sem a perder se os dados do navegador forem apagados.',acct_ask_su:'Mantém a gestão da tua inscrição',acct_ask_su_sub:'Neste momento só este dispositivo pode gerir a tua inscrição. Inicia sessão para a gerir também nos teus outros dispositivos, sem a perder se os dados do navegador forem apagados.',acct_live_title:'Do teu outro dispositivo',acct_live_offer:'Continuar com «{name}»?',acct_live_take:'Trazer',acct_live_skip:'Não',acct_live_unnamed:'o teu torneio',acct_welcome:'Sessão iniciada. Tudo o que está neste dispositivo está agora também na tua conta.',acct_err_mail:'Escreve um email válido.',acct_err_code:'Escreve o código do email.',acct_err_badcode:'Esse código está errado ou expirou. Pede um novo.',acct_err_rate:'Foram enviados demasiados emails agora mesmo. Tenta de novo daqui a uns minutos.',acct_err_setup:'O início de sessão ainda não está totalmente ativo. Não é culpa tua.',acct_err_link:'Esta ligação só funciona no navegador onde a pediste. Escreve o código do email na app ou pede um novo.',acct_err_offline:'Sem ligação. Tenta de novo daqui a pouco.',acct_err_generic:'Algo correu mal ({code}). Tenta de novo.',acct_err_wipe:'Não foi possível guardar tudo na tua conta, por isso os teus dados ficam neste dispositivo.',speak_btn:'Anunciar',speak_and:'e',speak_vs:'contra',fs_enter:'Ecrã inteiro',fs_exit:'Sair do ecrã inteiro',
   comp_menu:'Competicoes',comp_screen_title:'Competicoes',comp_new:'Nova competicao',comp_new_sub:'Liga a um grupo fixo para identificar jogadores entre sessoes.',comp_empty:'Ainda sem competicoes',comp_name_ph:'Nome da competicao',comp_group_lbl:'Grupo fixo',comp_group_pick:'Escolher grupo',comp_no_groups:'Guarda primeiro um grupo fixo',comp_schema_ph:'ex. 10,8,6,5,4,3,2,1',comp_add_btn:'Adicionar a competicao',comp_add_title:'Adicionar a competicao',comp_create_and_add:'Criar e adicionar',comp_session_added:'Sessao adicionada',comp_standings_lbl:'Classificacao',comp_sessions_lbl:'Sessoes',comp_played:'Jogadas',comp_back:'Voltar',comp_delete_confirm:'Eliminar competicao?',comp_session_del_confirm:'Eliminar sessao?',comp_no_group_match:'Grupo associado nao encontrado',comp_no_sessions:'Ainda sem sessoes',comp_col_player:'Jogador',comp_col_pts:'Pontos',comp_col_sessions:'Sessoes',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Variacao',comp_rating_wins:'Vitorias',comp_rating_avg:'Posicao media',comp_rating_note:'Rating baseado em comparacoes de posicionamento direto (ELO). Recalculado a partir de todas as sessoes.',
   cc_menu:'Iniciar competicao de clube',cc_prelink_cta:'Associar a competicao de clube',cc_code_ph:'Codigo',cc_link_btn:'Associar',cc_prelink_active:'Associado a competicao {code}',cc_err_code:'Introduz um codigo valido de 6 caracteres',cc_start_title:'Iniciar uma competicao de clube',cc_start_sub:'Partilha um link e recolhe resultados de varias noites ou de uma ladder.',cc_name_ph:'Nome da competicao',cc_club_ph:'Nome do clube (opcional)',cc_type_series:'Competicao por noites',cc_type_ladder:'Ladder',cc_model_linear:'Linear (vencedor = numero de jogadores, ultimo lugar = 1 ponto)',cc_model_fixed:'Esquema fixo (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Contar apenas as melhores X noites',cc_range_lbl:'Pode desafiar ate X posicoes acima',cc_create_btn:'Criar competicao',cc_created_title:'Competicao criada',cc_created_sub:'Partilha este link ou codigo QR com o clube.',cc_view_btn:'Ir para a classificacao',cc_done_btn:'Concluido',cc_add_title:'Adicionar a competicao',cc_add_btn:'Adicionar',cc_added:'Adicionado',cc_err_notfound:'Competicao nao encontrada',cc_adding:'A adicionar…',cc_add_ok:'Adicionado a competicao!',cc_loading:'A carregar…',cc_not_found:'Competicao nao encontrada.',cc_back:'Voltar',cc_share:'Partilhar',cc_share_png:'Partilhar como imagem',cc_standings_lbl:'Classificacao',cc_no_events:'Ainda sem noites jogadas',cc_col_played:'Noites',cc_col_wins:'Vitorias',cc_col_avgplace:'Posicao media',cc_place_short:'#',cc_pts_short:'pt',cc_alias_lbl:'Juntar nomes',cc_alias_sub:'Duas formas de escrever o mesmo jogador? Junta-as.',cc_alias_merge:'Juntar',cc_ladder_range_note:'Os jogadores podem desafiar ate {n} posicoes acima na ladder',cc_ladder_lbl:'Ladder',cc_ladder_empty:'Ainda sem jogadores na ladder',cc_ladder_join_lbl:'Juntar-te a ladder',cc_your_name:'O teu nome',cc_join:'Juntar',cc_joining:'A juntar…',cc_join_ok:'Estas na ladder!',cc_err_join_limit:'Ja adicionaste varios jogadores a partir deste dispositivo',cc_remove_confirm:'Remover este jogador da ladder?',cc_challenge_lbl:'Reportar um desafio',cc_score_ph:'Pontuacao (ex. 6-4, 6-3)',cc_winner_challenger:'O desafiante venceu',cc_winner_defender:'O defensor venceu',cc_challenge_submit:'Reportar resultado',cc_err_same_player:'Escolhe dois jogadores diferentes',cc_err_range:'So podes desafiar alguem ate {n} posicoes acima',cc_submitting:'A enviar…',cc_submitted:'Resultado reportado, a aguardar aprovacao do organizador',cc_pending_lbl:'Aguarda aprovacao',cc_winner_lbl:'Vencedor',cc_approve:'Aprovar',cc_reject:'Rejeitar',cc_history_lbl:'Historico',cc_rejected:'Rejeitado',cc_link_copied:'Link copiado!',cc_copied:'Copiado!',cc_err_generic:'Algo correu mal. Tenta novamente.',
   level_lbl:'Nivel',level_hint:'Opcional: escreve Nome:3 para nivel (1-5)',
@@ -2747,7 +2807,7 @@ id:{
   tab_standings:'Klasemen',sec_poule:'Babak grup',sec_winners:'Bagan juara, 4 besar',sec_losers:'Hiburan, peringkat 5 sampai 9',rnd_label:'Ronde {r}',rnd_progress:'{done} dari {tot} pertandingan dimainkan',rnd_game:'Game {gn} dari {total}, siapa menang?',rnd_undo:'Batalkan',rnd_court:'Lapangan {n}',st_col_team:'Tim',st_col_played:'Main',st_col_wins:'M',st_col_losses:'K',st_col_games:'GM-GK',st_losers_div:'Babak hiburan',brk_semifinal:'Semifinal',brk_final:'Final',brk_consolation:'Final hiburan',brk_winner:'PEMENANG',brk_consolation_lbl:'HIBURAN',am_round:'Ronde {n}',am_courts_one:'1 lapangan',am_courts_other:'{n} lapangan',am_pts:'{total}/{max} poin',am_save:'Simpan',am_undo:'Batalkan',am_standings:'Klasemen',am_col_player:'Pemain',am_col_pts:'Poin',am_bye:'Istirahat',am_col_w:'M',am_col_d:'S',am_col_l:'K',dm_rank:'Peringkat',dm_avg:'Rata-rata/pertandingan',dm_partners:'Pasangan',dm_opponents:'Lawan',dm_h2h:'Head to head',dm_no_matches:'Belum ada pertandingan dimainkan',player_pause:'Jedakan pemain',player_resume:'Lanjutkan pemain',player_paused:'jeda',player_new_name:'Nama baru…',player_save:'Simpan',timer_start:'Mulai ronde',timer_done:'WAKTU HABIS',latejoin_btn:'Pemain',latejoin_name_ph:'Nama pemain baru',latejoin_pts_confirm:'Poin awal: OK untuk rata-rata ({avg}), Batal untuk 0.',am_col_rest:'Istirahat',team_drop_btn:'Tandai tim mundur',team_dropped_badge:'mundur',team_drop_confirm_ko:'Tandai tim ini mundur? Sisa pertandingan menjadi kemenangan tanpa bertanding untuk lawan.',team_drop_confirm_rr1:'Tandai tim ini mundur?',team_drop_confirm_rr2:'OK berarti menang tanpa bertanding (lawan memenangkan pertandingan yang tersisa). Batal berarti menghapus pertandingan tersisa dari klasemen.',match_walkover:'W.O.',match_scratched:'Dicoret',pts_custom:'Lainnya',pts_custom_ph:'8-64',lbl_scoring_mode:'Penilaian',scoring_mode_points:'Jumlah poin tetap',
   scoring_mode_time:'Berdasarkan waktu',matchpts_edit_btn:'{n} poin/pertandingan',matchpts_edit_ph:'Poin per pertandingan (sekarang {cur})',matchpts_edit_invalid:'Pilih angka antara 8 dan 64.',golden_point_prompt:'Poin emas: siapa menang?',export_csv:'Unduh CSV',export_print:'Cetak / PDF',export_tournament:'Turnamen',export_format:'Format',export_matches:'Pertandingan',export_score:'Skor',export_round:'Ronde',pres_btn:'Presentasi',pres_live:'langsung via padel-bracket.com',pres_standings:'Klasemen',pres_active:'aktif',pres_meta:'{p} dimainkan · selisih {s}',res_title:'Lanjutkan turnamen',res_continue:'▶ Lanjutkan',res_discard:'✕',res_am:'{label}Americano · {n} pemain',res_mex:'{label}Mexicano · {n} pemain',res_team:'{label}{teams} tim · {done}/{tot} pertandingan',res_bracket_done:' · Bagan selesai',fin_winner:'Juara turnamen!',fin_winner_trio:'Juara turnamen (Trio)!',fin_title:'Klasemen akhir',fin_1st:'Juara',fin_2nd:'Peringkat 2',fin_3rd:'Peringkat 3',fin_copy:'Salin hasil',fin_copied:'Tersalin!',fin_copy_err:'Menyalin tidak tersedia di peramban ini.',fin_export_hdr:'{name}, klasemen akhir ({date})',fin_export_full:'Klasemen lengkap:',fin_export_gold:'🥇 Juara: {name}',fin_export_silver:'🥈 Runner-up: {name}',fin_export_bronze:'🥉 Peringkat 3: {name}',fin_export_row:'{pos}. {name}, {w}M {l}K ({gw}-{gl} game)',inst_subtitle_default:'Tambahkan ke layar utama',inst_close:'Tutup',inst_install:'Pasang',inst_skip:'Nanti saja',cast_btn:'Tampilkan ke TV',cast_stop:'Hentikan tampilan',pres_ios_title:'Tampilkan di TV',pres_ios_body:'Ketuk \'Buka presentasi\' untuk membuka papan skor. Untuk menampilkannya di TV lewat AirPlay:',pres_ios_s1:'Buka <strong>Pusat Kontrol</strong> (geser turun dari pojok kanan atas)',pres_ios_s2:'Ketuk <strong>Screen Mirroring</strong> (ikon persegi dengan segitiga)',
   pres_ios_s3:'Pilih <strong>Apple TV</strong> atau TV yang mendukung AirPlay dari daftar',pres_ios_open:'Buka presentasi',pres_ios_ok:'Tutup',court_links_btn:'Tautan lapangan',court_enter_score:'Masukkan skor',court_submit:'Kirim',court_submitted:'Skor terkirim, menunggu penyelenggara',court_invalid:'Tautan lapangan tidak valid',court_no_match:'Tidak ada pertandingan aktif di lapangan ini',court_accept:'Terima',court_pending_lbl:'Skor dikirim oleh pemain',player_scoring_toggle:'Pemain memasukkan skor',player_scoring_sub:'Pemain memilih namanya lalu mengirim skor lewat tautan',ppick_title:'Kamu siapa?',ppick_sub:'Ketuk namamu. Setelah itu kamu bisa memasukkan skor pertandinganmu.',ppick_skip:'Hanya menonton',my_match_lbl:'Pertandinganmu',viewer_score_submit:'Kirim skor',viewer_score_done:'Terkirim ✓',viewer_score_own:'Skormu',viewer_score_opp:'Lawan',viewer_confirm_zero:'Kirim skor {sa}-{sb}?',viewer_score_err_blocked:'Pengiriman gagal, coba lagi',viewer_change_player:'(ganti pemain)',share_mode_who:'Siapa yang memasukkan skor?',share_mode_self:'Saya sendiri',share_mode_self_sub:'Penyelenggara yang mengisi',share_mode_players:'Pemain',share_mode_players_sub:'Lewat tautan',am_pick_hint:'Ketuk namamu',am_waiting_players:'Menunggu pemain mengirim skor…',inst_ios_title:'Tambahkan ke layar utama lewat Browser',inst_ios_steps:'1. Ketuk ikon <b>Bagikan</b> <svg viewBox="0 0 24 24" fill="none" stroke="#C7FF5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2em;height:1.2em;vertical-align:middle;display:inline-block"><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> di bagian bawah Browser<br>2. Gulir lalu ketuk <b>Tambahkan ke Layar Utama</b><br>3. Ketuk <b>Tambah</b>, selesai!',inst_ios_ok:'Mengerti',inst_and_title:'Pasang aplikasi di layar utama',
-  inst_and_body:'Pakai Turnamen Padel seperti aplikasi sungguhan, <b>akses cepat</b> dari layar utama, bahkan tanpa internet.',share_img_btn:'Bagikan klasemen',share_img_winner:'Juara',share_img_standings:'Klasemen akhir',share_img_more:'dan {n} lainnya',speak_btn:'Umumkan',speak_and:'dan',speak_vs:'melawan',fs_enter:'Layar penuh',fs_exit:'Keluar dari layar penuh',comp_menu:'Kompetisi',comp_screen_title:'Kompetisi',comp_new:'Kompetisi baru',comp_new_sub:'Hubungkan ke grup tetap untuk mengenali pemain lintas sesi.',comp_empty:'Belum ada kompetisi',comp_name_ph:'Nama kompetisi',comp_group_lbl:'Grup tetap',comp_group_pick:'Pilih grup',comp_no_groups:'Simpan grup tetap dulu',comp_schema_ph:'mis. 10,8,6,5,4,3,2,1',comp_add_btn:'Tambahkan ke kompetisi',comp_add_title:'Tambahkan ke kompetisi',comp_create_and_add:'Buat dan tambahkan',comp_session_added:'Sesi ditambahkan',comp_standings_lbl:'Klasemen',comp_sessions_lbl:'Sesi',comp_played:'Dimainkan',comp_back:'Kembali',comp_delete_confirm:'Hapus kompetisi?',comp_session_del_confirm:'Hapus sesi?',comp_no_group_match:'Grup terkait tidak ditemukan',comp_no_sessions:'Belum ada sesi',comp_col_player:'Pemain',comp_col_pts:'Poin',comp_col_sessions:'Sesi',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Perubahan',comp_rating_wins:'Menang',comp_rating_avg:'Rata-rata peringkat',comp_rating_note:'Rating berdasarkan perbandingan peringkat langsung (ELO). Dihitung ulang dari semua sesi.',cc_menu:'Mulai kompetisi klub',cc_prelink_cta:'Hubungkan ke kompetisi klub',cc_code_ph:'Kode',cc_link_btn:'Hubungkan',cc_prelink_active:'Terhubung ke kompetisi {code}',cc_err_code:'Masukkan kode 6 karakter yang valid',cc_start_title:'Mulai kompetisi klub',cc_start_sub:'Bagikan tautan, kumpulkan hasil dari beberapa malam atau dari tangga peringkat.',cc_name_ph:'Nama kompetisi',cc_club_ph:'Nama klub (opsional)',cc_type_series:'Kompetisi per malam',cc_type_ladder:'Tangga peringkat',cc_model_linear:'Linear (juara = jumlah pemain, terakhir = 1 poin)',
+  inst_and_body:'Pakai Turnamen Padel seperti aplikasi sungguhan, <b>akses cepat</b> dari layar utama, bahkan tanpa internet.',share_img_btn:'Bagikan klasemen',share_img_winner:'Juara',share_img_standings:'Klasemen akhir',share_img_more:'dan {n} lainnya',acct_login:'Masuk',acct_title:'Akunmu',acct_close:'Tutup',acct_sub:'Opsional. Simpan grup, kompetisi, dan turnamen yang sedang berjalan, lalu lanjutkan di perangkat lain.',acct_google:'Lanjutkan dengan Google',acct_or_mail:'atau dengan alamat emailmu',acct_mail_ph:'kamu@contoh.id',acct_send:'Kirim kode masuk',acct_sending:'Mengirim...',acct_sent:'Kami sudah mengirim email ke {mail}. Ketik kode dari email itu, atau ketuk tautan di dalamnya.',acct_resent:'Email baru terkirim.',acct_code_ph:'Kode dari email',acct_verify:'Masuk',acct_checking:'Memeriksa...',acct_other_mail:'Email lain',acct_resend:'Kirim lagi',acct_nopass:'Tanpa kata sandi. Kamu selalu bisa menghapus akunmu lagi.',acct_privacy:'Privasi',acct_in_as:'Masuk sebagai {mail}',acct_via_google:'dengan Google',acct_via_mail:'dengan alamat emailmu',acct_saved_lbl:'Di akunmu',acct_saved_groups:'{n} grup',acct_saved_comps:'{n} kompetisi',acct_saved_group1:'1 grup',acct_saved_comp1:'1 kompetisi',acct_saved_cc:'pengelolaan kompetisi klubmu',acct_saved_su:'pendaftaran',acct_saved_live:'turnamen berjalan',acct_saved_none:'Belum ada yang tersimpan',acct_synced_at:'Diperbarui pukul {time}',acct_sync_now:'Perbarui sekarang',acct_syncing:'Memperbarui...',acct_logout:'Keluar',acct_logout_wipe:'Hapus juga dataku dari perangkat ini (perangkat bersama)',acct_sure:'Yakin? Ketuk sekali lagi',acct_delete:'Hapus akun',acct_delete_sub:'Akunmu dan isinya akan dihapus. Yang ada di perangkat ini tetap ada, dan tautan yang dibagikan tetap berfungsi.',acct_deleted:'Akunmu sudah dihapus. Yang ada di perangkat ini masih ada.',acct_logged_out:'Kamu sudah keluar. Yang ada di perangkat ini masih ada.',acct_not_now:'Nanti saja',acct_ask_done:'Simpan grup dan turnamenmu',acct_ask_done_sub:'Masuk, maka grup, kompetisi, dan turnamen berjalanmu juga ada di perangkatmu yang lain. Opsional, dan tanpa kata sandi.',acct_ask_cc:'Simpan pengelolaan kompetisimu',acct_ask_cc_sub:'Saat ini hanya perangkat ini yang bisa mengelola kompetisimu. Masuk agar bisa mengelolanya juga dari perangkat lain, dan tidak hilang jika data browser terhapus.',acct_ask_su:'Simpan pengelolaan pendaftaranmu',acct_ask_su_sub:'Saat ini hanya perangkat ini yang bisa mengelola pendaftaranmu. Masuk agar bisa mengelolanya juga dari perangkat lain, dan tidak hilang jika data browser terhapus.',acct_live_title:'Dari perangkatmu yang lain',acct_live_offer:'Lanjutkan “{name}”?',acct_live_take:'Ambil',acct_live_skip:'Tidak',acct_live_unnamed:'turnamenmu',acct_welcome:'Kamu sudah masuk. Semua dari perangkat ini sekarang juga ada di akunmu.',acct_err_mail:'Masukkan alamat email yang valid.',acct_err_code:'Masukkan kode dari email.',acct_err_badcode:'Kode itu salah atau sudah kedaluwarsa. Minta yang baru.',acct_err_rate:'Terlalu banyak email yang baru saja dikirim. Coba lagi beberapa menit lagi.',acct_err_setup:'Fitur masuk belum sepenuhnya aktif. Itu bukan salahmu.',acct_err_link:'Tautan ini hanya berfungsi di browser tempat kamu memintanya. Ketik kode dari email di aplikasi, atau minta yang baru.',acct_err_offline:'Tidak ada koneksi. Coba lagi sebentar lagi.',acct_err_generic:'Ada yang salah ({code}). Coba lagi.',acct_err_wipe:'Tidak semuanya bisa disimpan di akunmu, jadi datamu tetap ada di perangkat ini.',speak_btn:'Umumkan',speak_and:'dan',speak_vs:'melawan',fs_enter:'Layar penuh',fs_exit:'Keluar dari layar penuh',comp_menu:'Kompetisi',comp_screen_title:'Kompetisi',comp_new:'Kompetisi baru',comp_new_sub:'Hubungkan ke grup tetap untuk mengenali pemain lintas sesi.',comp_empty:'Belum ada kompetisi',comp_name_ph:'Nama kompetisi',comp_group_lbl:'Grup tetap',comp_group_pick:'Pilih grup',comp_no_groups:'Simpan grup tetap dulu',comp_schema_ph:'mis. 10,8,6,5,4,3,2,1',comp_add_btn:'Tambahkan ke kompetisi',comp_add_title:'Tambahkan ke kompetisi',comp_create_and_add:'Buat dan tambahkan',comp_session_added:'Sesi ditambahkan',comp_standings_lbl:'Klasemen',comp_sessions_lbl:'Sesi',comp_played:'Dimainkan',comp_back:'Kembali',comp_delete_confirm:'Hapus kompetisi?',comp_session_del_confirm:'Hapus sesi?',comp_no_group_match:'Grup terkait tidak ditemukan',comp_no_sessions:'Belum ada sesi',comp_col_player:'Pemain',comp_col_pts:'Poin',comp_col_sessions:'Sesi',comp_rating_lbl:'Rating',comp_rating_val:'Rating',comp_rating_chg:'Perubahan',comp_rating_wins:'Menang',comp_rating_avg:'Rata-rata peringkat',comp_rating_note:'Rating berdasarkan perbandingan peringkat langsung (ELO). Dihitung ulang dari semua sesi.',cc_menu:'Mulai kompetisi klub',cc_prelink_cta:'Hubungkan ke kompetisi klub',cc_code_ph:'Kode',cc_link_btn:'Hubungkan',cc_prelink_active:'Terhubung ke kompetisi {code}',cc_err_code:'Masukkan kode 6 karakter yang valid',cc_start_title:'Mulai kompetisi klub',cc_start_sub:'Bagikan tautan, kumpulkan hasil dari beberapa malam atau dari tangga peringkat.',cc_name_ph:'Nama kompetisi',cc_club_ph:'Nama klub (opsional)',cc_type_series:'Kompetisi per malam',cc_type_ladder:'Tangga peringkat',cc_model_linear:'Linear (juara = jumlah pemain, terakhir = 1 poin)',
   cc_model_fixed:'Skema tetap (25,18,15,12,10,8,6,4,2,1)',cc_bestof_lbl:'Hitung hanya X malam terbaik',cc_range_lbl:'Boleh menantang sampai X peringkat di atas',cc_create_btn:'Buat kompetisi',cc_created_title:'Kompetisi dibuat',cc_created_sub:'Bagikan tautan atau kode QR ini ke klub.',cc_view_btn:'Ke papan peringkat',cc_done_btn:'Selesai',cc_add_title:'Tambahkan ke kompetisi',cc_add_btn:'Tambah',cc_added:'Ditambahkan',cc_err_notfound:'Kompetisi tidak ditemukan',cc_adding:'Menambahkan…',cc_add_ok:'Ditambahkan ke kompetisi!',cc_loading:'Memuat…',cc_not_found:'Kompetisi tidak ditemukan.',cc_back:'Kembali',cc_share:'Bagikan',cc_share_png:'Bagikan sebagai gambar',cc_standings_lbl:'Klasemen',cc_no_events:'Belum ada malam yang dimainkan',cc_col_played:'Malam',cc_col_wins:'Menang',cc_col_avgplace:'Rata-rata peringkat',cc_place_short:'#',cc_pts_short:'poin',cc_alias_lbl:'Gabungkan nama',cc_alias_sub:'Dua ejaan untuk pemain yang sama? Gabungkan saja.',cc_alias_merge:'Gabungkan',cc_ladder_range_note:'Pemain boleh menantang sampai {n} peringkat di atasnya',cc_ladder_lbl:'Tangga peringkat',cc_ladder_empty:'Belum ada pemain di tangga peringkat',cc_ladder_join_lbl:'Gabung ke tangga peringkat',cc_your_name:'Namamu',cc_join:'Gabung',cc_joining:'Menggabungkan…',cc_join_ok:'Kamu sudah masuk tangga peringkat!',cc_err_join_limit:'Kamu sudah menambahkan beberapa pemain dari perangkat ini',cc_remove_confirm:'Hapus pemain ini dari tangga peringkat?',cc_challenge_lbl:'Laporkan tantangan',cc_score_ph:'Skor (mis. 6-4, 6-3)',cc_winner_challenger:'Penantang menang',cc_winner_defender:'Bertahan menang',cc_challenge_submit:'Laporkan hasil',cc_err_same_player:'Pilih dua pemain berbeda',cc_err_range:'Kamu hanya boleh menantang sampai {n} peringkat di atas',cc_submitting:'Mengirim…',cc_submitted:'Hasil dilaporkan, menunggu persetujuan penyelenggara',cc_pending_lbl:'Menunggu persetujuan',
   cc_winner_lbl:'Pemenang',cc_approve:'Setujui',cc_reject:'Tolak',cc_history_lbl:'Riwayat',cc_rejected:'Ditolak',cc_link_copied:'Tautan tersalin!',cc_copied:'Tersalin!',cc_err_generic:'Ada yang salah. Silakan coba lagi.',level_lbl:'Level',level_hint:'Opsional: ketik Nama:3 untuk level (1-5)',set_type_sub_mix:'pria + wanita',set_title_mix:'Atur Mixicano',set_desc_auto_mix:'Masukkan pria dan wanita terpisah. Setiap tim terdiri dari satu pria dan satu wanita.',mix_lbl_men:'Pria',mix_lbl_women:'Wanita',mix_ph_men:'Satu nama per baris',mix_ph_women:'Satu nama per baris',mix_val_min:'Minimal 2 pria dan 2 wanita (sekarang {m} dan {w}).',mix_val_need:'Masukkan minimal 2 pria dan 2 wanita.',mix_val_ok:'{m} pria, {w} wanita, {courts} lapangan per ronde',mix_val_unequal:'Jumlahnya tidak sama, sebagian pemain lebih sering istirahat.',mix_val_max:'Maksimal {max} pemain seluruhnya (sekarang {m} dan {w}).',res_mix:'{label}Mixed Americano · {n} pemain',eyebrow:'Turnamen baru',title:'Atur turnamenmu',sub_c:'Lihat turnamenmu terbentuk sambil kamu mengetik.',tname_ph:'Mis. Piala Jumat Malam (opsional)',step_type:'Tipe turnamen',step_type_sub:'Mau main dengan cara apa?',type_team:'Tim',type_team_sub:'Pasangan tetap',type_am:'Americano',type_am_sub:'Pasangan berganti',type_mex:'Mexicano',type_mex_sub:'Berdasarkan klasemen',type_rr:'Round Robin',type_rr_sub:'Semua lawan semua',type_tam:'Team Am.',type_tam_sub:'Tim tetap',type_tmex:'Team Mex.',type_tmex_sub:'Tim tetap, sesuai klasemen',type_mix:'Mixicano',type_mix_sub:'Pria & wanita',step_players:'Pemain',step_players_sub:'Ketik satu nama lalu tekan Enter, atau tempel satu daftar.',ph_player:'Ketik satu nama…',tip_team:'Tips: ketik "Jan & Piet" untuk membuat pasangan tetap.',saved_groups:'Atau mulai dengan grup tersimpan:',cnt_zero:'Tambahkan minimal 4 pemain',cnt_need:'Kurang {n} pemain lagi',
   cnt_ok:'{n} pemain · {m} pertandingan per ronde',cnt_odd:'{n} pemain · 1 pemain istirahat tiap ronde',cnt_max:'Maksimal {max} pemain',step_courts:'Lapangan',courts_word:'lapangan',court:'Lapangan',courts_advice:'Saran untuk {n} pemain: <b data-act="advice">{c} lapangan</b>',koc_courts_cap:'King of the Court butuh 4 pemain per lapangan. Maksimal {max} lapangan untuk {n} pemain.',step_match:'Format pertandingan',gpm1:'1 game',gpm3:'Best of 3',gpm5:'Best of 5',lbl_pts:'Poin per pertandingan',lbl_timer:'Timer per ronde',off:'Mati',deflt:'bawaan',btn_shuffle:'Acak',players_word:'pemain',pv_t:'Pratinjau langsung',pv_rounds:'ronde',pv_mpr:'per ronde',pv_dur:'durasi',pv_empty:'Tambahkan pemain untuk melihat jadwal terbentuk.',pv_estimate:'perkiraan ronde 1',rest_lbl:'Istirahat ronde ini:',btn_start:'Mulai turnamen',set_lbl_sport:'Olahraga',sport_padel:'Padel',sport_pickleball:'Pickleball',set_lbl_winby2:'Menang selisih 2',on_lbl:'Nyala',off_lbl:'Mati',courts_word_pk:'lapangan',export_dupr:'Ekspor untuk DUPR',type_koc:'King of the Court',type_koc_sub:'Pemenang naik lapangan',set_title_koc:'Atur King of the Court',set_desc_auto_koc:'Pemenang naik satu lapangan, yang kalah turun. Pasangan diundi ulang tiap ronde.',koc_rounds_lbl:'Ronde',koc_king_court:'Lapangan Raja',koc_court_n:'Lapangan {n}',koc_round_n:'Ronde {n} dari {total}',koc_pool:'Antrean penantang',koc_golden_pt:'Poin emas, siapa menang?',koc_king_lbl:'Raja',koc_standings:'Klasemen akhir',koc_king_rounds:'Berapa kali Raja',res_koc:'{label}King of the Court · {n} pemain',koc_done:'Turnamen selesai',koc_promotes:'naik',koc_demotes:'turun',koc_stays:'tetap Raja',val_min8:'Masukkan minimal 8 nama.',koc_cnt_ok:'{n} pemain, {c} lapangan',koc_col_trend:'Tren',koc_arrow_up:'Naik',koc_arrow_down:'Turun',koc_arrow_same:'Tetap',su_open_cta:'Buka pendaftaran',su_waitlist_btn:'Daftar tunggu',su_setup_title:'Buka pendaftaran',
@@ -2772,7 +2832,7 @@ function _loadGroups(){
       .filter(g=>g.lines.length>0);
   }catch{ return []; }
 }
-function _saveGroups(arr){ localStorage.setItem('padel_groups',JSON.stringify(arr)); }
+function _saveGroups(arr){ localStorage.setItem('padel_groups',JSON.stringify(arr)); acctSchedule(); }
 const MAX_GROUPS=20;
 // Spelers kunnen als "Naam:3" opgeslagen staan, waarbij 3 het speelniveau is.
 // De ruwe string blijft in localStorage, pas bij weergave halen we het niveau eraf.
@@ -3050,7 +3110,7 @@ function menuUndo(){
 const DEFAULT_SCHEMA=[10,8,6,5,4,3,2,1];
 
 function _loadComps(){try{return JSON.parse(localStorage.getItem('padel_competitions'))||[];}catch{return[];}}
-function _saveComps(arr){localStorage.setItem('padel_competitions',JSON.stringify(arr));}
+function _saveComps(arr){localStorage.setItem('padel_competitions',JSON.stringify(arr)); acctSchedule();}
 function _genCompId(){return typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);}
 function _compPointsForRank(schema,rank){return rank<=schema.length?schema[rank-1]:schema[schema.length-1];}
 
@@ -3448,7 +3508,17 @@ const SUPABASE_URL='https://yaakmxarwdvovvqgtkwb.supabase.co';
 const SUPABASE_KEY='sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i';
 const VAPID_PUBLIC_KEY='BKUTev1e5F-CG_OJgziNFTOrOIXqUqtktZw5n8I1i0RFiasIh-WVtdDjbXiOuZq3MJ-DYagY6leURbwqrGVK8kM';
 let _sb=null, _sbWrite=null, _startId=null, _startTs=null;
-function getSB(){ if(!_sb&&window.supabase) _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); return _sb; }
+// Elke client behalve die van het account (acctSB): zonder sessie en zonder
+// de adresbalk te lezen. Anders pakt de eerste de beste client de ?code= van
+// een inloglink af en gooit hem weg, want de sleutel om hem in te wisselen
+// staat bij de accountclient. Live toernooien, inschrijvingen en
+// clubcompetities blijven zo precies werken zoals ze werkten: als anon.
+const _SB_ANON_AUTH={persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'padel-sb-anon'};
+function _sbClient(headers){
+  if(!window.supabase) return null;
+  return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,headers?{auth:_SB_ANON_AUTH,global:{headers}}:{auth:_SB_ANON_AUTH});
+}
+function getSB(){ if(!_sb) _sb=_sbClient(); return _sb; }
 function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; _startId=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)); _startTs=Date.now(); sb.from('tournament_starts').insert({mode:m,player_count:n,client_id:_startId}).then(()=>{}); }catch{} }
 function trackEnd(){ try{ if(!_startId||!_startTs) return; const id=_startId; const dur=Math.round((Date.now()-_startTs)/1000); _startId=null; _startTs=null; const sb=getSB(); if(!sb) return; sb.from('tournament_durations').insert({client_id:id,duration_seconds:dur}).then(()=>{}); }catch{} }
 let _feedbackType='bug';
@@ -3492,8 +3562,526 @@ async function submitFeedback(){
 }
 function getSBWrite(){
   if(!_sbWrite&&sessionToken&&window.supabase)
-    _sbWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':sessionToken}}});
+    _sbWrite=_sbClient({'x-session-token':sessionToken});
   return _sbWrite||getSB();
+}
+
+// ════════════════════════════════════════════════════════════════
+// ── Account (optioneel): inloggen met Google of een mailcode ──────
+//
+// Waarom: alles van de organisator staat alleen in deze browser. Groepen,
+// competities, het lopende toernooi en de beheersleutels van live toernooien,
+// inschrijvingen en clubcompetities. Een ander toestel of gewiste
+// browsergegevens betekende: alles kwijt, ook het beheer van je ladder.
+//
+// Lessen uit Predict the Race (zie supabase/ACCOUNT.md voor de achtergrond):
+// - Nooit verplicht. De app werkt zonder account precies zoals hij werkte.
+// - Lui: er komt pas een client als iemand ooit inlogde of net terugkomt van
+//   een inloglink. Een paginaweergave kost geen netwerkverkeer.
+// - ACCT_RETURN wordt bovenin vastgelegd, vóór er een client bestaat.
+// - De terugkeer-url krijgt geen parameters mee; Supabase plakt er zijn eigen
+//   ?code= achter.
+// - Een code uit de mail naast de link: een geïnstalleerde app op een iPhone
+//   krijgt de link nooit te zien, die opent in Safari.
+// - Foutmeldingen in gewone taal, en zeggen wanneer iets niet aan jou ligt.
+//
+// Eén bewuste afwijking: geen anonieme accounts. Predict the Race had die
+// nodig omdat spelers in de database aan iemand moesten hangen. Hier staat
+// alles lokaal; het account komt pas als iemand zelf inlogt. Daardoor is
+// uitloggen altijd veilig: wat in je account staat, krijg je terug.
+// ════════════════════════════════════════════════════════════════
+
+// Pas aanzetten als supabase/account_migration.sql gedraaid is en de stappen
+// uit supabase/ACCOUNT.md in het Supabase-dashboard gedaan zijn. Tot die tijd
+// is het te bekijken met ?account=preview (en weer uit met ?account=off).
+const ACCOUNT_LIVE=false;
+const ACCT_STORAGE_KEY='padel-auth';
+const ACCT_META='padel-acct-meta';
+let acctUser=null, _acctSB=null, _acctStage='start', _acctMail='', _acctReason=null;
+let _acctBusy=false, _acctAgain=false, _acctTimer=null, _acctApplying=false;
+let _acctLiveOffer=null, _acctMsg='', _acctErr='', _acctLastSync=0, _acctSyncFailed=false;
+
+function acctEnabled(){
+  if(ACCOUNT_LIVE) return !!window.supabase;
+  try{
+    const p=new URLSearchParams(location.search).get('account');
+    if(p==='preview') localStorage.setItem('padel-account-preview','1');
+    if(p==='off') localStorage.removeItem('padel-account-preview');
+    return !!window.supabase&&localStorage.getItem('padel-account-preview')==='1';
+  }catch{ return false; }
+}
+// De enige client met een sessie. PKCE: de sleutel om de ?code= in te
+// wisselen staat in deze browser, en dat is precies waarom een maillink in
+// een andere browser niet werkt (zie acctExplain en de code uit de mail).
+function acctSB(){
+  if(!_acctSB&&window.supabase){
+    _acctSB=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{
+      flowType:'pkce',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:ACCT_STORAGE_KEY}});
+  }
+  return _acctSB;
+}
+const acctEmail=()=>acctUser?(acctUser.email||((acctUser.identities||[]).map(i=>i.identity_data&&i.identity_data.email).find(Boolean))||''):'';
+const acctViaGoogle=()=>!!acctUser&&(acctUser.identities||[]).some(i=>i.provider==='google');
+// Bewust zonder parameters: Supabase zet er zijn eigen ?code= achter, en een
+// tweede parameter met een andere betekenis is vragen om problemen.
+const acctBackUrl=()=>location.origin+location.pathname;
+
+function acctCleanUrl(){
+  try{
+    const u=new URL(location.href);
+    ['code','error','error_code','error_description','state'].forEach(k=>u.searchParams.delete(k));
+    if(/(^|[#&])(error|access_token)/.test(u.hash)) u.hash='';
+    history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash);
+  }catch{}
+}
+
+// Supabase-fouten in gewone taal. De code komt er alleen bij als we hem niet
+// herkennen, zodat een melding in een chat iets zegt.
+function acctExplain(e){
+  const msg=String((e&&(e.message||e.msg||e.error_description))||e||'');
+  const code=String((e&&(e.code||e.error_code||e.status))||'');
+  const all=(code+' '+msg).toLowerCase();
+  if(/failed to fetch|networkerror|network request|load failed|offline/.test(all)) return t('acct_err_offline');
+  if(/rate limit|too many|over_email_send_rate|after \d+ seconds|429/.test(all)) return t('acct_err_rate');
+  if(/expired|invalid.*(otp|token)|otp_expired|token has expired|access_denied/.test(all)) return t('acct_err_badcode');
+  if(/code verifier|flow state|pkce|bad_code_verifier/.test(all)) return t('acct_err_link');
+  if(/provider is not enabled|unsupported provider|validation_failed|signups not allowed|pgrst202|could not find the function|account_sync|delete_my_account|404|relation .* does not exist|permission denied/.test(all)) return t('acct_err_setup');
+  return t('acct_err_generic',{code:(code||msg||'?').slice(0,60)});
+}
+
+async function acctInit(){
+  if(!acctEnabled()) return;
+  acctRenderHeaderBtn();
+  if(ACCT_RETURN.error){
+    acctCleanUrl();
+    _acctErr=acctExplain(ACCT_RETURN.error);
+    acctOpen();
+    return;
+  }
+  let stored=false; try{ stored=!!localStorage.getItem(ACCT_STORAGE_KEY); }catch{}
+  if(!ACCT_RETURN.code&&!stored) return;
+  const sb=acctSB(); if(!sb) return;
+  try{
+    // getSession wacht tot supabase-js een ?code= heeft ingewisseld
+    const {data}=await sb.auth.getSession();
+    acctUser=(data&&data.session&&data.session.user)||null;
+  }catch(e){ acctUser=null; }
+  if(ACCT_RETURN.code) acctCleanUrl();
+  sb.auth.onAuthStateChange((ev,session)=>{
+    acctUser=(session&&session.user)||null;
+    acctRenderHeaderBtn();
+  });
+  acctRenderHeaderBtn();
+  if(ACCT_RETURN.code&&!acctUser){
+    // De link is in een andere browser geopend dan waar hij aangevraagd werd
+    _acctErr=t('acct_err_link');
+    acctOpen();
+    return;
+  }
+  if(!acctUser) return;
+  await acctSync();
+  if(ACCT_RETURN.code) acctAfterLogin();
+}
+
+// Na inloggen terug naar waar je was, als dat een clubcompetitie was. Die
+// parameter kon niet mee in de terugkeer-url (zie acctBackUrl).
+function acctAfterLogin(){
+  let back='';
+  try{ back=sessionStorage.getItem('padel-acct-back')||''; sessionStorage.removeItem('padel-acct-back'); }catch{}
+  if(/[?&]comp=[A-Za-z0-9]{6}/.test(back)){ location.replace(location.pathname+back); return; }
+  _acctMsg=t('acct_welcome');
+  acctOpen();
+}
+
+async function acctGoogle(){
+  _acctErr=''; _acctMsg='';
+  const sb=acctSB(); if(!sb){ _acctErr=t('acct_err_offline'); acctRender(); return; }
+  try{ sessionStorage.setItem('padel-acct-back',location.search); }catch{}
+  try{
+    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:acctBackUrl()}});
+    if(error){ _acctErr=acctExplain(error); acctRender(); }
+  }catch(e){ _acctErr=acctExplain(e); acctRender(); }
+}
+
+// shouldCreateUser staat hier wél aan, anders dan in Predict the Race. Daar
+// bestond er al een (anoniem) account om een adres aan te hangen; hier is
+// inloggen met je mail de manier om een account te krijgen.
+async function acctSendCode(resend){
+  _acctErr=''; _acctMsg='';
+  const mail=resend?_acctMail:(($('acct-mail')||{}).value||'').trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)){ _acctErr=t('acct_err_mail'); acctRender(); return; }
+  const sb=acctSB(); if(!sb){ _acctErr=t('acct_err_offline'); acctRender(); return; }
+  _acctBusyBtn('acct-send-btn',t('acct_sending'));
+  try{ sessionStorage.setItem('padel-acct-back',location.search); }catch{}
+  try{
+    const {error}=await sb.auth.signInWithOtp({email:mail,options:{shouldCreateUser:true,emailRedirectTo:acctBackUrl()}});
+    if(error){ _acctErr=acctExplain(error); acctRender(); return; }
+    _acctMail=mail; _acctStage='sent';
+    if(resend) _acctMsg=t('acct_resent');
+  }catch(e){ _acctErr=acctExplain(e); }
+  acctRender();
+  const c=$('acct-code'); if(c&&_acctStage==='sent') c.focus();
+}
+
+async function acctVerifyCode(){
+  _acctErr=''; _acctMsg='';
+  const code=(($('acct-code')||{}).value||'').replace(/\D/g,'');
+  if(code.length<6){ _acctErr=t('acct_err_code'); acctRender(); return; }
+  const sb=acctSB(); if(!sb){ _acctErr=t('acct_err_offline'); acctRender(); return; }
+  _acctBusyBtn('acct-verify-btn',t('acct_checking'));
+  try{
+    const {data,error}=await sb.auth.verifyOtp({email:_acctMail,token:code,type:'email'});
+    if(error||!data||!data.user){ _acctErr=acctExplain(error||'invalid otp'); acctRender(); return; }
+    acctUser=data.user; _acctStage='start';
+    acctRenderHeaderBtn();
+    await acctSync();
+    _acctMsg=_acctSyncFailed?'':t('acct_welcome');
+  }catch(e){ _acctErr=acctExplain(e); }
+  acctRender();
+}
+
+function _acctBusyBtn(id,label){ const b=$(id); if(b){ b.disabled=true; const sp=b.querySelector('span'); if(sp) sp.textContent=label; else b.textContent=label; } }
+
+// ── Synchroniseren ──────────────────────────────────────────────
+// Per ding één rij: een groep, een competitie, een beheersleutel, het lopende
+// toernooi. Per rij wint de nieuwste (zie account_sync in de migratie).
+//
+// Of iets lokaal veranderd is, ziet de app aan een vingerafdruk per rij in
+// padel-acct-meta. Zo hoeft niet elke plek die opslaat te weten dat er een
+// account is: na opslaan volstaat acctSchedule(). Verdwijnt iets lokaal, dan
+// wordt het een grafsteen, anders komt een weggegooide groep terug van je
+// andere toestel.
+
+// Vingerafdruk op een vaste sleutelvolgorde: Postgres (jsonb) geeft de
+// sleutels in een andere volgorde terug dan de app ze schreef.
+function _acctCanon(v){
+  if(Array.isArray(v)) return '['+v.map(_acctCanon).join(',')+']';
+  if(v&&typeof v==='object') return '{'+Object.keys(v).sort().filter(k=>v[k]!==undefined).map(k=>JSON.stringify(k)+':'+_acctCanon(v[k])).join(',')+'}';
+  return JSON.stringify(v===undefined?null:v);
+}
+function _acctHash(v){
+  const s=_acctCanon(v); let h1=0xdeadbeef, h2=0x41c6ce57;
+  for(let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);
+}
+function _acctReadArr(key){ try{ const a=JSON.parse(localStorage.getItem(key)||'[]'); return Array.isArray(a)?a:[]; }catch{ return []; } }
+function _acctLoadMeta(){
+  try{ const m=JSON.parse(localStorage.getItem(ACCT_META)||'null'); if(m&&m.items&&(!acctUser||m.uid===acctUser.id)) return m; }catch{}
+  return {uid:acctUser?acctUser.id:null,items:{}};
+}
+function _acctSaveMeta(m){ try{ localStorage.setItem(ACCT_META,JSON.stringify(m)); }catch{} }
+
+// Alles wat meegaat, zoals het nu in deze browser staat. `born` is de tijd
+// waarmee een rij meedoet als dit toestel hem nog nooit zag; daarna telt het
+// moment waarop hij lokaal veranderde.
+function _acctLocalItems(){
+  const out=[];
+  _acctReadArr('padel_groups').forEach(g=>{ if(g&&g.id) out.push({kind:'group',item_key:String(g.id),data:g,born:Number(g.updatedAt)||1}); });
+  _acctReadArr('padel_competitions').forEach(c=>{ if(c&&c.id) out.push({kind:'comp',item_key:String(c.id),data:c,born:Number(c.updatedAt||c.createdAt)||1}); });
+  ccKnownTokens().forEach(tok=>out.push({kind:'cc',item_key:tok.slice(0,100),data:{token:tok},born:1}));
+  const su=localStorage.getItem('padel-signup-code'), sut=localStorage.getItem('padel-signup-token');
+  if(su&&sut) out.push({kind:'signup',item_key:'current',data:{code:su,token:sut},born:1});
+  const raw=localStorage.getItem('padel-state');
+  if(raw){
+    try{
+      out.push({kind:'live',item_key:'current',born:Number(localStorage.getItem('padel-state-at'))||1,data:{
+        state:JSON.parse(raw),
+        shareCode:localStorage.getItem('padel-share-code')||null,
+        sessionToken:localStorage.getItem('padel-session-token')||null}});
+    }catch{}
+  }
+  return out;
+}
+// Beheersleutels en de inschrijving verdwijnen nooit door een ander toestel:
+// geen grafsteen voor die soorten. Je beheer kwijtraken is erger dan een
+// sleutel te veel bewaren.
+const ACCT_NEVER_GONE={cc:1,signup:1};
+
+function _acctScan(meta){
+  const now=Date.now(), seen=new Set(), push=[];
+  for(const it of _acctLocalItems()){
+    const k=it.kind+':'+it.item_key; seen.add(k);
+    const h=_acctHash(it.data); let m=meta.items[k];
+    if(!m) m=meta.items[k]={h,t:it.born,p:0,g:false};
+    else if(m.h!==h||m.g){ m.h=h; m.g=false; m.t=Math.max(now,m.t+1); }
+    if(m.t!==m.p) push.push({kind:it.kind,item_key:it.item_key,data:it.data,deleted:false,updated_at:m.t});
+  }
+  for(const k of Object.keys(meta.items)){
+    if(seen.has(k)) continue;
+    const kind=k.slice(0,k.indexOf(':'));
+    if(ACCT_NEVER_GONE[kind]) continue;
+    const m=meta.items[k];
+    if(!m.g){ m.g=true; m.h=null; m.t=Math.max(now,m.t+1); }
+    if(m.t!==m.p) push.push({kind,item_key:k.slice(kind.length+1),data:null,deleted:true,updated_at:m.t});
+  }
+  return push;
+}
+
+function _acctUpsertArr(key,item,deleted){
+  const arr=_acctReadArr(key).filter(x=>x&&String(x.id)!==String(item.id));
+  if(!deleted) arr.push(item);
+  localStorage.setItem(key,JSON.stringify(arr));
+}
+// Een rij van een ander toestel toepassen. Geeft terug wat er op het scherm
+// opnieuw getekend moet worden.
+function _acctApply(r,meta){
+  const k=r.kind+':'+r.item_key;
+  if(r.kind==='group'||r.kind==='comp'){
+    const key=r.kind==='group'?'padel_groups':'padel_competitions';
+    _acctUpsertArr(key,r.deleted?{id:r.item_key}:r.data,r.deleted);
+  } else if(r.kind==='cc'){
+    if(r.deleted||!r.data||!r.data.token) return null;
+    const tok=r.data.token;
+    if(!ccSessionToken){ ccSessionToken=tok; localStorage.setItem('padel-cc-token',tok); _ccWrite=null; }
+    else if(!ccKnownTokens().includes(tok)){
+      localStorage.setItem('padel-cc-tokens',JSON.stringify([...ccKnownTokens().filter(x=>x!==ccSessionToken),tok]));
+    }
+  } else if(r.kind==='signup'){
+    if(r.deleted||!r.data||!r.data.code||!r.data.token) return null;
+    suCode=r.data.code; suSessionToken=r.data.token; _suWrite=null;
+    localStorage.setItem('padel-signup-code',suCode);
+    localStorage.setItem('padel-signup-token',suSessionToken);
+  } else if(r.kind==='live'){
+    // Een toernooi van een ander toestel nooit stilletjes over het lopende
+    // heen zetten: aanbieden, en de organisator laten kiezen.
+    if(r.deleted){ _acctLiveOffer=null; return 'live'; }
+    if(meta.liveDeclined===r.updated_at) return null;
+    _acctLiveOffer=r;
+    return 'live';
+  }
+  meta.items[k]={h:r.deleted?null:_acctHash(r.data),t:r.updated_at,p:r.updated_at,g:!!r.deleted};
+  return r.kind;
+}
+
+async function acctSync(){
+  if(!acctUser) return false;
+  if(_acctBusy){ _acctAgain=true; return false; }
+  _acctBusy=true; clearTimeout(_acctTimer); _acctTimer=null;
+  let ok=false;
+  try{
+    const meta=_acctLoadMeta(); meta.uid=acctUser.id;
+    const push=_acctScan(meta);
+    _acctSaveMeta(meta);
+    const {data,error}=await acctSB().rpc('account_sync',{p_items:push});
+    if(error) throw error;
+    push.forEach(it=>{ const m=meta.items[it.kind+':'+it.item_key]; if(m&&m.t===it.updated_at) m.p=it.updated_at; });
+    const touched=new Set();
+    if(_acctLiveOffer){ _acctLiveOffer=null; touched.add('live'); }
+    if(_acctSyncFailed) _acctErr='';
+    _acctApplying=true;
+    try{
+      for(const r of (data||[])){
+        const k=r.kind+':'+r.item_key, m=meta.items[k];
+        r.updated_at=Number(r.updated_at);
+        if(m&&m.t>=r.updated_at){ if(m.t===r.updated_at) m.p=m.t; continue; }
+        const what=_acctApply(r,meta); if(what) touched.add(what);
+      }
+    }finally{ _acctApplying=false; }
+    _acctSaveMeta(meta);
+    _acctLastSync=Date.now(); _acctSyncFailed=false; ok=true;
+    _acctRefreshAfterSync(touched);
+  }catch(e){
+    console.warn('account sync failed',e);
+    _acctSyncFailed=true; _acctErr=acctExplain(e);
+  }finally{
+    _acctBusy=false;
+  }
+  if($('acct-modal')&&!$('acct-modal').classList.contains('hidden')) acctRender();
+  if(_acctAgain){ _acctAgain=false; acctSchedule(800); }
+  return ok;
+}
+
+function _acctRefreshAfterSync(touched){
+  if(touched.has('group')&&typeof window.sxRefreshGroups==='function') window.sxRefreshGroups();
+  if(touched.has('comp')){ const sc=$('screen-competitions'); if(sc&&sc.style.display!=='none'&&typeof renderCompetitions==='function') renderCompetitions(); }
+  if(touched.has('signup')&&suCode) suShowWaitlistBtn();
+  acctRenderLiveBanner();
+}
+
+// Na elke lokale opslag. Uitgesteld, zodat tien scores achter elkaar één
+// rondje naar Supabase zijn.
+function acctSchedule(delay){
+  if(!acctUser||_acctApplying) return;
+  clearTimeout(_acctTimer);
+  _acctTimer=setTimeout(()=>{ _acctTimer=null; acctSync(); },delay==null?2500:delay);
+}
+document.addEventListener('visibilitychange',()=>{
+  if(!acctUser) return;
+  if(document.hidden){ if(_acctTimer){ clearTimeout(_acctTimer); _acctTimer=null; acctSync(); } }
+  else acctSchedule(400);
+});
+
+// ── Het lopende toernooi van een ander toestel ──
+function acctRenderLiveBanner(){
+  let el=$('acct-live-banner');
+  const setupVisible=$('screen-setup')&&$('screen-setup').style.display!=='none';
+  const r=_acctLiveOffer;
+  if(!r||!setupVisible||viewMode){ if(el) el.remove(); return; }
+  // Hetzelfde toernooi als hier al staat? Dan valt er niets aan te bieden.
+  try{ const raw=localStorage.getItem('padel-state'); if(raw&&_acctHash(JSON.parse(raw))===_acctHash(r.data.state)){ if(el) el.remove(); return; } }catch{}
+  const name=(r.data&&r.data.state&&r.data.state.tournamentName)||t('acct_live_unnamed');
+  if(!el){
+    el=document.createElement('div'); el.id='acct-live-banner'; el.className='acct-live-banner';
+    const rb=$('resume-banner'); rb.parentNode.insertBefore(el,rb);
+  }
+  el.innerHTML=`<div class="resume-text"><strong>${esc(t('acct_live_title'))}</strong><span>${esc(t('acct_live_offer',{name}))}</span></div>
+    <div class="resume-btns"><button class="btn btn-green btn-sm" onclick="acctTakeLive()">${esc(t('acct_live_take'))}</button>
+    <button class="btn btn-ghost btn-sm" onclick="acctSkipLive()">${esc(t('acct_live_skip'))}</button></div>`;
+}
+function acctTakeLive(){
+  const r=_acctLiveOffer; if(!r||!r.data||!r.data.state) return;
+  localStorage.setItem('padel-state',JSON.stringify(r.data.state));
+  localStorage.setItem('padel-state-at',String(r.updated_at));
+  if(r.data.shareCode&&r.data.sessionToken){
+    localStorage.setItem('padel-share-code',r.data.shareCode);
+    localStorage.setItem('padel-session-token',r.data.sessionToken);
+  } else {
+    localStorage.removeItem('padel-share-code'); localStorage.removeItem('padel-session-token');
+  }
+  const meta=_acctLoadMeta();
+  meta.items['live:current']={h:_acctHash(r.data),t:r.updated_at,p:r.updated_at,g:false};
+  _acctSaveMeta(meta);
+  location.reload(); // het opstarten hervat padel-state vanzelf
+}
+function acctSkipLive(){
+  const r=_acctLiveOffer; _acctLiveOffer=null;
+  if(r){ const meta=_acctLoadMeta(); meta.liveDeclined=r.updated_at; _acctSaveMeta(meta); }
+  acctRenderLiveBanner();
+}
+
+// ── Uitloggen en verwijderen ──
+// Twee tikken in plaats van confirm(): een confirm wordt weggeklikt.
+function acctArm(btn,fn){
+  if(btn.dataset.armed==='1'){ btn.dataset.armed=''; fn(); return; }
+  btn.dataset.armed='1'; btn.dataset.label=btn.textContent; btn.textContent=t('acct_sure');
+  setTimeout(()=>{ if(btn.dataset.armed==='1'){ btn.dataset.armed=''; btn.textContent=btn.dataset.label; } },4000);
+}
+const ACCT_LOCAL_KEYS=['padel_groups','padel_competitions','padel-cc-token','padel-cc-tokens','padel-cc-last-code','padel-cc-prelink',
+  'padel-signup-code','padel-signup-token','padel-state','padel-state-at','padel-share-code','padel-session-token','padel-round-timer','padel-presentation'];
+async function acctLogout(){
+  _acctErr=''; _acctMsg='';
+  const wipe=!!($('acct-wipe')&&$('acct-wipe').checked);
+  // Eerst alles in het account, dan pas weg van dit toestel. Lukt dat niet,
+  // dan blijft alles hier staan: liever een gedeeld toestel met je groepen
+  // erop dan groepen die nergens meer staan.
+  const synced=await acctSync();
+  if(wipe&&!synced){ _acctErr=t('acct_err_wipe'); acctRender(); return; }
+  try{ await acctSB().auth.signOut({scope:'local'}); }catch{}
+  acctUser=null;
+  try{ localStorage.removeItem(ACCT_META); }catch{}
+  if(wipe){ ACCT_LOCAL_KEYS.forEach(k=>{ try{ localStorage.removeItem(k); }catch{} }); location.reload(); return; }
+  _acctStage='start'; _acctMsg=t('acct_logged_out');
+  acctRenderHeaderBtn(); acctRender();
+}
+async function acctDelete(){
+  _acctErr=''; _acctMsg='';
+  try{
+    const {error}=await acctSB().rpc('delete_my_account');
+    if(error){ _acctErr=acctExplain(error); acctRender(); return; }
+  }catch(e){ _acctErr=acctExplain(e); acctRender(); return; }
+  try{ await acctSB().auth.signOut({scope:'local'}); }catch{}
+  acctUser=null;
+  try{ localStorage.removeItem(ACCT_META); }catch{}
+  _acctStage='start'; _acctMsg=t('acct_deleted');
+  acctRenderHeaderBtn(); acctRender();
+}
+
+// ── Eén keer gevraagd ──
+// Op een moment dat er iets te verliezen valt: een afgelopen toernooi, een
+// nieuwe clubcompetitie of inschrijving. Daarna nooit meer. "Nu niet" is even
+// groot als inloggen; anders is het geen eerlijke keuze.
+function acctMaybeAsk(reason){
+  if(!acctEnabled()||acctUser||viewMode) return;
+  try{ if(localStorage.getItem('padel-acct-asked')) return; localStorage.setItem('padel-acct-asked','1'); }catch{ return; }
+  _acctReason=reason; _acctErr=''; _acctMsg='';
+  acctOpen();
+}
+
+// ── Scherm ──
+function acctRenderHeaderBtn(){
+  const b=$('btn-acct'); if(!b) return;
+  if(!acctEnabled()){ b.style.display='none'; return; }
+  b.style.display='';
+  const mail=acctEmail();
+  b.classList.toggle('acct-in',!!acctUser);
+  b.innerHTML=acctUser
+    ?`<span class="acct-avatar" aria-hidden="true">${esc((mail||'?').charAt(0).toUpperCase())}</span>`
+    :`<svg class="icon" viewBox="0 0 24 24"><use href="#ic-user"></use></svg> <span class="btn-label">${esc(t('acct_login'))}</span>`;
+  b.setAttribute('aria-label',acctUser?t('acct_in_as',{mail}):t('acct_login'));
+}
+function acctOpen(){
+  const m=$('acct-modal'); if(!m) return;
+  m.classList.remove('hidden');
+  acctRender();
+}
+function acctClose(){
+  const m=$('acct-modal'); if(m) m.classList.add('hidden');
+  _acctReason=null; _acctMsg='';
+}
+// Het officiële Google-logo, inline: een plaatje van Google's servers zou bij
+// elke weergave je IP-adres naar Google sturen, ook als je niet inlogt.
+const ACCT_GOOGLE_LOGO='<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
+
+function _acctSummary(){
+  const groups=_acctReadArr('padel_groups').length, comps=_acctReadArr('padel_competitions').length;
+  const parts=[];
+  if(groups) parts.push(t(groups===1?'acct_saved_group1':'acct_saved_groups',{n:groups}));
+  if(comps) parts.push(t(comps===1?'acct_saved_comp1':'acct_saved_comps',{n:comps}));
+  if(ccKnownTokens().length) parts.push(t('acct_saved_cc'));
+  if(localStorage.getItem('padel-signup-code')) parts.push(t('acct_saved_su'));
+  if(localStorage.getItem('padel-state')) parts.push(t('acct_saved_live'));
+  return parts.length?parts.join(' · '):t('acct_saved_none');
+}
+
+function acctRender(){
+  const card=$('acct-card'); if(!card) return;
+  const msg=_acctMsg?`<p class="acct-msg">${esc(_acctMsg)}</p>`:'';
+  const err=`<p class="acct-err" role="alert" aria-live="polite">${esc(_acctErr||'')}</p>`;
+  const privacy=`<a class="acct-link" href="/privacy/" target="_blank" rel="noopener">${esc(t('acct_privacy'))}</a>`;
+  let h=`<div class="dm-top"><div class="dm-title">${esc(_acctReason&&!acctUser?t('acct_ask_'+_acctReason):t('acct_title'))}</div>
+    <button class="dm-close-btn" onclick="acctClose()" aria-label="${esc(t('acct_close'))}">✕</button></div>`;
+  if(acctUser){
+    const time=_acctLastSync?new Date(_acctLastSync).toLocaleTimeString(SPEECH_LOCALES[LANG]||'en-GB',{hour:'2-digit',minute:'2-digit'}):'';
+    h+=`${msg}<div class="acct-who"><span class="acct-avatar acct-avatar-lg" aria-hidden="true">${esc((acctEmail()||'?').charAt(0).toUpperCase())}</span>
+        <div><div class="acct-who-mail">${esc(t('acct_in_as',{mail:acctEmail()}))}</div>
+        <div class="acct-who-via">${esc(acctViaGoogle()?t('acct_via_google'):t('acct_via_mail'))}</div></div></div>
+      <div class="dm-section"><div class="dm-section-title">${esc(t('acct_saved_lbl'))}</div>
+        <p class="acct-sub" id="acct-summary">${esc(_acctSummary())}</p>
+        <p class="acct-fine">${_acctBusy?esc(t('acct_syncing')):time?esc(t('acct_synced_at',{time})):''}</p>
+        <button class="btn btn-ghost btn-sm" id="acct-sync-btn" onclick="acctSync()">${esc(t('acct_sync_now'))}</button></div>
+      ${err}
+      <div class="dm-section"><div class="dm-section-title">${esc(t('acct_logout'))}</div>
+        <label class="acct-check"><input type="checkbox" id="acct-wipe"> <span>${esc(t('acct_logout_wipe'))}</span></label>
+        <button class="btn btn-ghost acct-wide" id="acct-logout-btn" onclick="acctArm(this,acctLogout)">${esc(t('acct_logout'))}</button></div>
+      <div class="dm-section"><div class="dm-section-title">${esc(t('acct_delete'))}</div>
+        <p class="acct-fine">${esc(t('acct_delete_sub'))}</p>
+        <button class="btn btn-ghost acct-wide acct-danger" id="acct-delete-btn" onclick="acctArm(this,acctDelete)">${esc(t('acct_delete'))}</button></div>
+      <p class="acct-fine acct-foot">${privacy}</p>`;
+  } else if(_acctStage==='sent'){
+    h+=`${msg}<p class="acct-sub">${esc(t('acct_sent',{mail:_acctMail}))}</p>
+      <form class="acct-form" novalidate onsubmit="event.preventDefault();acctVerifyCode()">
+        <input class="dm-rename-input acct-input acct-code" id="acct-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="${esc(t('acct_code_ph'))}" aria-label="${esc(t('acct_code_ph'))}">
+        <button class="btn btn-green acct-wide" id="acct-verify-btn" type="submit"><span>${esc(t('acct_verify'))}</span></button>
+      </form>
+      ${err}
+      <div class="acct-row"><button class="acct-link" onclick="_acctStage='start';_acctErr='';_acctMsg='';acctRender()">${esc(t('acct_other_mail'))}</button>
+        <button class="acct-link" onclick="acctSendCode(true)">${esc(t('acct_resend'))}</button></div>`;
+  } else {
+    const sub=_acctReason?t('acct_ask_'+_acctReason+'_sub'):t('acct_sub');
+    h+=`${msg}<p class="acct-sub">${esc(sub)}</p>
+      <button class="acct-google acct-wide" id="acct-google-btn" onclick="acctGoogle()">${ACCT_GOOGLE_LOGO}<span>${esc(t('acct_google'))}</span></button>
+      <div class="acct-or"><span>${esc(t('acct_or_mail'))}</span></div>
+      <form class="acct-form" novalidate onsubmit="event.preventDefault();acctSendCode()">
+        <input class="dm-rename-input acct-input" id="acct-mail" type="email" autocomplete="email" inputmode="email" placeholder="${esc(t('acct_mail_ph'))}" aria-label="${esc(t('acct_mail_ph'))}" value="${esc(_acctMail)}">
+        <button class="btn btn-ghost acct-wide" id="acct-send-btn" type="submit"><span>${esc(t('acct_send'))}</span></button>
+      </form>
+      ${err}
+      ${_acctReason?`<button class="btn btn-ghost acct-wide acct-notnow" onclick="acctClose()">${esc(t('acct_not_now'))}</button>`:''}
+      <p class="acct-fine acct-foot">${esc(t('acct_nopass'))} ${privacy}</p>`;
+  }
+  card.innerHTML=h;
 }
 
 // ── Zelf-inschrijving met wachtlijst ──────────
@@ -3505,7 +4093,7 @@ let joinCode=null, joinEvent=null, joinGender=null, joinConfirmedCount=0, joinWa
 function getSUWrite(){
   if(_suWrite&&_suWrite._tok!==suSessionToken) _suWrite=null;
   if(!_suWrite&&suSessionToken&&window.supabase){
-    _suWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':suSessionToken}}});
+    _suWrite=_sbClient({'x-session-token':suSessionToken});
     _suWrite._tok=suSessionToken;
   }
   return _suWrite||getSB();
@@ -3536,7 +4124,7 @@ async function suCreateEvent(){
   const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const code=Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
   const token=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
-  const sbTmp=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':token}}}):null;
+  const sbTmp=_sbClient({'x-session-token':token});
   if(!sbTmp){ alert(t('su_err_generic')); if(btn) btn.disabled=false; return; }
   try{
     const {error}=await sbTmp.from('signup_events').insert({
@@ -3547,6 +4135,7 @@ async function suCreateEvent(){
     suCode=code; suSessionToken=token; _suWrite=null;
     localStorage.setItem('padel-signup-code',code);
     localStorage.setItem('padel-signup-token',token);
+    acctSchedule();
     suEvent={code,event_name:eventName,event_date:eventDate,location:locationVal,format,max_players:maxPlayers,signup_open:true};
     $('screen-signup-setup').style.display='none';
     $('screen-setup').style.display='block';
@@ -3573,6 +4162,7 @@ async function suOpenLiveModal(){
 function closeSignupLiveModal(){
   $('signup-live-modal').classList.add('hidden');
   if(suPollInterval){ clearInterval(suPollInterval); suPollInterval=null; }
+  acctMaybeAsk('su');
 }
 function suCopyLink(){
   const inp=$('su-live-link'); if(!inp) return;
@@ -4022,6 +4612,7 @@ function goSetup(){
   $('resume-banner').classList.add('hidden');
   mode='team';
   $('screen-setup').style.display='block';
+  acctRenderLiveBanner();
   $('screen-tournament').style.display='none';
   $('screen-americano').style.display='none';
   $('screen-competitions').style.display='none';
@@ -5973,7 +6564,7 @@ async function initCourtMode(code,courtN,tok){
 
   let row;
   try{
-    const sb=window.supabase?.createClient('https://yaakmxarwdvovvqgtkwb.supabase.co','sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i');
+    const sb=_sbClient();
     const res=await sb.from('tournaments').select('data').eq('code',code).single();
     row=res.data;
   }catch(e){}
@@ -6041,7 +6632,7 @@ async function initCourtMode(code,courtN,tok){
     const btn=document.getElementById('cs-submit');
     if(btn){ btn.disabled=true; btn.textContent='…'; }
     try{
-      const sb2=window.supabase?.createClient('https://yaakmxarwdvovvqgtkwb.supabase.co','sb_publishable_Fccf-kWuAejjjBb9lPRkkg_k6ejhu-i');
+      const sb2=_sbClient();
       const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at').eq('code',code).single();
       if(selErr||!cur) throw new Error(selErr?.message||'not found');
       const d=cur.data||{};
@@ -7307,6 +7898,7 @@ async function shareTournament(){
     sessionToken=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
     localStorage.setItem('padel-session-token',sessionToken);
     _sbWrite=null; // reset write-client zodat die de nieuwe token pikt
+    acctSchedule();
   }
   const btn=$('btn-share'); if(btn) btn.disabled=true;
   const modal=$('share-modal');
@@ -7853,6 +8445,10 @@ function saveState(){
   }
   if(shareCode) pushToSupabase().then(ok=>{ if(ok) _pushMaybeNotify(); });
   updatePresentation();
+  // Wanneer dit toernooi voor het laatst veranderde: daarmee kiest het account
+  // tussen dit toestel en een ander (zie _acctLocalItems)
+  try{ localStorage.setItem('padel-state-at',String(Date.now())); }catch{}
+  acctSchedule(4000);
 }
 
 function loadState(){
@@ -7926,11 +8522,13 @@ function discardSaved(){
   localStorage.removeItem('padel-state');
   savedState=null;
   $('resume-banner').classList.add('hidden');
+  acctSchedule();
 }
 
 function clearSavedState(){
   localStorage.removeItem('padel-state');
   savedState=null;
+  acctSchedule();
 }
 
 // ── Statistieken & eindstand ───────────────────
@@ -8239,6 +8837,7 @@ async function shareStandingsImage(){
 }
 
 function renderExportBar(){
+  if(isTournamentDone()&&!viewMode) setTimeout(()=>acctMaybeAsk('done'),1500);
   const imgBtn=isTournamentDone()?renderImgShareBtn():'';
   const compBtn=isTournamentDone()?`<button id="btn-comp-add" class="btn btn-ghost btn-sm" onclick="ccOpenAddModal()">${icon('ic-league')} <span>${t('comp_add_btn')}</span></button>`:'';
   const duprBtn=(sport==='pickleball'&&(mode==='americano'||mode==='mexicano'||mode==='roundrobin'||mode==='kingofcourt'))?`<button class="btn btn-ghost btn-sm" onclick="exportDUPR()">${icon('ic-download')} ${t('export_dupr')}</button>`:'';
@@ -9402,6 +10001,7 @@ document.addEventListener('touchend',function(e){
     }
     _sxRenderGroups(); _sxRenderGrpPanel();
   };
+  window.sxRefreshGroups=function(){ _sxRenderGroups(); _sxRenderGrpPanel(); _sxRefreshSaveBtn(); };
   window.sxToggleGrpPlayer=function(i){ _grpOn[i]=!_grpOn[i]; _sxRenderGrpPanel(); };
   window.sxAddGrp=function(){
     const g=_grpOpen?_grpById(_grpOpen):null; if(!g) return;
@@ -9539,19 +10139,31 @@ function ccEnsureToken(){
   if(!ccSessionToken){
     ccSessionToken=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
     localStorage.setItem('padel-cc-token',ccSessionToken);
+    acctSchedule();
   }
   return ccSessionToken;
 }
-function ccGetWrite(){
-  ccEnsureToken();
-  if(_ccWrite&&_ccWrite._tok!==ccSessionToken) _ccWrite=null;
+// Elk toestel maakte zijn eigen beheersleutel. Met een account komen de
+// sleutels van je andere toestellen erbij (padel-cc-tokens), zodat je een
+// competitie die je op je telefoon begon ook op je laptop kunt beheren.
+function ccKnownTokens(){
+  let extra=[];
+  try{ extra=JSON.parse(localStorage.getItem('padel-cc-tokens')||'[]'); }catch{}
+  return [ccSessionToken,...(Array.isArray(extra)?extra:[])].filter((x,i,a)=>typeof x==='string'&&x&&a.indexOf(x)===i);
+}
+function _ccTokenFor(comp){
+  return comp&&ccKnownTokens().includes(comp.session_token)?comp.session_token:ccEnsureToken();
+}
+function ccGetWrite(tok){
+  tok=tok||_ccTokenFor(ccComp);
+  if(_ccWrite&&_ccWrite._tok!==tok) _ccWrite=null;
   if(!_ccWrite&&window.supabase){
-    _ccWrite=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{'x-session-token':ccSessionToken}}});
-    _ccWrite._tok=ccSessionToken;
+    _ccWrite=_sbClient({'x-session-token':tok});
+    _ccWrite._tok=tok;
   }
   return _ccWrite||getSB();
 }
-function ccPublicClient(){ return window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null; }
+function ccPublicClient(){ return _sbClient(); }
 
 // ── Naamnormalisatie & aliassen (Deel A) ──
 function ccNormName(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
@@ -9605,7 +10217,7 @@ function ccChallengeAllowed(challengerPos,defenderPos,range){
 
 // ── Supabase CRUD: competitions ──
 async function ccCreateCompetition({name,clubName,type,settings}){
-  const sb=ccGetWrite(); if(!sb) return null;
+  const sb=ccGetWrite(ccEnsureToken()); if(!sb) return null;
   for(let i=0;i<5;i++){
     const code=ccGenCode();
     const {data,error}=await sb.from('competitions').insert({code,session_token:ccSessionToken,name,club_name:clubName||null,type,settings:settings||{},aliases:{}}).select().single();
@@ -9790,6 +10402,8 @@ function ccShowCreated(comp){
     _ccPrelinkCode=comp.code;
     localStorage.setItem('padel-cc-prelink',comp.code);
   }
+  acctSchedule(0);
+  setTimeout(()=>acctMaybeAsk('cc'),1200);
 }
 function ccCopyCreatedLink(){
   const inp=$('cc-created-link'); inp.select(); document.execCommand('copy');
@@ -9859,7 +10473,7 @@ async function ccRefreshView(){
     return;
   }
   ccComp=comp;
-  ccIsOwner=!!(ccSessionToken&&comp.session_token===ccSessionToken);
+  ccIsOwner=!!(comp.session_token&&ccKnownTokens().includes(comp.session_token));
   if(comp.type==='ladder'){
     const [players,challenges]=await Promise.all([ccFetchLadderPlayers(ccViewCode),ccFetchChallenges(ccViewCode)]);
     ccLadderPlayers=players; ccLadderChallenges=challenges;
@@ -10178,8 +10792,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const _jc=_sp.get('join');
   if(_jc){ initJoinMode(_jc.toUpperCase()); return; }
   const _cc=_sp.get('comp');
-  if(_cc){ initCCView(_cc.toUpperCase()); return; }
+  if(_cc){ initCCView(_cc.toUpperCase()); acctInit(); return; }
   if(suCode) suShowWaitlistBtn();
+  acctInit();
   loadState();
   if(savedState) resumeFromBanner(); // auto-resume on page refresh
   initCast();
