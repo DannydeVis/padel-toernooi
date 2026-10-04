@@ -522,6 +522,8 @@ body.light .rlbl{border-bottom-color:#d1d5db}
 .acct-wide{width:100%;justify-content:center;min-height:46px}
 .acct-google{display:flex;align-items:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;border-radius:10px;font:500 .95rem/1 'Inter',sans-serif;text-transform:none;letter-spacing:normal;cursor:pointer;touch-action:manipulation}
 .acct-google:hover{background:#f7f8f8}
+.acct-gis{display:flex;justify-content:center;min-height:44px}
+.acct-gis[hidden],.acct-google[hidden]{display:none}
 .acct-or{display:flex;align-items:center;gap:10px;color:var(--b-muted);font-size:.75rem;margin:16px 0 12px}
 .acct-or::before,.acct-or::after{content:'';flex:1;height:1px;background:var(--bdr)}
 .acct-form{display:flex;flex-direction:column;gap:10px}
@@ -2102,7 +2104,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.15.0';
+const APP_VERSION = 'v2.16.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3714,6 +3716,66 @@ async function acctGoogle(){
   }catch(e){ _acctErr=acctExplain(e); acctRender(); }
 }
 
+// ── Google's eigen knop, op padel-bracket.com zelf ──
+// Via de omweg hierboven (signInWithOAuth) zegt Google "Inloggen bij
+// yaakmxarwdvovvqgtkwb.supabase.co": niemand vertrouwt dat. Met Google
+// Identity Services draait de knop op onze eigen pagina, toont Google
+// padel-bracket.com, en controleert Supabase alleen het bewijs dat Google
+// teruggeeft (signInWithIdToken). Het script laadt pas als iemand het
+// inlogpaneel opent, zodat Google van gewone bezoekers niets ziet.
+// Lukt het laden niet, of is dit de app op het beginscherm van een iPhone
+// (daar komt de pop-up van Google niet terug in de app), dan blijft de
+// eigen knop staan en gaat het via de omweg.
+const GOOGLE_CLIENT_ID='966716266314-r6tkos5bkdmfcak5p0qcordhdlk18b7k.apps.googleusercontent.com';
+let _gisLoad=null, _gisNonce=null;
+function _gisScript(){
+  if(window.google&&google.accounts&&google.accounts.id) return Promise.resolve(true);
+  if(_gisLoad) return _gisLoad;
+  _gisLoad=new Promise(res=>{
+    const sc=document.createElement('script');
+    sc.src='https://accounts.google.com/gsi/client'; sc.async=true;
+    sc.onload=()=>res(!!(window.google&&google.accounts&&google.accounts.id));
+    sc.onerror=()=>{ _gisLoad=null; res(false); };
+    document.head.appendChild(sc);
+    setTimeout(()=>res(false),6000);
+  });
+  return _gisLoad;
+}
+async function _sha256hex(str){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf),b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function acctMountGoogle(){
+  if(navigator.standalone===true||!window.crypto||!crypto.subtle) return;
+  if(!$('acct-gis')||!(await _gisScript())) return;
+  const host=$('acct-gis'); if(!host) return; // paneel intussen dicht of veranderd
+  // Eenmalige code: Google zet de hash in het bewijs, Supabase controleert hem
+  // met het origineel. Zo is een onderschept bewijs niet opnieuw te gebruiken.
+  const raw=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
+  _gisNonce=raw;
+  try{
+    google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:acctGoogleCredential,nonce:await _sha256hex(raw),
+      ux_mode:'popup',auto_select:false,itp_support:true,context:'signin'});
+    host.innerHTML='';
+    google.accounts.id.renderButton(host,{type:'standard',theme:'outline',size:'large',text:'continue_with',
+      shape:'rectangular',logo_alignment:'center',width:Math.max(200,Math.min(400,host.clientWidth||320)),locale:LANG});
+    host.hidden=false;
+    const fb=$('acct-google-btn'); if(fb) fb.hidden=true;
+  }catch(e){ console.warn('Google-knop niet geladen',e); }
+}
+async function acctGoogleCredential(resp){
+  _acctErr=''; _acctMsg='';
+  try{
+    const {data,error}=await acctSB().auth.signInWithIdToken({provider:'google',token:resp&&resp.credential,nonce:_gisNonce});
+    if(error||!data||!data.user){ _acctErr=acctExplain(error||'google'); acctRender(); return; }
+    acctUser=data.user; _acctStage='start';
+    acctRenderHeaderBtn();
+    await acctSync();
+    _acctMsg=_acctSyncFailed?'':t('acct_welcome');
+  }catch(e){ _acctErr=acctExplain(e); }
+  acctRender();
+}
+
 // shouldCreateUser staat hier wél aan, anders dan in Predict the Race. Daar
 // bestond er al een (anoniem) account om een adres aan te hangen; hier is
 // inloggen met je mail de manier om een account te krijgen.
@@ -4084,6 +4146,7 @@ function acctRender(){
   } else {
     const sub=_acctReason?t('acct_ask_'+_acctReason+'_sub'):t('acct_sub');
     h+=`${msg}<p class="acct-sub">${esc(sub)}</p>
+      <div id="acct-gis" class="acct-gis" hidden></div>
       <button class="acct-google acct-wide" id="acct-google-btn" onclick="acctGoogle()">${ACCT_GOOGLE_LOGO}<span>${esc(t('acct_google'))}</span></button>
       <div class="acct-or"><span>${esc(t('acct_or_mail'))}</span></div>
       <form class="acct-form" novalidate onsubmit="event.preventDefault();acctSendCode()">
@@ -4095,6 +4158,7 @@ function acctRender(){
       <p class="acct-fine acct-foot">${esc(t('acct_nopass'))} ${privacy}</p>`;
   }
   card.innerHTML=h;
+  if(!acctUser&&_acctStage!=='sent') acctMountGoogle();
 }
 
 // ── Zelf-inschrijving met wachtlijst ──────────

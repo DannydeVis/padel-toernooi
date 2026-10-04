@@ -122,6 +122,32 @@ Clubcompetities: elk toestel had zijn eigen beheersleutel (`padel-cc-token`).
 Met een account komen die van je andere toestellen erbij (`padel-cc-tokens`),
 en `ccIsOwner` en `ccGetWrite` kijken naar alle bekende sleutels.
 
+## Google's eigen knop in plaats van de omweg via supabase.co
+
+Met `signInWithOAuth` gaat de speler naar Google via
+`yaakmxarwdvovvqgtkwb.supabase.co`, en Google zegt dan "Inloggen bij
+yaakmxarwdvovvqgtkwb.supabase.co". Niemand vertrouwt dat. Een eigen domein bij
+Supabase lost het op, maar kost een betaald abonnement.
+
+Gratis: Google Identity Services. Google's eigen knop (`renderButton`) draait op
+padel-bracket.com, Google toont padel-bracket.com, en Supabase controleert
+alleen het bewijs dat Google teruggeeft (`signInWithIdToken`), met een
+eenmalige code (nonce: Google krijgt de SHA-256, Supabase het origineel).
+`acctMountGoogle()` in de app. Het script laadt pas als iemand het inlogpaneel
+opent. De oude knop (omweg) blijft als terugval: als het script niet laadt, en
+in de app op het beginscherm van een iPhone, waar de pop-up van Google niet
+terugkomt in de app.
+
+Nodig in Google Cloud: `https://padel-bracket.com` bij Authorized JavaScript
+origins van de OAuth-client (staat er). Nodig in Supabase: niets extra's; de
+Client ID bij de Google-provider is dezelfde.
+
+Wil je dat Google "Padel Bracket" met logo laat zien in plaats van
+padel-bracket.com: Google Auth Platform → Branding → homepagina, privacylink
+(`https://padel-bracket.com/privacy/`) en logo, en dan Verification Center →
+merkverificatie (gratis, een paar dagen; padel-bracket.com moet in Google
+Search Console geverifieerd zijn).
+
 ## De beheerpagina (/admin/)
 
 Inloggen met Google of een mailcode, met hetzelfde account (en dezelfde

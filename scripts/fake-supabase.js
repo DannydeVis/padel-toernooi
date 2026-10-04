@@ -53,6 +53,12 @@
         location.assign(res.url);
         return { data: { url: res.url }, error: null };
       },
+      async signInWithIdToken({ provider, token, nonce }) {
+        const res = await post('/idtoken', { provider, token, nonce });
+        if (res.error) return { data: {}, error: err(res.error) };
+        write({ user: res.user }); emit('SIGNED_IN', read());
+        return { data: { user: res.user, session: read() }, error: null };
+      },
       async signOut() { write(null); emit('SIGNED_OUT', null); return { error: null }; },
       _uid() { const s = read(); return s && s.user ? s.user.id : null; },
     };

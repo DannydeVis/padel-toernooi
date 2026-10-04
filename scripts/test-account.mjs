@@ -19,6 +19,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const FAKE = fs.readFileSync(path.join(root, 'scripts', 'fake-supabase.js'), 'utf8');
@@ -51,6 +52,7 @@ const db = {
   codes: new Map(),     // lange code -> {email, verifier, provider}
   googleEmail: null,
   calls: [],            // [{path, uid}]
+  idTokens: new Map(),  // nep-bewijzen van Google -> {email, nonceHash}
   migrationMissing: false,
 };
 let nextId = 1;
@@ -116,6 +118,21 @@ async function handle(route) {
       if (!uid || !db.users.has(uid)) return reply(401, { error: { code: '42501', message: 'not_signed_in' } });
       return reply(200, { data: accountSync(uid, body.params && body.params.p_items) });
     }
+    case '/gis': {
+      // Wat Google doet: een bewijs (ID-token) met de gehashte nonce erin
+      const tok = 'idtok-' + Math.random().toString(36).slice(2);
+      db.idTokens.set(tok, { email: db.googleEmail, nonceHash: body.nonce });
+      return reply(200, { credential: tok });
+    }
+    case '/idtoken': {
+      // Wat Supabase doet: het bewijs moet bestaan en de nonce moet kloppen
+      const t = db.idTokens.get(body.token);
+      if (!t) return reply(400, { error: { message: 'Bad ID token', code: 'bad_jwt' } });
+      if (createHash('sha256').update(String(body.nonce || '')).digest('hex') !== t.nonceHash)
+        return reply(400, { error: { message: 'Nonces mismatch', code: 'bad_nonce' } });
+      db.idTokens.delete(body.token);
+      return reply(200, { user: userFor(t.email, 'google') });
+    }
     case '/rpc/competition_owner_token': {
       const pr = body.params || {}, o = db.ccOwner;
       return reply(200, { data: o && o.code === pr.p_code && (pr.p_tokens || []).includes(o.token) ? o.token : null });
@@ -132,7 +149,15 @@ async function handle(route) {
 }
 
 const browser = await chromium.launch();
-async function device(name, { preview = true } = {}) {
+// Nagebootste Google Identity Services: renderButton zet een knop neer die,
+// net als de echte, het bewijs aan de callback geeft
+const FAKE_GIS = `window.google={accounts:{id:{
+  initialize(o){ window.__gis=o; },
+  renderButton(el,opts){ window.__gisOpts=opts; const b=document.createElement('button'); b.id='gis-btn';
+    b.textContent='Doorgaan met Google'; b.onclick=()=>fetch('/__fake-supabase/gis',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nonce:window.__gis.nonce})}).then(r=>r.json()).then(j=>window.__gis.callback({credential:j.credential})); el.appendChild(b); }
+}}};`;
+async function device(name, { preview = true, gis = false } = {}) {
   // Zonder service worker: die handelt verzoeken anders zelf af, buiten de
   // nagebootste server om
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
@@ -140,6 +165,7 @@ async function device(name, { preview = true } = {}) {
   await ctx.route('**/__fake-supabase/**', handle);
   // Alles van buiten (fonts, analytics, QR) is hier niet bereikbaar en niet nodig
   await ctx.route(/^https:\/\/(?!cdn\.jsdelivr\.net\/npm\/@supabase)/, r => r.abort());
+  if (gis) await ctx.route('https://accounts.google.com/gsi/client', r => { db.gisLoads = (db.gisLoads || 0) + 1; r.fulfill({ status: 200, contentType: 'text/javascript', body: FAKE_GIS }); });
   await ctx.addInitScript(preview => {
     try {
       // In het echt staat ACCOUNT_LIVE dan aan; hier doet de preview dat
@@ -375,6 +401,35 @@ try {
   ok(!db.users.has(uid) && rowsOf(uid).length === 0, 'account verwijderen: het account en alles erin is weg');
   ok((await groupsOf(A.page)).length === 2, 'wat op het toestel stond, staat er nog');
   ok((await A.page.textContent('#acct-card')).includes('Je account is verwijderd'), 'en het paneel zegt dat');
+
+  // ── 10b. Google's eigen knop op padel-bracket.com ──
+  console.log('\nGoogle-knop op de eigen pagina');
+  const K = await device('K', { gis: true });
+  db.googleEmail = 'speler@example.com';
+  await K.page.goto(BASE + '/app/');
+  await K.page.waitForSelector('#btn-acct:visible');
+  ok(!db.gisLoads, 'Google\'s script laadt niet bij een gewone paginaweergave');
+  await openSheet(K.page);
+  await K.page.waitForSelector('#gis-btn');
+  ok(db.gisLoads === 1, 'pas als het inlogpaneel opengaat');
+  ok(!(await K.page.isVisible('#acct-google-btn')), 'Google\'s eigen knop vervangt de knop met de omweg via supabase.co');
+  ok(await K.page.evaluate(() => window.__gisOpts && window.__gisOpts.locale === 'nl'), 'in de taal van de app');
+  const sent = await K.page.evaluate(() => ({ hashed: window.__gis.nonce, raw: _gisNonce }));
+  ok(sent.hashed && sent.raw && sent.hashed !== sent.raw && sent.hashed.length === 64, 'Google krijgt alleen de hash van de eenmalige code');
+  const gisCallsBefore = db.calls.length;
+  await K.page.click('#gis-btn');
+  await K.page.waitForSelector('.acct-who');
+  ok((await K.page.textContent('#acct-card')).includes('Ingelogd als speler@example.com'), 'ingelogd zonder de pagina te verlaten');
+  ok(!db.calls.slice(gisCallsBefore).some(c => c.path === '/oauth'), 'zonder omweg via supabase.co');
+  ok(K.page.url().startsWith(BASE + '/app/') && !/code=/.test(K.page.url()), 'en de app is nooit weggeweest');
+  // Een bewijs met de verkeerde eenmalige code wordt geweigerd
+  await K.page.evaluate(async () => { await acctSB().auth.signOut(); acctUser = null; _acctStage = 'start'; acctRender(); });
+  await K.page.waitForSelector('#gis-btn');
+  await K.page.evaluate(() => { _gisNonce = 'vervalst'; });
+  await K.page.click('#gis-btn');
+  await K.page.waitForSelector('.acct-err:not(:empty)');
+  ok(!(await K.page.isVisible('.acct-who')), 'een bewijs met een verkeerde eenmalige code logt niet in');
+  await K.ctx.close();
 
   // ── 11. Engels, en geen fouten in de console ──
   const H = await device('H');
