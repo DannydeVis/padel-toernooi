@@ -2102,7 +2102,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.13.0';
+const APP_VERSION = 'v2.14.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -4087,6 +4087,9 @@ function acctRender(){
 }
 
 // ── Zelf-inschrijving met wachtlijst ──────────
+// Expliciete kolommen: session_token is sinds security_migration.sql niet
+// meer te lezen, en select('*') vraagt daar dan ook om
+const SU_COLS='code,event_name,event_date,location,format,max_players,signup_open,created_at';
 let suCode=localStorage.getItem('padel-signup-code')||null;
 let suSessionToken=localStorage.getItem('padel-signup-token')||null;
 let suEvent=null, suConfirmed=[], suWaitlist=[], suPollInterval=null, _suWrite=null;
@@ -4177,7 +4180,7 @@ function suCopyLink(){
 async function suRefreshList(){
   const sb=getSB(); if(!sb||!suCode) return;
   try{
-    const {data:ev}=await sb.from('signup_events').select('*').eq('code',suCode).single();
+    const {data:ev}=await sb.from('signup_events').select(SU_COLS).eq('code',suCode).single();
     if(ev) suEvent=ev;
     const {data:rows}=await sb.from('signups').select('*').eq('tournament_code',suCode).order('created_at',{ascending:true});
     const list=rows||[];
@@ -4250,7 +4253,7 @@ async function initJoinMode(code){
   const sb=getSB();
   if(!sb){ _suJoinError(t('su_err_generic')); return; }
   try{
-    const {data:ev,error}=await sb.from('signup_events').select('*').eq('code',code).single();
+    const {data:ev,error}=await sb.from('signup_events').select(SU_COLS).eq('code',code).single();
     if(error||!ev){ _suJoinError(t('su_join_not_found')); return; }
     joinEvent=ev;
     await _suJoinRefreshCounts();
@@ -6355,13 +6358,20 @@ async function submitViewerScore(matchId,sa,sb){
   if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='…'; }
   try{
     const sb2=getSB();
+    const playerName=(mode==='teamamericano'||mode==='teammexicano')&&viewerTAPairIdx>=0
+      ?`${(_curTeamP()[viewerTAPairIdx]||{}).n1||'?'} & ${(_curTeamP()[viewerTAPairIdx]||{}).n2||'?'}`
+      :(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?';
+    // Een speler zet zijn score alleen in "ingestuurd door spelers"; de
+    // organisator keurt hem goed. Vroeger las de app daarvoor de beheersleutel
+    // van het toernooi uit de database: dat was het lek.
+    const {error:rpcErr}=await sb2.rpc('tournament_submit_score',{p_code:_viewCode,p_match_id:matchId,p_sa:sa,p_sb:sb,p_player:playerName});
+    if(rpcErr&&!_isMissingFn(rpcErr)) throw new Error(rpcErr.code==='42501'?'write_blocked':(rpcErr.message||'error'));
+    if(rpcErr){
+    // Database zonder security_migration.sql: zoals het altijd ging
     const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,session_token').eq('code',_viewCode).single();
     if(selErr||!cur) throw new Error(selErr?.message||'not found');
     const d=cur.data||{};
     d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
-    const playerName=(mode==='teamamericano'||mode==='teammexicano')&&viewerTAPairIdx>=0
-      ?`${(_curTeamP()[viewerTAPairIdx]||{}).n1||'?'} & ${(_curTeamP()[viewerTAPairIdx]||{}).n2||'?'}`
-      :(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?';
     d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName});
     // Use direct fetch so x-session-token header is guaranteed to be sent (RLS requires it)
     const res=await fetch(`${SUPABASE_URL}/rest/v1/tournaments?code=eq.${encodeURIComponent(_viewCode)}`,{
@@ -6378,6 +6388,7 @@ async function submitViewerScore(matchId,sa,sb){
     if(!res.ok){const t2=await res.text();throw new Error(t2||'update_failed');}
     const json=await res.json();
     if(!json||json.length===0) throw new Error('write_blocked');
+    }
     if(!viewerScores[matchId]) viewerScores[matchId]={sa,sb,submitted:false};
     viewerScores[matchId].sa=sa; viewerScores[matchId].sb=sb; viewerScores[matchId].submitted=true;
     if(card){
@@ -6634,14 +6645,12 @@ async function initCourtMode(code,courtN,tok){
     const btn=document.getElementById('cs-submit');
     if(btn){ btn.disabled=true; btn.textContent='…'; }
     try{
-      const sb2=_sbClient();
-      const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,updated_at').eq('code',code).single();
-      if(selErr||!cur) throw new Error(selErr?.message||'not found');
-      const d=cur.data||{};
-      d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==activeMatch.id);
-      d.courtPending.push({matchId:activeMatch.id,court:courtN,sa,sb,at:new Date().toISOString()});
-      const {error:updErr}=await sb2.from('tournaments').update({data:d,updated_at:new Date().toISOString()}).eq('code',code);
-      if(updErr) throw new Error(updErr.message);
+      // Met de sleutel van deze baanlink. Vroeger schreef dit zonder sleutel
+      // het hele toernooi terug, en dat weigerde de database stilletjes:
+      // "verstuurd" op het scherm, maar er kwam niets aan.
+      const {error:rpcErr}=await _sbClient().rpc('tournament_submit_score',
+        {p_code:code,p_match_id:activeMatch.id,p_sa:sa,p_sb:sb,p_court:courtN,p_court_token:tok});
+      if(rpcErr) throw new Error(rpcErr.message||rpcErr.code);
       $ct('ct-body',`<div class="court-done">
         <div class="court-done-icon">✓</div>
         <div class="court-done-txt">${t('court_submitted').split('—')[0].trim()}</div>
@@ -7864,6 +7873,9 @@ function _getSharePayload(){
   return base;
 }
 
+// Bestaat deze databasefunctie nog niet (migratie niet gedraaid)?
+function _isMissingFn(e){ return !!e&&/PGRST202|42883|could not find the function/i.test((e.code||'')+' '+(e.message||'')); }
+
 async function pushToSupabase(){
   if(!shareCode||!sessionToken) return false;
   const sb=getSBWrite(); if(!sb) return false;
@@ -7880,11 +7892,18 @@ async function pushToSupabase(){
         if(remoteOnly.length) payload.courtPending=[...remoteOnly,...pendingFromCourt];
       }
     }
-    const {error}=await sb.from('tournaments').upsert(
+    // tournament_save: bijwerken met de sleutel, of aanmaken als de code vrij
+    // is. Een upsert kan niet meer sinds security_migration.sql (die vraagt
+    // leesrecht op session_token).
+    const {error}=await sb.rpc('tournament_save',{p_code:shareCode,p_data:payload,p_token:sessionToken});
+    if(!error) return true;
+    if(!_isMissingFn(error)) throw error;
+    // Database zonder security_migration.sql: zoals het altijd ging
+    const {error:e2}=await sb.from('tournaments').upsert(
       {code:shareCode,data:payload,updated_at:new Date().toISOString(),session_token:sessionToken},
       {onConflict:'code'}
     );
-    if(error) throw error;
+    if(e2) throw e2;
     return true;
   }catch(e){ console.warn('Supabase push failed',e); return false; }
 }
@@ -10148,13 +10167,42 @@ function ccEnsureToken(){
 // Elk toestel maakte zijn eigen beheersleutel. Met een account komen de
 // sleutels van je andere toestellen erbij (padel-cc-tokens), zodat je een
 // competitie die je op je telefoon begon ook op je laptop kunt beheren.
+// Zonder session_token: die is sinds security_migration.sql niet meer te lezen
+const CC_COLS='id,code,name,club_name,type,settings,aliases,created_at';
+// Welke van mijn sleutels hoort bij welke competitie? Vraagt het aan de
+// database (competition_owner_token), die alleen een sleutel teruggeeft die
+// je al kent. Eén keer per competitie en per set sleutels.
+let _ccOwner={key:'',token:null};
+async function ccOwnerToken(code){
+  const toks=ccKnownTokens(), key=code+'|'+toks.join(',');
+  if(_ccOwner.key===key) return _ccOwner.token;
+  let token=null;
+  if(toks.length){
+    try{
+      const {data,error}=await getSB().rpc('competition_owner_token',{p_code:code,p_tokens:toks});
+      if(error) throw error;
+      token=data||null;
+    }catch(e){
+      // Database zonder security_migration.sql: daar is de sleutel nog te lezen
+      if(_isMissingFn(e)){
+        try{
+          const {data}=await getSB().from('competitions').select('session_token').eq('code',code).maybeSingle();
+          if(data&&toks.includes(data.session_token)) token=data.session_token;
+        }catch{}
+      }
+    }
+  }
+  _ccOwner={key,token};
+  return token;
+}
 function ccKnownTokens(){
   let extra=[];
   try{ extra=JSON.parse(localStorage.getItem('padel-cc-tokens')||'[]'); }catch{}
   return [ccSessionToken,...(Array.isArray(extra)?extra:[])].filter((x,i,a)=>typeof x==='string'&&x&&a.indexOf(x)===i);
 }
 function _ccTokenFor(comp){
-  return comp&&ccKnownTokens().includes(comp.session_token)?comp.session_token:ccEnsureToken();
+  if(comp&&_ccOwner.token&&_ccOwner.key.startsWith(comp.code+'|')) return _ccOwner.token;
+  return comp&&comp.session_token&&ccKnownTokens().includes(comp.session_token)?comp.session_token:ccEnsureToken();
 }
 function ccGetWrite(tok){
   tok=tok||_ccTokenFor(ccComp);
@@ -10222,7 +10270,7 @@ async function ccCreateCompetition({name,clubName,type,settings}){
   const sb=ccGetWrite(ccEnsureToken()); if(!sb) return null;
   for(let i=0;i<5;i++){
     const code=ccGenCode();
-    const {data,error}=await sb.from('competitions').insert({code,session_token:ccSessionToken,name,club_name:clubName||null,type,settings:settings||{},aliases:{}}).select().single();
+    const {data,error}=await sb.from('competitions').insert({code,session_token:ccSessionToken,name,club_name:clubName||null,type,settings:settings||{},aliases:{}}).select(CC_COLS).single();
     if(!error) return data;
     if(error.code!=='23505') return null;
   }
@@ -10230,7 +10278,7 @@ async function ccCreateCompetition({name,clubName,type,settings}){
 }
 async function ccFetchCompetition(code){
   const sb=getSB(); if(!sb) return null;
-  const {data,error}=await sb.from('competitions').select('*').eq('code',code).maybeSingle();
+  const {data,error}=await sb.from('competitions').select(CC_COLS).eq('code',code).maybeSingle();
   if(error) return null;
   return data;
 }
@@ -10475,7 +10523,7 @@ async function ccRefreshView(){
     return;
   }
   ccComp=comp;
-  ccIsOwner=!!(comp.session_token&&ccKnownTokens().includes(comp.session_token));
+  ccIsOwner=!!(await ccOwnerToken(comp.code));
   if(comp.type==='ladder'){
     const [players,challenges]=await Promise.all([ccFetchLadderPlayers(ccViewCode),ccFetchChallenges(ccViewCode)]);
     ccLadderPlayers=players; ccLadderChallenges=challenges;

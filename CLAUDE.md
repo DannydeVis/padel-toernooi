@@ -35,5 +35,9 @@
   aan `_acctLocalItems()`/`_acctApply()` en roep na het opslaan `acctSchedule()` aan.
 - Beheer: `/admin/` logt in met hetzelfde account; `is_admin()` in
   `supabase/admin_migration.sql` beslist. Nooit meer de service_role key in de browser.
-- Tests: `node scripts/test-account.mjs` en `node scripts/test-admin.mjs`
+- Beheersleutels (`session_token`) zijn niet leesbaar (`supabase/security_migration.sql`):
+  nooit `select('*')` of `session_token` op `tournaments`, `competitions` of
+  `signup_events`; gebruik de kolomlijsten (`SU_COLS`, `CC_COLS`) en de functies
+  `tournament_save`, `tournament_submit_score`, `competition_owner_token`.
+- Tests: `node scripts/test-account.mjs`, `node scripts/test-admin.mjs` en `node scripts/test-security.mjs`
   (browser, nagebootste Supabase) en `supabase/tests/run.sh` (SQL tegen PostgreSQL 16).

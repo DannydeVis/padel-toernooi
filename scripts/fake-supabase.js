@@ -58,16 +58,22 @@
     };
   }
 
-  // Alles wat niet met het account te maken heeft: een lege, nette keten.
-  function chain() {
-    const result = Promise.resolve({ data: null, error: null });
+  // Tabelvragen: de keten onthoudt welke methodes er met welke argumenten
+  // aangeroepen werden (select, eq, insert, ...) en stuurt dat naar de
+  // server als /from. Een test die niets met tabellen doet, antwoordt daar
+  // gewoon { data: null }.
+  function chain(table, headers, uid) {
+    const calls = [];
+    let result = null;
+    const run = () => result || (result = post('/from', { table, calls, headers: headers || {}, uid })
+      .then(res => ({ data: res.data === undefined ? null : res.data, error: res.error ? err(res.error) : null }))
+      .catch(e => ({ data: null, error: err({ message: String(e) }) })));
     const p = new Proxy(function () {}, {
       get(_, prop) {
-        if (prop === 'then') return result.then.bind(result);
-        if (prop === 'catch') return result.catch.bind(result);
-        return () => p;
+        if (prop === 'then') return (a, b) => run().then(a, b);
+        if (prop === 'catch') return b => run().catch(b);
+        return (...args) => { calls.push([prop, ...args]); return p; };
       },
-      apply() { return p; },
     });
     return p;
   }
@@ -77,7 +83,7 @@
       const auth = makeAuth(opts && opts.auth);
       return {
         auth,
-        from() { return chain(); },
+        from(table) { return chain(table, opts && opts.global && opts.global.headers, auth._uid()); },
         channel() { return { on() { return this; }, subscribe() { return this; } }; },
         removeChannel() {},
         functions: { invoke: async () => ({ data: null, error: null }) },

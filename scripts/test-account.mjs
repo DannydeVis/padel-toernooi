@@ -123,6 +123,7 @@ async function handle(route) {
       return reply(200, { data: null });
     }
   }
+  if (url.pathname.endsWith('/from')) return reply(200, { data: null });
   return reply(404, { error: { message: 'unknown fake path ' + url.pathname } });
 }
 

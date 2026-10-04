@@ -121,6 +121,7 @@ async function handle(route) {
     if (p === '/rpc/admin_dashboard') return reply(200, { data: dashboard() });
     if (p === '/rpc/admin_accounts') return reply(200, { data: accounts() });
   }
+  if (p === '/from') return reply(200, { data: null });
   return reply(404, { error: { message: 'onbekend pad ' + p } });
 }
 

@@ -161,13 +161,40 @@ staat daarin, net als bij supabase-js, in `localStorage`, dus een nieuwe
 browsercontext is echt een ander toestel. PKCE wordt nagedaan, zodat "een
 maillink in een andere browser werkt niet" ook echt getest wordt.
 
-## Wat nog openstaat (los van het account)
+## Het lek van de beheersleutels (opgelost in security_migration.sql)
 
 De beheersleutels (`session_token`) van `tournaments`, `competitions` en
-`signup_events` zijn voor iedereen leesbaar: de leespolicy staat op
-`using (true)` voor alle kolommen, en de app leest de sleutel zelf ook terug
-(spelers die scores invoeren, `ccIsOwner`). Wie de anon key uit de broncode
-haalt, kan daarmee elk toernooi of elke competitie wijzigen. Dichtzetten
-vraagt om `security definer`-functies voor het lezen zonder sleutel en voor
-het invoeren van scores door spelers. Dat is een aparte wijziging, net als
-"Fase 0" bij Predict the Race.
+`signup_events` waren voor iedereen leesbaar: de leespolicies stonden op
+`using (true)` voor alle kolommen. Met de anon key uit de broncode kon
+iedereen elk toernooi, elke competitie en elke inschrijving wijzigen.
+
+`supabase/security_migration.sql` (draaien ná app v2.14.0):
+
+- **Kolomrechten**: `session_token` is niet meer te lezen; al het andere wel.
+  Daarom vraagt de app nergens meer `select('*')` op deze drie tabellen
+  (`SU_COLS`, `CC_COLS` in de app).
+- **`tournament_save`**: de organisator bewaart zijn toernooi. Een upsert kan
+  niet meer: PostgreSQL vraagt daarvoor leesrecht op de kolom die de policy
+  controleert.
+- **`tournament_submit_score`**: spelers en baanlinks sturen een score in. Die
+  komt alleen in `courtPending`; de organisator keurt hem goed. Mag alleen
+  met "spelers voeren scores in" aan, of met de sleutel van de baanlink.
+  Bijvangst: baanlinks schreven vroeger zonder sleutel, wat de database
+  stilletjes weigerde.
+- **`competition_owner_token`**: is deze browser beheerder? Geeft alleen een
+  sleutel terug die je al kent.
+- **`comp_token_ok` / `signup_token_ok`**: de policies van de ladder, de
+  competitieavonden en de wachtlijst lazen de sleutel van een andere tabel.
+  Dat kan niet meer, dus vragen ze het aan deze functies.
+
+De app werkt met én zonder de migratie (hij valt terug als een functie nog
+niet bestaat), zodat de volgorde "eerst de app, dan de database" geen gat
+geeft.
+
+Wat bewust open blijft: de toernooigegevens zelf (namen, scores) zijn nog
+voor iedereen te lezen, ook zonder de code. Dat is lezen, geen schrijven;
+dichtzetten vraagt om functies voor "toernooi ophalen op code", zoals
+Predict the Race dat met `poule_ophalen` deed.
+
+Tests: `supabase/tests/security.test.sql` (tegen de echte policies uit de
+migratiebestanden) en `node scripts/test-security.mjs`.
