@@ -34,5 +34,7 @@
   een inloglink lezen.
 - Lokaal iets nieuws bewaren dat mee moet naar andere toestellen? Voeg het toe
   aan `_acctLocalItems()`/`_acctApply()` en roep na het opslaan `acctSchedule()` aan.
-- Tests: `node scripts/test-account.mjs` (browser, nagebootste Supabase) en
-  `supabase/tests/run.sh` (SQL tegen PostgreSQL 16).
+- Beheer: `/admin/` logt in met hetzelfde account; `is_admin()` in
+  `supabase/admin_migration.sql` beslist. Nooit meer de service_role key in de browser.
+- Tests: `node scripts/test-account.mjs` en `node scripts/test-admin.mjs`
+  (browser, nagebootste Supabase) en `supabase/tests/run.sh` (SQL tegen PostgreSQL 16).

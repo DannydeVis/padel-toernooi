@@ -11,4 +11,7 @@ psql -q -v ON_ERROR_STOP=1 -d "$DB" -f account_migration.sql
 # Twee keer draaien moet kunnen (staat zo in de kop van de migratie)
 psql -q -v ON_ERROR_STOP=1 -d "$DB" -f account_migration.sql
 psql -q -v ON_ERROR_STOP=1 -d "$DB" -f tests/account.test.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f admin_migration.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f admin_migration.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f tests/admin.test.sql
 dropdb "$DB"

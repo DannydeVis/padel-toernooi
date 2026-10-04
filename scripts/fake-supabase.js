@@ -36,7 +36,8 @@
       async getSession() { await init; return { data: { session: read() }, error: null }; },
       onAuthStateChange(cb) { listeners.push(cb); return { data: { subscription: { unsubscribe() {} } } }; },
       async signInWithOtp({ email, options }) {
-        const res = await post('/otp', { email, verifier: newVerifier(), redirectTo: options && options.emailRedirectTo });
+        const res = await post('/otp', { email, verifier: newVerifier(), redirectTo: options && options.emailRedirectTo,
+          shouldCreateUser: !options || options.shouldCreateUser !== false });
         return { data: {}, error: res.error ? err(res.error) : null };
       },
       async verifyOtp({ email, token }) {
@@ -46,7 +47,8 @@
         return { data: { user: res.user, session: read() }, error: null };
       },
       async signInWithOAuth({ provider, options }) {
-        const res = await post('/oauth', { provider, verifier: newVerifier(), redirectTo: options && options.redirectTo });
+        const res = await post('/oauth', { provider, verifier: newVerifier(), redirectTo: options && options.redirectTo,
+          queryParams: options && options.queryParams });
         if (res.error) return { data: {}, error: err(res.error) };
         location.assign(res.url);
         return { data: { url: res.url }, error: null };

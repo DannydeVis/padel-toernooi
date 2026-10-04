@@ -24,7 +24,8 @@ iedereen het ziet.
 1. **SQL draaien.** `supabase/account_migration.sql` in de SQL Editor.
    Veilig om opnieuw te draaien.
 2. **Redirect-url's toestaan.** Authentication → URL Configuration →
-   Redirect URLs: `https://padel-bracket.com/app/` (en eventueel
+   Redirect URLs: `https://padel-bracket.com/app/` en
+   `https://padel-bracket.com/admin/` (of in één keer
    `https://padel-bracket.com/**`). Staat de url er niet in, dan stuurt
    Supabase je na het inloggen naar de Site URL in plaats van terug naar de
    app.
@@ -117,14 +118,38 @@ Clubcompetities: elk toestel had zijn eigen beheersleutel (`padel-cc-token`).
 Met een account komen die van je andere toestellen erbij (`padel-cc-tokens`),
 en `ccIsOwner` en `ccGetWrite` kijken naar alle bekende sleutels.
 
+## De beheerpagina (/admin/)
+
+Inloggen met Google of een mailcode, met hetzelfde account (en dezelfde
+sessie) als in de app. De database bepaalt of je beheerder bent:
+`is_admin()` in `supabase/admin_migration.sql`, alleen voor het bevestigde
+beheeradres (`admin_address()`) of een bevestigd adres in `site_admins`.
+Extra beheerder: `insert into public.site_admins values ('adres@voorbeeld.nl');`
+in de SQL Editor.
+
+De service_role key hoeft niet meer in de browser; de pagina haalt een oude,
+achtergebleven sleutel (`padel-admin-key`) zelf uit localStorage.
+
+Aanzetten: `account_migration.sql` en daarna `admin_migration.sql` draaien,
+Google aanzetten en `/admin/` als redirect-url toestaan (stappen 1 tot 3
+hierboven). `ACCOUNT_LIVE` hoeft daarvoor niet aan.
+
+Wat erop staat: de toernooicijfers van de oude pagina, plus accounts
+(totaal, nieuw vandaag en in 7 dagen, via Google of mailcode, nieuwe accounts
+per dag over 30 dagen) en een lijst van de nieuwste accounts met wat iemand
+in zijn account bewaart (alleen aantallen, nooit de inhoud).
+
 ## Testen
 
 ```sh
-# SQL tegen een lege PostgreSQL 16 (17 controles)
+# SQL tegen een lege PostgreSQL 16 (17 account- en 14 beheercontroles)
 PGHOST=... PGPORT=... PGUSER=postgres supabase/tests/run.sh
 
 # Browser, twee toestellen, tegen een nagebootste Supabase (53 controles)
 node scripts/test-account.mjs
+
+# De beheerpagina, tegen dezelfde nagebootste Supabase (36 controles)
+node scripts/test-admin.mjs
 ```
 
 `scripts/fake-supabase.js` vervangt supabase-js in de browsertest. De sessie
