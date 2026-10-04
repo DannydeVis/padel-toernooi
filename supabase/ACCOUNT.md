@@ -35,11 +35,15 @@ iedereen het ziet.
    op die pagina toont). Zet in het OAuth-toestemmingsscherm de app-naam
    "Padel Bracket" en het logo, anders ziet de speler de projectcode van
    Supabase.
-4. **Mailsjabloon met code.** Authentication → Email Templates → Magic Link:
-   zet er `{{ .Token }}` in, bijvoorbeeld *"Je inlogcode is {{ .Token }}. Of
-   tik op deze link: …"*. Zonder code in de mail kan iemand die de app op zijn
-   iPhone heeft geïnstalleerd niet inloggen met zijn mail: de link opent in
-   Safari, niet in de app.
+4. **Mailsjabloon met code, in de taal van de speler.** Authentication →
+   Emails → Templates → **Magic link or OTP** én **Confirm sign up**: plak in
+   Body de inhoud van `supabase/email-template.html`, en zet als Subject
+   `Padel Bracket: {{ .Token }}` (werkt in elke taal). De app stuurt bij het
+   inloggen de taal mee (`data:{lang}`); het sjabloon kiest daarmee een van de
+   negen talen, en valt terug op Engels. Bestaande accounts houden de taal
+   waarin ze ooit aangemaakt zijn. Zonder code in de mail kan iemand die de
+   app op zijn iPhone heeft geïnstalleerd niet inloggen met zijn mail: de link
+   opent in Safari, niet in de app.
 5. **Eigen mailserver (aanbevolen).** Authentication → SMTP Settings. De
    ingebouwde mailer van Supabase stuurt maar een paar mails per uur en is
    niet voor productie bedoeld. Google is de hoofdweg, dus het hoeft niet op

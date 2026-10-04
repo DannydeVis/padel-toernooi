@@ -1,0 +1,56 @@
+{{ $l := "en" }}{{ if .Data.lang }}{{ $l = .Data.lang }}{{ end }}
+{{ if eq $l "nl" }}
+<h2>Inloggen bij Padel Bracket</h2>
+<p>Typ deze code in de app:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Of tik op deze link: <a href="{{ .ConfirmationURL }}">inloggen</a></p>
+<p style="color:#888;font-size:13px">De code werkt één keer en verloopt na korte tijd. Niet aangevraagd? Negeer deze mail.</p>
+{{ else if eq $l "de" }}
+<h2>Anmelden bei Padel Bracket</h2>
+<p>Gib diesen Code in der App ein:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Oder tippe auf diesen Link: <a href="{{ .ConfirmationURL }}">anmelden</a></p>
+<p style="color:#888;font-size:13px">Der Code funktioniert einmal und läuft bald ab. Nicht angefordert? Ignoriere diese E-Mail.</p>
+{{ else if eq $l "fr" }}
+<h2>Connexion à Padel Bracket</h2>
+<p>Saisissez ce code dans l'app :</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Ou touchez ce lien : <a href="{{ .ConfirmationURL }}">se connecter</a></p>
+<p style="color:#888;font-size:13px">Le code ne fonctionne qu'une fois et expire rapidement. Vous ne l'avez pas demandé ? Ignorez cet e-mail.</p>
+{{ else if eq $l "es" }}
+<h2>Iniciar sesión en Padel Bracket</h2>
+<p>Escribe este código en la app:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>O toca este enlace: <a href="{{ .ConfirmationURL }}">iniciar sesión</a></p>
+<p style="color:#888;font-size:13px">El código funciona una vez y caduca pronto. ¿No lo pediste? Ignora este correo.</p>
+{{ else if eq $l "it" }}
+<h2>Accedi a Padel Bracket</h2>
+<p>Inserisci questo codice nell'app:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Oppure tocca questo link: <a href="{{ .ConfirmationURL }}">accedi</a></p>
+<p style="color:#888;font-size:13px">Il codice funziona una volta e scade presto. Non l'hai richiesto? Ignora questa email.</p>
+{{ else if eq $l "pt" }}
+<h2>Entrar no Padel Bracket</h2>
+<p>Escreve este código na app:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Ou toca nesta ligação: <a href="{{ .ConfirmationURL }}">entrar</a></p>
+<p style="color:#888;font-size:13px">O código funciona uma vez e expira em breve. Não pediste? Ignora este email.</p>
+{{ else if eq $l "sv" }}
+<h2>Logga in på Padel Bracket</h2>
+<p>Skriv den här koden i appen:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Eller tryck på länken: <a href="{{ .ConfirmationURL }}">logga in</a></p>
+<p style="color:#888;font-size:13px">Koden fungerar en gång och går snart ut. Inte du? Ignorera det här mejlet.</p>
+{{ else if eq $l "id" }}
+<h2>Masuk ke Padel Bracket</h2>
+<p>Ketik kode ini di aplikasi:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Atau ketuk tautan ini: <a href="{{ .ConfirmationURL }}">masuk</a></p>
+<p style="color:#888;font-size:13px">Kode hanya berlaku sekali dan segera kedaluwarsa. Tidak memintanya? Abaikan email ini.</p>
+{{ else }}
+<h2>Log in to Padel Bracket</h2>
+<p>Type this code in the app:</p>
+<p style="font-size:28px;font-weight:bold;letter-spacing:6px">{{ .Token }}</p>
+<p>Or tap this link: <a href="{{ .ConfirmationURL }}">log in</a></p>
+<p style="color:#888;font-size:13px">The code works once and expires soon. Didn't request it? Ignore this email.</p>
+{{ end }}
