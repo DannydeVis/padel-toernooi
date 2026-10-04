@@ -70,10 +70,11 @@ Every team plays every other team at least once. Standings are ranked by number 
 - Works fully offline after the first load, installable as a Progressive Web App on phone, tablet or desktop
 - Available in 8 languages: Dutch, English, French, German, Spanish, Swedish, Italian and Portuguese
 - Light and dark theme
-- No account, no registration, no payment, no ads, no paywall
+- No account required, no registration, no payment, no ads, no paywall
+- Optional account (Google or an email code, no password): saved groups, competitions, the running tournament and organiser rights follow you to your other devices
 
 ## Pricing
-Free. No subscription, no account, no ads, no paywall — every feature listed above is included at no cost.
+Free. No subscription, no ads, no paywall, and no account needed — every feature listed above is included at no cost.
 
 ## Languages
 Dutch, English, French, German, Spanish, Swedish, Italian, Portuguese

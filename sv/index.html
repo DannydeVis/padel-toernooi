@@ -67,7 +67,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Är PadelBracket gratis?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, PadelBracket är helt gratis. Ingen prenumeration, inget konto, ingen betalvägg. Alla funktioner är tillgängliga direkt." } },
+      { "@type": "Question", "name": "Är PadelBracket gratis?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, PadelBracket är helt gratis. Ingen prenumeration, ingen betalvägg och inget konto behövs. Alla funktioner är tillgängliga direkt." } },
       { "@type": "Question", "name": "Vilka turneringsformat stöds?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket stöder åtta format: Americano (roterande partners, poäng per spelare), Mexicano (partners baserat på ställning), King of the Court (banor rankade från lägst till högst, vinnare klättrar upp), Mixicano (mixade par), Team Americano (fasta par, poäng per par), knockout-bracket (grupper plus final), Round Robin (alla mot alla) och Pickleball (samma format, anpassad poängräkning)." } },
       { "@type": "Question", "name": "Vad är skillnaden mellan Americano och Mexicano?", "acceptedAnswer": { "@type": "Answer", "text": "I Americano bestäms partners i förväg via fast rotation. I Mexicano tilldelas partners om efter varje rond baserat på aktuell ställning: rang 1 och 2 spelar mot rang 3 och 4. Mexicano blir mer tävlingsinriktat för varje rond." } },
       { "@type": "Question", "name": "Fungerar appen utan internet?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Efter första laddningen fungerar PadelBracket helt offline. Turneringen sparas lokalt på din enhet, även om du stänger webbläsaren." } }
@@ -468,6 +468,13 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
           <p>Nederlandska, Engelska, Franska, Tyska, Spanska, Italienska, Portugisiska och Svenska. Appen identifierar automatiskt enhetens sprak, perfekt for internationella grupper.</p>
         </div>
       </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(16,185,129,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="9" x="2" y="4" rx="1.5"/><path d="M5 17h7"/><rect width="7" height="11" x="15" y="9" rx="1.5"/><path d="M18.5 17h.01"/></svg></div>
+        <div class="fc-text">
+          <h3>På alla dina enheter</h3>
+          <p>Logga in om du vill med Google eller en kod via mejl, utan lösenord. Dina grupper, tävlingar och pågående turneringar följer då med till mobil, surfplatta och dator. Utan inloggning fungerar allt lika bra.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -647,7 +654,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <section class="section" id="faq">
   <h2 class="section-title">Vanliga frågor</h2>
   <div class="faq-list">
-    <details class="faq-item"><summary>Är PadelBracket gratis?</summary><p>Ja, PadelBracket är helt gratis. Ingen prenumeration, inget konto, ingen betalvägg. Alla funktioner är tillgängliga direkt.</p></details>
+    <details class="faq-item"><summary>Är PadelBracket gratis?</summary><p>Ja, PadelBracket är helt gratis. Ingen prenumeration, ingen betalvägg och inget konto behövs. Alla funktioner är tillgängliga direkt.</p></details>
     <details class="faq-item"><summary>Vilka turneringsformat stöds?</summary><p>PadelBracket stöder åtta format: <strong>Americano</strong> (roterande partners, poäng per spelare), <strong>Mexicano</strong> (partners baserat på ställning), <strong>King of the Court</strong> (banor rankade från lägst till högst, vinnare klättrar upp), <strong>Mixicano</strong> (mixade par), <strong>Team Americano</strong> (fasta par, poäng per par), <strong>knockout-bracket</strong> (grupper plus final), <strong>Round Robin</strong> (alla mot alla) och <strong>Pickleball</strong> (samma format, anpassad poängräkning).</p></details>
     <details class="faq-item"><summary>Vad är skillnaden mellan Americano och Mexicano?</summary><p>I <strong>Americano</strong> bestäms partners i förväg via fast rotation. Alla spelar exakt en gång tillsammans. I <strong>Mexicano</strong> tilldelas partners om efter varje rond baserat på aktuell ställning: rang 1 och 2 spelar mot rang 3 och 4. Mexicano blir mer tävlingsinriktat för varje rond.</p></details>
     <details class="faq-item"><summary>Vad gör presentationsläget?</summary><p>Presentationsläget öppnar en helskärms-resultattavla, perfekt för en TV eller projektor i klubblokalen. Du ser live-ställningen och alla aktiva matcher med live-resultat. Skärmen uppdateras automatiskt var 3:e sekund.</p></details>

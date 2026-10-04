@@ -67,7 +67,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "PadelBracket est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de compte, pas de mur payant. Toutes les fonctionnalités sont disponibles immédiatement." } },
+      { "@type": "Question", "name": "PadelBracket est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de mur payant, aucun compte requis. Toutes les fonctionnalités sont disponibles immédiatement." } },
       { "@type": "Question", "name": "Quels formats de tournoi sont supportés ?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket supporte huit formats : Americano (partenaires tournants, points par joueur), Mexicano (partenaires selon le classement), King of the Court (terrains classés du plus bas au plus haut, les gagnants montent), Mixicano (paires mixtes), Team Americano (paires fixes, points par paire), bracket knockout (groupes plus finale), Round Robin (tout le monde joue contre tout le monde) et Pickleball (memes formats, score adapte)." } },
       { "@type": "Question", "name": "Quelle est la différence entre Americano et Mexicano ?", "acceptedAnswer": { "@type": "Answer", "text": "En Americano, les partenaires sont déterminés à l'avance par une rotation fixe. En Mexicano, les partenaires sont réattribués après chaque tour selon le classement actuel : rang 1 et 2 jouent contre rang 3 et 4. Le Mexicano devient de plus en plus compétitif." } },
       { "@type": "Question", "name": "Que fait le mode présentation ?", "acceptedAnswer": { "@type": "Answer", "text": "Le mode présentation ouvre un tableau de score plein écran, idéal pour une TV ou un projecteur. Vous voyez le classement en direct et tous les matchs actifs. L'écran se rafraîchit automatiquement toutes les 3 secondes." } },
@@ -470,6 +470,13 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
           <p>Neerlandais, Anglais, Francais, Allemand, Espagnol, Italien, Portugais et Suedois. L'app detecte automatiquement la langue de votre appareil, ideal pour les groupes internationaux.</p>
         </div>
       </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(16,185,129,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="9" x="2" y="4" rx="1.5"/><path d="M5 17h7"/><rect width="7" height="11" x="15" y="9" rx="1.5"/><path d="M18.5 17h.01"/></svg></div>
+        <div class="fc-text">
+          <h3>Sur tous vos appareils</h3>
+          <p>Connexion facultative avec Google ou un code par e-mail, sans mot de passe. Vos groupes, compétitions et tournois en cours vous suivent alors sur téléphone, tablette et ordinateur. Sans connexion, tout fonctionne aussi bien.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -649,7 +656,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <section class="section" id="faq">
   <h2 class="section-title">Questions fréquentes</h2>
   <div class="faq-list">
-    <details class="faq-item"><summary>PadelBracket est-il gratuit ?</summary><p>Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de compte, pas de mur payant. Toutes les fonctionnalités sont disponibles immédiatement.</p></details>
+    <details class="faq-item"><summary>PadelBracket est-il gratuit ?</summary><p>Oui, PadelBracket est entièrement gratuit. Pas d'abonnement, pas de mur payant, aucun compte requis. Toutes les fonctionnalités sont disponibles immédiatement.</p></details>
     <details class="faq-item"><summary>Quels formats de tournoi sont supportés ?</summary><p>PadelBracket supporte huit formats : <strong>Americano</strong> (partenaires tournants, points par joueur), <strong>Mexicano</strong> (partenaires selon le classement), <strong>King of the Court</strong> (terrains classés du plus bas au plus haut, les gagnants montent), <strong>Mixicano</strong> (paires mixtes), <strong>Team Americano</strong> (paires fixes, points par paire), <strong>bracket knockout</strong> (groupes plus finale), <strong>Round Robin</strong> (tout le monde joue contre tout le monde) et <strong>Pickleball</strong> (memes formats, score adapte).</p></details>
     <details class="faq-item"><summary>Quelle est la différence entre Americano et Mexicano ?</summary><p>En <strong>Americano</strong>, les partenaires sont déterminés à l'avance par une rotation fixe. Tout le monde joue exactement une fois ensemble. En <strong>Mexicano</strong>, les partenaires sont réattribués après chaque tour selon le classement actuel : rang 1 et 2 jouent contre rang 3 et 4. Le Mexicano devient de plus en plus compétitif au fil du tournoi.</p></details>
     <details class="faq-item"><summary>Que fait le mode présentation ?</summary><p>Le mode présentation ouvre un tableau de score plein écran, idéal pour une TV ou un projecteur au club. Vous voyez le classement en direct et tous les matchs actifs avec les scores. L'écran se rafraîchit automatiquement toutes les 3 secondes.</p></details>

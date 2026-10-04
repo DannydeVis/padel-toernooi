@@ -67,7 +67,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Apakah PadelBracket gratis?", "acceptedAnswer": { "@type": "Answer", "text": "Ya, PadelBracket sepenuhnya gratis. Tanpa langganan, tanpa akun, tanpa dinding bayar. Semua fitur langsung tersedia." } },
+      { "@type": "Question", "name": "Apakah PadelBracket gratis?", "acceptedAnswer": { "@type": "Answer", "text": "Ya, PadelBracket sepenuhnya gratis. Tanpa langganan, tanpa dinding bayar, dan tidak perlu akun. Semua fitur langsung tersedia." } },
       { "@type": "Question", "name": "Format turnamen apa saja yang didukung?", "acceptedAnswer": { "@type": "Answer", "text": "PadelBracket mendukung delapan format: Americano (partner berputar, poin per pemain), Mexicano (partner berdasarkan klasemen), King of the Court (lapangan dari rendah ke tinggi, pemenang naik), Mixicano (pasangan campuran), Team Americano (pasangan tetap, poin per pasangan), bagan knockout (grup plus final), Round Robin (semua lawan semua) dan Pickleball (format sama, penghitungan disesuaikan)." } },
       { "@type": "Question", "name": "Apa bedanya Americano dan Mexicano?", "acceptedAnswer": { "@type": "Answer", "text": "Pada Americano, partner ditentukan lebih dulu lewat rotasi tetap. Pada Mexicano, partner dibagi ulang setiap ronde berdasarkan klasemen saat itu: peringkat 1 dan 2 melawan peringkat 3 dan 4. Mexicano makin ketat setiap ronde." } },
       { "@type": "Question", "name": "Apa fungsi mode presentasi?", "acceptedAnswer": { "@type": "Answer", "text": "Mode presentasi membuka papan skor layar penuh, cocok untuk TV atau proyektor di klub. Kamu melihat klasemen langsung dan semua pertandingan yang sedang berjalan. Tampilan menyegarkan sendiri setiap 3 detik." } },
@@ -463,6 +463,13 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
           <p>Belanda, Inggris, Prancis, Jerman, Spanyol, Italia, Portugis, Swedia dan Indonesia. Aplikasi mengenali bahasa perangkatmu secara otomatis, cocok untuk grup internasional.</p>
         </div>
       </div>
+      <div class="fc-item">
+        <div class="fc-icon" style="background:rgba(16,185,129,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="9" x="2" y="4" rx="1.5"/><path d="M5 17h7"/><rect width="7" height="11" x="15" y="9" rx="1.5"/><path d="M18.5 17h.01"/></svg></div>
+        <div class="fc-text">
+          <h3>Di semua perangkatmu</h3>
+          <p>Masuk secara opsional dengan Google atau kode lewat email, tanpa kata sandi. Grup, kompetisi, dan turnamen yang sedang berjalan ikut ke ponsel, tablet, dan laptopmu. Tanpa masuk pun semuanya tetap berjalan.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -642,7 +649,7 @@ function switchLang(l){localStorage.setItem('padel-lang',l);const p={nl:'/',en:'
 <section class="section" id="faq">
   <h2 class="section-title">Pertanyaan yang sering diajukan</h2>
   <div class="faq-list">
-    <details class="faq-item"><summary>Apakah PadelBracket gratis?</summary><p>Ya, PadelBracket sepenuhnya gratis. Tanpa langganan, tanpa akun, tanpa dinding pembayaran. Semua fitur langsung tersedia.</p></details>
+    <details class="faq-item"><summary>Apakah PadelBracket gratis?</summary><p>Ya, PadelBracket sepenuhnya gratis. Tanpa langganan, tanpa dinding pembayaran, dan tidak perlu akun. Semua fitur langsung tersedia.</p></details>
     <details class="faq-item"><summary>Format turnamen apa saja yang didukung?</summary><p>PadelBracket mendukung delapan format:<strong>Americano</strong>(pasangan berganti, poin per pemain),<strong>Mexicano</strong>(pasangan sesuai klasemen),<strong>King of the Court</strong>(lapangan dari bawah ke atas, pemenang naik),<strong>Mixicano</strong>(pasangan campuran),<strong>Team Americano</strong>(pasangan tetap, poin per pasangan),<strong>Bagan Knockout</strong>(babak grup plus final),<strong>Round Robin</strong>(semua melawan semua) dan<strong>Pickleball</strong>(format sama, penilaian disesuaikan).</p></details>
     <details class="faq-item"><summary>Apa bedanya Americano dan Mexicano?</summary><p>Pada<strong>Americano</strong>pasangan ditentukan lebih dulu lewat rotasi tetap. Semua bermain tepat satu kali bersama setiap orang lain. Pada<strong>Mexicano</strong>pasangan disusun ulang tiap ronde berdasarkan klasemen saat itu: peringkat 1 dan 2 melawan peringkat 3 dan 4. Mexicano makin kompetitif tiap ronde.</p></details>
     <details class="faq-item"><summary>Apa fungsi mode presentasi?</summary><p>Mode presentasi membuka papan skor layar penuh, cocok untuk TV atau proyektor di klub. Kamu melihat klasemen langsung dan semua pertandingan berjalan dengan hasil terkini. Tampilannya diperbarui otomatis tiap 3 detik.</p></details>
