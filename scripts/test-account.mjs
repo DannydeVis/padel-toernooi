@@ -162,13 +162,13 @@ async function openSheet(page) {
 
 try {
   // ── 0. Zonder de schakelaar: niets te zien en geen verkeer ──
-  console.log('\nZonder schakelaar');
+  console.log('\nZonder ?account=preview');
   {
     const { page, ctx } = await device('uit', { preview: false });
     await page.goto(BASE + '/app/');
     await page.waitForTimeout(500);
-    ok(!(await page.isVisible('#btn-acct')), 'geen accountknop zolang ACCOUNT_LIVE uit staat');
-    ok(db.calls.length === 0, 'geen enkel verzoek naar Supabase-auth');
+    ok(await page.isVisible('#btn-acct'), 'ACCOUNT_LIVE staat aan: de accountknop staat er ook zonder ?account=preview');
+    ok(db.calls.length === 0, 'een paginaweergave maakt nog steeds geen enkel verzoek naar Supabase-auth');
     await ctx.close();
   }
 

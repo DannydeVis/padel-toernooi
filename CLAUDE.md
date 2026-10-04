@@ -26,9 +26,8 @@
 - Inloggen met Google of een mailcode; synchroniseert groepen, competities,
   beheersleutels en het lopende toernooi. Achtergrond en dashboardstappen:
   `supabase/ACCOUNT.md`.
-- Staat achter `ACCOUNT_LIVE` in `app/index.html` (te bekijken met
-  `?account=preview`). Pas op `true` zetten als de stappen uit ACCOUNT.md
-  gedaan zijn.
+- Staat live sinds v2.13.0 (`ACCOUNT_LIVE=true` in `app/index.html`); de
+  stappen uit ACCOUNT.md zijn gedaan.
 - Nieuwe Supabase-clients altijd via `_sbClient()`, nooit rechtstreeks
   `createClient`: alleen `acctSB()` mag een sessie hebben en de `?code=` van
   een inloglink lezen.

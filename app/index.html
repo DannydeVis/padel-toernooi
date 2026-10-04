@@ -2102,7 +2102,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.12.1';
+const APP_VERSION = 'v2.13.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3594,7 +3594,7 @@ function getSBWrite(){
 // Pas aanzetten als supabase/account_migration.sql gedraaid is en de stappen
 // uit supabase/ACCOUNT.md in het Supabase-dashboard gedaan zijn. Tot die tijd
 // is het te bekijken met ?account=preview (en weer uit met ?account=off).
-const ACCOUNT_LIVE=false;
+const ACCOUNT_LIVE=true;
 const ACCT_STORAGE_KEY='padel-auth';
 const ACCT_META='padel-acct-meta';
 let acctUser=null, _acctSB=null, _acctStage='start', _acctMail='', _acctReason=null;
