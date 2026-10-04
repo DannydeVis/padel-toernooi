@@ -191,10 +191,17 @@ De app werkt met én zonder de migratie (hij valt terug als een functie nog
 niet bestaat), zodat de volgorde "eerst de app, dan de database" geen gat
 geeft.
 
-Wat bewust open blijft: de toernooigegevens zelf (namen, scores) zijn nog
-voor iedereen te lezen, ook zonder de code. Dat is lezen, geen schrijven;
-dichtzetten vraagt om functies voor "toernooi ophalen op code", zoals
-Predict the Race dat met `poule_ophalen` deed.
+## Alleen lezen met de code erbij (read_policy_migration.sql)
 
-Tests: `supabase/tests/security.test.sql` (tegen de echte policies uit de
-migratiebestanden) en `node scripts/test-security.mjs`.
+Daarna stonden de toernooigegevens zelf nog open: iedereen kon in één keer
+alle toernooien, competities, ladders en inschrijvingen downloaden.
+`supabase/read_policy_migration.sql` (draaien ná app v2.15.0) vervangt de
+leespolicies `using (true)` door "alleen de rij van de code in de header
+`x-padel-code`". De app stuurt die code bij elke vraag mee via `sbFor(code)`,
+dus wie een link of code heeft merkt niets. Wie geen code heeft, ziet lege
+tabellen. Schrijven door de organisator stuurt de code én de sleutel mee
+(`sbFor(code, token)`), omdat een update met een WHERE ook langs de
+leespolicy moet.
+
+Tests: `supabase/tests/security.test.sql` en `read_policy.test.sql` (tegen de
+echte policies uit de migratiebestanden) en `node scripts/test-security.mjs`.

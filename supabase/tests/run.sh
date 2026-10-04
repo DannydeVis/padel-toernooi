@@ -21,4 +21,7 @@ for f in rls_migration.sql signup_migration.sql competition_migration.sql securi
   psql -q -v ON_ERROR_STOP=1 -d "$DB" -f "$f"
 done
 psql -q -v ON_ERROR_STOP=1 -d "$DB" -f tests/security.test.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f read_policy_migration.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f read_policy_migration.sql
+psql -q -v ON_ERROR_STOP=1 -d "$DB" -f tests/read_policy.test.sql
 dropdb "$DB"

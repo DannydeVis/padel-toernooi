@@ -3,8 +3,8 @@
 // beheersleutel (session_token) uit de database, en gebruikt de nieuwe
 // functies: tournament_save (organisator bewaart), tournament_submit_score
 // (speler of baanlink stuurt een score in) en competition_owner_token (ben
-// ik beheerder van deze competitie?). Plus de terugval op een database
-// waar de migratie nog niet gedraaid is.
+// ik beheerder van deze competitie?). En read_policy_migration.sql: elke
+// vraag aan deze tabellen draagt de code mee, anders zie je niets.
 //
 // Zelfde opzet als scripts/test-account.mjs. Of de database echt weigert wat
 // hij moet weigeren, controleert supabase/tests/security.test.sql.
@@ -48,6 +48,8 @@ const db = {
   rpc: [], from: [],
 };
 const SECRET_TABLES = ['tournaments', 'competitions', 'signup_events'];
+const CODE_TABLES = { tournaments: 'code', competitions: 'code', signup_events: 'code', competition_events: 'competition_code',
+  ladder_players: 'competition_code', ladder_challenges: 'competition_code', signups: 'tournament_code' };
 function selectOf(calls) { const s = calls.find(c => c[0] === 'select'); return s ? (s[1] ?? '*') : null; }
 function eqOf(calls, col) { const e = calls.find(c => c[0] === 'eq' && c[1] === col); return e ? e[2] : undefined; }
 const strip = row => { const { session_token, ...rest } = row; return rest; };
@@ -59,8 +61,12 @@ async function handle(route) {
   const reply = (status, json) => route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(json) });
   const missing = name => reply(404, { error: { code: 'PGRST202', message: `Could not find the function public.${name}` } });
   if (p === '/from') {
-    const { table, calls } = body;
-    db.from.push({ table, calls });
+    const { table, calls, headers } = body;
+    db.from.push({ table, calls, headers });
+    // read_policy_migration.sql: zonder x-padel-code zie je niets
+    const codeCol = CODE_TABLES[table], filt = codeCol && eqOf(calls, codeCol);
+    if (codeCol && selectOf(calls) !== null && (!headers || String(headers['x-padel-code'] || '').toUpperCase() !== String(filt || '').toUpperCase()))
+      return reply(200, { data: calls.some(c => c[0] === 'single' || c[0] === 'maybeSingle') ? null : [] });
     const sel = selectOf(calls);
     // Na de migratie: session_token (en dus ook *) is niet te lezen
     if (db.migrated && SECRET_TABLES.includes(table) && sel !== null && (sel === '*' || /session_token/.test(sel)))
@@ -209,6 +215,10 @@ try {
   await L.page.waitForFunction(() => ccComp && ccComp.code === 'LADDER');
   ok(await L.page.evaluate(() => ccIsOwner), 'de beheerder wordt herkend via competition_owner_token');
   ok(await L.page.evaluate(() => _ccTokenFor(ccComp)) === 'mijn-ladder-sleutel-1234', 'en schrijft met de sleutel die bij deze competitie hoort');
+  // Beheeracties: die moeten de code én de sleutel meesturen
+  await L.page.evaluate(async () => { await ccRejectChallenge(1); await ccRemoveLadderPlayer(1); await ccUpdateSettings('LADDER', { range: 3 }); });
+  ok(db.from.filter(f => ['ladder_players', 'ladder_challenges', 'competitions'].includes(f.table) && f.calls.some(c => ['update', 'delete'].includes(c[0])))
+    .every(f => f.headers['x-padel-code'] === 'LADDER' && f.headers['x-session-token'] === 'mijn-ladder-sleutel-1234'), 'ladderbeheer stuurt de code én de juiste sleutel mee');
   const L2 = await device('bezoeker', { 'padel-cc-token': 'helemaal-iets-anders-00' });
   await L2.page.goto(BASE + '/app/?comp=LADDER');
   await L2.page.waitForFunction(() => ccComp && ccComp.code === 'LADDER');
@@ -220,27 +230,23 @@ try {
   await J.page.goto(BASE + '/app/?join=SIGN01');
   await J.page.waitForFunction(() => typeof joinEvent !== 'undefined' && joinEvent && joinEvent.code === 'SIGN01');
   ok(true, 'het inschrijfscherm laadt zonder de sleutel te vragen');
+  // De organisator van de inschrijving beheert de wachtlijst
+  const S = await device('inschrijfbaas', { 'padel-signup-code': 'SIGN01', 'padel-signup-token': 'inschrijf-sleutel-123456' });
+  await S.page.goto(BASE + '/app/');
+  await S.page.waitForFunction(() => typeof suRemoveSignup === 'function');
+  await S.page.evaluate(async () => { await suRefreshList(); await suRemoveSignup(1); });
+  const suCalls = db.from.filter(f => f.table === 'signups' && f.calls.some(c => c[0] === 'delete'));
+  ok(suCalls.length && suCalls.every(f => f.headers['x-padel-code'] === 'SIGN01' && f.headers['x-session-token'] === 'inschrijf-sleutel-123456'), 'wachtlijstbeheer stuurt de code én de sleutel mee');
+  await S.ctx.close();
   await J.ctx.close();
 
   // ── Nergens meer om de sleutel gevraagd ──
   const leaks = db.from.filter(f => SECRET_TABLES.includes(f.table) && (() => { const s = selectOf(f.calls); return s !== null && (s === '*' || /session_token/.test(s)); })());
+  const noCode = db.from.filter(f => CODE_TABLES[f.table] && !(f.headers && f.headers['x-padel-code']));
+  ok(noCode.length === 0, 'elke vraag aan deze tabellen draagt de code mee (x-padel-code)' + (noCode.length ? ': ' + JSON.stringify(noCode.map(f => [f.table, f.calls[0]])) : ''));
+  const wrong = db.from.filter(f => { const col = CODE_TABLES[f.table], v = col && eqOf(f.calls, col); return v && f.headers && String(f.headers['x-padel-code']).toUpperCase() !== String(v).toUpperCase(); });
+  ok(wrong.length === 0, 'en altijd de code van de rij waar het om gaat');
   ok(leaks.length === 0, 'de app vraagt nergens meer session_token of * op' + (leaks.length ? ': ' + JSON.stringify(leaks.map(l => [l.table, selectOf(l.calls)])) : ''));
-
-  // ── Database zonder de migratie: alles werkt zoals vroeger ──
-  console.log('\nZonder security_migration.sql');
-  db.migrated = false;
-  db.rpc.length = 0; db.from.length = 0;
-  await O.page.evaluate(() => { AM[0][0].sa = 3; saveState(); return pushToSupabase(); });
-  ok(db.from.some(f => f.table === 'tournaments' && f.calls.some(c => c[0] === 'upsert' && c[1].session_token === token)), 'bewaren valt terug op de upsert');
-  await V.page.evaluate(id => { delete viewerScores[id]; }, m.id);
-  await V.page.evaluate(id => submitViewerScore(id, 19, 13), m.id);
-  ok(await V.page.evaluate(id => viewerScores[id] && viewerScores[id].submitted, m.id), 'een speler kan nog insturen (de oude manier)');
-  const L3 = await device('ladderbaas-oud', { 'padel-cc-token': 'mijn-ladder-sleutel-1234' });
-  await L3.page.goto(BASE + '/app/?comp=LADDER');
-  await L3.page.waitForFunction(() => ccComp && ccComp.code === 'LADDER');
-  await L3.page.waitForTimeout(300);
-  ok(await L3.page.evaluate(() => ccIsOwner), 'de beheerder van een competitie wordt nog herkend');
-  db.migrated = true;
 
   ok(allErrors.length === 0, 'geen JavaScript-fouten' + (allErrors.length ? ': ' + allErrors.join(' | ') : ''));
 } catch (e) {

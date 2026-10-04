@@ -116,6 +116,10 @@ async function handle(route) {
       if (!uid || !db.users.has(uid)) return reply(401, { error: { code: '42501', message: 'not_signed_in' } });
       return reply(200, { data: accountSync(uid, body.params && body.params.p_items) });
     }
+    case '/rpc/competition_owner_token': {
+      const pr = body.params || {}, o = db.ccOwner;
+      return reply(200, { data: o && o.code === pr.p_code && (pr.p_tokens || []).includes(o.token) ? o.token : null });
+    }
     case '/rpc/delete_my_account': {
       if (!uid || !db.users.has(uid)) return reply(401, { error: { code: '42501', message: 'not_signed_in' } });
       db.users.delete(uid);
@@ -277,7 +281,10 @@ try {
   await A.page.evaluate(() => acctSync());
   const knownA = await A.page.evaluate(() => ccKnownTokens());
   ok(knownA.includes(ccTokenA) && knownA.includes(ccTokenB), 'toestel A kent nu de beheersleutels van beide toestellen');
-  ok(await A.page.evaluate(t => { ccComp = { session_token: t }; return _ccTokenFor(ccComp) === t; }, ccTokenB), 'en schrijft met de sleutel die bij de competitie hoort');
+  // Een competitie die op toestel B is aangemaakt: de database (competition_owner_token)
+  // herkent de sleutel van B, die A nu via het account kent
+  db.ccOwner = { code: 'CCB001', token: ccTokenB };
+  ok(await A.page.evaluate(async t => { ccComp = { code: 'CCB001' }; await ccOwnerToken('CCB001'); return _ccTokenFor(ccComp) === t; }, ccTokenB), 'en schrijft met de sleutel die bij de competitie hoort');
 
   // ── 6. Een maillink in een andere browser ──
   console.log('\nMaillink in een andere browser');

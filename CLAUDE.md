@@ -39,5 +39,8 @@
   nooit `select('*')` of `session_token` op `tournaments`, `competitions` of
   `signup_events`; gebruik de kolomlijsten (`SU_COLS`, `CC_COLS`) en de functies
   `tournament_save`, `tournament_submit_score`, `competition_owner_token`.
+- Lezen kan alleen met de code erbij (`supabase/read_policy_migration.sql`): elke
+  vraag aan toernooien, competities, ladders en inschrijvingen gaat via
+  `sbFor(code)` of `sbFor(code, token)`, nooit via `getSB()`.
 - Tests: `node scripts/test-account.mjs`, `node scripts/test-admin.mjs` en `node scripts/test-security.mjs`
   (browser, nagebootste Supabase) en `supabase/tests/run.sh` (SQL tegen PostgreSQL 16).

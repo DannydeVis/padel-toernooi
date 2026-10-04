@@ -2102,7 +2102,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.14.0';
+const APP_VERSION = 'v2.15.0';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -3519,6 +3519,19 @@ function _sbClient(headers){
   return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,headers?{auth:_SB_ANON_AUTH,global:{headers}}:{auth:_SB_ANON_AUTH});
 }
 function getSB(){ if(!_sb) _sb=_sbClient(); return _sb; }
+// Toernooien, competities en inschrijvingen zijn alleen te lezen met hun code
+// erbij (read_policy_migration.sql): de database laat alleen de rij(en) van
+// de code in x-padel-code zien. Zo kan niemand de hele tabel leegvissen, en
+// voor wie de link of de code heeft verandert er niets.
+const _sbCodeClients={};
+function sbFor(code,token){
+  const c=String(code||'').toUpperCase(), key=c+'|'+(token||'');
+  if(!_sbCodeClients[key]){
+    const h={'x-padel-code':c}; if(token) h['x-session-token']=token;
+    _sbCodeClients[key]=_sbClient(h);
+  }
+  return _sbCodeClients[key];
+}
 function trackStart(m,n){ try{ const sb=getSB(); if(!sb) return; _startId=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)); _startTs=Date.now(); sb.from('tournament_starts').insert({mode:m,player_count:n,client_id:_startId}).then(()=>{}); }catch{} }
 function trackEnd(){ try{ if(!_startId||!_startTs) return; const id=_startId; const dur=Math.round((Date.now()-_startTs)/1000); _startId=null; _startTs=null; const sb=getSB(); if(!sb) return; sb.from('tournament_durations').insert({client_id:id,duration_seconds:dur}).then(()=>{}); }catch{} }
 let _feedbackType='bug';
@@ -3561,9 +3574,7 @@ async function submitFeedback(){
   }
 }
 function getSBWrite(){
-  if(!_sbWrite&&sessionToken&&window.supabase)
-    _sbWrite=_sbClient({'x-session-token':sessionToken});
-  return _sbWrite||getSB();
+  return sessionToken&&shareCode?sbFor(shareCode,sessionToken):sbFor(shareCode);
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -4095,14 +4106,7 @@ let suSessionToken=localStorage.getItem('padel-signup-token')||null;
 let suEvent=null, suConfirmed=[], suWaitlist=[], suPollInterval=null, _suWrite=null;
 let joinCode=null, joinEvent=null, joinGender=null, joinConfirmedCount=0, joinWaitlistCount=0, joinPendingDup=false, joinFinalName='', _joinNames=[];
 
-function getSUWrite(){
-  if(_suWrite&&_suWrite._tok!==suSessionToken) _suWrite=null;
-  if(!_suWrite&&suSessionToken&&window.supabase){
-    _suWrite=_sbClient({'x-session-token':suSessionToken});
-    _suWrite._tok=suSessionToken;
-  }
-  return _suWrite||getSB();
-}
+function getSUWrite(){ return sbFor(suCode,suSessionToken); }
 
 function suShowWaitlistBtn(){
   const btn=$('btn-waitlist'); if(btn) btn.style.display='';
@@ -4129,7 +4133,7 @@ async function suCreateEvent(){
   const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const code=Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
   const token=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
-  const sbTmp=_sbClient({'x-session-token':token});
+  const sbTmp=sbFor(code,token);
   if(!sbTmp){ alert(t('su_err_generic')); if(btn) btn.disabled=false; return; }
   try{
     const {error}=await sbTmp.from('signup_events').insert({
@@ -4178,7 +4182,7 @@ function suCopyLink(){
 }
 
 async function suRefreshList(){
-  const sb=getSB(); if(!sb||!suCode) return;
+  if(!suCode) return; const sb=sbFor(suCode); if(!sb) return;
   try{
     const {data:ev}=await sb.from('signup_events').select(SU_COLS).eq('code',suCode).single();
     if(ev) suEvent=ev;
@@ -4250,7 +4254,7 @@ async function initJoinMode(code){
   $('screen-setup').style.display='none';
   const el=$('screen-join'); el.style.display='block';
   if(!navigator.onLine){ _suJoinError(t('su_join_offline')); return; }
-  const sb=getSB();
+  const sb=sbFor(code);
   if(!sb){ _suJoinError(t('su_err_generic')); return; }
   try{
     const {data:ev,error}=await sb.from('signup_events').select(SU_COLS).eq('code',code).single();
@@ -4262,7 +4266,7 @@ async function initJoinMode(code){
 }
 
 async function _suJoinRefreshCounts(){
-  const sb=getSB(); if(!sb) return;
+  const sb=sbFor(joinCode); if(!sb) return;
   const {data:rows}=await sb.from('signups').select('name,status').eq('tournament_code',joinCode);
   const list=rows||[];
   joinConfirmedCount=list.filter(r=>r.status==='confirmed').length;
@@ -4336,7 +4340,7 @@ async function suSubmitJoin(){
 
   const btn=$('join-submit-btn'); if(btn) btn.disabled=true;
   try{
-    const sb=getSB(); if(!sb) throw new Error('no sb');
+    const sb=sbFor(joinCode); if(!sb) throw new Error('no sb');
     await _suJoinRefreshCounts();
     const wlStatus = joinConfirmedCount < joinEvent.max_players ? 'confirmed' : 'waitlist';
     const {error}=await sb.from('signups').insert({
@@ -6357,7 +6361,7 @@ async function submitViewerScore(matchId,sa,sb){
   const submitBtn=card?.querySelector('.viewer-submit-btn');
   if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='…'; }
   try{
-    const sb2=getSB();
+    const sb2=sbFor(_viewCode);
     const playerName=(mode==='teamamericano'||mode==='teammexicano')&&viewerTAPairIdx>=0
       ?`${(_curTeamP()[viewerTAPairIdx]||{}).n1||'?'} & ${(_curTeamP()[viewerTAPairIdx]||{}).n2||'?'}`
       :(AP.find(x=>x.id===viewerPlayerId)||{}).name||'?';
@@ -6365,30 +6369,7 @@ async function submitViewerScore(matchId,sa,sb){
     // organisator keurt hem goed. Vroeger las de app daarvoor de beheersleutel
     // van het toernooi uit de database: dat was het lek.
     const {error:rpcErr}=await sb2.rpc('tournament_submit_score',{p_code:_viewCode,p_match_id:matchId,p_sa:sa,p_sb:sb,p_player:playerName});
-    if(rpcErr&&!_isMissingFn(rpcErr)) throw new Error(rpcErr.code==='42501'?'write_blocked':(rpcErr.message||'error'));
-    if(rpcErr){
-    // Database zonder security_migration.sql: zoals het altijd ging
-    const {data:cur,error:selErr}=await sb2.from('tournaments').select('data,session_token').eq('code',_viewCode).single();
-    if(selErr||!cur) throw new Error(selErr?.message||'not found');
-    const d=cur.data||{};
-    d.courtPending=(d.courtPending||[]).filter(p=>p.matchId!==matchId);
-    d.courtPending.push({matchId,court:null,sa,sb,at:new Date().toISOString(),playerName});
-    // Use direct fetch so x-session-token header is guaranteed to be sent (RLS requires it)
-    const res=await fetch(`${SUPABASE_URL}/rest/v1/tournaments?code=eq.${encodeURIComponent(_viewCode)}`,{
-      method:'PATCH',
-      headers:{
-        'apikey':SUPABASE_KEY,
-        'Authorization':`Bearer ${SUPABASE_KEY}`,
-        'Content-Type':'application/json',
-        'Prefer':'return=representation',
-        'x-session-token':cur.session_token||''
-      },
-      body:JSON.stringify({data:d,updated_at:new Date().toISOString()})
-    });
-    if(!res.ok){const t2=await res.text();throw new Error(t2||'update_failed');}
-    const json=await res.json();
-    if(!json||json.length===0) throw new Error('write_blocked');
-    }
+    if(rpcErr) throw new Error(rpcErr.code==='42501'?'write_blocked':(rpcErr.message||'error'));
     if(!viewerScores[matchId]) viewerScores[matchId]={sa,sb,submitted:false};
     viewerScores[matchId].sa=sa; viewerScores[matchId].sb=sb; viewerScores[matchId].submitted=true;
     if(card){
@@ -6517,7 +6498,7 @@ function showCourtLinksModal(roundIdx){
 async function _pollCourtPending(){
   if(!shareCode) return;
   try{
-    const sb=getSB(); if(!sb) return;
+    const sb=sbFor(shareCode); if(!sb) return;
     const {data:row}=await sb.from('tournaments').select('data').eq('code',shareCode).single();
     if(!row) return;
     const remote=row.data||{};
@@ -6545,7 +6526,7 @@ function _onVisibilityChange(){
 }
 async function _pollViewNow(){
   try{
-    const {data}=await getSB().from('tournaments').select('data').eq('code',_viewCode).single();
+    const {data}=await sbFor(_viewCode).from('tournaments').select('data').eq('code',_viewCode).single();
     if(data) _applyViewState(data.data);
   }catch(e){}
 }
@@ -6577,7 +6558,7 @@ async function initCourtMode(code,courtN,tok){
 
   let row;
   try{
-    const sb=_sbClient();
+    const sb=sbFor(code);
     const res=await sb.from('tournaments').select('data').eq('code',code).single();
     row=res.data;
   }catch(e){}
@@ -6648,7 +6629,7 @@ async function initCourtMode(code,courtN,tok){
       // Met de sleutel van deze baanlink. Vroeger schreef dit zonder sleutel
       // het hele toernooi terug, en dat weigerde de database stilletjes:
       // "verstuurd" op het scherm, maar er kwam niets aan.
-      const {error:rpcErr}=await _sbClient().rpc('tournament_submit_score',
+      const {error:rpcErr}=await sbFor(code).rpc('tournament_submit_score',
         {p_code:code,p_match_id:activeMatch.id,p_sa:sa,p_sb:sb,p_court:courtN,p_court_token:tok});
       if(rpcErr) throw new Error(rpcErr.message||rpcErr.code);
       $ct('ct-body',`<div class="court-done">
@@ -7873,8 +7854,6 @@ function _getSharePayload(){
   return base;
 }
 
-// Bestaat deze databasefunctie nog niet (migratie niet gedraaid)?
-function _isMissingFn(e){ return !!e&&/PGRST202|42883|could not find the function/i.test((e.code||'')+' '+(e.message||'')); }
 
 async function pushToSupabase(){
   if(!shareCode||!sessionToken) return false;
@@ -7896,14 +7875,7 @@ async function pushToSupabase(){
     // is. Een upsert kan niet meer sinds security_migration.sql (die vraagt
     // leesrecht op session_token).
     const {error}=await sb.rpc('tournament_save',{p_code:shareCode,p_data:payload,p_token:sessionToken});
-    if(!error) return true;
-    if(!_isMissingFn(error)) throw error;
-    // Database zonder security_migration.sql: zoals het altijd ging
-    const {error:e2}=await sb.from('tournaments').upsert(
-      {code:shareCode,data:payload,updated_at:new Date().toISOString(),session_token:sessionToken},
-      {onConflict:'code'}
-    );
-    if(e2) throw e2;
+    if(error) throw error;
     return true;
   }catch(e){ console.warn('Supabase push failed',e); return false; }
 }
@@ -8367,7 +8339,7 @@ function _showViewError(msg){
 
 async function initViewMode(code){
   viewMode=true; _viewCode=code;
-  const sb=getSB();
+  const sb=sbFor(code);
   if(!sb){ _showViewError(t('share_error')); return; }
   $('screen-setup').style.display='none';
   const el=$('screen-tournament'); el.style.display='block';
@@ -10179,19 +10151,10 @@ async function ccOwnerToken(code){
   let token=null;
   if(toks.length){
     try{
-      const {data,error}=await getSB().rpc('competition_owner_token',{p_code:code,p_tokens:toks});
+      const {data,error}=await sbFor(code).rpc('competition_owner_token',{p_code:code,p_tokens:toks});
       if(error) throw error;
       token=data||null;
-    }catch(e){
-      // Database zonder security_migration.sql: daar is de sleutel nog te lezen
-      if(_isMissingFn(e)){
-        try{
-          const {data}=await getSB().from('competitions').select('session_token').eq('code',code).maybeSingle();
-          if(data&&toks.includes(data.session_token)) token=data.session_token;
-        }catch{}
-      }
-    }
-  }
+    }catch(e){ token=null; }  }
   _ccOwner={key,token};
   return token;
 }
@@ -10202,16 +10165,10 @@ function ccKnownTokens(){
 }
 function _ccTokenFor(comp){
   if(comp&&_ccOwner.token&&_ccOwner.key.startsWith(comp.code+'|')) return _ccOwner.token;
-  return comp&&comp.session_token&&ccKnownTokens().includes(comp.session_token)?comp.session_token:ccEnsureToken();
+  return ccEnsureToken();
 }
-function ccGetWrite(tok){
-  tok=tok||_ccTokenFor(ccComp);
-  if(_ccWrite&&_ccWrite._tok!==tok) _ccWrite=null;
-  if(!_ccWrite&&window.supabase){
-    _ccWrite=_sbClient({'x-session-token':tok});
-    _ccWrite._tok=tok;
-  }
-  return _ccWrite||getSB();
+function ccGetWrite(tok,code){
+  return sbFor(code||(ccComp&&ccComp.code)||ccViewCode,tok||_ccTokenFor(ccComp));
 }
 function ccPublicClient(){ return _sbClient(); }
 
@@ -10267,9 +10224,10 @@ function ccChallengeAllowed(challengerPos,defenderPos,range){
 
 // ── Supabase CRUD: competitions ──
 async function ccCreateCompetition({name,clubName,type,settings}){
-  const sb=ccGetWrite(ccEnsureToken()); if(!sb) return null;
+  if(!window.supabase) return null;
   for(let i=0;i<5;i++){
     const code=ccGenCode();
+    const sb=ccGetWrite(ccEnsureToken(),code);
     const {data,error}=await sb.from('competitions').insert({code,session_token:ccSessionToken,name,club_name:clubName||null,type,settings:settings||{},aliases:{}}).select(CC_COLS).single();
     if(!error) return data;
     if(error.code!=='23505') return null;
@@ -10277,13 +10235,13 @@ async function ccCreateCompetition({name,clubName,type,settings}){
   return null;
 }
 async function ccFetchCompetition(code){
-  const sb=getSB(); if(!sb) return null;
+  const sb=sbFor(code); if(!sb) return null;
   const {data,error}=await sb.from('competitions').select(CC_COLS).eq('code',code).maybeSingle();
   if(error) return null;
   return data;
 }
 async function ccUpdateSettings(code,patch){
-  const sb=ccGetWrite(); if(!sb) return false;
+  const sb=ccGetWrite(null,code); if(!sb) return false;
   const {error}=await sb.from('competitions').update(patch).eq('code',code);
   return !error;
 }
@@ -10298,26 +10256,26 @@ async function ccSetAlias(aliasRaw,canonicalRaw){
 
 // ── Supabase CRUD: competition_events ──
 async function ccFetchEvents(code){
-  const sb=getSB(); if(!sb) return [];
+  const sb=sbFor(code); if(!sb) return [];
   const {data,error}=await sb.from('competition_events').select('*').eq('competition_code',code).order('played_at',{ascending:false});
   if(error) return [];
   return data||[];
 }
 async function ccInsertEvent(code,{tournamentCode,format,results}){
-  const sb=ccPublicClient(); if(!sb) return false;
+  const sb=sbFor(code); if(!sb) return false;
   const {error}=await sb.from('competition_events').insert({competition_code:code,tournament_code:tournamentCode||null,format,results});
   return !error;
 }
 
 // ── Supabase CRUD: ladder (Deel B) ──
 async function ccFetchLadderPlayers(code){
-  const sb=getSB(); if(!sb) return [];
+  const sb=sbFor(code); if(!sb) return [];
   const {data,error}=await sb.from('ladder_players').select('*').eq('competition_code',code).order('position',{ascending:true});
   if(error) return [];
   return data||[];
 }
 async function ccJoinLadder(code,name){
-  const sb=ccPublicClient(); if(!sb) return{ok:false};
+  const sb=sbFor(code); if(!sb) return{ok:false};
   const players=await ccFetchLadderPlayers(code);
   const nextPos=players.length?Math.max(...players.map(p=>p.position))+1:1;
   const {error}=await sb.from('ladder_players').insert({competition_code:code,name:name.trim(),position:nextPos});
@@ -10329,13 +10287,13 @@ async function ccRemoveLadderPlayer(id){
   return !error;
 }
 async function ccFetchChallenges(code){
-  const sb=getSB(); if(!sb) return [];
+  const sb=sbFor(code); if(!sb) return [];
   const {data,error}=await sb.from('ladder_challenges').select('*').eq('competition_code',code).order('created_at',{ascending:false});
   if(error) return [];
   return data||[];
 }
 async function ccSubmitChallenge(code,{challenger,defender,score,winner}){
-  const sb=ccPublicClient(); if(!sb) return{ok:false};
+  const sb=sbFor(code); if(!sb) return{ok:false};
   const {error}=await sb.from('ladder_challenges').insert({competition_code:code,challenger_name:challenger,defender_name:defender,score:score||null,reported_winner:winner});
   return{ok:!error,error};
 }
