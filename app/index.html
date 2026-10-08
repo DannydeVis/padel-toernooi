@@ -2104,7 +2104,7 @@ body.light .c-panel{box-shadow:0 24px 60px rgba(0,0,0,.14)}
 </div>
 
 <script>
-const APP_VERSION = 'v2.16.0';
+const APP_VERSION = 'v2.16.1';
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
@@ -6537,7 +6537,7 @@ function showCourtLinksModal(roundIdx){
   const rows=courts.map(c=>{
     const url=`${baseUrl}?score=${shareCode}&court=${c}&tok=${courtTokens[c]}`;
     return `<div style="margin-bottom:12px">
-      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-bottom:4px">${t('am_courts_one').replace('1 ','')&&''}Baan ${c}</div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-bottom:4px">${t('rnd_court',{n:c})}</div>
       <div style="display:flex;align-items:center;gap:8px">
         <input readonly value="${url}" style="flex:1;background:var(--surface2);border:1px solid var(--bdr);border-radius:8px;padding:8px 10px;font-size:.72rem;color:var(--txt);font-family:'Inter',sans-serif" onclick="this.select()">
         <button class="btn btn-ghost btn-sm" onclick="navigator.clipboard.writeText('${url}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='${t('share_copy')}',1500)})" style="flex-shrink:0">${t('share_copy')}</button>
@@ -6617,7 +6617,7 @@ async function initCourtMode(code,courtN,tok){
   if(theme==='light') document.body.classList.add('light');
   const wrap=document.createElement('div');
   wrap.id='court-screen';
-  wrap.innerHTML=`<div class="court-hdr"><div class="court-badge">Baan ${courtN}</div><div class="court-title" id="ct-title">…</div><div class="court-tnm" id="ct-tnm"></div></div><div id="ct-body"></div>`;
+  wrap.innerHTML=`<div class="court-hdr"><div class="court-badge">${t('rnd_court',{n:courtN})}</div><div class="court-title" id="ct-title">…</div><div class="court-tnm" id="ct-tnm"></div></div><div id="ct-body"></div>`;
   document.body.appendChild(wrap);
 
   let row;
@@ -9398,7 +9398,7 @@ function initPresentation(){
       const sections=d.rounds.map((r,i)=>{
         const isActive=allDone||(i===activeIdx);
         const isCurrent=!allDone&&i===activeIdx;
-        const roundLabel=isCurrent?`Ronde ${r.round} — ${t('pres_active')}`:`Ronde ${r.round}`;
+        const roundLabel=isCurrent?`${t('rnd_label',{r:r.round})} — ${t('pres_active')}`:t('rnd_label',{r:r.round});
         const cards=r.matches.map(m=>`
           <div class="pres-match${m.done?' pres-match-done':''}">
             ${m.court?`<div class="pres-court-lbl">${t('rnd_court',{n:m.court})}</div>`:''}
@@ -9413,7 +9413,7 @@ function initPresentation(){
           </div>`).join('');
         const ct=_countdown(td,i);
         const roundTimer=isCurrent&&ct
-          ?`<div class="pres-timer-wrap" style="margin-top:10px"><span class="pres-timer-lbl">Ronde ${i+1}</span><span class="pres-timer-val${ct.danger?' danger':''}" id="pres-timer">${ct.str}</span></div>`
+          ?`<div class="pres-timer-wrap" style="margin-top:10px"><span class="pres-timer-lbl">${t('rnd_label',{r:i+1})}</span><span class="pres-timer-val${ct.danger?' danger':''}" id="pres-timer">${ct.str}</span></div>`
           :'';
         return`<div class="pres-round-block${isActive?' pres-round-active':''}">
           <div class="pres-matches-title">${roundLabel}</div>${cards}${roundTimer}</div>`;
